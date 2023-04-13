@@ -27,7 +27,7 @@
                         <i v-if="item.status != 2 " class="iconfont icon-dengdai animated bounceInDown"></i>
                         <!-- 1 => 成功 2 失败 3取消 4 等待 -->
                         {{item.status == 2?'已读':'未读'}}
-
+                        
                     </span>
               <!-- <span class="secondary ">123456789</span> -->
             </div>
@@ -78,11 +78,11 @@ export default {
   props: {},
   data () {
     return {
-      pageNum: 1,
-      pageSize: 15,
-      list: {
-        list: []
-      }
+        pageNum: 1,
+        pageSize: 15,
+        list: {
+          list: []
+        }
     }
   },
   watch: {},
@@ -112,7 +112,7 @@ export default {
     async loadMore () {
       return
       if (this.list.length < 10 || this.total <= this.pageNum * this.pageNum) {
-
+        return
       }
       this.loading = true
       // 加载下一页
@@ -120,12 +120,12 @@ export default {
       await this.getListDetail()
       this.loading = false
     },
-    Formater (timestamp) {
+    Formater(timestamp) {
       let time = new Date(timestamp)
       let dateStr = time.toLocaleDateString()
       let timeStr = time.toLocaleTimeString()
-      console.log(dateStr, timeStr)
-      return (dateStr + timeStr)
+      console.log(dateStr,timeStr)
+      return (dateStr+timeStr)
     },
     async getlist () {
       // 获取 提现记录
@@ -145,8 +145,8 @@ export default {
       } else {
         Toast(data.msg)
       }
-    }
-  }
+    },
+  },
 }
 </script>
 <style lang="less" scoped>

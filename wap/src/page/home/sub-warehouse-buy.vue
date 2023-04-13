@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper"> 
     <div class="detail-part">
       <div class="index-name">
         <p>{{detail.name}} <span class="index-name_code">{{detail.code}}</span></p>
@@ -19,7 +19,7 @@
               <!-- <p class="title"></p> -->
               <p :class="detail.hcrate<0?'number green': 'number red'">
                 <span class="title">涨跌</span>
-                {{Number(detail.hcrate).toFixed(2)}}
+                {{Number(detail.hcrate).toFixed(2)}} 
               </p>
             </li>
             <li>
@@ -158,7 +158,7 @@
         </p>
 
       </div>
-    </div> -->
+    </div> --> 
     <div class="agree">
       <p style="line-height: 0.4rem;padding: 0 0.2rem;">
         当该指数涨幅达到<span class="red">涨停限制</span>时,不能买涨；达到<span class="green">跌停限制</span>时，不能买跌.
@@ -182,7 +182,7 @@
         </div>
       </div>
     </div>
-
+   
     <foot></foot>
   </div>
 </template>
@@ -221,7 +221,7 @@ export default {
         { label: '300手', value: '300' },
         { label: '自定义', value: '' }
       ],
-      siteLeverList: [],
+      siteLeverList:[],
       selectNumber: '',
       autoNumber: '',
       type: [
@@ -237,23 +237,23 @@ export default {
         buyMaxNum: 1000, // 最大买入股数
         buyMinNum: 100 // 最小买入股数
       }, // 设置规则信息
-      settingIndexInfo: {
-        riseLimit: 0.1,
-        downLimit: 0.1
+      settingIndexInfo:{
+        riseLimit:0.1,
+        downLimit:0.1
       },
-
+      
       dialogShow: false,
       timer: null,
       buying: false,
       focePromptPopup: false, // 总手续费提示框
       settingSpreadRate: {spreadRate: 0},
-      subaccountList: [1, 2], // 子账户列表
-      subaccountNumber: '' // 子账户
+      subaccountList:[1,2],//子账户列表
+      subaccountNumber:'' //子账户
     }
   },
   watch: {},
   computed: {
-    poundage () { // 手续费= 买入手续费+印花税+点差费
+    poundage () { //手续费= 买入手续费+印花税+点差费
       if (this.autoNumber) {
         let payfee = (this.detail.nowPrice * this.autoNumber * 100).toFixed(2) // / this.selectCycle
         return ((payfee * this.settingInfo.buyFee) + (payfee * this.settingInfo.dutyFee) + (payfee * this.settingSpreadRate.spreadRate)).toFixed(2)
@@ -265,18 +265,18 @@ export default {
       }
     },
     total () {
-      if (this.settingSpreadRate == undefined || this.settingSpreadRate.spreadRate == undefined) {
+      if (this.settingSpreadRate == undefined || this.settingSpreadRate.spreadRate == undefined){
         this.settingSpreadRate.spreadRate = 0
       }
       if (this.autoNumber) {
         let payfee = (this.detail.nowPrice * this.autoNumber * 100 / this.selectCycle)
         return (payfee + (payfee * this.settingInfo.buyFee) + (payfee * this.settingInfo.dutyFee) + (payfee * this.settingSpreadRate.spreadRate)).toFixed(2)
-        // return (this.detail.nowPrice * this.autoNumber * 100 / this.selectCycle).toFixed(2)
+        //return (this.detail.nowPrice * this.autoNumber * 100 / this.selectCycle).toFixed(2)
       } else if (this.selectNumber) {
         // alert("bb"+this.detail.nowPrice+"cc==="+this.selectNumber+"ff==="+this.selectCycle+"==="+this.settingSpreadRate.spreadRate)
         let payfee = (this.detail.nowPrice * this.selectNumber * 100 / this.selectCycle)
         return (payfee + (payfee * this.settingInfo.buyFee) + (payfee * this.settingInfo.dutyFee) + (payfee * this.settingSpreadRate.spreadRate)).toFixed(2)
-        // return (this.detail.nowPrice * this.selectNumber * 100 / this.selectCycle).toFixed(2)
+        //return (this.detail.nowPrice * this.selectNumber * 100 / this.selectCycle).toFixed(2)
       } else {
         return 0
       }
@@ -304,7 +304,7 @@ export default {
     this.selectNumber = 0
     this.getSettingIndexInfo()
     this.getSettingInfo()
-    this.getUserSubaccount()
+      this.getUserSubaccount()
 
     if (!this.$store.state.userInfo.enableAmt) {
       this.getUserInfo()
@@ -322,6 +322,7 @@ export default {
       if (data.status === 0) {
         // 成功
         this.settingIndexInfo = data.data
+        
       } else {
         Toast(data.msg)
       }
@@ -336,23 +337,23 @@ export default {
         // 杠杆倍数
         this.selectCycle = data.data.siteLever
         // console.log(this.$store.state.userInfo)
-        if (this.$store.state.userInfo !== undefined && this.$store.state.userInfo !== null && this.$store.state.userInfo.phone !== '' && this.$store.state.userInfo.siteLever !== null) {
-          this.selectCycle = data.data.siteLever.split('/')[0]
-          this.siteLeverList = []
-          for (let i = 0; i < data.data.siteLever.split('/').length; i++) {
-            let val = data.data.siteLever.split('/')[i]
-            let item = { label: val + '倍', value: val }
-            this.siteLeverList.push(item)
+        if(this.$store.state.userInfo !== undefined && this.$store.state.userInfo !== null && this.$store.state.userInfo.phone !== '' && this.$store.state.userInfo.siteLever !== null){
+            this.selectCycle = data.data.siteLever.split('/')[0]
+            this.siteLeverList = []
+            for (let i = 0; i < data.data.siteLever.split('/').length; i++) {
+              let val = data.data.siteLever.split('/')[i]
+              let item = { label: val + '倍', value: val }
+              this.siteLeverList.push(item)
+            }
+          } else {
+            this.selectCycle = data.data.siteLever.split('/')[0]
+            this.siteLeverList = []
+            for (let i = 0; i < data.data.siteLever.split('/').length; i++) {
+              let val = data.data.siteLever.split('/')[i]
+              let item = { label: val + '倍', value: val }
+              this.siteLeverList.push(item)
+            }
           }
-        } else {
-          this.selectCycle = data.data.siteLever.split('/')[0]
-          this.siteLeverList = []
-          for (let i = 0; i < data.data.siteLever.split('/').length; i++) {
-            let val = data.data.siteLever.split('/')[i]
-            let item = { label: val + '倍', value: val }
-            this.siteLeverList.push(item)
-          }
-        }
         this.numberList = []
         for (let i = 0; i < 10; i++) {
           if (i === 0 || i % 2 === 1) {
@@ -370,17 +371,18 @@ export default {
       // 查询点差费率
       let opts = {
         applies: this.detail.hcrate, // 涨跌幅
-        turnover: this.total, // 成交额
-        unitprice: this.detail.nowPrice, // 股票单价
+        turnover: this.total, //成交额
+        unitprice: this.detail.nowPrice, //股票单价
         code: this.$route.params.code
       }
       let data = await api.findSpreadRateOne(opts)
       if (data.status === 0) {
         // 成功
-        if (data.data != undefined) {
+        if(data.data != undefined){
           this.settingSpreadRate = data.data
         }
         console.log(this.settingSpreadRate)
+        
       } else {
         this.$message.error(data.msg)
       }
@@ -404,25 +406,25 @@ export default {
     //     Toast(data.msg)
     //   }
     // },
-    async getUserSubaccount () {
-      // 用户操盘中子账户
-      let result = await api.getUserSubaccount()
-      if (result.status === 0) {
-        if (result.data.list.length > 0) {
-          this.subaccountList = result.data.list
-          if (this.$route.query.sub != undefined && this.$route.query.sub != '') {
-            this.form.subaccountNumber = this.$route.query.sub
+       async getUserSubaccount () {
+        // 用户操盘中子账户
+        let result = await api.getUserSubaccount()
+        if (result.status === 0) {
+          if(result.data.list.length>0){
+            this.subaccountList = result.data.list
+            if(this.$route.query.sub != undefined && this.$route.query.sub != ''){
+              this.form.subaccountNumber = this.$route.query.sub
+            } else {
+              this.form.subaccountNumber = this.subaccountList[0].subaccountNumber
+            } 
           } else {
-            this.form.subaccountNumber = this.subaccountList[0].subaccountNumber
+            Toast('未获取到子账户！')
           }
         } else {
-          Toast('未获取到子账户！')
+          Toast(result.msg)
         }
-      } else {
-        Toast(result.msg)
-      }
-    },
-    async getDetail () {
+      },
+    async getDetail() {
       let opts = {
         code: this.$route.query.code
       }
@@ -432,6 +434,7 @@ export default {
       if (data.status === 0) {
         this.detail = data.data
         this.findSpreadRateOne()
+
       } else {
         Toast(data.msg)
       }
@@ -440,6 +443,7 @@ export default {
       this.selectCycle = value
     },
     selectNumberFun (value) {
+      
       this.selectNumber = value
       if (value !== 0) {
         this.autoNumber = ''
@@ -490,7 +494,7 @@ export default {
         Toast('请选择购买手数')
       } else if (isNull(this.selectType)) {
         Toast('请选择买卖方向')
-      } else if (isNull(this.subaccountNumber)) {
+      } else if(isNull(this.subaccountNumber)) {
         Toast('请选择子账户')
       } else {
         this.buying = true
@@ -499,7 +503,7 @@ export default {
           buyNum: this.selectNumber ? this.selectNumber * 100 : 0, // 单位为手
           buyType: this.selectType,
           lever: this.selectCycle ? this.selectCycle : 0,
-          subaccountNumber: this.subaccountNumber
+          subaccountNumber:this.subaccountNumber
         }
         let data = await api.buyFunds(opts)
         this.buying = false
@@ -835,7 +839,7 @@ export default {
     }
     .footer-btn {
       background-color: #E0E0E0;
-
+      
     }
     .footer-btn .total .pay {
       color: #222;

@@ -40,8 +40,7 @@
                 <p v-if="item.stock_plate == '科创'" class="code"><i class="iconfont kechuang-mark">科创</i>{{item.stockCode}}
                 </p>
                 <p v-else class="code">
-                  <i :class="item.stock_type == 'sz'?'iconfont shen-mark hushen-mark':'iconfont hushen-mark'">{{item.stock_type
-                    == 'sz'?'深':'沪'}}</i>
+                  <i :class="item.stock_type == 'sz'?'iconfont shen-mark hushen-mark':'iconfont hushen-mark'">{{getStockType(item.stock_type)}}</i>
                   {{item.stockCode}}
                 </p>
               </li>
@@ -100,7 +99,7 @@ export default {
     this.timer = setInterval(this.refreshList, 5000)
   },
   beforeDestroy () {
-    if (this.$state.theme == 'red') {
+    if (this.$state.theme =='red') {
       document.body.classList.remove('red-bg')
       document.body.classList.add('black-bg')
     }
@@ -108,12 +107,23 @@ export default {
   },
   mounted () {
     //   this.getStock()
-    if (this.$state.theme == 'red') {
-      document.body.classList.remove('black-bg')
-      document.body.classList.add('red-bg')
+    if (this.$state.theme =='red') {
+        document.body.classList.remove('black-bg')
+        document.body.classList.add('red-bg')
     }
   },
   methods: {
+    getStockType (val) {
+      let rs = '沪'
+      if (val === 'sz') {
+        rs = '深'
+      } else if (val === 'hk') {
+        rs = '港'
+      } else if (val === 'us') {
+        rs = '美'
+      }
+      return rs
+    },
     async getStock () {
       let opt = {
         keyWords: this.keywords,

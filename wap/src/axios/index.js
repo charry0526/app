@@ -1,5 +1,3 @@
-// 薇雅网络：http://www.dxcfd.com/
-// 客服QQ:2958997801
 
 import axios from 'axios' // 引入axios
 import qs from 'qs' // 引入qs
@@ -19,11 +17,10 @@ axios.defaults.withCredentials = true // 表示跨域请求时是否需要使用
 // 在ajax发送之前拦截 比如对所有请求统一添加header token
 axios.interceptors.request.use(
   config => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      // config.headers.Authorization = `USER_TOKEN = ${store.state.token}`;
-      config.headers['token'] = token
-    }
+    // if (store.state.token) {
+    //     // config.headers.Authorization = `USER_TOKEN = ${store.state.token}`;
+    //     config.headers["USER_TOKEN"] = store.state.token;
+    // }
     // console.log(config)
     return config
   },
@@ -39,7 +36,7 @@ axios.interceptors.response.use(
     switch (response.data && response.data.success) {
       case false:
         response.data.msg = '您还未登录,请先登录'
-        // console.log(response.data)
+        //console.log(response.data)
         router.replace({
           path: 'openaccount'
         })

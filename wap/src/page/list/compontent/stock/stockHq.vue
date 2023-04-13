@@ -240,7 +240,7 @@
             </div>
           </div>
         </div>
-<!--        <div class="tab-content tabs kLineTabs blockBg" v-if="false">
+        <div class="tab-content tabs kLineTabs blockBg" v-if="false">
             <p class="tabsTitle">
               <span
                 v-for='(item,index) in PeriodObj.TabTextAry'
@@ -263,13 +263,13 @@
                 </option>
               </select>
             </p>
-            &lt;!&ndash; 分时图部分 &ndash;&gt;
+            <!-- 分时图部分 -->
             <div class="clear minuteWrap">
                 <div id="minuteChart" v-show='Minute.IsShow'></div>
                 <div id="minuteFiveDaychart" v-show='FiveMinute.IsShow'></div>
                 <div id="kline" v-show='Kline.IsShow'></div>
 
-                &lt;!&ndash; 分时图右侧内容 &ndash;&gt;
+                <!-- 分时图右侧内容 -->
                 <div class="rightMinute" v-show='!IsIndex && Minute.IsShow'>
                     <ul class="minute-tab clear tabsTitle">
                         <li class="tableSell active-minute" @click='ChangeMinuteTab(0)'
@@ -280,7 +280,7 @@
                     <div class="tabsContent">
                         <div id="minuteFive" class="tableMinuteContent" v-show='MinuteMenuIndex == 0'>
                             <table class="tableOne">
-                                &lt;!&ndash; 卖五 &ndash;&gt;
+                                <!-- 卖五 -->
                                 <tbody>
                                 <tr v-for='item in StockData.SellerFive'>
                                     <td>{{item.name}}</td>
@@ -290,7 +290,7 @@
                                 </tbody>
                             </table>
                             <table class="tableTwo">
-                                &lt;!&ndash; 买五 &ndash;&gt;
+                                <!-- 买五 -->
                                 <tbody>
                                 <tr v-for='item in StockData.BuyerFive'>
                                     <td>{{item.name}}</td>
@@ -315,7 +315,7 @@
 
                 </div>
 
-                &lt;!&ndash; k线图右侧内容 &ndash;&gt;
+                <!-- k线图右侧内容 -->
                 <div class="phoneRight" v-show='!IsIndex && RightMenu.IsShow'>
                     <ul class="ulOne">
                         <li v-for='item in RightMenu.List' :key="item.ID" @click='ChangeKlinRight(item)' class="noRight"
@@ -324,7 +324,7 @@
                     </ul>
                 </div>
 
-                &lt;!&ndash; k线图指标 &ndash;&gt;
+                <!-- k线图指标 -->
                 <div
                   class="indexWrap"
                   v-show='Kline.IsShow'
@@ -338,7 +338,7 @@
                   >{{item.Name}}</span>
                 </div>
             </div>
-        </div>-->
+        </div>
         <!-- 下单部分 -->
         <div class="agree-footer text-center" v-if="false">
                 <div v-if="$store.state.userInfo.phone" class="btn-box clearfix">
@@ -354,194 +354,190 @@
 </template>
 
 <script>
-import 'hqchart/src/jscommon/umychart.resource/css/tools.css'
-import 'hqchart/src/jscommon/umychart.resource/font/iconfont.css'
-import HQChart from 'hqchart'
-// import JSCommon from 'hqchart/src/jscommon/umychart.vue/umychart.vue.js'
-// import JSCommonStock from 'hqchart/src/jscommon/umychart.vue/umychart.stock.vue.js'
-import Tools from './utils/tools'
-import urlObj from './utils/urlObj'
-import {Toast} from 'mint-ui'
-import * as api from '@/axios/api'
+  import 'hqchart/src/jscommon/umychart.resource/css/tools.css'
+  import 'hqchart/src/jscommon/umychart.resource/font/iconfont.css'
+  import HQChart from 'hqchart'
+  //import JSCommon from 'hqchart/src/jscommon/umychart.vue/umychart.vue.js'
+  //import JSCommonStock from 'hqchart/src/jscommon/umychart.vue/umychart.stock.vue.js'
+  import Tools from './utils/tools'
+  import urlObj from './utils/urlObj'
+  import {Toast} from 'mint-ui'
+  import * as api from '@/axios/api'
 
-import $ from 'jquery'
+  import $ from 'jquery'
 
-var JSCommon = HQChart.Chart
-var JSCommonStock = HQChart.Stock
-JSCommonStock.JSStock.SetDomain('http://kline.dxcfd.com', 'http://klinec.dxcfd.com')
-JSCommon.JSChart.SetDomain('http://kline.dxcfd.com', 'http://klinec.dxcfd.com')
-var blackStyle = JSCommon.HQChartStyle.GetStyleConfig(JSCommon.STYLE_TYPE_ID.BLACK_ID)
+  var JSCommon = HQChart.Chart
+  var JSCommonStock = HQChart.Stock
+  JSCommonStock.JSStock.SetDomain('http://localhost:8989','http://localhost:8989')
+  JSCommon.JSChart.SetDomain('http://localhost:8989','http://localhost:8989')
+ var blackStyle=JSCommon.HQChartStyle.GetStyleConfig(JSCommon.STYLE_TYPE_ID.BLACK_ID);
 
-JSCommon.JSChart.SetStyle(blackStyle)
+    JSCommon.JSChart.SetStyle(blackStyle);
 
-function DefaultData () {
-}
-// 数据默认显示值
-DefaultData.GetStockData = function () {
-  const data =
+  function DefaultData () {
+  }
+
+  DefaultData.GetStockData = function () //数据默认显示值
+  {
+    const data =
       {
         Name: {Text: ''},
         Price: {Text: '', Color: 'PriceNull'},
         RiseFallPrice: {Text: '', Color: 'PriceNull'},
         Increase: {Text: '', Color: 'PriceNull'},
         High: {Text: '', Color: 'PriceNull'},
-        Low: {Text: '', Color: 'PriceNull'},
+        Low: {Text: '', Ceolor: 'PriceNull'},
         Open: {Text: '', Color: 'PriceNull'},
         YClose: {Text: ''},
 
         Excahngerate: {Text: '', Color: 'PriceNull'},
-        Amount: {Text: ''},
-        Vol: {Text: ''},
-        Pe: {Text: ''},
-        Roe: {Text: ''},
-        MarketV: {Text: ''},
-        FlowMarketV: {Text: ''},
-        Eps: {Text: ''},
-        ScrollEPS: {Text: ''},
-        Pb: {Text: ''},
-        Amplitude: {Text: ''},
+        Amount: {Text: ''}, Vol: {Text: ''},
+        Pe: {Text: ''}, Roe: {Text: ''},
+        MarketV: {Text: ''}, FlowMarketV: {Text: ''},
+        Eps: {Text: ''}, ScrollEPS: {Text: ''},
+        Pb: {Text: ''}, Amplitude: {Text: ''},
 
-        // 指数才有
-        Down: {Text: ''}, // 上涨
-        Up: {Text: ''}, // 下跌
-        Unchanged: {Text: ''}, // 平盘
-        Stop: {Text: ''}, // 停牌
+        //指数才有
+        Down: {Text: ''}, //上涨
+        Up: {Text: ''},   //下跌
+        Unchanged: {Text: ''},   //平盘
+        Stop: {Text: ''},         //停牌
 
         HK: {Symbol: '', Name: ''},
-        IsMargin: false, // 融资融券
-        IsSHHK: false, // 沪港通
-        IsHK: false, // 港股
+        IsMargin: false,     //融资融券
+        IsSHHK: false,       //沪港通
+        IsHK: false,         //港股
 
         SellerFive: [],
         BuyerFive: [],
         Dealer: []
       }
 
-  return data
-}
+    return data
+  }
 
-DefaultData.GetMinuteOption = function (symbol) {
-  let data =
+  DefaultData.GetMinuteOption = function (symbol) {
+    let data =
       {
-        Type: '分钟走势图', // 走势图
+        Type: '分钟走势图', //走势图
         Symbol: symbol,
-        IsAutoUpate: true, // 是自动更新数据
+        IsAutoUpate: true, //是自动更新数据
 
-        IsShowRightMenu: false, // 禁用右键菜单
-        CorssCursorTouchEnd: true, // 手势离开屏幕 十字光标自动消失
-        EnableScrollUpDown: true, // 允许上下拖动图形
+        IsShowRightMenu: false,     //禁用右键菜单
+        CorssCursorTouchEnd: true,   //手势离开屏幕 十字光标自动消失
+        EnableScrollUpDown: true,    //允许上下拖动图形
         DayCount: 1,
 
-        Border: // 边框
+        Border: //边框
           {
-            Left: 1, // 左边间距
-            Right: 1, // 右边间距
+            Left: 1, //左边间距
+            Right: 1, //右边间距
             Top: 20,
             Bottom: 1
           },
 
-        KLineTitle: // 标题设置
+        KLineTitle: //标题设置
           {
-            IsShowName: false, // 不显示股票名称
-            IsShowSettingInfo: false // 不显示周期/复权
+            IsShowName: false, //不显示股票名称
+            IsShowSettingInfo: false, //不显示周期/复权
           },
 
-        Frame: // 子框架设置,刻度小数位数设置
+        Frame: //子框架设置,刻度小数位数设置
           [
             {SplitCount: 5, StringFormat: 0},
             {SplitCount: 3, StringFormat: 0}
           ],
 
-        ExtendChart: // 扩展图形
+        ExtendChart:    //扩展图形
           [
-            {Name: 'MinuteTooltip'} // 手机端tooltip
-          ]
+            {Name: 'MinuteTooltip'}  //手机端tooltip
+          ],
       }
-  return data
-}
+    return data
+  }
 
-DefaultData.GetFiveDayMinuteOption = function (symbol) {
-  let data =
+  DefaultData.GetFiveDayMinuteOption = function (symbol) {
+    let data =
       {
         Type: '分钟走势图',
         Symbol: symbol,
-        IsAutoUpate: true, // 是自动更新数据
+        IsAutoUpate: true, //是自动更新数据
 
-        IsShowRightMenu: false, // 右键菜单
-        DayCount: 5, // 5日
-        CorssCursorTouchEnd: true, // 手势离开屏幕 十字光标自动消失
-        EnableScrollUpDown: true, // 允许上下拖动图形
+        IsShowRightMenu: false, //右键菜单
+        DayCount: 5,  //5日
+        CorssCursorTouchEnd: true,   //手势离开屏幕 十字光标自动消失
+        EnableScrollUpDown: true,    //允许上下拖动图形
 
-        Border: // 边框
+        Border: //边框
           {
-            Left: 1, // 左边间距
-            Right: 1, // 右边间距
+            Left: 1, //左边间距
+            Right: 1, //右边间距
             Top: 20,
             Bottom: 20
           },
 
-        KLineTitle: // 标题设置
+        KLineTitle: //标题设置
           {
-            IsShowName: false, // 不显示股票名称
-            IsShowSettingInfo: false // 不显示周期/复权
+            IsShowName: false, //不显示股票名称
+            IsShowSettingInfo: false, //不显示周期/复权
           },
 
-        Frame: // 子框架设置,刻度小数位数设置
+        Frame: //子框架设置,刻度小数位数设置
           [
             {SplitCount: 5, StringFormat: 1},
             {SplitCount: 3, StringFormat: 1}
           ],
 
-        ExtendChart: // 扩展图形
+        ExtendChart:    //扩展图形
           [
-            {Name: 'MinuteTooltip'} // 手机端tooltip
-          ]
+            {Name: 'MinuteTooltip'}  //手机端tooltip
+          ],
       }
-  return data
-}
+    return data
+  }
 
-DefaultData.GetKlineOption = function (symbol) {
-  let data =
+  DefaultData.GetKlineOption = function (symbol) {
+    let data =
       {
         Type: '历史K线图',
         Windows:
           [
             {Index: '均线', Modify: false, Change: false},
-            {Index: 'VOL', Modify: false, Change: false}
-          ], // 窗口指标
+            {Index: 'VOL', Modify: false, Change: false},
+          ], //窗口指标
 
         Symbol: symbol,
-        IsAutoUpate: true, // 是自动更新数据
+        IsAutoUpate: true, //是自动更新数据
 
-        CorssCursorTouchEnd: true, // 手势离开屏幕 十字光标自动消失
-        EnableScrollUpDown: true, // 允许上下拖动图形
-        IsShowRightMenu: false, // 右键菜单
+        CorssCursorTouchEnd: true,   //手势离开屏幕 十字光标自动消失
+        EnableScrollUpDown: true,    //允许上下拖动图形
+        IsShowRightMenu: false,     //右键菜单
 
         KLine:
           {
-            DragMode: 1, // 拖拽模式 0 禁止拖拽 1 数据拖拽 2 区间选择
-            Right: 1, // 复权 0 不复权 1 前复权 2 后复权
-            Period: 0, // 周期 0 日线 1 周线 2 月线 3 年线
-            MaxReqeustDataCount: 1000, // 日线数据最近1000天
-            MaxRequestMinuteDayCount: 15, // 分钟数据最近15天
-            PageSize: 50, // 一屏显示多少数据
-            IsShowTooltip: false // 是否显示K线提示信息
+            DragMode: 1, //拖拽模式 0 禁止拖拽 1 数据拖拽 2 区间选择
+            Right: 1, //复权 0 不复权 1 前复权 2 后复权
+            Period: 0, //周期 0 日线 1 周线 2 月线 3 年线
+            MaxReqeustDataCount: 1000, //日线数据最近1000天
+            MaxRequestMinuteDayCount: 15,    //分钟数据最近15天
+            PageSize: 50, //一屏显示多少数据
+            IsShowTooltip: false //是否显示K线提示信息
           },
 
-        KLineTitle: // 标题设置
+        KLineTitle: //标题设置
           {
-            IsShowName: false, // 不显示股票名称
-            IsShowSettingInfo: false // 不显示周期/复权
+            IsShowName: false, //不显示股票名称
+            IsShowSettingInfo: false //不显示周期/复权
           },
 
-        Border: // 边框
+        Border: //边框
           {
-            Left: 0, // 左边间距
-            Right: 1, // 右边间距
+            Left: 0, //左边间距
+            Right: 1, //右边间距
             Top: 20
           },
 
-        Frame: // 子框架设置
+        Frame: //子框架设置
           [
             {SplitCount: 3, StringFormat: 0},
             {SplitCount: 3, StringFormat: 0},
@@ -549,108 +545,108 @@ DefaultData.GetKlineOption = function (symbol) {
             {SplitCount: 3, StringFormat: 0}
           ],
 
-        ExtendChart: // 扩展图形
+        ExtendChart:    //扩展图形
           [
-            {Name: 'KLineTooltip'} // 手机端tooltip
-          ]
+            {Name: 'KLineTooltip'}  //手机端tooltip
+          ],
       }
-  return data
-}
+    return data
+  }
 
-export default {
-  name: 'HQChartDemo',
-  data () {
-    let data =
+  export default {
+    name: 'HQChartDemo',
+    data () {
+      let data =
         {
           styleName: 'black-bg',
           ExchangeInfoTShow: false,
           CollapseImgClass: '',
           MinuteMenuIndex: 0,
           IsIndex: false,
-          Symbol: '600000.sh', // 399006.sz
+          Symbol: '600000.sh', //399006.sz
           JSStock: null,
           ID: JSCommon.JSChart.CreateGuid(),
           StockData: DefaultData.GetStockData(),
           timer: null,
           loading: false,
 
-          Minute: // 分时
+          Minute:         //分时
             {
               JSChart: null,
               IsShow: true,
               Option: null
             },
           detail: {
-            'name': '青海华鼎',
-            'code': '600243',
-            'spell': 'qhhd',
-            'gid': 'sh600243',
-            'nowPrice': '4.290',
-            'hcrate': 1.18,
-            'today_max': '4.300',
-            'today_min': '4.240',
-            'business_balance': '4151985.000',
-            'business_amount': '973005',
-            'preclose_px': '4.240',
-            'open_px': '4.240',
-            'buy1': '4.290',
-            'buy2': '4.280',
-            'buy3': '4.270',
-            'buy4': '4.260',
-            'buy5': '4.250',
-            'sell1': '4.300',
-            'sell2': '4.310',
-            'sell3': '4.320',
-            'sell4': '4.330',
-            'sell5': '4.340',
-            'buy1_num': '34700',
-            'buy2_num': '38900',
-            'buy3_num': '35900',
-            'buy4_num': '26200',
-            'buy5_num': '50100',
-            'sell1_num': '76005',
-            'sell2_num': '5100',
-            'sell3_num': '2500',
-            'sell4_num': '40200',
-            'sell5_num': '11500'
-          }, // 详情
-          FiveMinute: // 多日分时
+          'name': '青海华鼎',
+          'code': '600243',
+          'spell': 'qhhd',
+          'gid': 'sh600243',
+          'nowPrice': '4.290',
+          'hcrate': 1.18,
+          'today_max': '4.300',
+          'today_min': '4.240',
+          'business_balance': '4151985.000',
+          'business_amount': '973005',
+          'preclose_px': '4.240',
+          'open_px': '4.240',
+          'buy1': '4.290',
+          'buy2': '4.280',
+          'buy3': '4.270',
+          'buy4': '4.260',
+          'buy5': '4.250',
+          'sell1': '4.300',
+          'sell2': '4.310',
+          'sell3': '4.320',
+          'sell4': '4.330',
+          'sell5': '4.340',
+          'buy1_num': '34700',
+          'buy2_num': '38900',
+          'buy3_num': '35900',
+          'buy4_num': '26200',
+          'buy5_num': '50100',
+          'sell1_num': '76005',
+          'sell2_num': '5100',
+          'sell3_num': '2500',
+          'sell4_num': '40200',
+          'sell5_num': '11500'
+        }, // 详情
+          FiveMinute:     //多日分时
             {
               JSChart: null,
               IsShow: false,
               Option: null
             },
 
-          Kline: // K线图
+          Kline:          //K线图
             {
               JSChart: null,
               IsShow: false,
               Option: null
             },
 
-          IndexMenu: // 指标Tab
+          IndexMenu:      //指标Tab
             [
               {Name: 'KDJ', ID: 'KDJ', WindowsID: 1, Selected: false},
               {Name: 'MACD', ID: 'MACD', WindowsID: 1, Selected: false},
               {Name: 'RSI', ID: 'RSI', WindowsID: 1, Selected: false},
               {Name: 'BOLL', ID: 'BOLL', WindowsID: 0, Selected: false},
               {Name: 'VOL', ID: 'VOL', WindowsID: 1, Selected: false},
-              {Name: '均线', ID: '均线', WindowsID: 0, Selected: false}
+              {Name: '均线', ID: '均线', WindowsID: 0, Selected: false},
             ],
 
-          RightMenu: // 复权
+          RightMenu:  //复权
             {
               List: [{Name: '不复权', ID: 0}, {Name: '前复权', ID: 1}, {Name: '后复权', ID: 2}],
               IsShow: false,
               Selected: null
             },
 
-          PeriodObj: { // 周期数据
+          PeriodObj: {  //周期数据
             TabTextAry: ['分时', '五日', '日线', '周线', '月线'],
             TabTextIndex: 0,
             preTextIndex: 0
           },
-          MinutePeriod: { // 分钟周期
+          MinutePeriod: {   //分钟周期
             SelectOptionList: [
               {
                 Text: '1分钟',
@@ -673,91 +669,92 @@ export default {
                 Value: 8
               }
             ],
-            minutePeriod: 4 // 分钟周期
+            minutePeriod: 4,  //分钟周期
           },
-          isOptionOpt: false // 是否已经添加自选
+          isOptionOpt: false, // 是否已经添加自选
           // KLineOption:null
         }
 
-    return data
-  },
+      return data
+    },
 
-  components: {},
+    components: {},
 
-  created () {
-    // this.timer = setInterval(this.refreshList, 5000)
-    this.Symbol = this.$parent.detail.code + '.' + this.$parent.detail.stockType
-
-    console.log('Symbol:', this.Symbol)
-
-    // this.Symbol = '600000.sh'
-    const stockType = Tools.getURLParams('stock_type')
-    console.log('stock_type', stockType)
-    var symbol = Tools.getURLParams('symbol')
-    if (symbol) {
-      console.log(`[HQChartDemo::created] symbol=${symbol}`)
-      console.info(this.props.symbol)
-      this.Symbol = this.props.symbol
-    }
-
-    this.IsIndex = this.IsSHSZIndex() // 初始判断是否是指数
-
-    this.JSStock = JSCommonStock.JSStockInit()
-    this.InitalStock()
-    this.JSStock.RequestData()
-
-    this.Minute.Option = DefaultData.GetMinuteOption(this.Symbol)
-    this.FiveMinute.Option = DefaultData.GetFiveDayMinuteOption(this.Symbol)
-    this.Kline.Option = DefaultData.GetKlineOption(this.Symbol)
-  },
-  beforeDestroy () {
-    // clearInterval(this.timer)
-  },
-  mounted () {
-    this.getDetail()
-    if (this.$store.state.userInfo.phone) {
-      // 判断是否登录
-      this.getOpation()
-    } else {
-      // 获取用户信息
-      this.getUserInfo()
-    }
-    this.OnSize()
-    window.onresize = () => {
-      this.$refs.stockHqNews.OnSize()
-      this.OnSize()
-    }
-    this.Minute.JSChart = JSCommon.JSChart.Init(document.getElementById('minuteChart'))
-    this.Minute.JSChart.SetOption(this.Minute.Option)
-  },
-  computed: {
-    minutePeriod () {
-      return this.MinutePeriod.minutePeriod
-    }
-  },
-  watch: {
-    minutePeriod: function (value, oldValue) {
-      if (value == oldValue) return
-      this.Minute.IsShow = false
-      this.FiveMinute.IsShow = false
-      this.Kline.IsShow = true
-      this.RightMenu.IsShow = false // 分钟K线没有复权
-      this.OnSize()
-      if (this.Kline.JSChart == null) {
-        this.Kline.JSChart = JSCommon.JSChart.Init(document.getElementById('kline'))
-
-        this.Kline.Option.KLine.Period = value
-        this.Kline.JSChart.SetOption(this.Kline.Option)
-      } else {
-        this.Kline.JSChart.ChangePeriod(value)
+    created () {
+      // this.timer = setInterval(this.refreshList, 5000)
+      this.Symbol = this.$parent.detail.code + '.' + this.$parent.detail.stockType
+      if(this.$parent.detail.stockType == 'us'){
+        this.Symbol = this.$parent.detail.code + '.' + this.$parent.detail.stockType + "a"
       }
-    }
-  },
 
-  methods:
+      console.log('Symbol:', this.Symbol)
+
+      // this.Symbol = '600000.sh'
+      var symbol = Tools.getURLParams('symbol')
+      if (symbol) {
+        console.log(`[HQChartDemo::created] symbol=${symbol}`)
+        console.info(this.props.symbol)
+        this.Symbol = this.props.symbol
+      }
+
+      this.IsIndex = this.IsSHSZIndex()  //初始判断是否是指数
+
+      this.JSStock = JSCommonStock.JSStockInit()
+      this.InitalStock()
+      this.JSStock.RequestData()
+
+      this.Minute.Option = DefaultData.GetMinuteOption(this.Symbol)
+      this.FiveMinute.Option = DefaultData.GetFiveDayMinuteOption(this.Symbol)
+      this.Kline.Option = DefaultData.GetKlineOption(this.Symbol)
+    },
+    beforeDestroy () {
+      // clearInterval(this.timer)
+    },
+    mounted () {
+      this.getDetail()
+      if (this.$store.state.userInfo.phone) {
+        // 判断是否登录
+        this.getOpation()
+      } else {
+        // 获取用户信息
+        this.getUserInfo()
+      }
+      this.OnSize()
+      window.onresize = () => {
+        this.$refs.stockHqNews.OnSize()
+        this.OnSize()
+      }
+      this.Minute.JSChart = JSCommon.JSChart.Init(document.getElementById('minuteChart'))
+      this.Minute.JSChart.SetOption(this.Minute.Option)
+    },
+    computed: {
+      minutePeriod () {
+        return this.MinutePeriod.minutePeriod
+      }
+    },
+    watch: {
+      minutePeriod: function (value, oldValue) {
+        if (value == oldValue) return
+        this.Minute.IsShow = false
+        this.FiveMinute.IsShow = false
+        this.Kline.IsShow = true
+        this.RightMenu.IsShow = false    //分钟K线没有复权
+        this.OnSize()
+        if (this.Kline.JSChart == null) {
+          this.Kline.JSChart = JSCommon.JSChart.Init(document.getElementById('kline'))
+
+          this.Kline.Option.KLine.Period = value
+          this.Kline.JSChart.SetOption(this.Kline.Option)
+        } else {
+          this.Kline.JSChart.ChangePeriod(value)
+        }
+      }
+    },
+
+    methods:
       {
 
-        // 下单部分
+        //下单部分
         async getUserInfo () {
           // 获取用户信息
           let data = await api.getUserInfo()
@@ -787,7 +784,7 @@ export default {
             this.isOptionOpt = true
           }
         },
-        async getDetail () {
+        async getDetail() {
           let opts = {
             code: this.$route.query.code
           }
@@ -871,7 +868,7 @@ export default {
           }
         },
 
-        // 修改k线指标
+        //修改k线指标
         ChangeKlinIndex (item) {
           if (!this.Kline.JSChart) return
 
@@ -912,7 +909,7 @@ export default {
           }
         },
 
-        // 修改复权
+        //修改复权
         ChangeKlinRight (item) {
           if (!this.Kline.JSChart) return
 
@@ -929,14 +926,14 @@ export default {
           this.PeriodObj.TabTextIndex = index
 
           switch (index) {
-            case 0: // 分时图
+            case 0:  //分时图
               this.Minute.IsShow = true
               this.FiveMinute.IsShow = false
               this.Kline.IsShow = false
               this.RightMenu.IsShow = false
               this.OnSize()
               break
-            case 1: // 5日分时图
+            case 1:  //5日分时图
               this.Minute.IsShow = false
               this.FiveMinute.IsShow = true
               this.Kline.IsShow = false
@@ -947,7 +944,7 @@ export default {
                 this.FiveMinute.JSChart.SetOption(this.FiveMinute.Option)
               }
               break
-            case 2: // 历史K线图
+            case 2:  //历史K线图
             case 3:
             case 4:
               this.Minute.IsShow = false
@@ -958,7 +955,8 @@ export default {
               if (this.Kline.JSChart == null) {
                 this.Kline.JSChart = JSCommon.JSChart.Init(document.getElementById('kline'))
                 this.Kline.JSChart.SetOption(this.Kline.Option)
-              } else {
+              }
+              else {
                 this.Kline.JSChart.ChangePeriod(index - 2)
               }
 
@@ -986,10 +984,10 @@ export default {
           if (id != this.ID) return
 
           let isIndex = this.IsSHSZIndex()
-          let read = jsStock.GetStockRead(this.ID, this.UpdateData) // 获取一个读取数据类,并绑定id和更新数据方法
+          let read = jsStock.GetStockRead(this.ID, this.UpdateData) //获取一个读取数据类,并绑定id和更新数据方法
           if (arySymbol.indexOf(this.Symbol) < 0) return
 
-          let data = {} // 数据取到的数据 数据名称：{ Value:数值(可以没有), Color:颜色, Text:显示的文本字段(先给默认显示)}
+          let data = {}    //数据取到的数据 数据名称：{ Value:数值(可以没有), Color:颜色, Text:显示的文本字段(先给默认显示)}
           data.Name = {Text: read.Get(this.Symbol, JSCommonStock.STOCK_FIELD_NAME.NAME)}
           let date = read.Get(this.Symbol, JSCommonStock.STOCK_FIELD_NAME.DATE)
           let time = read.Get(this.Symbol, JSCommonStock.STOCK_FIELD_NAME.TIME)
@@ -1020,7 +1018,7 @@ export default {
           let SellFive = read.Get(this.Symbol, JSCommonStock.STOCK_FIELD_NAME.SELL5)
           let BuyFive = read.Get(this.Symbol, JSCommonStock.STOCK_FIELD_NAME.BUY5)
           let Deal = read.Get(this.Symbol, JSCommonStock.STOCK_FIELD_NAME.DEAL)
-          // 卖五
+          //卖五
           if (SellFive && SellFive.length == 5) {
             var str1 = []
             for (var i in SellFive) {
@@ -1035,7 +1033,7 @@ export default {
             }
             data.SellerFive = str1.reverse()
           }
-          // 买五
+          //买五
           if (BuyFive && BuyFive.length == 5) {
             var str2 = []
             for (var i in BuyFive) {
@@ -1050,7 +1048,7 @@ export default {
             }
             data.BuyerFive = str2
           }
-          // 分笔
+          //分笔
           if (Deal != undefined) {
             var str3 = []
             for (var i in Deal) {
@@ -1075,8 +1073,8 @@ export default {
             data.Dealer = str3
           }
 
-          data.Price.Text = JSCommon.IFrameSplitOperator.FormatValueString(data.Price.Value, 2) // 保留2位小数
-          data.Price.Color = JSCommon.IFrameSplitOperator.FormatValueColor(data.Price.Value, yClose) // 价格颜色判断
+          data.Price.Text = JSCommon.IFrameSplitOperator.FormatValueString(data.Price.Value, 2)  //保留2位小数
+          data.Price.Color = JSCommon.IFrameSplitOperator.FormatValueColor(data.Price.Value, yClose) //价格颜色判断
 
           if (data.RiseFallPrice.Value == 0) {
             data.RiseFallPrice.Text = '0.00'
@@ -1107,10 +1105,10 @@ export default {
           data.Vol.Text = JSCommon.IFrameSplitOperator.FormatValueString(data.Vol.Value, 2)
 
           if (isIndex) {
-            // 指数才有
-            data.Down = {Text: ''} // 上涨
-            data.Up = {Text: ''} // 下跌
-            data.Unchanged = {Text: ''} // 平盘
+            //指数才有
+            data.Down = {Text: ''} //上涨
+            data.Up = {Text: ''}   //下跌
+            data.Unchanged = {Text: ''} //平盘
             data.Stop = {Text: ''}
             let indexTop = read.Get(this.Symbol, JSCommonStock.STOCK_FIELD_NAME.INDEXTOP)
             if (indexTop) {
@@ -1119,7 +1117,8 @@ export default {
               data.Unchanged.Text = JSCommon.IFrameSplitOperator.FormatValueString(indexTop.Unchanged, 0)
               data.Stop.Text = JSCommon.IFrameSplitOperator.FormatValueString(indexTop.Stop, 0)
             }
-          } else {
+          }
+          else {
             data.Excahngerate = {
               Value: read.Get(this.Symbol, JSCommonStock.STOCK_FIELD_NAME.EXCHANGE_RATE),
               Color: '',
@@ -1153,18 +1152,19 @@ export default {
             if (events) {
               console.log('[StockInfo::UpdateData] events data ', this.Symbol, events)
               data.HK = events.HK
-              data.IsMargin = events.IsMargin /// /是否是融资融券标题
-              data.IsHK = events.IsHK // 是否有港股
-              data.IsSHHK = events.IsSHHK // 沪港通
+              data.IsMargin = events.IsMargin ////是否是融资融券标题
+              data.IsHK = events.IsHK  //是否有港股
+              data.IsSHHK = events.IsSHHK  //沪港通
             }
           }
+
           this.StockData = data
         },
 
         InitalStock () {
-          let read = this.JSStock.GetStockRead(this.ID, this.UpdateData) // 获取一个读取数据类,并绑定id和更新数据方法
+          let read = this.JSStock.GetStockRead(this.ID, this.UpdateData)         //获取一个读取数据类,并绑定id和更新数据方法
 
-          const stockField =// 需要获取的数据字段
+          const stockField =//需要获取的数据字段
             [
               JSCommonStock.STOCK_FIELD_NAME.NAME,
               JSCommonStock.STOCK_FIELD_NAME.DATE,
@@ -1190,7 +1190,7 @@ export default {
               JSCommonStock.STOCK_FIELD_NAME.EVENTS,
               JSCommonStock.STOCK_FIELD_NAME.SELL5,
               JSCommonStock.STOCK_FIELD_NAME.BUY5,
-              JSCommonStock.STOCK_FIELD_NAME.DEAL
+              JSCommonStock.STOCK_FIELD_NAME.DEAL,
             ]
 
           const indexField =
@@ -1207,7 +1207,7 @@ export default {
               JSCommonStock.STOCK_FIELD_NAME.YCLOSE,
               JSCommonStock.STOCK_FIELD_NAME.AMOUNT,
               JSCommonStock.STOCK_FIELD_NAME.VOL,
-              JSCommonStock.STOCK_FIELD_NAME.INDEXTOP
+              JSCommonStock.STOCK_FIELD_NAME.INDEXTOP,
             ]
 
           if (this.IsSHSZIndex()) {
@@ -1224,9 +1224,9 @@ export default {
         goToBusiness () {
           window.open(urlObj.htmlSimulateTrade + '?oprTypeIndex=0' + '&symbol=' + this.Symbol + '&symbolName=' + this.StockData.Name.Text, '_self')
         }
-      }
+      },
 
-}
+  }
 
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-
+    
     <mt-tab-container class="order-list" v-model="selected">
       <mt-tab-container-item id="1">
         <holdPosition :selectedNumber='selectedNumber' :handleOptions='handleOptions'/>
@@ -147,6 +147,6 @@ export default {
         }
       }
     }
-
+    
   }
 </style>

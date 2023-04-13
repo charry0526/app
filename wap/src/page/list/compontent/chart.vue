@@ -41,7 +41,7 @@ export default {
     getChrtsTime () {
       // 获取时间
       this.ChartsTime = []
-      if (this.$route.query.code.indexOf('hf_HSI') != -1) {
+      if(this.$route.query.code.indexOf('hf_HSI')!=-1){
         // 9:15~12:00
         for (var i = 9; i < 12; i++) {
           let item = ''
@@ -104,24 +104,24 @@ export default {
             }
           }
         }
-      } else if (this.$route.query.code.indexOf('hf_') != -1) {
+      } else if(this.$route.query.code.indexOf('hf_')!=-1){
         // 0:01 ~ 23:59
         for (var i = 0; i <= 23; i++) {
           let item = ''
           for (let j = 0; j < 60; j++) {
-            let min = i
-            let sec = j
-            if (sec < 10) {
-              sec = '0' + j
+              let min = i
+              let sec = j
+              if (sec < 10) {
+                sec = '0' + j
+              }
+              if (min < 10) {
+                min = '0' + i
+              }
+              item = min + ':' + sec
+              this.ChartsTime.push(item)
             }
-            if (min < 10) {
-              min = '0' + i
-            }
-            item = min + ':' + sec
-            this.ChartsTime.push(item)
-          }
         }
-      } else {
+      } else{
         // 9:30 ~ 11:30  13:00~15:00
         for (var i = 9; i < 15; i++) {
           let item = ''

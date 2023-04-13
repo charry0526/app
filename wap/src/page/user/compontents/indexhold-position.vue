@@ -19,7 +19,7 @@
           <div class="order-info-box">
             <div class="order-title">
               <span @click="toDetail(item.indexCode)" class="main">{{item.indexName}}</span>
-
+              
               <span :class="item.orderDirection=='买涨'?'type type-up':'type type-down'">{{item.orderDirection=='买涨'?'买涨':'买跌'}}</span>
               <span class="direction pull-right big-font">
                         总盈亏:

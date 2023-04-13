@@ -30,15 +30,19 @@
       <ul class="table-list table-list-body"
           v-infinite-scroll="loadMore"
           infinite-scroll-disabled="loading"
-          infinite-scroll-distance="10">
+          infinite-scroll-distance="10" style="margin-top: 45px;">
         <li class="list-body" v-for="item in list" :key="item.key">
           <div>
             <ul class="clearfix"
                 :class="item.nowPrice-item.preclose_px<0?'green':item.nowPrice-item.preclose_px==0?'':'red'"
-                @click='toDetail(item)'>
+                @click='toDetail(item)' style=" overflow: hidden;
+ width: auto;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;">
               <li class="li-title">
                 <p class="name">
-                  <img 
+                  <img
                   @click.stop="toDeleteMy(item)"
                   v-if="item.isOption == '1'" :src="require(`../../../static/img/list/${$state.theme === 'red' ? 'red-' : ''}loved-icon.png`)" alt="">
                   <img v-else
@@ -48,20 +52,20 @@
                 </p>
                 <p class="code">
                   <span class="code-wra">{{item.code}}</span>
-                  <i 
+                  <i
                     v-if="item.stock_plate != '科创'"
                     class="iconfont shen-mark hushen-mark"
                   >
-                    {{item.stock_type == 'sz'?'深':'沪'}}
+                    {{item.stock_type == 'us'?'美':''}}
                   </i>
                   <i v-else class="iconfont kechuang-mark">科创</i>
                 </p>
-                  
+
               </li>
-              <li class="li-base">
+              <li class="li-base" style="line-height:65px;">
                 <span>{{item.nowPrice?Number(item.nowPrice).toFixed(2):'-'}}</span>
               </li>
-              <li class="li-base">
+              <li class="li-base" style="line-height:65px;">
                 <span v-if="item.nowPrice == 0">-</span>
                 <span v-else>{{item.nowPrice-item.preclose_px>0 ?'+':''}} {{item.hcrate?item.hcrate:'0'}}%</span>
               </li>
@@ -120,7 +124,7 @@ export default {
   },
   watch: {
     selectedNumber (val) {
-      if (val === '2') {
+      if (val === '6') {
         this.getStock()
         this.timer = setInterval(this.refreshList, 5000)
       } else {
@@ -165,7 +169,7 @@ export default {
     },
     async getStock () {
       let opt = {
-        stockPlate: '',
+        stockPlate: '美股',
         pageNum: this.pageNum,
         pageSize: 15
       }
@@ -185,7 +189,7 @@ export default {
         return
       }
       let opt = {
-        stockPlate: '',
+        stockPlate: '美股',
         pageNum: 1,
         pageSize: this.currentNum
       }

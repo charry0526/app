@@ -34,8 +34,7 @@
                 <p class="name">{{item.name}}</p>
                 <p class="code">
                   <i v-if="item.stock_plate != '科创'"
-                     :class="item.stock_type == 'sz'?'iconfont shen-mark hushen-mark':'iconfont hushen-mark'">{{item.stock_type
-                    == 'sz'?'深':'沪'}}</i>
+                     :class="item.stock_type == 'sz'?'iconfont shen-mark hushen-mark':'iconfont hushen-mark'">{{getStockType(item.stock_type)}}</i>
                   <i v-else class="iconfont kechuang-mark">科创</i>
                   {{item.code}}
                 </p>
@@ -113,6 +112,17 @@ export default {
     //   this.getStock()
   },
   methods: {
+    getStockType (val) {
+      let rs = '沪'
+      if (val === 'sz') {
+        rs = '深'
+      } else if (val === 'hk') {
+        rs = '港'
+      } else if (val === 'us') {
+        rs = '美'
+      }
+      return rs
+    },
     async getStock () {
       let opt = {
         keyWords: this.keywords,
@@ -164,7 +174,7 @@ export default {
         path: '/listdetail',
         query: {
           code: val.code,
-          stock_type: val.stock_type
+          stock_type:val.stock_type
           // name: val.name
         }
       })

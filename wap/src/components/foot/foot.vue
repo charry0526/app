@@ -1,5 +1,5 @@
 <template>
-  <div
+  <div 
     style="position: fixed;
     bottom: 0;
     width: 100%;"
@@ -11,10 +11,10 @@
         <i v-else class="iconfont icon-zhuiocn"></i> -->
         <img
           class="foot-icon"
-          v-if="$store.state.select == '/home'"
+          v-if="$store.state.select == '/home'" 
           :src="require(`../../../static/img/foot/${$state.theme}/home-active.png`)" alt=""
         >
-        <img
+        <img 
           class="foot-icon"
           v-else
           :src="require(`../../../static/img/foot/${$state.theme}/home.png`)" alt=""
@@ -28,27 +28,27 @@
         <i v-else class="iconfont icon-hangqing-copy"></i> -->
         <img
           class="foot-icon"
-          v-if="$store.state.select == '/list'"
+          v-if="$store.state.select == '/list'" 
           :src="require(`../../../static/img/foot/${$state.theme}/hangqing-active.png`)" alt=""
         >
-        <img
+        <img 
           class="foot-icon"
           v-else
           :src="require(`../../../static/img/foot/${$state.theme}/hangqing.png`)" alt=""
         >
         <p v-if="$store.state.select == '/list'" :style="{color: $state.theme === 'black' ? '#138DB3' : '#C11815'}">行情</p>
         <p v-else :style="{color: $state.theme === 'black' ? '#FFFFFF' : '#656565'}">行情</p>
-
+        
       </mt-tab-item>
       <mt-tab-item id="orderlist" :class="$store.state.select == '/orderlist' ? 'on' : ''">
         <!-- <i v-if="$store.state.select == '/orderlist'" class="iconfont icon-hangqing2"></i>
         <i v-else class="iconfont icon-hangqing-unselectedx"></i> -->
         <img
           class="foot-icon"
-          v-if="$store.state.select == '/orderlist'"
+          v-if="$store.state.select == '/orderlist'" 
           :src="require(`../../../static/img/foot/${$state.theme}/chicang-active.png`)" alt=""
         >
-        <img
+        <img 
           class="foot-icon"
           v-else
           :src="require(`../../../static/img/foot/${$state.theme}/chicang.png`)" alt=""
@@ -61,56 +61,40 @@
         <i v-else class="iconfont icon-xuanze" style="font-size: 0.40rem; padding-top: 0.04rem;"></i> -->
         <img
           class="foot-icon"
-          v-if="$store.state.select == '/mylist'"
+          v-if="$store.state.select == '/mylist'" 
           :src="require(`../../../static/img/foot/${$state.theme}/zixuan-active.png`)" alt=""
         >
-        <img
+        <img 
           class="foot-icon"
           v-else
           :src="require(`../../../static/img/foot/${$state.theme}/zixuan.png`)" alt=""
         >
         <p v-if="$store.state.select == '/mylist'" :style="{color: $state.theme === 'black' ? '#138DB3' : '#C11815'}">自选</p>
         <p v-else :style="{color: $state.theme === 'black' ? '#FFFFFF' : '#656565'}">自选</p>
-
-      </mt-tab-item>
-      <mt-tab-item id="dazong" :class="$store.state.select == '/dazong' ? 'on' : ''">
-        <!-- <i v-if="$store.state.select == '/user'" class="iconfont icon-peoplefill"></i>
-        <i v-else class="iconfont icon-my"></i> -->
-        <img
-          class="foot-icon"
-          v-if="$store.state.select == '/dazong'"
-          :src="require(`../../../static/img/foot/${$state.theme}/dazong-active.png`)" alt=""
-        >
-        <img
-          class="foot-icon"
-          v-else
-          :src="require(`../../../static/img/foot/${$state.theme}/dazong.png`)" alt=""
-        >
-        <p v-if="$store.state.select == '/dazong'" :style="{color: $state.theme === 'black' ? '#138DB3' : '#C11815'}">大宗</p>
-        <p v-else :style="{color: $state.theme === 'black' ? '#FFFFFF' : '#656565'}">大宗</p>
-
+        
       </mt-tab-item>
       <mt-tab-item id="user" :class="$store.state.select == '/user' ? 'on' : ''">
         <!-- <i v-if="$store.state.select == '/user'" class="iconfont icon-peoplefill"></i>
         <i v-else class="iconfont icon-my"></i> -->
         <img
           class="foot-icon"
-          v-if="$store.state.select == '/user'"
+          v-if="$store.state.select == '/user'" 
           :src="require(`../../../static/img/foot/${$state.theme}/user-active.png`)" alt=""
         >
-        <img
+        <img 
           class="foot-icon"
           v-else
           :src="require(`../../../static/img/foot/${$state.theme}/user.png`)" alt=""
         >
         <p v-if="$store.state.select == '/user'" :style="{color: $state.theme === 'black' ? '#138DB3' : '#C11815'}">我的</p>
         <p v-else :style="{color: $state.theme === 'black' ? '#FFFFFF' : '#656565'}">我的</p>
-
+        
       </mt-tab-item>
     </mt-tabbar>
   </div>
 </template>
 <script>
+import eventBus from '@/event.js'
 export default {
   data () {
     return {
@@ -126,7 +110,7 @@ export default {
       handler: function (newval, oldval) {
         // console.log("======"+this.$store.state.select)
         console.log(newval)
-        let tabList = ['home', 'list', 'orderlist', 'mylist', 'user', 'dazong']
+        let tabList = ['home','list','orderlist','mylist','user']
         if (tabList.includes(newval)) {
           this.$store.state.select = newval
           this.select = newval
@@ -193,5 +177,5 @@ export default {
   .black-theme .mint-tabbar{
     background-color: #040506 !important;
   }
-
+  
 </style>

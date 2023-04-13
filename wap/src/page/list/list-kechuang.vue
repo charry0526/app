@@ -120,12 +120,12 @@ export default {
   mounted () {
   },
   methods: {
-    async addOptions (val) {
-      let data = await api.addOption({ code: val.code })
+    async addOptions(val) {
+      let data = await api.addOption({ code: val.code });
       if (data.status === 0) {
-        Toast('添加自选成功')
+        Toast("添加自选成功");
       } else {
-        Toast(data.msg)
+        Toast(data.msg);
       }
     },
     async toDeleteMy (val) {
@@ -183,7 +183,7 @@ export default {
         path: '/listdetail',
         query: {
           code: val.code,
-          stock_type: val.stock_type
+          stock_type:val.stock_type
           // name: val.name
         }
       })

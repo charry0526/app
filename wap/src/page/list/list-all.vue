@@ -45,9 +45,9 @@
             <div :class="i.floatPoint<0?'tab ':'tab '" v-for="(i,index) in stockKechuangList" v-if="index < 6"
                  :key="i.key">
               <p :index='index' class="name">{{i.name}}</p>
-              <p
+              <p 
               :class="changeTextClass[index] == true?'price heartBeat':'price'"
-
+              
               >
               <span :class="i.hcrate<0?'pifting green':'pifting red'">
 {{Number(i.nowPrice).toFixed(2)}}
@@ -245,7 +245,7 @@ export default {
         font-size: 0.24rem;
         vertical-align: middle;
         margin: 0 0.05rem;
-
+        
       }
     }
 

@@ -96,7 +96,7 @@ export default {
       openIcon3: require('../../static/img/openAccount/open-icon3.png'),
       dataIcon1: require('../../static/img/openAccount/data-icon1.png'),
       dataIcon2: require('../../static/img/openAccount/data-icon2.png'),
-      dataIcon3: require('../../static/img/openAccount/data-icon3.png')
+      dataIcon3: require('../../static/img/openAccount/data-icon3.png'),
     }
   },
   components: {

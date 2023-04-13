@@ -60,15 +60,15 @@ export default {
 
   },
   beforeDestroy () {
-    if (this.$state.theme == 'red') {
+    if (this.$state.theme =='red') {
       document.body.classList.remove('red-bg')
-      document.body.classList.add('black-bg')
+        document.body.classList.add('black-bg')
     }
   },
   mounted () {
-    if (this.$state.theme == 'red') {
-      document.body.classList.remove('black-bg')
-      document.body.classList.add('red-bg')
+    if (this.$state.theme =='red') {
+        document.body.classList.remove('black-bg')
+        document.body.classList.add('red-bg')
     }
     this.getCardDetail()
   },

@@ -10,7 +10,7 @@
     </div> -->
     <!-- <form target="frameFile" v-on:submit.prevent='formSubmit'>
       <mt-button slot="right" class="search-btn-list" @click="getOrderList" icon="search">搜索</mt-button> -->
-    <!-- </form> -->
+    <!-- </form> --> 
     <div class="search">
       <!-- <mt-search
         fixed
@@ -19,7 +19,7 @@
         @keyup.enter.native="getOrderList"
         placeholder="可输入股票简拼查询持仓"
       >
-
+        
       </mt-search> -->
       <div class="search-input">
         <input type="text" placeholder="可输入股票简拼查询"

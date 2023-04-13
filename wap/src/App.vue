@@ -26,38 +26,38 @@ export default {
 
     if (this.$route.meta.hasHeader) {
       this.hasHeader = true
-    } else {
+    } else{
       this.hasHeader = false
     }
     if (this.$route.meta.iconRight) {
       this.iconRight = this.$route.meta.iconRight
-    } else {
+    } else{
       this.iconRight = 'default'
     }
     // this.$store.state.className = window.localStorage.getItem('styleName')?window.localStorage.getItem('styleName'):'red'
   },
   watch: {
-    $route (val) {
+    $route(val) {
       let title = val.meta.title || '首页'
       this.title = title
 
       if (val.meta.iconRight) {
         this.iconRight = val.meta.iconRight
-      } else {
+      } else{
         this.iconRight = 'default'
       }
       if (val.meta.hasHeader) {
         this.hasHeader = true
-      } else {
+      } else{
         this.hasHeader = false
       }
     }
   },
-  data () {
+  data() {
     return {
       title: '首页',
       hasHeader: false,
-      iconRight: 'default'
+      iconRight:'default'
     }
   }
 }
@@ -83,7 +83,7 @@ export default {
           font-size: 0.36rem;
           color:rgba(255,255,255,1);
         }
-
+        
       }
       button{
         outline: none;

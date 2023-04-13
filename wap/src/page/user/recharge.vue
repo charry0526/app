@@ -162,7 +162,7 @@
 
 <script>
 import * as api from '@/axios/api'
-import QRCode from 'qrcodejs2'
+import QRCode from "qrcodejs2";
 import { Toast } from 'mint-ui'
 
 export default {
@@ -229,9 +229,9 @@ export default {
   computed: {},
   created () {},
   mounted () {
-    if (this.$state.theme == 'red') {
-      document.body.classList.remove('black-bg')
-      document.body.classList.add('red-bg')
+    if (this.$state.theme =='red') {
+        document.body.classList.remove('black-bg')
+        document.body.classList.add('red-bg')
     }
     this.getSettingInfo()
     if (!this.$store.state.userInfo.idCard) {
@@ -240,9 +240,9 @@ export default {
     this.getPayInfo()
   },
   beforeDestroy () {
-    if (this.$state.theme == 'red') {
+    if (this.$state.theme =='red') {
       document.body.classList.remove('red-bg')
-      document.body.classList.add('black-bg')
+        document.body.classList.add('black-bg')
     }
     window.clearInterval(this.timer)
   },
@@ -255,11 +255,11 @@ export default {
         if (data2.status === 0) {
           // 成功
           this.formDate = data2.data
-          // console.log(document.getElementById("pay_form"))
+          //console.log(document.getElementById("pay_form"))
           this.dialogShow = true
           // 支付跳转
           setTimeout(() => {
-            document.getElementById('pay_form').submit()
+            document.getElementById("pay_form").submit()
             this.isloading = false
           }, 1500)
         } else {
@@ -310,7 +310,7 @@ export default {
       this.id = value.id
       // 支付宝扫码渠道单独分开
       //  if(value == 'juhe1'){
-      if (value.formUrl !== undefined && value.formUrl !== '' && value.formUrl.indexOf('yunpay.waa.cn') !== -1) {
+      if(value.formUrl !== undefined && value.formUrl !== '' && value.formUrl.indexOf('yunpay.waa.cn') !== -1){
         this.type = value.ctype
         this.formDate = value
         this.formCode = value.formCode
@@ -393,15 +393,15 @@ export default {
       if (this.isloading) {
         return
       }
-      // H5支付
-      if (this.formDate.formUrl !== undefined && this.formDate.formUrl !== '' && this.formDate.formUrl.indexOf('yunpay.waa.cn') !== -1) {
+      //H5支付
+      if(this.formDate.formUrl !== undefined && this.formDate.formUrl !== '' && this.formDate.formUrl.indexOf('yunpay.waa.cn') !== -1){
         let data5 = await api.getjuheH5({ payType: this.formDate.formCode, payAmt: this.selectNumber })
         if (data5.status === 0) {
           this.formh5Date = data5.data
           this.$nextTick(() => {
-            this.qrcode(this.formh5Date.qrcode)
-          })
-
+            this.qrcode(this.formh5Date.qrcode);
+          });
+          
           this.popupVisible = true
           // console.log(document.getElementById("payh5_form"))
           // return;
@@ -450,13 +450,13 @@ export default {
     },
     // 生成二维码
     qrcode (url) {
-      document.getElementById('qrcode').innerHTML = ''
-      let qrcode = new QRCode('qrcode', {
-        width: 200, // 二维码宽度，单位像素
-        height: 200, // 二维码高度，单位像素
-        text: url // 生成二维码的链接
-      })
-    },
+        document.getElementById("qrcode").innerHTML = ""
+        let qrcode = new QRCode("qrcode", {
+        width: 200, // 二维码宽度，单位像素
+        height: 200, // 二维码高度，单位像素
+        text: url // 生成二维码的链接
+      });
+    },
     closePopup () {
       // 关闭弹窗
       this.popupVisible = false

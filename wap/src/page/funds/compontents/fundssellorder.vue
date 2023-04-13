@@ -1,10 +1,10 @@
 <template>
   <div class="wrapper">
-    <div v-if="list.length<=0 && !getStatus"
+    <div v-if="list.length<=0 && !getStatus" 
     class="empty text-center">
       暂无订单信息!
     </div>
-    <div v-if="list.length<=0 && getStatus"
+    <div v-if="list.length<=0 && getStatus" 
     class="empty text-center">
       <mt-spinner type="fading-circle"></mt-spinner>
       加载中...
@@ -176,7 +176,7 @@ export default {
         pageSize: this.pageSize
       }
       this.getStatus = true
-      if (this.pageNum == 1) {
+      if(this.pageNum == 1){
         this.list = []
       }
       let data = await api.getFundsOrderList(opt)

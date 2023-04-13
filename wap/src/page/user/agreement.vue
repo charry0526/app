@@ -30,13 +30,13 @@ export default {
       this.$router.back(-1)
     },
     async getInfoSite () {
-      // 获取网站信息
-      let result = await api.getInfoSite()
-      if (result.status === 0) {
-        this.siteInfo = result.data
-      } else {
-        this.$message.error(result.msg)
-      }
+        // 获取网站信息
+        let result = await api.getInfoSite()
+        if (result.status === 0) {
+          this.siteInfo = result.data
+        } else {
+          this.$message.error(result.msg)
+        }
     }
   }
 }

@@ -30,7 +30,7 @@
                            class="iconfont icon-iconfontweitongguo animated bounceInDown"></i>
                         <!-- 1 => 成功 2 失败 3取消 4 等待 -->
                         {{item.orderStatus == 1?'充值成功':item.orderStatus == 2?'充值失败':item.orderStatus == 3?'取消充值':'审核中'}}
-
+                        
                     </span>
               <!-- <span class="secondary ">123456789</span> -->
             </div>

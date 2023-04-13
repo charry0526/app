@@ -273,7 +273,7 @@ export default {
       statusDetail: {},
       exchangeNumber: '', // 汇率
       buying: false, // 下单状态
-      siteLeverList: []
+      siteLeverList:[]
     }
   },
   watch: {},
@@ -281,9 +281,9 @@ export default {
     total () {
       if (this.autoNumber) {
         //   每手保证金 * 手数  = 价钱
-        return (this.detail.depositAmt * this.autoNumber / this.selectCycle).toFixed(2)
+        return (this.detail.depositAmt * this.autoNumber  / this.selectCycle).toFixed(2)
       } else if (this.selectNumber) {
-        return (this.detail.depositAmt * this.selectNumber / this.selectCycle).toFixed(2)
+        return (this.detail.depositAmt * this.selectNumber  / this.selectCycle).toFixed(2)
       } else {
         return 0
       }
@@ -355,23 +355,23 @@ export default {
         // 成功
         // 杠杆倍数
         this.selectCycle = data.data.siteLever
-        if (this.$store.state.userInfo !== undefined && this.$store.state.userInfo !== null && this.$store.state.userInfo.phone !== '' && this.$store.state.userInfo.siteLever !== null) {
-          this.selectCycle = this.$store.state.userInfo.siteLever.split('/')[0]
-          this.siteLeverList = []
-          for (let i = 0; i < this.$store.state.userInfo.siteLever.split('/').length; i++) {
-            let val = this.$store.state.userInfo.siteLever.split('/')[i]
-            let item = { label: val + '倍', value: val }
-            this.siteLeverList.push(item)
+        if(this.$store.state.userInfo !== undefined && this.$store.state.userInfo !== null && this.$store.state.userInfo.phone !== '' && this.$store.state.userInfo.siteLever !== null){
+            this.selectCycle = this.$store.state.userInfo.siteLever.split('/')[0]
+            this.siteLeverList = []
+            for (let i = 0; i < this.$store.state.userInfo.siteLever.split('/').length; i++) {
+              let val = this.$store.state.userInfo.siteLever.split('/')[i]
+              let item = { label: val + '倍', value: val }
+              this.siteLeverList.push(item)
+            }
+          } else {
+            this.selectCycle = data.data.siteLever.split('/')[0]
+            this.siteLeverList = []
+            for (let i = 0; i < data.data.siteLever.split('/').length; i++) {
+              let val = data.data.siteLever.split('/')[i]
+              let item = { label: val + '倍', value: val }
+              this.siteLeverList.push(item)
+            }
           }
-        } else {
-          this.selectCycle = data.data.siteLever.split('/')[0]
-          this.siteLeverList = []
-          for (let i = 0; i < data.data.siteLever.split('/').length; i++) {
-            let val = data.data.siteLever.split('/')[i]
-            let item = { label: val + '倍', value: val }
-            this.siteLeverList.push(item)
-          }
-        }
       } else {
         Toast(data.msg)
       }
@@ -391,7 +391,7 @@ export default {
       let data = await api.querySingleMarket(opts)
       if (data.status === 0) {
         this.statusDetail = data.data
-        if (this.statusDetail.lastClose === null || this.statusDetail.lastClose === '') {
+        if(this.statusDetail.lastClose === null || this.statusDetail.lastClose === ''){
           this.statusDetail.lastClose = this.statusDetail.extra1
         }
       } else {
@@ -454,7 +454,7 @@ export default {
         this.buying = true
         let opts = {
           FuturesId: this.detail.id,
-          buyNum: this.selectNumber ? this.selectNumber : this.autoNumber, // 单位为手
+          buyNum: this.selectNumber ? this.selectNumber: this.autoNumber, // 单位为手
           buyType: this.selectType,
           lever: this.selectCycle ? this.selectCycle : 0
         }

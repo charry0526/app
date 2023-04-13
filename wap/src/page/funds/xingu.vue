@@ -18,7 +18,7 @@
                         <div class="order-money">{{i.names || 0}}</div>
                     </div>
                     <div class="col-xs-3 account">
-
+                       
                         <div class="order-title">发行价格</div>
                         <div class="order-money">{{i.price || 0}}</div>
                     </div>
@@ -47,7 +47,7 @@
                         <div class="order-money">{{item.xgname || 0}}</div>
                         <div class="order-title">保证金</div>
                         <div class="order-money">{{item.bzj|| 0}}</div>
-
+                    
                     </div>
                     <div class="col-xs-4 account">
                         <!-- 保证金：100 股票市值：0 股票盈亏：0  -->
@@ -94,104 +94,105 @@
 </template>
 
 <script>
-import * as api from '../../axios/api'
+    import * as api from '../../axios/api'
 
-export default {
-  data () {
-    return {
-      list: {
-        list: []
-      },
-      aaa: 'aaa',
-      shengou: '',
-      dialogCommunity: false,
-      haoForm: {
-        shehao: ''
-      },
-      tijiao: '',
-      sgList: ''
-    }
-  },
-  computed: {
-    // progress() {
-    //     let per = this.$store.state.userInfo.userAmt/(this.$store.state.userInfo.userAmt+this.$store.state.userInfo.userIndexAmt) * 100 > 100?100:this.$store.state.userInfo.userAmt/(this.$store.state.userInfo.userAmt+this.$store.state.userInfo.userIndexAmt) * 100 > 100?this.$store.state.userInfo.userAmt/(this.$store.state.userInfo.userAmt+this.$store.state.userInfo.userIndexAmt) * 100 > 100?100:this.$store.state.userInfo.userAmt/(this.$store.state.userInfo.userAmt+this.$store.state.userInfo.userIndexAmt) * 100:100
-    //     return per
-    // }
-  },
-  created () {
-    this.getlist()
-    this.xxxx()
-  },
-  methods: {
-    async shengouclik (i) {
-      this.dialogCommunity = true
-      this.tijiao = i
-      console.log(i)
-    },
-    async shengouuu () {
-      this.aaa = 'aaa'
-    },
-    async shengoulist () {
-      this.aaa = 'bbb'
-      this.shengouList()
-    },
-    async getlist () {
-      // 获取持仓列表
-      let opt = {
-        userId: 0,
-        pageNum: this.pageNum,
-        pageSize: this.pageSize
-      }
-      console.log(opt)
-      let data = await api.getUserApplyList(opt)
-      if (data.status === 0) {
-        this.list = data.data
-      }
-    },
-    async xxxx () {
-      // 获取持仓列表
-      let opt = {}
-      let data = await api.xingusg(opt)
-      this.shengou = data.data.list
-      console.log(this.shengou, '申购')
-    },
-    async shengData () {
-      // 获取持仓列表
-      var timestamps = (new Date()).getTime()
-      let opt = {
-        sgname: this.tijiao.names,
-        sgdaima: this.tijiao.code,
-        sgprice: this.tijiao.price,
-        sgsumber: this.haoForm.shehao,
-        tmes: timestamps
-      }
-      console.log(opt)
-      let data = await api.xingusgs(opt)
-      this.shengoutijiao = data.data.list
-      console.log(this.shengoutijiao, '申购提交')
-      this.dialogCommunity = false
-      if (data.status == 200) {
-        this.$message({
-          message: data.msg,
-          type: 'success'
-        })
-      } else {
-        this.$message({
-          message: data.msg,
-          type: 'warning'
-        })
-      }
-    },
-    async shengouList () {
-      let opt = {}
-      let data = await api.xingusgsList(opt)
-      this.sgList = data.data.list
-      // this.timestampToTime()
-      console.log(this.sgList)
-    }
-  }
+    export default {
+        data() {
+            return {
+                list: {
+                    list: []
+                },
+                aaa: 'aaa',
+                shengou: "",
+                dialogCommunity: false,
+                haoForm: {
+                    shehao: ''
+                },
+                tijiao: '',
+                sgList: ''
+            }
+        },
+        computed: {
+            // progress() {
+            //     let per = this.$store.state.userInfo.userAmt/(this.$store.state.userInfo.userAmt+this.$store.state.userInfo.userIndexAmt) * 100 > 100?100:this.$store.state.userInfo.userAmt/(this.$store.state.userInfo.userAmt+this.$store.state.userInfo.userIndexAmt) * 100 > 100?this.$store.state.userInfo.userAmt/(this.$store.state.userInfo.userAmt+this.$store.state.userInfo.userIndexAmt) * 100 > 100?100:this.$store.state.userInfo.userAmt/(this.$store.state.userInfo.userAmt+this.$store.state.userInfo.userIndexAmt) * 100:100
+            //     return per
+            // }
+        },
+        created() {
+            this.getlist()
+            this.xxxx();
+        },
+        methods: {
+            async shengouclik(i) {
+                this.dialogCommunity = true
+                this.tijiao = i
+                console.log(i)
+            },
+            async shengouuu() {
+                this.aaa = 'aaa'
+            },
+            async shengoulist() {
+                this.aaa = 'bbb'
+                this.shengouList();
+            },
+            async getlist() {
+                // 获取持仓列表
+                let opt = {
+                    userId: 0,
+                    pageNum: this.pageNum,
+                    pageSize: this.pageSize
+                }
+                console.log(opt)
+                let data = await api.getUserApplyList(opt)
+                if (data.status === 0) {
+                    this.list = data.data
+                }
 
-}
+            },
+            async xxxx() {
+                // 获取持仓列表
+                let opt = {};
+                let data = await api.xingusg(opt);
+                this.shengou = data.data.list;
+                console.log(this.shengou, "申购");
+            },
+            async shengData() {
+                // 获取持仓列表
+                var timestamps = (new Date()).getTime();
+                let opt = {
+                    sgname: this.tijiao.names,
+                    sgdaima: this.tijiao.code,
+                    sgprice: this.tijiao.price,
+                    sgsumber: this.haoForm.shehao,
+                    tmes: timestamps,
+                };
+                console.log(opt);
+                let data = await api.xingusgs(opt);
+                this.shengoutijiao = data.data.list;
+                console.log(this.shengoutijiao, "申购提交");
+                this.dialogCommunity = false
+                if (data.status == 200) {
+                    this.$message({
+                        message: data.msg,
+                        type: 'success'
+                    });
+                } else {
+                    this.$message({
+                        message: data.msg,
+                        type: 'warning'
+                    });
+                }
+            },
+            async shengouList() {
+                let opt = {};
+                let data = await api.xingusgsList(opt);
+                this.sgList = data.data.list;
+                // this.timestampToTime()
+                console.log(this.sgList)
+            },
+        },
+
+    }
 </script>
 
 <style lang="less" scoped>

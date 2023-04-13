@@ -272,7 +272,6 @@
     <!-- tab -->
 
     <foot></foot>
-    <a href="http://kf.dxcfd.com/index/index/home?visiter_id=&visiter_name=&avatar=&business_id=3&groupid=0&special=3"><img class="meiqia" :src="require('../../../static/img/meiqia.png')"/></a>
   </div>
 
 </template>
@@ -295,7 +294,7 @@ export default {
   props: {},
   data () {
     return {
-      news: 'tab_0',
+      news:'tab_0',
       market: [],
       moveStats: false,
       bannerList: '',
@@ -317,8 +316,8 @@ export default {
       newsContent3: [], // 全球股市
       newsContent4: [], // 7*24全球
       newsContent5: [], // 商品资讯,
-      b_bg: require('../../../static/img/bg-zhisu.png'),
-      r_bg: require('../../../static/img/bg-zhisu-red.png')
+      b_bg:require('../../../static/img/bg-zhisu.png'),
+      r_bg:require('../../../static/img/bg-zhisu-red.png')
     }
   },
   created () {
@@ -338,34 +337,34 @@ export default {
     }
   },
   methods: {
-    async getNewsList (type) {
-      let data = await api.queryNewsList(type)
-      console.log('xinwen:', data)
-      switch (type) {
+    async getNewsList(type) {
+      let data = await api.queryNewsList(type);
+      console.log('xinwen:',data)
+      switch(type) {
         case 1:
           this.newsContent1 = data.data.list
-          break
+          break;
         case 2:
           this.newsContent2 = data.data.list
-          break
+          break;
         case 3:
           this.newsContent3 = data.data.list
-          break
+          break;
         case 4:
           this.newsContent4 = data.data.list
-          break
+          break;
         case 5:
           this.newsContent5 = data.data.list
-          break
+          break;
       }
     },
     // 主题切换
-    handleChangeThemeClick () {
+    handleChangeThemeClick() {
       if (this.theme === 'black') {
-        eventBus.$emit('getTheme', 'red')
+        eventBus.$emit("getTheme", 'red');
         this.theme = 'red'
       } else {
-        eventBus.$emit('getTheme', 'black')
+        eventBus.$emit("getTheme", 'black');
         this.theme = 'black'
       }
     },
@@ -499,7 +498,7 @@ export default {
     this.getNewsList(4)
     this.getNewsList(5)
     this.getMarket() // 获取大盘指数
-    this.getBanner() // 获取banner
+    this.getBanner() //获取banner
     this.getArtList() // 获取公告
     // let header = document.querySelector('.header-box')
     let body = document.querySelector('.wrapper')

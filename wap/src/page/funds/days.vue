@@ -38,7 +38,7 @@
                 >（配资资金为{{fundsAmount}}元）</span>
             </div>
             <div class="days-box_items beishu">
-                <div
+                <div 
                 v-for="(item, index) in fundsTypeList" :key="item.id"
                 :class="['days-box_item', selLever==item.lever?'active':'']"
                 :style="{marginRight:(index+1)%4==0&&'0'}"
@@ -71,14 +71,14 @@
         <div class="notify-1">
             <span style="color:#fff"
                 :style="{color:$state.theme =='red'?'#222':''}"
-
+            
             >总操盘资金：</span>
             {{totalTradingAmount}} 元 = {{Number(form.margin).toFixed(0)}}元（保证金）+ {{fundsAmount}} 元（配资资金）
         </div>
         <div class="notify-1">
             <span style="color:#fff"
                 :style="{color:$state.theme =='red'?'#222':''}"
-
+            
             >需准备资金：</span>
              {{Number(Number(form.margin) + (fundsAmount * selManageRate * selDaysUseVal / 100)).toFixed(1)}}  元 = {{Number(form.margin).toFixed(0)}} 元（保证金）+ {{Number(fundsAmount * selManageRate * selDaysUseVal / 100).toFixed(1)}} 元 (一次性收取管理费)
         </div>
@@ -119,7 +119,7 @@
             <div class="warn-detail">
                 <div>1.保证金：您用于投资股票的资金，起点相当低。 </div>
                 <div>
-                 2.操盘期限；按天计算，不包含各类法定节假日。
+                 2.操盘期限；按天计算，不包含各类法定节假日。 
                 </div>
                 <div>3.按天支付管理费（不包含交交易印花税，过户费和佣金），无任何其他费用</div>
                 <div>4.如操盘10天，一次性收取10天管理费</div>
@@ -131,161 +131,161 @@
 </template>
 
 <script>
-import * as api from '../../axios/api'
+  import * as api from '../../axios/api'
 
 export default {
-  data () {
-    return {
-      bzjs: [
-        { value: 1000, label: '1000' },
-        { value: 1500, label: '1500' },
-        { value: 2000, label: '2000' },
-        { value: 3000, label: '3000' },
-        { value: 5000, label: '5000' },
-        { value: 8000, label: '8000' }
-      ],
-      baozhen: 0,
-      beishu: 100,
-      isloading: false,
-      form: {
-        margin: ''
-      },
-      selLever: 0,
-      selManageRate: 0,
-      selCycleType: '',
-      selDaysUsePeriod: '',
-      selDaysUseVal: '',
-      selMinDay: '',
-      selMaxDay: '',
-      selSingleHoldingRatio: '',
-      fundsSetting: {},
-      fundsTypeList: [{}]
-    }
-  },
-  methods: {
-    setBaozhen (val) {
-      this.form.margin = val
+    data() {
+        return {
+            bzjs:[
+                { value:1000,label:'1000' },
+                { value:1500,label:'1500' },
+                { value:2000,label:'2000' },
+                { value:3000,label:'3000' },
+                { value:5000,label:'5000' },
+                { value:8000,label:'8000' }, 
+            ],
+            baozhen:0,
+            beishu:100,
+            isloading: false,
+            form: {
+                margin: ''
+            },
+            selLever: 0,
+            selManageRate: 0,
+            selCycleType: '',
+            selDaysUsePeriod: '',
+            selDaysUseVal: '',
+            selMinDay: '',
+            selMaxDay: '',
+            selSingleHoldingRatio: '',
+            fundsSetting: {},
+            fundsTypeList: [{}]
+        }
     },
-    async getUserInfo () {
-      // 获取用户信息
-      let data = await api.getUserInfo()
-      if (data.status === 0) {
-        // 判断是否登录
-        this.$store.state.userInfo = data.data
-      } else {
-      }
-    },
-    async getFundsSetting () {
-      // 分仓配资设置信息查询
-      let data = await api.getFundsSetting()
-      if (data.status === 0) {
-        this.fundsSetting = data.data
-        this.form.margin = this.fundsSetting.marginMin
-        this.selDaysUsePeriod = this.fundsSetting.daysUsePeriod.split('|')[0] + '天'
-        this.selDaysUseVal = this.fundsSetting.daysUsePeriod.split('|')[0]
-        this.selMinDay = this.fundsSetting.daysUsePeriod.split('|')[0]
-        this.selMaxDay = this.fundsSetting.daysUsePeriod.split('|')[this.fundsSetting.daysUsePeriod.split('|').length - 1]
-      } else {
-      }
-    },
-    async getFundsTypeList () {
-      // 查询配资类型杠杆
-      let data = await api.getFundsTypeList({cycleType: 1})
-      if (data.status === 0) {
-        this.fundsTypeList = data.data.list
-        this.selLever = this.fundsTypeList[0].lever
-        this.selManageRate = this.fundsTypeList[0].manageRate
-        this.selCycleType = this.fundsTypeList[0].lever + '倍'
-        this.selSingleHoldingRatio = this.fundsTypeList[0].singleHoldingRatio
-      } else {
-      }
-    },
-    getIntNumber () {
-      if (this.form.margin >= this.fundsSetting.marginMax) {
-        this.form.margin = this.fundsSetting.marginMax
-      }
-      this.form.margin = Math.floor(this.form.margin)
-    },
-    async Onsubmit () {
-      // 融资转指数
-      let opt = {
-        userId: this.$store.state.userInfo.id,
-        userName: this.$store.state.userInfo.realName,
-        userPhone: this.$store.state.userInfo.phone,
-        fundsType: 1, // 配资类型：1按天、2按周、3按月
-        margin: this.form.margin, // 保证金
-        fundsAmount: this.fundsAmount, // 配资金额
-        lever: this.selLever, // 杠杆
-        totalTradingAmount: this.totalTradingAmount, // 总操盘金额
-        tradersCycle: this.selDaysUseVal, // 操盘期限
-        manageFee: this.manageFee // 管理费
-      }
-      let data = await api.addFundsApply(opt)
-      if (data.status === 0) {
-        this.$message.success(data.msg)
-      } else {
-        this.$message.error(data.msg)
-      }
-    },
-    currentSel (selVal) {
-      this.selLever = selVal.lever
-      this.selManageRate = selVal.manageRate
-      this.selCycleType = selVal.lever + '倍'
-      this.selSingleHoldingRatio = selVal.singleHoldingRatio
-    },
-    currentSelDays (selVal) {
-      let val = parseInt(selVal.target.value)
-      console.log(val)
-      if (isNaN(val)) {
-        this.selDaysUsePeriod = this.selMinDay + '天'
-        this.selDaysUseVal = this.selMinDay
-      } else {
-        if (val < this.selMinDay) {
-          this.selDaysUsePeriod = this.selMinDay + '天'
-          this.selDaysUseVal = this.selMinDay
-        } else if (val > this.selMaxDay) {
-          this.selDaysUsePeriod = this.selMaxDay + '天'
-          this.selDaysUseVal = this.selMaxDay
+    methods:{
+        setBaozhen(val) {
+            this.form.margin = val
+        },
+            async getUserInfo () {
+        // 获取用户信息
+        let data = await api.getUserInfo()
+        if (data.status === 0) {
+          // 判断是否登录
+          this.$store.state.userInfo = data.data
         } else {
-          this.selDaysUsePeriod = val + '天'
-          this.selDaysUseVal = val
+        }
+      },
+      async getFundsSetting () {
+        // 分仓配资设置信息查询
+        let data = await api.getFundsSetting()
+        if (data.status === 0) {
+          this.fundsSetting = data.data
+          this.form.margin = this.fundsSetting.marginMin
+          this.selDaysUsePeriod = this.fundsSetting.daysUsePeriod.split('|')[0] + '天'
+          this.selDaysUseVal = this.fundsSetting.daysUsePeriod.split('|')[0]
+          this.selMinDay = this.fundsSetting.daysUsePeriod.split('|')[0]
+          this.selMaxDay = this.fundsSetting.daysUsePeriod.split('|')[this.fundsSetting.daysUsePeriod.split('|').length - 1]
+        } else {
+        }
+      },
+      async getFundsTypeList () {
+        // 查询配资类型杠杆
+        let data = await api.getFundsTypeList({cycleType:1})
+        if (data.status === 0) {
+          this.fundsTypeList = data.data.list
+          this.selLever = this.fundsTypeList[0].lever
+          this.selManageRate = this.fundsTypeList[0].manageRate
+          this.selCycleType = this.fundsTypeList[0].lever + '倍'
+          this.selSingleHoldingRatio = this.fundsTypeList[0].singleHoldingRatio
+        } else {
+        }
+      },
+      getIntNumber () {
+        if (this.form.margin >= this.fundsSetting.marginMax) {
+          this.form.margin = this.fundsSetting.marginMax
+        }
+        this.form.margin = Math.floor(this.form.margin)
+      },
+      async Onsubmit () {
+        // 融资转指数
+        let opt = {
+          userId: this.$store.state.userInfo.id,
+          userName: this.$store.state.userInfo.realName,
+          userPhone: this.$store.state.userInfo.phone,
+          fundsType: 1, // 配资类型：1按天、2按周、3按月
+          margin: this.form.margin, //保证金
+          fundsAmount: this.fundsAmount, //配资金额
+          lever: this.selLever, //杠杆
+          totalTradingAmount: this.totalTradingAmount, //总操盘金额
+          tradersCycle: this.selDaysUseVal, //操盘期限
+          manageFee: this.manageFee //管理费
+        }
+        let data = await api.addFundsApply(opt)
+        if (data.status === 0) {
+          this.$message.success(data.msg)
+        } else {
+          this.$message.error(data.msg)
+        }
+      },
+      currentSel(selVal) {
+        this.selLever = selVal.lever
+        this.selManageRate = selVal.manageRate
+        this.selCycleType = selVal.lever + '倍'
+        this.selSingleHoldingRatio = selVal.singleHoldingRatio
+      },
+      currentSelDays(selVal) {
+        let val = parseInt(selVal.target.value)
+        console.log(val)
+        if (isNaN(val)) {
+            this.selDaysUsePeriod = this.selMinDay + '天'
+            this.selDaysUseVal = this.selMinDay
+        } else {
+            if (val< this.selMinDay) {
+                this.selDaysUsePeriod = this.selMinDay + '天'
+                this.selDaysUseVal = this.selMinDay
+            } else if(val> this.selMaxDay) {
+                this.selDaysUsePeriod = this.selMaxDay + '天'
+                this.selDaysUseVal = this.selMaxDay
+            } else {
+                this.selDaysUsePeriod = val + '天'
+                this.selDaysUseVal = val
+            }
+        }
+        // this.selDaysUsePeriod = selVal + '天'
+        // this.selDaysUseVal = selVal
+      }
+    },
+    created() {
+         this.getUserInfo()
+        this.getFundsSetting()
+        this.getFundsTypeList()
+    },
+    computed:{
+        zidinyi() {
+            return !this.bzjs.map(it => it.value).includes(this.form.margin)
+        },
+        fundsAmount () { //配资金额= 保证金*杠杆倍数
+        if (this.form.margin) {
+          return Number(this.form.margin * this.selLever).toFixed(0)
+        } else {
+          return 0
+        }
+      },
+      totalTradingAmount () {//总操盘金额
+        if (this.form.margin) {
+          return Number(Number(this.form.margin) + (this.form.margin * this.selLever)).toFixed(0)
+        } else {
+          return 0
+        }
+      },
+      manageFee () {//管理费
+        if (this.selDaysUseVal) {
+          return (this.fundsAmount * this.selManageRate * this.selDaysUseVal / 100).toFixed(1)
+        } else {
+          return 0
         }
       }
-      // this.selDaysUsePeriod = selVal + '天'
-      // this.selDaysUseVal = selVal
     }
-  },
-  created () {
-    this.getUserInfo()
-    this.getFundsSetting()
-    this.getFundsTypeList()
-  },
-  computed: {
-    zidinyi () {
-      return !this.bzjs.map(it => it.value).includes(this.form.margin)
-    },
-    fundsAmount () { // 配资金额= 保证金*杠杆倍数
-      if (this.form.margin) {
-        return Number(this.form.margin * this.selLever).toFixed(0)
-      } else {
-        return 0
-      }
-    },
-    totalTradingAmount () { // 总操盘金额
-      if (this.form.margin) {
-        return Number(Number(this.form.margin) + (this.form.margin * this.selLever)).toFixed(0)
-      } else {
-        return 0
-      }
-    },
-    manageFee () { // 管理费
-      if (this.selDaysUseVal) {
-        return (this.fundsAmount * this.selManageRate * this.selDaysUseVal / 100).toFixed(1)
-      } else {
-        return 0
-      }
-    }
-  }
 }
 </script>
 

@@ -148,7 +148,6 @@ export default {
       this.clickFalg = 0
       if (data.status === 0) {
         this.$store.state.userInfo.phone = this.phone
-        localStorage.setItem('token', data.data.token)
         // this.$store.state.userInfo.token = data.data.cookie
         this.clickFalg = 0
         // this.clearCookie()
@@ -280,3 +279,5 @@ export default {
     }
   }
 </style>
+
+

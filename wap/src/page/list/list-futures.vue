@@ -26,9 +26,9 @@
             <ul class="clearfix" :class="item.floatPoint<0?'green':item.floatPoint==0?'':'red'" @click='toDetail(item)'>
               <li class="li-title">
                 <p class="name">
-                  <img
-                  v-if="item.isOption == '1'"
-                  :src="require(`../../../static/img/list/${$state.theme === 'red' ? 'red-' : ''}loved-icon.png`)"
+                  <img 
+                  v-if="item.isOption == '1'" 
+                  :src="require(`../../../static/img/list/${$state.theme === 'red' ? 'red-' : ''}loved-icon.png`)" 
                   @click.stop="toDeleteMy(item)"
                   alt="">
                   <img v-else
@@ -119,12 +119,12 @@ export default {
   mounted () {
   },
   methods: {
-    async addOptions (val) {
-      let data = await api.addOption({ code: val.futuresCode })
+    async addOptions(val) {
+      let data = await api.addOption({ code: val.futuresCode });
       if (data.status === 0) {
-        Toast('添加自选成功')
+        Toast("添加自选成功");
       } else {
-        Toast(data.msg)
+        Toast(data.msg);
       }
     },
     async toDeleteMy (val) {
@@ -180,11 +180,12 @@ export default {
         //   }
         // })
 
+
         this.$router.push({
           path: '/listdetail2',
           query: {
             code: val.futuresGid,
-            stock_type: 'hf',
+            stock_type:'hf',
             qhinfo: val,
             type: 'qh'
             // name: val.name

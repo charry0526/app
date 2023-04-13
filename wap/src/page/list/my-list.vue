@@ -109,7 +109,7 @@ export default {
       timer: '',
       currentNum: 15,
       market: [],
-      changeTextClass: {}
+      changeTextClass: {},
       // pageNum:1,
       // pageSize:15
     }
@@ -183,7 +183,7 @@ export default {
         Toast(data.msg)
       }
     },
-    async getQhDetail (code, stockGid) {
+    async getQhDetail (code,stockGid) {
       let opts = {
         futuresCode: code
       }
@@ -206,10 +206,10 @@ export default {
       //     Toast('系统正在升级，暂关闭交易！')
       //     return
       // }
-      let code = val.stockCode
-      if (val.stockGid !== undefined && val.stockGid.indexOf('hf_') != -1) {
-        this.getQhDetail(val.stockCode, val.stockGid)
-      } else if (val.stockCode !== undefined && val.stockCode.substring(0, 3) == '000') {
+      let code =val.stockCode
+      if(val.stockGid !== undefined && val.stockGid.indexOf('hf_')!=-1){
+        this.getQhDetail(val.stockCode,val.stockGid)
+      } else if(val.stockCode !== undefined && val.stockCode.substring(0,3)=='000'){
         code = val.stockGid
         // this.$router.push({
         //   path: '/listdetail',
@@ -224,10 +224,11 @@ export default {
           path: '/listdetail2',
           query: {
             code: code,
-            stock_type: val.stock_type,
+            stock_type:val.stock_type,
             zsinfo: val
           }
         })
+        return
       } else {
         // 详情
         // this.$router.push({
@@ -242,11 +243,12 @@ export default {
           path: '/listdetail2',
           query: {
             code: code,
-            stock_type: val.stock_type,
+            stock_type:val.stock_type,
             zsinfo: val
           }
         })
       }
+      
     },
     toSearch () {
       this.$router.push('/searchmylist')

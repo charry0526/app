@@ -5,10 +5,12 @@
         </router-link>
         <mt-button slot="right" icon="search" @click="toSearch"></mt-button>
     </mt-header> -->
-    <mt-navbar class="top-navbar" v-model="selected" :fixed="selected != '2'?true:false">
+    <mt-navbar class="top-navbar" v-model="selected" :style="selected != '2'?'':''" :fixed="selected != '2'?true:false">
       <!-- <mt-tab-item id="0">全部</mt-tab-item> -->
       <mt-tab-item v-if="this.$store.state.settingForm.indexDisplay" id="1">指数</mt-tab-item>
       <mt-tab-item v-if="this.$store.state.settingForm.stockDisplay" id="2">沪深</mt-tab-item>
+      <mt-tab-item v-if="this.$store.state.settingForm.stockDisplay" id="5">港股</mt-tab-item>
+      <mt-tab-item v-if="this.$store.state.settingForm.stockDisplay" id="6">美股</mt-tab-item>
       <mt-tab-item v-if="this.$store.state.settingForm.kcStockDisplay" id="3">科创</mt-tab-item>
       <mt-tab-item v-if="this.$store.state.settingForm.futuresDisplay" id="4">期货</mt-tab-item>
     </mt-navbar>
@@ -22,6 +24,15 @@
       <mt-tab-container-item v-if="this.$store.state.settingForm.stockDisplay" id="2">
         <List2 :selectedNumber='selected'/>
       </mt-tab-container-item>
+
+      <mt-tab-container-item v-if="this.$store.state.settingForm.stockDisplay" id="5">
+        <List5 :selectedNumber='selected'/>
+      </mt-tab-container-item>
+
+      <mt-tab-container-item v-if="this.$store.state.settingForm.stockDisplay" id="6">
+        <List6 :selectedNumber='selected'/>
+      </mt-tab-container-item>
+
       <mt-tab-container-item v-if="this.$store.state.settingForm.kcStockDisplay" id="3">
         <List3 :selectedNumber='selected'/>
       </mt-tab-container-item>
@@ -41,6 +52,8 @@ import List1 from './list-index'
 import List2 from './list-stock'
 import List3 from './list-kechuang'
 import List4 from './list-futures'
+import List5 from './list-gangu'
+import List6 from './list-meigu'
 import * as api from '@/axios/api'
 import { Toast } from 'mint-ui'
 
@@ -51,7 +64,9 @@ export default {
     List1,
     List2,
     List3,
-    List4
+    List4,
+    List5,
+    List6
   },
   props: {},
   data () {

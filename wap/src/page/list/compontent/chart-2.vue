@@ -43,24 +43,24 @@ export default {
   },
   methods: {
     async getDate () {
-      // 期货
-      if (this.code.indexOf('hf_') != -1) {
-        let data = await api.getFuturesMinKEcharts({code: this.code, time: 15, size: 50})
+      //期货
+      if(this.code.indexOf('hf_')!=-1){
+        let data = await api.getFuturesMinKEcharts({code: this.code, time: 15,size: 50})
         if (data.status === 0) {
           this.initEchartMap(data.data)
           this.hasload = true
         } else {
-          // Toast(data.msg)
+          //Toast(data.msg)
         }
-      } else if (this.code.indexOf('sh') != -1 || this.code.indexOf('sz') != -1) {
-        let data = await api.getIndexMinKEcharts({code: this.code, time: 15, size: 50})
+      } else if(this.code.indexOf('sh')!=-1 || this.code.indexOf('sz')!=-1){
+        let data = await api.getIndexMinKEcharts({code: this.code, time: 15,size: 50})
         if (data.status === 0) {
           this.initEchartMap(data.data)
           this.hasload = true
         } else {
-          // Toast(data.msg)
+          //Toast(data.msg)
         }
-      } else {
+      } else{
         let opts = {
           code: this.code,
           time: 15,
@@ -72,9 +72,10 @@ export default {
           this.initEchartMap(data.data)
           this.hasload = true
         } else {
-          // Toast(data.msg)
+          //Toast(data.msg)
         }
       }
+      
     },
     splitData (rawData) {
       var categoryData = []
