@@ -1,31 +1,52 @@
 <template>
   <div class="img">
     <mt-navbar v-model="selected">
-      <mt-tab-item id="1">分时</mt-tab-item>
-      <mt-tab-item id="2">5分</mt-tab-item>
-      <mt-tab-item id="3">15分</mt-tab-item>
-      <mt-tab-item id="4">30分</mt-tab-item>
-      <mt-tab-item id="5">日线</mt-tab-item>
+      <mt-tab-item id="1">1m</mt-tab-item>
+      <mt-tab-item id="2">3m</mt-tab-item>
+      <mt-tab-item id="3">6m</mt-tab-item>
+      <!-- <mt-tab-item id="4">YTD</mt-tab-item> -->
+      <mt-tab-item id="5">1y</mt-tab-item>
+      <mt-tab-item id="6">All</mt-tab-item>
     </mt-navbar>
 
     <!-- tab-container -->
     <mt-tab-container v-model="selected">
       <mt-tab-container-item id="1">
-        <chart1 :selected="selected" :code="code"></chart1>
+        <chart5 :selected="selected" :data="data" :code="code" :id="1"></chart5>
       </mt-tab-container-item>
+      
       <mt-tab-container-item id="2">
+        <chart5 :selected="selected" :data="data" :code="code" :id="2"></chart5>
+      </mt-tab-container-item>
+
+      <mt-tab-container-item id="3">
+        <chart5 :selected="selected" :data="data" :code="code" :id="3"></chart5>
+      </mt-tab-container-item>
+
+      <!-- <mt-tab-container-item id="4">
+        <chart5 :selected="selected" :data="data" :code="code"></chart5>
+      </mt-tab-container-item> -->
+
+      <mt-tab-container-item id="5">
+        <chart5 :selected="selected" :data="data" :code="code" :id="5"></chart5>
+      </mt-tab-container-item>
+
+      <mt-tab-container-item id="6">
+        <chart5 :selected="selected" :data="data" :code="code" :id="6"></chart5>
+      </mt-tab-container-item>
+      
+      <!-- <mt-tab-container-item id="2">
         <chart2 :selected="selected" :code="code"></chart2>
       </mt-tab-container-item>
       <mt-tab-container-item id="3">
         <chart3 :selected="selected" :code="code"></chart3>
       </mt-tab-container-item>
       <mt-tab-container-item id="4">
-        <!-- <img class="img" :src="imgList.monthImg" alt=""> -->
         <chart4 :selected="selected" :code="code"></chart4>
       </mt-tab-container-item>
       <mt-tab-container-item id="5">
         <chart5 :selected="selected" :code="code"></chart5>
-      </mt-tab-container-item>
+      </mt-tab-container-item> -->
     </mt-tab-container>
   </div>
 </template>
@@ -36,6 +57,8 @@ import chart2 from './chart-1.vue'
 import chart3 from './chart-2.vue'
 import chart4 from './chart-3.vue'
 import chart5 from './chart-day.vue'
+
+import * as api from '@/axios/api'
 
 export default {
   components: {
@@ -57,7 +80,8 @@ export default {
   },
   data () {
     return {
-      selected: '1'
+      selected: '1',
+      data:{},
     }
   },
   watch: {
@@ -66,8 +90,15 @@ export default {
   },
   computed: {},
   created () {},
-  mounted () {},
-  methods: {}
+  mounted () {
+    this.loadData();
+  },
+  methods: {
+    async loadData(){
+      this.data = await api.getHistory(this.code)
+
+    }
+  }
 }
 </script>
 <style lang="less" scoped>

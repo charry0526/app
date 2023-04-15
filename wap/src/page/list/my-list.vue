@@ -44,6 +44,9 @@
         v-infinite-scroll="loadMore"
         infinite-scroll-disabled="loading"
         infinite-scroll-distance="10">
+
+
+
       <li class="list-body" v-for="item in list" :key="item.key">
         <div>
           <ul class="clearfix" :class="item.nowPrice-item.preclose_px<0?'green':'red'">
@@ -56,17 +59,19 @@
               <p v-if="item.stock_plate == '科创'" class="code"><i class="iconfont kechuang-mark">科创</i>{{item.stockCode}}
               </p>
               <p v-else class="code">
-                <i :class="item.stock_type == 'sz'?'iconfont shen-mark hushen-mark':'iconfont hushen-mark'">{{item.stock_type
-                  == 'sz'?'深':'沪'}}</i>
-                {{item.stockCode}}
+                <!-- <i :class="item.stock_type == 'sz'?'iconfont shen-mark hushen-mark':'iconfont hushen-mark'">{{item.stock_type
+                  == 'sz'?'深':'沪'}}</i> -->
+                  <i class="iconfont kechuang-mark">{{item.stock_type}}</i>
               </p>
             </li>
             <li @click='toDetail(item)' class="li-base">
-              <span>{{item.nowPrice?Number(item.nowPrice).toFixed(2):'-'}}</span>
+              <span :class="item.hcrate == 0?' yellow':item.hcrate > 0?' green':item.hcrate<0?' red':''" style="width:50%;float:left;">{{item.nowPrice?Number(item.nowPrice).toFixed(2):'-'}}</span>
             </li>
-            <li @click='toDetail(item)' class="li-base">
-              <span v-if="item.nowPrice == 0">-</span>
-              <span v-else>{{item.nowPrice-item.preclose_px>0?'+':''}}{{item.hcrate?item.hcrate:'-'}}%</span>
+            <li @click='toDetail(item)' class="li-base" style="width:30%">
+              <span v-if="item.hcrate == 0" class="yellow">-</span>
+                <span v-else-if="item.hcrate < 0" class="red"> {{item.hcrate?item.hcrate:'0'}}  {{Number(item.hcrate/(item.nowPrice-item.hcrate)*100).toFixed(2)}}%</span>
+                <span v-else class="green"> {{item.hcrate?item.hcrate:'0'}} {{Number(item.hcrate/(item.nowPrice-item.hcrate)*100).toFixed(2)}}%</span>
+
             </li>
             <li class="li-base text-center">
               <mt-button plain @click="toDeleteMy(item)"><i class="iconfont icon-shanchucopy"></i></mt-button>
@@ -75,6 +80,10 @@
         </div>
 
       </li>
+
+
+
+
     </ul>
     <div v-if="list.length<=0 && getStatus" class="load-all text-center">
       <mt-spinner type="fading-circle"></mt-spinner>
@@ -346,4 +355,10 @@ export default {
       background-color: #E9E9E9;
     }
   }
+
+  .li-title{
+    width: 30% !important;;
+  }
+
+  
 </style>

@@ -18,31 +18,35 @@
                 <!-- 明细 -->
                 <div class="clearfix">
                     <div class="pull-left col-xs-7">
-                        <p :class="detail.nowPrice - detail.preclose_px <0?'price green':'price red'">
-                            {{detail.nowPrice}}</p>
-                        <p :class="detail.nowPrice - detail.preclose_px <0?'gain green':'gain red'">
-                            {{detail.hcrate}}%</p>
+                        <p :class="detail.hcrate == 0?'price yellow':detail.hcrate > 0?'price green':detail.hcrate<0?'price red':''">
+                            {{Number(detail.nowPrice).toFixed(2)}}</p>
+                        
+
+                        <p >
+                          <p :class="detail.hcrate == 0?' yellow':detail.hcrate > 0?' green':detail.hcrate<0?' red':''" style="width:50%;float:left;">{{detail.hcrate}}</p>    
+                          <p :class="detail.hcrate == 0?' yellow':detail.hcrate > 0?' green':detail.hcrate<0?' red':''" style="width:50%;float:left;">{{Number(detail.hcrate/(detail.nowPrice-detail.hcrate)*100).toFixed(2)}}%</p>    
+                        </p>
                     </div>
                     <div class="pull-right col-xs-5">
                         <ul class="price-detail text-center">
                             <li>
-                                <p class="title">昨收</p>
-                                <p :class="detail.nowPrice - detail.preclose_px <0?'number green':'number red'">
+                                <p class="title">TC</p>
+                                <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
                                     {{detail.preclose_px}}</p>
                             </li>
                             <li>
-                                <p class="title">今开</p>
-                                <p :class="detail.nowPrice - detail.preclose_px <0?'number green':'number red'">
+                                <p class="title">O</p>
+                                <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
                                     {{detail.open_px}}</p>
                             </li>
                             <li>
-                                <p class="title">最高</p>
-                                <p :class="detail.nowPrice - detail.preclose_px <0?'number green':'number red'">
+                                <p class="title">H</p>
+                                <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
                                     {{detail.today_max}}</p>
                             </li>
                             <li>
-                                <p class="title">最低</p>
-                                <p :class="detail.nowPrice - detail.preclose_px <0?'number green':'number red'">
+                                <p class="title">L</p>
+                                <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
                                     {{detail.today_min}}</p>
                             </li>
                         </ul>
@@ -50,26 +54,22 @@
                 </div>
                 <div class="row detail-list">
                     <div class="col-xs-4">
-                        <p class="title">成交量</p>
-                        <p class="number">{{(Number(detail.business_amount)/100/10000).toFixed(2)}}万</p>
+                        <p class="title">Khối lượng</p>
+                        <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">{{(Number(detail.business_amount)/1000000).toFixed(2)}}M</p>
                     </div>
-                    <div class="col-xs-6">
-                        <p class="title">成交额</p>
-                        <p class="number">{{(Number(detail.business_balance)/100000000).toFixed(2)}}亿</p>
-                    </div>
+                    <!-- <div class="col-xs-6">
+                        <p class="title">Giá trị</p>
+                        <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">{{(Number(detail.business_balance)/100000000).toFixed(2)}}亿</p>
+                    </div> -->
                 </div>
             </div>
             <div class="page-part box-part">
                 <!-- 图 -->
                 <imgBox :code="$route.query.code" :imgList='detail'/>
             </div>
-            <div class="page-part">
+            <!-- <div class="page-part">
                 <ul class="stock-price clearfix">
-                    <!-- <li class="text-center pull-left" v-for="item in buyList" :key="item.key">
-                        <p>买①</p>
-                        <p class="red">{{item.price}}</p>
-                        <p>{{item.price2}}</p>
-                    </li> -->
+                    
                     <li class="text-center pull-left">
                         <p>买①</p>
                         <p :class="detail.nowPrice - detail.preclose_px <0?'green':'red'">{{detail.buy1}}</p>
@@ -125,7 +125,7 @@
                         <p>{{(Number(detail.sell5_num)/100).toFixed(2)}}</p>
                     </li>
                 </ul>
-            </div>
+            </div> -->
             <div class="agree-footer text-center">
                 <div v-if="$store.state.userInfo.phone" class="btn-box clearfix">
                     <a v-if="!isOptionOpt" class="pull-left bottom-btn" href="javascript:;" @click="addOptions">添加自选</a>
@@ -385,5 +385,16 @@
 
     .box-part {
         padding: 0;
+    }
+
+
+    .red{
+      color:rgba(255,0,0,1);
+    }
+    .yellow{
+      color:rgb(226, 107, 10);
+    }
+    .green{
+      color: rgb(0, 128, 0);
     }
 </style>

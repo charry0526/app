@@ -371,6 +371,10 @@ export function getFuturesDayK (options) {
   return post('/api/stock/getFuturesDayK.do', options)
 }
 
+export function getHistory(code){
+  return get('/chart3api/history?symbol='+code+'&resolution=D&from=0&to=99999999999')
+}
+
 // 指数日线图
 export function getIndexDayK (options) {
   return post('/api/stock/getIndexDayK.do', options)

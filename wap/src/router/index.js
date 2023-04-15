@@ -154,7 +154,7 @@ export default new Router({
       path: '/listdetail',
       name: 'listdetail',
       meta: {
-        title: '详情',
+        title: 'Thông tin chi tiết',
         requireAuth: false,
         hasHeader: true
       },
@@ -163,7 +163,7 @@ export default new Router({
       path: '/listdetail2',
       name: 'listdetail2',
       meta: {
-        title: '详情',
+        title: 'Thông tin chi tiết',
         requireAuth: false,
         hasHeader: true
       },

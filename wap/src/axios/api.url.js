@@ -5,7 +5,7 @@ export default {
   baseURL: ENV == 'development'?'http://localhost':'http://localhost',
   // baseURL: 'http://localhost:8070',
   /* Util API */
-  baseURL: 'http://localhost',
+  baseURL: 'http://localhost:7001',
   util: {
     image: '/util/image.html' // 图片上传
   }

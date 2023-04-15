@@ -5,20 +5,23 @@
         </router-link>
         <mt-button slot="right" icon="search" @click="toSearch"></mt-button>
     </mt-header> -->
-    <mt-navbar class="top-navbar" v-model="selected" :style="selected != '2'?'':''" :fixed="selected != '2'?true:false">
+    <mt-navbar class="top-navbar" v-model="selected" :style="selected != '7'?'':''" :fixed="selected != '7'?true:false">
       <!-- <mt-tab-item id="0">全部</mt-tab-item> -->
-      <mt-tab-item v-if="this.$store.state.settingForm.indexDisplay" id="1">指数</mt-tab-item>
+      <!-- <mt-tab-item v-if="this.$store.state.settingForm.indexDisplay" id="1">指数</mt-tab-item>
       <mt-tab-item v-if="this.$store.state.settingForm.stockDisplay" id="2">沪深</mt-tab-item>
       <mt-tab-item v-if="this.$store.state.settingForm.stockDisplay" id="5">港股</mt-tab-item>
       <mt-tab-item v-if="this.$store.state.settingForm.stockDisplay" id="6">美股</mt-tab-item>
       <mt-tab-item v-if="this.$store.state.settingForm.kcStockDisplay" id="3">科创</mt-tab-item>
-      <mt-tab-item v-if="this.$store.state.settingForm.futuresDisplay" id="4">期货</mt-tab-item>
+      <mt-tab-item v-if="this.$store.state.settingForm.futuresDisplay" id="4">期货</mt-tab-item>  -->
+      <mt-tab-item id="1">HSX</mt-tab-item>
+      <mt-tab-item id="2">HNX</mt-tab-item>
+      <mt-tab-item id="3">UPCOM</mt-tab-item>
     </mt-navbar>
     <mt-tab-container class="order-list" v-model="selected">
       <!-- <mt-tab-container-item id="0">
           <List0 :changeNavOptions='changeNavOptions'/>
       </mt-tab-container-item> -->
-      <mt-tab-container-item v-if="this.$store.state.settingForm.indexDisplay" id="1">
+      <!-- <mt-tab-container-item v-if="this.$store.state.settingForm.indexDisplay" id="1">
         <List1 :selectedNumber='selected'/>
       </mt-tab-container-item>
       <mt-tab-container-item v-if="this.$store.state.settingForm.stockDisplay" id="2">
@@ -38,6 +41,17 @@
       </mt-tab-container-item>
       <mt-tab-container-item v-if="this.$store.state.settingForm.futuresDisplay" id="4">
         <List4 :selectedNumber='selected'/>
+      </mt-tab-container-item> -->
+      <mt-tab-container-item id="1">
+        <List1 :selectedNumber='selected'/>
+      </mt-tab-container-item>
+
+      <mt-tab-container-item id="2">
+        <List2 :selectedNumber='selected'/>
+      </mt-tab-container-item>
+
+      <mt-tab-container-item id="3">
+        <List3 :selectedNumber='selected'/>
       </mt-tab-container-item>
     </mt-tab-container>
     <foot></foot>
@@ -47,26 +61,31 @@
 <script>
 import foot from '@/components/foot/foot'
 // import '@/assets/style/common.less'
-import List0 from './list-all'
-import List1 from './list-index'
-import List2 from './list-stock'
-import List3 from './list-kechuang'
-import List4 from './list-futures'
-import List5 from './list-gangu'
-import List6 from './list-meigu'
+// import List0 from './list-all'
+// import List1 from './list-index'
+// import List2 from './list-stock'
+// import List3 from './list-kechuang'
+// import List4 from './list-futures'
+// import List5 from './list-gangu'
+// import List6 from './list-meigu'
+
+import List1 from './list-HSX'
+import List2 from './list-HNX'
+import List3 from './list-UPCOM'
+
 import * as api from '@/axios/api'
 import { Toast } from 'mint-ui'
 
 export default {
   components: {
     foot,
-    List0,
+    // List0,
     List1,
     List2,
     List3,
-    List4,
-    List5,
-    List6
+    // List4,
+    // List5,
+    // List6
   },
   props: {},
   data () {
