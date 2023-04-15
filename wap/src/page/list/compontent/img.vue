@@ -1,12 +1,11 @@
 <template>
   <div class="img">
     <mt-navbar v-model="selected">
-      <mt-tab-item id="1">1m</mt-tab-item>
-      <mt-tab-item id="2">3m</mt-tab-item>
-      <mt-tab-item id="3">6m</mt-tab-item>
+      <mt-tab-item id="1">1y</mt-tab-item>
+      <mt-tab-item id="2">6m</mt-tab-item>
+      <mt-tab-item id="3">3m</mt-tab-item>
       <!-- <mt-tab-item id="4">YTD</mt-tab-item> -->
-      <mt-tab-item id="5">1y</mt-tab-item>
-      <mt-tab-item id="6">All</mt-tab-item>
+      <mt-tab-item id="4">1d</mt-tab-item>
     </mt-navbar>
 
     <!-- tab-container -->
@@ -27,13 +26,13 @@
         <chart5 :selected="selected" :data="data" :code="code"></chart5>
       </mt-tab-container-item> -->
 
-      <mt-tab-container-item id="5">
-        <chart5 :selected="selected" :data="data" :code="code" :id="5"></chart5>
+      <mt-tab-container-item id="4">
+        <chart5 :selected="selected" :data="data" :code="code" :id="4"></chart5>
       </mt-tab-container-item>
 
-      <mt-tab-container-item id="6">
+      <!-- <mt-tab-container-item id="6">
         <chart5 :selected="selected" :data="data" :code="code" :id="6"></chart5>
-      </mt-tab-container-item>
+      </mt-tab-container-item> -->
       
       <!-- <mt-tab-container-item id="2">
         <chart2 :selected="selected" :code="code"></chart2>

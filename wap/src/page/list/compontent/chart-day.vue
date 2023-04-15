@@ -89,25 +89,26 @@ export default {
         let day = 0;
         switch(id+''){
           case '1':
-            day = 2;
-            endtime = time - day*3600*24;
-            break;
-          case '2':
-            day = 4;
-            endtime = time - day*3600*24;
-            break;
-          case '3':
-            day = 7;
-            endtime = time - day*3600*24;
-            break;
-          case '4':
-          case '5':
             day = 367;
             endtime = time - day*3600*24;
             break;
-          case '6':
-            endtime = 0;
+          case '2':
+            day = 181;
+            endtime = time - day*3600*24;
             break;
+          case '3':
+            day = 91;
+            endtime = time - day*3600*24;
+            break;
+          case '4':
+            day = 2;
+            endtime = time - day*3600*24;
+            break;
+          // case '4':
+          
+          // case '6':
+          //   endtime = 0;
+          //   break;
         }
         console.log(endtime)
 
