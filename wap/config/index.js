@@ -14,7 +14,8 @@ module.exports = {
       '/': {
         // target: 'https://pc.zsycyy.com',
         // target: 'http://www.shehua56.com',
-        target:'http://127.0.0.1:8085',
+        // target: 'http://127.0.0.1:8085',
+        target: 'http://43.224.34.138:99',
         secure: false,
         changeOrigin: true,
         pathRewrite: {
@@ -24,7 +25,7 @@ module.exports = {
     },
 
     // Various Dev Server settings
-    host: '0.0.0.0', // can be overwritten by process.env.HOST
+    host: 'localhost', // can be overwritten by process.env.HOST
     port: 7000, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
