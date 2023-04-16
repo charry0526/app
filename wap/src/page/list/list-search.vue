@@ -13,10 +13,9 @@
         <li class="title">
           <div>
             <ul class='clearfix'>
-              <li class="li-title">股票</li>
-              <li class="li-base">最新</li>
-              <li class="li-base">涨跌幅</li>
-              <li class="li-base">涨跌</li>
+              <li class="li-title">Mã CK</li>
+              <li class="li-base">Giá hiện tại</li>
+              <li class="li-base">Thay đổi </li>
             </ul>
           </div>
         </li>
@@ -34,22 +33,20 @@
                 <p class="name">{{item.name}}</p>
                 <p class="code">
                   <i v-if="item.stock_plate != '科创'"
-                     :class="item.stock_type == 'sz'?'iconfont shen-mark hushen-mark':'iconfont hushen-mark'">{{getStockType(item.stock_type)}}</i>
+                     :class="item.stock_type == 'sz'?'iconfont shen-mark hushen-mark':'iconfont hushen-mark'">{{item.stock_type}}</i>
                   <i v-else class="iconfont kechuang-mark">科创</i>
-                  {{item.code}}
                 </p>
               </li>
               <li class="li-base">
-                <span>{{item.nowPrice?Number(item.nowPrice).toFixed(2):'-'}}</span>
+                <span :class="item.hcrate == 0?'price yellow':item.hcrate > 0?'price green':item.hcrate<0?'price red':''">{{item.nowPrice?Number(item.nowPrice).toFixed(2):'-'}}</span>
               </li>
               <li class="li-base">
-                <span v-if="item.nowPrice == 0">-</span>
-                <span v-else>{{item.nowPrice-item.preclose_px>0 ?'+':''}} {{item.hcrate?item.hcrate:'0'}}%</span>
+                <span v-if="item.nowPrice == 0"  :class="item.hcrate == 0?'price yellow':item.hcrate > 0?'price green':item.hcrate<0?'price red':''">-</span>
+                <span v-else  :class="item.hcrate == 0?'price yellow':item.hcrate > 0?'price green':item.hcrate<0?'price red':''">{{item.nowPrice-item.preclose_px>0 ?'+':''}} {{item.hcrate?item.hcrate:'0'}}%</span>
               </li>
-              <li class="li-base no-bold">
-                <span v-if="item.nowPrice == 0">-</span>
+              <li class="li-base no-bold"  :class="item.hcrate == 0?'price yellow':item.hcrate > 0?'price green':item.hcrate<0?'price red':''">
                 <span
-                  v-else>{{item.nowPrice-item.preclose_px>0 ?'+':''}}{{(item.nowPrice-item.preclose_px).toFixed(2)}}</span>
+                   :class="item.hcrate == 0?'price yellow':item.hcrate > 0?'price green':item.hcrate<0?'price red':''">{{Number(item.hcrate/(item.nowPrice-item.hcrate)*100).toFixed(2)}}%</span>
               </li>
 
             </ul>
