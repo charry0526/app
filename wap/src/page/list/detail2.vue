@@ -29,11 +29,11 @@
                     </div>
                     <div class="pull-right col-xs-5">
                         <ul class="price-detail text-center">
-                            <li>
+                            <!-- <li>
                                 <p class="title">TC</p>
                                 <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
                                     {{detail.preclose_px}}</p>
-                            </li>
+                            </li> -->
                             <li>
                                 <p class="title">O</p>
                                 <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
