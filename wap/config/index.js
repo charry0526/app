@@ -15,7 +15,7 @@ module.exports = {
         // target: 'https://pc.zsycyy.com',
         // target: 'http://www.shehua56.com',
         // target: 'http://127.0.0.1:8085',
-        target: 'http://43.224.34.138:99',
+        target: 'http://43.224.34.138:98',
         secure: false,
         changeOrigin: true,
         pathRewrite: {

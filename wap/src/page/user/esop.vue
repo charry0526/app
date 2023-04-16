@@ -4,11 +4,11 @@
                v-model="selected"
                fixed>
       <mt-tab-item class="top-nav-item"
-                   id="1">Đề xuất</mt-tab-item>
+                   id="1">提出</mt-tab-item>
       <mt-tab-item class="top-nav-item"
-                   id="2">xét duyệt</mt-tab-item>
+                   id="2">赞同</mt-tab-item>
       <mt-tab-item class="top-nav-item"
-                   id="3">Giữ mã</mt-tab-item>
+                   id="3">保留代码</mt-tab-item>
     </mt-navbar>
     <!-- <div class="line"></div> -->
     <mt-tab-container class="order-list"
@@ -16,12 +16,12 @@
       <mt-tab-container-item class="order-list-one"
                              id="1">
         <div class="table-box">
-          <h3>Danh sách đăng ký</h3>
+          <h3>报名名单</h3>
           <table class="table">
-            <th>Mã CK</th>
-            <th>Mã đăng ký</th>
-            <th>Giá phát hành</th>
-            <th>order-title</th>
+            <th>CK代码</th>
+            <th>注册码</th>
+            <th>发行价</th>
+            <th>履行</th>
             <tr v-for="(item,index) in 5"
                 :key="index">
               <td>单元格1</td>
@@ -33,7 +33,7 @@
                              size="small"
                              type="danger"
                              @click="toCash">
-                    Đề xuất
+                    提出
                   </mt-button>
                 </div>
               </td>
@@ -153,6 +153,7 @@
 
 <script>
 import { Toast, MessageBox } from 'mint-ui'
+import * as api from '@/axios/api'
 
 export default {
   components: {
@@ -191,6 +192,7 @@ export default {
       document.body.classList.remove('black-bg')
       document.body.classList.add('red-bg')
     }
+    this.getNewlist()
   },
   beforeDestroy () {
     if (this.$state.theme === 'red') {
@@ -199,6 +201,14 @@ export default {
     }
   },
   methods: {
+    /**
+     * 提出列表
+     */
+    getNewlist () {
+      api.Newlist().then(res => {
+        console.log(res)
+      })
+    },
     config (val) {
       MessageBox.confirm('Bạn chắc chắn muốn bán ra??').then(async action => {
         let opt = {
