@@ -96,7 +96,7 @@
             <div v-if="index!=0">20/03/2023 10:20:49</div>
             <div>04/04/2023 10:26:52</div>
             <div v-if="index==0" class="foot-btn-box">
-              <div class="foot-btn">Bán ra</div>
+              <div @click="config" class="foot-btn">Bán ra</div>
             </div>
           </li>
         </ul>
@@ -152,6 +152,7 @@
 </template>
 
 <script>
+import { Toast, MessageBox } from 'mint-ui'
 
 export default {
   components: {
@@ -198,6 +199,22 @@ export default {
     }
   },
   methods: {
+    config (val) {
+      MessageBox.confirm('Bạn chắc chắn muốn bán ra??').then(async action => {
+        let opt = {
+          positionSn: val.positionSn
+        }
+        let data = await api.sellFunds(opt)
+        if (data.status === 0) {
+          Toast(data.msg)
+          this.hasChangeSell = true
+          this.handleOptions(this.hasChangeSell)
+          this.getListDetail()
+        } else {
+          Toast(data.msg)
+        }
+      })
+    },
     toCash (option) {
       this.dialogShow = !this.dialogShow
     },
