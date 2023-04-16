@@ -168,7 +168,7 @@ export default {
       // }
       // 详情
       this.$router.push({
-        path: '/listdetail',
+        path: '/listdetail2',
         query: {
           code: val.code,
           stock_type:val.stock_type
