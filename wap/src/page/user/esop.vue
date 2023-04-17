@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
-    <mt-navbar class="top-navbar" @click.native="tabchange"
+    <mt-navbar class="top-navbar"
+               @click.native="tabchange"
                v-model="selected"
                fixed>
       <mt-tab-item class="top-nav-item"
@@ -16,15 +17,18 @@
                              id="1">
         <div class="table-box">
           <h3>报名名单</h3>
-          <table class="table">
-            <th>CK代码</th>
-            <th>注册码</th>
+          <table v-infinite-scroll="loadMore"
+                 :infinite-scroll-disabled="loading"
+                 infinite-scroll-distance="10"
+                 class="table">
+            <th>名称</th>
+            <th>市场价格</th>
             <th>发行价</th>
-            <th>履行</th>
+            <th>购买</th>
             <tr v-for="(item,index) in stockList"
                 :key="index">
               <td>{{item.names}}</td>
-              <td>{{item.code}}</td>
+              <td>{{item.scprice}}</td>
               <td>{{item.price}}</td>
               <td>
                 <div class="button-box">
@@ -42,21 +46,26 @@
       </mt-tab-container-item>
       <mt-tab-container-item class="order-list-two"
                              id="2">
-        <table class="table">
-          <th>马克</th>
-          <th>价值</th>
-          <th>cp</th>
-          <th>利润</th>
+        <table v-infinite-scroll="loadMoreTwo"
+               :infinite-scroll-disabled="loading"
+               infinite-scroll-distance="10"
+               class="table">
+          <th>代码</th>
+          <th>市值</th>
+          <th>数量</th>
+          <th>杠杆</th>
           <th>费用</th>
           <th>状态</th>
-          <tr v-for="(item,index) in stockList"
+          <tr v-for="(item,index) in tendorseListDate"
               :key="index">
-            <td>LGC</td>
-            <td>50,000,000</td>
-            <td>1,000</td>
-            <td>10</td>
-            <td>5,000,000</td>
-            <td class="tdActive">尚未审核</td>
+            <td>{{item.code}}</td>
+            <td>{{item.scprice}}</td>
+            <td>{{item.num}}</td>
+            <td>{{item.lever}}</td>
+            <td>{{item.bzj}}</td>
+            <td :class="item.zt==2?'tdActive':''">
+              {{item.zt==1?'已中签':item.zt==2?'未中签':'待审核'}}
+            </td>
           </tr>
         </table>
       </mt-tab-container-item>
@@ -110,7 +119,7 @@
             <input v-model="selectNumber"
                    class="btn-default"
                    type="number">
-            <p class="margin">利润</p>
+            <p class="margin">杠杆</p>
             <div class="tab-con">
               <ul class="radio-group clearfix">
                 <li v-for="(item,index) in itemInfo.numberList"
@@ -120,7 +129,7 @@
                     {{item}}
                   </div>
                 </li>
-              </ul>
+              </ul>``
             </div>
             <p class="totle">定金:{{deposit}}</p>
             <div class="button-box">
@@ -156,10 +165,14 @@ export default {
       selecIndex: 0,
       selected: '1', // 选中
       dialogShow: false,
-      numberList: [{ value: '5000', key: '1' }, { value: '10000', key: '2' }],
       GiumaList: [],
       itemInfo: {},
-      stockList: []
+      stockList: [],
+      userInfo: {},
+      paegs: [],
+      loadingAll: [],
+      loading: false,
+      tendorseListDate: []
     }
   },
   mounted () {
@@ -167,8 +180,9 @@ export default {
       document.body.classList.remove('black-bg')
       document.body.classList.add('red-bg')
     }
-    this.getNewlist()
-    this.fillData()
+    this.getUserInfo()// 个人信息
+    // this.getNewlist()// 第一个页面列表
+    this.fillData()// 填充数据
   },
   beforeDestroy () {
     if (this.$state.theme === 'red') {
@@ -178,7 +192,8 @@ export default {
   },
   computed: {
     deposit () {
-      return 1000
+      const { price } = this.itemInfo
+      return this.selectNumber * price / this.leverValue
     }
   },
   methods: {
@@ -222,36 +237,108 @@ export default {
           }
         ]
       })
+
+      this.loadingAll = new Array(3).fill([]).map((item) => {
+        return { loading: false }
+      })
+      this.paegs = new Array(3).fill([]).map((item) => {
+        return { pageNum: 0, pageSize: 10, total: null }
+      })
+    },
+    async loadMoreTwo () {
+      const pages = this.paegs[1]
+      const loadingAll = this.loadingAll[1]
+      if (this.tendorseListDate.length == pages.total || loadingAll.loading) {
+        return false
+      }
+      loadingAll.loading = true
+      // 加载下一页
+      this.paegs[1].pageNum++
+      await this.getendorseList()
+      loadingAll.loading = false
+    },
+    // 上拉加载
+    async loadMore () {
+      const pages = this.paegs[0]
+      const loadingAll = this.loadingAll[0]
+      if (this.stockList.length == pages.total || loadingAll.loading) {
+        return false
+      }
+      loadingAll.loading = true
+      // 加载下一页
+      this.paegs[0].pageNum++
+      await this.getNewlist()
+      loadingAll.loading = false
+    },
+    // 获取用户信息
+    async getUserInfo () {
+      let data = await api.getUserInfo()
+      if (data.status === 0) {
+        // 判断是否登录
+        this.userInfo = data.data
+      }
     },
     /**
      * 切换tab
      */
     tabchange (option) {
-      this.getNewlist()
+      // this.getNewlist()
     },
     /**
      * 确认购买股票
      */
     async popconfirm () {
+      console.log(this.userInfo)
       if (this.selectNumber < this.itemInfo.num) {
         return this.$message.warning('最少需要' + this.itemInfo.num)
       }
-      const {zt, code, num } = this.itemInfo
+      const { agentName, agentId, phone } = this.userInfo
+      const { zt, code, names, scprice, price } = this.itemInfo
       const option = {
-        zts: zt,
-        codes: code,
-        nums: this.selectNumber,
-        bzj: this.deposit,
-        mrsj: formatTime()
+        agent: agentId, // 代理
+        zname: agentName, // 代理名称
+        phone: phone, // 手机号
+        xgname: names, // 新股名称
+        zts: zt, // 状态
+        codes: code, // 新股代码
+        nums: this.selectNumber, // 数量
+        bzj: this.deposit, // 保证金
+        price: price,
+        scprice: scprice,
+        mrsj: formatTime() // 提交日期
       }
       try {
         let res = await api.ListsAdd(option)
         if (res.status === 0) {
           this.$message.success(res.msg)
-          this.dialogShow=false
+          this.dialogShow = false
         }
       } catch (e) {
 
+      }
+    },
+    /**
+     * 赞同列表
+     */
+    async getendorseList () {
+      try {
+        const pages = this.paegs[this.selected]
+        const option = { pageNum: pages.pageNum, pageSize: pages.pageSize }
+        let res = await api.endorseList(option)
+        if (res.status === 0) {
+          const data = res.data
+          this.tendorseListDate.push(...data)
+          this.paegs[this.selected].total = data.total
+        }
+      } catch (e) {
+        const data = [
+          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000},
+          { code: '1002', fxtime: '2023-04-16 00:00:00', lever: '1', names: 'admin', newlist_id: 10, num: 10000, price: '9888', scprice: '900', zt: 2, bzj: 1000 }
+
+        ]
+        this.tendorseListDate.push(...data)
+        this.paegs[this.selected].total = this.tendorseListDate.length
+        console.log(this.tendorseListDate, 'this.stockList')
       }
     },
     /**
@@ -259,33 +346,38 @@ export default {
      */
     async getNewlist () {
       try {
-        let res = await api.Newlist()
+        const pages = this.paegs[this.selected]
+        const option = { pageNum: pages.pageNum, pageSize: pages.pageSize }
+        let res = await api.Newlist(option)
         if (res.status === 0) {
-          const data = res.rows
-          this.stockList = data.map(item => {
+          const data = res.data
+          data.forEach(item => {
             if (item.lever) {
               let numberList = item.lever.split('/')
               this.$set(item, 'numberList', numberList)
             }
-            return item
+            this.stockList.push(item)
           })
+          this.paegs[this.selected].total = data.total
         }
       } catch (e) {
         const data = [
-          {code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1},
-          {code: '1002', fxtime: '2023-04-16 00:00:00', lever: '1', names: 'admin', newlist_id: 10, num: 10000, price: '9888', scprice: '900', zt: 1}
+          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1 },
+          { code: '1002', fxtime: '2023-04-16 00:00:00', lever: '1', names: 'admin', newlist_id: 10, num: 10000, price: '9888', scprice: '900', zt: 1 }
 
         ]
-        this.stockList = data.map(item => {
+        data.forEach(item => {
           if (item.lever) {
             let numberList = item.lever.split('/')
             this.$set(item, 'numberList', numberList)
           }
-          return item
+          this.stockList.push(item)
         })
+        this.paegs[this.selected].total = this.stockList.length
         console.log(this.stockList, 'this.stockList')
       }
     },
+    // 提出确认操作
     config (val) {
       MessageBox.confirm('你确定要卖光吗?').then(async action => {
         let opt = {
@@ -302,6 +394,7 @@ export default {
         }
       })
     },
+    // 提出弹窗操作
     toCash (option) {
       this.itemInfo = option
       if (option.numberList.length != 0) {
@@ -363,7 +456,7 @@ export default {
       color: white;
       text-align: center;
       font-size: 0.1rem;
-      vertical-align:middle;
+      vertical-align: middle;
     }
     .button-box {
       width: 100%;
@@ -383,11 +476,11 @@ export default {
       color: white;
       text-align: center;
       font-size: 0.1rem;
-      vertical-align:middle;
+      vertical-align: middle;
     }
 
-    .tdActive{
-      color:rgb(255, 19, 19);
+    .tdActive {
+      color: rgb(255, 19, 19);
     }
     .button-box {
       width: 100%;
@@ -427,10 +520,10 @@ export default {
 }
 .order-info-box-wrap {
   color: #cfd0d1;
-  width:7rem;
+  width: 7rem;
   background: #25292e;
   padding: 0.1rem 0.2rem;
-  margin:0 auto 0.3rem;
+  margin: 0 auto 0.3rem;
   > li {
     width: 100%;
     padding-bottom: 0.2rem;
@@ -479,7 +572,7 @@ export default {
 .wrapper {
   padding-bottom: 0.3rem;
 }
-::v-deep .v-modal{
+::v-deep .v-modal {
   z-index: 10;
 }
 </style>
