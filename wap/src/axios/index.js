@@ -36,7 +36,7 @@ axios.interceptors.response.use(
     switch (response.data && response.data.success) {
       case false:
         response.data.msg = '您还未登录,请先登录'
-        //console.log(response.data)
+        // console.log(response.data)
         router.replace({
           path: 'openaccount'
         })

@@ -17,11 +17,10 @@ export function xingusgs (options) {
   return post('/new/public/index.php/api/Lists/add', options)
 }
 
-//新股冻结资金
+// 新股冻结资金
 export function getprice (options) {
   return get('/new/public/index.php/api/Lists/getprice', options)
 }
-
 
 // 申购提交列表
 export function xingusgsList (options) {
@@ -330,7 +329,7 @@ export function getjuhe1 (options) {
   return post('/user/pay/juhe1.do', options)
 }
 
-//H5支付
+// H5支付
 export function getjuheH5 (options) {
   return post('/user/pay/juheh5.do', options)
 }
@@ -371,8 +370,8 @@ export function getFuturesDayK (options) {
   return post('/api/stock/getFuturesDayK.do', options)
 }
 
-export function getHistory(code){
-  return get('/chart3api/history?symbol='+code+'&resolution=D&from=0&to=99999999999')
+export function getHistory (code) {
+  return get('/chart3api/history?symbol=' + code + '&resolution=D&from=0&to=99999999999')
 }
 
 // 指数日线图
@@ -384,7 +383,6 @@ export function getIndexDayK (options) {
 export function queryFuturesByCode (options) {
   return get('/api/futures/queryFuturesByCode.do', options)
 }
-
 
 // ==================最新修改内容：新版-新闻资讯、交易大厅，2020年8月26日10:39======================
 
@@ -398,7 +396,7 @@ export function getUserApplyList (options) {
   return post('/user/funds/getUserApplyList.do', options)
 }
 
-// -----分仓配资----- 2020 08 30 
+// -----分仓配资----- 2020 08 30
 
 export function getFundsSetting (options) {
   return post('/user/funds/getFundsSetting.do', options)
@@ -413,7 +411,7 @@ export function getFundsTypeList (options) {
 export function addFundsApply (options) {
   return post('/user/funds/addFundsApply.do', options)
 }
-//分仓下单
+// 分仓下单
 export function buyFunds (options) {
   return post('/user/funds/buyFunds.do', options)
 }
@@ -424,7 +422,7 @@ export function getUserSubaccount (options) {
 }
 
 // 获取消息列表
-export function getNoticeList(options) {
+export function getNoticeList (options) {
   return post('/user/cash/getMessagelist.do', options)
 }
 
@@ -436,4 +434,9 @@ export function getFundsOrderList (options) {
 // 分仓交易-配资平仓
 export function sellFunds (options) {
   return post('/user/funds/sellFunds.do', options)
+}
+
+// 新股-提出
+export function Newlist (options) {
+  return get('/admin/Newlist/index', options)
 }

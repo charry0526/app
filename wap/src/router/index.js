@@ -22,6 +22,8 @@ import sellOrderList from '@/page/user/search-order/sell-stockCode'
 import sellOrderList2 from '@/page/user/search-order/sell-stockSpell'
 import Detail from '@/page/user/detail'
 import Card from '@/page/user/card'
+import Esop from '@/page/user/esop'
+
 import Authentication from '@/page/user/authentication'
 import Aggre from '@/page/user/agreement'
 import Recharge from '@/page/user/recharge'
@@ -176,7 +178,7 @@ export default new Router({
         title: '指数购买',
         requireAuth: false,
         hasHeader: true,
-        iconRight:'search'
+        iconRight: 'search'
       },
       component: indexBuy
     },
@@ -187,7 +189,7 @@ export default new Router({
         title: '两融交易',
         requireAuth: false,
         hasHeader: true,
-        iconRight:'search'
+        iconRight: 'search'
       },
       component: TwoBuy
     },
@@ -198,7 +200,7 @@ export default new Router({
         title: '分仓交易',
         requireAuth: false,
         hasHeader: true,
-        iconRight:'search'
+        iconRight: 'search'
       },
       component: SubWarehouseBuy
     }, {
@@ -207,7 +209,7 @@ export default new Router({
       meta: {
         title: '期货购买',
         requireAuth: false,
-        hasHeader: true,
+        hasHeader: true
       },
       component: futuresBuy
     }, {
@@ -227,8 +229,8 @@ export default new Router({
         hasHeader: true
       },
       component: User
-    }, 
-   {
+    },
+    {
       path: '/transfer',
       name: 'transfer',
       meta: {
@@ -242,17 +244,17 @@ export default new Router({
       meta: {
         title: '持仓',
         requireAuth: false,
-        hasHeader: true,
+        hasHeader: true
       },
       component: OrderList
-    }, 
+    },
     {
       path: '/holdorderlist',
       name: 'holdorderlist',
       meta: {
         title: '查询持仓',
         requireAuth: true,
-        hasHeader:true
+        hasHeader: true
       },
       component: holdOrderList
     }, {
@@ -261,7 +263,7 @@ export default new Router({
       meta: {
         title: '查询持仓',
         requireAuth: true,
-        hasHeader:true
+        hasHeader: true
       },
       component: holdOrderList2
     }, {
@@ -301,6 +303,16 @@ export default new Router({
       },
       component: Card
     }, {
+      path: '/esop',
+      name: 'esop',
+      meta: {
+        title: 'Esop',
+        requireAuth: true,
+        hasHeader: true
+      },
+      component: Esop
+    },
+    {
       path: '/authentication',
       name: 'authentication',
       meta: {
@@ -352,7 +364,7 @@ export default new Router({
       meta: {
         title: '提现',
         requireAuth: true,
-        hasHeader:true
+        hasHeader: true
       },
       component: Cash
     }, {
@@ -361,7 +373,7 @@ export default new Router({
       meta: {
         title: '添加银行卡',
         requireAuth: true,
-        hasHeader:true
+        hasHeader: true
 
       },
       component: AddCard
@@ -371,7 +383,7 @@ export default new Router({
       meta: {
         title: '提现记录',
         requireAuth: true,
-        hasHeader:true
+        hasHeader: true
 
       },
       component: Cashlist
@@ -408,10 +420,10 @@ export default new Router({
         requireAuth: true
       },
       component: Alertdetail
-    }, 
+    },
     {
       path: '/funds',
-      name:'funds',
+      name: 'funds',
       meta: {
         title: '配资主页',
         requireAuth: true,
@@ -422,7 +434,7 @@ export default new Router({
     },
     {
       path: '/days',
-      name:'days',
+      name: 'days',
       meta: {
         title: '按天配资',
         requireAuth: true,
@@ -433,7 +445,7 @@ export default new Router({
     },
     {
       path: '/xingu',
-      name:'xingu',
+      name: 'xingu',
       meta: {
         title: '新股申购',
         requireAuth: true,
@@ -448,7 +460,7 @@ export default new Router({
       meta: {
         title: '查询股票',
         requireAuth: true,
-        hasHeader: true,
+        hasHeader: true
       },
       component: () => import('../page/list/search')
     },
@@ -458,7 +470,7 @@ export default new Router({
       meta: {
         title: '消息记录',
         requireAuth: true,
-        hasHeader: true,
+        hasHeader: true
       },
       component: () => import('../page/user/notify')
     }, {
@@ -467,7 +479,7 @@ export default new Router({
       meta: {
         title: '分仓配资',
         requireAuth: false,
-        hasHeader: true,
+        hasHeader: true
       },
       component: FundsList
     },

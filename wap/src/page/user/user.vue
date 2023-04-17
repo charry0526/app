@@ -58,7 +58,7 @@
         <div class="acc-pre-left">
           <img v-show="$state.theme!='red'" src="../../assets/ico/zongzichan.png" alt="">
           <img v-show="$state.theme=='red'" src="../../assets/ico/zongzichan-red.png" alt="">
-          
+
           <span class="ti">总资产</span>
           <span class="de">
             <div>
@@ -168,7 +168,7 @@
             </ul>
           </div>
         </div>
-        <div v-show="item.isShow" 
+        <div v-show="item.isShow"
         class="pcx"
         style="padding: 0.12rem 0.4rem 0.15rem;">
           <!-- 强制平仓线为 ： 可用资金 + 冻结保证金 * 0.6 -->
@@ -294,6 +294,15 @@
                     <icon name="right66" class="right" slot="icon"></icon>
                 </span>
         </li>
+         <li @click="goEsop">
+                <span>
+                     <img src="../../assets/ico/yinhangka.png"
+                      style="width:.28rem;height:.24rem;margin-right: 0.15rem;"
+                    >
+                    esop
+                    <icon name="right66" class="right" slot="icon"></icon>
+                </span>
+        </li>
         <li >
             <span>
                 <!-- <i style="font-size:0.28rem" class="iconfont icon-yinhangqia"></i> -->
@@ -320,7 +329,7 @@
 
       </ul>
       <ul class="after">
-        
+
         <li @click="goDetail">
               <span>
                   <!-- <i style="font-size:0.28rem" class="iconfont icon-zijinmingxi"></i> -->
@@ -423,7 +432,7 @@ export default {
       ],
       showChangeBtn: false, // 是否显示资金互转按钮
       styleName: 'black',
-      shengoudj:''
+      shengoudj: ''
     }
   },
   watch: {
@@ -448,20 +457,20 @@ export default {
     }
   },
   methods: {
-    async getprice() {
-      let opt = {};
-      let data = await api.getprice(opt);
-      this.shengoudj = data.data;
-      console.log(this.shengoudj, "申购");
+    async getprice () {
+      let opt = {}
+      let data = await api.getprice(opt)
+      this.shengoudj = data.data
+      console.log(this.shengoudj, '申购')
     },
-    goFunds(type) {
-      if (type  == 1) {
+    goFunds (type) {
+      if (type == 1) {
         this.$router.push('/funds')
       }
       if (type == 2) {
         this.$router.push('/days')
       }
-      if (type == 3){
+      if (type == 3) {
         this.$router.push('/xingu')
       }
     },
@@ -512,6 +521,9 @@ export default {
     },
     goCard: function () {
       this.$router.push('/card')
+    },
+    goEsop () {
+      this.$router.push('/esop')
     },
     toAggre: function () {
       this.$router.push('/aggre')
