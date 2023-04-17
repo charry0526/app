@@ -21,11 +21,11 @@
             <th>注册码</th>
             <th>发行价</th>
             <th>履行</th>
-            <tr v-for="(item,index) in 5"
+            <tr v-for="(item,index) in stockList"
                 :key="index">
-              <td>单元格1</td>
-              <td>单元格2</td>
-              <td>单元格3</td>
+              <td>{{item.names}}</td>
+              <td>{{item.code}}</td>
+              <td>{{item.price}}</td>
               <td>
                 <div class="button-box">
                   <mt-button class="btn-red pull-right"
@@ -49,7 +49,7 @@
           <th>利润</th>
           <th>费用</th>
           <th>状态</th>
-          <tr v-for="(item,index) in 30"
+          <tr v-for="(item,index) in stockList"
               :key="index">
             <td>LGC</td>
             <td>50,000,000</td>
@@ -113,12 +113,11 @@
             <p class="margin">利润</p>
             <div class="tab-con">
               <ul class="radio-group clearfix">
-                <li v-for="(item,index) in numberList"
+                <li v-for="(item,index) in itemInfo.numberList"
                     :key="item.key"
-                    @click="selectTypeFun(item.value,index)">
-
+                    @click="selectTypeFun(item,index)">
                   <div :class="selecIndex == index?'on':''">
-                    {{item.value}}
+                    {{item}}
                   </div>
                 </li>
               </ul>
@@ -144,20 +143,23 @@
 <script>
 import { Toast, MessageBox } from 'mint-ui'
 import * as api from '@/axios/api'
-
+import { formatTime } from '@/utils/imgupload'
 export default {
   components: {
   },
   props: {},
   data () {
     return {
+      formatTime,
       selectNumber: '',
+      leverValue: 0,
       selecIndex: 0,
       selected: '1', // 选中
       dialogShow: false,
       numberList: [{ value: '5000', key: '1' }, { value: '10000', key: '2' }],
       GiumaList: [],
-      itemInfo: {}
+      itemInfo: {},
+      stockList: []
     }
   },
   mounted () {
@@ -230,16 +232,59 @@ export default {
     /**
      * 确认购买股票
      */
-    popconfirm () {
+    async popconfirm () {
+      if (this.selectNumber < this.itemInfo.num) {
+        return this.$message.warning('最少需要' + this.itemInfo.num)
+      }
+      const {zt, code, num } = this.itemInfo
+      const option = {
+        zts: zt,
+        codes: code,
+        nums: this.selectNumber,
+        bzj: this.deposit,
+        mrsj: formatTime()
+      }
+      try {
+        let res = await api.ListsAdd(option)
+        if (res.status === 0) {
+          this.$message.success(res.msg)
+          this.dialogShow=false
+        }
+      } catch (e) {
 
+      }
     },
     /**
      * 提出列表
      */
-    getNewlist () {
-      api.Newlist().then(res => {
-        console.log(res)
-      })
+    async getNewlist () {
+      try {
+        let res = await api.Newlist()
+        if (res.status === 0) {
+          const data = res.rows
+          this.stockList = data.map(item => {
+            if (item.lever) {
+              let numberList = item.lever.split('/')
+              this.$set(item, 'numberList', numberList)
+            }
+            return item
+          })
+        }
+      } catch (e) {
+        const data = [
+          {code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1},
+          {code: '1002', fxtime: '2023-04-16 00:00:00', lever: '1', names: 'admin', newlist_id: 10, num: 10000, price: '9888', scprice: '900', zt: 1}
+
+        ]
+        this.stockList = data.map(item => {
+          if (item.lever) {
+            let numberList = item.lever.split('/')
+            this.$set(item, 'numberList', numberList)
+          }
+          return item
+        })
+        console.log(this.stockList, 'this.stockList')
+      }
     },
     config (val) {
       MessageBox.confirm('你确定要卖光吗?').then(async action => {
@@ -259,11 +304,20 @@ export default {
     },
     toCash (option) {
       this.itemInfo = option
+      if (option.numberList.length != 0) {
+        this.leverValue = option.numberList[0]
+        console.log(this.leverValue)
+      }
+      this.reset()
       this.dialogShow = !this.dialogShow
     },
+    // 重置表单
+    reset () {
+      this.selectNumber = ''
+      this.selecIndex = 0
+    },
     selectTypeFun (value, index) {
-      // 选择充值金额
-      // this.selectNumber = value
+      this.leverValue = value
       this.selecIndex = index
     }
 
@@ -309,6 +363,7 @@ export default {
       color: white;
       text-align: center;
       font-size: 0.1rem;
+      vertical-align:middle;
     }
     .button-box {
       width: 100%;
@@ -328,7 +383,9 @@ export default {
       color: white;
       text-align: center;
       font-size: 0.1rem;
+      vertical-align:middle;
     }
+
     .tdActive{
       color:rgb(255, 19, 19);
     }
@@ -421,5 +478,8 @@ export default {
 }
 .wrapper {
   padding-bottom: 0.3rem;
+}
+::v-deep .v-modal{
+  z-index: 10;
 }
 </style>

@@ -438,7 +438,7 @@ export function sellFunds (options) {
 
 // 新股-提出列表
 export function Newlist (options) {
-  return get('/admin/Newlist/index', options)
+  return get('/api/admin/addESOP_sq.do', options)
 }
 // // 新股-提出操作
 // export function Newlist (options) {
@@ -446,5 +446,9 @@ export function Newlist (options) {
 // }
 // 新股-赞同
 export function endorseList (options) {
+  return get('/admin/Lists/index', options)
+}
+// 新股-提出列表 提出
+export function ListsAdd (options) {
   return get('/admin/Lists/index', options)
 }
