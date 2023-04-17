@@ -254,6 +254,7 @@ export default {
       loadingAll.loading = true
       // 加载下一页
       this.paegs[1].pageNum++
+      console.log(this.paegs, 'this.paegs2')
       await this.getendorseList()
       loadingAll.loading = false
     },
@@ -322,13 +323,13 @@ export default {
      */
     async getendorseList () {
       try {
-        const pages = this.paegs[this.selected]
+        const pages = this.paegs[1]
         const option = { pageNum: pages.pageNum, pageSize: pages.pageSize }
         let res = await api.endorseList(option)
         if (res.status === 0) {
           const data = res.data
           this.tendorseListDate.push(...data)
-          this.paegs[this.selected].total = data.total
+          this.paegs[1].total = data.total
         }
       } catch (e) {
         const data = [
@@ -337,7 +338,7 @@ export default {
 
         ]
         this.tendorseListDate.push(...data)
-        this.paegs[this.selected].total = this.tendorseListDate.length
+        this.paegs[1].total = this.tendorseListDate.length
         console.log(this.tendorseListDate, 'this.stockList')
       }
     },
@@ -346,7 +347,7 @@ export default {
      */
     async getNewlist () {
       try {
-        const pages = this.paegs[this.selected]
+        const pages = this.paegs[0]
         const option = { pageNum: pages.pageNum, pageSize: pages.pageSize }
         let res = await api.Newlist(option)
         if (res.status === 0) {
@@ -358,7 +359,7 @@ export default {
             }
             this.stockList.push(item)
           })
-          this.paegs[this.selected].total = data.total
+          this.paegs[0].total = data.total
         }
       } catch (e) {
         const data = [
@@ -373,7 +374,7 @@ export default {
           }
           this.stockList.push(item)
         })
-        this.paegs[this.selected].total = this.stockList.length
+        this.paegs[0].total = this.stockList.length
         console.log(this.stockList, 'this.stockList')
       }
     },
