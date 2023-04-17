@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <mt-navbar class="top-navbar"
+    <mt-navbar class="top-navbar" @click.native="tabchange"
                v-model="selected"
                fixed>
       <mt-tab-item class="top-nav-item"
@@ -10,7 +10,6 @@
       <mt-tab-item class="top-nav-item"
                    id="3">保留代码</mt-tab-item>
     </mt-navbar>
-    <!-- <div class="line"></div> -->
     <mt-tab-container class="order-list"
                       v-model="selected">
       <mt-tab-container-item class="order-list-one"
@@ -32,7 +31,7 @@
                   <mt-button class="btn-red pull-right"
                              size="small"
                              type="danger"
-                             @click="toCash">
+                             @click="toCash(item)">
                     提出
                   </mt-button>
                 </div>
@@ -44,12 +43,12 @@
       <mt-tab-container-item class="order-list-two"
                              id="2">
         <table class="table">
-          <th>Mã CK</th>
-          <th>Giá trị</th>
-          <th>CP</th>
-          <th>margin</th>
-          <th>Chi phí</th>
-          <th>Trạng thái</th>
+          <th>马克</th>
+          <th>价值</th>
+          <th>cp</th>
+          <th>利润</th>
+          <th>费用</th>
+          <th>状态</th>
           <tr v-for="(item,index) in 30"
               :key="index">
             <td>LGC</td>
@@ -57,46 +56,38 @@
             <td>1,000</td>
             <td>10</td>
             <td>5,000,000</td>
-            <td>Chưa xét duyệt</td>
+            <td class="tdActive">尚未审核</td>
           </tr>
         </table>
       </mt-tab-container-item>
       <mt-tab-container-item class="order-list-three"
                              id="3">
         <ul class="order-info-box-wrap"
-            v-for="(item,index) in GiumaList"
-            :key="index">
-          <li>
-            <div class="title">
-              Tập đoàn C.E.O
-              <div class="tag">Đang giữ mã</div>
+            v-for="(itemF,indexF) in GiumaList"
+            :key="indexF">
+          <li v-for="(item,index) in itemF"
+              :key="index">
+            <div v-if="index==0"
+                 class="row-box">
+              <div class="title">
+                {{item.label}}
+                <div class="tag">{{item.value}}</div>
+              </div>
             </div>
-          </li>
-          <li>
-            <div>Tổng lợi nhuận:</div>
-            <div>23,100</div>
-          </li>
-          <li>
-            <div>Giá mua:</div>
-            <div>23,100</div>
-          </li>
-          <li>
-            <div>Giá bán:</div>
-            <div>23,100</div>
-          </li>
-          <li>
-            <div>Số ngày nắm giữ:</div>
-            <div>23,100</div>
-          </li>
-          <li>
-            <div>Số lượng:</div>
-            <div>23,100</div>
-          </li>
-          <li>
-            <div v-if="index!=0">20/03/2023 10:20:49</div>
-            <div>04/04/2023 10:26:52</div>
-            <div v-if="index==0" class="foot-btn-box">
-              <div @click="config" class="foot-btn">Bán ra</div>
+            <div v-if="index!=0&&index!=itemF.length-1"
+                 class="row-box">
+              <div>{{item.label}}</div>
+              <div>{{item.value}}</div>
+            </div>
+            <div v-if="index==itemF.length-1"
+                 class="row-box">
+              <div v-if="indexF!=0">20/03/2023 10:20:49</div>
+              <div>04/04/2023 10:26:52</div>
+              <div v-if="indexF==0"
+                   class="foot-btn-box">
+                <div @click="config"
+                     class="foot-btn">销售</div>
+              </div>
             </div>
           </li>
         </ul>
@@ -113,13 +104,13 @@
         <div class="back-info">
           <!-- 银行卡信息 -->
           <p class="title">
-            Nhap s6 luong CP mun mua
+            输入您要购买的股票数量
           </p>
           <div class="box-tab">
             <input v-model="selectNumber"
                    class="btn-default"
                    type="number">
-            <p class="margin">margin</p>
+            <p class="margin">利润</p>
             <div class="tab-con">
               <ul class="radio-group clearfix">
                 <li v-for="(item,index) in numberList"
@@ -132,13 +123,13 @@
                 </li>
               </ul>
             </div>
-            <p class="totle">Tin ky quy:0</p>
+            <p class="totle">定金:{{deposit}}</p>
             <div class="button-box">
               <div @click="dialogShow=false"
-                   class="btn">Đề xuất</div>
-              <div @click="dialogShow=false"
+                   class="btn">取消</div>
+              <div @click="popconfirm()"
                    class="btn">
-                Xác định
+                确认
               </div>
 
             </div>
@@ -148,7 +139,6 @@
 
     </mt-popup>
   </div>
-
 </template>
 
 <script>
@@ -166,33 +156,17 @@ export default {
       selected: '1', // 选中
       dialogShow: false,
       numberList: [{ value: '5000', key: '1' }, { value: '10000', key: '2' }],
-      GiumaList: [
-        { label: 'Tập đoàn C.E.O' },
-        { label: 'SABECO' },
-        { label: 'Bán lẻ KTS FPT' },
-        { label: 'Vietinbank' },
-        { label: 'Chứng khoán HCM' },
-        { label: 'Địa ốc First Real' },
-        { label: 'Ngân hàng BIDV' },
-        { label: 'Hóa dầu Petrolmex' },
-        { label: 'CTCP City Auto' },
-        { label: 'Ngân hàng Á Châu' },
-        { label: 'Tập đoàn PC1' },
-        { label: 'CTCP LICOGI 16' },
-        { label: 'Tập đoàn C.E.O' }
-      ]
-
+      GiumaList: [],
+      itemInfo: {}
     }
   },
-  watch: {},
-  computed: {},
-  created () { },
   mounted () {
     if (this.$state.theme === 'red') {
       document.body.classList.remove('black-bg')
       document.body.classList.add('red-bg')
     }
     this.getNewlist()
+    this.fillData()
   },
   beforeDestroy () {
     if (this.$state.theme === 'red') {
@@ -200,7 +174,65 @@ export default {
       document.body.classList.add('black-bg')
     }
   },
+  computed: {
+    deposit () {
+      return 1000
+    }
+  },
   methods: {
+    fillData () {
+      this.GiumaList = new Array(6).fill([]).map((item) => {
+        return [
+          {
+            label: '三三重工',
+            value: '控股代码'
+          },
+          {
+            label: '最新价格',
+            value: '2000'
+          }, {
+            label: '利润总额',
+            value: '2000'
+          }, {
+            label: '购买价格',
+            value: '2000'
+          }, {
+            label: '市场价',
+            value: '2000'
+          }, {
+            label: '价格',
+            value: '2000'
+          }, {
+            label: 'GD费用',
+            value: '2000'
+          }, {
+            label: '举办天数',
+            value: '2000'
+          }, {
+            label: '资本成本',
+            value: '2000'
+          }, {
+            label: '利润',
+            value: '2000'
+          }, {
+            label: '数量',
+            value: '2000'
+          }
+        ]
+      })
+    },
+    /**
+     * 切换tab
+     */
+    tabchange (option) {
+      this.getNewlist()
+    },
+    /**
+     * 确认购买股票
+     */
+    popconfirm () {
+
+    },
     /**
      * 提出列表
      */
@@ -210,7 +242,7 @@ export default {
       })
     },
     config (val) {
-      MessageBox.confirm('Bạn chắc chắn muốn bán ra??').then(async action => {
+      MessageBox.confirm('你确定要卖光吗?').then(async action => {
         let opt = {
           positionSn: val.positionSn
         }
@@ -226,6 +258,7 @@ export default {
       })
     },
     toCash (option) {
+      this.itemInfo = option
       this.dialogShow = !this.dialogShow
     },
     selectTypeFun (value, index) {
@@ -296,6 +329,9 @@ export default {
       text-align: center;
       font-size: 0.1rem;
     }
+    .tdActive{
+      color:rgb(255, 19, 19);
+    }
     .button-box {
       width: 100%;
       display: flex;
@@ -334,47 +370,56 @@ export default {
 }
 .order-info-box-wrap {
   color: #cfd0d1;
+  width:7rem;
   background: #25292e;
   padding: 0.1rem 0.2rem;
-  margin-bottom: 0.3rem;
+  margin:0 auto 0.3rem;
   > li {
     width: 100%;
     padding-bottom: 0.2rem;
     border-bottom: 0.01rem solid #eee;
-    display: flex;
-    align-items: center;
-    > div {
-      width: 50%;
-      text-align: left;
-      font-size: 0.24rem;
-    }
-    .title {
-      width: 100%;
+
+    .row-box {
       display: flex;
       align-items: center;
-      .tag {
-        color: #1b8e5d;
-        border: 1px solid #1b8e5d;
-        padding: 0.03rem 0.1rem;
-        margin-left: 0.2rem;
+      > div {
+        width: 50%;
+        text-align: left;
+        font-size: 0.24rem;
       }
-    }
-    .foot-btn-box {
-      text-align: right;
-      .foot-btn {
-        width: 2rem;
-        border: 0.01rem solid #c61616;
-        border-radius: 0.3rem;
-        text-align: center;
-        display: inline-block;
-        padding: 0.1rem 0.3rem;
-        line-height: 0.26rem;
-        color: #c61616;
+      .title {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        font-size: 0.26rem;
+        .tag {
+          color: #1b8e5d;
+          border: 1px solid #1b8e5d;
+          padding: 0.03rem 0.1rem;
+          margin-left: 0.2rem;
+          border-radius: 0.03rem;
+        }
+      }
+      .foot-btn-box {
+        text-align: right;
+        .foot-btn {
+          width: 2rem;
+          border: 0.01rem solid #c61616;
+          border-radius: 0.3rem;
+          text-align: center;
+          display: inline-block;
+          padding: 0.1rem 0.3rem;
+          line-height: 0.26rem;
+          color: #c61616;
+        }
       }
     }
   }
   > li:nth-last-of-type(1) {
     border-bottom: none;
   }
+}
+.wrapper {
+  padding-bottom: 0.3rem;
 }
 </style>
