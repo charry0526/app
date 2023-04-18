@@ -3,7 +3,7 @@
     <mt-navbar class="top-navbar"
                @click.native="tabchange"
                v-model="selected"
-               fixed>
+               >
       <mt-tab-item class="top-nav-item"
                    id="1">提出</mt-tab-item>
       <mt-tab-item class="top-nav-item"
@@ -347,41 +347,44 @@ export default {
     async getendorseList () {
       try {
         const pages = this.paegs[1]
-        const option = { pageNum: pages.pageNum, pageSize: pages.pageSize }
+        const option = { pageNum: pages.pageNum, pageSize: pages.pageSize,phone:this.userInfo.phone }
         let res = await api.endorseList(option)
         if (res.status === 0) {
           const data = res.data
-          this.tendorseListDate.push(...data)
-          this.paegs[1].total = data.total
+          if(data.length!=0){
+            this.tendorseListDate.push(...data)
+            this.paegs[1].total = data.total
+          }
+          
         }
       } catch (e) {
-        const data = [
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-          { code: '1002', fxtime: '2023-04-16 00:00:00', lever: '1', names: 'admin', newlist_id: 10, num: 10000, price: '9888', scprice: '900', zt: 2, bzj: 1000 },
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 }
+        // const data = [
+        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+        //   { code: '1002', fxtime: '2023-04-16 00:00:00', lever: '1', names: 'admin', newlist_id: 10, num: 10000, price: '9888', scprice: '900', zt: 2, bzj: 1000 },
+        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 }
 
-        ]
-        this.tendorseListDate.push(...data)
-        // this.paegs[1].total = this.tendorseListDate.length
-        // console.log(this.paegs, 'this.pages[1]')
-        if (this.paegs[1].pageNum == 2) {
-          this.paegs[1].total = 34
-        }
-        console.log(this.tendorseListDate, 'this.stockList')
+        // ]
+        // this.tendorseListDate.push(...data)
+        // // this.paegs[1].total = this.tendorseListDate.length
+        // // console.log(this.paegs, 'this.pages[1]')
+        // if (this.paegs[1].pageNum == 2) {
+        //   this.paegs[1].total = 34
+        // }
+        // console.log(this.tendorseListDate, 'this.stockList')
       }
     },
     /**
@@ -394,7 +397,7 @@ export default {
         let res = await api.Newlist(option)
         if (res.status === 0) {
           const data = res.data
-          data.forEach(item => {
+          data.list.forEach(item => {
             if (item.lever) {
               let numberList = item.lever.split('/')
               this.$set(item, 'numberList', numberList)
@@ -404,20 +407,20 @@ export default {
           this.paegs[0].total = data.total
         }
       } catch (e) {
-        const data = [
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1 },
-          { code: '1002', fxtime: '2023-04-16 00:00:00', lever: '1', names: 'admin', newlist_id: 10, num: 10000, price: '9888', scprice: '900', zt: 1 }
+        // const data = [
+        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1 },
+        //   { code: '1002', fxtime: '2023-04-16 00:00:00', lever: '1', names: 'admin', newlist_id: 10, num: 10000, price: '9888', scprice: '900', zt: 1 }
 
-        ]
-        data.forEach(item => {
-          if (item.lever) {
-            let numberList = item.lever.split('/')
-            this.$set(item, 'numberList', numberList)
-          }
-          this.stockList.push(item)
-        })
-        this.paegs[0].total = this.stockList.length
-        console.log(this.stockList, 'this.stockList')
+        // ]
+        // data.forEach(item => {
+        //   if (item.lever) {
+        //     let numberList = item.lever.split('/')
+        //     this.$set(item, 'numberList', numberList)
+        //   }
+        //   this.stockList.push(item)
+        // })
+        // this.paegs[0].total = this.stockList.length
+        // console.log(this.stockList, 'this.stockList')
       }
     },
     // 提出确认操作
