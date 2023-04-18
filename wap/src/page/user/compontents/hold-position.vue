@@ -26,7 +26,7 @@
                         最新:
                         <b v-if="item.now_price == 0">-</b>
                         <b v-else
-                           :class="item.now_price-item.buyOrderPrice<0?'space green':item.now_price-item.buyOrderPrice==0?'space':'space red'">{{item.now_price}}</b>
+                           :class="item.now_price-item.buyOrderPrice<0?'space red':item.now_price-item.buyOrderPrice==0?'space':'space green'">{{item.now_price}}</b>
                     </span>
             </div>
             <div class="order-info">

@@ -19,11 +19,11 @@
                 <div class="clearfix">
                     <div class="pull-left col-xs-7">
                         <p :class="detail.hcrate == 0?'price yellow':detail.hcrate > 0?'price green':detail.hcrate<0?'price red':''">
-                            {{Number(detail.nowPrice).toFixed(2)}}</p>
+                            {{Number(detail.nowPrice/1000).toFixed(2)}}M</p>
                         
 
                         <p >
-                          <p :class="detail.hcrate == 0?' yellow':detail.hcrate > 0?' green':detail.hcrate<0?' red':''" style="width:50%;float:left;">{{detail.hcrate}}</p>    
+                          <p :class="detail.hcrate == 0?' yellow':detail.hcrate > 0?' green':detail.hcrate<0?' red':''" style="width:50%;float:left;">{{detail.hcrate/1000}}</p>    
                           <p :class="detail.hcrate == 0?' yellow':detail.hcrate > 0?' green':detail.hcrate<0?' red':''" style="width:50%;float:left;">{{Number(detail.hcrate/(detail.nowPrice-detail.hcrate)*100).toFixed(2)}}%</p>    
                         </p>
                     </div>
@@ -37,17 +37,20 @@
                             <li>
                                 <p class="title">O</p>
                                 <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
-                                    {{detail.open_px}}</p>
+                                    {{Number(detail.open_px/1000).toFixed(2)}}</p>
+                                    
                             </li>
                             <li>
                                 <p class="title">H</p>
                                 <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
-                                    {{detail.today_max}}</p>
+                                    {{Number(detail.today_max/1000).toFixed(2)}}</p>
+                                    
                             </li>
                             <li>
                                 <p class="title">L</p>
                                 <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
-                                    {{detail.today_min}}</p>
+                                    {{Number(detail.today_min/1000).toFixed(2)}}</p>
+                                    
                             </li>
                         </ul>
                     </div>
@@ -290,34 +293,44 @@
         }
       },
       toBuy () {
-        //期货
-        if(this.$route.query.code != undefined && this.$route.query.code.indexOf('hf_')!=-1){
-          this.$router.push({
-            path: '/futuresBuy',
+
+
+        this.$router.push({
+            path: '/twoBuy',
             query: {
-              info: this.qhinfo
+              code: this.detail.code
             }
           })
-        } else if(this.$route.query.code != undefined && (this.$route.query.code.indexOf('sh')!=-1 || this.$route.query.code.indexOf('sz')!=-1)){
-          this.$router.push({
-            path: '/indexBuy',
-            query: {
-              info: this.zsinfo
-            }
-          })
-        } else{
-          this.$router.push(
-          {
-            name: 'buy',
-            params: {
-              gid: this.detail.id,
-              name: this.detail.name,
-              code: this.detail.code,
-              hcrate: this.detail.hcrate,
-              nowPrice: this.detail.nowPrice
-            }
-          })
-        }
+
+
+        // //期货
+        // if(this.$route.query.code != undefined && this.$route.query.code.indexOf('hf_')!=-1){
+        //   this.$router.push({
+        //     path: '/futuresBuy',
+        //     query: {
+        //       info: this.qhinfo
+        //     }
+        //   })
+        // } else if(this.$route.query.code != undefined && (this.$route.query.code.indexOf('sh')!=-1 || this.$route.query.code.indexOf('sz')!=-1)){
+        //   this.$router.push({
+        //     path: '/indexBuy',
+        //     query: {
+        //       info: this.zsinfo
+        //     }
+        //   })
+        // } else{
+        //   this.$router.push(
+        //   {
+        //     name: 'buy',
+        //     params: {
+        //       gid: this.detail.id,
+        //       name: this.detail.name,
+        //       code: this.detail.code,
+        //       hcrate: this.detail.hcrate,
+        //       nowPrice: this.detail.nowPrice
+        //     }
+        //   })
+        // }
 
       }
     }

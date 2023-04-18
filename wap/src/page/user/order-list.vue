@@ -1,30 +1,30 @@
 <template>
   <div class="wrapper">
     <mt-navbar class="top-navbar" v-model="selected" fixed>
-      <mt-tab-item
+     <!--  <mt-tab-item
       class="top-nav-item"
       v-if="this.$store.state.settingForm.stockDisplay" id="1">沪深账户</mt-tab-item>
       <mt-tab-item
       class="top-nav-item"
       v-if="this.$store.state.settingForm.indexDisplay" id="2">指数账户</mt-tab-item>
-      <!-- <mt-tab-item id="3">科创</mt-tab-item> -->
+      <mt-tab-item id="3">科创</mt-tab-item> 
       <mt-tab-item
       class="top-nav-item"
-      v-if="this.$store.state.settingForm.futuresDisplay" id="4">期货账户</mt-tab-item>
+      v-if="this.$store.state.settingForm.futuresDisplay" id="4">期货账户</mt-tab-item> -->
     </mt-navbar>
     <mt-tab-container class="order-list" v-model="selected">
       <mt-tab-container-item v-if="this.$store.state.settingForm.stockDisplay" id="1">
         <List1 :selectedNumber='selected'/>
       </mt-tab-container-item>
-      <mt-tab-container-item v-if="this.$store.state.settingForm.indexDisplay" id="2">
+      <!-- <mt-tab-container-item v-if="this.$store.state.settingForm.indexDisplay" id="2">
         <List2 :selectedNumber='selected'/>
-      </mt-tab-container-item>
+      </mt-tab-container-item>-->
       <!-- <mt-tab-container-item id="3">
           <List3 :handleOptions='handleOptions2'/>
       </mt-tab-container-item> -->
-      <mt-tab-container-item v-if="this.$store.state.settingForm.futuresDisplay" id="4">
+     <!-- <mt-tab-container-item v-if="this.$store.state.settingForm.futuresDisplay" id="4">
         <List4 :selectedNumber='selected'/>
-      </mt-tab-container-item>
+      </mt-tab-container-item> -->
     </mt-tab-container>
     <foot></foot>
   </div>
@@ -108,7 +108,7 @@ export default {
   }
 
   .mint-tab-container-item {
-    padding-top: 0.8rem;
+    // padding-top: 0.8rem;
 
     .mint-button--default {
       padding: 0 0.2rem;
