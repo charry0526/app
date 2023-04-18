@@ -125,6 +125,10 @@
   margin-left: 0.2rem;
   border-radius: 0.03rem;
 }
+.order-info-box-wrap > li .row-box .title .tagred {
+  color: #c61616;
+  border: 1px solid #c61616;
+}
 .order-info-box-wrap > li .row-box .foot-btn-box {
   text-align: right;
 }
@@ -193,4 +197,10 @@
 }
 ::v-deep .v-modal {
   z-index: 10;
+}
+.activeGreen {
+  color: #31b97e;
+}
+.activeRed {
+  color: #c61616;
 }
