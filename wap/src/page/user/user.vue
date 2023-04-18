@@ -299,7 +299,7 @@
                      <img src="../../assets/ico/yinhangka.png"
                       style="width:.28rem;height:.24rem;margin-right: 0.15rem;"
                     >
-                    esop
+                    注册购买 ESOP 代码
                     <icon name="right66" class="right" slot="icon"></icon>
                 </span>
         </li>
