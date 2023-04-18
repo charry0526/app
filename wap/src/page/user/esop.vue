@@ -323,8 +323,8 @@ export default {
         zname: agentName, // 代理名称
         phone: phone, // 手机号
         xgname: names, // 新股名称
-        zts: zt, // 状态
-        codes: code, // 新股代码
+        // zts: zt, // 状态
+        // codes: code, // 新股代码
         nums: this.selectNumber, // 数量
         bzj: this.deposit, // 保证金
         price: price,
