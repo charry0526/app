@@ -46,7 +46,8 @@
       </mt-tab-container-item>
       <mt-tab-container-item class="order-list-two"
                              id="2">
-        <table v-if="selected==2" v-infinite-scroll="loadMoreTwo"
+        <table v-if="selected==2"
+               v-infinite-scroll="loadMore"
                :infinite-scroll-disabled="loading"
                infinite-scroll-distance="10"
                class="table">
@@ -242,33 +243,47 @@ export default {
         return { loading: false }
       })
       this.paegs = new Array(3).fill([]).map((item) => {
-        return { pageNum: 0, pageSize: 10, total: null }
+        return { pageNum: 0, pageSize: 20, total: null }
       })
     },
-    async loadMoreTwo () {
-      const pages = this.paegs[1]
-      const loadingAll = this.loadingAll[1]
-      if (this.tendorseListDate.length == pages.total || loadingAll.loading) {
-        return false
-      }
-      loadingAll.loading = true
-      // 加载下一页
-      this.paegs[1].pageNum++
-      console.log(this.paegs, 'this.paegs2')
-      await this.getendorseList()
-      loadingAll.loading = false
-    },
+    // async loadMoreTwo () {
+    //   console.log(this.paegs, 'this.paegs1this.paegs')
+    //   const pages = this.paegs[1]
+    //   const loadingAll = this.loadingAll[1]
+    //   if (this.tendorseListDate.length == pages.total || loadingAll.loading) {
+    //     return false
+    //   }
+    //   loadingAll.loading = true
+    //   // 加载下一页
+    //   this.paegs[1].pageNum++
+    //   console.log(this.paegs, 'this.paegs2')
+    //   await this.getendorseList()
+    //   loadingAll.loading = false
+    // },
     // 上拉加载
     async loadMore () {
-      const pages = this.paegs[0]
-      const loadingAll = this.loadingAll[0]
-      if (this.stockList.length == pages.total || loadingAll.loading) {
-        return false
+      const pages = this.paegs[this.selected - 1]
+      const loadingAll = this.loadingAll[this.selected - 1]
+      if (this.selected == 1) {
+        if (this.stockList.length == pages.total || loadingAll.loading) {
+          return false
+        }
+      }
+      if (this.selected == 2) {
+        if (this.tendorseListDate.length == pages.total || loadingAll.loading) {
+          return false
+        }
       }
       loadingAll.loading = true
       // 加载下一页
-      this.paegs[0].pageNum++
-      await this.getNewlist()
+      this.paegs[this.selected - 1].pageNum++
+      if (this.selected == 1) {
+        await this.getNewlist()
+      }
+      if (this.selected == 2) {
+        await this.getendorseList()
+      }
+
       loadingAll.loading = false
     },
     // 获取用户信息
@@ -286,7 +301,7 @@ export default {
       if (this.selected != 2) {
         this.tendorseListDate = []
         this.paegs[1].pageNum = 0
-        this.paegs[1].pageSize = 10
+        this.paegs[1].pageSize = 20
         this.paegs[1].total = null
         // this.loadingAll[1].loading=true
         // await this.getendorseList()
@@ -357,19 +372,15 @@ export default {
           { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
           { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
           { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
           { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 }
 
         ]
         this.tendorseListDate.push(...data)
-        this.paegs[1].total = this.tendorseListDate.length
+        // this.paegs[1].total = this.tendorseListDate.length
+        // console.log(this.paegs, 'this.pages[1]')
+        if (this.paegs[1].pageNum == 2) {
+          this.paegs[1].total = 34
+        }
         console.log(this.tendorseListDate, 'this.stockList')
       }
     },
