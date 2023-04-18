@@ -442,7 +442,7 @@ export function Newlist (options) {
 }
 // 新股-提出列表 提出
 export function ListsAdd (options) {
-  return get('/api/admin/addESOP_sq.do', options)
+  return post('/api/admin/addESOP_sq.do', options)
 }
 // // 新股-提出操作
 // export function Newlist (options) {
