@@ -347,15 +347,14 @@ export default {
     async getendorseList () {
       try {
         const pages = this.paegs[1]
-        const option = { pageNum: pages.pageNum, pageSize: pages.pageSize,phone:this.userInfo.phone }
+        const option = { pageNum: pages.pageNum, pageSize: pages.pageSize, phone: this.userInfo.phone }
         let res = await api.endorseList(option)
         if (res.status === 0) {
           const data = res.data
-          if(data.list.length!=0){
+          if (data.list.length != 0) {
             this.tendorseListDate.push(...data.list)
             this.paegs[1].total = data.total
           }
-
         }
       } catch (e) {
         // const data = [
