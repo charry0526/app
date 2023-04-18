@@ -1,22 +1,22 @@
 <template>
   <div class="wrapper">
     <mt-navbar class="top-navbar"
-               @click.native="tabchange"
                v-model="selected"
-               >
+               fixed>
       <mt-tab-item class="top-nav-item"
-                   id="1">提出</mt-tab-item>
+                   id="1">沪深账户</mt-tab-item>
       <mt-tab-item class="top-nav-item"
-                   id="2">赞同</mt-tab-item>
+                   id="2">指数账户</mt-tab-item>
+      <!-- <mt-tab-item id="3">科创</mt-tab-item> -->
       <mt-tab-item class="top-nav-item"
-                   id="3">保留代码</mt-tab-item>
+                   id="3">期货账户</mt-tab-item>
     </mt-navbar>
     <mt-tab-container class="order-list"
                       v-model="selected">
       <mt-tab-container-item class="order-list-one"
                              id="1">
         <div class="table-box">
-          <h3>报名名单</h3>
+          <!-- <h3>报名名单</h3> -->
           <table v-infinite-scroll="loadMore"
                  :infinite-scroll-disabled="loading"
                  infinite-scroll-distance="10"
@@ -46,32 +46,34 @@
       </mt-tab-container-item>
       <mt-tab-container-item class="order-list-two"
                              id="2">
-        <table v-if="selected==2"
-               v-infinite-scroll="loadMore"
-               :infinite-scroll-disabled="loading"
-               infinite-scroll-distance="10"
-               class="table">
-          <th>股票名称</th>
-          <th>市值</th>
-          <th>数量</th>
-          <th>杠杆</th>
-          <th>费用</th>
-          <th>状态</th>
-          <tr v-for="(item,index) in tendorseListDate"
-              :key="index">
-            <td>{{item.xgname}}</td>
-            <td>{{item.sz}}</td>
-            <td>{{item.nums}}</td>
-            <td>{{item.gg}}</td>
-            <td>{{item.bzj}}</td>
-            <td :class="item.zt==2?'tdActive':''">
-              {{item.zt==1?'已中签':item.zt==2?'未中签':'待审核'}}
-            </td>
-          </tr>
-        </table>
+        <div class="table-box">
+          <table v-if="selected==2"
+                 v-infinite-scroll="loadMore"
+                 :infinite-scroll-disabled="loading"
+                 infinite-scroll-distance="10"
+                 class="table">
+            <th>股票名称</th>
+            <th>市值</th>
+            <th>数量</th>
+            <th>杠杆</th>
+            <th>费用</th>
+            <th>状态</th>
+            <tr v-for="(item,index) in tendorseListDate"
+                :key="index">
+              <td>{{item.xgname}}</td>
+              <td>{{item.sz}}</td>
+              <td>{{item.nums}}</td>
+              <td>{{item.gg}}</td>
+              <td>{{item.bzj}}</td>
+              <td :class="item.zt==2?'tdActive':''">
+                {{item.zt==1?'已中签':item.zt==2?'未中签':'待审核'}}
+              </td>
+            </tr>
+          </table>
+        </div>
       </mt-tab-container-item>
-      <mt-tab-container-item class="order-list-three"
-                             id="3">
+      <mt-tab-container-item class="order-list-three" id="3">
+
         <ul class="order-info-box-wrap"
             v-for="(itemF,indexF) in GiumaList"
             :key="indexF">
@@ -360,33 +362,33 @@ export default {
           }
         }
       } catch (e) {
-        // const data = [
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1002', fxtime: '2023-04-16 00:00:00', lever: '1', names: 'admin', newlist_id: 10, num: 10000, price: '9888', scprice: '900', zt: 2, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 }
+        const data = [
+          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+          { code: '1002', fxtime: '2023-04-16 00:00:00', lever: '1', names: 'admin', newlist_id: 10, num: 10000, price: '9888', scprice: '900', zt: 2, bzj: 1000 },
+          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
+          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 }
 
-        // ]
-        // this.tendorseListDate.push(...data)
-        // // this.paegs[1].total = this.tendorseListDate.length
-        // // console.log(this.paegs, 'this.pages[1]')
-        // if (this.paegs[1].pageNum == 2) {
-        //   this.paegs[1].total = 34
-        // }
-        // console.log(this.tendorseListDate, 'this.stockList')
+        ]
+        this.tendorseListDate.push(...data)
+        // this.paegs[1].total = this.tendorseListDate.length
+        // console.log(this.paegs, 'this.pages[1]')
+        if (this.paegs[1].pageNum == 2) {
+          this.paegs[1].total = 34
+        }
+        console.log(this.tendorseListDate, 'this.stockList')
       }
     },
     /**
@@ -409,20 +411,20 @@ export default {
           this.paegs[0].total = data.total
         }
       } catch (e) {
-        // const data = [
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1 },
-        //   { code: '1002', fxtime: '2023-04-16 00:00:00', lever: '1', names: 'admin', newlist_id: 10, num: 10000, price: '9888', scprice: '900', zt: 1 }
+        const data = [
+          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1 },
+          { code: '1002', fxtime: '2023-04-16 00:00:00', lever: '1', names: 'admin', newlist_id: 10, num: 10000, price: '9888', scprice: '900', zt: 1 }
 
-        // ]
-        // data.forEach(item => {
-        //   if (item.lever) {
-        //     let numberList = item.lever.split('/')
-        //     this.$set(item, 'numberList', numberList)
-        //   }
-        //   this.stockList.push(item)
-        // })
-        // this.paegs[0].total = this.stockList.length
-        // console.log(this.stockList, 'this.stockList')
+        ]
+        data.forEach(item => {
+          if (item.lever) {
+            let numberList = item.lever.split('/')
+            this.$set(item, 'numberList', numberList)
+          }
+          this.stockList.push(item)
+        })
+        this.paegs[0].total = this.stockList.length
+        console.log(this.stockList, 'this.stockList')
       }
     },
     // 提出确认操作
@@ -465,162 +467,4 @@ export default {
   }
 }
 </script>
-<style lang="less" scoped>
-.line {
-  background-color: #eee;
-  width: 100%;
-  height: 0.1rem;
-}
-.table-box {
-  border-top: 0.2rem solid #eee;
-  border-bottom: 0.2rem solid #eee;
-}
-.order-list-one {
-  h3 {
-    position: relative;
-    text-align: center;
-    padding: 0.26rem 0 0.26rem 0.26rem;
-    color: #fff;
-    font-size: 0.25rem;
-    font-weight: 700;
-    text-align: left;
-  }
-  h3::before {
-    content: "";
-    width: 0.03rem;
-    height: 100%;
-    background-color: red;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  .table {
-    width: 100%;
-    tr {
-    }
-    td,
-    th {
-      padding: 0.2rem 0;
-      color: white;
-      text-align: center;
-      font-size: 0.1rem;
-      vertical-align: middle;
-    }
-    .button-box {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
-  }
-}
-.order-list-two {
-  .table {
-    width: 100%;
-    tr {
-    }
-    td,
-    th {
-      padding: 0.2rem 0;
-      color: white;
-      text-align: center;
-      font-size: 0.1rem;
-      vertical-align: middle;
-    }
-
-    .tdActive {
-      color: rgb(255, 19, 19);
-    }
-    .button-box {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
-  }
-}
-.box-tab {
-  .btn-default {
-    border: 0.02rem solid #4e4d4d;
-    border-radius: 0.2rem;
-    display: inline-block;
-    height: 0.8rem;
-    width: 100%;
-    text-indent: 0.2rem;
-    background: none;
-  }
-  .margin {
-    margin: 0.2rem 0;
-  }
-  .radio-group li {
-    // width: 19%;
-    width: 24%;
-    margin-right: 1%;
-  }
-  .button-box {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 0.2rem;
-    margin-top: 0.2rem;
-    .btn {
-      padding: 0.2rem 0.5rem;
-      border: 0.02rem solid #c5c1c1;
-    }
-  }
-}
-.order-info-box-wrap {
-  color: #cfd0d1;
-  width: 7rem;
-  background: #25292e;
-  padding: 0.1rem 0.2rem;
-  margin: 0 auto 0.3rem;
-  > li {
-    width: 100%;
-    padding-bottom: 0.2rem;
-    border-bottom: 0.01rem solid #eee;
-
-    .row-box {
-      display: flex;
-      align-items: center;
-      > div {
-        width: 50%;
-        text-align: left;
-        font-size: 0.24rem;
-      }
-      .title {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        font-size: 0.26rem;
-        .tag {
-          color: #1b8e5d;
-          border: 1px solid #1b8e5d;
-          padding: 0.03rem 0.1rem;
-          margin-left: 0.2rem;
-          border-radius: 0.03rem;
-        }
-      }
-      .foot-btn-box {
-        text-align: right;
-        .foot-btn {
-          width: 2rem;
-          border: 0.01rem solid #c61616;
-          border-radius: 0.3rem;
-          text-align: center;
-          display: inline-block;
-          padding: 0.1rem 0.3rem;
-          line-height: 0.26rem;
-          color: #c61616;
-        }
-      }
-    }
-  }
-  > li:nth-last-of-type(1) {
-    border-bottom: none;
-  }
-}
-.wrapper {
-  padding-bottom: 0.3rem;
-}
-::v-deep .v-modal {
-  z-index: 10;
-}
-</style>
+<style scoped lang="less" src="@/assets/css/esop.less" />
