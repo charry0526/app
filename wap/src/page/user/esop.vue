@@ -51,7 +51,7 @@
                :infinite-scroll-disabled="loading"
                infinite-scroll-distance="10"
                class="table">
-          <th>代码</th>
+          <th>股票名称</th>
           <th>市值</th>
           <th>数量</th>
           <th>杠杆</th>
@@ -59,10 +59,10 @@
           <th>状态</th>
           <tr v-for="(item,index) in tendorseListDate"
               :key="index">
-            <td>{{item.code}}</td>
-            <td>{{item.scprice}}</td>
-            <td>{{item.num}}</td>
-            <td>{{item.lever}}</td>
+            <td>{{item.xgname}}</td>
+            <td>{{item.sz}}</td>
+            <td>{{item.nums}}</td>
+            <td>{{item.gg}}</td>
             <td>{{item.bzj}}</td>
             <td :class="item.zt==2?'tdActive':''">
               {{item.zt==1?'已中签':item.zt==2?'未中签':'待审核'}}
