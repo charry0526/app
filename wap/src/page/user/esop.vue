@@ -327,8 +327,10 @@ export default {
         // codes: code, // 新股代码
         nums: this.selectNumber, // 数量
         bzj: this.deposit, // 保证金
-        price: price,
-        scprice: scprice,
+        // price: price,
+        gg: this.leverValue, // 杠杆
+        sz: Number(this.selectNumber) * Number(price), // 市值
+        // scprice: scprice,
         mrsj: formatTime() // 提交日期
       }
       try {
