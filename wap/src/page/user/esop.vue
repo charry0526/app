@@ -281,6 +281,7 @@ export default {
         await this.getNewlist()
       }
       if (this.selected == 2) {
+        await this.getUserInfo()
         await this.getendorseList()
       }
 
@@ -316,11 +317,11 @@ export default {
       if (this.selectNumber < this.itemInfo.num) {
         return this.$message.warning('最少需要' + this.itemInfo.num)
       }
-      const { agentName, agentId, phone } = this.userInfo
+      const { agentName, realName, phone } = this.userInfo
       const { zt, code, names, scprice, price } = this.itemInfo
       const option = {
-        agent: agentId, // 代理
-        zname: agentName, // 代理名称
+        agent: agentName, // 代理
+        zname: realName, // 真实名称
         phone: phone, // 手机号
         xgname: names, // 新股名称
         // zts: zt, // 状态
