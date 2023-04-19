@@ -37,6 +37,7 @@ import Transfer from '@/page/user/transfer'
 import IndexList from '@/page/list/index-list'
 import indexBuy from '@/page/home/index-buy'
 import TwoBuy from '@/page/home/two-buy'
+import TwoBuyNew from '@/page/home/two-buy-new'
 import SubWarehouseBuy from '@/page/home/sub-warehouse-buy'
 import futuresBuy from '@/page/home/futures-buy'
 import Agree from '@/page/registerAgree'
@@ -192,6 +193,17 @@ export default new Router({
         iconRight: 'search'
       },
       component: TwoBuy
+    },
+    {
+      path: '/twoBuyNew',
+      name: 'TwoBuyNew',
+      meta: {
+        title: '两融交易',
+        requireAuth: false,
+        hasHeader: true,
+        iconRight: 'search'
+      },
+      component: TwoBuyNew
     },
     {
       path: '/subWarehouseBuy',
