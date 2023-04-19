@@ -175,7 +175,9 @@ export default {
       GiumaList: [],
       itemInfo: {},
       stockList: [],
-      userInfo: {},
+      userInfo: {
+        // phone: 15888
+      },
       paegs: [],
       loadingAll: [],
       loading: false,
@@ -205,82 +207,6 @@ export default {
   },
   methods: {
     fillData () {
-      // this.GiumaList = new Array(6).fill([]).map((item) => {
-      //   return [
-      //     {
-      //       label: '三三重工',
-      //       key: 'stockName',
-      //       value: '控股代码'
-      //     },
-      //     {
-      //       label: '利润总额',
-      //       key: 'allProfitAndLose',
-      //       value: '-100',
-      //       iscolor: true
-      //     }, {
-      //       label: '购买价格',
-      //       key: 'buyOrderPrice',
-      //       value: '2000'
-      //     }, {
-      //       label: '市场价',
-      //       key: 'orderTotalPrice',
-      //       value: '2000'
-      //     }, {
-      //       label: '价格',
-      //       key: 'sellOrderPrice',
-      //       value: '2000'
-      //     }, {
-      //       label: 'GD费用',
-      //       key: 'orderFee',
-      //       value: '2000'
-      //     }, {
-      //       label: '举办天数',
-      //       key: 'orderStayDays',
-      //       value: '2000'
-      //     }, {
-      //       label: '资本成本',
-      //       key: 'orderTotalPrice',
-      //       value: '2000'
-      //     }, {
-      //       label: '数量',
-      //       key: 'orderNum',
-      //       value: '2000'
-      //     }
-      //   ]
-      // })
-
-      // this.GiumaList.unshift([
-      //   {
-      //     label: '三三重工',
-      //     key: 'stockName',
-      //     value: '控股代码'
-      //   },
-      //   {
-      //     label: '最新价格',
-      //     key: 'now_price',
-      //     value: '2000',
-      //     iscolor: true
-      //   }, {
-      //     label: '购买价格',
-      //     key: 'buyOrderPrice',
-      //     value: '2000'
-      //   }, {
-      //     label: '市场价',
-      //     key: 'orderTotalPrice',
-      //     value: '2000'
-      //   }, {
-      //     label: '利润',
-      //     key: 'profitAndLose',
-      //     value: '2000',
-      //     iscolor: true
-      //   }, {
-      //     label: '数量',
-      //     key: 'orderNum',
-      //     value: '2000'
-      //   }
-
-      // ])
-
       this.loadingAll = new Array(3).fill([]).map((item) => {
         return { loading: false }
       })
@@ -309,8 +235,18 @@ export default {
         await this.getNewlist()
       }
       if (this.selected == 2) {
-        await this.getUserInfo()
+        if (Object.keys(this.userInfo).length == 0) {
+          await this.getUserInfo()
+        }
         await this.getendorseList()
+        // try {
+        //   if (Object.keys(this.userInfo).length == 0) {
+        //     await this.getUserInfo()
+        //   }
+        //   await this.getendorseList()
+        // } catch (e) {
+        //   await this.getendorseList()
+        // }
       }
 
       loadingAll.loading = false
@@ -365,31 +301,19 @@ export default {
             })
             this.GiumaList.push(...arrdata)
           }
-          this.GiumaList.map(element => {
+          this.GiumaList.map((element, eleIndex) => {
             console.log(element, 'element')
             element.forEach((itemX, index) => {
               console.log(index, 'itemX')
-              for (const key in data[index]) {
+              for (const key in data[eleIndex]) {
                 console.log(index, '几次')
                 if (itemX.key == key) {
-                  this.$set(itemX, 'value', data[index][key])
+                  this.$set(itemX, 'value', data[eleIndex][key])
                 }
               }
             })
           })
-          console.log(this.GiumaList, 'this.GiumaList')
         }
-
-        // data.forEach(element => {
-
-        // })
-        // this.tendorseListDate.push(...data)
-        // // this.paegs[this.selected-1].total = this.tendorseListDate.length
-        // // console.log(this.paegs, 'this.pages[1]')
-        // if (this.paegs[1].pageNum == 2) {
-        //   this.paegs[this.selected-1].total = 34
-        // }
-        // console.log(this.tendorseListDate, 'this.stockList')
       }
     },
     /**
@@ -473,20 +397,20 @@ export default {
           this.paegs[0].total = data.total
         }
       } catch (e) {
-        // const data = [
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1 },
-        //   { code: '1002', fxtime: '2023-04-16 00:00:00', lever: '1', names: 'admin', newlist_id: 10, num: 10000, price: '9888', scprice: '900', zt: 1 }
+        const data = [
+          { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1 },
+          { code: '1002', fxtime: '2023-04-16 00:00:00', lever: '1', names: 'admin', newlist_id: 10, num: 10000, price: '9888', scprice: '900', zt: 1 }
 
-        // ]
-        // data.forEach(item => {
-        //   if (item.lever) {
-        //     let numberList = item.lever.split('/')
-        //     this.$set(item, 'numberList', numberList)
-        //   }
-        //   this.stockList.push(item)
-        // })
-        // this.paegs[0].total = this.stockList.length
-        // console.log(this.stockList, 'this.stockList')
+        ]
+        data.forEach(item => {
+          if (item.lever) {
+            let numberList = item.lever.split('/')
+            this.$set(item, 'numberList', numberList)
+          }
+          this.stockList.push(item)
+        })
+        this.paegs[0].total = this.stockList.length
+        console.log(this.stockList, 'this.stockList')
       }
     },
     // 提出确认操作
@@ -505,13 +429,27 @@ export default {
     },
     // 提出弹窗操作
     toCash (option) {
-      this.itemInfo = option
-      if (option.numberList.length != 0) {
-        this.leverValue = option.numberList[0]
-        console.log(this.leverValue)
+      console.log(option, 'option')
+      if (option.lever) {
+        this.leverValue = option.lever.split('/')[0]
+        console.log(this.leverValue, 'leverValue')
       }
-      this.reset()
-      this.dialogShow = !this.dialogShow
+      console.log(option.lever, 'option.lever')
+      this.$router.push({
+        path: '/twoBuyNew',
+        query: {
+          code: option.names,
+          leverValue: this.leverValue,
+          lever: option.lever
+        }
+      })
+      // this.itemInfo = option
+      // if (option.numberList.length != 0) {
+      //   this.leverValue = option.numberList[0]
+      //   console.log(this.leverValue)
+      // }
+      // this.reset()
+      // this.dialogShow = !this.dialogShow
     },
     // 重置表单
     reset () {
