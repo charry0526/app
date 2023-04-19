@@ -65,12 +65,12 @@
               </p>
             </li>
             <li @click='toDetail(item)' class="li-base">
-              <span :class="item.hcrate == 0?' yellow':item.hcrate > 0?' green':item.hcrate<0?' red':''" style="width:50%;float:left;">{{item.nowPrice?Number(item.nowPrice).toFixed(2):'-'}}</span>
+              <span :class="item.hcrate == 0?' yellow':item.hcrate > 0?' green':item.hcrate<0?' red':''" style="width:50%;float:left;">{{item.nowPrice?Number(item.nowPrice/1000).toFixed(2):'-'}}</span>
             </li>
             <li @click='toDetail(item)' class="li-base" style="width:30%">
               <span v-if="item.hcrate == 0" class="yellow">-</span>
-                <span v-else-if="item.hcrate < 0" class="red"> {{item.hcrate?item.hcrate:'0'}}  {{Number(item.hcrate/(item.nowPrice-item.hcrate)*100).toFixed(2)}}%</span>
-                <span v-else class="green"> {{item.hcrate?item.hcrate:'0'}} {{Number(item.hcrate/(item.nowPrice-item.hcrate)*100).toFixed(2)}}%</span>
+                <span v-else-if="item.hcrate < 0" class="red"> {{item.hcrate?item.hcrate/1000:'0'}}  {{Number(item.hcrate/(item.nowPrice-item.hcrate)*100).toFixed(2)}}%</span>
+                <span v-else class="green"> {{item.hcrate?item.hcrate/1000:'0'}} {{Number(item.hcrate/(item.nowPrice-item.hcrate)*100).toFixed(2)}}%</span>
 
             </li>
             <li class="li-base text-center">

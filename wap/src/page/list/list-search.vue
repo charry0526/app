@@ -38,11 +38,11 @@
                 </p>
               </li>
               <li class="li-base">
-                <span :class="item.hcrate == 0?'price yellow':item.hcrate > 0?'price green':item.hcrate<0?'price red':''">{{item.nowPrice?Number(item.nowPrice).toFixed(2):'-'}}</span>
+                <span :class="item.hcrate == 0?'price yellow':item.hcrate > 0?'price green':item.hcrate<0?'price red':''">{{item.nowPrice?Number(item.nowPrice/1000).toFixed(2):'-'}}</span>
               </li>
               <li class="li-base">
                 <span v-if="item.nowPrice == 0"  :class="item.hcrate == 0?'price yellow':item.hcrate > 0?'price green':item.hcrate<0?'price red':''">-</span>
-                <span v-else  :class="item.hcrate == 0?'price yellow':item.hcrate > 0?'price green':item.hcrate<0?'price red':''">{{item.nowPrice-item.preclose_px>0 ?'+':''}} {{item.hcrate?item.hcrate:'0'}}%</span>
+                <span v-else  :class="item.hcrate == 0?'price yellow':item.hcrate > 0?'price green':item.hcrate<0?'price red':''">{{item.nowPrice-item.preclose_px>0 ?'+':''}} {{item.hcrate?item.hcrate/1000:'0'}}</span>
               </li>
               <li class="li-base no-bold"  :class="item.hcrate == 0?'price yellow':item.hcrate > 0?'price green':item.hcrate<0?'price red':''">
                 <span

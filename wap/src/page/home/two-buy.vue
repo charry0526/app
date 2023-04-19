@@ -8,41 +8,41 @@
       </div>
       <div class="clearfix">
         <div class="pull-left hangqin-left col-xs-4">
-          <p :class="detail.hcrate>0?'price red':detail.hcrate<0?'green price':'price'">
+          <p :class="detail.hcrate == 0?'price yellow':detail.hcrate > 0?'price green':detail.hcrate<0?'price red':''">
             {{Number(detail.nowPrice).toFixed(2)}}</p>
-          <p :class="detail.hcrate>0?'gain red':detail.hcrate<0?'green gain':'gain'">
-            <span>{{Number(detail.hcrate  * detail.nowPrice).toFixed(2)}}</span>
-            <span style="margin-left: .1rem;">{{Number(detail.hcrate ).toFixed(2)}}%</span>
+          <p :class="detail.hcrate == 0?'gain yellow':detail.hcrate > 0?'gain green':detail.hcrate<0?'gain red':''">
+            <span>{{Number(detail.hcrate).toFixed(2)}}</span>
+            <span style="margin-left: .1rem;">{{Number(detail.hcrate/(detail.nowPrice-detail.hcrate)*100).toFixed(2)}}%</span>
           </p>
         </div>
         <div class="pull-right hangqin-right col-xs-8">
           <ul class="price-detail text-center">
             <li>
               <!-- <p class="title"></p> -->
-              <p :class="detail.hcrate<0?'number green': 'number red'">
-                <span class="title">涨跌</span>
-                {{Number(detail.hcrate * detail.nowPrice).toFixed(2)}} 
+              <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
+                <span class="title">O</span>
+                {{Number(detail.open_px).toFixed(2)}} 
+              </p>
+            </li>
+            <li style="text-align:left">
+              <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
+                <span class="title ">H</span>
+                {{Number(detail.today_max).toFixed(2)}} 
               </p>
             </li>
             <li>
-              <p class="number red">
-                <span class="title red">涨停限制</span>
-                {{(Number(detail.nowPrice) * settingIndexInfo.riseLimit + Number(detail.nowPrice)).toFixed(2)}}
+              <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
+                <span class="title">L</span>
+                {{Number(detail.today_min).toFixed(2)}} 
               </p>
             </li>
-            <li>
-              <p :class="detail.hcrate<0?'number green': 'number red'">
-                <span class="title">涨幅</span>
-                {{Number(detail.hcrate).toFixed(2)}}%
-              </p>
-            </li>
-            <li>
+            <!-- <li> -->
               <!-- <p class="title">最低</p> -->
-              <p class="green">
+              <!-- <p class="green">
                 <span class="title green">跌停限制</span>
                 {{(detail.nowPrice - Number(detail.nowPrice) * settingIndexInfo.downLimit ).toFixed(2)}}
               </p>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
@@ -90,8 +90,8 @@
     </div>
     <div class="box-tab">
       <div class="tab-title">
-        <span class="circle"></span>选择手数
-        <span class="notify">最小购买股数1手，最大可购买数量100手  </span>
+        <span class="circle"></span>选择股数
+        <span class="notify">最小购买股数1股，最大可购买数量100股  </span>
       </div>
       <div class="tab-con">
         <ul class="radio-group clearfix">
@@ -102,16 +102,16 @@
             </div>
           </li>
           <li v-show="!selectNumber">
-            <input @keyup="changeAutoNumber" v-model="autoNumber" type="text">手
+            <input @keyup="changeAutoNumber" v-model="autoNumber" type="text">股
           </li>
         </ul>
         <p class="clearfix">
-          <span class="pull-left">最小购买股数{{Number(settingInfo.buyMinNum)}}手</span>
-          <span class="protem pull-right">最大可购买数量{{Number(settingInfo.buyMaxNum)}}手</span>
+          <span class="pull-left">最小购买股数{{Number(settingInfo.buyMinNum)}}股</span>
+          <span class="protem pull-right">最大可购买数量{{Number(settingInfo.buyMaxNum)}}股</span>
         </p>
       </div>
     </div>
-    <div class="box-tab">
+    <div class="box-tab" style="display:none">
       <div class="tab-title">
         <span class="circle"></span>买卖方向
         <span class="notify">最大购买金额:{{(settingInfo.buyMaxAmtPercent * $store.state.userInfo.enableAmt).toFixed(2)}}</span>
@@ -126,7 +126,7 @@
         </ul>
       </div>
     </div>
-    <div class="box-tab">
+    <div class="box-tab" style="display:none">
       <div class="tab-title">
         <span class="circle"></span>选择杠杆
       </div>
@@ -154,9 +154,9 @@
       </div>
     </div> --> 
     <div class="agree">
-      <p style="line-height: 0.4rem;padding: 0 0.2rem;">
+      <!-- <p style="line-height: 0.4rem;padding: 0 0.2rem;">
         当该指数涨幅达到<span class="red">涨停限制</span>时,不能买涨；达到<span class="green">跌停限制</span>时，不能买跌.
-      </p>
+      </p> -->
       <!-- <p>
           <i @click="isAgree" :class="agree?'glyphicon glyphicon glyphicon-ok-sign red':'glyphicon glyphicon-ok-circle'"></i>
           我已阅读并同意
@@ -205,14 +205,14 @@ export default {
         { label: '20', value: '20' },
         { label: '30', value: '30' }
       ],
-      selectCycle: '20',
+      selectCycle: 1,
       numberList: [
-        { label: '50手', value: '50' },
-        { label: '100手', value: '100' },
-        { label: '150手', value: '150' },
-        { label: '200手', value: '200' },
-        { label: '250手', value: '250' },
-        { label: '300手', value: '300' },
+        { label: '1000股', value: '1000' },
+        { label: '1500股', value: '1500' },
+        { label: '2000股', value: '2000' },
+        { label: '2500股', value: '2500' },
+        { label: '3000股', value: '3000' },
+        { label: '3500股', value: '3500' },
         { label: '自定义', value: '' }
       ],
       siteLeverList:[],
@@ -222,7 +222,7 @@ export default {
         { label: '买涨', value: '0' },
         { label: '买跌', value: '1' }
       ],
-      selectType: '',
+      selectType: 0,
       // number:0,// 股
       // price:0,// 股价格
       // total:0, // 总价
@@ -261,12 +261,12 @@ export default {
         this.settingSpreadRate.spreadRate = 0
       }
       if (this.autoNumber) {
-        let payfee = (this.detail.nowPrice * this.autoNumber * 100 / this.selectCycle)
+        let payfee = (this.detail.nowPrice *1* this.autoNumber  / this.selectCycle)
         return (payfee + (payfee * this.settingInfo.buyFee) + (payfee * this.settingInfo.dutyFee) + (payfee * this.settingSpreadRate.spreadRate)).toFixed(2)
         //return (this.detail.nowPrice * this.autoNumber * 100 / this.selectCycle).toFixed(2)
       } else if (this.selectNumber) {
         // alert("bb"+this.detail.nowPrice+"cc==="+this.selectNumber+"ff==="+this.selectCycle+"==="+this.settingSpreadRate.spreadRate)
-        let payfee = (this.detail.nowPrice * this.selectNumber * 100 / this.selectCycle)
+        let payfee = (this.detail.nowPrice *1* this.selectNumber  / this.selectCycle)
         return (payfee + (payfee * this.settingInfo.buyFee) + (payfee * this.settingInfo.dutyFee) + (payfee * this.settingSpreadRate.spreadRate)).toFixed(2)
         //return (this.detail.nowPrice * this.selectNumber * 100 / this.selectCycle).toFixed(2)
       } else {
@@ -276,9 +276,9 @@ export default {
     },
     price () {
       if (this.autoNumber) {
-        return (this.detail.nowPrice * this.autoNumber * 100).toFixed(2)
+        return (this.detail.nowPrice * this.autoNumber * 1).toFixed(2)
       } else if (this.selectNumber) {
-        return (this.detail.nowPrice * this.selectNumber * 100).toFixed(2)
+        return (this.detail.nowPrice * this.selectNumber * 1).toFixed(2)
       } else {
         return 0
       }
@@ -327,6 +327,7 @@ export default {
         this.selectCycle = data.data.siteLever
         // console.log(this.$store.state.userInfo)
         if(this.$store.state.userInfo !== undefined && this.$store.state.userInfo !== null && this.$store.state.userInfo.phone !== '' && this.$store.state.userInfo.siteLever !== null){
+            data.data.siteLever = '1'
             this.selectCycle = data.data.siteLever.split('/')[0]
             this.siteLeverList = []
             for (let i = 0; i < data.data.siteLever.split('/').length; i++) {
@@ -335,6 +336,7 @@ export default {
               this.siteLeverList.push(item)
             }
           } else {
+            data.data.siteLever = '1'
             this.selectCycle = data.data.siteLever.split('/')[0]
             this.siteLeverList = []
             for (let i = 0; i < data.data.siteLever.split('/').length; i++) {
@@ -402,6 +404,7 @@ export default {
       }
     },
     selectCycleFun (value) {
+      value = 1
       this.selectCycle = value
     },
     selectNumberFun (value) {
@@ -458,9 +461,10 @@ export default {
         Toast('请选择买卖方向')
       } else {
         this.buying = true
+        console.log(this.detail)
         let opts = {
           stockId: this.detail.id,
-          buyNum: this.selectNumber ? this.selectNumber * 100 : this.autoNumber * 100, // 单位为手
+          buyNum: this.selectNumber ? this.selectNumber * 1 : this.autoNumber * 1, // 单位为手
           buyType: this.selectType,
           lever: this.selectCycle ? this.selectCycle : 0
         }
@@ -469,7 +473,7 @@ export default {
         if (data.status === 0) {
           Toast(data.data)
           this.getUserInfo()
-          this.$router.push('/orderlist?index=2')
+          this.$router.push('/orderlist')
         } else {
           Toast(data.msg)
         }
