@@ -410,7 +410,8 @@ export default {
     // },
     async getDetail () {
       let opts = {
-        code: this.$route.query.code
+        code: this.$route.query.code,
+        isNew: 1
       }
       this.loading = true
       let data = await api.getSingleStock(opts)
