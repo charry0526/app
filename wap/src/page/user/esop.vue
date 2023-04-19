@@ -440,7 +440,8 @@ export default {
         query: {
           code: option.names,
           leverValue: this.leverValue,
-          lever: option.lever
+          lever: option.lever,
+          buyMinNum: option.num
         }
       })
       // this.itemInfo = option

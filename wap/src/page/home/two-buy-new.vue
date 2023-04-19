@@ -92,7 +92,7 @@
     <div class="box-tab">
       <div class="tab-title">
         <span class="circle"></span>选择股数
-        <span class="notify">最小购买股数1股，最大可购买数量100股 </span>
+        <span class="notify">最小购买股数{{Number(routeQuery.buyMinNum)}}股</span>
       </div>
       <div class="tab-con">
         <ul class="radio-group clearfix">
@@ -110,8 +110,10 @@
           </li>
         </ul>
         <p class="clearfix">
-          <span class="pull-left">最小购买股数{{Number(settingInfo.buyMinNum)}}股</span>
-          <span class="protem pull-right">最大可购买数量{{Number(settingInfo.buyMaxNum)}}股</span>
+          <span class="pull-left">最小购买股数{{Number(routeQuery.buyMinNum)}}股</span>
+          <!-- <span class="protem pull-right">
+            最大可购买数量{{Number(settingInfo.buyMaxNum)}}股
+          </span> -->
         </p>
       </div>
     </div>
