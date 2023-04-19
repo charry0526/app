@@ -73,7 +73,8 @@
           </table>
         </div>
       </mt-tab-container-item>
-      <mt-tab-container-item class="order-list-three" id="3">
+      <mt-tab-container-item class="order-list-three"
+                             id="3">
 
         <ul class="order-info-box-wrap"
             v-for="(itemF,indexF) in GiumaList"
@@ -83,8 +84,9 @@
             <div v-if="index==0"
                  class="row-box">
               <div class="title">
-                {{item.label}}
-                <div :class="{'tagred':indexF!=0}" class="tag">{{item.value}}</div>
+                {{item.value}}
+                <div :class="{'tagred':indexF!=0}"
+                     class="tag">{{item.value}}</div>
               </div>
             </div>
             <div v-if="index!=0&&index!=itemF.length-1"
@@ -155,6 +157,7 @@
 
 <script>
 import { Toast, MessageBox } from 'mint-ui'
+import { CodeList, endorseList, CodeDateFormat, CodeDateFormatFrist } from '@/utils/data.js'
 import * as api from '@/axios/api'
 import { formatTime } from '@/utils/imgupload'
 export default {
@@ -202,67 +205,81 @@ export default {
   },
   methods: {
     fillData () {
-      this.GiumaList = new Array(6).fill([]).map((item) => {
-        return [
-          {
-            label: '三三重工',
-            value: '控股代码'
-          },
-          {
-            label: '利润总额',
-            value: '-100',
-            iscolor: true
-          }, {
-            label: '购买价格',
-            value: '2000'
-          }, {
-            label: '市场价',
-            value: '2000'
-          }, {
-            label: '价格',
-            value: '2000'
-          }, {
-            label: 'GD费用',
-            value: '2000'
-          }, {
-            label: '举办天数',
-            value: '2000'
-          }, {
-            label: '资本成本',
-            value: '2000'
-          }, {
-            label: '数量',
-            value: '2000'
-          }
-        ]
-      })
+      // this.GiumaList = new Array(6).fill([]).map((item) => {
+      //   return [
+      //     {
+      //       label: '三三重工',
+      //       key: 'stockName',
+      //       value: '控股代码'
+      //     },
+      //     {
+      //       label: '利润总额',
+      //       key: 'allProfitAndLose',
+      //       value: '-100',
+      //       iscolor: true
+      //     }, {
+      //       label: '购买价格',
+      //       key: 'buyOrderPrice',
+      //       value: '2000'
+      //     }, {
+      //       label: '市场价',
+      //       key: 'orderTotalPrice',
+      //       value: '2000'
+      //     }, {
+      //       label: '价格',
+      //       key: 'sellOrderPrice',
+      //       value: '2000'
+      //     }, {
+      //       label: 'GD费用',
+      //       key: 'orderFee',
+      //       value: '2000'
+      //     }, {
+      //       label: '举办天数',
+      //       key: 'orderStayDays',
+      //       value: '2000'
+      //     }, {
+      //       label: '资本成本',
+      //       key: 'orderTotalPrice',
+      //       value: '2000'
+      //     }, {
+      //       label: '数量',
+      //       key: 'orderNum',
+      //       value: '2000'
+      //     }
+      //   ]
+      // })
 
-      this.GiumaList.unshift([
-        {
-          label: '三三重工',
-          value: '控股代码'
-        },
-        {
-          label: '最新价格',
-          value: '2000',
-          iscolor: true
-        }, {
-          label: '购买价格',
-          value: '2000'
-        }, {
-          label: '市场价',
-          value: '2000'
-        }, {
-          label: '利润',
-          value: '2000',
-          iscolor: true
-        }, {
-          label: '数量',
-          value: '2000'
-        }
+      // this.GiumaList.unshift([
+      //   {
+      //     label: '三三重工',
+      //     key: 'stockName',
+      //     value: '控股代码'
+      //   },
+      //   {
+      //     label: '最新价格',
+      //     key: 'now_price',
+      //     value: '2000',
+      //     iscolor: true
+      //   }, {
+      //     label: '购买价格',
+      //     key: 'buyOrderPrice',
+      //     value: '2000'
+      //   }, {
+      //     label: '市场价',
+      //     key: 'orderTotalPrice',
+      //     value: '2000'
+      //   }, {
+      //     label: '利润',
+      //     key: 'profitAndLose',
+      //     value: '2000',
+      //     iscolor: true
+      //   }, {
+      //     label: '数量',
+      //     key: 'orderNum',
+      //     value: '2000'
+      //   }
 
-      ])
-      console.log(this.GiumaList, 'this.GiumaList')
+      // ])
 
       this.loadingAll = new Array(3).fill([]).map((item) => {
         return { loading: false }
@@ -319,6 +336,61 @@ export default {
         // await this.getendorseList()
         // this.loadingAll[1].loading = false
       }
+      if (this.selected == 3) {
+        this.getCodeList()
+      }
+    },
+    /**
+     * 保留代码
+     */
+    async getCodeList () {
+      try {
+        const pages = this.paegs[this.selected - 1]
+        const option = { pageNum: pages.pageNum, pageSize: pages.pageSize }
+        let res = await api.endorseList(option)
+        if (res.status === 0) {
+          const data = res.data
+          if (data.list.length != 0) {
+            this.GiumaList.push(...data.list)
+            this.paegs[this.selected - 1].total = data.total
+          }
+        }
+      } catch (e) {
+        const data = CodeList
+        if (data.length != 0) {
+          this.GiumaList.push(CodeDateFormatFrist)
+          if (data.length > 1) {
+            const arrdata = new Array(data.length - 1).fill([]).map((item) => {
+              return CodeDateFormat
+            })
+            this.GiumaList.push(...arrdata)
+          }
+          this.GiumaList.map(element => {
+            console.log(element, 'element')
+            element.forEach((itemX, index) => {
+              console.log(index, 'itemX')
+              for (const key in data[index]) {
+                console.log(index, '几次')
+                if (itemX.key == key) {
+                  this.$set(itemX, 'value', data[index][key])
+                }
+              }
+            })
+          })
+          console.log(this.GiumaList, 'this.GiumaList')
+        }
+
+        // data.forEach(element => {
+
+        // })
+        // this.tendorseListDate.push(...data)
+        // // this.paegs[this.selected-1].total = this.tendorseListDate.length
+        // // console.log(this.paegs, 'this.pages[1]')
+        // if (this.paegs[1].pageNum == 2) {
+        //   this.paegs[this.selected-1].total = 34
+        // }
+        // console.log(this.tendorseListDate, 'this.stockList')
+      }
     },
     /**
      * 确认购买股票
@@ -371,46 +443,14 @@ export default {
           }
         }
       } catch (e) {
-        // const data = [
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1002', fxtime: '2023-04-16 00:00:00', lever: '1', names: 'admin', newlist_id: 10, num: 10000, price: '9888', scprice: '900', zt: 2, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
-        //   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 }
-        // ]
-        // this.tendorseListDate.push(...data)
-        // // this.paegs[1].total = this.tendorseListDate.length
-        // // console.log(this.paegs, 'this.pages[1]')
-        // if (this.paegs[1].pageNum == 2) {
-        //   this.paegs[1].total = 34
-        // }
-        // console.log(this.tendorseListDate, 'this.stockList')
+        const data = endorseList
+        this.tendorseListDate.push(...data)
+        // this.paegs[1].total = this.tendorseListDate.length
+        // console.log(this.paegs, 'this.pages[1]')
+        if (this.paegs[1].pageNum == 2) {
+          this.paegs[1].total = 34
+        }
+        console.log(this.tendorseListDate, 'this.stockList')
       }
     },
     /**
