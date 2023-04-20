@@ -230,7 +230,7 @@
             <i class="iconfont icon-rongzilishi"></i>
             我的平仓
           </div>
-          <div  @click="goEsop()" class="col-xs-3">
+          <div v-if="this.$store.state.settingForm.indexDisplay" @click="goEsop()" class="col-xs-3">
             <i class="iconfont icon-zhishuyidong"></i>
             ESOP
           </div>
@@ -426,7 +426,7 @@ export default {
       focePromptPopup: false, // 强制平仓提示框
       buttonBottom: 0,
       account: [
-        { name: '我的', link: 'stock', isShow: true, isDisplay: false },
+        { name: '我的', link: 'stock', isShow: true, isDisplay: false }
         // { name: '指数', link: 'index', isShow: false, isDisplay: false },
         // { name: '期货', link: 'futures', isShow: false, isDisplay: false }
       ],

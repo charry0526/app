@@ -66,12 +66,12 @@
               <td>{{item.nums}}</td>
               <td>{{item.gg}}</td>
               <td>{{item.bzj}}</td>
-              <td :class="item.zt==2?'tdActive':''">
-                {{item.zt==1?'审核通过':item.zt==2?'未通过':'未审核'}}
+              <td :class="item.zts==2?'tdActive':''">
+                {{item.zts==1?'审核通过':item.zts==2?'未通过':'未审核'}}
               </td>
               <td>
                 <div class="button-box">
-                  <mt-button v-if="item.zt==1" class="btn-red pull-right"
+                  <mt-button v-if="item.zts==1" class="btn-red pull-right"
                              size="small"
                              type="danger"
                              @click="toCash(item)">
