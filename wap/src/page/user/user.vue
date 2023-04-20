@@ -230,7 +230,7 @@
             <i class="iconfont icon-rongzilishi"></i>
             我的平仓
           </div>
-          <div v-if="this.$store.state.settingForm.indexDisplay" @click="goOrderList(2)" class="col-xs-3">
+          <div  @click="goEsop()" class="col-xs-3">
             <i class="iconfont icon-zhishuyidong"></i>
             ESOP
           </div>
@@ -509,6 +509,7 @@ export default {
       let j = true
       this.$store.state.hide = this.$store.state.hide ? i : j
     },
+
     goOrderList: function (val) {
       //   this.$router.push('/orderlist')
       this.$router.push('/orderlist?index=' + val)
