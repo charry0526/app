@@ -368,7 +368,6 @@ export default {
         query: {
           code: option.names || option.xgname,
           leverValue: option.gg,
-          lever: option.lever || option.ggstr,
           buyMinNum: option.num || option.nums
         }
       })

@@ -103,11 +103,7 @@
               {{item.label}}
             </div>
           </li>
-          <li v-show="!selectNumber">
-            <input @keyup="changeAutoNumber"
-                   v-model="autoNumber"
-                   type="text">股
-          </li>
+
         </ul>
         <p class="clearfix">
           <span class="pull-left">最小购买股数{{Number(routeQuery.buyMinNum)}}股</span>
@@ -220,15 +216,7 @@ export default {
         { label: '30', value: '30' }
       ],
       selectCycle: 1,
-      numberList: [
-        { label: '1000股', value: '1000' },
-        { label: '1500股', value: '1500' },
-        { label: '2000股', value: '2000' },
-        { label: '2500股', value: '2500' },
-        { label: '3000股', value: '3000' },
-        { label: '3500股', value: '3500' },
-        { label: '自定义', value: '' }
-      ],
+      numberList: [],
       siteLeverList: [],
       selectNumber: '',
       autoNumber: '',
@@ -309,16 +297,15 @@ export default {
   mounted () {
     this.routeQuery = this.$route.query
     console.log(this.routeQuery, 'this.routeQuery')
-    if (Object.keys(this.routeQuery).length != 0) {
-      this.selectCycle = this.routeQuery.leverValue
-      for (let i = 0; i < this.routeQuery.lever.split('/').length; i++) {
-        let val = this.routeQuery.lever.split('/')[i]
-        let item = { label: val + '倍', value: val }
-        this.siteLeverList.push(item)
-      }
-    }
+    this.selectNumber = this.routeQuery.buyMinNum
+    let items= { label: this.selectNumber + '股', value: this.selectNumber }
+    console.log(this.selectNumber,items)
+    this.numberList.push(items)
+    this.selectCycle = this.routeQuery.leverValue
+    let item = { label: this.selectCycle + '倍', value: this.selectCycle }
+    this.siteLeverList.push(item)
     this.getDetail()
-    this.selectNumber = 0
+
     this.getSettingIndexInfo()
     this.getSettingInfo()
     if (!this.$store.state.userInfo.enableAmt) {
