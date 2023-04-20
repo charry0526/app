@@ -356,19 +356,19 @@ export default {
     },
     toCash (option) {
       console.log(option, 'option')
-      if (option.lever) {
-        this.leverValue = option.lever.split('/')[0]
-      }
-      if (option.gg) {
-        this.leverValue = option.lever.split('/')[0]
+      // if (option.lever) {
+      //   this.leverValue = option.lever.split('/')[0]
+      // }
+      if (option.ggstr) {
+        this.leverValue = option.ggstr.split('/')[0]
       }
       console.log(option.lever, 'option.lever')
       this.$router.push({
         path: '/twoBuyNew',
         query: {
           code: option.names || option.xgname,
-          leverValue: this.leverValue,
-          lever: option.lever || option.gg,
+          leverValue: option.gg,
+          lever: option.lever || option.ggstr,
           buyMinNum: option.num || option.nums
         }
       })

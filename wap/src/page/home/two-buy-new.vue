@@ -308,6 +308,7 @@ export default {
   },
   mounted () {
     this.routeQuery = this.$route.query
+    console.log(this.routeQuery, 'this.routeQuery')
     if (Object.keys(this.routeQuery).length != 0) {
       this.selectCycle = this.routeQuery.leverValue
       for (let i = 0; i < this.routeQuery.lever.split('/').length; i++) {
@@ -427,7 +428,7 @@ export default {
     },
     selectCycleFun (value) {
       // value = 1
-      this.selectCycle = value
+      // this.selectCycle = value
     },
     selectNumberFun (value) {
       this.selectNumber = value
