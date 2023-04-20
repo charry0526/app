@@ -8,9 +8,8 @@
                    id="1">沪深账户</mt-tab-item>
       <mt-tab-item class="top-nav-item"
                    id="2">指数账户</mt-tab-item>
-      <!-- <mt-tab-item id="3">科创</mt-tab-item> -->
-      <mt-tab-item class="top-nav-item"
-                   id="3">期货账户</mt-tab-item>
+      <!-- <mt-tab-item class="top-nav-item"
+                   id="3">期货账户</mt-tab-item> -->
     </mt-navbar>
     <mt-tab-container class="order-list"
                       v-model="selected">
@@ -59,6 +58,7 @@
             <th>杠杆</th>
             <th>费用</th>
             <th>状态</th>
+            <th>购买</th>
             <tr v-for="(item,index) in tendorseListDate"
                 :key="index">
               <td>{{item.xgname}}</td>
@@ -67,45 +67,21 @@
               <td>{{item.gg}}</td>
               <td>{{item.bzj}}</td>
               <td :class="item.zt==2?'tdActive':''">
-                {{item.zt==1?'已中签':item.zt==2?'未中签':'待审核'}}
+                {{item.zt==1?'审核通过':item.zt==2?'未通过':'未审核'}}
+              </td>
+              <td>
+                <div class="button-box">
+                  <mt-button v-if="item.zt==1" class="btn-red pull-right"
+                             size="small"
+                             type="danger"
+                             @click="toCash(item)">
+                    提出
+                  </mt-button>
+                </div>
               </td>
             </tr>
           </table>
         </div>
-      </mt-tab-container-item>
-      <mt-tab-container-item class="order-list-three"
-                             id="3">
-
-        <ul class="order-info-box-wrap"
-            v-for="(itemF,indexF) in GiumaList"
-            :key="indexF">
-          <li v-for="(item,index) in itemF"
-              :key="index">
-            <div v-if="index==0"
-                 class="row-box">
-              <div class="title">
-                {{item.value}}
-                <div :class="{'tagred':indexF!=0}"
-                     class="tag">{{item.value}}</div>
-              </div>
-            </div>
-            <div v-if="index!=0&&index!=itemF.length-1"
-                 class="row-box">
-              <div>{{item.label}}</div>
-              <div :class="item.iscolor&&item.value>0?'activeGreen':item.iscolor&&item.value<0?'activeRed':''">{{item.value}}</div>
-            </div>
-            <div v-if="index==itemF.length-1"
-                 class="row-box">
-              <div v-if="indexF!=0">20/03/2023 10:20:49</div>
-              <div>04/04/2023 10:26:52</div>
-              <div v-if="indexF==0"
-                   class="foot-btn-box">
-                <div @click="config"
-                     class="foot-btn">销售</div>
-              </div>
-            </div>
-          </li>
-        </ul>
       </mt-tab-container-item>
     </mt-tab-container>
     <mt-popup v-model="dialogShow"
@@ -268,52 +244,6 @@ export default {
         this.paegs[1].pageNum = 0
         this.paegs[1].pageSize = 20
         this.paegs[1].total = null
-        // this.loadingAll[1].loading=true
-        // await this.getendorseList()
-        // this.loadingAll[1].loading = false
-      }
-      if (this.selected == 3) {
-        this.getCodeList()
-      }
-    },
-    /**
-     * 保留代码
-     */
-    async getCodeList () {
-      try {
-        const pages = this.paegs[this.selected - 1]
-        const option = { pageNum: pages.pageNum, pageSize: pages.pageSize }
-        let res = await api.endorseList(option)
-        if (res.status === 0) {
-          const data = res.data
-          if (data.list.length != 0) {
-            this.GiumaList.push(...data.list)
-            this.paegs[this.selected - 1].total = data.total
-          }
-        }
-      } catch (e) {
-        const data = CodeList
-        if (data.length != 0) {
-          this.GiumaList.push(CodeDateFormatFrist)
-          if (data.length > 1) {
-            const arrdata = new Array(data.length - 1).fill([]).map((item) => {
-              return CodeDateFormat
-            })
-            this.GiumaList.push(...arrdata)
-          }
-          this.GiumaList.map((element, eleIndex) => {
-            console.log(element, 'element')
-            element.forEach((itemX, index) => {
-              console.log(index, 'itemX')
-              for (const key in data[eleIndex]) {
-                console.log(index, '几次')
-                if (itemX.key == key) {
-                  this.$set(itemX, 'value', data[eleIndex][key])
-                }
-              }
-            })
-          })
-        }
       }
     },
     /**
@@ -413,44 +343,26 @@ export default {
         console.log(this.stockList, 'this.stockList')
       }
     },
-    // 提出确认操作
-    config (val) {
-      MessageBox.confirm('你确定要卖光吗?').then(async action => {
-        let opt = {
-          positionSn: val.positionSn
-        }
-        let data = await api.sellFunds(opt)
-        if (data.status === 0) {
-          Toast(data.msg)
-        } else {
-          Toast(data.msg)
-        }
-      })
-    },
+
     // 提出弹窗操作
     toCash (option) {
       console.log(option, 'option')
       if (option.lever) {
         this.leverValue = option.lever.split('/')[0]
-        console.log(this.leverValue, 'leverValue')
+      }
+      if (option.gg) {
+        this.leverValue = option.lever.split('/')[0]
       }
       console.log(option.lever, 'option.lever')
       this.$router.push({
         path: '/twoBuyNew',
         query: {
-          code: option.names,
+          code: option.names || option.xgname,
           leverValue: this.leverValue,
-          lever: option.lever,
-          buyMinNum: option.num
+          lever: option.lever || option.gg,
+          buyMinNum: option.num || option.nums
         }
       })
-      // this.itemInfo = option
-      // if (option.numberList.length != 0) {
-      //   this.leverValue = option.numberList[0]
-      //   console.log(this.leverValue)
-      // }
-      // this.reset()
-      // this.dialogShow = !this.dialogShow
     },
     // 重置表单
     reset () {
