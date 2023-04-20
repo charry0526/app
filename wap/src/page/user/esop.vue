@@ -5,9 +5,9 @@
                v-model="selected"
                fixed>
       <mt-tab-item class="top-nav-item"
-                   id="1">沪深账户</mt-tab-item>
+                   id="1">ESOP列表</mt-tab-item>
       <mt-tab-item class="top-nav-item"
-                   id="2">指数账户</mt-tab-item>
+                   id="2">申请列表</mt-tab-item>
       <!-- <mt-tab-item class="top-nav-item"
                    id="3">期货账户</mt-tab-item> -->
     </mt-navbar>
