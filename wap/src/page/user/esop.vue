@@ -24,7 +24,7 @@
             <th>名称</th>
             <th>市场价格</th>
             <th>发行价</th>
-            <th>购买</th>
+            <th>申请</th>
             <tr v-for="(item,index) in stockList"
                 :key="index">
               <td>{{item.names}}</td>
@@ -35,8 +35,8 @@
                   <mt-button class="btn-red pull-right"
                              size="small"
                              type="danger"
-                             @click="toCash(item)">
-                    提出
+                             @click="popUp(item)">
+                    申请
                   </mt-button>
                 </div>
               </td>
@@ -345,6 +345,15 @@ export default {
     },
 
     // 提出弹窗操作
+    popUp (option) {
+      this.itemInfo = option
+      if (option.numberList.length != 0) {
+        this.leverValue = option.numberList[0]
+        console.log(this.leverValue)
+      }
+      this.reset()
+      this.dialogShow = !this.dialogShow
+    },
     toCash (option) {
       console.log(option, 'option')
       if (option.lever) {
