@@ -44,6 +44,7 @@ import Agree from '@/page/registerAgree'
 import Trage from '@/page/tradeAgree'
 import OpenAccount from '@/page/openaccount'
 import FundsList from '@/page/funds/funds-list'
+import News from '@/page/home/news'
 
 Vue.use(Router)
 
@@ -494,6 +495,16 @@ export default new Router({
         hasHeader: true
       },
       component: FundsList
+    },
+    {
+      path: '/news',
+      name: 'news',
+      meta: {
+        title: '详情',
+        requireAuth: false,
+        hasHeader: true
+      },
+      component: News
     },
     {
       // 会匹配所有路径

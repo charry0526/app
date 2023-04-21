@@ -155,9 +155,10 @@
     <div class="news-tab">
       <mt-navbar v-model="news">
         <mt-tab-item id="tab_0">
-          <span class="tab-name">财经要闻</span>
+          <!-- <span class="tab-name">财经要闻</span> -->
+          <span class="tab-name">新闻列表</span>
         </mt-tab-item>
-        <mt-tab-item id="tab_1">
+        <!-- <mt-tab-item id="tab_1">
           <span class="tab-name">经济数据</span>
         </mt-tab-item>
         <mt-tab-item id="tab_2">
@@ -168,7 +169,7 @@
         </mt-tab-item>
         <mt-tab-item id="tab_4">
           <span class="tab-name">商品资讯</span>
-        </mt-tab-item>
+        </mt-tab-item> -->
         <!-- <mt-tab-item id="tab_5">
           <span class="tab-name">上市公司</span>
         </mt-tab-item> -->
@@ -177,6 +178,41 @@
         </mt-tab-item> -->
       </mt-navbar>
       <mt-tab-container v-model="news" :swipeable="true">
+         <mt-tab-container-item  id="tab_0">
+          <div v-infinite-scroll="loadMore"
+                 :infinite-scroll-disabled="loading"
+                 infinite-scroll-distance="10" class="news-content">
+            <div
+              @click="pageNews(item)"
+              class="news-item"
+              v-for="item of newsContent"
+              :key="item.id"
+            >
+              <p
+                class="news-title"
+                style="-webkit-box-orient: vertical;"
+              >{{item.title}}</p>
+              <span class="news-status">
+                <!-- <i class="glyphicon glyphicon-eye-open"></i>
+                浏览量：{{item.views}} -->
+              </span>
+            </div>
+          </div>
+          <div v-if="newsContent.length<=0" class="load-all text-center">
+            <mt-spinner type="fading-circle"></mt-spinner>
+          </div>
+          <div v-show="loading" class="load-all text-center">
+              <mt-spinner type="fading-circle"></mt-spinner>
+              加载中...
+          </div>
+          <div v-show="!loading && newsContent.length>0" class="load-all text-center">
+              已全部加载
+          </div>
+        </mt-tab-container-item>
+
+      </mt-tab-container>
+
+      <!-- <mt-tab-container v-model="news" :swipeable="true">
         <mt-tab-container-item id="tab_0">
           <div class="news-content">
             <div
@@ -267,7 +303,7 @@
             </div>
           </div>
         </mt-tab-container-item>
-      </mt-tab-container>
+      </mt-tab-container> -->
     </div>
     <!-- tab -->
 
@@ -284,6 +320,7 @@ import { Toast } from 'mint-ui'
 import * as api from '@/axios/api'
 import bannerImg from '../../assets/img/banner.png'
 import eventBus from '@/event.js'
+import { apikey } from '@/utils/shuhaikeji'
 
 export default {
   components: {
@@ -294,7 +331,7 @@ export default {
   props: {},
   data () {
     return {
-      news:'tab_0',
+      news: 'tab_0',
       market: [],
       moveStats: false,
       bannerList: '',
@@ -311,13 +348,20 @@ export default {
         stockDisplay: false
       },
       theme: 'black',
+      pages: {
+        page: 0,
+        limit: 10,
+        total: -1
+      },
+      loading: false,
+      newsContent: [], // 全部新闻
       newsContent1: [], // 财经要闻
       newsContent2: [], // 经济数据
       newsContent3: [], // 全球股市
       newsContent4: [], // 7*24全球
       newsContent5: [], // 商品资讯,
-      b_bg:require('../../../static/img/bg-zhisu.png'),
-      r_bg:require('../../../static/img/bg-zhisu-red.png')
+      b_bg: require('../../../static/img/bg-zhisu.png'),
+      r_bg: require('../../../static/img/bg-zhisu-red.png')
     }
   },
   created () {
@@ -337,34 +381,63 @@ export default {
     }
   },
   methods: {
-    async getNewsList(type) {
-      let data = await api.queryNewsList(type);
-      console.log('xinwen:',data)
-      switch(type) {
-        case 1:
-          this.newsContent1 = data.data.list
-          break;
-        case 2:
-          this.newsContent2 = data.data.list
-          break;
-        case 3:
-          this.newsContent3 = data.data.list
-          break;
-        case 4:
-          this.newsContent4 = data.data.list
-          break;
-        case 5:
-          this.newsContent5 = data.data.list
-          break;
-      }
+    // 跳转新闻详情
+    pageNews (option) {
+      this.$router.push({
+        path: '/news'
+      })
+      window.sessionStorage.setItem('newDetail', option.maincontent)
     },
+    // 加载更多
+    async loadMore () {
+      if (this.newsContent.length == this.pages.total || this.loading) {
+        return
+      }
+      this.loading = true
+      // 加载下一页
+      this.pages.page++
+      await this.getAllNewList()
+      this.loading = false
+    },
+    async getAllNewList () {
+      const {page, limit} = this.pages
+      let obj = {
+        apikey,
+        page,
+        limit
+      }
+      const res = await api.allNewList(obj)
+      this.newsContent.push(...res.data)
+      this.pages.total = res.meta.total_count
+    },
+    // async getNewsList(type) {
+    //   let data = await api.queryNewsList(type);
+    //   console.log('xinwen:',data)
+    //   switch(type) {
+    //     case 1:
+    //       this.newsContent1 = data.data.list
+    //       break;
+    //     case 2:
+    //       this.newsContent2 = data.data.list
+    //       break;
+    //     case 3:
+    //       this.newsContent3 = data.data.list
+    //       break;
+    //     case 4:
+    //       this.newsContent4 = data.data.list
+    //       break;
+    //     case 5:
+    //       this.newsContent5 = data.data.list
+    //       break;
+    //   }
+    // },
     // 主题切换
-    handleChangeThemeClick() {
+    handleChangeThemeClick () {
       if (this.theme === 'black') {
-        eventBus.$emit("getTheme", 'red');
+        eventBus.$emit('getTheme', 'red')
         this.theme = 'red'
       } else {
-        eventBus.$emit("getTheme", 'black');
+        eventBus.$emit('getTheme', 'black')
         this.theme = 'black'
       }
     },
@@ -492,13 +565,13 @@ export default {
     }
   },
   mounted () {
-    this.getNewsList(1)
-    this.getNewsList(2)
-    this.getNewsList(3)
-    this.getNewsList(4)
-    this.getNewsList(5)
+    // this.getNewsList(1)
+    // this.getNewsList(2)
+    // this.getNewsList(3)
+    // this.getNewsList(4)
+    // this.getNewsList(5)
     this.getMarket() // 获取大盘指数
-    this.getBanner() //获取banner
+    this.getBanner() // 获取banner
     this.getArtList() // 获取公告
     // let header = document.querySelector('.header-box')
     let body = document.querySelector('.wrapper')
@@ -924,6 +997,7 @@ export default {
   margin-top: .1rem;
   /deep/.mint-tab-container {
     background-color: #1D1E29;
+    padding-bottom: .3rem;
   }
   /deep/.mint-tab-item {
     background-color: #1D1E29;

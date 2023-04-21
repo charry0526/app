@@ -452,3 +452,11 @@ export function ListsAdd (options) {
 export function endorseList (options) {
   return get('/api/admin/getEsopList_sq.do', options)
 }
+// 首页-新闻
+export function allNewList (options) {
+  return get('/wifeed/api/tin-tuc/thi-truong', options)
+}
+// 股票列表
+export function bestandslisteList (options) {
+  return get('/wifeed/api/tin-tuc/co-phieu', options)
+}

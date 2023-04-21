@@ -17,6 +17,17 @@
       <mt-tab-item id="2">HNX</mt-tab-item>
       <mt-tab-item id="3">UPCOM</mt-tab-item>
     </mt-navbar>
+     <div :class="i.floatPoint>0?'tab greenBg':'tab redBg'" v-for="(i,index) in market" v-if="index < 3"
+                 :key="i.key">
+        <p :index='index' class="name">{{i.indexName}}</p>
+        <p :class="changeTextClass[index] == true?'price heartBeat':'price'">
+          {{Number(i.currentPoint).toFixed(2)}}
+        </p>
+        <div class="status">
+            <span :class="i.floatPoint>0?'pifting green':'pifting red'">{{Number(i.floatPoint).toFixed(2)}}</span>
+            <span :class="i.floatRate>0?'Percentage green':'Percentage red'">{{i.floatRate}}%</span>
+        </div>
+    </div>
     <mt-tab-container class="order-list" v-model="selected">
       <!-- <mt-tab-container-item id="0">
           <List0 :changeNavOptions='changeNavOptions'/>
@@ -82,7 +93,7 @@ export default {
     // List0,
     List1,
     List2,
-    List3,
+    List3
     // List4,
     // List5,
     // List6
@@ -90,6 +101,8 @@ export default {
   props: {},
   data () {
     return {
+      market: [],
+      changeTextClass: {},
       selected: '' // 选中
     }
   },
@@ -105,8 +118,18 @@ export default {
     if (this.$route.query.index) {
       this.selected = this.$route.query.index
     }
+    this.getMarket()
   },
   methods: {
+    async getMarket () {
+      // 获取大盘指数
+      let result = await api.getIndexMarket()
+      if (result.status === 0) {
+        this.market = result.data
+      } else {
+        Toast(result.msg)
+      }
+    },
     toSearch () {
       this.$router.push('/searchlist')
     },
@@ -293,4 +316,30 @@ export default {
       }
     }
   }
+   .tab {
+      float: left;
+      width: 31%;
+      margin: 0.05rem 1%;
+      margin-top: 0;
+      text-align: center;
+      padding: 0.1rem 0;
+      background: none !important;
+
+      p {
+        margin-top: 0.1rem;
+      }
+
+      .name {
+        font-size: .22rem;
+      }
+
+      .price {
+        font-size: 0.34rem;
+      }
+
+      .status {
+        margin-top: 0.1rem;
+        font-size: .22rem;
+      }
+    }
 </style>
