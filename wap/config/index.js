@@ -1,7 +1,8 @@
 'use strict'
 // Template version: 1.3.1
 // see http://vuejs-templates.github.io/webpack for documentation.
-
+const webpack = require('webpack')
+const CompressionPlugin = require('compression-webpack-plugin')
 const path = require('path')
 
 module.exports = {
@@ -72,7 +73,36 @@ module.exports = {
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: './',
-
+    plugins: [
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+      // 下面两项配置才是 compression-webpack-plugin 压缩配置
+      // 压缩成 .gz 文件
+      new CompressionPlugin({
+        filename: '[path][base].gz',
+        algorithm: 'gzip',
+        test: /\.js$|\.css$|\.html$/,
+        threshold: 10240,
+        minRatio: 0.8
+      }),
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor',
+        filename: '[name].js',
+        minChunks: function (module, count) {
+          console.log(module.resource, `引用次数${count}`)
+          // "有正在处理文件" + "这个文件是 .js 后缀" + "这个文件是在 node_modules 中"
+          return (
+            module.resource &&
+                /\.js$/.test(module.resource) &&
+                module.resource.indexOf(path.join(__dirname, './node_modules')) === 0
+          )
+        }
+      }),
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'runtime',
+        filename: '[name].js',
+        chunks: ['vendor']
+      })
+    ],
     /**
      * Source Maps
      */

@@ -11,7 +11,7 @@ export default {
   data () {
     return {
       newDetail: ''
-    } 
+    }
   },
   created () {
     this.newDetail = window.sessionStorage.getItem('newDetail')
@@ -42,6 +42,9 @@ export default {
 }
 /deep/ div{
   margin-bottom: .3rem;
+}
+/deep/ table{
+  max-width: 100%;
 }
 /deep/img {
   max-width: 100%;
