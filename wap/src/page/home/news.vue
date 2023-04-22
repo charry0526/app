@@ -11,11 +11,11 @@ export default {
   data () {
     return {
       newDetail: ''
-    }
+    } 
   },
   created () {
     this.newDetail = window.sessionStorage.getItem('newDetail')
-    console.log(this.newDetail, 'this.newDetail ')
+    // console.log(this.newDetail, 'this.newDetail ')
   },
   mounted () {
   },

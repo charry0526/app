@@ -14,7 +14,8 @@
             <div class="order-title">
               <span class="main">{{item.stockName}}</span>
               <span class="secondary">({{item.stockCode}})</span>
-              <span :class="item.orderDirection=='买涨'?'type type-up':'type type-down'">{{item.orderDirection=='买涨'?'买涨':'买跌'}}</span>
+              
+              <span :class="item.isNew=='1'?'type type-up':'type type-down'">{{item.isNew=='1'?'ESOP':''}}</span>
               <span v-if="item.stockPlate=='科创'" :class="item.stockPlate=='科创'?'type':''">科创</span>
               <span class="pull-right">总盈亏:<b
                 :class="item.allProfitAndLose<0?'space green':item.allProfitAndLose==0?'space':'space red'">{{item.allProfitAndLose}}</b></span>

@@ -7,7 +7,7 @@
       <mt-tab-item
       class="top-nav-item"
       v-if="this.$store.state.settingForm.indexDisplay" id="2">指数账户</mt-tab-item>
-      <mt-tab-item id="3">科创</mt-tab-item> 
+      <mt-tab-item id="3">科创</mt-tab-item>
       <mt-tab-item
       class="top-nav-item"
       v-if="this.$store.state.settingForm.futuresDisplay" id="4">期货账户</mt-tab-item> -->
@@ -150,7 +150,7 @@ export default {
     .mint-tab-item {
       padding: 0.3rem 0;
       background-color: #16171D;
-      
+
     }
     .top-nav-item{
       position: relative;
@@ -207,7 +207,7 @@ export default {
     }
     .table-title {
       font-size: .24rem;
-      
+
     }
     .table-value {
       font-size: .24rem;
@@ -231,7 +231,7 @@ export default {
     .top-navbar {
       background-color: #E9E9E9 !important;
       .mint-tab-item {
-        background-color: #E9E9E9; 
+        background-color: #E9E9E9;
       }
       .top-nav-item.is-selected {
         color : #000;
@@ -249,7 +249,7 @@ export default {
     .load-all {
       background: #fff !important;
     }
-    
+
   }
   /deep/.red-theme .order-info-box{
       background-color: #fff ;
