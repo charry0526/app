@@ -19,11 +19,11 @@
         <img src="../../assets/ico/wogerenziliao.png" alt="">
       </div>
       <div class="account-info_detail">
-        <div class="account-phone">账户：{{$store.state.userInfo.phone || '未登录'}}</div>
-        <div class="account-name">昵称：{{$store.state.userInfo.nickName || '未登录'}}</div>
+        <div class="account-phone">{{$t("userAuth")}}：{{$store.state.userInfo.phone || $t("notLoggedL")}}</div>
+        <div class="account-name">{{$t("userName")}}：{{$store.state.userInfo.nickName || $t("notLoggedL")}}</div>
       </div>
       <div class="account-info_ctl" @click="hideNumber">
-        资产状况
+        {{$t("assetStatus")}}
         <i v-show="$store.state.hide" class="iconfont icon-yanjing"></i>
         <i v-show="!$store.state.hide" class="iconfont icon-yanjing1"></i>
       </div>
@@ -59,7 +59,7 @@
           <img v-show="$state.theme!='red'" src="../../assets/ico/zongzichan.png" alt="">
           <img v-show="$state.theme=='red'" src="../../assets/ico/zongzichan-red.png" alt="">
 
-          <span class="ti">总资产</span>
+          <span class="ti">{{$t("uesrTotle")}}</span>
           <span class="de">
             <div>
               <p v-if="this.$store.state.settingForm.indexDisplay && !this.$store.state.settingForm.futuresDisplay "
@@ -77,13 +77,13 @@
           </span>
         </div>
         <div class="acc-pre-center">
-          <div>我的账户: <span>￥{{$store.state.hide?'****':$store.state.userInfo.userAmt}}</span></div>
+          <div>{{$t("userAuth")}}: <span>￥{{$store.state.hide?'****':$store.state.userInfo.userAmt}}</span></div>
           <!-- <div>指数账户: <span>￥{{$store.state.hide?'****':$store.state.userInfo.userIndexAmt}}</span></div> -->
           <!-- <div>期货账户: <span>￥{{$store.state.hide?'****':Number($store.state.userInfo.userFuturesAmt).toFixed(2)}}</span></div> -->
         </div>
         <div class="acc-pre-right">
-          <div class="redbtn btn" @click="toRecharge">充值</div>
-          <div class="bluebtn btn" @click="toCash">提现</div>
+          <div class="redbtn btn" @click="toRecharge">{{$t("recharge")}}</div>
+          <div class="bluebtn btn" @click="toCash">{{$t("withdraw")}}</div>
         </div>
       </div>
       <div v-for="item in account" :key="item.key">
@@ -104,7 +104,7 @@
             <img v-else class="iconfont"
             src="../../assets/ico/jia-red.png"
             >
-            <span :style="{color:$state.theme =='red'?'#000':'#fff'}">{{item.name}}账户</span>
+            <span :style="{color:$state.theme =='red'?'#000':'#fff'}">của tôi {{$t("userAuth")}}</span>
             <span v-if="item.name == '指数'">(￥{{$store.state.hide?'****':$store.state.userInfo.userIndexAmt}})</span>
             <span v-if="item.name == '我的'">(￥{{$store.state.hide?'****':$store.state.userInfo.userAmt}})</span>
             <span
@@ -119,7 +119,7 @@
             <ul class="clearfix">
               <li>
                 <i class="iconfont icon-zijin1"></i>
-                <div class="name">总资产</div>
+                <div class="name">{{$t("uesrTotle")}}</div>
                 <p v-if="item.name == '指数'" class="number yellow">
                   {{$store.state.hide?'****':$store.state.userInfo.userIndexAmt}}</p>
                 <p v-if="item.name == '我的'" class="number yellow">
@@ -129,7 +129,7 @@
               </li>
               <li>
                 <i class="iconfont icon-keyongzijin"></i>
-                <div class="name">可用资金</div>
+                <div class="name">{{$t("AvailableFunds")}}</div>
                 <p v-if="item.name == '指数'" class="number yellow">
                   {{$store.state.hide?'****':$store.state.userInfo.enableIndexAmt}}</p>
                 <p v-if="item.name == '我的'" class="number yellow">
@@ -139,7 +139,7 @@
               </li>
               <li>
                 <i class="iconfont icon-dongjiezijin"></i>
-                <div class="name">冻结保证金</div>
+                <div class="name">{{$t("FreezeMargin")}}</div>
                 <p v-if="item.name == '指数'" class="number yellow">
                   {{$store.state.hide?'****':$store.state.userInfo.allIndexFreezAmt}}</p>
                 <p v-if="item.name == '我的'" class="number yellow">
@@ -149,7 +149,7 @@
               </li>
               <li>
                 <i class="iconfont icon-yingkuixuanzhong"></i>
-                <div class="name">持仓总盈亏</div>
+                <div class="name">{{$t("TotalprofitAndLoss")}}</div>
                 <p v-if="item.name == '指数'"
                   :class="$store.state.userInfo.allIndexProfitAndLose>0?'number red':$store.state.userInfo.allIndexProfitAndLose<0?'number green':'number'">
                   {{$store.state.hide?'****':$store.state.userInfo.allIndexProfitAndLose}}</p>
@@ -172,11 +172,12 @@
         class="pcx"
         style="padding: 0.12rem 0.4rem 0.15rem;">
           <!-- 强制平仓线为 ： 可用资金 + 冻结保证金 * 0.6 -->
-          <div style="background:#1A1E29">
-            您的{{item.name}}账户强制平仓线为
-          <span v-if="item.name == '指数'" style="font-weight:bold;font-size:0.26rem;margin:0 0.1rem;">{{$store.state.hide?'****':Number(($store.state.userInfo.enableIndexAmt + $store.state.userInfo.allIndexFreezAmt) * indexSettingInfo.forceSellPercent).toFixed(2)}} </span>
-          <span v-if="item.name == '我的'" style="font-weight:bold;font-size:0.26rem;margin:0 0.1rem;">{{$store.state.hide?'****':Number(($store.state.userInfo.enableAmt + $store.state.userInfo.allFreezAmt) * settingInfo.forceStopPercent).toFixed(2)}} </span>
-          <span v-if="item.name == '期货'" style="font-weight:bold;font-size:0.26rem;margin:0 0.1rem;">{{$store.state.hide?'****':Number(($store.state.userInfo.enableFuturesAmt + $store.state.userInfo.allFuturesFreezAmt) * futuresSettingInfo.forceSellPercent).toFixed(2)}} </span>
+          <div style="background:#1A1E29;line-height: .4rem;">
+            <!-- 您的{{item.name}}账户强制平仓线为-->
+            Của bạn{{item.name}}Dòng buộc thanh lý tài khoản là
+          <span v-if="item.name == '指数'" style="font-weight:bold;font-size:0.26rem;">{{$store.state.hide?'****':Number(($store.state.userInfo.enableIndexAmt + $store.state.userInfo.allIndexFreezAmt) * indexSettingInfo.forceSellPercent).toFixed(2)}} </span>
+          <span v-if="item.name == '我的'" style="font-weight:bold;font-size:0.26rem;">{{$store.state.hide?'****':Number(($store.state.userInfo.enableAmt + $store.state.userInfo.allFreezAmt) * settingInfo.forceStopPercent).toFixed(2)}} </span>
+          <span v-if="item.name == '期货'" style="font-weight:bold;font-size:0.26rem;">{{$store.state.hide?'****':Number(($store.state.userInfo.enableFuturesAmt + $store.state.userInfo.allFuturesFreezAmt) * futuresSettingInfo.forceSellPercent).toFixed(2)}} </span>
           <!-- 请实时注意账户风险 -->
           <i @click="focePromptPopup = true" ref="button" class="iconfont icon-xinshou"></i>
           </div>
@@ -218,17 +219,17 @@
     </div> -->
     <div class="panel">
       <div class="panel-head">
-        <span class="font-w">我的持仓</span>
+        <span class="font-w">{{$t("myPosition")}}</span>
       </div>
       <div class="panel-body">
         <div class="row">
           <div @click="goOrderList(1)" class="col-xs-3">
             <i class="iconfont icon-rongzi2"></i>
-            我的持仓
+            {{$t("myPosition")}}
           </div>
-          <div @click="goOrderList(1)" class="col-xs-3">
+          <div style="width:27%" @click="goOrderList(1)" class="col-xs-3">
             <i class="iconfont icon-rongzilishi"></i>
-            我的平仓
+            {{$t("myClosingPosition")}}
           </div>
           <div v-if="this.$store.state.settingForm.indexDisplay" @click="goEsop()" class="col-xs-3">
             <i class="iconfont icon-zhishuyidong"></i>
@@ -258,18 +259,18 @@
                     <img src="../../assets/ico/shimin.png"
                     style="width:.28rem;height:.24rem;margin-right: 0.15rem;"
                     >
-                    实名认证
+                    {{$t("Verified")}}
                     <span class="renzhen done"
                     v-if="$store.state.userInfo.isActive == 2"
                     >
                       <i class="iconfont el-icon-circle-check" ></i>
-                      审核通过
+                      {{$t("examinationPassed")}}
                     </span>
                     <span class="renzhen ing"
                     v-if="$store.state.userInfo.isActive == 0 || $store.state.userInfo.isActive == 3" style="color:red;font-size: 0.7rem;"
                     >
                       <i class="iconfont el-icon-circle-close" ></i>
-                      未审核
+                      {{$t("NotReviewed")}}
                     </span>
                     <!-- <i v-if="$store.state.userInfo.isActive == 1" style="color:red;font-size: 0.7rem;"
                        class="iconfont icon-shenhezhong"></i>
@@ -286,7 +287,7 @@
                      <img src="../../assets/ico/yinhangka.png"
                       style="width:.28rem;height:.24rem;margin-right: 0.15rem;"
                     >
-                    银行卡
+                    {{$t("bank")}}
                     <!-- <i v-if="!$store.state.bankInfo.bankNo" style="color:red;font-size: 0.3rem;margin-left: 0.1rem;"
                        class="iconfont icon-iconfontweitongguo"></i>
                     <i v-if="$store.state.bankInfo.bankNo" style="color:red;font-size: 0.3rem;margin-left: 0.1rem;"
@@ -299,7 +300,7 @@
                      <img src="../../assets/ico/yinhangka.png"
                       style="width:.28rem;height:.24rem;margin-right: 0.15rem;"
                     >
-                    注册购买 ESOP 代码
+                    {{$t("RegisterbuyESOP")}}
                     <icon name="right66" class="right" slot="icon"></icon>
                 </span>
         </li>
@@ -309,7 +310,7 @@
                  <img src="../../assets/ico/gaimima.png"
                       style="width:.24rem;height:.24rem;margin-right: 0.15rem;"
                     >
-                修改密码
+                {{$t("changePassword")}}
                 <!-- <i v-if="!$store.state.bankInfo.bankNo" style="color:red;font-size: 0.3rem;margin-left: 0.1rem;"
                     class="iconfont icon-iconfontweitongguo"></i>
                 <i v-if="$store.state.bankInfo.bankNo" style="color:red;font-size: 0.3rem;margin-left: 0.1rem;"
@@ -336,7 +337,7 @@
                   <img src="../../assets/ico/zijin.png"
                       style="width:.27rem;height:.24rem;margin-right: 0.15rem;"
                     >
-                  资金明细
+                  {{$t("FundingDetails")}}
                   <icon name="right66" class="right" slot="icon"></icon>
               </span>
         </li>
@@ -346,7 +347,7 @@
                     <img src="../../assets/ico/chongzhi.png"
                       style="width:.27rem;height:.27rem;margin-right: 0.15rem;"
                     >
-                    充值记录
+                    {{$t("RechargeRecord")}}
                     <icon name="right66" class="right" slot="icon"></icon>
                   </span>
         </li>
@@ -356,7 +357,7 @@
                     <img src="../../assets/ico/tixian.png"
                       style="width:.24rem;height:.24rem;margin-right: 0.15rem;"
                     >
-                    提现记录
+                    {{$t("WithdrawalsRecord")}}
                     <icon name="right66" class="right" slot="icon"></icon>
                 </span>
         </li>
@@ -377,23 +378,23 @@
         <div class="clearfix">
           <a @click="focePromptPopup = false" class="pull-right"><i class="iconfont icon-weitongguo"></i></a>
         </div>
-        <p class="font-title">什么是强制平仓线？</p>
+        <p class="font-title">{{$t("popupTip1")}}？</p>
         <!--  账户可用资金 +  -->
-        <p v-if="$store.state.settingForm.stockDisplay" class="font-bold">(沪深)强制平仓线 = (账户可用资金+冻结保证金) *
+        <p v-if="$store.state.settingForm.stockDisplay" class="font-bold">{{$t("popupTip2")}}
           {{settingInfo.forceStopPercent ? settingInfo.forceStopPercent:0}}</p>
-        <p v-if="$store.state.settingForm.indexDisplay" class="font-bold">(指数)强制平仓线 = (账户可用资金+冻结保证金) *
+        <p v-if="$store.state.settingForm.indexDisplay" class="font-bold">{{$t("popupTip3")}}
           {{indexSettingInfo.forceSellPercent ? indexSettingInfo.forceSellPercent:0}}</p>
-        <p v-if="$store.state.settingForm.futuresDisplay" class="font-bold">(期货)强制平仓线 = (账户可用资金+冻结保证金) *
+        <p v-if="$store.state.settingForm.futuresDisplay" class="font-bold">{{$t("popupTip4")}}
           {{futuresSettingInfo.forceSellPercent ? futuresSettingInfo.forceSellPercent:0}}</p>
-        <p v-if="$store.state.settingForm.stockDisplay">当您的沪深账户持仓总盈亏为<span class="green number">-{{Number(($store.state.userInfo.enableAmt + $store.state.userInfo.allFreezAmt) * settingInfo.forceStopPercent).toFixed(2)}}</span>时系统会强制平仓
+        <p v-if="$store.state.settingForm.stockDisplay">{{$t("popupTip5")}}<span class="green number">-{{Number(($store.state.userInfo.enableAmt + $store.state.userInfo.allFreezAmt) * settingInfo.forceStopPercent).toFixed(2)}}</span>{{$t("popupTip6")}}
         </p>
-        <p v-if="$store.state.settingForm.indexDisplay">当您的指数账户持仓总盈亏为<span class="green number">-{{Number(($store.state.userInfo.allIndexFreezAmt + $store.state.userInfo.enableIndexAmt) * indexSettingInfo.forceSellPercent).toFixed(2)}}</span>时系统会强制平仓
+        <p v-if="$store.state.settingForm.indexDisplay">{{$t("popupTip7")}}<span class="green number">-{{Number(($store.state.userInfo.allIndexFreezAmt + $store.state.userInfo.enableIndexAmt) * indexSettingInfo.forceSellPercent).toFixed(2)}}</span>{{$t("popupTip6")}}
         </p>
-        <p v-if="$store.state.settingForm.futuresDisplay">当您的期货账户持仓总盈亏为<span class="green number">-{{Number(($store.state.userInfo.allFuturesFreezAmt + $store.state.userInfo.enableFuturesAmt) * futuresSettingInfo.forceSellPercent).toFixed(2)}}</span>时系统会强制平仓
+        <p v-if="$store.state.settingForm.futuresDisplay">{{$t("popupTip9")}}<span class="green number">-{{Number(($store.state.userInfo.allFuturesFreezAmt + $store.state.userInfo.enableFuturesAmt) * futuresSettingInfo.forceSellPercent).toFixed(2)}}</span>{{$t("popupTip6")}}
         </p>
       </mt-popup>
       <div class="btnbox">
-        <span class="text-center btnok loginout" @click="toRegister">注销登录</span>
+        <span class="text-center btnok loginout" @click="toRegister">đăng xuất</span>
       </div>
     </div>
     <foot></foot>
@@ -517,6 +518,7 @@ export default {
     goFundsList: function (val) {
       this.$router.push('/fundslist?index=' + val)
     },
+    //
     goDetail: function () {
       this.$router.push('/detail')
     },
@@ -526,9 +528,12 @@ export default {
     goEsop () {
       this.$router.push('/esop')
     },
+    //
     toAggre: function () {
       this.$router.push('/aggre')
     },
+
+    //
     toAuthentication: function () {
       this.$router.push('/authentication')
     },
@@ -540,6 +545,8 @@ export default {
       // 提现
       this.$router.push('/cash')
     },
+    //
+
     async toRegister () {
       // 注销登陆
       this.clearCookie()
@@ -1220,9 +1227,11 @@ export default {
         flex-direction: column;
         justify-content: space-around;
         .btn {
+          width:1.3rem;
           color: #fff;
           padding: 0 10px;
           border-radius: .2rem;
+          font-size: .1rem;
         }
         .redbtn {
           background-color: #E6003E;

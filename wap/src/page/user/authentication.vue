@@ -22,14 +22,14 @@
     </div>
     <div class="form-block">
       <div class="auth-msg" v-if="this.$store.state.userInfo.isActive == 3">
-        <p>认证失败，请重新认证</p>
+        <p>{{$t("authenticationFailed")}}</p>
         <div>
-          失败原因：{{this.$store.state.userInfo.authMsg}}
+          {{$t("failureReason")}}：{{this.$store.state.userInfo.authMsg}}
         </div>
       </div>
       <!-- <mt-field label="手机号" placeholder="请输入您的手机号" v-model="form.phone"></mt-field> -->
-      <mt-field label="真实姓名" placeholder="请输入您的真实姓名" type="text" v-model="form.name"></mt-field>
-      <mt-field label="身份证号" placeholder="请输入您的身份证号" type="text" v-model="form.idCard"></mt-field>
+      <mt-field :label="$t('authenticationName')" :placeholder="$t('authenticationNamepla')" type="text" v-model="form.name"></mt-field>
+      <mt-field :label="$t('iDCard')" :placeholder="$t('iDCardpla')" type="text" v-model="form.idCard"></mt-field>
     </div>
     <div class="upload-box clearfix">
       <!-- <form action=""> -->
@@ -46,8 +46,8 @@
           :before-upload="beforeAvatarUpload">
           <img v-if="form.img1key" :src="form.img1key" class="id-img avatar">
           <i v-else class="iconfont icon-zhaopian"></i>
-          <span v-if="!form.img1key && !imgStatus" class="btn-title">身份证正面</span>
-          <span v-if="imgStatus" class="btn-title">正在上传中...</span>
+          <span v-if="!form.img1key && !imgStatus" class="btn-title"> {{$t("iDCardFront")}}</span>
+          <span v-if="imgStatus" class="btn-title"> {{$t("uploading")}}...</span>
         </el-upload>
         <!-- <i class="iconfont icon-tupian"></i> -->
         <!-- <span class="btn-title">身份证正面</span> -->
@@ -67,8 +67,8 @@
           :before-upload="beforeAvatarUpload2">
           <img v-if="form.img2key" :src="form.img2key" class="id-img avatar">
           <i v-else class="iconfont icon-zhaopian"></i>
-          <span v-if="!form.img2key && !imgStatus2" class="btn-title">身份证背面</span>
-          <span v-if="imgStatus2" class="btn-title">正在上传中...</span>
+          <span v-if="!form.img2key && !imgStatus2" class="btn-title">{{$t("iDCardback")}}</span>
+          <span v-if="imgStatus2" class="btn-title">{{$t("uploading")}}...</span>
         </el-upload>
         <!--
             :auto-upload="false"
@@ -91,15 +91,15 @@
       </div> -->
     </div>
     <div class="rule-box">
-      <div class="title">认证规则：</div>
+      <div class="title">{{$t("ruleTitle")}}：</div>
       <ul>
-        <li>1、新用户注册后必须通过实名认证审核。</li>
-        <li>2、姓名和身份证号码一经认证不予修改，修改请联系客服。</li>
-        <li>3、真实姓名必须和出金银行卡户名一致。</li>
+        <li>1、{{$t("ruleTip1")}}。</li>
+        <li>2、{{$t("ruleTip2")}}。</li>
+        <li>3、{{$t("ruleTip3")}}。</li>
       </ul>
     </div>
     <div v-show="showBtn" class="btnbox">
-      <span class="text-center btnok" @click="toSure">确定</span>
+      <span class="text-center btnok" @click="toSure">{{$t("config")}}</span>
     </div>
 
   </div>
@@ -130,8 +130,13 @@ export default {
       showBtn: true,
       admin: '',
       imgStatus: false,
-      imgStatus2: false
-    }
+      imgStatus2: false,
+      fileTip: this.$t('fileTip'),
+      fileTip1: this.$t('fileTip1'),
+      fileTip2: this.$t('fileTip2'),
+      fileTip3: this.$t('fileTip3'),
+      fileTip4: this.$t('fileTip4'),
+}
   },
   watch: {},
   computed: {},
@@ -215,7 +220,7 @@ export default {
       // const _that = this
       const isLt10M = file.size / 1024 / 1024 < 10
       if (!isLt10M) {
-        this.$message.error('上传图片大小不能超过 10M!')
+        this.$message.error(this.fileTip4)
         return false
       } else {
         this.form.img2key = URL.createObjectURL(file)
@@ -254,7 +259,7 @@ export default {
       console.log(file, 'file')
       let i = false
       if (i) {
-        Toast('您上传的照片过大，请选择20M以下的图片')
+        Toast(this.fileTip)
       } else {
         // Indicator.open('Loading...')
         this.img1Key = file
@@ -286,11 +291,11 @@ export default {
     toSure () {
       // 实名认证弹框
       if (isNull(this.form.name) || !isName(this.form.name)) {
-        Toast('请输入您的真实姓���')
+        Toast(this.fileTip1)
       } else if (isNull(this.form.idCard) || !idCardReg(this.form.idCard)) {
-        Toast('请输入您的正确的身份证号码')
+        Toast(this.fileTip2)
       } else if (isNull(this.form.img1key) || isNull(this.form.img2key)) {
-        Toast('请上传您的身份证照片')
+        Toast(this.fileTip3)
       } else {
         // 显示确认弹窗
         this.toAuthentication()

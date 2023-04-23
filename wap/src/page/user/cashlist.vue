@@ -9,8 +9,8 @@
     </div> -->
     <div class="text-center">
       <div class="btn-group">
-        <a href="#/cash" class="with-draw-btn">提现</a>
-        <a href="javascript:;" class="with-draw-detai-btn on">记录</a>
+        <a href="#/cash" class="with-draw-btn">{{$t("withdraw")}}</a>
+        <a href="javascript:;" class="with-draw-detai-btn on">Ghi  <!--记录--></a>
       </div>
     </div>
     <div>
@@ -41,13 +41,13 @@ export default {
   computed: {},
   created () {},
   mounted () {
-    if (this.$state.theme =='red') {
-        document.body.classList.remove('black-bg')
-        document.body.classList.add('red-bg')
+    if (this.$state.theme == 'red') {
+      document.body.classList.remove('black-bg')
+      document.body.classList.add('red-bg')
     }
   },
   beforeDestroy () {
-    if (this.$state.theme =='red') {
+    if (this.$state.theme == 'red') {
       document.body.classList.remove('red-bg')
       document.body.classList.add('black-bg')
     }

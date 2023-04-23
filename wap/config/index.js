@@ -3,8 +3,11 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 const webpack = require('webpack')
 const CompressionPlugin = require('compression-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
-
+// console.log(new HtmlWebpackPlugin(), __dirname, path.resolve(__dirname, '../favicon.png'), new HtmlWebpackPlugin({
+//   favicon: path.resolve(__dirname, '../favicon.png')
+// }))
 module.exports = {
   dev: {
 
@@ -34,6 +37,14 @@ module.exports = {
       }
     },
 
+    // plugins: [
+    //   new HtmlWebpackPlugin({
+    //     filename: 'index.html',
+    //     template: 'index.html',
+    //     inject: true,
+    //     favicon: path.resolve(__dirname, '../favicon.png')
+    //   })
+    // ],
     // Various Dev Server settings
     host: '127.0.0.1', // can be overwritten by process.env.HOST
     port: 9006, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
@@ -74,6 +85,21 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: './',
     plugins: [
+      // new HtmlWebpackPlugin({
+      //   filename: 'index.html',
+      //   template: 'index.html',
+      //   inject: true,
+      //   // filename, titile, template ...
+      //   favicon: path.resolve(__dirname, '../favicon.png')
+      //   // favicon: '../favicon.png'
+      // }),
+      // new HtmlWebpackPlugin({
+      //   filename: 'index.html',
+      //   template: 'index.html',
+      //   inject: true,
+      //   favicon: path.resolve('favicon.png') // 在此处设置
+      // }),
+
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
       // 下面两项配置才是 compression-webpack-plugin 压缩配置
       // 压缩成 .gz 文件

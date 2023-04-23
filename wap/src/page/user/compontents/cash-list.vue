@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div v-if="list.length<=0" class="empty text-center">
-      暂无提现信息!
+      Không có thông tin rút tiền!
     </div>
     <div v-else>
       <ul
@@ -13,11 +13,14 @@
           <div class="order-info-box">
             <div class="order-title">
                     <span class="main">
-                        提现至银行卡
+                        <!-- 提现至银行卡 -->
+                        Rút về thẻ ngân hàng
                     </span>
               <span class="payNumber">¥{{item.withAmt}}</span>
               <span class="red pull-right">
-                        {{item.withStatus == 1?'提现成功':item.withStatus == 2?'提现失败':item.withStatus == 3?'订单取消':'审核中'}}
+                        <!-- {{item.withStatus == 1?'提现成功':item.withStatus == 2?'提现失败':item.withStatus == 3?'订单取消':'审核中'}} -->
+                       {{item.withStatus == 1?'thành công':item.withStatus == 2?'thất bại':item.withStatus == 3?'Hủy bỏ':'đang xem xét'}}
+
                         <i v-if="item.withStatus == 1" class="iconfont icon-tongguo4 animated bounceIn"></i>
                         <i v-if="item.withStatus==0" class="iconfont icon-dengdai animated bounceInDown"></i>
                         <i v-if="item.withStatus == 2" class="iconfont icon-failure animated bounceInDown"></i>
@@ -28,23 +31,34 @@
             </div>
             <div class="order-info">
               <p class="clearfix">
-                <span class="col-xs-6">手续费:<b class="space">￥{{item.withFee}}</b></span>
+                <span class="col-xs-6"><!--手续费-->{{$t("commission")}}:<b class="space">￥{{item.withFee}}</b></span>
                 <!-- <span class="col-xs-6">实际到账金额:<b class="space" style="font-size:0.26rem">{{item.withAmt - item.withFee}}</b>元</span>                         -->
               </p>
               <p class="clearfix">
-                <span class="col-xs-12">银行卡:<b class="space">{{item.bankName}}-{{item.bankAddress}}</b></span>
+                <span class="col-xs-12"><!--银行卡-->{{$t("bank")}}:<b class="space">{{item.bankName}}-{{item.bankAddress}}</b></span>
               </p>
               <p class="clearfix">
-                <span class="col-xs-12">卡号:<b class="space">{{item.bankNo}}</b></span>
+                <span class="col-xs-12">
+                  <!-- 卡号 -->
+                  số thẻ
+                  :<b class="space">{{item.bankNo}}</b></span>
               </p>
               <p v-if="item.withStatus == 3" class="clearfix">
-                <span class="col-xs-12">取消原因:<b class="space">{{item.withMsg}}</b></span>
+                <span class="col-xs-12">
+                  <!-- 取消原因: -->
+                  Lý do hủy bỏ:
+                  <b class="space">{{item.withMsg}}</b></span>
               </p>
               <p v-if="item.withStatus == 2" class="clearfix">
-                <span class="col-xs-12">失败原因:<b class="space">{{item.withMsg}}</b></span>
+                <span class="col-xs-12">
+                  <!-- 失败原因: -->
+                  lý do thất bại:
+                  <b class="space">{{item.withMsg}}</b></span>
               </p>
               <p class="clearfix">
-                        <span class="secondary col-xs-6">时间:
+                        <span class="secondary col-xs-6">
+                          <!-- 时间 -->
+                          thời gian:
                             <b v-if="item.applyTime">{{new Date(item.applyTime) | timeFormat}}</b>
                             <b v-else></b>
                         </span>
@@ -53,7 +67,8 @@
             <div v-if="item.withStatus == 0" class="order-foot clearfix">
               <div @click="cancle(item.id)" class="foot-btn">
                 <i class='font-icon'></i>
-                取消提现
+                <!-- 取消提现 -->
+                hủy rút tiền
               </div>
             </div>
 

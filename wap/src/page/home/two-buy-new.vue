@@ -91,8 +91,8 @@
     </div>
     <div class="box-tab">
       <div class="tab-title">
-        <span class="circle"></span>选择股数
-        <span class="notify">最小购买股数{{Number(routeQuery.buyMinNum)}}股</span>
+        <span class="circle"></span>{{$t("selectNumber")}}({{$t("strand")}})
+        <!-- <div class="notify">最小购买股数{{Number(routeQuery.buyMinNum)}}股</div> -->
       </div>
       <div class="tab-con">
         <ul class="radio-group clearfix">
@@ -106,7 +106,7 @@
 
         </ul>
         <p class="clearfix">
-          <span class="pull-left">最小购买股数{{Number(routeQuery.buyMinNum)}}股</span>
+          <!-- <span class="pull-left">最小购买股数{{Number(routeQuery.buyMinNum)}}股</span> -->
           <!-- <span class="protem pull-right">
             最大可购买数量{{Number(settingInfo.buyMaxNum)}}股
           </span> -->
@@ -133,7 +133,7 @@
     </div>
     <div class="box-tab">
       <div class="tab-title">
-        <span class="circle"></span>选择杠杆
+        <span class="circle"></span>chọn đòn bẩy
       </div>
       <div class="tab-con">
         <ul class="radio-group clearfix">
@@ -172,8 +172,8 @@
     </div>
     <div class="footer-btn">
       <div class="total">
-        <p class="pay">支付保证金<span class="protem">{{total?total:0}}</span></p>
-        <p class="account">(账户余额:{{$store.state.userInfo.enableAmt}}元)</p>
+        <p class="pay">{{$t("paybond")}}<span class="protem">{{total?total:0}}</span></p>
+        <p class="account">({{$t("accountbalance")}}:{{$store.state.userInfo.enableAmt}})</p>
       </div>
       <!-- <mt-button :disabled="buying" class="btn-red" size="small" type="danger" @click="toInquiry">下单</mt-button> -->
       <div class="right-btn">
@@ -182,7 +182,7 @@
           <img src="../../assets/ico/hangqing-btn.png"
                alt=""
                srcset="">
-          两融下单
+          {{$t("placorderwithliangrong")}}
         </div>
       </div>
     </div>
@@ -298,11 +298,11 @@ export default {
     this.routeQuery = this.$route.query
     console.log(this.routeQuery, 'this.routeQuery')
     this.selectNumber = this.routeQuery.buyMinNum
-    let items= { label: this.selectNumber + '股', value: this.selectNumber }
-    console.log(this.selectNumber,items)
+    let items = { label: this.selectNumber + 'mắc cạn', value: this.selectNumber }
+    console.log(this.selectNumber, items)
     this.numberList.push(items)
     this.selectCycle = this.routeQuery.leverValue
-    let item = { label: this.selectCycle + '倍', value: this.selectCycle }
+    let item = { label: this.selectCycle + 'lần', value: this.selectCycle }
     this.siteLeverList.push(item)
     this.getDetail()
 
@@ -822,5 +822,9 @@ body {
   .footer-btn .right-btn .btn-buy {
     background-color: #e00202;
   }
+}
+.radio-group li{
+  width: 2rem;
+  padding: 0 .2rem;
 }
 </style>

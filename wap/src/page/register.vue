@@ -7,7 +7,9 @@
       <div class="register-form-item input-model" style="margin-top:1.11rem">
         <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/loginuser.png" alt="">
         <img class="register-ico" v-show="$state.theme == 'red'" src="../assets/ico/loginuser-red.png" alt="">
-        <input class="register-input" placeholder="请输入手机号码" type="tel" pattern="[0-9]*" v-model="phone">
+        <!-- <input class="register-input" placeholder="请输入手机号码" type="tel" pattern="[0-9]*" v-model="phone"> -->
+                <input class="register-input" placeholder="Vui lòng nhập số điện thoại" type="tel" pattern="[0-9]*" v-model="phone">
+
       </div>
       <!-- <div class="register-form-item input-model">
         <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/vertify.png" alt="">
@@ -19,30 +21,47 @@
       <div class="register-form-item input-model">
         <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/loginpwd.png" alt="">
         <img class="register-ico" v-show="$state.theme == 'red'" src="../assets/ico/loginpwd-pwd.png" alt="">
-        <input class="register-input" placeholder="密码为6~12位数字、字母或符号" type="password" pattern="[0-9]*" v-model="psd">
+        <input class="register-input" placeholder="Mật khẩu là 6 ~ 12 chữ số, chữ cái hoặc ký hiệu" type="password" pattern="[0-9]*" v-model="psd">
+
+        <!-- <input class="register-input" placeholder="密码为6~12位数字、字母或符号" type="password" pattern="[0-9]*" v-model="psd"> -->
       </div>
       <div class="register-form-item input-model">
         <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/loginpwd.png" alt="">
         <img class="register-ico" v-show="$state.theme == 'red'" src="../assets/ico/loginpwd-pwd.png" alt="">
-        <input class="register-input" placeholder="请再次确认密码" type="password" pattern="[0-9]*" v-model="psd2">
+        <!-- <input class="register-input" placeholder="请再次确认密码" type="password" pattern="[0-9]*" v-model="psd2"> -->
+                <input class="register-input" placeholder="Vui lòng xác nhận lại mật khẩu" type="password" pattern="[0-9]*" v-model="psd2">
+
       </div>
       <div class="register-form-item input-model">
         <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/organization.png" alt="">
         <img class="register-ico" v-show="$state.theme == 'red'" src="../assets/ico/organization-red.png" alt="">
-        <input class="register-input" placeholder="机构代码" type="tel" pattern="[0-9]*" v-model="invitecode">
+        <!-- <input class="register-input" placeholder="机构代码" type="tel" pattern="[0-9]*" v-model="invitecode"> -->
+                <input class="register-input" placeholder="Mã cơ quan" type="tel" pattern="[0-9]*" v-model="invitecode">
+
       </div>
       <div class="register-form-item agree-model">
         <i @click="isAgree"
           :class="agree?'glyphicon glyphicon glyphicon-ok-sign red':'glyphicon glyphicon-ok-circle'"></i>
-        我已阅读并同意
-        <a @click="toagreeUrl" style="color:#fff">《注册协议》</a>
+        <!-- 我已阅读并同意 -->
+        tôi đã đọc và đồng ý
+        <a @click="toagreeUrl" style="color:#fff">
+          <!-- 《注册协议》 -->
+          《Hợp đồng đăng ký》
+        </a>
       </div>
       <div class="register-form-item submit-model" @click="gook">
-        立即注册
+        <!-- 立即注册 -->
+        Đăng ký ngay
       </div>
       <div class="register-form-item " style="margin-top: .23rem;display:flex;justify-content:flex-end">
-        <div :style="{'font-size':'.2rem', color:$state.theme =='red'?'#000':'#86CBD1'}">已有账号？<span
-            :style="{color:$state.theme =='red'?'#BB1815':'#fff'}" @click="goLogin">返回登录</span></div>
+        <div :style="{'font-size':'.2rem', color:$state.theme =='red'?'#000':'#86CBD1'}">
+          <!-- 已有账号？ -->
+          có một tài khoản？
+          <span
+            :style="{color:$state.theme =='red'?'#BB1815':'#fff'}" @click="goLogin">
+            <!-- 返回登录 -->
+            đăng nhập lại
+            </span></div>
       </div>
     </div>
     <!-- <div class="text-center">
@@ -103,14 +122,23 @@
       <div class="">
         <div class="row check-box">
           <div class="title">
-            输入图片上的验证码
+            <!-- 输入图片上的验证码 -->
+            Nhập mã xác nhận trên hình
           </div>
-          <mt-field label="验证码" placeholder="请输入验证码" v-model="code2">
+          <!-- <mt-field label="验证码" placeholder="请输入验证码" v-model="code2"> -->
+          <mt-field label="mã xác nhận" placeholder="vui lòng nhập mã xác nhận" v-model="code2">
+
             <img @click="refreshImg" :src="adminUrl+'/code/getCode.do?time='+ imgCodeTime" height="45px" width="100px">
           </mt-field>
-          <p class="red" v-if="!checkCodeState">您输入的验证码有误,请重新输入</p>
+          <p class="red" v-if="!checkCodeState">
+            <!-- 您输入的验证码有误,请重新输入 -->
+            Mã xác minh bạn đã nhập sai, vui lòng nhập lại
+          </p>
           <div class="text-center">
-            <mt-button type="primary" @click="checkImg">确定</mt-button>
+            <mt-button type="primary" @click="checkImg">
+              <!-- 确定 -->
+              Chắc chắn
+            </mt-button>
             <!-- <mt-button style="margin-left: 10%;width:22%" type="default" @click="dialogShow = false">返回</mt-button> -->
           </div>
         </div>

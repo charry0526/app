@@ -6,13 +6,20 @@
       </router-link>
     </mt-header> -->
     <div class="top-wrapper">
-      <div class="title-wrapper">交易流程</div>
+      <div class="title-wrapper">
+        <!-- 交易流程 -->
+        Quy trình giao dịch
+      </div>
       <div class="content-box">
         <el-steps :active="0" class="steps-box" align-center>
-          <el-step title="注册"></el-step>
+          <!-- <el-step title="注册"></el-step>
           <el-step title="认证"></el-step>
           <el-step title="入金"></el-step>
-          <el-step title="交易"></el-step>
+          <el-step title="交易"></el-step> -->
+          <el-step title="đăng ký"></el-step>
+          <el-step title="chứng nhận"></el-step>
+          <el-step title="Tiền gửi"></el-step>
+          <el-step title="buôn bán"></el-step>
         </el-steps>
         <ul class="list">
           <li class="list-item animated fadeInLeft">
@@ -20,8 +27,10 @@
               <img :src="openIcon1" alt="">
             </div>
             <div class="content">
-              <h3>行情分发,极速稳定</h3>
-              <p>专线直连交易所,毫秒级下单速度</p>
+              <!-- <h3>行情分发,极速稳定</h3>
+              <p>专线直连交易所,毫秒级下单速度</p> -->
+              <h3>Phân phối thị trường, cực nhanh và ổn định</h3>
+              <p>Đường dây chuyên dụng được kết nối trực tiếp với sàn giao dịch, đặt lệnh tính bằng mili giây</p>
             </div>
           </li>
           <li class="list-item animated fadeInRight">
@@ -29,8 +38,10 @@
               <img :src="openIcon2" alt="">
             </div>
             <div class="content">
-              <h3>客户至上,优享服务</h3>
-              <p>灵活投资、实现收益最大化</p>
+              <!-- <h3>客户至上,优享服务</h3>
+              <p>灵活投资、实现收益最大化</p> -->
+               <h3>Khách hàng đầu tiên, dịch vụ ưu đãi</h3>
+              <p>Đầu tư linh hoạt để tối đa hóa lợi nhuận</p>
             </div>
           </li>
           <li class="list-item animated fadeInLeft">
@@ -38,45 +49,70 @@
               <img :src="openIcon3" alt="">
             </div>
             <div class="content">
-              <h3>极速开户,超高配额</h3>
-              <p>0资金门槛,无需线下见证</p>
+              <!-- <h3>极速开户,超高配额</h3>
+              <p>0资金门槛,无需线下见证</p> -->
+                <h3>Mở tài khoản nhanh, hạn ngạch siêu cao</h3>
+              <p>0 ngưỡng vốn, không cần nhân chứng ngoại tuyến</p>
             </div>
           </li>
         </ul>
       </div>
       <div class="btnbox animated fadeInUp text-center">
         <span class="login btnok" @click="toLogin">
-            登录
+            <!-- 登录 -->
+            Đăng nhập
         </span>
         <span class="register btnok" @click="toRegister">
-          注册
+          <!-- 注册 -->
+          đăng ký
         </span>
       </div>
     </div>
 
     <div class="bottom-prompt">
-      <h2 class="text-center">开户前请准备好</h2>
+      <h2 class="text-center">
+        <!-- 开户前请准备好 -->
+        Vui lòng chuẩn bị trước khi mở tài khoản
+      </h2>
       <ul class="list list2 clearfix">
         <li>
           <div class="icon">
             <img :src="dataIcon1" alt="">
           </div>
-          <h3>身份证</h3>
-          <p>有效期内的二代身份证</p>
+          <h3>
+            <!-- 身份证 -->
+            chứng minh thư
+            </h3>
+          <p>
+            Chứng minh nhân dân thế hệ thứ hai trong thời hạn hiệu lực
+            <!-- 有效期内的二代身份证 -->
+          </p>
         </li>
         <li>
           <div class="icon">
             <img :src="dataIcon2" alt="">
           </div>
-          <h3>银行卡</h3>
-          <p>户名与身份证一致的银行卡</p>
+          <h3>
+            <!-- 银行卡 -->
+            Thẻ ngân hàng
+            </h3>
+          <p>
+            Thẻ ngân hàng trùng tên tài khoản và CMND
+            <!-- 户名与身份证一致的银行卡 -->
+          </p>
         </li>
         <li>
           <div class="icon">
             <img :src="dataIcon3" alt="">
           </div>
-          <h3>WIFI网络</h3>
-          <p>3G/4G网络</p>
+          <h3>
+            <!-- WIFI网络 -->
+            Mạng wifi
+            </h3>
+          <p>
+            mạng 3G/4G
+            <!-- 3G/4G网络 -->
+            </p>
         </li>
       </ul>
     </div>
@@ -96,7 +132,7 @@ export default {
       openIcon3: require('../../static/img/openAccount/open-icon3.png'),
       dataIcon1: require('../../static/img/openAccount/data-icon1.png'),
       dataIcon2: require('../../static/img/openAccount/data-icon2.png'),
-      dataIcon3: require('../../static/img/openAccount/data-icon3.png'),
+      dataIcon3: require('../../static/img/openAccount/data-icon3.png')
     }
   },
   components: {
@@ -207,6 +243,7 @@ export default {
           }
         }
         .content{
+          width:5rem;
           h3{
             font-size:0.26rem;
             font-family:Microsoft YaHei;
@@ -247,7 +284,7 @@ export default {
   }
 
   .list {
-    width: 5rem;
+    width: 6rem;
     margin: 0 auto;
     li {
       position: relative;

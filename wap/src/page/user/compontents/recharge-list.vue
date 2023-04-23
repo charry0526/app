@@ -1,7 +1,8 @@
 <template>
   <div>
     <div v-if="list.length<=0" class="empty text-center">
-      暂无充值信息!
+      <!-- 暂无充值信息! -->
+      Không có thông tin nạp tiền！
     </div>
     <div v-else>
       <ul
@@ -18,9 +19,14 @@
                         <i v-if="item.payChannel == '微信' " style="color:#1296db;" class="iconfont icon-weixin"></i>
                         <i v-if="item.payChannel == 1 || item.payChannel == '对公转账'" style="color:#1296db;"
                            class="iconfont icon-yinlian"></i> -->
-                        {{item.payChannel == 0?'支付宝':item.payChannel == 1?'对公转账':item.payChannel}}
+
+                       {{item.payChannel == 0?'支付宝':item.payChannel == 1?'chuyển khoản':item.payChannel}}
+
+                        <!-- {{item.payChannel == 0?'支付宝':item.payChannel == 1?'对公转账':item.payChannel}} -->
                     </span>
-              <span class="payNumber">充值：<span :style="{color:$state.theme =='red'?'#BB1815':''}">￥{{item.payAmt}}</span></span>
+              <span class="payNumber">nạp điện：<span :style="{color:$state.theme =='red'?'#BB1815':''}">￥{{item.payAmt}}</span></span>
+
+              <!-- <span class="payNumber">充值：<span :style="{color:$state.theme =='red'?'#BB1815':''}">￥{{item.payAmt}}</span></span> -->
               <span
                 :class="item.orderStatus == 1?'green pull-right':item.orderStatus == 2?'red pull-right':'red pull-right'">
                         <i v-if="item.orderStatus == 1" class="iconfont icon-tongguo4 animated bounceIn"></i>
@@ -29,7 +35,9 @@
                         <i v-if="item.orderStatus == 3"
                            class="iconfont icon-iconfontweitongguo animated bounceInDown"></i>
                         <!-- 1 => 成功 2 失败 3取消 4 等待 -->
-                        {{item.orderStatus == 1?'充值成功':item.orderStatus == 2?'充值失败':item.orderStatus == 3?'取消充值':'审核中'}}
+                        {{item.orderStatus == 1?'thành công':item.orderStatus == 2?'thất bại':item.orderStatus == 3?'Hủy bỏ':'đang xem xét'}}
+
+                        <!-- {{item.orderStatus == 1?'充值成功':item.orderStatus == 2?'充值失败':item.orderStatus == 3?'取消充值':'审核中'}} -->
 
                     </span>
               <!-- <span class="secondary ">123456789</span> -->
@@ -48,8 +56,10 @@
                         </span>
               </p> -->
               <div class="info-mix ">
-                <span class="info-item">订单号:<b>{{item.orderSn}}</b></span>
-                <span class="info-item">时间:
+                                <!-- <span class="info-item">订单号:<b>{{item.orderSn}}</b></span> -->
+
+                <span class="info-item">số thứ tự:<b>{{item.orderSn}}</b></span>
+                <span class="info-item">thời gian: <!-- 时间:-->
                     <b v-if="item.addTime">{{new Date(item.addTime) | timeFormat}}</b>
                     <b v-else></b>
                 </span>

@@ -24,7 +24,8 @@
               <!-- <span :class="item.orderDirection=='买涨'?'type type-up':'type type-down'">{{item.orderDirection=='买涨'?'买涨':'买跌'}}</span> -->
               <span v-if="item.stockPlate=='科创'" :class="item.stockPlate=='科创'?'type':''">科创</span>
               <span class="direction pull-right big-font">
-                        最新:
+                        <!-- 最新: -->
+                        cập nhật:
                         <b v-if="item.now_price == 0">-</b>
                         <b v-else
                            :class="item.now_price-item.buyOrderPrice<0?'space red':item.now_price-item.buyOrderPrice==0?'space':'space green'">{{item.now_price}}</b>
@@ -32,23 +33,51 @@
             </div>
             <div class="order-info">
               <p class="clearfix">
-                <span class="col-xs-4">买入价格:<b class="space">{{item.buyOrderPrice}}</b></span>
-                <span class="col-xs-4 text-center">数量:<b class="space">{{item.orderNum}}</b></span>
-                <span class="col-xs-4 text-right">市值:<b class="space">{{item.orderTotalPrice}}</b></span>
+                <span class="col-xs-4">
+                  <!-- 买入价格 -->
+                  giá mua:
+                  <b class="space">{{item.buyOrderPrice}}</b></span>
+                <span class="col-xs-4 text-center">
+                  <!-- 数量 -->
+                  Số lượng:
+                  <b class="space">{{item.orderNum}}</b></span>
+                <span class="col-xs-4 text-right">
+                  <!-- 市值 -->
+                  giá trị:
+                  <b class="space">{{item.orderTotalPrice}}</b></span>
               </p>
               <p class="clearfix">
-                <span class="col-xs-4">手续费:<b class="space">{{item.orderFee}}</b></span>
-                <span class="col-xs-4 text-center">印花税:<b class="space">{{item.orderSpread}}</b></span>
-                <span class="col-xs-4 text-right">留仓费:<b class="space">{{item.orderStayFee}}</b></span>
+                <span class="col-xs-4">
+                  <!-- 手续费 -->
+                  phí xử lý:
+                  <b class="space">{{item.orderFee}}</b></span>
+                <span class="col-xs-4 text-center">
+                  <!-- 印花税 -->
+                  tem đóng thuế
+                  :
+                  <b class="space">{{item.orderSpread}}</b></span>
+                <span class="col-xs-4 text-right">
+                  <!-- 留仓费 -->
+                  Phí lưu trữ:
+                  <b class="space">{{item.orderStayFee}}</b></span>
               </p>
               <p class="clearfix">
-                <span class="col-xs-4">点差费:<b class="space">{{item.spreadRatePrice}}</b></span>
-                        <span class="col-xs-4 text-center">浮动盈亏:
+                <span class="col-xs-4">
+                  <!-- 点差费 -->
+                  phí lây lan
+                  :<b class="space">{{item.spreadRatePrice}}</b></span>
+                        <span class="col-xs-4 text-center">
+                          <!-- 浮动盈亏 -->
+                          Lãi lỗ thả nổi
+                          :
                             <b v-if="item.now_price == 0">-</b>
                             <b v-else
                                :class="item.profitAndLose<0?'space red':item.profitAndLose>=0?'space':'space green'">{{item.profitAndLose}}</b>
                         </span>
-                <span class="col-xs-4 text-right big-font">总盈亏:
+                <span class="col-xs-4 text-right big-font">
+                  <!-- 总盈亏 -->
+                  tổng lãi lỗ
+                  :
                     <b v-if="item.now_price == 0">-</b>
                     <b v-else
                        :class="item.allProfitAndLose<0?'space red':item.allProfitAndLose>=0?'space':'space green'">{{item.allProfitAndLose}}</b>
@@ -62,7 +91,8 @@
               </div>
               <div @click="sell(item.positionSn)" class="foot-btn">
                 <i class='font-icon'></i>
-                我要平仓
+                <!-- 我要平仓 -->
+                Tôi muốn đóng vị thế
               </div>
             </div>
           </div>

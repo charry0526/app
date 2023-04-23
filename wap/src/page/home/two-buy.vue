@@ -167,7 +167,8 @@
     <div class="footer-btn">
       <div class="total">
         <p class="pay">{{$t("paybond")}}<span class="protem">{{total?total:0}}</span></p>
-        <p class="account">({{$t("accountbalance")}}:{{$store.state.userInfo.enableAmt}}元)</p>
+        <p class="account">({{$t("accountbalance")}}:{{$store.state.userInfo.enableAmt}})</p>
+        <!-- 元 -->
       </div>
       <!-- <mt-button :disabled="buying" class="btn-red" size="small" type="danger" @click="toInquiry">下单</mt-button> -->
       <div class="right-btn">
@@ -208,13 +209,13 @@ export default {
       ],
       selectCycle: 1,
       numberList: [
-        { label: '1000股', value: '1000' },
-        { label: '1500股', value: '1500' },
-        { label: '2000股', value: '2000' },
-        { label: '2500股', value: '2500' },
-        { label: '3000股', value: '3000' },
-        { label: '3500股', value: '3500' },
-        { label: '自定义', value: '' }
+        { label: '1000', value: '1000' },
+        { label: '1500', value: '1500' },
+        { label: '2000', value: '2000' },
+        { label: '2500', value: '2500' },
+        { label: '3000', value: '3000' },
+        { label: '3500', value: '3500' },
+        { label: 'tùy chỉnh', value: '' }
       ],
       siteLeverList: [],
       selectNumber: '',
@@ -332,7 +333,7 @@ export default {
           this.siteLeverList = []
           for (let i = 0; i < data.data.siteLever.split('/').length; i++) {
             let val = data.data.siteLever.split('/')[i]
-            let item = { label: val + '倍', value: val }
+            let item = { label: val + 'lần', value: val }
             this.siteLeverList.push(item)
           }
         } else {
@@ -341,7 +342,7 @@ export default {
           this.siteLeverList = []
           for (let i = 0; i < data.data.siteLever.split('/').length; i++) {
             let val = data.data.siteLever.split('/')[i]
-            let item = { label: val + '倍', value: val }
+            let item = { label: val + 'lần', value: val }
             this.siteLeverList.push(item)
           }
         }

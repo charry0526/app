@@ -5,9 +5,9 @@
                v-model="selected"
                fixed>
       <mt-tab-item class="top-nav-item"
-                   id="1">ESOP列表</mt-tab-item>
+                   id="1">danh sách ESOP</mt-tab-item>
       <mt-tab-item class="top-nav-item"
-                   id="2">申请列表</mt-tab-item>
+                   id="2">danh sách ứng dụng</mt-tab-item>
       <!-- <mt-tab-item class="top-nav-item"
                    id="3">期货账户</mt-tab-item> -->
     </mt-navbar>
@@ -21,10 +21,10 @@
                  :infinite-scroll-disabled="loading"
                  infinite-scroll-distance="10"
                  class="table">
-            <th>名称</th>
-            <th>市场价格</th>
-            <th>发行价</th>
-            <th>申请</th>
+            <th>tên</th>
+            <th>Giá thị trường</th>
+            <th>giá phát hành</th>
+            <th>Áp dụng</th>
             <tr v-for="(item,index) in stockList"
                 :key="index">
               <td>{{item.names}}</td>
@@ -36,7 +36,7 @@
                              size="small"
                              type="danger"
                              @click="popUp(item)">
-                    申请
+                    Áp dụng
                   </mt-button>
                 </div>
               </td>
@@ -52,13 +52,13 @@
                  :infinite-scroll-disabled="loading"
                  infinite-scroll-distance="10"
                  class="table">
-            <th>股票名称</th>
-            <th>市值</th>
-            <th>数量</th>
-            <th>杠杆</th>
-            <th>费用</th>
-            <th>状态</th>
-            <th>购买</th>
+            <th>tên</th>
+            <th>{{$t('marketValue')}}</th>
+            <th>{{$t('nums')}}</th>
+            <th>đòn bẩy</th>
+            <th>trị giá</th>
+            <th>tình trạng</th>
+            <th>Mua</th>
             <tr v-for="(item,index) in tendorseListDate"
                 :key="index">
               <td>{{item.xgname}}</td>
@@ -67,7 +67,7 @@
               <td>{{item.gg}}</td>
               <td>{{item.bzj}}</td>
               <td :class="item.zts==2?'tdActive':''">
-                {{item.zts==1?'审核通过':item.zts==2?'未通过':item.zts==4?'购买完成':'未审核'}}
+                {{item.zts==1?'vượt qua':item.zts==2?'không vượt qua':item.zts==4?'Hoàn thành':'không được xem xét'}}
               </td>
               <td>
                 <div class="button-box">
@@ -75,7 +75,7 @@
                              size="small"
                              type="danger"
                              @click="toCash(item)">
-                    提出
+                    cầu hôn
                   </mt-button>
                 </div>
               </td>
@@ -366,7 +366,7 @@ export default {
       this.$router.push({
         path: '/twoBuyNew',
         query: {
-          id:option.listsId,
+          id: option.listsId,
           code: option.names || option.xgname,
           leverValue: option.gg,
           buyMinNum: option.num || option.nums

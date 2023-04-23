@@ -62,7 +62,8 @@ export default new Router({
       path: '/home',
       name: 'home',
       meta: {
-        title: '首页',
+        // title: '首页',
+        title: 'trang đầu',
         requireAuth: true
       },
       component: Home
@@ -70,7 +71,8 @@ export default new Router({
       path: '/buy',
       name: 'buy',
       meta: {
-        title: '购买',
+        // title: '购买',
+        title: 'trang đầu',
         requireAuth: true,
         hasHeader: true
       },
@@ -79,21 +81,24 @@ export default new Router({
       path: '/register',
       name: 'register',
       meta: {
-        title: '注册'
+        // title: '注册'
+        title: 'đăng ký'
       },
       component: Register
     }, {
       path: '/forget',
       name: 'forget',
       meta: {
-        title: '忘记密码'
+        // title: '忘记密码'
+        title: 'quên mật khẩu'
       },
       component: Forget
     }, {
       path: '/login',
       name: 'login',
       meta: {
-        title: '账户登录',
+        // title: '账户登录',
+        title: 'đăng nhập tài khoản',
         hasHeader: true
       },
       component: Login
@@ -101,7 +106,8 @@ export default new Router({
       path: '/openaccount',
       name: 'openaccount',
       meta: {
-        title: '开户',
+        // title: 'mở một tài khoản',
+        title: 'đăng nhập tài khoản',
         hasHeader: true
       },
       component: OpenAccount
@@ -109,7 +115,8 @@ export default new Router({
       path: '/list',
       name: 'list',
       meta: {
-        title: '行情',
+        // title: '行情',
+        title: 'dấu ngoặc kép',
         requireAuth: false,
         hasHeader: true
       },
@@ -118,14 +125,16 @@ export default new Router({
       path: '/indexsearchlist',
       name: '指数查询',
       meta: {
-        title: '指数查询'
+        // title: '指数查询'
+        title: 'truy vấn chỉ mục'
       },
       component: IndexSearchlist
     }, {
       path: '/indexlist',
       name: 'indexlist',
       meta: {
-        title: '指数列表',
+        // title: '指数列表',
+        title: 'danh sách chỉ mục',
         requireAuth: false
       },
       component: IndexList
@@ -133,14 +142,16 @@ export default new Router({
       path: '/searchlist',
       name: '个股查询',
       meta: {
-        title: '个股查询'
+        // title: '个股查询'
+        title: 'truy vấn chứng khoán cá nhân'
       },
       component: Searchlist
     }, {
       path: '/searchmylist',
       name: 'searchmylist',
       meta: {
-        title: '自选查询',
+        // title: '自选查询',
+        title: 'truy vấn tùy chọn',
         requireAuth: true
       },
       component: SearchMylist
@@ -148,7 +159,8 @@ export default new Router({
       path: '/mylist',
       name: 'mylist',
       meta: {
-        title: '自选列表',
+        // title: '自选列表',
+        title: 'danh sách theo dõi',
         requireAuth: true,
         hasHeader: true
 
@@ -177,7 +189,8 @@ export default new Router({
       path: '/indexBuy',
       name: 'indexBuy',
       meta: {
-        title: '指数购买',
+        // title: '指数购买',
+        title: 'chỉ số mua',
         requireAuth: false,
         hasHeader: true,
         iconRight: 'search'
@@ -188,7 +201,8 @@ export default new Router({
       path: '/twoBuy',
       name: 'TwoBuy',
       meta: {
-        title: '两融交易',
+        // title: '两融交易',
+        title: 'Hai giao dịch tài chính',
         requireAuth: false,
         hasHeader: true,
         iconRight: 'search'
@@ -199,7 +213,8 @@ export default new Router({
       path: '/twoBuyNew',
       name: 'TwoBuyNew',
       meta: {
-        title: '两融交易',
+        // title: '两融交易',
+        title: 'Hai giao dịch tài chính',
         requireAuth: false,
         hasHeader: true,
         iconRight: 'search'
@@ -210,7 +225,8 @@ export default new Router({
       path: '/subWarehouseBuy',
       name: 'SubWarehouseBuy',
       meta: {
-        title: '分仓交易',
+        // title: '分仓交易',
+        title: 'chia nhỏ giao dịch',
         requireAuth: false,
         hasHeader: true,
         iconRight: 'search'
@@ -220,7 +236,8 @@ export default new Router({
       path: '/futuresBuy',
       name: 'futuresBuy',
       meta: {
-        title: '期货购买',
+        // title: '期货购买',
+        title: 'mua tương lai',
         requireAuth: false,
         hasHeader: true
       },
@@ -229,7 +246,8 @@ export default new Router({
       path: '/inquiry',
       name: 'inquiry',
       meta: {
-        title: '询价',
+        // title: '询价',
+        title: 'cuộc điều tra',
         requireAuth: true
       },
       component: Inquiry
@@ -237,7 +255,8 @@ export default new Router({
       path: '/user',
       name: 'user',
       meta: {
-        title: '我的',
+        // title: '我的',
+        title: 'của tôi',
         requireAuth: false,
         hasHeader: true
       },
@@ -247,7 +266,8 @@ export default new Router({
       path: '/transfer',
       name: 'transfer',
       meta: {
-        title: '资金互转',
+        // title: '资金互转',
+        title: 'chuyển tiền lẫn nhau',
         requireAuth: true
       },
       component: Transfer
@@ -255,7 +275,8 @@ export default new Router({
       path: '/orderlist',
       name: 'orderlist',
       meta: {
-        title: '持仓',
+        // title: '持仓',
+        title: 'chức vụ',
         requireAuth: false,
         hasHeader: true
       },
@@ -265,7 +286,8 @@ export default new Router({
       path: '/holdorderlist',
       name: 'holdorderlist',
       meta: {
-        title: '查询持仓',
+        // title: '查询持仓',
+        title: 'vị trí truy vấn',
         requireAuth: true,
         hasHeader: true
       },
@@ -274,7 +296,8 @@ export default new Router({
       path: '/holdorderlist2',
       name: 'holdorderlist2',
       meta: {
-        title: '查询持仓',
+        // title: '查询持仓',
+        title: 'vị trí truy vấn',
         requireAuth: true,
         hasHeader: true
       },
@@ -283,7 +306,8 @@ export default new Router({
       path: '/sellorderlist',
       name: 'sellorderlist',
       meta: {
-        title: '查询平仓',
+        // title: '查询平仓',
+        title: 'Truy vấn để đóng một vị trí',
         requireAuth: true,
         hasHeader: true
       },
@@ -292,7 +316,8 @@ export default new Router({
       path: '/sellorderlist2',
       name: 'sellorderlist2',
       meta: {
-        title: '查询平仓',
+        // title: '查询平仓',
+        title: 'Truy vấn để đóng một vị trí',
         requireAuth: true,
         hasHeader: true
       },
@@ -301,7 +326,8 @@ export default new Router({
       path: '/detail',
       name: 'detail',
       meta: {
-        title: '资金明细',
+        // title: '资金明细',
+        title: 'chi tiết tài trợ',
         requireAuth: true,
         hasHeader: true
       },
@@ -310,7 +336,8 @@ export default new Router({
       path: '/card',
       name: 'card',
       meta: {
-        title: '银行卡',
+        // title: '银行卡',
+        title: 'Thẻ ngân hàng',
         requireAuth: true,
         hasHeader: true
       },
@@ -329,7 +356,8 @@ export default new Router({
       path: '/authentication',
       name: 'authentication',
       meta: {
-        title: '认证',
+        // title: '认证',
+        title: 'chứng nhận',
         requireAuth: true,
         hasHeader: true
       },
@@ -338,7 +366,8 @@ export default new Router({
       path: '/aggre',
       name: 'aggre',
       meta: {
-        title: '合作协议',
+        // title: '合作协议',
+        title: 'thỏa thuận hợp tác',
         requireAuth: true
       },
       component: Aggre
@@ -346,7 +375,8 @@ export default new Router({
       path: '/recharge',
       name: 'recharge',
       meta: {
-        title: '充值',
+        // title: '充值',
+        title: 'nạp điện',
         requireAuth: true,
         hasHeader: true
 
@@ -356,7 +386,8 @@ export default new Router({
       path: '/rechargeSure',
       name: 'rechargeSure',
       meta: {
-        title: '确认充值',
+        // title: '确认充值',
+        title: 'xác nhận nạp tiền',
         requireAuth: true,
         hasHeader: true
 
@@ -366,7 +397,8 @@ export default new Router({
       path: '/rechargelist',
       name: 'rechargelist',
       meta: {
-        title: '充值记录',
+        // title: '充值记录',
+        title: 'hồ sơ nạp tiền',
         requireAuth: true,
         hasHeader: true
       },
@@ -375,7 +407,8 @@ export default new Router({
       path: '/cash',
       name: 'cash',
       meta: {
-        title: '提现',
+        // title: '提现',
+        title: 'rút',
         requireAuth: true,
         hasHeader: true
       },
@@ -384,7 +417,8 @@ export default new Router({
       path: '/addCard',
       name: 'addCard',
       meta: {
-        title: '添加银行卡',
+        // title: '添加银行卡',
+        title: 'thêm thẻ ngân hàng',
         requireAuth: true,
         hasHeader: true
 
@@ -394,7 +428,8 @@ export default new Router({
       path: '/cashlist',
       name: 'cashlist',
       meta: {
-        title: '提现记录',
+        // title: '提现记录',
+        title: 'Hồ sơ rút tiền',
         requireAuth: true,
         hasHeader: true
 
@@ -404,7 +439,8 @@ export default new Router({
       path: '/setting',
       name: 'setting',
       meta: {
-        title: '设置',
+        // title: '设置',
+        title: 'cài đặt',
         requireAuth: true
       },
       component: Setting
@@ -412,7 +448,8 @@ export default new Router({
       path: '/agree',
       name: 'agree',
       meta: {
-        title: '注册协议',
+        // title: '注册协议',
+        title: 'Thỏa thuận đăng ký',
         requireAuth: true
       },
       component: Agree
@@ -420,7 +457,8 @@ export default new Router({
       path: '/trade',
       name: 'trade',
       meta: {
-        title: '交易⻛险揭示书',
+        // title: '交易⻛险揭示书',
+        title: 'Tiết lộ Rủi ro Giao dịch',
         requireAuth: true
       },
       component: Trage
@@ -429,7 +467,8 @@ export default new Router({
       path: '/alertdetail',
       name: 'alertdetail',
       meta: {
-        title: '公告详情',
+        // title: '公告详情',
+        title: 'Chi tiết thông báo',
         requireAuth: true
       },
       component: Alertdetail
@@ -438,7 +477,8 @@ export default new Router({
       path: '/funds',
       name: 'funds',
       meta: {
-        title: '配资主页',
+        // title: '配资主页',
+        title: 'trang chủ tài trợ',
         requireAuth: true,
         hasHeader: true,
         iconRight: 'setting'
@@ -449,7 +489,8 @@ export default new Router({
       path: '/days',
       name: 'days',
       meta: {
-        title: '按天配资',
+        // title: '按天配资',
+        title: 'Cấp vốn theo ngày',
         requireAuth: true,
         hasHeader: true,
         iconRight: 'setting'
@@ -460,7 +501,8 @@ export default new Router({
       path: '/xingu',
       name: 'xingu',
       meta: {
-        title: '新股申购',
+        // title: '新股申购',
+        title: 'IPO',
         requireAuth: true,
         hasHeader: true,
         iconRight: 'setting'
@@ -471,7 +513,8 @@ export default new Router({
       path: '/searchStock',
       name: 'searchStock',
       meta: {
-        title: '查询股票',
+        // title: '查询股票',
+        title: 'Kiểm tra chứng khoán',
         requireAuth: true,
         hasHeader: true
       },
@@ -481,7 +524,8 @@ export default new Router({
       path: '/notify',
       name: 'notify',
       meta: {
-        title: '消息记录',
+        // title: '消息记录',
+        title: 'nhật ký tin nhắn',
         requireAuth: true,
         hasHeader: true
       },
@@ -490,7 +534,8 @@ export default new Router({
       path: '/fundslist',
       name: 'fundslist',
       meta: {
-        title: '分仓配资',
+        // title: '分仓配资',
+        title: 'Phân bổ vị trí phụ',
         requireAuth: false,
         hasHeader: true
       },
@@ -500,7 +545,8 @@ export default new Router({
       path: '/news',
       name: 'news',
       meta: {
-        title: '详情',
+        // title: '详情',
+        title: 'chi tiết',
         requireAuth: false,
         hasHeader: true
       },

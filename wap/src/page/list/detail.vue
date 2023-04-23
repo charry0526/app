@@ -43,7 +43,7 @@
       <mt-tab-container v-model="news" :swipeable="true">
         <mt-tab-container-item id="tab_0">
           <div class="news-content">
-            <div 
+            <div
               class="news-item"
               v-for="item of newsContent1"
               :key="item.id"
@@ -61,7 +61,7 @@
         </mt-tab-container-item>
         <mt-tab-container-item id="tab_1">
           <div class="news-content">
-            <div 
+            <div
               class="news-item"
               v-for="item of newsContent2"
               :key="item.id"
@@ -79,7 +79,7 @@
         </mt-tab-container-item>
         <mt-tab-container-item id="tab_2">
           <div class="news-content">
-            <div 
+            <div
               class="news-item"
               v-for="item of newsContent3"
               :key="item.id"
@@ -97,7 +97,7 @@
         </mt-tab-container-item>
         <mt-tab-container-item id="tab_3">
           <div class="news-content">
-            <div 
+            <div
               class="news-item"
               v-for="item of newsContent4"
               :key="item.id"
@@ -115,7 +115,7 @@
         </mt-tab-container-item>
         <mt-tab-container-item id="tab_4">
           <div class="news-content">
-            <div 
+            <div
               class="news-item"
               v-for="item of newsContent5"
               :key="item.id"
@@ -152,10 +152,10 @@
 </template>
 
 <script>
-import imgBox from "./compontent/img";
-import stockHq from "./compontent/stock/stockHq";
-import { Toast } from "mint-ui";
-import * as api from "@/axios/api";
+import imgBox from './compontent/img'
+import stockHq from './compontent/stock/stockHq'
+import { Toast } from 'mint-ui'
+import * as api from '@/axios/api'
 import foot from '@/components/foot/foot'
 
 export default {
@@ -165,55 +165,55 @@ export default {
     foot
   },
   props: {},
-  data() {
+  data () {
     return {
       detail: {
-        name: "青海华鼎",
-        code: "600243",
-        stockType: "sh",
-        spell: "qhhd",
-        gid: "sh600243",
-        nowPrice: "4.290",
+        name: '青海华鼎',
+        code: '600243',
+        stockType: 'sh',
+        spell: 'qhhd',
+        gid: 'sh600243',
+        nowPrice: '4.290',
         hcrate: 1.18,
-        today_max: "4.300",
-        today_min: "4.240",
-        business_balance: "4151985.000",
-        business_amount: "973005",
-        preclose_px: "4.240",
-        open_px: "4.240",
-        buy1: "4.290",
-        buy2: "4.280",
-        buy3: "4.270",
-        buy4: "4.260",
-        buy5: "4.250",
-        sell1: "4.300",
-        sell2: "4.310",
-        sell3: "4.320",
-        sell4: "4.330",
-        sell5: "4.340",
-        buy1_num: "34700",
-        buy2_num: "38900",
-        buy3_num: "35900",
-        buy4_num: "26200",
-        buy5_num: "50100",
-        sell1_num: "76005",
-        sell2_num: "5100",
-        sell3_num: "2500",
-        sell4_num: "40200",
-        sell5_num: "11500",
+        today_max: '4.300',
+        today_min: '4.240',
+        business_balance: '4151985.000',
+        business_amount: '973005',
+        preclose_px: '4.240',
+        open_px: '4.240',
+        buy1: '4.290',
+        buy2: '4.280',
+        buy3: '4.270',
+        buy4: '4.260',
+        buy5: '4.250',
+        sell1: '4.300',
+        sell2: '4.310',
+        sell3: '4.320',
+        sell4: '4.330',
+        sell5: '4.340',
+        buy1_num: '34700',
+        buy2_num: '38900',
+        buy3_num: '35900',
+        buy4_num: '26200',
+        buy5_num: '50100',
+        sell1_num: '76005',
+        sell2_num: '5100',
+        sell3_num: '2500',
+        sell4_num: '40200',
+        sell5_num: '11500'
       }, // 详情
       buyList: [
         { price: 33.5, price2: 14323.5 },
         { price: 33.5, price2: 14323.5 },
         { price: 33.5, price2: 14323.5 },
         { price: 33.5, price2: 14323.5 },
-        { price: 33.5, price2: 14323.5 },
+        { price: 33.5, price2: 14323.5 }
       ],
       isOptionOpt: false, // 是否已经添加自选
       timer: null,
       loading: false,
       // 新闻
-      news:'tab_0',
+      news: 'tab_0',
       btnIcon1: require('../../../static/img/detail/zixuan-icon.png'),
       btnIcon2: require('../../../static/img/detail/liangrong-icon.png'),
       btnIcon3: require('../../../static/img/detail/fencang-icon.png'),
@@ -222,36 +222,36 @@ export default {
       newsContent3: [], // 全球股市
       newsContent4: [], // 7*24全球
       newsContent5: [] // 商品资讯
-    };
+    }
   },
   watch: {},
   computed: {},
-  created() {
-    this.detail.code = this.$route.query.code;
-    this.detail.stockType = this.$route.query.stock_type;
+  created () {
+    this.detail.code = this.$route.query.code
+    this.detail.stockType = this.$route.query.stock_type
     // this.timer = setInterval(this.refreshList, 5000)
   },
-  beforeDestroy() {
-    clearInterval(this.timer);
+  beforeDestroy () {
+    clearInterval(this.timer)
   },
-  mounted() {
+  mounted () {
     this.getNewsList(1)
     this.getNewsList(2)
     this.getNewsList(3)
     this.getNewsList(4)
     this.getNewsList(5)
-    this.getDetail();
+    this.getDetail()
     if (this.$store.state.userInfo.phone) {
       // 判断是否登录
-      this.getOpation();
+      this.getOpation()
     } else {
       // 获取用户信息
-      this.getUserInfo();
+      this.getUserInfo()
     }
   },
   methods: {
     // 两融交易
-    handleTwoBuyClick() {
+    handleTwoBuyClick () {
       this.$router.push({
         path: '/twoBuy',
         query: {
@@ -260,7 +260,7 @@ export default {
       })
     },
     // 分仓交易
-    handleSubBuyClick() {
+    handleSubBuyClick () {
       this.$router.push({
         path: '/subWarehouseBuy',
         query: {
@@ -268,110 +268,110 @@ export default {
         }
       })
     },
-    toSearch() {
-      this.$router.push("/searchlist");
+    toSearch () {
+      this.$router.push('/searchlist')
     },
-    async getNewsList(type) {
-      let data = await api.queryNewsList(type);
-      console.log('xinwen:',data)
-      switch(type) {
+    async getNewsList (type) {
+      let data = await api.queryNewsList(type)
+      console.log('xinwen:', data)
+      switch (type) {
         case 1:
           this.newsContent1 = data.data.list
-          break;
+          break
         case 2:
           this.newsContent2 = data.data.list
-          break;
+          break
         case 3:
           this.newsContent3 = data.data.list
-          break;
+          break
         case 4:
           this.newsContent4 = data.data.list
-          break;
+          break
         case 5:
           this.newsContent5 = data.data.list
-          break;
+          break
       }
     },
-    async getUserInfo() {
+    async getUserInfo () {
       // 获取用户信息
-      let data = await api.getUserInfo();
+      let data = await api.getUserInfo()
       if (data.status === 0) {
-        this.$store.state.userInfo = data.data;
-        this.getOpation();
+        this.$store.state.userInfo = data.data
+        this.getOpation()
       } else {
-        Toast(data.msg);
+        Toast(data.msg)
       }
-      this.$store.state.user = this.user;
+      this.$store.state.user = this.user
     },
-    async refreshList() {
+    async refreshList () {
       if (this.loading) {
-        return;
+
       }
       // this.getDetail()
     },
-    async getOpation() {
+    async getOpation () {
       let opts = {
-        code: this.$route.query.code,
-      };
-      let data = await api.isOption(opts);
+        code: this.$route.query.code
+      }
+      let data = await api.isOption(opts)
       if (data.status === 0) {
         // 0 --> 未添加
-        this.isOptionOpt = false;
+        this.isOptionOpt = false
       } else {
-        this.isOptionOpt = true;
+        this.isOptionOpt = true
       }
     },
-    async getDetail() {
+    async getDetail () {
       let opts = {
         code: this.$route.query.code,
-        stockType: this.$route.query.stock_type,
-      };
-      let data = await api.getSingleStock(opts);
-      this.loading = false;
+        stockType: this.$route.query.stock_type
+      }
+      let data = await api.getSingleStock(opts)
+      this.loading = false
       if (data.status === 0) {
-        this.detail = data.data;
+        this.detail = data.data
       } else {
-        Toast(data.msg);
+        Toast(data.msg)
       }
     },
-    async addOptions() {
+    async addOptions () {
       //   if(!this.$store.state.userInfo.phone){
       //     MessageBox.confirm('您还未登录，是否去登录?').then(action => {
       //         this.$router.push('/login')
       //     });
       //     return
       //   }
-      let data = await api.addOption({ code: this.detail.code });
+      let data = await api.addOption({ code: this.detail.code })
       if (data.status === 0) {
-        Toast("添加自选成功");
-        this.isOptionOpt = true;
+        Toast('添加自选成功')
+        this.isOptionOpt = true
       } else {
-        Toast(data.msg);
+        Toast(data.msg)
       }
     },
-    async deteleOptions() {
-      let data = await api.delOption({ code: this.detail.code });
+    async deteleOptions () {
+      let data = await api.delOption({ code: this.detail.code })
       if (data.status === 0) {
-        Toast("删除自选股成功");
-        this.isOptionOpt = false;
+        Toast('删除自选股成功')
+        this.isOptionOpt = false
       } else {
-        Toast(data.msg);
+        Toast(data.msg)
       }
     },
-    toBuy() {
+    toBuy () {
       this.$router.push({
-        name: "buy",
+        name: 'buy',
         params: {
           gid: this.detail.id,
           name: this.detail.name,
           code: this.detail.code,
           hcrate: this.detail.hcrate,
-          nowPrice: this.detail.nowPrice,
-        },
-      });
-    },
-  },
-};
+          nowPrice: this.detail.nowPrice
+        }
+      })
+    }
+  }
+}
 </script>
 <style lang="less" scoped>
 .wrapper {

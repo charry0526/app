@@ -16,38 +16,72 @@
               <span class="secondary">({{item.stockCode}})</span>
 
               <span v-if="item.isNew==1" :class="item.isNew=='1'?'type type-up':'type type-down'">{{item.isNew=='1'?'ESOP':''}}</span>
-              <span v-if="item.stockPlate=='科创'" :class="item.stockPlate=='科创'?'type':''">科创</span>
-              <span class="pull-right">总盈亏:<b
+              <span v-if="item.stockPlate=='科创'" :class="item.stockPlate=='科创'?'type':''">
+                <!-- 科创 -->
+                HOSE
+              </span>
+              <span class="pull-right">
+                <!-- 总盈亏 -->
+                tổng lãi lỗ
+                :<b
                 :class="item.allProfitAndLose<0?'space green':item.allProfitAndLose==0?'space':'space red'">{{item.allProfitAndLose}}</b></span>
             </div>
             <div class="order-info">
               <p class="clearfix">
-                <span class="col-xs-4">买入价格:<b class="space">{{item.buyOrderPrice}}</b></span>
-                <span class="col-xs-4 text-center">数量:<b class="space">{{item.orderNum}}</b></span>
-                <span class="col-xs-4 text-right">市值:<b class="space">{{item.orderTotalPrice}}</b></span>
+                <span class="col-xs-4">
+                  <!-- 买入价格 -->
+                  giá mua::
+                  <b class="space">{{item.buyOrderPrice}}</b></span>
+                <span class="col-xs-4 text-center">
+                  <!-- 数量 -->
+                   Số lượng::<b class="space">{{item.orderNum}}</b></span>
+                <span class="col-xs-4 text-right">
+                  <!-- 市值 -->
+                  giá trị:<b class="space">{{item.orderTotalPrice}}</b></span>
               </p>
               <p class="clearfix">
-                <span class="col-xs-4">卖出价格:<b class="space">{{item.sellOrderPrice}}</b></span>
+                <span class="col-xs-4">
+                  <!-- 卖出价格 -->
+                  gia ban
+                  :<b class="space">{{item.sellOrderPrice}}</b></span>
                 <span class="col-xs-4 text-center"></span>
-                <span class="col-xs-4 text-right">点差费:<b class="space">{{item.orderStayFee}}</b></span>
+                <span class="col-xs-4 text-right">
+                  <!-- 点差费 -->
+                  phí lây lan:<b class="space">{{item.orderStayFee}}</b></span>
               </p>
               <p class="clearfix">
-                <span class="col-xs-4">手续费:<b class="space">{{item.orderFee}}</b></span>
-                <span class="col-xs-4 text-center">印花税:<b class="space">{{item.orderSpread}}</b></span>
-                <span class="col-xs-4 text-right">留仓费:<b class="space">{{item.orderStayFee}}</b></span>
+                <span class="col-xs-4">
+                  <!-- 手续费 -->
+                  phí xử lý:
+                  <b class="space">{{item.orderFee}}</b></span>
+                <span class="col-xs-4 text-center">
+                  <!-- 印花税 -->
+                  tem đóng thuế
+                  :<b class="space">{{item.orderSpread}}</b></span>
+                <span class="col-xs-4 text-right">
+                  <!-- 留仓费 -->
+                  Phí lưu trữ:<b class="space">{{item.orderStayFee}}</b></span>
               </p>
 
               <p class="clearfix">
-                <span class="col-xs-5">留仓天数:<b class="space">{{item.orderStayDays}}</b></span>
-                <span class="col-xs-7 text-right">浮动盈亏:<b
+                <span class="col-xs-5">
+                  <!-- 留仓天数 -->
+                  ngày ở lại:<b class="space">{{item.orderStayDays}}</b></span>
+                <span class="col-xs-7 text-right">
+                  <!-- 浮动盈亏 -->
+                  Lãi lỗ thả nổi:<b
                   :class="item.profitAndLose<0?'space green':item.profitAndLose==0?'space':'space red'">{{item.profitAndLose}}</b></span>
               </p>
               <p class="clearfix">
-                        <span class="secondary col-xs-6">买入:
+                        <span class="secondary col-xs-6">
+                          <!-- 买入 -->
+                          mua:
                             <b v-if="item.buyOrderTime">{{new Date(item.buyOrderTime) | timeFormat}}</b>
                             <b v-else></b>
                         </span>
-                <span class="secondary col-xs-6 text-right">卖出:
+                <span class="secondary col-xs-6 text-right">
+                  <!-- 卖出 -->
+                  bán:
                             <b v-if="item.sellOrderTime">{{new Date(item.sellOrderTime) | timeFormat}}</b>
                             <b v-else></b>
                         </span>

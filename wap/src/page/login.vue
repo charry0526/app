@@ -16,7 +16,7 @@
         <img v-show="$state.theme == 'red'" class="login-ico" src="../assets/ico/loginuser-red.png" alt="">
         <input
         class="login-input"
-        placeholder="用户名"
+        placeholder="tên tài khoản"
         type="tel" pattern="[0-9]*"
         v-model="phone"
         >
@@ -24,15 +24,26 @@
       <div class="login-form-item input-model">
         <img v-show="$state.theme != 'red'" class="login-ico" src="../assets/ico/loginpwd.png" alt="">
         <img v-show="$state.theme == 'red'" class="login-ico" src="../assets/ico/loginpwd-pwd.png" alt="">
-        <input class="login-input" type="password" placeholder="密码" v-model="psd">
+        <input class="login-input" type="password" placeholder="mật khẩu" v-model="psd">
       </div>
       <div class="login-form-item submit-model" @click="gook">
-        立即登录<i v-show="isloading" style="color:#fff;" class="iconfont icon-jiazaizhong"></i>
+        <!-- 立即登录 -->
+        đăng nhập ngay lập tức
+        <i v-show="isloading" style="color:#fff;" class="iconfont icon-jiazaizhong"></i>
       </div>
       <div class="login-form-item extra-model">
-        <div style="color:#0E6580"><span @click="toForget">忘记密码？</span></div>
+        <div style="color:#0E6580"><span @click="toForget">
+          <!-- 忘记密码 -->
+          quên mật khẩu？
+          </span></div>
         <div :style="{color:$state.theme =='red'?'#BB1815':'#86CBD1'}">
-          <span style="color:#0E6580">还没有账号？</span><span @click="toRegister">立即注册</span></div>
+          <span style="color:#0E6580">
+            <!-- 还没有账号 -->
+            Không tài khoản？
+            </span><span @click="toRegister">
+              <!-- 立即注册 -->
+              đăng ký
+            </span></div>
       </div>
     </div>
     <!-- <div class="text-center">

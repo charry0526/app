@@ -11,20 +11,21 @@
     <div class="box page-part">
       <div class="box-contain clearfix">
         <div class="account text-center">
-          <p class="title">当前可用余额（元）</p>
+          <!-- <p class="title">当前可用余额（元）</p> -->
+          <p class="title">current available balance（Yuan）</p>
           <p class="red number">{{$store.state.userInfo.enableAmt}}</p>
         </div>
         <div class="account-panel">
           <div class="col-xs-6">
             <a href="#/recharge">
               <img src="../../assets/img/recharge_icon.png"><br>
-              充值
+              {{$t("recharge")}}
             </a>
           </div>
           <div class="col-xs-6">
             <a href="#/cash">
               <img src="../../assets/img/withdrew_icon.png"><br>
-              提现
+              {{$t("withdraw")}}
             </a>
           </div>
         </div>
