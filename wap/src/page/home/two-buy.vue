@@ -1,8 +1,8 @@
 <template>
-  <div class="wrapper"> 
+  <div class="wrapper">
     <div class="detail-part">
       <div class="index-name">
-        <p>{{detail.name}} 
+        <p>{{detail.name}}
           <span class="index-name_code">{{detail.code}}</span>
         </p>
       </div>
@@ -21,19 +21,19 @@
               <!-- <p class="title"></p> -->
               <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
                 <span class="title">O</span>
-                {{Number(detail.open_px).toFixed(2)}} 
+                {{Number(detail.open_px).toFixed(2)}}
               </p>
             </li>
             <li style="text-align:left">
               <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
                 <span class="title ">H</span>
-                {{Number(detail.today_max).toFixed(2)}} 
+                {{Number(detail.today_max).toFixed(2)}}
               </p>
             </li>
             <li>
               <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
                 <span class="title">L</span>
-                {{Number(detail.today_min).toFixed(2)}} 
+                {{Number(detail.today_min).toFixed(2)}}
               </p>
             </li>
             <!-- <li> -->
@@ -90,8 +90,8 @@
     </div>
     <div class="box-tab">
       <div class="tab-title">
-        <span class="circle"></span>选择股数
-        <span class="notify">最小购买股数1股，最大可购买数量100股  </span>
+        <span class="circle"></span>{{$t("selectNumber")}}
+        <p class="notify">{{$t("purchaseRules")}}({{$t("strand")}}) </p>
       </div>
       <div class="tab-con">
         <ul class="radio-group clearfix">
@@ -102,12 +102,13 @@
             </div>
           </li>
           <li v-show="!selectNumber">
-            <input @keyup="changeAutoNumber" v-model="autoNumber" type="text">股
+            <input @keyup="changeAutoNumber" v-model="autoNumber" type="text">
+            <!-- {{$t("strand")}} -->
           </li>
         </ul>
-        <p class="clearfix">
-          <span class="pull-left">最小购买股数{{Number(settingInfo.buyMinNum)}}股</span>
-          <span class="protem pull-right">最大可购买数量{{Number(settingInfo.buyMaxNum)}}股</span>
+        <p class="clearfix tipBox">
+          <span class="pull-left">{{$t("minPur")}}{{Number(settingInfo.buyMinNum)}}{{$t("strand")}}</span>
+          <span class="protem pull-right">{{$t("maxPur")}}{{Number(settingInfo.buyMaxNum)}}{{$t("strand")}}</span>
         </p>
       </div>
     </div>
@@ -152,7 +153,7 @@
         </p>
 
       </div>
-    </div> --> 
+    </div> -->
     <div class="agree">
       <!-- <p style="line-height: 0.4rem;padding: 0 0.2rem;">
         当该指数涨幅达到<span class="red">涨停限制</span>时,不能买涨；达到<span class="green">跌停限制</span>时，不能买跌.
@@ -165,18 +166,18 @@
     </div>
     <div class="footer-btn">
       <div class="total">
-        <p class="pay">支付保证金<span class="protem">{{total?total:0}}</span></p>
-        <p class="account">(账户余额:{{$store.state.userInfo.enableAmt}}元)</p>
+        <p class="pay">{{$t("paybond")}}<span class="protem">{{total?total:0}}</span></p>
+        <p class="account">({{$t("accountbalance")}}:{{$store.state.userInfo.enableAmt}}元)</p>
       </div>
       <!-- <mt-button :disabled="buying" class="btn-red" size="small" type="danger" @click="toInquiry">下单</mt-button> -->
       <div class="right-btn">
         <div class="btn-buy" @click="toInquiry">
           <img src="../../assets/ico/hangqing-btn.png" alt="" srcset="">
-          两融下单
+          {{$t("placorderwithliangrong")}}
         </div>
       </div>
     </div>
-   
+
     <foot></foot>
   </div>
 </template>
@@ -215,7 +216,7 @@ export default {
         { label: '3500股', value: '3500' },
         { label: '自定义', value: '' }
       ],
-      siteLeverList:[],
+      siteLeverList: [],
       selectNumber: '',
       autoNumber: '',
       type: [
@@ -231,11 +232,11 @@ export default {
         buyMaxNum: 1000, // 最大买入股数
         buyMinNum: 100 // 最小买入股数
       }, // 设置规则信息
-      settingIndexInfo:{
-        riseLimit:0.1,
-        downLimit:0.1
+      settingIndexInfo: {
+        riseLimit: 0.1,
+        downLimit: 0.1
       },
-      
+
       dialogShow: false,
       timer: null,
       buying: false,
@@ -245,7 +246,7 @@ export default {
   },
   watch: {},
   computed: {
-    poundage () { //手续费= 买入手续费+印花税+点差费
+    poundage () { // 手续费= 买入手续费+印花税+点差费
       if (this.autoNumber) {
         let payfee = (this.detail.nowPrice * this.autoNumber * 100).toFixed(2) // / this.selectCycle
         return ((payfee * this.settingInfo.buyFee) + (payfee * this.settingInfo.dutyFee) + (payfee * this.settingSpreadRate.spreadRate)).toFixed(2)
@@ -257,18 +258,18 @@ export default {
       }
     },
     total () {
-      if (this.settingSpreadRate == undefined || this.settingSpreadRate.spreadRate == undefined){
+      if (this.settingSpreadRate == undefined || this.settingSpreadRate.spreadRate == undefined) {
         this.settingSpreadRate.spreadRate = 0
       }
       if (this.autoNumber) {
-        let payfee = (this.detail.nowPrice *1* this.autoNumber  / this.selectCycle)
+        let payfee = (this.detail.nowPrice * 1 * this.autoNumber / this.selectCycle)
         return (payfee + (payfee * this.settingInfo.buyFee) + (payfee * this.settingInfo.dutyFee) + (payfee * this.settingSpreadRate.spreadRate)).toFixed(2)
-        //return (this.detail.nowPrice * this.autoNumber * 100 / this.selectCycle).toFixed(2)
+        // return (this.detail.nowPrice * this.autoNumber * 100 / this.selectCycle).toFixed(2)
       } else if (this.selectNumber) {
         // alert("bb"+this.detail.nowPrice+"cc==="+this.selectNumber+"ff==="+this.selectCycle+"==="+this.settingSpreadRate.spreadRate)
-        let payfee = (this.detail.nowPrice *1* this.selectNumber  / this.selectCycle)
+        let payfee = (this.detail.nowPrice * 1 * this.selectNumber / this.selectCycle)
         return (payfee + (payfee * this.settingInfo.buyFee) + (payfee * this.settingInfo.dutyFee) + (payfee * this.settingSpreadRate.spreadRate)).toFixed(2)
-        //return (this.detail.nowPrice * this.selectNumber * 100 / this.selectCycle).toFixed(2)
+        // return (this.detail.nowPrice * this.selectNumber * 100 / this.selectCycle).toFixed(2)
       } else {
         return 0
       }
@@ -311,8 +312,7 @@ export default {
       let data = await api.getIndexSetting()
       if (data.status === 0) {
         // 成功
-        this.settingIndexInfo = data.data 
-        
+        this.settingIndexInfo = data.data
       } else {
         Toast(data.msg)
       }
@@ -326,25 +326,25 @@ export default {
         // 杠杆倍数
         this.selectCycle = data.data.siteLever
         // console.log(this.$store.state.userInfo)
-        if(this.$store.state.userInfo !== undefined && this.$store.state.userInfo !== null && this.$store.state.userInfo.phone !== '' && this.$store.state.userInfo.siteLever !== null){
-            data.data.siteLever = '1'
-            this.selectCycle = data.data.siteLever.split('/')[0]
-            this.siteLeverList = []
-            for (let i = 0; i < data.data.siteLever.split('/').length; i++) {
-              let val = data.data.siteLever.split('/')[i]
-              let item = { label: val + '倍', value: val }
-              this.siteLeverList.push(item)
-            }
-          } else {
-            data.data.siteLever = '1'
-            this.selectCycle = data.data.siteLever.split('/')[0]
-            this.siteLeverList = []
-            for (let i = 0; i < data.data.siteLever.split('/').length; i++) {
-              let val = data.data.siteLever.split('/')[i]
-              let item = { label: val + '倍', value: val }
-              this.siteLeverList.push(item)
-            }
+        if (this.$store.state.userInfo !== undefined && this.$store.state.userInfo !== null && this.$store.state.userInfo.phone !== '' && this.$store.state.userInfo.siteLever !== null) {
+          data.data.siteLever = '1'
+          this.selectCycle = data.data.siteLever.split('/')[0]
+          this.siteLeverList = []
+          for (let i = 0; i < data.data.siteLever.split('/').length; i++) {
+            let val = data.data.siteLever.split('/')[i]
+            let item = { label: val + '倍', value: val }
+            this.siteLeverList.push(item)
           }
+        } else {
+          data.data.siteLever = '1'
+          this.selectCycle = data.data.siteLever.split('/')[0]
+          this.siteLeverList = []
+          for (let i = 0; i < data.data.siteLever.split('/').length; i++) {
+            let val = data.data.siteLever.split('/')[i]
+            let item = { label: val + '倍', value: val }
+            this.siteLeverList.push(item)
+          }
+        }
       } else {
         Toast(data.msg)
       }
@@ -353,18 +353,17 @@ export default {
       // 查询点差费率
       let opts = {
         applies: this.detail.hcrate, // 涨跌幅
-        turnover: this.total, //成交额
-        unitprice: this.detail.nowPrice, //股票单价
+        turnover: this.total, // 成交额
+        unitprice: this.detail.nowPrice, // 股票单价
         code: this.$route.params.code
       }
       let data = await api.findSpreadRateOne(opts)
       if (data.status === 0) {
         // 成功
-        if(data.data != undefined){
+        if (data.data != undefined) {
           this.settingSpreadRate = data.data
         }
         console.log(this.settingSpreadRate)
-        
       } else {
         this.$message.error(data.msg)
       }
@@ -388,7 +387,7 @@ export default {
     //     Toast(data.msg)
     //   }
     // },
-    async getDetail() {
+    async getDetail () {
       let opts = {
         code: this.$route.query.code
       }
@@ -398,7 +397,6 @@ export default {
       if (data.status === 0) {
         this.detail = data.data
         this.findSpreadRateOne()
-
       } else {
         Toast(data.msg)
       }
@@ -408,7 +406,6 @@ export default {
       this.selectCycle = value
     },
     selectNumberFun (value) {
-      
       this.selectNumber = value
       if (value !== 0) {
         this.autoNumber = ''
@@ -814,4 +811,17 @@ export default {
       background-color: #E00202;
     }
   }
+  .tab-title:after{
+      top:22% !important;
+    }
+    .tipBox{
+        display: flex;
+        align-items: center;
+        .pull-left{
+          text-align: left;
+        }
+        .pull-right{
+          text-align: right;
+        }
+    }
 </style>

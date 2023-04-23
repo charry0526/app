@@ -26,9 +26,9 @@
             <ul class="clearfix" :class="item.floatPoint<0?'green':item.floatPoint==0?'':'red'" @click='toDetail(item)'>
               <li class="li-title">
                 <p class="name">
-                  <img 
-                  v-if="item.isOption == '1'" 
-                  :src="require(`../../../static/img/list/${$state.theme === 'red' ? 'red-' : ''}loved-icon.png`)" 
+                  <img
+                  v-if="item.isOption == '1'"
+                  :src="require(`../../../static/img/list/${$state.theme === 'red' ? 'red-' : ''}loved-icon.png`)"
                   @click.stop="toDeleteMy(item)"
                   alt="">
                   <img v-else
@@ -58,10 +58,10 @@
       </div>
       <div v-show="loading" class="load-all text-center">
         <mt-spinner type="fading-circle"></mt-spinner>
-        加载中...
+        {{$t("loading")}}...
       </div>
       <div v-show="!loading && list.length>0" class="load-all text-center">
-        已全部加载
+        {{$t("allLoaded")}}
       </div>
       <!-- <div class="footer-btn">
           <p class="red">*注：
@@ -119,12 +119,12 @@ export default {
   mounted () {
   },
   methods: {
-    async addOptions(val) {
-      let data = await api.addOption({ code: val.futuresCode });
+    async addOptions (val) {
+      let data = await api.addOption({ code: val.futuresCode })
       if (data.status === 0) {
-        Toast("添加自选成功");
+        Toast('添加自选成功')
       } else {
-        Toast(data.msg);
+        Toast(data.msg)
       }
     },
     async toDeleteMy (val) {
@@ -180,12 +180,11 @@ export default {
         //   }
         // })
 
-
         this.$router.push({
           path: '/listdetail2',
           query: {
             code: val.futuresGid,
-            stock_type:'hf',
+            stock_type: 'hf',
             qhinfo: val,
             type: 'qh'
             // name: val.name

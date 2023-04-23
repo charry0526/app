@@ -67,7 +67,7 @@
               <td>{{item.gg}}</td>
               <td>{{item.bzj}}</td>
               <td :class="item.zts==2?'tdActive':''">
-                {{item.zts==1?'审核通过':item.zts==2?'未通过':'未审核'}}
+                {{item.zts==1?'审核通过':item.zts==2?'未通过':item.zts==4?'购买完成':'未审核'}}
               </td>
               <td>
                 <div class="button-box">
@@ -366,6 +366,7 @@ export default {
       this.$router.push({
         path: '/twoBuyNew',
         query: {
+          id:option.listsId,
           code: option.names || option.xgname,
           leverValue: option.gg,
           buyMinNum: option.num || option.nums

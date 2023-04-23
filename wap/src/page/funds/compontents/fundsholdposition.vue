@@ -1,13 +1,13 @@
 <template>
   <div class="wrapper">
-    <div v-if="list.length<=0 && !getStatus" 
+    <div v-if="list.length<=0 && !getStatus"
     class="empty text-center">
       暂无订单信息!
     </div>
-    <div v-if="list.length<=0 && getStatus" 
+    <div v-if="list.length<=0 && getStatus"
     class="empty text-center">
       <mt-spinner type="fading-circle"></mt-spinner>
-      加载中...
+      {{$t("loading")}}...
     </div>
     <div v-if="list.length>0">
       <ul
@@ -68,10 +68,10 @@
       </ul>
       <div v-show="loading" class="load-all text-center">
         <mt-spinner type="fading-circle"></mt-spinner>
-        加载中...
+        {{$t("loading")}}...
       </div>
       <div v-show="!loading" class="load-all text-center">
-        已全部加载
+        {{$t("allLoaded")}}
       </div>
     </div>
   </div>
@@ -180,7 +180,7 @@ export default {
         pageSize: this.pageSize
       }
       this.getStatus = true
-      if(this.pageNum == 1){
+      if (this.pageNum == 1) {
         this.list = []
       }
       let data = await api.getFundsOrderList(opt)
@@ -235,7 +235,7 @@ export default {
       return true
     },
     toSell (val) {
-        MessageBox.confirm('您确定要平仓吗?').then(async action => {
+      MessageBox.confirm('您确定要平仓吗?').then(async action => {
         let opt = {
           positionSn: val.positionSn
         }

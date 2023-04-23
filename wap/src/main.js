@@ -15,7 +15,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 // import md5 from 'js-md5'
 import * as filters from '@/utils/utils'
 import animated from 'animate.css' // npm install animate.css --save安装，在引入
-
+import VueI18n from 'vue-i18n'
+import zh from './i18n/zh'
+import en from './i18n/en'
 import '../static/css/public2.css'
 
 // import VueTouch from 'vue-touch'
@@ -23,12 +25,20 @@ import '../static/css/public2.css'
 Vue.use(animated)
 Vue.use(ElementUI)
 Vue.use(VueClipboard)
+Vue.use(VueI18n)
+
 // Vue.use(VueTouch, { name: 'v-touch' })
 // // Vue.prototype.$md5 = md5
 // VueTouch.config.swipe = {
 //   threshold: 100 // 手指左右滑动距离
 // }
-
+const i18n = new VueI18n({
+  locale: localStorage.getItem('lang') || 'zh', // 没有就设置默认值zh
+  messages: {
+    zh: zh,
+    en: en
+  }
+})
 Vue.use(Mint)
 Vue.component('icon', Icon)
 Vue.config.productionTip = false
@@ -138,5 +148,6 @@ new Vue({
   store,
   router,
   axios,
+  i18n,
   render: h => h(App)
 }).$mount('#app')

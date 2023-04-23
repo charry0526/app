@@ -11,7 +11,7 @@
         <img src="../../assets/ico/fangdajing.png" alt="">
         <input type="text"
         @focus="$router.push('/Searchlist')"
-        placeholder="名称/代码/拼音首字母">
+        :placeholder="$t('searchText')">
       </div>
       <div class="home-search-ctl">
         <img class="lingdang" src="../../assets/ico/lingdang.png" alt=""
@@ -50,7 +50,7 @@
           class="icon-img"
           src="../../assets/ico/hangqing.png" alt="">
         </a>
-        <p class="icon-title">行情</p>
+        <p class="icon-title">{{ $t("homeNavList1") }}</p>
       </div>
       <div class="col-xs-3 text-center">
         <a class='icon-wrap animated zoomIn' @click="goOrderlist" href="javascript:;">
@@ -58,7 +58,7 @@
           class="icon-img"
           src="../../assets/ico/jiaoyi.png" alt="">
         </a>
-        <p class="icon-title">持仓</p>
+        <p class="icon-title">{{$t("homeNavList2")}}</p>
       </div>
       <div class="col-xs-3 text-center">
         <a class='icon-wrap animated zoomIn' @click="goMyList" href="javascript:;">
@@ -67,7 +67,7 @@
           src="../../assets/ico/xuanze.png" alt="">
           <!-- <i class="iconfont icon-xinshou"></i> -->
         </a>
-        <p class="icon-title">自选</p>
+        <p class="icon-title">{{$t("homeNavList3")}}</p>
       </div>
       <div class="col-xs-3 text-center">
         <a class='icon-wrap animated zoomIn' @click="goMyinfo" href="javascript:;">
@@ -76,38 +76,38 @@
           src="../../assets/ico/wo.png" alt="">
           <!-- <i class="iconfont icon-xinshou"></i> -->
         </a>
-        <p class="icon-title">我的</p>
+        <p class="icon-title">{{$t("homeNavList4")}}</p>
       </div>
     </div>
     <div class="shadow-box">
       <img class="shadow-ico" src="../../assets/ico/shadow.png" alt="">
     </div>
     <!-- 公告栏 -->
-        <div class="col-xs-24 horseLampModule">
+        <!-- <div class="col-xs-24 horseLampModule">
           <div class="horseLamp-box" v-if="artList.artTitle" @click="toAltDetail">
             <img class="tzIco" v-show="$state.theme != 'red'" src="../../assets/ico/horn.png"/>
             <img class="tzIco" v-show="$state.theme == 'red'" src="../../assets/ico/horn-red.png"/>
             <div class="wrap">
-              <!-- // 外框，固定宽度 -->
+              // 外框，固定宽度
               <div ref="box" id="box">
-                <!-- // 内部滚动框 -->
+                // 内部滚动框
                 <div id="marquee">{{artList.artTitle}}</div>
-                <!-- //展示的文字 -->
+                //展示的文字
                 <div id="copy"></div>
-                <!-- // 文字副本，为了实现无缝滚动 -->
+                // 文字副本，为了实现无缝滚动
               </div>
               <div ref='node' id="node">{{artList.artTitle}}</div>
-              <!-- //为了获取text实际宽度 -->
+              //为了获取text实际宽度
             </div>
             <span class="right">{{new Date(artList.addTime).getFullYear()}}-{{new Date(artList.addTime).getMonth()+1}}-{{new Date(artList.addTime).getDate()}}</span>
           </div>
-        </div>
+        </div> -->
 
     <!-- <div class="nav-bg page-part" @click="goList">
       <img class="img" src="../../assets/img/shangpinbg.png" alt="shangpinbg">
     </div> -->
     <!-- 轮播图 -->
-    <div class="swiper-home">
+    <!-- <div class="swiper-home">
       <mt-swipe :auto="4000">
         <mt-swipe-item
         v-for="banner in bannerList"
@@ -118,9 +118,9 @@
           </a>
         </mt-swipe-item>
       </mt-swipe>
-    </div>
+    </div> -->
     <!-- 轮播图 -->
-    <AllList/>
+    <!-- <AllList/>
     <div class="swiper-ad">
       <mt-swipe :auto="4000">
         <mt-swipe-item
@@ -134,7 +134,7 @@
           </a>
         </mt-swipe-item>
       </mt-swipe>
-    </div>
+    </div> -->
     <!-- <div v-show="true" class="box  page-part">
       <div class="box-title">
         <span class="left"></span>大盘指数
@@ -156,7 +156,7 @@
       <mt-navbar v-model="news">
         <mt-tab-item id="tab_0">
           <!-- <span class="tab-name">财经要闻</span> -->
-          <span class="tab-name">新闻列表</span>
+          <span class="tab-name">{{$t("NewsList")}}</span>
         </mt-tab-item>
         <!-- <mt-tab-item id="tab_1">
           <span class="tab-name">经济数据</span>
@@ -185,8 +185,8 @@
             <div
               @click="pageNews(item)"
               class="news-item"
-              v-for="item of newsContent"
-              :key="item.id"
+              v-for="(item,index) of newsContent"
+              :key="index"
             >
               <p
                 class="news-title"
@@ -203,107 +203,14 @@
           </div>
           <div v-show="loading" class="load-all text-center">
               <mt-spinner type="fading-circle"></mt-spinner>
-              加载中...
+              {{$t("loading")}}...
           </div>
           <div v-show="!loading && newsContent.length>0" class="load-all text-center">
-              已全部加载
+              {{$t("allLoaded")}}
           </div>
         </mt-tab-container-item>
 
       </mt-tab-container>
-
-      <!-- <mt-tab-container v-model="news" :swipeable="true">
-        <mt-tab-container-item id="tab_0">
-          <div class="news-content">
-            <div
-              class="news-item"
-              v-for="item of newsContent1"
-              :key="item.id"
-            >
-              <p
-                class="news-title"
-                style="-webkit-box-orient: vertical;"
-              >{{item.title}}</p>
-              <span class="news-status">
-                <i class="glyphicon glyphicon-eye-open"></i>
-                浏览量：{{item.views}}
-              </span>
-            </div>
-          </div>
-        </mt-tab-container-item>
-        <mt-tab-container-item id="tab_1">
-          <div class="news-content">
-            <div
-              class="news-item"
-              v-for="item of newsContent2"
-              :key="item.id"
-            >
-              <p
-                class="news-title"
-                style="-webkit-box-orient: vertical;"
-              >{{item.title}}</p>
-              <span class="news-status">
-                <i class="glyphicon glyphicon-eye-open"></i>
-                浏览量：{{item.views}}
-              </span>
-            </div>
-          </div>
-        </mt-tab-container-item>
-        <mt-tab-container-item id="tab_2">
-          <div class="news-content">
-            <div
-              class="news-item"
-              v-for="item of newsContent3"
-              :key="item.id"
-            >
-              <p
-                class="news-title"
-                style="-webkit-box-orient: vertical;"
-              >{{item.title}}</p>
-              <span class="news-status">
-                <i class="glyphicon glyphicon-eye-open"></i>
-                浏览量：{{item.views}}
-              </span>
-            </div>
-          </div>
-        </mt-tab-container-item>
-        <mt-tab-container-item id="tab_3">
-          <div class="news-content">
-            <div
-              class="news-item"
-              v-for="item of newsContent4"
-              :key="item.id"
-            >
-              <p
-                class="news-title"
-                style="-webkit-box-orient: vertical;"
-              >{{item.title}}</p>
-              <span class="news-status">
-                <i class="glyphicon glyphicon-eye-open"></i>
-                浏览量：{{item.views}}
-              </span>
-            </div>
-          </div>
-        </mt-tab-container-item>
-        <mt-tab-container-item id="tab_4">
-          <div class="news-content">
-            <div
-              class="news-item"
-              v-for="item of newsContent5"
-              :key="item.id"
-            >
-              <p
-                class="news-title"
-                style="-webkit-box-orient: vertical;"
-              >{{item.title}}</p>
-              <span class="news-status">
-                <i class="glyphicon glyphicon-eye-open"></i>
-                浏览量：{{item.views}}
-              </span>
-            </div>
-          </div>
-        </mt-tab-container-item>
-      </mt-tab-container> -->
     </div>
     <!-- tab -->
 

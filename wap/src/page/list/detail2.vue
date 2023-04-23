@@ -137,14 +137,14 @@
         <a v-if="!isOptionOpt"
            class="pull-left bottom-btn"
            href="javascript:;"
-           @click="addOptions">添加自选</a>
+           @click="addOptions">{{$t("AddSelection")}}</a>
         <a v-if="isOptionOpt"
            class="pull-left bottom-btn"
            href="javascript:;"
-           @click="deteleOptions">删除自选</a>
+           @click="deteleOptions">{{$t("deleteSelection")}}</a>
         <a class="pull-left bottom-btn on"
            href="javascript:;"
-           @click="toBuy">马上下单</a>
+           @click="toBuy">{{$t("placeOrder")}}</a>
         <!-- <mt-button :class="agree?'btn btn-red':'btn btn-default'" size="small" @click="toBuy()">确定</mt-button> -->
         <!-- <mt-button class="btn btn-cancel" size="small" @click="toBuy">取消</mt-button> -->
       </div>
@@ -176,7 +176,7 @@
         <div v-show="bestandslisteLoading"
             class="load-all text-center">
           <mt-spinner type="fading-circle"></mt-spinner>
-          加载中...
+          {{$t("loading")}}...
         </div>
         <div v-show="!bestandslisteLoading && bestandslisteContent.length>0"
             class="load-all text-center">

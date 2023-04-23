@@ -54,10 +54,10 @@
       </ul>
       <div v-show="loading" class="load-all text-center">
         <mt-spinner type="fading-circle"></mt-spinner>
-        加载中...
+        {{$t("loading")}}...
       </div>
       <div v-show="!loading && hasSearch" class="load-all text-center">
-        已全部加载
+        {{$t("allLoaded")}}
       </div>
       <div v-show="!hasSearch" class="load-all text-center">
         可输入您想要查询的指数代码或者简拼进行查询

@@ -10,7 +10,7 @@
     </div> -->
     <!-- <form target="frameFile" v-on:submit.prevent='formSubmit'>
       <mt-button slot="right" class="search-btn-list" @click="getOrderList" icon="search">搜索</mt-button> -->
-    <!-- </form> --> 
+    <!-- </form> -->
     <div class="search">
       <!-- <mt-search
         fixed
@@ -19,17 +19,17 @@
         @keyup.enter.native="getOrderList"
         placeholder="可输入股票简拼查询持仓"
       >
-        
+
       </mt-search> -->
       <div class="search-input">
-        <input type="text" placeholder="可输入股票简拼查询持仓"
+        <input type="text" :placeholder="$t('ShortPinyinQueryPosition')"
          v-model="stockCode"
          @keyup.enter="getOrderList"
         >
       </div>
       <mt-button size="small" @click="getOrderList" icon="search"
       style="background-color:#000"
-      >搜索</mt-button>
+      >{{$t("search")}}</mt-button>
 
     </div>
     <div class="">
@@ -112,13 +112,13 @@
     </div>
     <div v-show="loading" class="load-all text-center">
           <mt-spinner type="fading-circle"></mt-spinner>
-          加载中...
+          {{$t("loading")}}...
         </div>
         <div v-show="!loading && hasSearch" class="load-all text-center">
-          已全部加载
+          {{$t("allLoaded")}}
         </div>
         <div class="text-center" v-if="!hasSearch">
-          请查询订单
+          {{$t("pleaseCheckTheOrder")}}
         </div>
     <foot></foot>
   </div>

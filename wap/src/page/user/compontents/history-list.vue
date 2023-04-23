@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div v-if="list.length<=0" class="empty text-center">
-      暂无订单信息!
+      {{$t("noData")}}
     </div>
     <div v-if="list.length>0">
       <ul
@@ -14,7 +14,7 @@
             <div class="order-title">
               <span class="main">{{item.stockName}}</span>
               <span class="secondary">({{item.stockCode}})</span>
-              
+
               <span v-if="item.isNew==1" :class="item.isNew=='1'?'type type-up':'type type-down'">{{item.isNew=='1'?'ESOP':''}}</span>
               <span v-if="item.stockPlate=='科创'" :class="item.stockPlate=='科创'?'type':''">科创</span>
               <span class="pull-right">总盈亏:<b
@@ -59,10 +59,10 @@
       </ul>
       <div v-show="loading" class="load-all text-center">
         <mt-spinner type="fading-circle"></mt-spinner>
-        加载中...
+        {{$t("loading")}}...
       </div>
       <div v-show="!loading" class="load-all text-center">
-        已全部加载
+        {{$t("allLoaded")}}
       </div>
     </div>
   </div>

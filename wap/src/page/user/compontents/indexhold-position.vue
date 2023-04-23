@@ -7,7 +7,7 @@
     <div v-if="list.length<=0 && getStatus"
     class="empty text-center">
       <mt-spinner type="fading-circle"></mt-spinner>
-      加载中...
+      {{$t("loading")}}...
     </div>
     <div v-if="list.length>0">
       <ul
@@ -19,7 +19,7 @@
           <div class="order-info-box">
             <div class="order-title">
               <span @click="toDetail(item.indexCode)" class="main">{{item.indexName}}</span>
-              
+
               <span :class="item.orderDirection=='买涨'?'type type-up':'type type-down'">{{item.orderDirection=='买涨'?'买涨':'买跌'}}</span>
               <span class="direction pull-right big-font">
                         总盈亏:
@@ -96,10 +96,10 @@
       </ul>
       <div v-show="loading" class="load-all text-center">
         <mt-spinner type="fading-circle"></mt-spinner>
-        加载中...
+        {{$t("loading")}}...
       </div>
       <div v-show="!loading" class="load-all text-center">
-        已全部加载
+        {{$t("allLoaded")}}
       </div>
     </div>
   </div>

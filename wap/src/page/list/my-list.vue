@@ -29,11 +29,11 @@
       <li class="title">
         <div>
           <ul class='clearfix'>
-            <li class="li-title">股票</li>
-            <li class="li-base">最新</li>
-            <li class="li-base">涨跌幅</li>
-            <li class="li-base text-center">
-              删自选
+            <li class="li-title">{{ $t("optionalList1") }}</li>
+            <li class="li-base">{{ $t("optionalList2") }}</li>
+            <li class="li-base">{{ $t("optionalList3") }}</li>
+            <li class="li-base text-center del">
+              {{ $t("optionalList4") }}
             </li>
           </ul>
         </div>
@@ -85,10 +85,10 @@
     </div>
     <div v-show="loading" class="load-all text-center">
       <mt-spinner type="fading-circle"></mt-spinner>
-      加载中...
+      {{$t("loading")}}...
     </div>
     <div v-show="!loading && !getStatus" class="load-all text-center">
-      已全部加载
+      {{$t("allLoaded")}}
     </div>
     <foot></foot>
   </div>
@@ -352,5 +352,7 @@ export default {
   .li-title{
     width: 30% !important;;
   }
-
+  .del{
+    width:25% !important;
+  }
 </style>

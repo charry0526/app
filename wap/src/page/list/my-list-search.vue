@@ -61,10 +61,10 @@
       </ul>
       <div v-show="loading" class="load-all text-center">
         <mt-spinner type="fading-circle"></mt-spinner>
-        加载中...
+        {{$t("loading")}}...
       </div>
       <div v-show="!loading" class="load-all text-center">
-        已全部加载
+        {{$t("allLoaded")}}
       </div>
     </mt-search>
     <foot></foot>
@@ -99,7 +99,7 @@ export default {
     this.timer = setInterval(this.refreshList, 5000)
   },
   beforeDestroy () {
-    if (this.$state.theme =='red') {
+    if (this.$state.theme == 'red') {
       document.body.classList.remove('red-bg')
       document.body.classList.add('black-bg')
     }
@@ -107,9 +107,9 @@ export default {
   },
   mounted () {
     //   this.getStock()
-    if (this.$state.theme =='red') {
-        document.body.classList.remove('black-bg')
-        document.body.classList.add('red-bg')
+    if (this.$state.theme == 'red') {
+      document.body.classList.remove('black-bg')
+      document.body.classList.add('red-bg')
     }
   },
   methods: {

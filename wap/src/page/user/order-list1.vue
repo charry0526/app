@@ -6,21 +6,21 @@
         </router-link>
     </mt-header> -->
     <mt-navbar class="sub-navbar" v-model="selected">
-      <mt-tab-item id="1"></i>我的持仓</mt-tab-item>
-      <mt-tab-item id="2">我的平仓</mt-tab-item>
+      <mt-tab-item id="1"></i>{{$t("myPosition")}}</mt-tab-item>
+      <mt-tab-item id="2">{{$t("myClosingPosition")}}</mt-tab-item>
     </mt-navbar>
     <mt-tab-container class="order-list" v-model="selected">
       <mt-tab-container-item id="1">
         <div class="text-center">
-          <mt-button @click="toSearchName" type="default">根据股票简拼查询订单</mt-button>
-          <mt-button @click="toSearchCode" type="default">根据股票代码查询订单</mt-button>
+          <mt-button @click="toSearchName" type="default">{{$t("queryOrders")}}</mt-button>
+          <mt-button @click="toSearchCode" type="default">{{$t("queryCodeOrders")}}</mt-button>
         </div>
         <holdPosition :selectedNumber='selectedNumber' :handleOptions='handleOptions'/>
       </mt-tab-container-item>
       <mt-tab-container-item id="2">
         <div class="text-center">
-          <mt-button @click="toSearchName2" type="default">根据股票简拼查询订单</mt-button>
-          <mt-button @click="toSearchCode2" type="default">根据股票代码查询订单</mt-button>
+          <mt-button @click="toSearchName2" type="default">{{$t("queryOrders")}}</mt-button>
+          <mt-button @click="toSearchCode2" type="default">{{$t("queryCodeOrders")}}</mt-button>
         </div>
         <HistoryList :selectedNumber='selectedNumber' :hasChangeSell="hasChangeSell" :handleOptions='handleOptions'/>
       </mt-tab-container-item>
@@ -196,7 +196,7 @@ export default {
       flex-grow: 0;
       flex-shrink:1;
       flex-basis:auto;
-      width: 1.4rem;
+      width: 1.9rem;
       height: .4rem;
       background-color: #3D4456;
       padding: 0;
@@ -225,5 +225,8 @@ export default {
       }
     }
 
+  }
+  .text-center /deep/button{
+    width:2.9rem
   }
 </style>

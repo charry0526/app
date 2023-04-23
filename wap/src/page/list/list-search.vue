@@ -56,10 +56,10 @@
       </ul>
       <div v-show="loading" class="load-all text-center">
         <mt-spinner type="fading-circle"></mt-spinner>
-        加载中...
+        {{$t("loading")}}...
       </div>
       <div v-show="!loading && hasSearch" class="load-all text-center">
-        已全部加载
+        {{$t("allLoaded")}}
       </div>
       <div v-show="!hasSearch" class="load-all text-center">
         可输入您想要查询的股票代码或者简拼进行查询
@@ -171,7 +171,7 @@ export default {
         path: '/listdetail2',
         query: {
           code: val.code,
-          stock_type:val.stock_type
+          stock_type: val.stock_type
           // name: val.name
         }
       })

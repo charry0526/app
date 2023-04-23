@@ -38,7 +38,7 @@
                 @click='toDetail(item)'>
               <li class="li-title">
                 <p class="name">
-                  <img 
+                  <img
                   @click.stop="toDeleteMy(item)"
                   v-if="item.isOption == '1'" :src="require(`../../../static/img/list/${$state.theme === 'red' ? 'red-' : ''}loved-icon.png`)" alt="">
                   <img v-else
@@ -48,7 +48,7 @@
                 </p>
                 <p class="code">
                   <span class="code-wra">{{item.code}}</span>
-                  <i 
+                  <i
                     v-if="item.stock_plate != '科创'"
                     class="iconfont shen-mark hushen-mark"
                   >
@@ -56,7 +56,7 @@
                   </i>
                   <i v-else class="iconfont kechuang-mark">科创</i>
                 </p>
-                  
+
               </li>
               <li class="li-base">
                 <span>{{item.nowPrice?Number(item.nowPrice).toFixed(2):'-'}}</span>
@@ -80,10 +80,10 @@
       </div>
       <div v-show="loading" class="load-all text-center">
         <mt-spinner type="fading-circle"></mt-spinner>
-        加载中...
+        {{$t("loading")}}...
       </div>
       <div v-show="!loading && list.length>0" class="load-all text-center">
-        已全部加载
+        {{$t("allLoaded")}}
       </div>
     </div>
     <foot></foot>
@@ -137,12 +137,12 @@ export default {
   mounted () {
   },
   methods: {
-    async addOptions(val) {
-      let data = await api.addOption({ code: val.code });
+    async addOptions (val) {
+      let data = await api.addOption({ code: val.code })
       if (data.status === 0) {
-        Toast("添加自选成功");
+        Toast('添加自选成功')
       } else {
-        Toast(data.msg);
+        Toast(data.msg)
       }
     },
     async toDeleteMy (val) {
@@ -227,7 +227,7 @@ export default {
         path: '/listdetail',
         query: {
           code: val.code,
-          stock_type:val.stock_type
+          stock_type: val.stock_type
           // name: val.name
         }
       })

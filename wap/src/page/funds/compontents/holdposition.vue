@@ -1,13 +1,13 @@
 <template>
   <div class="wrapper">
-    <div v-if="list.length<=0 && !getStatus" 
+    <div v-if="list.length<=0 && !getStatus"
     class="empty text-center">
       暂无订单信息!
     </div>
-    <div v-if="list.length<=0 && getStatus" 
+    <div v-if="list.length<=0 && getStatus"
     class="empty text-center">
       <mt-spinner type="fading-circle"></mt-spinner>
-      加载中...
+      {{$t("loading")}}...
     </div>
     <div v-if="list.length>0">
       <ul
@@ -47,7 +47,7 @@
                     <b v-if="item.status==4" class="green">已结束</b>
                 </span>
               </p>
-              
+
               <p class="clearfix">
                 <span class="col-xs-8">终止时间:<b class="space" v-if="item.endTime">{{new Date(item.endTime) | timeFormat}}</b></span>
                 <span class="col-xs-4 text-right big-font">股票盈亏:
@@ -71,10 +71,10 @@
       </ul>
       <div v-show="loading" class="load-all text-center">
         <mt-spinner type="fading-circle"></mt-spinner>
-        加载中...
+        {{$t("loading")}}...
       </div>
       <div v-show="!loading" class="load-all text-center">
-        已全部加载
+        {{$t("allLoaded")}}
       </div>
     </div>
   </div>
@@ -181,7 +181,7 @@ export default {
         pageSize: this.pageSize
       }
       this.getStatus = true
-      if(this.pageNum == 1){
+      if (this.pageNum == 1) {
         this.list = []
       }
       let data = await api.getUserApplyList(opt)
@@ -234,9 +234,9 @@ export default {
       return true
     },
     withFunding (val) {
-        this.$router.push({
-            path: '/days?id='+ val.id
-        })
+      this.$router.push({
+        path: '/days?id=' + val.id
+      })
     }
   }
 }

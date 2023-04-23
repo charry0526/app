@@ -30,7 +30,7 @@
                   <img
                   @click.stop="toDeleteMy(item)"
                   v-if="item.isOption == '1'" :src="require(`../../../static/img/list/${$state.theme === 'red' ? 'red-' : ''}loved-icon.png`)" alt="">
-                  <img v-else 
+                  <img v-else
                   @click.stop="addOptions(item)"
                   :src="require(`../../../static/img/list/${$state.theme === 'red' ? 'red-' : ''}love-icon.png`)" alt="">
                   <!-- <i :class="item.transState == 1?'iconfont icon-jiaoyi':'iconfont icon-jinzhi'"></i> -->
@@ -59,10 +59,10 @@
       </div>
       <div v-show="loading" class="load-all text-center">
         <mt-spinner type="fading-circle"></mt-spinner>
-        加载中...
+        {{$t("loading")}}...
       </div>
       <div v-show="!loading && list.length>0" class="load-all text-center">
-        已全部加载
+        {{$t("allLoaded")}}
       </div>
       <!-- <div class="footer-btn">
           <p class="red">*注：
@@ -122,12 +122,12 @@ export default {
     this.getListMarket()
   },
   methods: {
-    async addOptions(val) {
-      let data = await api.addOption({ code: val.indexCode });
+    async addOptions (val) {
+      let data = await api.addOption({ code: val.indexCode })
       if (data.status === 0) {
-        Toast("添加自选成功");
+        Toast('添加自选成功')
       } else {
-        Toast(data.msg);
+        Toast(data.msg)
       }
     },
     async toDeleteMy (val) {
