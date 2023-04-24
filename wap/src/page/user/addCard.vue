@@ -76,11 +76,11 @@ export default {
     async toSure () {
       // 添加银行卡
       if (isNull(this.bankNo) || !bankNoReg(this.bankNo)) {
-        Toast('请输入银行卡号')
+        Toast('Vui lòng nhập số thẻ ngân hàng')
       } else if (isNull(this.bankName) || !isName(this.bankName)) {
-        Toast('请输入银行名称')
+        Toast('Vui lòng nhập tên ngân hàng')
       } else if (isNull(this.bankAddress) || !isName(this.bankAddress)) {
-        Toast('请输入开户支行')
+        Toast('Vui lòng nhập chi nhánh mở tài khoản')
       } else {
         let opts = {
           bankName: this.bankName,
@@ -90,7 +90,7 @@ export default {
         if (this.$route.query.type === 'edit') {
           let data = await api.updateBankCard(opts)
           if (data.status === 0) {
-            Toast('修改成功!')
+            Toast('sửa đổi thành công!')
             this.$router.push('/card')
           } else {
             Toast(data.msg)
@@ -98,7 +98,7 @@ export default {
         } else {
           let data = await api.addBankCard(opts)
           if (data.status === 0) {
-            Toast('添加成功!')
+            Toast('Thêm thành công!')
             this.$router.push('/card')
           } else {
             Toast(data.msg)

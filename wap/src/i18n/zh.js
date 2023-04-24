@@ -75,25 +75,25 @@ const optional = {
 const authentication = {
   authenticationFailed: 'Xác thực không thành công, vui lòng xác thực lại', // 认证失败，请重新认证
   failureReason: 'lý do thất bại', // 失败原因
-  authenticationName: 'tên thật', // 真实姓名
+  authenticationName: 'Tên theo CCCD', // 真实姓名
   authenticationNamepla: 'vui lòng nhập tên thật của bạn', // 请输入您的真实姓名
-  iDCard: 'số ID', // 身份证号
+  iDCard: 'Số CCCD:', // 身份证号
   iDCardpla: 'Vui lòng nhập số nhận dạng', // 请输入您的身份证号
-  iDCardFront: 'đằng trước', // 身份证正面
+  iDCardFront: 'Ảnh mặt trước CCCD', // 身份证正面
   uploading: 'tải lên', // 正在上传中
-  iDCardback: 'mặt sau', // 身份证背面
+  iDCardback: 'Ảnh mặt sau CCCD', // 身份证背面
   ruleTitle: 'Quy tắc xác thực', // 认证规则
-  ruleTip1: 'Người dùng mới phải vượt qua đánh giá xác thực tên thật sau khi đăng ký', // 新用户注册后必须通过实名认证审核
-  ruleTip2: 'Sau khi tên và số ID được chứng nhận, chúng sẽ không bị sửa đổi, vui lòng liên hệ bộ phận chăm sóc khách hàng để sửa đổi', // 姓名和身份证号码一经认证不予修改，修改请联系客服
-  ruleTip3: 'Tên thật phải trùng với tên tài khoản thẻ ngân hàng rút tiền' // 真实姓名必须和出金银行卡户名一致
+  ruleTip1: 'Người dùng cần xác thực tên thật sau khi đăng ký', // 新用户注册后必须通过实名认证审核
+  ruleTip2: 'Sau khi tên và CCCD được xác thực sẽ không được sửa đổi, hãy liên hệ bộ phận CSKH để sửa đổi khi cần thiết', // 姓名和身份证号码一经认证不予修改，修改请联系客服
+  ruleTip3: 'Tên thật phải khớp với tên tài khoản ngân hàng được liên kết rút tiền' // 真实姓名必须和出金银行卡户名一致
 }
 const uesr = {
   userAuth: 'tài khoản', // 账户
   userName: 'tên nick', // 昵称
   assetStatus: 'tài sản', // 资产状况
   uesrTotle: 'Tổng tài sản', // 总资产
-  recharge: 'nạp điện', // 充值
-  withdraw: 'rút', // 提现
+  recharge: 'Nạp tiền', // 充值
+  withdraw: 'Rút tiền', // 提现
   AvailableFunds: 'SỐ DƯ KHẢ DỤNG', // 可用资金
   FreezeMargin: 'TỔNG SỐ KÝ QUỸ', // 冻结保证金
   Verified: 'Đã xác minh', // 实名认证

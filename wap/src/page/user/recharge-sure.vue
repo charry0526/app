@@ -9,32 +9,49 @@
     </div> -->
     <div class="box1">
       <div class="form-block page-part">
-        <mt-field label="充值金额" placeholder="充值金额" disabled type="number" v-model="selectNumber"></mt-field>
+        <!-- <mt-field label="充值金额" placeholder="充值金额" disabled type="number" v-model="selectNumber"></mt-field> -->
+
+        <mt-field label="số tiền nạp" placeholder="số tiền nạp" disabled type="number" v-model="selectNumber"></mt-field>
+
         <div v-if="type == 0">
-          <mt-field label="支付宝名称" placeholder="支付宝名称" disabled type="text" v-model="payInfo.channelName">
+          <!-- <mt-field label="支付宝名称" placeholder="支付宝名称" disabled type="text" v-model="payInfo.channelName"> -->
+          <mt-field label="tên alipay" placeholder="tên alipay" disabled type="text" v-model="payInfo.channelName">
+
           </mt-field>
-          <mt-field label="支付宝账号" placeholder="支付宝账号" disabled type="text" v-model="payInfo.channelAccount">
+          <!-- <mt-field label="支付宝账号" placeholder="支付宝账号" disabled type="text" v-model="payInfo.channelAccount"> -->
+
+          <mt-field label="tài khoản alipay" placeholder="tài khoản alipay" disabled type="text" v-model="payInfo.channelAccount">
                     <span v-clipboard:copy="payInfo.channelAccount"
                           v-clipboard:success="onCopy"
                           v-clipboard:error="onError">
-                        <i class="iconfont icon-fuzhi"></i>复制
+                        <i class="iconfont icon-fuzhi"></i>
+                        <!-- 复制 -->
+                        sao chép
                     </span>
           </mt-field>
-          <div class="text-right" style="padding: 0.2rem 0.3rem 0;" @click="popupVisible2 = true">查看支付宝限额说明</div>
+          <div class="text-right" style="padding: 0.2rem 0.3rem 0;" @click="popupVisible2 = true">
+            <!-- 查看支付宝限额说明 -->
+            Xem hướng dẫn giới hạn Alipay
+          </div>
         </div>
         <div v-else-if="type == 1">
-          <mt-field label="收款名称" placeholder="收款名称" disabled type="text" v-model="payInfo.channelName">
+          <!-- <mt-field label="收款名称" placeholder="收款名称" disabled type="text" v-model="payInfo.channelName"> -->
+
+          <mt-field label="Tên hóa đơn" placeholder="Tên hóa đơn" disabled type="text" v-model="payInfo.channelName">
                     <span v-clipboard:copy="payInfo.channelName"
                           v-clipboard:success="onCopy"
                           v-clipboard:error="onError">
-                        <i class="iconfont icon-fuzhi"></i>复制
+                        <i class="iconfont icon-fuzhi"></i>
+                        <!-- 复制 -->
+                        sao chép
                     </span>
           </mt-field>
-          <mt-field label="收款银行" placeholder="收款银行" disabled type="text" v-model="payInfo.channelDesc">
+          <!-- <mt-field label="收款银行" placeholder="收款银行" disabled type="text" v-model="payInfo.channelDesc"> -->
+            <mt-field label="ngân hàng" placeholder="ngân hàng" disabled type="text" v-model="payInfo.channelDesc">
                     <span v-clipboard:copy="payInfo.channelDesc"
                           v-clipboard:success="onCopy"
                           v-clipboard:error="onError">
-                        <i class="iconfont icon-fuzhi"></i>复制
+                        <i class="iconfont icon-fuzhi"></i>sao chép
                     </span>
           </mt-field>
           <!-- <mt-field label="收款支行" placeholder="收款支行" disabled type="text" v-model="payInfo.payBankAddress">
@@ -44,30 +61,34 @@
                   <i class="iconfont icon-fuzhi"></i>复制
               </span>
           </mt-field> -->
-          <mt-field label="收款账号" placeholder="收款账号" disabled type="text" v-model="payInfo.channelAccount">
+          <!-- <mt-field label="收款账号" placeholder="收款账号" disabled type="text" v-model="payInfo.channelAccount"> -->
+          <mt-field label="tài khoản" placeholder="tài khoản" disabled type="text" v-model="payInfo.channelAccount">
+
                     <span v-clipboard:copy="payInfo.channelAccount"
                           v-clipboard:success="onCopy"
                           v-clipboard:error="onError">
-                        <i class="iconfont icon-fuzhi"></i>复制
+                        <i class="iconfont icon-fuzhi"></i>sao chép
                     </span>
           </mt-field>
         </div>
         <div v-else>
-          <mt-field label="收款方" placeholder="收款方" disabled type="text" v-model="payInfo.channelName">
+          <!-- <mt-field label="收款方" placeholder="收款方" disabled type="text" v-model="payInfo.channelName"> -->
+
+          <mt-field label="người thụ hưởng" placeholder="người thụ hưởng" disabled type="text" v-model="payInfo.channelName">
           </mt-field>
-          <mt-field label="收款账号" placeholder="收款账号" disabled type="text" v-model="payInfo.channelAccount">
+          <mt-field label="tài khoản" placeholder="tài khoản" disabled type="text" v-model="payInfo.channelAccount">
                     <span v-clipboard:copy="payInfo.channelAccount"
                           v-clipboard:success="onCopy"
                           v-clipboard:error="onError">
-                        <i class="iconfont icon-fuzhi"></i>复制
+                        <i class="iconfont icon-fuzhi"></i>sao chép
                     </span>
           </mt-field>
-          <mt-field v-if="payInfo.channelDesc" label="备注" placeholder="备注" disabled type="text"
+          <mt-field v-if="payInfo.channelDesc" label="Nhận xét" placeholder="Nhận xét" disabled type="text"
                     v-model="payInfo.channelDesc">
                     <span v-clipboard:copy="payInfo.channelDesc"
                           v-clipboard:success="onCopy"
                           v-clipboard:error="onError">
-                        <i class="iconfont icon-fuzhi"></i>复制
+                        <i class="iconfont icon-fuzhi"></i>sao chép
                     </span>
           </mt-field>
           <div v-if="payInfo.channelImg" class="eq-code-img">
@@ -76,7 +97,7 @@
         </div>
       </div>
       <div v-if="type == 0">
-        <div class="tips-group">
+         <!-- <div class="tips-group">
           <p><i class="iconfont icon-jinggao1"></i>注意事项：</p>
           <p class="tip-text"><i class="iconfont icon-jingpaibuzhou"></i>由于支付收款上限限制，每次收款公户可能不一样，<span class="red">请每次充值前获取最新的二维码完成支付</span>
           </p>
@@ -104,6 +125,35 @@
         <div class="tips-group red">
           <p><i class="iconfont icon-jinggao1"></i>注意事项：</p>
           <p class="tip-text"><i class="iconfont icon-jingpaibuzhou"></i>为了及时到账，充值成功后务必联系线上客服提交核对转账明细，确保入金安全！</p>
+        </div> -->
+        <div class="tips-group">
+          <p><i class="iconfont icon-jinggao1"></i>Các biện pháp phòng ngừa：</p>
+          <p class="tip-text"><i class="iconfont icon-jingpaibuzhou"></i>Do giới hạn trên của bộ sưu tập thanh toán, tài khoản công cộng có thể khác nhau mỗi lần,<span class="red">Vui lòng lấy mã QR mới nhất trước mỗi lần nạp tiền để hoàn tất thanh toán</span>
+          </p>
+          <p class="tip-text"><i class="iconfont icon-jingpaibuzhou3"></i>Nếu môi trường mạng của bạn không ổn định hoặc do thiết bị, môi trường, sở thích, hành vi, mối quan hệ, tài khoản, danh tính và các yếu tố khác，<span
+            class="red">Nó có thể khiến hệ thống kiểm soát rủi ro của Alipay nhắc nhở rủi ro, vui lòng bắt đầu thanh toán trong một môi trường an toàn</span></p>
+          <p class="tip-text"><i class="iconfont icon-jingpaibuzhou2"></i>Để đảm bảo rằng tiền gửi đến một cách kịp thời，<span class="red">Vui lòng xác nhận rằng số tiền bạn đã nhập phù hợp với số tiền nạp lại mà bạn đã gửi</span>.
+          </p>
+          <p class="tip-text"><i class="iconfont icon-jingpaibuzhou1"></i>Bị ảnh hưởng bởi thời gian thông báo đến của Alipay, thời gian gửi tiền có thể bị trì hoãn, vui lòng kiên nhẫn chờ đợi.</p>
+        </div>
+        <div v-if="payInfo.channelImg" class="btnbox">
+          <span class="text-center btnok" @click="toSure">Nhấp để lấy mã QR</span>
+        </div>
+        <div v-if="false" class="tips-group">
+          <p><i class="iconfont icon-liucheng"></i>Phương thức nạp tiền：</p>
+          <p class="tip-text"><i class="iconfont icon-buzhou"></i>Lưu mã QR cục bộ, mở Alipay để quét mã QR và chuyển vào tài khoản công ty được chỉ định trên nền tảng</p>
+          <p class="tip-text"><i class="iconfont icon-buzhou2"></i>Nhấp vào "Sao chép" để sao chép tài khoản Alipay, mở Alipay và nhấp vào Chuyển khoản để chuyển sang tài khoản công ty được chỉ định trên nền tảng</p>
+        </div>
+      </div>
+      <div v-else-if="type == 1">
+        <div class="tips-group">
+          <p><i class="iconfont icon-liucheng"></i>Thủ tục điều hành：</p>
+          <p class="tip-text"><i class="iconfont icon-buzhou"></i>Nhấp vào "Sao chép" để sao chép thông tin</p>
+          <p class="tip-text"><i class="iconfont icon-buzhou2"></i>Sau khi sao chép, mở ngân hàng di động để chuyển</p>
+        </div>
+        <div class="tips-group red">
+          <p><i class="iconfont icon-jinggao1"></i>Các biện pháp phòng ngừa：</p>
+          <p class="tip-text"><i class="iconfont icon-jingpaibuzhou"></i>Để đến tài khoản kịp thời, sau khi nạp tiền thành công, hãy nhớ liên hệ với dịch vụ khách hàng trực tuyến để gửi chi tiết chuyển khoản xác minh để đảm bảo an toàn cho khoản tiền gửi！</p>
         </div>
       </div>
       <div v-else>
@@ -123,25 +173,33 @@
           <i v-if="type == 1" class="iconfont icon-02"></i>
         </p>
         <div class="prompt-box text-center">
-          扫码后请输入以下金额支付
+          <!-- 扫码后请输入以下金额支付 -->
+          Sau khi quét mã, vui lòng nhập số tiền sau để thanh toán
         </div>
         <p class="text-center money">
-          ¥<span class="number">{{selectNumber}}</span>
+          <span class="number">{{selectNumber}}VND</span>
         </p>
         <div class="qrCode">
           <!-- <img src="../../assets/img/timg.png" alt="二维码"> -->
-          <img :src="payInfo.channelImg" alt="二维码">
+          <img :src="payInfo.channelImg" alt="mã QR">
           <div v-if="stopTime" class="alert-box">
             <i class="iconfont icon-jinggao2"></i>
-            支付已过期
+            <!-- 支付已过期 -->
+            thanh toán đã hết hạn
           </div>
         </div>
         <div class="timer-box">
           {{time.minutes}}:{{time.seconds}}
         </div>
         <div class="scan">
-          <span v-if="type == 0">打开支付宝扫一扫</span>
-          <span v-if="type == 1">打开微信扫一扫</span>
+          <span v-if="type == 0">
+            <!-- 打开支付宝扫一扫 -->
+            Mở Alipay và quét
+          </span>
+          <span v-if="type == 1">
+            <!-- 打开微信扫一扫 -->
+            Mở WeChat và quét
+          </span>
         </div>
       </div>
     </mt-popup>

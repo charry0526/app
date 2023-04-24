@@ -21,7 +21,10 @@
     <div class="box">
       <div class="box-contain clearfix">
         <div class="account text-center">
-          <p class="title">当前可用余额（元）</p>
+          <p class="title">
+            <!-- 当前可用余额（元） -->
+             số dư khả dụng hiện tại（VND）
+          </p>
           <p class="red number">{{$store.state.userInfo.enableAmt}}</p>
         </div>
       </div>
@@ -31,7 +34,8 @@
         <div class="back-info">
           <!-- 银行卡信息 -->
           <p class="title">
-            选择面额(元)
+            <!-- 选择面额(元) -->
+             chọn mệnh giá(VND)
           </p>
           <div class="box-tab">
             <input v-model="selectNumber" class="btn-default" type="number">
@@ -49,13 +53,20 @@
                 </li> -->
               </ul>
             </div>
-            <p style="padding-bottom:0.3rem">最小充值金额为{{settingInfo.chargeMinAmt}}元</p>
+            <p style="padding-bottom:0.3rem">
+              <!-- 最小充值金额为 -->
+              Số tiền nạp tối thiểu là
+              {{settingInfo.chargeMinAmt}}
+              <!-- 元 -->
+              VND
+            </p>
           </div>
         </div>
         <div class="back-info">
           <!-- 银行卡信息 -->
           <p class="title">
-            充值方式
+            <!-- 充值方式 -->
+            Phương thức nạp tiền
           </p>
           <div class="box-tab">
             <div v-for="i in optionsPay" :key="i.key" class="pay-radio">
@@ -90,7 +101,8 @@
       </div>
       <div class="btnbox">
             <span v-if="!dialogShow" class="text-center btnok" @click="toSure">
-                立即充值
+                <!-- 立即充值 -->
+                nạp tiền ngay bây giờ
                 <i v-show="isloading" style="color:#fff;" class="iconfont icon-jiazaizhong"></i>
                 <i v-show="isloading"></i>
             </span>
@@ -110,12 +122,16 @@
             <!--<input type="hidden" name="pay_producturl" v-model="formDate.pay_producturl"/>-->
           </form>
           <button class="submitBtn" type="submit" @click="onsubmit()">
-            立即充值
+            <!-- 立即充值 -->
+            nạp tiền ngay bây giờ
           </button>
         </div>
       </div>
       <div class="attention">
-        <p>注意:注意不要重复历史转账，三方银行监管账号随时更换，请务必关注账号变化！大额充值请联系在线客服受理！</p>
+        <p>
+          <!-- 注意:注意不要重复历史转账，三方银行监管账号随时更换，请务必关注账号变化！大额充值请联系在线客服受理 -->
+          Lưu ý: Hãy cẩn thận để không lặp lại các lần chuyển tiền trước đây. Tài khoản giám sát ngân hàng của bên thứ ba có thể được thay đổi bất cứ lúc nào. Hãy nhớ chú ý đến các thay đổi của tài khoản! Vui lòng liên hệ với dịch vụ khách hàng trực tuyến để nạp tiền lớn
+        </p>
       </div>
     </div>
 
@@ -130,25 +146,33 @@
           <i v-if="formCode == 3" class="iconfont icon-02"></i>
         </p>
         <div class="prompt-box text-center">
-          扫码后请输入以下金额支付
+          <!-- 扫码后请输入以下金额支付 -->
+          Sau khi quét mã, vui lòng nhập số tiền sau để thanh toán
         </div>
         <p class="text-center money">
-          ¥<span class="number">{{selectNumber}}</span>
+          <span class="number">{{selectNumber}}VND</span>
         </p>
         <div class="qrCode">
           <!-- <img src="../../assets/img/timg.jpg" alt="二维码"> -->
           <div id="qrcode" ref="qrcode"></div>
           <div v-if="stopTime" class="alert-box">
             <i class="iconfont icon-jinggao2"></i>
-            支付已过期
+            <!-- 支付已过期 -->
+            thanh toán đã hết hạn
           </div>
         </div>
         <div class="timer-box">
           {{time.minutes}}:{{time.seconds}}
         </div>
         <div class="scan">
-          <span v-if="formCode == 1">打开支付宝扫一扫</span>
-          <span v-if="formCode == 3">打开微信扫一扫</span>
+          <span v-if="formCode == 1">
+            <!-- 打开支付宝扫一扫 -->
+            Mở Alipay và quét
+          </span>
+          <span v-if="formCode == 3">
+            <!-- 打开微信扫一扫 -->
+            Mở WeChat và quét
+          </span>
         </div>
       </div>
     </mt-popup>
@@ -162,7 +186,7 @@
 
 <script>
 import * as api from '@/axios/api'
-import QRCode from "qrcodejs2";
+import QRCode from 'qrcodejs2'
 import { Toast } from 'mint-ui'
 
 export default {
@@ -183,15 +207,18 @@ export default {
       type: '', // 选择的渠道类型
       optionsPay: [
         {
-          label: '支付宝',
+          // label: '支付宝',
+          label: 'alipay',
           value: '1'
         },
         {
-          label: '对公转账',
+          // label: '对公转账',
+          label: 'chuyển nhượng công ty',
           value: '3'
         },
         {
-          label: '微信',
+          // label: '微信',
+          label: 'Wechat',
           value: '2'
         }
       ],
@@ -229,9 +256,9 @@ export default {
   computed: {},
   created () {},
   mounted () {
-    if (this.$state.theme =='red') {
-        document.body.classList.remove('black-bg')
-        document.body.classList.add('red-bg')
+    if (this.$state.theme == 'red') {
+      document.body.classList.remove('black-bg')
+      document.body.classList.add('red-bg')
     }
     this.getSettingInfo()
     if (!this.$store.state.userInfo.idCard) {
@@ -240,9 +267,9 @@ export default {
     this.getPayInfo()
   },
   beforeDestroy () {
-    if (this.$state.theme =='red') {
+    if (this.$state.theme == 'red') {
       document.body.classList.remove('red-bg')
-        document.body.classList.add('black-bg')
+      document.body.classList.add('black-bg')
     }
     window.clearInterval(this.timer)
   },
@@ -255,11 +282,11 @@ export default {
         if (data2.status === 0) {
           // 成功
           this.formDate = data2.data
-          //console.log(document.getElementById("pay_form"))
+          // console.log(document.getElementById("pay_form"))
           this.dialogShow = true
           // 支付跳转
           setTimeout(() => {
-            document.getElementById("pay_form").submit()
+            document.getElementById('pay_form').submit()
             this.isloading = false
           }, 1500)
         } else {
@@ -310,7 +337,7 @@ export default {
       this.id = value.id
       // 支付宝扫码渠道单独分开
       //  if(value == 'juhe1'){
-      if(value.formUrl !== undefined && value.formUrl !== '' && value.formUrl.indexOf('yunpay.waa.cn') !== -1){
+      if (value.formUrl !== undefined && value.formUrl !== '' && value.formUrl.indexOf('yunpay.waa.cn') !== -1) {
         this.type = value.ctype
         this.formDate = value
         this.formCode = value.formCode
@@ -393,15 +420,15 @@ export default {
       if (this.isloading) {
         return
       }
-      //H5支付
-      if(this.formDate.formUrl !== undefined && this.formDate.formUrl !== '' && this.formDate.formUrl.indexOf('yunpay.waa.cn') !== -1){
+      // H5支付
+      if (this.formDate.formUrl !== undefined && this.formDate.formUrl !== '' && this.formDate.formUrl.indexOf('yunpay.waa.cn') !== -1) {
         let data5 = await api.getjuheH5({ payType: this.formDate.formCode, payAmt: this.selectNumber })
         if (data5.status === 0) {
           this.formh5Date = data5.data
           this.$nextTick(() => {
-            this.qrcode(this.formh5Date.qrcode);
-          });
-          
+            this.qrcode(this.formh5Date.qrcode)
+          })
+
           this.popupVisible = true
           // console.log(document.getElementById("payh5_form"))
           // return;
@@ -450,13 +477,13 @@ export default {
     },
     // 生成二维码
     qrcode (url) {
-        document.getElementById("qrcode").innerHTML = ""
-        let qrcode = new QRCode("qrcode", {
-        width: 200, // 二维码宽度，单位像素
-        height: 200, // 二维码高度，单位像素
-        text: url // 生成二维码的链接
-      });
-    },
+      document.getElementById('qrcode').innerHTML = ''
+      let qrcode = new QRCode('qrcode', {
+        width: 200, // 二维码宽度，单位像素
+        height: 200, // 二维码高度，单位像素
+        text: url // 生成二维码的链接
+      })
+    },
     closePopup () {
       // 关闭弹窗
       this.popupVisible = false

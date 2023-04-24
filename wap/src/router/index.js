@@ -45,6 +45,7 @@ import Trage from '@/page/tradeAgree'
 import OpenAccount from '@/page/openaccount'
 import FundsList from '@/page/funds/funds-list'
 import News from '@/page/home/news'
+import changePassword from '@/page/user/changePassword'
 
 Vue.use(Router)
 
@@ -357,7 +358,7 @@ export default new Router({
       name: 'authentication',
       meta: {
         // title: '认证',
-        title: 'chứng nhận',
+        title: 'Xác thực',
         requireAuth: true,
         hasHeader: true
       },
@@ -551,6 +552,15 @@ export default new Router({
         hasHeader: true
       },
       component: News
+    }, {
+      path: '/changePassword',
+      name: 'changePassword',
+      meta: {
+        title: 'đổi mật khẩu',
+        requireAuth: false,
+        hasHeader: true
+      },
+      component: changePassword
     },
     {
       // 会匹配所有路径

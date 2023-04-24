@@ -347,7 +347,7 @@
                   slot="icon"></icon>
           </span>
         </li>
-        <li>
+        <li @click="gochangepass">
           <span>
             <!-- <i style="font-size:0.28rem" class="iconfont icon-yinhangqia"></i> -->
             <img src="../../assets/ico/gaimima.png"
@@ -628,6 +628,9 @@ export default {
           type: val
         }
       })
+    },
+    gochangepass () {
+      this.$router.push('/changePassword')
     },
     async getCardDetail () {
       // 获取银行卡信息

@@ -1,13 +1,13 @@
 <template>
   <div class="wrapper">
-    <mt-button slot="right" class="search-btn-list" icon="search" @click="getStock">搜索</mt-button>
+    <mt-button slot="right" class="search-btn-list" icon="search" @click="getStock">tìm kiếm</mt-button>
     <mt-search
       fixed
       show
       autofocus
       v-model="keywords"
       @keyup.enter.native="getStock"
-      placeholder="可输入股票代码或简拼"
+      placeholder="Mã chứng khoán hoặc chính tả đơn giản"
     >
       <ul class="table-list">
         <li class="title">
@@ -34,7 +34,7 @@
                 <p class="code">
                   <i v-if="item.stock_plate != '科创'"
                      :class="item.stock_type == 'sz'?'iconfont shen-mark hushen-mark':'iconfont hushen-mark'">{{item.stock_type}}</i>
-                  <i v-else class="iconfont kechuang-mark">科创</i>
+                  <i v-else class="iconfont kechuang-mark">HOSE</i>
                 </p>
               </li>
               <li class="li-base">
@@ -62,7 +62,7 @@
         {{$t("allLoaded")}}
       </div>
       <div v-show="!hasSearch" class="load-all text-center">
-        可输入您想要查询的股票代码或者简拼进行查询
+        <p class="text">Nhập mã chứng khoán hoặc chính tả đơn giản mà bạn muốn truy vấn</p>
       </div>
     </mt-search>
     <foot></foot>
@@ -221,5 +221,15 @@ export default {
       background-color: rgba(180, 180, 180, 0.1)
     }
   }
-
+/deep/.load-all{
+  height: auto !important;
+  line-height: .4rem !important;
+  margin-top: 1rem;
+  padding: .2rem 0;
+}
+.text{
+  width:80%;
+  text-align: center;
+  margin: 0 auto;
+}
 </style>

@@ -12,42 +12,62 @@
       <div class="box-contain clearfix">
         <div class="empty text-center">
           <!-- 您已通过实名认证 -->
-          <i v-show="this.$store.state.userInfo.isActive == 1" style="color:red;font-size: 1.5rem;"
+          <img v-show="this.$store.state.userInfo.isActive == 1"
+               class="renzhengImg"
+               src="@/assets/img/under-review.png" />
+          <img v-show="!showBtn && this.$store.state.userInfo.isActive != 1"
+               class="renzhengImg"
+               src="@/assets/img/pass.png" />
+          <img  v-show="showBtn"
+               class="renzhengImg"
+               src="@/assets/img/no.png" />
+          <!-- <i  style="color:red;font-size: 1.5rem;"
              class="iconfont icon-shenhezhong"></i>
-          <i v-show="!showBtn && this.$store.state.userInfo.isActive != 1" style="color:red;font-size: 1.5rem;"
+          <i  style="color:red;font-size: 1.5rem;"
              class="iconfont icon-tongguo1"></i>
-          <i v-show="showBtn" style="color:red;font-size: 1.5rem;" class="iconfont icon-icon-test"></i>
+          <i  style="color:red;font-size: 1.5rem;" class="iconfont icon-icon-test"></i> -->
         </div>
       </div>
     </div>
     <div class="form-block">
-      <div class="auth-msg" v-if="this.$store.state.userInfo.isActive == 3">
+      <div class="auth-msg"
+           v-if="this.$store.state.userInfo.isActive == 3">
         <p>{{$t("authenticationFailed")}}</p>
         <div>
           {{$t("failureReason")}}：{{this.$store.state.userInfo.authMsg}}
         </div>
       </div>
       <!-- <mt-field label="手机号" placeholder="请输入您的手机号" v-model="form.phone"></mt-field> -->
-      <mt-field :label="$t('authenticationName')" :placeholder="$t('authenticationNamepla')" type="text" v-model="form.name"></mt-field>
-      <mt-field :label="$t('iDCard')" :placeholder="$t('iDCardpla')" type="text" v-model="form.idCard"></mt-field>
+      <mt-field :label="$t('authenticationName')"
+                :placeholder="$t('authenticationNamepla')"
+                type="text"
+                v-model="form.name"></mt-field>
+      <mt-field :label="$t('iDCard')"
+                :placeholder="$t('iDCardpla')"
+                type="text"
+                v-model="form.idCard"></mt-field>
     </div>
     <div class="upload-box clearfix">
       <!-- <form action=""> -->
       <div class="upload-btn">
-        <el-upload
-          :with-credentials='true'
-          class="avatar-uploader"
-          :action="admin+'/user/upload.do'"
-          list-type="picture-card"
-          name="upload_file"
-          :show-file-list="false"
-          :on-success="handleAvatarSuccess"
-          :on-error='handleError'
-          :before-upload="beforeAvatarUpload">
-          <img v-if="form.img1key" :src="form.img1key" class="id-img avatar">
-          <i v-else class="iconfont icon-zhaopian"></i>
-          <span v-if="!form.img1key && !imgStatus" class="btn-title"> {{$t("iDCardFront")}}</span>
-          <span v-if="imgStatus" class="btn-title"> {{$t("uploading")}}...</span>
+        <el-upload :with-credentials='true'
+                   class="avatar-uploader"
+                   :action="admin+'/user/upload.do'"
+                   list-type="picture-card"
+                   name="upload_file"
+                   :show-file-list="false"
+                   :on-success="handleAvatarSuccess"
+                   :on-error='handleError'
+                   :before-upload="beforeAvatarUpload">
+          <img v-if="form.img1key"
+               :src="form.img1key"
+               class="id-img avatar">
+          <i v-else
+             class="iconfont icon-zhaopian"></i>
+          <span v-if="!form.img1key && !imgStatus"
+                class="btn-title"> {{$t("iDCardFront")}}</span>
+          <span v-if="imgStatus"
+                class="btn-title"> {{$t("uploading")}}...</span>
         </el-upload>
         <!-- <i class="iconfont icon-tupian"></i> -->
         <!-- <span class="btn-title">身份证正面</span> -->
@@ -55,20 +75,24 @@
         <!-- <img class="id-img" :src="this.form.img2Key" alt=""> -->
       </div>
       <div class="upload-btn">
-        <el-upload
-          :with-credentials='true'
-          class="avatar-uploader"
-          :action="admin+'/user/upload.do'"
-          list-type="picture-card"
-          name="upload_file"
-          :show-file-list="false"
-          :on-success="handleAvatarSuccess2"
-          :on-error='handleError2'
-          :before-upload="beforeAvatarUpload2">
-          <img v-if="form.img2key" :src="form.img2key" class="id-img avatar">
-          <i v-else class="iconfont icon-zhaopian"></i>
-          <span v-if="!form.img2key && !imgStatus2" class="btn-title">{{$t("iDCardback")}}</span>
-          <span v-if="imgStatus2" class="btn-title">{{$t("uploading")}}...</span>
+        <el-upload :with-credentials='true'
+                   class="avatar-uploader"
+                   :action="admin+'/user/upload.do'"
+                   list-type="picture-card"
+                   name="upload_file"
+                   :show-file-list="false"
+                   :on-success="handleAvatarSuccess2"
+                   :on-error='handleError2'
+                   :before-upload="beforeAvatarUpload2">
+          <img v-if="form.img2key"
+               :src="form.img2key"
+               class="id-img avatar">
+          <i v-else
+             class="iconfont icon-zhaopian"></i>
+          <span v-if="!form.img2key && !imgStatus2"
+                class="btn-title">{{$t("iDCardback")}}</span>
+          <span v-if="imgStatus2"
+                class="btn-title">{{$t("uploading")}}...</span>
         </el-upload>
         <!--
             :auto-upload="false"
@@ -98,8 +122,10 @@
         <li>3、{{$t("ruleTip3")}}。</li>
       </ul>
     </div>
-    <div v-show="showBtn" class="btnbox">
-      <span class="text-center btnok" @click="toSure">{{$t("config")}}</span>
+    <div v-show="showBtn"
+         class="btnbox">
+      <span class="text-center btnok"
+            @click="toSure">{{$t("config")}}</span>
     </div>
 
   </div>
@@ -135,8 +161,8 @@ export default {
       fileTip1: this.$t('fileTip1'),
       fileTip2: this.$t('fileTip2'),
       fileTip3: this.$t('fileTip3'),
-      fileTip4: this.$t('fileTip4'),
-}
+      fileTip4: this.$t('fileTip4')
+    }
   },
   watch: {},
   computed: {},
@@ -324,101 +350,108 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-  .transaction {
-    color: rgba(100, 100, 100, 0.78);
+.transaction {
+  color: rgba(100, 100, 100, 0.78);
 
-    .empty {
-      width: 100%;
-      // height: 1.34rem;
-      font-size: 0.43rem;
-      color: #888888;
-      text-align: center;
-      line-height: 2rem;
-      // background: url('../../assets/img/thingsOk.png') no-repeat center center;
-      background-size: 70%;
-    }
+  .empty {
+    width: 100%;
+    // height: 1.34rem;
+    font-size: 0.43rem;
+    color: #888888;
+    text-align: center;
+    line-height: 2rem;
+    // background: url('../../assets/img/thingsOk.png') no-repeat center center;
+    background-size: 70%;
+  }
+}
+
+.rule-box {
+  padding: 0.2rem 0.3rem;
+
+  .title {
+    font-size: 0.3rem;
+    height: 0.5rem;
+    line-height: 0.5rem;
+    margin-bottom: 0.2rem;
   }
 
-  .rule-box {
-    padding: 0.2rem 0.3rem;
-
-    .title {
-      font-size: 0.3rem;
-      height: 0.5rem;
+  ul {
+    li {
+      color: #999;
       line-height: 0.5rem;
-      margin-bottom: 0.2rem;
-    }
-
-    ul {
-      li {
-        color: #999;
-        line-height: 0.5rem;
-      }
     }
   }
+}
 
-  .upload-box {
-    padding: 0.5rem;
+.upload-box {
+  padding: 0.5rem;
 
-    .upload-btn {
-      // border: 1px solid #ddd;
-      border-radius: 4px;
-      width: 40%;
+  .upload-btn {
+    // border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 40%;
+    height: 1.6rem;
+    margin-bottom: 10px;
+    float: left;
+    margin: 0.2rem 5%;
+    text-align: center;
+    position: relative;
+
+    .btn-hidden {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 3;
+      opacity: 0;
+    }
+
+    .id-img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    /deep/ .el-upload--picture-card {
+      background: none;
+      width: 100%;
       height: 1.6rem;
-      margin-bottom: 10px;
-      float: left;
-      margin: 0.2rem 5%;
-      text-align: center;
-      position: relative;
-
-      .btn-hidden {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 3;
-        opacity: 0;
-      }
-
-      .id-img {
-        max-width: 100%;
-        max-height: 100%;
-      }
-
-      /deep/ .el-upload--picture-card {
-        background: none;
-        width: 100%;
-        height: 1.6rem;
-        line-height: 1.6rem;
-      }
-
-      .btn-title {
-        position: absolute;
-        top: 23px;
-        left: 0;
-        width: 100%;
-      }
-
-      /deep/ .el-upload__input {
-        display: none;
-      }
-
+      line-height: 1.6rem;
     }
 
-  }
-
-  .auth-msg {
-    padding: 0.2rem 0.6rem;
-    line-height: 0.4rem;
-
-    p {
-      color: red;
+    .btn-title {
+      position: absolute;
+      bottom: 0.1rem;
+      left: 0;
+      width: 100%;
+      line-height: 0.3rem;
+      font-size: 0.24rem;
     }
 
-    div {
-      color: #ddd;
+    /deep/ .el-upload__input {
+      display: none;
     }
   }
+}
 
+.auth-msg {
+  padding: 0.2rem 0.6rem;
+  line-height: 0.4rem;
+
+  p {
+    color: red;
+  }
+
+  div {
+    color: #ddd;
+  }
+}
+/deep/.mint-field .mint-cell-title {
+  width: 34%;
+}
+.renzhengImg{
+  width:3rem;
+  height:3rem;
+  object-fit: contain;
+}
 </style>

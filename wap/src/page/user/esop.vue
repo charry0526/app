@@ -5,9 +5,9 @@
                v-model="selected"
                fixed>
       <mt-tab-item class="top-nav-item"
-                   id="1">danh sách ESOP</mt-tab-item>
+                   id="1">ESOP</mt-tab-item>
       <mt-tab-item class="top-nav-item"
-                   id="2">danh sách ứng dụng</mt-tab-item>
+                   id="2">Danh mục</mt-tab-item>
       <!-- <mt-tab-item class="top-nav-item"
                    id="3">期货账户</mt-tab-item> -->
     </mt-navbar>
@@ -21,10 +21,10 @@
                  :infinite-scroll-disabled="loading"
                  infinite-scroll-distance="10"
                  class="table">
-            <th>tên</th>
-            <th>Giá thị trường</th>
-            <th>giá phát hành</th>
-            <th>Áp dụng</th>
+            <th>Mã</th>
+            <th>Giá thị trường</th>
+            <th>Giá phát hành</th>
+            <th>Đặt lệnh</th>
             <tr v-for="(item,index) in stockList"
                 :key="index">
               <td>{{item.names}}</td>
@@ -36,7 +36,7 @@
                              size="small"
                              type="danger"
                              @click="popUp(item)">
-                    Áp dụng
+                    Mua
                   </mt-button>
                 </div>
               </td>
@@ -52,13 +52,13 @@
                  :infinite-scroll-disabled="loading"
                  infinite-scroll-distance="10"
                  class="table">
-            <th>tên</th>
-            <th>{{$t('marketValue')}}</th>
-            <th>{{$t('nums')}}</th>
-            <th>đòn bẩy</th>
-            <th>trị giá</th>
-            <th>tình trạng</th>
-            <th>Mua</th>
+            <th>Mã</th>
+            <th>Giá thị trường</th>
+            <th>Giá phát hành</th>
+            <th>Khối lượng</th>
+            <th>Giá hiện tại</th>
+            <!-- <th>tình trạng</th> -->
+            <th></th>
             <tr v-for="(item,index) in tendorseListDate"
                 :key="index">
               <td>{{item.xgname}}</td>
@@ -66,16 +66,16 @@
               <td>{{item.nums}}</td>
               <td>{{item.gg}}</td>
               <td>{{item.bzj}}</td>
-              <td :class="item.zts==2?'tdActive':''">
+              <!-- <td :class="item.zts==2?'tdActive':''">
                 {{item.zts==1?'vượt qua':item.zts==2?'không vượt qua':item.zts==4?'Hoàn thành':'không được xem xét'}}
-              </td>
+              </td> -->
               <td>
                 <div class="button-box">
                   <mt-button v-if="item.zts==1" class="btn-red pull-right"
                              size="small"
                              type="danger"
                              @click="toCash(item)">
-                    cầu hôn
+                    Bán
                   </mt-button>
                 </div>
               </td>

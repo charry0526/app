@@ -4,11 +4,13 @@
         v-infinite-scroll="loadMore"
         infinite-scroll-disabled="loading"
         infinite-scroll-distance="10">
-      <li class="list-body" v-for="item in list" :key="item.key">
+      <li class="list-body"
+          v-for="item in list"
+          :key="item.key">
         <div class="capital">
           <div>
             {{item.deType}}
-            <span :class="item.deAmt<0?'pull-right green':'pull-right red'">{{item.deAmt}}</span>
+            <span :class="item.deAmt>0?'pull-right green':'pull-right red'">{{moneyDot(item.deAmt)}}</span>
           </div>
           <div class="pro clearfix">
             {{item.deSummary}}
@@ -29,11 +31,13 @@
 
       </li>
     </ul>
-    <div v-show="loading" class="load-all text-center">
+    <div v-show="loading"
+         class="load-all text-center">
       <mt-spinner type="fading-circle"></mt-spinner>
       {{$t("loading")}}...
     </div>
-    <div v-show="!loading" class="load-all text-center">
+    <div v-show="!loading"
+         class="load-all text-center">
       {{$t("allLoaded")}}
     </div>
   </div>
@@ -42,7 +46,7 @@
 <script>
 import { Toast } from 'mint-ui'
 import * as api from '@/axios/api'
-
+import { moneyDot } from '@/utils/utils.js'
 export default {
   components: {},
   props: {},
@@ -52,12 +56,13 @@ export default {
       list: [],
       pageNum: 1,
       pageSize: 10,
-      total: 0
+      total: 0,
+      moneyDot
     }
   },
   watch: {},
   computed: {},
-  created () {},
+  created () { },
   mounted () {
     this.getcashDetail()
   },
@@ -69,17 +74,20 @@ export default {
         pageSize: 10
       }
       let data = await api.cashDetail(opts)
-      if (data.status === 0) {
+      if (data.status === 0)
+      {
         data.data.list.forEach(element => {
           this.list.push(element)
         })
         this.total = data.data.total
-      } else {
+      } else
+      {
         Toast(data.msg)
       }
     },
     async loadMore () {
-      if (this.list.length < this.pageSize || this.total <= this.pageNum * this.pageSize) {
+      if (this.list.length < this.pageSize || this.total <= this.pageNum * this.pageSize)
+      {
         return
       }
       this.loading = true
@@ -92,31 +100,30 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-  .table-list {
-    padding: 0.2rem 0;
+.table-list {
+  padding: 0.2rem 0;
 
-    .list-body {
-      padding: 0.1rem 0.2rem;
+  .list-body {
+    padding: 0.1rem 0.2rem;
 
-      .capital {
-        padding: 0.2rem;
-        border-radius: 0.2rem;
-        border: 0.01rem solid #3f444a;
+    .capital {
+      padding: 0.2rem;
+      border-radius: 0.2rem;
+      border: 0.01rem solid #3f444a;
 
-        div {
-          line-height: 0.4rem;
-        }
+      div {
+        line-height: 0.4rem;
+      }
 
-        .col-xs-4 {
-          padding-left: 0;
-          padding-right: 0;
-        }
+      .col-xs-4 {
+        padding-left: 0;
+        padding-right: 0;
+      }
 
-        .pro {
-          color: #999;
-        }
+      .pro {
+        color: #999;
       }
     }
   }
-
+}
 </style>

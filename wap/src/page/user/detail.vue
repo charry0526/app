@@ -12,8 +12,8 @@
       <div class="box-contain clearfix">
         <div class="account text-center">
           <!-- <p class="title">当前可用余额（元）</p> -->
-          <p class="title">current available balance（Yuan）</p>
-          <p class="red number">{{$store.state.userInfo.enableAmt}}</p>
+          <p class="title">Số dư khả dụng (VND)</p>
+          <p class="red number">{{moneyDot($store.state.userInfo.enableAmt)||''}}</p>
         </div>
         <div class="account-panel">
           <div class="col-xs-6">
@@ -39,6 +39,7 @@
 
 <script>
 import listDetail from './compontents/list-detail'
+import { moneyDot } from '@/utils/utils.js'
 
 export default {
   components: {
@@ -47,22 +48,23 @@ export default {
   props: {},
   data () {
     return {
-      listDetail
+      listDetail,
+      moneyDot
     }
   },
   watch: {},
   computed: {},
   created () {},
   mounted () {
-    if (this.$state.theme =='red') {
-        document.body.classList.remove('black-bg')
-        document.body.classList.add('red-bg')
+    if (this.$state.theme == 'red') {
+      document.body.classList.remove('black-bg')
+      document.body.classList.add('red-bg')
     }
   },
   beforeDestroy () {
-    if (this.$state.theme =='red') {
+    if (this.$state.theme == 'red') {
       document.body.classList.remove('red-bg')
-        document.body.classList.add('black-bg')
+      document.body.classList.add('black-bg')
     }
   },
   methods: {}
