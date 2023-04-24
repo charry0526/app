@@ -198,9 +198,6 @@
               </span>
             </div>
           </div>
-          <div v-if="newsContent.length<=0" class="load-all text-center">
-            <mt-spinner type="fading-circle"></mt-spinner>
-          </div>
           <div v-show="loading" class="load-all text-center">
               <mt-spinner type="fading-circle"></mt-spinner>
               {{$t("loading")}}...

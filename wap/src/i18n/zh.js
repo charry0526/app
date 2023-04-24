@@ -5,7 +5,7 @@ const common = {
   searchText: 'Tên/Mã/Bính âm viết tắt', // 名称/代码/拼音首字母
   strand: 'mắc cạn', // 股
   moneyUnit: 'nhân dân tệ', // 元
-  config: 'Chắc chắn', // 确定
+  config: 'Hoàn thành', // 确定
   notLoggedL: 'chưa đăng nhập' // 未登录
 }
 // 提示
@@ -19,18 +19,26 @@ const tipObj = {
 }
 // 首页
 const home = {
-  homeNavList1: 'Giá thị trường', // 行情
-  homeNavList2: 'chức vụ', // 持仓
-  homeNavList3: 'không bắt buộc', // 自选
-  homeNavList4: 'của tôi', // 我的
-  NewsList: 'danh sách tin tức', // 新闻列表
+  homeNavList1: 'Bảng giá', // 行情
+  homeNavList2: 'Tài sản', // 持仓
+  homeNavList3: 'Không bắt buộc', // 自选
+  homeNavList4: 'Của tôi', // 我的
+  NewsList: 'Tin tức', // 新闻列表
   search: 'tìm kiếm', // 搜索
   pleaseCheckTheOrder: 'Vui lòng kiểm tra đơn hàng' // 请查询订单
 }
+const tabbar = {
+  tabbar1: 'Trang đầu',
+  tabbar2: 'Bảng giá',
+  tabbar3: 'Tài sản',
+  tabbar4: 'Tự chọn',
+  tabbar5: 'Của tôi'
+
+}
 // 持仓
 const orderList = {
-  myPosition: 'chức vụ', // 我的持仓
-  myClosingPosition: 'đóng một vị trí', // 我的平仓
+  myPosition: 'Tài sản', // 我的持仓
+  myClosingPosition: 'Bán ra', // 我的平仓
   queryOrders: 'Thứ tự truy vấn Jianpin', // 根据股票简拼查询订单
   queryCodeOrders: 'thứ tự truy vấn mã', // 根据股票代码查询订单
   // 科创
@@ -44,7 +52,7 @@ const orderList = {
   pointdifferenceFee: 'phí lây lan', // 点差费
   Floating: 'Lãi lỗ thả nổi', // 浮动盈亏
   TotalprofitAndLoss: 'tổng lãi lỗ', // 总盈亏
-  closeAposition: 'đóng một vị trí', // 我要平仓
+  closeAposition: 'Bán ra', // 我要平仓
   ShortPinyinQueryPosition: 'Vị trí truy vấn pin đơn giản' // 可输入股票简拼查询持仓
 }
 // 自选
@@ -86,8 +94,8 @@ const uesr = {
   uesrTotle: 'Tổng tài sản', // 总资产
   recharge: 'nạp điện', // 充值
   withdraw: 'rút', // 提现
-  AvailableFunds: 'tiền khả dụng', // 可用资金
-  FreezeMargin: 'Ký quỹ đóng băng', // 冻结保证金
+  AvailableFunds: 'SỐ DƯ KHẢ DỤNG', // 可用资金
+  FreezeMargin: 'TỔNG SỐ KÝ QUỸ', // 冻结保证金
   Verified: 'Đã xác minh', // 实名认证
   examinationPassed: 'kiểm tra thông qua', // 审核通过
   NotReviewed: 'không được xem xét', // 未审核
@@ -98,14 +106,26 @@ const uesr = {
   RechargeRecord: 'hồ sơ nạp tiền', // 充值记录
   WithdrawalsRecord: 'Hồ sơ rút tiền' // 提现记录
 }
-const cardBind={
-  
+const cardBind = {
+  cashText: 'Số tiền có thể rút ( VND )',
+  cashText2: 'Hoàn thành',
+  cashText3: '1 : Để thực hiện rút tiền , vui lòng xác thực tên thật và liên kết tài khoản ngân hàng chính chủ.',
+  cashText4: '2 : Thời gian rút tiền từ 09:00 đến 17:00 trừ ngày thứ 7 chủ nhật, ngày lễ .',
+  cashText5: '3 : Số tiền rút tối thiểu cho mỗi lần rút 100.000 VND.',
+  cashText6: '4 : Thời gian hoàn thành giao dịch rút trong vòng 24 giờ tính từ lúc lệnh rút được thông qua,tùy thuộc vào ngân hàng thụ hưởng.',
+  cashText7: 'Lưu ý :Số tiền rút không được vượt quá số dư khả dụng trong tài khoản của bạn.'
+}
+const openaccount = {
+  process1: 'Đăng ký',
+  process2: 'Xác nhận',
+  process3: 'Tiền gửi',
+  process4: 'Mua bán'
 }
 const popup = {
   popupTip1: 'Dòng thanh lý bắt buộc là gì',
-  popupTip2: '(Thượng Hải và Thâm Quyến) dòng thanh lý bắt buộc = (tiền khả dụng của tài khoản + ký quỹ đóng băng) *',
+  popupTip2: '(Thượng Hải và Thâm Quyến) dòng thanh lý bắt buộc = (tiền khả dụng của tài khoản + TỔNG SỐ KÝ QUỸ) *',
   popupTip3: '(Chỉ số) Dòng thanh lý cưỡng bức = (tiền khả dụng của tài khoản + ký quỹ bị đóng băng) *',
-  popupTip4: '(Hợp đồng tương lai) dòng thanh lý bắt buộc = (tiền khả dụng của tài khoản + ký quỹ đóng băng) *',
+  popupTip4: '(Hợp đồng tương lai) dòng thanh lý bắt buộc = (tiền khả dụng của tài khoản + TỔNG SỐ KÝ QUỸ) *',
   popupTip5: 'Khi tổng lãi và lỗ của các vị thế tài khoản Thượng Hải và Thâm Quyến của bạn là',
   popupTip6: 'Hệ thống sẽ buộc thanh lý',
   popupTip7: 'Khi tổng lãi và lỗ của các vị trí tài khoản chỉ mục của bạn là',
@@ -119,5 +139,8 @@ export default {
   ...authentication,
   ...tipObj,
   ...uesr,
-  ...popup
+  ...popup,
+  ...tabbar,
+  ...openaccount,
+  ...cardBind
 }

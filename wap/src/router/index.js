@@ -82,7 +82,7 @@ export default new Router({
       name: 'register',
       meta: {
         // title: '注册'
-        title: 'đăng ký'
+        title: 'Đăng ký'
       },
       component: Register
     }, {
@@ -98,7 +98,7 @@ export default new Router({
       name: 'login',
       meta: {
         // title: '账户登录',
-        title: 'đăng nhập tài khoản',
+        title: 'Đăng nhập tài khoản',
         hasHeader: true
       },
       component: Login
@@ -107,7 +107,7 @@ export default new Router({
       name: 'openaccount',
       meta: {
         // title: 'mở một tài khoản',
-        title: 'đăng nhập tài khoản',
+        title: 'Đăng nhập tài khoản',
         hasHeader: true
       },
       component: OpenAccount
@@ -116,7 +116,7 @@ export default new Router({
       name: 'list',
       meta: {
         // title: '行情',
-        title: 'dấu ngoặc kép',
+        title: 'Bảng giá',
         requireAuth: false,
         hasHeader: true
       },
@@ -276,7 +276,7 @@ export default new Router({
       name: 'orderlist',
       meta: {
         // title: '持仓',
-        title: 'chức vụ',
+        title: 'Tài sản',
         requireAuth: false,
         hasHeader: true
       },

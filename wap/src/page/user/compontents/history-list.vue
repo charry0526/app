@@ -30,14 +30,14 @@
               <p class="clearfix">
                 <span class="col-xs-4">
                   <!-- 买入价格 -->
-                  giá mua::
+                  Giá mua:
                   <b class="space">{{item.buyOrderPrice}}</b></span>
                 <span class="col-xs-4 text-center">
                   <!-- 数量 -->
                    Số lượng::<b class="space">{{item.orderNum}}</b></span>
                 <span class="col-xs-4 text-right">
                   <!-- 市值 -->
-                  giá trị:<b class="space">{{item.orderTotalPrice}}</b></span>
+                  Giá thị trường:<b class="space">{{item.orderTotalPrice}}</b></span>
               </p>
               <p class="clearfix">
                 <span class="col-xs-4">
@@ -52,7 +52,7 @@
               <p class="clearfix">
                 <span class="col-xs-4">
                   <!-- 手续费 -->
-                  phí xử lý:
+                  Phí giao dịch:
                   <b class="space">{{item.orderFee}}</b></span>
                 <span class="col-xs-4 text-center">
                   <!-- 印花税 -->
@@ -60,7 +60,7 @@
                   :<b class="space">{{item.orderSpread}}</b></span>
                 <span class="col-xs-4 text-right">
                   <!-- 留仓费 -->
-                  Phí lưu trữ:<b class="space">{{item.orderStayFee}}</b></span>
+                  Phí qua đêm:<b class="space">{{item.orderStayFee}}</b></span>
               </p>
 
               <p class="clearfix">
@@ -95,9 +95,9 @@
         <mt-spinner type="fading-circle"></mt-spinner>
         {{$t("loading")}}...
       </div>
-      <div v-show="!loading" class="load-all text-center">
+      <!-- <div v-show="!loading" class="load-all text-center">
         {{$t("allLoaded")}}
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

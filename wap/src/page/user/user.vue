@@ -16,16 +16,20 @@
     </div> -->
     <div class="account-info">
       <div class="account-info_avatar">
-        <img src="../../assets/ico/wogerenziliao.png" alt="">
+        <img src="../../assets/ico/wogerenziliao.png"
+             alt="">
       </div>
       <div class="account-info_detail">
         <div class="account-phone">{{$t("userAuth")}}：{{$store.state.userInfo.phone || $t("notLoggedL")}}</div>
         <div class="account-name">{{$t("userName")}}：{{$store.state.userInfo.nickName || $t("notLoggedL")}}</div>
       </div>
-      <div class="account-info_ctl" @click="hideNumber">
+      <div class="account-info_ctl"
+           @click="hideNumber">
         {{$t("assetStatus")}}
-        <i v-show="$store.state.hide" class="iconfont icon-yanjing"></i>
-        <i v-show="!$store.state.hide" class="iconfont icon-yanjing1"></i>
+        <i v-show="$store.state.hide"
+           class="iconfont icon-yanjing"></i>
+        <i v-show="!$store.state.hide"
+           class="iconfont icon-yanjing1"></i>
       </div>
     </div>
     <div class="account-container">
@@ -56,108 +60,134 @@
       </div> -->
       <div class="account-preview">
         <div class="acc-pre-left">
-          <img v-show="$state.theme!='red'" src="../../assets/ico/zongzichan.png" alt="">
-          <img v-show="$state.theme=='red'" src="../../assets/ico/zongzichan-red.png" alt="">
+          <img v-show="$state.theme!='red'"
+               src="../../assets/img/vnd.png"
+               alt="">
+          <img v-show="$state.theme=='red'"
+               src="../../assets/img/vnd-red.png"
+               alt="">
 
           <span class="ti">{{$t("uesrTotle")}}</span>
           <span class="de">
             <div>
               <p v-if="this.$store.state.settingForm.indexDisplay && !this.$store.state.settingForm.futuresDisplay "
-                class="account">¥{{$store.state.hide?'****':Number($store.state.userInfo.userAmt +
+                 class="account">¥{{$store.state.hide?'****':Number($store.state.userInfo.userAmt +
                 $store.state.userInfo.userIndexAmt).toFixed(2)}}</p>
               <p v-else-if="!this.$store.state.settingForm.indexDisplay && this.$store.state.settingForm.futuresDisplay"
-                class="account">¥{{$store.state.hide?'****':Number($store.state.userInfo.userAmt +
+                 class="account">¥{{$store.state.hide?'****':Number($store.state.userInfo.userAmt +
                 $store.state.userInfo.userFuturesAmt).toFixed(2)}}</p>
               <p v-else-if="!this.$store.state.settingForm.indexDisplay && !this.$store.state.settingForm.futuresDisplay"
-                class="account">¥{{$store.state.hide?'****':Number($store.state.userInfo.userAmt).toFixed(2)}}</p>
+                 class="account">¥{{$store.state.hide?'****':Number($store.state.userInfo.userAmt).toFixed(2)}}</p>
               <p v-else-if="this.$store.state.settingForm.indexDisplay && this.$store.state.settingForm.futuresDisplay"
-                class="account">¥{{$store.state.hide?'****':Number($store.state.userInfo.userAmt +
+                 class="account">¥{{$store.state.hide?'****':Number($store.state.userInfo.userAmt +
                 $store.state.userInfo.userIndexAmt + $store.state.userInfo.userFuturesAmt).toFixed(2)}}</p>
             </div>
           </span>
         </div>
         <div class="acc-pre-center">
-          <div>{{$t("userAuth")}}: <span>￥{{$store.state.hide?'****':$store.state.userInfo.userAmt}}</span></div>
+          <div>{{$t("userAuth")}}: <span style="font-size: .22rem;">{{$store.state.hide?'****':$store.state.userInfo.userAmt}}.VND</span></div>
           <!-- <div>指数账户: <span>￥{{$store.state.hide?'****':$store.state.userInfo.userIndexAmt}}</span></div> -->
           <!-- <div>期货账户: <span>￥{{$store.state.hide?'****':Number($store.state.userInfo.userFuturesAmt).toFixed(2)}}</span></div> -->
         </div>
         <div class="acc-pre-right">
-          <div class="redbtn btn" @click="toRecharge">{{$t("recharge")}}</div>
-          <div class="bluebtn btn" @click="toCash">{{$t("withdraw")}}</div>
+          <div class="redbtn btn"
+               @click="toRecharge">{{$t("recharge")}}</div>
+          <div class="bluebtn btn"
+               @click="toCash">{{$t("withdraw")}}</div>
         </div>
       </div>
-      <div v-for="item in account" :key="item.key">
-        <div class="account-box" v-if="item.isDisplay">
-          <div class="header" @click="item.isShow = item.isShow?false:true">
+      <div v-for="item in account"
+           :key="item.key">
+        <div class="account-box"
+             v-if="item.isDisplay">
+          <div class="header"
+               @click="item.isShow = item.isShow?false:true">
             <!-- <i v-if="item.isShow" class="iconfont jian"></i>
             <i v-else class="iconfont jia"></i> -->
             <div class="header-left">
-            <img v-if="item.isShow&&$state.theme =='red'" class="iconfont"
-            src="../../assets/ico/jian-red.png"
-            >
-            <img v-else-if="item.isShow&&$state.theme !='red'" class="iconfont"
-            src="../../assets/ico/jian.png"
-            >
-            <img v-else-if="!item.isShow&&$state.theme !='red'" class="iconfont"
-            src="../../assets/ico/jia.png"
-            >
-            <img v-else class="iconfont"
-            src="../../assets/ico/jia-red.png"
-            >
-            <span :style="{color:$state.theme =='red'?'#000':'#fff'}">của tôi {{$t("userAuth")}}</span>
-            <span v-if="item.name == '指数'">(￥{{$store.state.hide?'****':$store.state.userInfo.userIndexAmt}})</span>
-            <span v-if="item.name == '我的'">(￥{{$store.state.hide?'****':$store.state.userInfo.userAmt}})</span>
-            <span
-              v-if="item.name == '期货'">(￥{{$store.state.hide?'****':Number($store.state.userInfo.userFuturesAmt).toFixed(2)}})
-            </span>
+              <img v-if="item.isShow&&$state.theme =='red'"
+                   class="iconfont"
+                   src="../../assets/ico/jian-red.png">
+              <img v-else-if="item.isShow&&$state.theme !='red'"
+                   class="iconfont"
+                   src="../../assets/ico/jian.png">
+              <img v-else-if="!item.isShow&&$state.theme !='red'"
+                   class="iconfont"
+                   src="../../assets/ico/jia.png">
+              <img v-else
+                   class="iconfont"
+                   src="../../assets/ico/jia-red.png">
+              <span :style="{color:$state.theme =='red'?'#000':'#fff'}">TÀI SẢN CỦA TÔI {{$t("userAuth")}}</span>
+              <span v-if="item.name == '指数'">({{$store.state.hide?'****':$store.state.userInfo.userIndexAmt}})</span>
+              <span v-if="item.name == '我的'">({{$store.state.hide?'****':$store.state.userInfo.userAmt}})</span>
+              <span v-if="item.name == '期货'">({{$store.state.hide?'****':Number($store.state.userInfo.userFuturesAmt).toFixed(2)}})
+              </span>
             </div>
             <!-- <a class="pull-right" @click="toTransfer(1)">
               <span :style="{color:$state.theme == 'red'?'#000':'#fff'}">资金互转<i class="iconfont icon-you"></i></span>
             </a> -->
           </div>
-          <div v-show="item.isShow" class="content">
-            <ul class="clearfix">
+          <div v-show="item.isShow"
+               class="content">
+            <ul class="content-ul">
               <li>
-                <i class="iconfont icon-zijin1"></i>
-                <div class="name">{{$t("uesrTotle")}}</div>
-                <p v-if="item.name == '指数'" class="number yellow">
-                  {{$store.state.hide?'****':$store.state.userInfo.userIndexAmt}}</p>
-                <p v-if="item.name == '我的'" class="number yellow">
-                  {{$store.state.hide?'****':$store.state.userInfo.userAmt}}</p>
-                <p v-if="item.name == '期货'" class="number yellow">
-                  {{$store.state.hide?'****':Number($store.state.userInfo.userFuturesAmt).toFixed(2)}}</p>
+                <!-- <i class="iconfont icon-zijin1"></i> -->
+                <img class="zijin1"
+                     src="../../assets/img/zijin1.png">
+                <div>
+                  <div class="name">{{$t("uesrTotle")}}</div>
+                  <p v-if="item.name == '指数'"
+                     class="number yellow">
+                    {{$store.state.hide?'****':$store.state.userInfo.userIndexAmt}}.VND</p>
+                  <p v-if="item.name == '我的'"
+                     class="number yellow">
+                    {{$store.state.hide?'****':$store.state.userInfo.userAmt}}.VND</p>
+                  <p v-if="item.name == '期货'"
+                     class="number yellow">
+                    {{$store.state.hide?'****':Number($store.state.userInfo.userFuturesAmt).toFixed(2)}}.VND</p>
+                </div>
               </li>
               <li>
-                <i class="iconfont icon-keyongzijin"></i>
-                <div class="name">{{$t("AvailableFunds")}}</div>
-                <p v-if="item.name == '指数'" class="number yellow">
-                  {{$store.state.hide?'****':$store.state.userInfo.enableIndexAmt}}</p>
-                <p v-if="item.name == '我的'" class="number yellow">
-                  {{$store.state.hide?'****':$store.state.userInfo.enableAmt}}</p>
-                <p v-if="item.name == '期货'" class="number yellow">
-                  {{$store.state.hide?'****':$store.state.userInfo.enableFuturesAmt}}</p>
+                <!-- <i class="iconfont icon-keyongzijin"></i> -->
+                <img class="zijin1"
+                     src="../../assets/img/keyongzijin.png">
+                <div>
+                  <div class="name">{{$t("AvailableFunds")}}</div>
+                  <p v-if="item.name == '指数'"
+                     class="number yellow">
+                    {{$store.state.hide?'****':$store.state.userInfo.enableIndexAmt}}</p>
+                  <p v-if="item.name == '我的'"
+                     class="number yellow">
+                    {{$store.state.hide?'****':$store.state.userInfo.enableAmt}}</p>
+                  <p v-if="item.name == '期货'"
+                     class="number yellow">
+                    {{$store.state.hide?'****':$store.state.userInfo.enableFuturesAmt}}</p>
+                </div>
               </li>
               <li>
                 <i class="iconfont icon-dongjiezijin"></i>
                 <div class="name">{{$t("FreezeMargin")}}</div>
-                <p v-if="item.name == '指数'" class="number yellow">
+                <p v-if="item.name == '指数'"
+                   class="number yellow">
                   {{$store.state.hide?'****':$store.state.userInfo.allIndexFreezAmt}}</p>
-                <p v-if="item.name == '我的'" class="number yellow">
+                <p v-if="item.name == '我的'"
+                   class="number yellow">
                   {{$store.state.hide?'****':$store.state.userInfo.allFreezAmt}}</p>
-                <p v-if="item.name == '期货'" class="number yellow">
+                <p v-if="item.name == '期货'"
+                   class="number yellow">
                   {{$store.state.hide?'****':$store.state.userInfo.allFuturesFreezAmt}}</p>
               </li>
               <li>
                 <i class="iconfont icon-yingkuixuanzhong"></i>
                 <div class="name">{{$t("TotalprofitAndLoss")}}</div>
                 <p v-if="item.name == '指数'"
-                  :class="$store.state.userInfo.allIndexProfitAndLose>0?'number red':$store.state.userInfo.allIndexProfitAndLose<0?'number green':'number'">
+                   :class="$store.state.userInfo.allIndexProfitAndLose>0?'number red':$store.state.userInfo.allIndexProfitAndLose<0?'number green':'number'">
                   {{$store.state.hide?'****':$store.state.userInfo.allIndexProfitAndLose}}</p>
                 <p v-if="item.name == '我的'"
-                  :class="$store.state.userInfo.allProfitAndLose>0?'number red':$store.state.userInfo.allProfitAndLose<0?'number green':'number'">
+                   :class="$store.state.userInfo.allProfitAndLose>0?'number red':$store.state.userInfo.allProfitAndLose<0?'number green':'number'">
                   {{$store.state.hide?'****':$store.state.userInfo.allProfitAndLose}}</p>
                 <p v-if="item.name == '期货'"
-                  :class="$store.state.userInfo.allFuturesProfitAndLose>0?'number red':$store.state.userInfo.allFuturesProfitAndLose<0?'number green':'number'">
+                   :class="$store.state.userInfo.allFuturesProfitAndLose>0?'number red':$store.state.userInfo.allFuturesProfitAndLose<0?'number green':'number'">
                   {{$store.state.hide?'****':Number($store.state.userInfo.allFuturesProfitAndLose).toFixed(2)}}</p>
               </li>
               <!-- <li>
@@ -169,17 +199,23 @@
           </div>
         </div>
         <div v-show="item.isShow"
-        class="pcx"
-        style="padding: 0.12rem 0.4rem 0.15rem;">
+             class="pcx"
+             style="padding: 0.12rem 0.4rem 0.15rem;">
           <!-- 强制平仓线为 ： 可用资金 + 冻结保证金 * 0.6 -->
           <div style="background:#1A1E29;line-height: .4rem;">
             <!-- 您的{{item.name}}账户强制平仓线为-->
-            Của bạn{{item.name}}Dòng buộc thanh lý tài khoản là
-          <span v-if="item.name == '指数'" style="font-weight:bold;font-size:0.26rem;">{{$store.state.hide?'****':Number(($store.state.userInfo.enableIndexAmt + $store.state.userInfo.allIndexFreezAmt) * indexSettingInfo.forceSellPercent).toFixed(2)}} </span>
-          <span v-if="item.name == '我的'" style="font-weight:bold;font-size:0.26rem;">{{$store.state.hide?'****':Number(($store.state.userInfo.enableAmt + $store.state.userInfo.allFreezAmt) * settingInfo.forceStopPercent).toFixed(2)}} </span>
-          <span v-if="item.name == '期货'" style="font-weight:bold;font-size:0.26rem;">{{$store.state.hide?'****':Number(($store.state.userInfo.enableFuturesAmt + $store.state.userInfo.allFuturesFreezAmt) * futuresSettingInfo.forceSellPercent).toFixed(2)}} </span>
-          <!-- 请实时注意账户风险 -->
-          <i @click="focePromptPopup = true" ref="button" class="iconfont icon-xinshou"></i>
+            <!-- Của bạn{{item.name}}Dòng buộc thanh lý tài khoản là -->
+            THANH LÝ BẮT BUỘC TẠI
+            <span v-if="item.name == '指数'"
+                  style="font-weight:bold;font-size:0.26rem;">{{$store.state.hide?'****':Number(($store.state.userInfo.enableIndexAmt + $store.state.userInfo.allIndexFreezAmt) * indexSettingInfo.forceSellPercent).toFixed(2)}} </span>
+            <span v-if="item.name == '我的'"
+                  style="font-weight:bold;font-size:0.26rem;">{{$store.state.hide?'****':Number(($store.state.userInfo.enableAmt + $store.state.userInfo.allFreezAmt) * settingInfo.forceStopPercent).toFixed(2)}} </span>
+            <span v-if="item.name == '期货'"
+                  style="font-weight:bold;font-size:0.26rem;">{{$store.state.hide?'****':Number(($store.state.userInfo.enableFuturesAmt + $store.state.userInfo.allFuturesFreezAmt) * futuresSettingInfo.forceSellPercent).toFixed(2)}} </span>
+            <!-- 请实时注意账户风险 -->
+            <i @click="focePromptPopup = true"
+               ref="button"
+               class="iconfont icon-xinshou"></i>
           </div>
         </div>
       </div>
@@ -223,15 +259,20 @@
       </div>
       <div class="panel-body">
         <div class="row">
-          <div @click="goOrderList(1)" class="col-xs-3">
+          <div @click="goOrderList(1)"
+               class="col-xs-3">
             <i class="iconfont icon-rongzi2"></i>
             {{$t("myPosition")}}
           </div>
-          <div style="width:27%" @click="goOrderList(1)" class="col-xs-3">
+          <div style="width:27%"
+               @click="goOrderList(1)"
+               class="col-xs-3">
             <i class="iconfont icon-rongzilishi"></i>
             {{$t("myClosingPosition")}}
           </div>
-          <div v-if="this.$store.state.settingForm.indexDisplay" @click="goEsop()" class="col-xs-3">
+          <div v-if="this.$store.state.settingForm.indexDisplay"
+               @click="goEsop()"
+               class="col-xs-3">
             <i class="iconfont icon-zhishuyidong"></i>
             ESOP
           </div>
@@ -253,70 +294,73 @@
     <div class="other">
       <ul class="after">
         <li @click="toAuthentication">
-                  <span>
-                    <!-- <icon name="shoufei" slot="icon"></icon> -->
-                    <!-- <i style="font-size:0.34rem" class="iconfont icon-shenfenrenzheng"></i> -->
-                    <img src="../../assets/ico/shimin.png"
-                    style="width:.28rem;height:.24rem;margin-right: 0.15rem;"
-                    >
-                    {{$t("Verified")}}
-                    <span class="renzhen done"
-                    v-if="$store.state.userInfo.isActive == 2"
-                    >
-                      <i class="iconfont el-icon-circle-check" ></i>
-                      {{$t("examinationPassed")}}
-                    </span>
-                    <span class="renzhen ing"
-                    v-if="$store.state.userInfo.isActive == 0 || $store.state.userInfo.isActive == 3" style="color:red;font-size: 0.7rem;"
-                    >
-                      <i class="iconfont el-icon-circle-close" ></i>
-                      {{$t("NotReviewed")}}
-                    </span>
-                    <!-- <i v-if="$store.state.userInfo.isActive == 1" style="color:red;font-size: 0.7rem;"
+          <span>
+            <!-- <icon name="shoufei" slot="icon"></icon> -->
+            <!-- <i style="font-size:0.34rem" class="iconfont icon-shenfenrenzheng"></i> -->
+            <img src="../../assets/ico/shimin.png"
+                 style="width:.28rem;height:.24rem;margin-right: 0.15rem;">
+            {{$t("Verified")}}
+            <span class="renzhen done"
+                  v-if="$store.state.userInfo.isActive == 2">
+              <i class="iconfont el-icon-circle-check"></i>
+              {{$t("examinationPassed")}}
+            </span>
+            <span class="renzhen ing"
+                  v-if="$store.state.userInfo.isActive == 0 || $store.state.userInfo.isActive == 3"
+                  style="color:red;font-size: 0.7rem;">
+              <i class="iconfont el-icon-circle-close"></i>
+              {{$t("NotReviewed")}}
+            </span>
+            <!-- <i v-if="$store.state.userInfo.isActive == 1" style="color:red;font-size: 0.7rem;"
                        class="iconfont icon-shenhezhong"></i>
                     <i v-if="$store.state.userInfo.isActive == 2" style="color:red;font-size: 0.7rem;"
                        class="iconfont icon-tongguo1"></i>
                     <i v-if="$store.state.userInfo.isActive == 0 || $store.state.userInfo.isActive == 3"
                        style="color:red;font-size: 0.75rem;" class="iconfont icon-icon-test"></i> -->
-                    <icon name="right66" class="right" slot="icon"></icon>
-                  </span>
+            <icon name="right66"
+                  class="right"
+                  slot="icon"></icon>
+          </span>
         </li>
         <li @click="goCard">
-                <span>
-                    <!-- <i style="font-size:0.28rem" class="iconfont icon-yinhangqia"></i> -->
-                     <img src="../../assets/ico/yinhangka.png"
-                      style="width:.28rem;height:.24rem;margin-right: 0.15rem;"
-                    >
-                    {{$t("bank")}}
-                    <!-- <i v-if="!$store.state.bankInfo.bankNo" style="color:red;font-size: 0.3rem;margin-left: 0.1rem;"
+          <span>
+            <!-- <i style="font-size:0.28rem" class="iconfont icon-yinhangqia"></i> -->
+            <img src="../../assets/ico/yinhangka.png"
+                 style="width:.28rem;height:.24rem;margin-right: 0.15rem;">
+            {{$t("bank")}}
+            <!-- <i v-if="!$store.state.bankInfo.bankNo" style="color:red;font-size: 0.3rem;margin-left: 0.1rem;"
                        class="iconfont icon-iconfontweitongguo"></i>
                     <i v-if="$store.state.bankInfo.bankNo" style="color:red;font-size: 0.3rem;margin-left: 0.1rem;"
                        class="iconfont icon-yanzhengma"></i> -->
-                    <icon name="right66" class="right" slot="icon"></icon>
-                </span>
+            <icon name="right66"
+                  class="right"
+                  slot="icon"></icon>
+          </span>
         </li>
-         <li @click="goEsop">
-                <span>
-                     <img src="../../assets/ico/yinhangka.png"
-                      style="width:.28rem;height:.24rem;margin-right: 0.15rem;"
-                    >
-                    {{$t("RegisterbuyESOP")}}
-                    <icon name="right66" class="right" slot="icon"></icon>
-                </span>
+        <li @click="goEsop">
+          <span>
+            <img src="../../assets/ico/yinhangka.png"
+                 style="width:.28rem;height:.24rem;margin-right: 0.15rem;">
+            {{$t("RegisterbuyESOP")}}
+            <icon name="right66"
+                  class="right"
+                  slot="icon"></icon>
+          </span>
         </li>
-        <li >
-            <span>
-                <!-- <i style="font-size:0.28rem" class="iconfont icon-yinhangqia"></i> -->
-                 <img src="../../assets/ico/gaimima.png"
-                      style="width:.24rem;height:.24rem;margin-right: 0.15rem;"
-                    >
-                {{$t("changePassword")}}
-                <!-- <i v-if="!$store.state.bankInfo.bankNo" style="color:red;font-size: 0.3rem;margin-left: 0.1rem;"
+        <li>
+          <span>
+            <!-- <i style="font-size:0.28rem" class="iconfont icon-yinhangqia"></i> -->
+            <img src="../../assets/ico/gaimima.png"
+                 style="width:.24rem;height:.24rem;margin-right: 0.15rem;">
+            {{$t("changePassword")}}
+            <!-- <i v-if="!$store.state.bankInfo.bankNo" style="color:red;font-size: 0.3rem;margin-left: 0.1rem;"
                     class="iconfont icon-iconfontweitongguo"></i>
                 <i v-if="$store.state.bankInfo.bankNo" style="color:red;font-size: 0.3rem;margin-left: 0.1rem;"
                     class="iconfont icon-yanzhengma"></i> -->
-                <icon name="right66" class="right" slot="icon"></icon>
-            </span>
+            <icon name="right66"
+                  class="right"
+                  slot="icon"></icon>
+          </span>
         </li>
       </ul>
       <ul class="after">
@@ -332,34 +376,37 @@
       <ul class="after">
 
         <li @click="goDetail">
-              <span>
-                  <!-- <i style="font-size:0.28rem" class="iconfont icon-zijinmingxi"></i> -->
-                  <img src="../../assets/ico/zijin.png"
-                      style="width:.27rem;height:.24rem;margin-right: 0.15rem;"
-                    >
-                  {{$t("FundingDetails")}}
-                  <icon name="right66" class="right" slot="icon"></icon>
-              </span>
+          <span>
+            <!-- <i style="font-size:0.28rem" class="iconfont icon-zijinmingxi"></i> -->
+            <img src="../../assets/ico/zijin.png"
+                 style="width:.27rem;height:.24rem;margin-right: 0.15rem;">
+            {{$t("FundingDetails")}}
+            <icon name="right66"
+                  class="right"
+                  slot="icon"></icon>
+          </span>
         </li>
         <li @click="toRechargeList">
-                  <span>
-                    <!-- <i style="font-size:0.28rem" class="iconfont icon-dingdanjilu1"></i> -->
-                    <img src="../../assets/ico/chongzhi.png"
-                      style="width:.27rem;height:.27rem;margin-right: 0.15rem;"
-                    >
-                    {{$t("RechargeRecord")}}
-                    <icon name="right66" class="right" slot="icon"></icon>
-                  </span>
+          <span>
+            <!-- <i style="font-size:0.28rem" class="iconfont icon-dingdanjilu1"></i> -->
+            <img src="../../assets/ico/chongzhi.png"
+                 style="width:.27rem;height:.27rem;margin-right: 0.15rem;">
+            {{$t("RechargeRecord")}}
+            <icon name="right66"
+                  class="right"
+                  slot="icon"></icon>
+          </span>
         </li>
         <li @click="toCashList">
-                <span>
-                    <!-- <i style="font-size:0.28rem" class="iconfont icon-dingdanjilu1"></i> -->
-                    <img src="../../assets/ico/tixian.png"
-                      style="width:.24rem;height:.24rem;margin-right: 0.15rem;"
-                    >
-                    {{$t("WithdrawalsRecord")}}
-                    <icon name="right66" class="right" slot="icon"></icon>
-                </span>
+          <span>
+            <!-- <i style="font-size:0.28rem" class="iconfont icon-dingdanjilu1"></i> -->
+            <img src="../../assets/ico/tixian.png"
+                 style="width:.24rem;height:.24rem;margin-right: 0.15rem;">
+            {{$t("WithdrawalsRecord")}}
+            <icon name="right66"
+                  class="right"
+                  slot="icon"></icon>
+          </span>
         </li>
       </ul>
       <!-- <ul class="after">
@@ -374,17 +421,23 @@
               </span>
           </li>
       </ul> -->
-      <mt-popup v-model="focePromptPopup" popup-transition="popup-fade" class="mint-popup-white">
+      <mt-popup v-model="focePromptPopup"
+                popup-transition="popup-fade"
+                class="mint-popup-white">
         <div class="clearfix">
-          <a @click="focePromptPopup = false" class="pull-right"><i class="iconfont icon-weitongguo"></i></a>
+          <a @click="focePromptPopup = false"
+             class="pull-right"><i class="iconfont icon-weitongguo"></i></a>
         </div>
         <p class="font-title">{{$t("popupTip1")}}？</p>
         <!--  账户可用资金 +  -->
-        <p v-if="$store.state.settingForm.stockDisplay" class="font-bold">{{$t("popupTip2")}}
+        <p v-if="$store.state.settingForm.stockDisplay"
+           class="font-bold">{{$t("popupTip2")}}
           {{settingInfo.forceStopPercent ? settingInfo.forceStopPercent:0}}</p>
-        <p v-if="$store.state.settingForm.indexDisplay" class="font-bold">{{$t("popupTip3")}}
+        <p v-if="$store.state.settingForm.indexDisplay"
+           class="font-bold">{{$t("popupTip3")}}
           {{indexSettingInfo.forceSellPercent ? indexSettingInfo.forceSellPercent:0}}</p>
-        <p v-if="$store.state.settingForm.futuresDisplay" class="font-bold">{{$t("popupTip4")}}
+        <p v-if="$store.state.settingForm.futuresDisplay"
+           class="font-bold">{{$t("popupTip4")}}
           {{futuresSettingInfo.forceSellPercent ? futuresSettingInfo.forceSellPercent:0}}</p>
         <p v-if="$store.state.settingForm.stockDisplay">{{$t("popupTip5")}}<span class="green number">-{{Number(($store.state.userInfo.enableAmt + $store.state.userInfo.allFreezAmt) * settingInfo.forceStopPercent).toFixed(2)}}</span>{{$t("popupTip6")}}
         </p>
@@ -394,7 +447,8 @@
         </p>
       </mt-popup>
       <div class="btnbox">
-        <span class="text-center btnok loginout" @click="toRegister">đăng xuất</span>
+        <span class="text-center btnok loginout"
+              @click="toRegister">đăng xuất</span>
       </div>
     </div>
     <foot></foot>
@@ -630,696 +684,715 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  // @bgColor: #fff;
-  @bgColor: #16171d;
-  @fontColor: #fff;
-  @borderColor: #676b6f;
-  body {
-    background: #000
-  }
+// @bgColor: #fff;
+@bgColor: #16171d;
+@fontColor: #fff;
+@borderColor: #676b6f;
+body {
+  background: #000;
+}
 
-  .page .head {
-    width: 100%;
-    // height: 0;
-    // padding-top: 44%;
-    height: 2.8rem;
-    background-image: url('../../assets/img/header.png');
-    background-size: 100% 100%;
-
-  }
-  .wrapper {
-    background-color: @bgColor;
-  }
-  .after {
-    .iconfont {
-      vertical-align: middle;
-      margin-right: 0.15rem;
-    }
-  }
-
-  .setting {
-    margin-right: 0.2rem;
-  }
-
-  .status {
-    font-size: 0.24rem;
-    // margin-left: 0.2rem;
-    .iconfont {
-      margin-left: 0.2rem;
-      font-size: 0.24rem;
-    }
-  }
-
-  .user {
-    .user-top {
-      padding: 0 0.4rem;
-      // width: 96%;
-      // height: 1.96rem;
-      margin: 0 auto;
-      background: #2e3237;
-      // border-radius: 0.11rem;
-      box-shadow: 0.014rem 0.014rem 0.014rem rgba(103, 107, 111, 0.38);
-      // margin-top: -0.945rem;
-      position: relative;
-      margin-bottom: .16rem;
-      padding-bottom: 0.2rem;
-      margin-top: 0.1rem;
-
-      .user-header {
-        width: 1.4rem;
-        height: 1.4rem;
-        border-radius: 100%;
-        background: #000;
-        position: absolute;
-        left: 50%;
-        top: -0.68rem;
-        margin-left: -0.68rem;
-
-        .green {
-          color: green;
-        }
-      }
-
-      .user-img {
-        width: 1.3rem;
-        height: 1.3rem;
-        background-color: @bgColor;
-        border-radius: 100%;
-        margin: 0 auto;
-        margin-top: 0.014rem;
-
-        img {
-          width: 100%;
-          height: 100%;
-        }
-      }
-
-      .user-box {
-        // padding-top: 1.08rem;
-        font-size: 0.33rem;
-        color: @fontColor;
-        font-weight: 700;
-        height: 0.68rem;
-        line-height: 0.695rem;
-
-        .btn-red {
-          // width: 1.418rem;
-          width: 2.418rem;
-          height: 0.68rem;
-          font-size: 0.29rem;
-          line-height: 0.68rem;
-          padding: 0;
-          border-radius: 0.028rem;
-          background: #b60c0d;
-        }
-      }
-    }
-  }
-
-  .other {
-    margin: 0.12rem .28rem;
-
-    ul {
-      position: relative;
-      background-color: #1F2636;
-      border-radius: 4px;
-      overflow: hidden;
-        padding: 0 0.2rem ;
-      li {
-        position: relative;
-        height: 0.92rem;
-        line-height: 0.92rem;
-        // padding: 0 0.4rem;
-        font-size: 0.26rem;
-        background-color: #1F2636;
-        position: relative;
-        border-bottom: 1px solid #3f444a;
-      }
-      li:last-child {
-        border-bottom: none;
-      }
-    }
-
-    .after {
-      margin-bottom: 0.125rem;
-    }
-
-  }
-  .renzhen{
-    position: relative;
-    padding: 0 .1rem;
-    font-size: .18rem;
-    height: .35rem;
-    line-height: .35rem;
-    display: inline-block;
+.page .head {
+  width: 100%;
+  // height: 0;
+  // padding-top: 44%;
+  height: 2.8rem;
+  background-image: url("../../assets/img/header.png");
+  background-size: 100% 100%;
+}
+.wrapper {
+  background-color: @bgColor;
+}
+.after {
+  .iconfont {
     vertical-align: middle;
-    padding-left: .3rem;
-    .iconfont{
-      font-size: .18rem;
-      vertical-align: middle;
+    margin-right: 0.15rem;
+  }
+}
+
+.setting {
+  margin-right: 0.2rem;
+}
+
+.status {
+  font-size: 0.24rem;
+  // margin-left: 0.2rem;
+  .iconfont {
+    margin-left: 0.2rem;
+    font-size: 0.24rem;
+  }
+}
+
+.user {
+  .user-top {
+    padding: 0 0.4rem;
+    // width: 96%;
+    // height: 1.96rem;
+    margin: 0 auto;
+    background: #2e3237;
+    // border-radius: 0.11rem;
+    box-shadow: 0.014rem 0.014rem 0.014rem rgba(103, 107, 111, 0.38);
+    // margin-top: -0.945rem;
+    position: relative;
+    margin-bottom: 0.16rem;
+    padding-bottom: 0.2rem;
+    margin-top: 0.1rem;
+
+    .user-header {
+      width: 1.4rem;
+      height: 1.4rem;
+      border-radius: 100%;
+      background: #000;
       position: absolute;
-      left: 0.05rem ;
-      top: .05rem;
-    }
-    &.ing {
-      background-color: #E6003E;
-    }
-    &.done {
-      background-color: #04823E;
-    }
-  }
-  .other ul li svg {
-    width: 16px;
-    height: 15px;
-    line-height: 25px;
-    margin-top: .28rem;
-    color: #ccc;
-  }
+      left: 50%;
+      top: -0.68rem;
+      margin-left: -0.68rem;
 
-  .other ul li svg:first {
-    float: left;
-    margin-right: 0.39rem;
-  }
+      .green {
+        color: green;
+      }
+    }
 
-  .my-Assets {
-    .img-box {
+    .user-img {
       width: 1.3rem;
       height: 1.3rem;
-    }
+      background-color: @bgColor;
+      border-radius: 100%;
+      margin: 0 auto;
+      margin-top: 0.014rem;
 
-    .assets-box {
-      line-height: 0.5rem;
-      margin-top: 0.2rem;
-
-      .iconfont {
-        margin-right: 0.2rem;
+      img {
+        width: 100%;
+        height: 100%;
       }
     }
 
-    font-size: 0.25rem;
-    padding: 0.2rem 0 0.3rem;
-  }
-
-  .user-header {
-    padding: 0rem 0.3rem 0;
-    background: #2e3237;
-    margin-bottom: 0.15rem;
-
-    .box:nth-child(1) {
-      margin-right: 6%;
-    }
-
-    .box {
-      padding: 0.26rem 0.25rem 0.3rem;
-      padding: 0.26rem 0.25rem 0.2rem;
-      background-color: #c6c8d4;
-      width: 47%;
-      float: left;
-      color: #2f2f2f;
-      border-radius: 0.2rem 0.2rem 0.1rem 0.1rem;
-
-      .name {
-        font-size: 0.26rem;
-        font-weight: bold;
-        margin-bottom: 0.2rem;
-      }
-
-      .account {
-        font-size: 0.3rem;
-        font-weight: bold;
-      }
-
-      .name2 {
-        font-size: 0.23rem;
-        margin-top: 0.2rem;
-
-        span {
-          padding-left: 0.1rem;
-        }
-      }
-    }
-  }
-
-  .loginout {
-    color: #999;
-    font-size: 0.3rem;
-    background: none;
-  }
-
-  .btnbox .btnok {
-    background: none;
-    font-size: 0.28rem;
-    height: 0.6rem;
-    line-height: 0.6rem;
-    color: #606060;
-  }
-
-  .btnbox {
-    width: 100%;
-    padding: 0 0.3rem;
-  }
-
-  .mint-popup-1 {
-    color: #333;
-    width: 200px;
-    border-radius: 8px;
-    padding: 10px;
-    transform: translate(-50%, 0);
-
-    h1 {
-      font-size: 20px;
-      color: #26a2ff;
-    }
-
-    p {
-      margin-bottom: 10px;
-    }
-
-    top: 3.2rem;
-  }
-
-  .mint-popup-1::before {
-    triangle: 10px top #fff;
-    content: '';
-    position: absolute;
-    top: -20px;
-    right: 50px;
-  }
-
-  .mint-popup-white {
-    padding: 0.3rem 0.28rem;
-
-    .font-title {
-      font-size: 0.26rem;
-      margin-bottom: 0.12rem;
-    }
-
-    .font-bold {
-      font-weight: bold;
-    }
-
-    .number {
-      margin: 0 0.1rem;
-      font-weight: bold;
-      font-size: 0.26rem;
-    }
-
-    p {
-      line-height: 0.4rem;
-    }
-  }
-
-  // 总资产
-  .account-header {
-    padding: 0.2rem 0.2rem 0;
-    position: relative;
-    background-color: #1F2636;
-
-    .iconfont {
-      position: absolute;
-      right: 0.2rem;
-      // top: 50%;
-      top: 1.1rem;
-      font-size: 0.8rem;
-      color: #FF5722;
-      margin-top: -0.4rem;
+    .user-box {
+      // padding-top: 1.08rem;
+      font-size: 0.33rem;
+      color: @fontColor;
+      font-weight: 700;
+      height: 0.68rem;
+      line-height: 0.695rem;
 
       .btn-red {
-        margin-left: 0.2rem;
-        padding: 0.08rem 0.2rem;
-        background: #FF5722;
+        // width: 1.418rem;
+        width: 2.418rem;
+        height: 0.68rem;
+        font-size: 0.29rem;
+        line-height: 0.68rem;
+        padding: 0;
+        border-radius: 0.028rem;
+        background: #b60c0d;
       }
     }
+  }
+}
 
-    .title {
-      font-size: 0.28rem;
-      margin-bottom: 0.26rem;
+.other {
+  margin: 0.12rem 0.28rem;
+
+  ul {
+    position: relative;
+    background-color: #1f2636;
+    border-radius: 4px;
+    overflow: hidden;
+    padding: 0 0.2rem;
+    li {
+      position: relative;
+      height: 0.92rem;
+      line-height: 0.92rem;
+      // padding: 0 0.4rem;
+      font-size: 0.26rem;
+      background-color: #1f2636;
+      position: relative;
+      border-bottom: 1px solid #3f444a;
     }
+    li:last-child {
+      border-bottom: none;
+    }
+  }
 
-    .sub-title {
-      color: #7e8c8d;
-      font-size: 0.2rem;
+  .after {
+    margin-bottom: 0.125rem;
+  }
+}
+.renzhen {
+  position: relative;
+  padding: 0 0.1rem;
+  font-size: 0.18rem;
+  height: 0.35rem;
+  line-height: 0.35rem;
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 0.3rem;
+  .iconfont {
+    font-size: 0.18rem;
+    vertical-align: middle;
+    position: absolute;
+    left: 0.05rem;
+    top: 0.05rem;
+  }
+  &.ing {
+    background-color: #e6003e;
+  }
+  &.done {
+    background-color: #04823e;
+  }
+}
+.other ul li svg {
+  width: 16px;
+  height: 15px;
+  line-height: 25px;
+  margin-top: 0.28rem;
+  color: #ccc;
+}
 
-      i {
-        font-style: normal;
-      }
+.other ul li svg:first {
+  float: left;
+  margin-right: 0.39rem;
+}
+
+.my-Assets {
+  .img-box {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+
+  .assets-box {
+    line-height: 0.5rem;
+    margin-top: 0.2rem;
+
+    .iconfont {
+      margin-right: 0.2rem;
+    }
+  }
+
+  font-size: 0.25rem;
+  padding: 0.2rem 0 0.3rem;
+}
+
+.user-header {
+  padding: 0rem 0.3rem 0;
+  background: #2e3237;
+  margin-bottom: 0.15rem;
+
+  .box:nth-child(1) {
+    margin-right: 6%;
+  }
+
+  .box {
+    padding: 0.26rem 0.25rem 0.3rem;
+    padding: 0.26rem 0.25rem 0.2rem;
+    background-color: #c6c8d4;
+    width: 47%;
+    float: left;
+    color: #2f2f2f;
+    border-radius: 0.2rem 0.2rem 0.1rem 0.1rem;
+
+    .name {
+      font-size: 0.26rem;
+      font-weight: bold;
+      margin-bottom: 0.2rem;
     }
 
     .account {
-      color: #b60c0d;
-      font-size: 0.4rem;
-      font-weight: 600;
-      font-family: lightnumber;
-    }
-  }
-
-  .account-box {
-    // margin-bottom: 0.12rem;
-    padding: 0 0.2rem;
-    // padding: 0 0.35rem;
-    background-color: #1F2636;
-    .header {
-      font-size: 0.22rem;
-      line-height: 0.7rem;
-      height: .7rem;
-      display: flex;
-      justify-content: space-between;
-      .header-left{
-        display: flex;
-        align-items: center;
-      }
-      img.iconfont {
-        color: #f5ca07;
-        width: .3rem;
-        height: .3rem;
-        display: inline-block;
-        margin-right: .2rem;
-        &.jian {
-          background-image: url(../../assets/ico/jian.png);
-        }
-      }
-
-      .iconfont {
-        font-size: 0.24rem;
-        vertical-align: middle;
-        margin: 0 0.05rem;
-      }
-    }
-
-    .content {
-      padding: 0 0.2rem 0.18rem;
-
-      li {
-        width: 50%;
-        float: left;
-        padding: 0.2rem 0.2rem 0.04rem 0.56rem;
-        line-height: 0.36rem;
-        position: relative;
-
-        &:nth-child(2) {
-          .iconfont {
-            color: #2f97fc;
-          }
-        }
-
-        &:nth-child(3) {
-          .iconfont {
-            color: #17b780;
-          }
-        }
-
-        &:nth-child(3) {
-          .iconfont {
-            color: #ff7602;
-          }
-        }
-
-        .iconfont {
-          position: absolute;
-          top: 0.38rem;
-          left: 0;
-          font-size: 0.42rem;
-          color: #fd4256;
-
-        }
-
-        .name {
-          color: #888;
-          font-size: 0.22rem;
-        }
-
-        .number {
-          font-size: 0.27rem;
-        }
-
-      }
-    }
-  }
-
-  .mt-progress {
-    height: 5px;
-    line-height: 5px;
-    margin-top: 0.3rem;
-    border-radius: 0.2rem;
-    // padding: 0 0.2rem;
-    /deep/ .mt-progress-runway {
-      border-radius: 0.2rem;
-      background-color: #ff7602;
-    }
-
-    /deep/ .mt-progress-progress {
-      border-radius: 0.2rem;
-      background-color: #bb3d4c;
-    }
-  }
-
-  .panel {
-    margin: 0.2rem .28rem;
-    padding: 0 0.2rem;
-    background-color: #1F2636;
-
-    .panel-head {
-      height: 0.88rem;
-      line-height: 0.88rem;
-      padding-top: .1rem;
-      text-align: center;
+      font-size: 0.3rem;
       font-weight: bold;
-      .font-w {
-        font-size: 0.28rem;
-        // font-weight: 600;
-        // color: #000;
-      }
     }
 
-    .panel-body {
-      padding: 0 0.2rem;
-      text-align: center;
+    .name2 {
+      font-size: 0.23rem;
+      margin-top: 0.2rem;
 
-      .iconfont {
-        display: block;
-        font-size: 20px;
-        margin-bottom: 0.1rem;
-        color: #138DB2;
-      }
-
-      .font {
-        font-size: 0.3rem;
-        color: #000;
-        font-weight: 600;
-        line-height: 0.5rem;
-      }
-
-      .col-xs-3 {
-        padding: 0.2rem 0;
+      span {
+        padding-left: 0.1rem;
       }
     }
   }
+}
 
-  .account-info {
-    padding: .28rem;
+.loginout {
+  color: #999;
+  font-size: 0.3rem;
+  background: none;
+}
+
+.btnbox .btnok {
+  background: none;
+  font-size: 0.28rem;
+  height: 0.6rem;
+  line-height: 0.6rem;
+  color: #606060;
+}
+
+.btnbox {
+  width: 100%;
+  padding: 0 0.3rem;
+}
+
+.mint-popup-1 {
+  color: #333;
+  width: 200px;
+  border-radius: 8px;
+  padding: 10px;
+  transform: translate(-50%, 0);
+
+  h1 {
+    font-size: 20px;
+    color: #26a2ff;
+  }
+
+  p {
+    margin-bottom: 10px;
+  }
+
+  top: 3.2rem;
+}
+
+.mint-popup-1::before {
+  triangle: 10px top #fff;
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: 50px;
+}
+
+.mint-popup-white {
+  padding: 0.3rem 0.28rem;
+
+  .font-title {
+    font-size: 0.26rem;
+    margin-bottom: 0.12rem;
+  }
+
+  .font-bold {
+    font-weight: bold;
+  }
+
+  .number {
+    margin: 0 0.1rem;
+    font-weight: bold;
+    font-size: 0.26rem;
+  }
+
+  p {
+    line-height: 0.4rem;
+  }
+}
+
+// 总资产
+.account-header {
+  padding: 0.2rem 0.2rem 0;
+  position: relative;
+  background-color: #1f2636;
+
+  .iconfont {
+    position: absolute;
+    right: 0.2rem;
+    // top: 50%;
+    top: 1.1rem;
+    font-size: 0.8rem;
+    color: #ff5722;
+    margin-top: -0.4rem;
+
+    .btn-red {
+      margin-left: 0.2rem;
+      padding: 0.08rem 0.2rem;
+      background: #ff5722;
+    }
+  }
+
+  .title {
+    font-size: 0.28rem;
+    margin-bottom: 0.26rem;
+  }
+
+  .sub-title {
+    color: #7e8c8d;
+    font-size: 0.2rem;
+
+    i {
+      font-style: normal;
+    }
+  }
+
+  .account {
+    color: #b60c0d;
+    font-size: 0.4rem;
+    font-weight: 600;
+    font-family: lightnumber;
+  }
+}
+
+.account-box {
+  // margin-bottom: 0.12rem;
+  padding: 0 0.2rem;
+  // padding: 0 0.35rem;
+  background-color: #1f2636;
+  .header {
+    font-size: 0.22rem;
+    line-height: 0.7rem;
+    height: 0.7rem;
     display: flex;
     justify-content: space-between;
-    &_avatar {
-      width: 1.13rem;
-      height: 1.13rem;
-      line-height: 1.13rem;
-      border-radius: 50%;
-      background-color: #444656;
+    .header-left {
       display: flex;
       align-items: center;
-      justify-content: center;
-      img {
-        width: .55rem;
-        height: .58rem;
+    }
+    img.iconfont {
+      color: #f5ca07;
+      width: 0.3rem;
+      height: 0.3rem;
+      display: inline-block;
+      margin-right: 0.2rem;
+      &.jian {
+        background-image: url(../../assets/ico/jian.png);
       }
     }
-    &_detail {
-      padding-left: .22rem;
+
+    .iconfont {
+      font-size: 0.24rem;
+      vertical-align: middle;
+      margin: 0 0.05rem;
+    }
+  }
+
+  .content {
+    padding: 0 0.2rem 0.18rem;
+
+    li {
+      width: 50%;
+      float: left;
+      padding: 0.2rem 0.2rem 0.04rem 0.56rem;
+      line-height: 0.36rem;
+      position: relative;
+
+      &:nth-child(2) {
+        .iconfont {
+          color: #2f97fc;
+        }
+      }
+
+      &:nth-child(3) {
+        .iconfont {
+          color: #17b780;
+        }
+      }
+
+      &:nth-child(3) {
+        .iconfont {
+          color: #ff7602;
+        }
+      }
+
+      .iconfont {
+        position: absolute;
+        top: 0.38rem;
+        left: 0;
+        font-size: 0.42rem;
+        color: #fd4256;
+      }
+
+      .name {
+        color: #888;
+        font-size: 0.22rem;
+      }
+
+      .number {
+        font-size: 0.27rem;
+      }
+    }
+  }
+}
+
+.mt-progress {
+  height: 5px;
+  line-height: 5px;
+  margin-top: 0.3rem;
+  border-radius: 0.2rem;
+  // padding: 0 0.2rem;
+  /deep/ .mt-progress-runway {
+    border-radius: 0.2rem;
+    background-color: #ff7602;
+  }
+
+  /deep/ .mt-progress-progress {
+    border-radius: 0.2rem;
+    background-color: #bb3d4c;
+  }
+}
+
+.panel {
+  margin: 0.2rem 0.28rem;
+  padding: 0 0.2rem;
+  background-color: #1f2636;
+
+  .panel-head {
+    height: 0.88rem;
+    line-height: 0.88rem;
+    padding-top: 0.1rem;
+    text-align: center;
+    font-weight: bold;
+    .font-w {
+      font-size: 0.28rem;
+      // font-weight: 600;
+      // color: #000;
+    }
+  }
+
+  .panel-body {
+    padding: 0 0.2rem;
+    text-align: center;
+
+    .iconfont {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 0.1rem;
+      color: #138db2;
+    }
+
+    .font {
+      font-size: 0.3rem;
+      color: #000;
+      font-weight: 600;
+      line-height: 0.5rem;
+    }
+
+    .col-xs-3 {
+      padding: 0.2rem 0;
+    }
+  }
+}
+
+.account-info {
+  padding: 0.28rem;
+  display: flex;
+  justify-content: space-between;
+  &_avatar {
+    width: 1.13rem;
+    height: 1.13rem;
+    line-height: 1.13rem;
+    border-radius: 50%;
+    background-color: #444656;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      width: 0.55rem;
+      height: 0.58rem;
+    }
+  }
+  &_detail {
+    padding-left: 0.22rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex: 1;
+    .account-phone {
+      font-size: 0.3rem;
+      color: #fff;
+    }
+    .account-name {
+      color: #636a93;
+    }
+  }
+  &_ctl {
+    margin-top: 0.1rem;
+  }
+}
+.account-container {
+  // margin: .28rem;
+  width: 6.9rem;
+  margin: 0.28rem auto;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: #1f2636;
+  .pcx {
+    margin: 0.2rem;
+    // background-color: #1F2636;
+    background: #1a1e29;
+  }
+  .account-preview {
+    display: flex;
+    padding: 0.3rem 0.2rem 0.28rem;
+    .acc-pre-left {
+      width: 1.92rem;
+      height: 1.92rem;
+      background-image: url(../../assets/ico/round.png);
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      align-items: center;
+      position: relative;
+      img {
+        width: 0.36rem;
+        height: 0.36rem;
+        margin-bottom: 0.1rem;
+      }
+      span.ti {
+        font-size: 0.24rem;
+        color: #ccc;
+        margin-bottom: 0.1rem;
+      }
+      span.de {
+        font-size: 0.24rem;
+        color: #009c46;
+        font-family: lightnumber;
+        .account {
+          font-family: lightnumber;
+        }
+      }
+      &::after {
+        display: block;
+        content: "";
+        width: 0.67rem;
+        height: 2.21rem;
+        position: absolute;
+        top: -0.16rem;
+        right: -0.44rem;
+        background-image: url(../../assets/ico/round-r.png);
+        background-size: cover;
+      }
+    }
+    .acc-pre-center {
+      margin-left: 0.45rem;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
-      flex: 1;
-      .account-phone{
-        font-size: .3rem;
+      font-family: lightnumber;
+      color: #ccc;
+      span {
         color: #fff;
-      }
-      .account-name {
-        color: #636A93;
+        font-family: lightnumber;
+        font-weight: 300;
       }
     }
-    &_ctl {
-      margin-top: .1rem;
+    .acc-pre-right {
+      flex: 1;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      .btn {
+        width: 1.3rem;
+        color: #fff;
+        padding: 0 10px;
+        border-radius: 0.2rem;
+        font-size: 0.1rem;
+      }
+      .redbtn {
+        background-color: #e6003e;
+      }
+      .bluebtn {
+        background-color: #024da1;
+      }
     }
+  }
+}
+
+.red-theme {
+  .wrapper {
+    background-color: #e9e9e9;
+  }
+  .account-info_avatar {
+    background-color: #b5b5b5;
+  }
+  .account-phone {
+    color: #000;
+  }
+  .account-name {
+    color: #999999;
+  }
+  .account-info_ctl {
+    color: #858585;
   }
   .account-container {
-    // margin: .28rem;
-    width: 6.9rem;
-    margin: .28rem auto;
-    border-radius: 5px;
-    overflow: hidden;
-    background-color: #1F2636;
-    .pcx {
-      margin: .2rem;
-      // background-color: #1F2636;
-      background:#1A1E29
-    }
-    .account-preview {
-      display: flex;
-      padding: .3rem .2rem .28rem;
-      .acc-pre-left {
-        width: 1.92rem;
-        height: 1.92rem;
-        background-image: url(../../assets/ico/round.png);
-        background-size: cover;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-        align-items: center;
-        position: relative;
-        img {
-          width:.36rem;
-          height: .36rem;
-          margin-bottom: .1rem;
-        }
-        span.ti {
-          font-size: .24rem;
-          color: #ccc;
-          margin-bottom: .1rem;
-        }
-        span.de {
-          font-size: .24rem;
-          color: #009C46;
-          font-family: lightnumber;
-          .account {
-            font-family: lightnumber;
-          }
-        }
-        &::after {
-          display: block;
-          content : "";
-          width: .67rem;
-          height: 2.21rem;
-          position: absolute;
-          top: -.16rem;
-          right: -.44rem;
-          background-image: url(../../assets/ico/round-r.png);
-          background-size: cover;
-        }
-      }
-      .acc-pre-center {
-        margin-left: .45rem;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        font-family: lightnumber;
-        color: #ccc;
-        span {
-          color: #fff;
-          font-family: lightnumber;
-          font-weight: 300;
-        }
-      }
-      .acc-pre-right {
-        flex: 1;
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        .btn {
-          width:1.3rem;
-          color: #fff;
-          padding: 0 10px;
-          border-radius: .2rem;
-          font-size: .1rem;
-        }
-        .redbtn {
-          background-color: #E6003E;
-        }
-        .bluebtn {
-          background-color: #024DA1;
-        }
-      }
+    background-color: #fff;
+    span.ti {
+      color: #000 !important;
     }
   }
-
-  .red-theme {
-    .wrapper {
-      background-color: #E9E9E9;
-    }
-    .account-info_avatar{
-      background-color: #B5B5B5;
-    }
-    .account-phone{
-      color: #000;
-    }
-    .account-name {
-      color: #999999;
-    }
-    .account-info_ctl{
-      color: #858585;
-    }
-    .account-container{
-      background-color: #fff;
-      span.ti{
-        color: #000 !important;
-      }
-    }
-   .acc-pre-center{
-     color: #333 !important;
-     span {
+  .acc-pre-center {
+    color: #333 !important;
+    span {
       color: #333 !important;
-     }
-   }
-   .acc-pre-right {
-     .bluebtn {
-       background-color: #222 !important;
-     }
-   }
-   .account-box{
-     background-color: #fff;
-   }
-   .name {
-     color : #12354E !important;
-   }
-   .number {
-     color: #E6003E !important;
-   }
-   .pcx {
-     background-color: #E7E7E8;
-     div {
+    }
+  }
+  .acc-pre-right {
+    .bluebtn {
+      background-color: #222 !important;
+    }
+  }
+  .account-box {
+    background-color: #fff;
+  }
+  .name {
+    color: #12354e !important;
+  }
+  .number {
+    color: #e6003e !important;
+  }
+  .pcx {
+    background-color: #e7e7e8;
+    div {
       background-color: transparent !important;
       color: #000;
-     }
-   }
-   .panel {
-     background-color: #fff;
-     color: #000;
-     .panel-head {
-       border-bottom-color: #cbcbcb;
-     }
-     .iconfont {
-       color: #E6003E;
-     }
-     .font-w {
-       color: #000;
-     }
-   }
-   .other {
-     .after{
+    }
+  }
+  .panel {
+    background-color: #fff;
+    color: #000;
+    .panel-head {
+      border-bottom-color: #cbcbcb;
+    }
+    .iconfont {
+      color: #e6003e;
+    }
+    .font-w {
+      color: #000;
+    }
+  }
+  .other {
+    .after {
       background-color: #fff;
-      li{
+      li {
         background-color: #fff;
         color: #000;
-       border-bottom-color: #cbcbcb;
+        border-bottom-color: #cbcbcb;
         .renzhen {
           color: #fff;
         }
-        svg{
+        svg {
           color: #222;
         }
       }
-     }
-   }
+    }
   }
+}
+.content-ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  li {
+    width: 50%;
+  }
+  li:nth-of-type(1),li:nth-of-type(2)  {
+    padding-left: 0;
+    padding-right: 0;
+    display: flex;
+    align-items: center;
+  }
+  li:nth-of-type(2){
+    padding-right: 0;
+  }
+}
+
+.zijin1 {
+  width: 0.4rem;
+  margin-right: 0.2rem;
+  object-fit: contain;
+}
 </style>

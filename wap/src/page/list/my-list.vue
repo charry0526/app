@@ -262,6 +262,9 @@ export default {
   .table-list-body {
     // padding-top:0.62rem;
     // margin-top: 40px;
+    .li-base{
+      font-size: .3rem;
+    }
   }
 
   .wrapper {

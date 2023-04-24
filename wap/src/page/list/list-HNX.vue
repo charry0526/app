@@ -10,8 +10,8 @@
         <div>
           <ul class='clearfix'>
             <li class="li-title">Mã CK<img :src="sortIcon" alt=""></li>
-            <li class="li-base">Giá hiện tại<img :src="sortIcon" alt=""></li>
-            <li class="li-base"> Thay đổi <img :src="sortIcon" alt=""></li>
+            <li class="li-base">Giá khớp lệnh<img :src="sortIcon" alt=""></li>
+            <li class="li-base"> %+/- <img :src="sortIcon" alt=""></li>
             <!-- <li class="li-base">涨跌</li> -->
           </ul>
         </div>

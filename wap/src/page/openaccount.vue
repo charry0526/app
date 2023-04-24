@@ -16,10 +16,10 @@
           <el-step title="认证"></el-step>
           <el-step title="入金"></el-step>
           <el-step title="交易"></el-step> -->
-          <el-step title="đăng ký"></el-step>
-          <el-step title="chứng nhận"></el-step>
-          <el-step title="Tiền gửi"></el-step>
-          <el-step title="buôn bán"></el-step>
+          <el-step :title="$t('process1')"></el-step>
+          <el-step :title="$t('process2')"></el-step>
+          <el-step :title="$t('process3')"></el-step>
+          <el-step :title="$t('process4')"></el-step>
         </el-steps>
         <ul class="list">
           <li class="list-item animated fadeInLeft">
@@ -51,8 +51,8 @@
             <div class="content">
               <!-- <h3>极速开户,超高配额</h3>
               <p>0资金门槛,无需线下见证</p> -->
-                <h3>Mở tài khoản nhanh, hạn ngạch siêu cao</h3>
-              <p>0 ngưỡng vốn, không cần nhân chứng ngoại tuyến</p>
+                <h3>Mở tài khoản nhanh, hạn mức siêu cao</h3>
+              <p>Không mất phí</p>
             </div>
           </li>
         </ul>
@@ -64,7 +64,7 @@
         </span>
         <span class="register btnok" @click="toRegister">
           <!-- 注册 -->
-          đăng ký
+          Đăng ký
         </span>
       </div>
     </div>
@@ -81,10 +81,10 @@
           </div>
           <h3>
             <!-- 身份证 -->
-            chứng minh thư
+           CCCD/CMND
             </h3>
           <p>
-            Chứng minh nhân dân thế hệ thứ hai trong thời hạn hiệu lực
+            CCCD/CMND còn thời hạn sử dụng
             <!-- 有效期内的二代身份证 -->
           </p>
         </li>
@@ -97,7 +97,7 @@
             Thẻ ngân hàng
             </h3>
           <p>
-            Thẻ ngân hàng trùng tên tài khoản và CMND
+            Thẻ ngân hàng chính chủ
             <!-- 户名与身份证一致的银行卡 -->
           </p>
         </li>

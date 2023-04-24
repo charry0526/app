@@ -20,8 +20,8 @@
           :src="require(`../../../static/img/foot/${$state.theme}/home.png`)" alt=""
         >
 
-        <p v-if="$store.state.select == '/home'" :style="{color: $state.theme === 'black' ? '#138DB3' : '#C11815'}">trang đầu<!-- 首页 --></p>
-        <p v-else :style="{color: $state.theme === 'black' ? '#FFFFFF' : '#656565'}">trang đầu</p>
+        <p v-if="$store.state.select == '/home'" :style="{color: $state.theme === 'black' ? '#138DB3' : '#C11815'}">{{$t("tabbar1")}}<!-- 首页 --></p>
+        <p v-else :style="{color: $state.theme === 'black' ? '#FFFFFF' : '#656565'}">{{$t("tabbar1")}}</p>
 
       </mt-tab-item>
       <mt-tab-item id="list" :class="$store.state.select == '/list' || $store.state.select == '/indexlist'? 'on' : ''">
@@ -37,8 +37,8 @@
           v-else
           :src="require(`../../../static/img/foot/${$state.theme}/hangqing.png`)" alt=""
         >
-        <p v-if="$store.state.select == '/list'" :style="{color: $state.theme === 'black' ? '#138DB3' : '#C11815'}">Tình trạng<!-- 行情 --></p>
-        <p v-else :style="{color: $state.theme === 'black' ? '#FFFFFF' : '#656565'}">Tình trạng</p>
+        <p v-if="$store.state.select == '/list'" :style="{color: $state.theme === 'black' ? '#138DB3' : '#C11815'}">{{$t("tabbar2")}}<!-- 行情 --></p>
+        <p v-else :style="{color: $state.theme === 'black' ? '#FFFFFF' : '#656565'}">{{$t("tabbar2")}}</p>
 
       </mt-tab-item>
       <mt-tab-item id="orderlist" :class="$store.state.select == '/orderlist' ? 'on' : ''">
@@ -54,8 +54,8 @@
           v-else
           :src="require(`../../../static/img/foot/${$state.theme}/chicang.png`)" alt=""
         >
-        <p v-if="$store.state.select == '/orderlist'" :style="{color: $state.theme === 'black' ? '#138DB3' : '#C11815'}">chức vụ<!-- 行情 --></p>
-        <p v-else :style="{color: $state.theme === 'black' ? '#FFFFFF' : '#656565'}">chức vụ</p>
+        <p v-if="$store.state.select == '/orderlist'" :style="{color: $state.theme === 'black' ? '#138DB3' : '#C11815'}">{{$t("tabbar3")}}<!-- 行情 --></p>
+        <p v-else :style="{color: $state.theme === 'black' ? '#FFFFFF' : '#656565'}">{{$t("tabbar3")}}</p>
       </mt-tab-item>
       <mt-tab-item id="mylist" :class="$store.state.select == '/mylist' ? 'on' : ''">
         <!-- <i v-if="$store.state.select == '/mylist'" class="iconfont icon-xuanze3" style="font-size: 0.40rem; padding-top: 0.04rem;"></i>
@@ -70,8 +70,8 @@
           v-else
           :src="require(`../../../static/img/foot/${$state.theme}/zixuan.png`)" alt=""
         >
-        <p v-if="$store.state.select == '/mylist'" :style="{color: $state.theme === 'black' ? '#138DB3' : '#C11815'}">tự chọn<!-- 行情 --></p>
-        <p v-else :style="{color: $state.theme === 'black' ? '#FFFFFF' : '#656565'}">tự chọn</p>
+        <p v-if="$store.state.select == '/mylist'" :style="{color: $state.theme === 'black' ? '#138DB3' : '#C11815'}">{{$t("tabbar4")}}<!-- 行情 --></p>
+        <p v-else :style="{color: $state.theme === 'black' ? '#FFFFFF' : '#656565'}">{{$t("tabbar4")}}</p>
 
       </mt-tab-item>
       <mt-tab-item id="user" :class="$store.state.select == '/user' ? 'on' : ''">
@@ -87,8 +87,8 @@
           v-else
           :src="require(`../../../static/img/foot/${$state.theme}/user.png`)" alt=""
         >
-        <p v-if="$store.state.select == '/user'" :style="{color: $state.theme === 'black' ? '#138DB3' : '#C11815'}">của tôi<!-- 行情 --></p>
-        <p v-else :style="{color: $state.theme === 'black' ? '#FFFFFF' : '#656565'}">của tôi</p>
+        <p v-if="$store.state.select == '/user'" :style="{color: $state.theme === 'black' ? '#138DB3' : '#C11815'}">{{$t("tabbar5")}}<!-- 行情 --></p>
+        <p v-else :style="{color: $state.theme === 'black' ? '#FFFFFF' : '#656565'}">{{$t("tabbar5")}}</p>
 
       </mt-tab-item>
     </mt-tabbar>

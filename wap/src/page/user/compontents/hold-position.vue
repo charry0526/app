@@ -25,7 +25,7 @@
               <span v-if="item.stockPlate=='科创'" :class="item.stockPlate=='科创'?'type':''">科创</span>
               <span class="direction pull-right big-font">
                         <!-- 最新: -->
-                        cập nhật:
+                        Cập nhật:
                         <b v-if="item.now_price == 0">-</b>
                         <b v-else
                            :class="item.now_price-item.buyOrderPrice<0?'space red':item.now_price-item.buyOrderPrice==0?'space':'space green'">{{item.now_price}}</b>
@@ -35,7 +35,7 @@
               <p class="clearfix">
                 <span class="col-xs-4">
                   <!-- 买入价格 -->
-                  giá mua:
+                  Giá mua:
                   <b class="space">{{item.buyOrderPrice}}</b></span>
                 <span class="col-xs-4 text-center">
                   <!-- 数量 -->
@@ -43,45 +43,47 @@
                   <b class="space">{{item.orderNum}}</b></span>
                 <span class="col-xs-4 text-right">
                   <!-- 市值 -->
-                  giá trị:
+                  Giá thị trường:
                   <b class="space">{{item.orderTotalPrice}}</b></span>
               </p>
               <p class="clearfix">
                 <span class="col-xs-4">
                   <!-- 手续费 -->
-                  phí xử lý:
+                  Phí giao dịch:
                   <b class="space">{{item.orderFee}}</b></span>
-                <span class="col-xs-4 text-center">
-                  <!-- 印花税 -->
+                <!-- <span class="col-xs-4 text-center">
                   tem đóng thuế
                   :
-                  <b class="space">{{item.orderSpread}}</b></span>
+                  <b class="space">{{item.orderSpread}}</b></span> -->
                 <span class="col-xs-4 text-right">
                   <!-- 留仓费 -->
-                  Phí lưu trữ:
-                  <b class="space">{{item.orderStayFee}}</b></span>
+                  Phí qua đêm:{{item.orderStayFee}}
+                  <!-- <b class="space">{{item.orderStayFee}}</b>--></span>
+                <span class="col-xs-4 text-right">
+                  Lãi/lỗ:
+                 <b v-if="item.now_price == 0">-</b>
+                    <b v-else
+                       :class="item.allProfitAndLose<0?'space red':item.allProfitAndLose>=0?'space':'space green'">{{item.allProfitAndLose}}</b>
+                </span>
               </p>
               <p class="clearfix">
-                <span class="col-xs-4">
-                  <!-- 点差费 -->
+                <!-- <span class="col-xs-4">
                   phí lây lan
                   :<b class="space">{{item.spreadRatePrice}}</b></span>
                         <span class="col-xs-4 text-center">
-                          <!-- 浮动盈亏 -->
                           Lãi lỗ thả nổi
                           :
                             <b v-if="item.now_price == 0">-</b>
                             <b v-else
                                :class="item.profitAndLose<0?'space red':item.profitAndLose>=0?'space':'space green'">{{item.profitAndLose}}</b>
-                        </span>
-                <span class="col-xs-4 text-right big-font">
-                  <!-- 总盈亏 -->
+                        </span> -->
+                <!-- <span class="col-xs-4 text-right big-font">
                   tổng lãi lỗ
                   :
                     <b v-if="item.now_price == 0">-</b>
                     <b v-else
                        :class="item.allProfitAndLose<0?'space red':item.allProfitAndLose>=0?'space':'space green'">{{item.allProfitAndLose}}</b>
-                </span>
+                </span> -->
               </p>
             </div>
             <div class="order-foot clearfix">
@@ -92,7 +94,7 @@
               <div @click="sell(item.positionSn)" class="foot-btn">
                 <i class='font-icon'></i>
                 <!-- 我要平仓 -->
-                Tôi muốn đóng vị thế
+                Bán ra
               </div>
             </div>
           </div>
@@ -102,9 +104,9 @@
         <mt-spinner type="fading-circle"></mt-spinner>
         {{$t("loading")}}...
       </div>
-      <div v-show="!loading" class="load-all text-center">
+      <!-- <div v-show="!loading" class="load-all text-center">
         {{$t("allLoaded")}}
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
