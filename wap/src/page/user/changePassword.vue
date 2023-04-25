@@ -32,6 +32,17 @@ export default {
   mounted () {
   },
   methods: {
+    async toRegister () {
+      // 注销登陆
+      this.clearCookie()
+      let data = await api.logout()
+      if (data.status === 0) {
+        // Toast(data.msg)
+        this.$router.back(-1)
+      } else {
+        Toast(data.msg)
+      }
+    },
     async toSure () {
       let flag = true
       const { oldPwd, newPwd, config } = this.objPassword
@@ -49,10 +60,10 @@ export default {
         oldPwd,
         newPwd
       }
-      let data = await api.forgetPas(opts)
+      let data = await api.changePassword(opts)
       if (data.status === 0) {
         Toast('sửa đổi thành công!')
-        this.$router.back(-1)
+        this.toRegister()
       } else {
         Toast(data.msg)
       }

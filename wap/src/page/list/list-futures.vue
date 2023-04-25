@@ -191,7 +191,7 @@ export default {
           }
         })
       } else {
-        Toast('该期货暂不能交易!')
+        Toast('Hợp đồng tương lai này không thể được giao dịch tạm thời!')
       }
     },
     toSearch () {

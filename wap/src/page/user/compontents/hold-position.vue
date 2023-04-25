@@ -274,7 +274,7 @@ export default {
       //     return
       // }
 
-      MessageBox.confirm('您确定要平仓吗?').then(async action => {
+      MessageBox.confirm('Bạn có chắc chắn muốn đóng vị trí?').then(async action => {
         let opt = {
           positionSn: val
         }

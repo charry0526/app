@@ -153,6 +153,26 @@
     </div> -->
     <!-- tab -->
     <div class="news-tab">
+      <div class="firma-logo">
+        <img src="../../assets/img/2-1.png" alt="" srcset="">
+        <p>CTY CPCK XTB VIỆT NAM</p>
+      </div>
+      <ul class="firma-info">
+        <li>
+          <p class="label">Địa chỉ</p>：
+          <p class="con">Landmark81 Building, 720A Điện Biên Phủ, Quận Bình Thạnh, Tp .Hồ Chí Minh</p>
+        </li>
+        <li>
+          <p class="label">CSKH</p>：
+        </li>
+        <li>
+          <p class="label">Email</p>：
+        </li>
+        <li>
+          <p class="label">Web</p>：
+        </li>
+        
+      </ul>
       <mt-navbar v-model="news">
         <mt-tab-item id="tab_0">
           <!-- <span class="tab-name">财经要闻</span> -->
@@ -899,6 +919,7 @@ export default {
   min-height: 5rem;
   padding: 0 .3rem;
   margin-top: .1rem;
+  background-color: #1D1E29;
   /deep/.mint-tab-container {
     background-color: #1D1E29;
     padding-bottom: .3rem;
@@ -1055,5 +1076,38 @@ export default {
     background-size: cover;
     opacity: .5;
   }
+}
+.firma-logo{
+  display:flex;
+  align-items: center;
+  img{
+    width: 2rem;
+    height: 1.5rem;
+    object-fit: contain;
+  }
+  p{
+    font-weight: bold;
+    font-size: .33rem;
+    color: #fff;
+  }
+}
+.firma-info{
+  li{
+    font-size: 0.4rem;
+    margin-bottom: 0.2rem;
+    display: flex;
+    color:#fff;
+    .label{
+      width:1.3rem;
+    }
+    .con{
+      width: 4.7rem;
+      font-size: .3rem;
+      // margin-left: 0.6rem;
+      line-height: .4rem;
+
+    }
+  }
+
 }
 </style>

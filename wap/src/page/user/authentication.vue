@@ -173,6 +173,7 @@ export default {
       this.form.img1key = this.$store.state.userInfo.img1Key
       this.form.img2key = this.$store.state.userInfo.img2Key
       //   this.form.img3key = this.$store.state.userInfo.img3Key
+      console.log(this.form.img1key, this.form.img2key, this.$store.state.userInfo)
       this.showBtn = false
     }
   },

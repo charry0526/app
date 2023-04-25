@@ -475,8 +475,10 @@ export default {
           stockId: this.detail.id,
           buyNum: this.selectNumber ? this.selectNumber * 1 : this.autoNumber * 1, // 单位为手
           buyType: this.selectType,
-          lever: this.selectCycle ? this.selectCycle : 0
+          lever: this.selectCycle ? this.selectCycle : 0,
+          newId: this.routeQuery.id
         }
+
         let data = await api.buy(opts)
         this.buying = false
         if (data.status === 0) {
