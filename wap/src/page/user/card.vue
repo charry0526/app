@@ -37,7 +37,7 @@
             </li>
           </ul>
           <!-- <p class="red">每人最多绑定一张银行卡，如需更换银行卡请联系客服</p> -->
-          <p class="red">Mỗi người có thể liên kết nhiều nhất một thẻ ngân hàng, nếu bạn cần thay đổi thẻ ngân hàng, vui lòng liên hệ bộ phận chăm sóc khách hàng</p>
+          <p class="red">Mỗi người chỉ có thể liên kết được một tài khoản ngân hàng, nếu bạn cần thay đổi tài khoản ngân hàng hãy liên hệ bộ phận CSKH</p>
         </div>
       </div>
     </div>
@@ -51,7 +51,7 @@
          class="btnbox">
       <!-- <span class="text-center btnok" @click="addCard('edit')">修改银行卡</span> -->
       <span class="text-center btnok"
-            @click="addCard('edit')">Sửa đổi thẻ ngân hàng</span>
+            @click="addCard('edit')">Đổi thông tin tài khoản ngân hàng</span>
 
     </div>
   </div>
@@ -75,15 +75,13 @@ export default {
 
   },
   beforeDestroy () {
-    if (this.$state.theme == 'red')
-    {
+    if (this.$state.theme == 'red') {
       document.body.classList.remove('red-bg')
       document.body.classList.add('black-bg')
     }
   },
   mounted () {
-    if (this.$state.theme == 'red')
-    {
+    if (this.$state.theme == 'red') {
       document.body.classList.remove('black-bg')
       document.body.classList.add('red-bg')
     }
@@ -92,16 +90,14 @@ export default {
   methods: {
     // 添加银行卡
     addCard (val) {
-      if (val === 'edit')
-      {
+      if (val === 'edit') {
         this.$router.push({
           path: '/addCard',
           query: {
             type: val
           }
         })
-      } else
-      {
+      } else {
         this.$router.push('/addCard')
       }
     },
@@ -112,13 +108,11 @@ export default {
         code: this.$route.query.code
       }
       let data = await api.getBankCard(opts)
-      if (data.status === 0)
-      {
+      if (data.status === 0) {
         this.cardInfo = []
         this.cardInfo.push(data.data)
         this.$store.state.bankInfo = data.data
-      } else
-      {
+      } else {
         Toast(data.msg)
       }
     }

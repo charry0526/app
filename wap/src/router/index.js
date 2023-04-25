@@ -338,7 +338,7 @@ export default new Router({
       name: 'card',
       meta: {
         // title: '银行卡',
-        title: 'Thẻ ngân hàng',
+        title: 'Liên kết ngân hàng',
         requireAuth: true,
         hasHeader: true
       },

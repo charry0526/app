@@ -193,7 +193,7 @@
     </div>
     <div class="footer-btn">
       <div class="total">
-        <p class="pay">支付保证金<span class="protem">￥{{cnyTotal?cnyTotal:0}}</span></p>
+        <p class="pay">支付保证金<span class="protem">{{cnyTotal?cnyTotal:0}}VND</span></p>
         <p class="account">(期货余额:{{$store.state.userInfo.enableFuturesAmt}}元)</p>
       </div>
       <mt-button :disabled='buying' class="btn-red" size="small" type="danger" @click="toInquiry">下单</mt-button>
@@ -440,16 +440,16 @@ export default {
       // }
       // 下单
       if (!this.$store.state.userInfo.idCard) {
-        Toast('您还未实名认证,请先实名认证了再下单')
+        Toast('Bạn chưa xác minh tên thật của mình, vui lòng xác minh tên thật của bạn trước khi đặt hàng')
         this.$router.push('/authentication')
         return
       }
       if (!this.agree) {
-        Toast('需同意合作协议才能交易!')
+        Toast('Cần đồng ý thỏa thuận hợp tác để giao dịch!')
       } else if (isNull(this.selectNumber) && isNull(this.autoNumber)) {
-        Toast('请选择购买手数')
+        Toast('Vui lòng chọn số lô cần mua')
       } else if (isNull(this.selectType)) {
-        Toast('请选择买卖方向')
+        Toast('Vui lòng chọn hướng mua và bán')
       } else {
         this.buying = true
         let opts = {

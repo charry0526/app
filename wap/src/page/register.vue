@@ -148,219 +148,219 @@
   </div>
 </template>
 <script>
-  import { Toast } from 'mint-ui'
-  import { isNull, isPhone, pwdReg } from '@/utils/utils'
-  // import APIUrl from '@/axios/api.url'
-  import * as api from '@/axios/api'
+import { Toast } from 'mint-ui'
+import { isNull, isPhone, pwdReg } from '@/utils/utils'
+// import APIUrl from '@/axios/api.url'
+import * as api from '@/axios/api'
 
-  export default {
-    data() {
-      return {
-        phone: '',
-        code: '1',
-        code2: '',
-        psd: '',
-        psd2: '',
-        invitecode: '',
-        codeshow: true,
-        count: '', // 倒计时
-        clickFalg: 0, //  点击次数
-        imgCode: '',
-        adminUrl: '',
-        dialogShow: false, // 显示弹窗
-        ischeckImg: false,
-        checkCodeState: true,
-        dialogImgShow: false, // 图片显示
-        logo: '',
-        agree: false,
-        logindialogShow: false, // 注册协议
-        agreeUrl: '', // 注册协议地址
-        siteInfo: {},
-        imgCodeTime: 0
+export default {
+  data () {
+    return {
+      phone: '',
+      code: '1',
+      code2: '',
+      psd: '',
+      psd2: '',
+      invitecode: '',
+      codeshow: true,
+      count: '', // 倒计时
+      clickFalg: 0, //  点击次数
+      imgCode: '',
+      adminUrl: '',
+      dialogShow: false, // 显示弹窗
+      ischeckImg: false,
+      checkCodeState: true,
+      dialogImgShow: false, // 图片显示
+      logo: '',
+      agree: false,
+      logindialogShow: false, // 注册协议
+      agreeUrl: '', // 注册协议地址
+      siteInfo: {},
+      imgCodeTime: 0
+    }
+  },
+  mounted: function () {
+    if (this.$route.query.code) {
+      this.invitecode = this.$route.query.code
+    }
+    this.getInfoSite()
+  },
+  methods: {
+    async getInfoSite () {
+      // 获取 logo
+      let data = await api.getInfoSite()
+      if (data.status === 0) {
+        this.logo = data.data.siteLogoSm
+        this.agreeUrl = data.data.regAgree
+        this.siteInfo = data.data
+        if (this.siteInfo.smsDisplay === false) {
+          this.code = '6666'
+        }
+        this.$store.state.siteInfo = this.siteInfo
+        // this.invitecode = this.siteInfo.agentCode
+      } else {
+        Toast(data.msg)
       }
     },
-    mounted: function () {
-      if (this.$route.query.code) {
-        this.invitecode = this.$route.query.code
+    checkCodeBox () {
+      if (isNull(this.phone) || !isPhone(this.phone)) {
+        Toast('Xin vui lòng nhập một số điện thoại hợp lệ')
+      } else {
+        this.checkPhone()
       }
-      this.getInfoSite()
     },
-    methods: {
-      async getInfoSite() {
-        // 获取 logo
-        let data = await api.getInfoSite()
-        if (data.status === 0) {
-          this.logo = data.data.siteLogoSm
-          this.agreeUrl = data.data.regAgree
-          this.siteInfo = data.data
-          if (this.siteInfo.smsDisplay === false) {
-            this.code = '6666'
-          }
-          this.$store.state.siteInfo = this.siteInfo
-          // this.invitecode = this.siteInfo.agentCode
+    async checkCode () {
+      let data = await api.checkCode({ code: this.code2 })
+      this.ischeckImg = data
+    },
+    async checkImg () {
+      if (!this.code2) {
+        Toast('Mã xác minh bạn đã nhập sai, vui lòng nhập lại')
+        this.checkCodeState = false
+        return
+      }
+      // await this.checkCode()
+      let data = await api.checkCode({ code: this.code2 })
+      if (data === 'true' || data === true) {
+        this.getcode()
+        this.dialogShow = false
+        this.checkCodeState = true
+      } else {
+        Toast('Mã xác minh bạn đã nhập sai, vui lòng nhập lại')
+        this.checkCodeState = false
+        this.adminUrl = process.env.API_HOST + '1'
+        this.adminUrl = process.env.API_HOST
+        if (this.adminUrl === undefined) {
+          this.adminUrl = ''
+        }
+      }
+    },
+    async getcode () {
+      // if(!this.checkCode()){
+      //     // 验证图形码是否正确
+      //     Toast('请输入正确图形验证码')
+      //     return
+      // }
+      // 获取验证码
+      if (this.clickFalg !== 0) {
+        this.clickFalg = 0
+        return
+      }
+      this.clickFalg++
+      //   var reg = 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/
+      let reg = /^[0-9]{11}$/ // 手机号码验证
+      if (isNull(this.phone)) {
+        Toast('Số điện thoại di động không được để trống')
+      } else {
+        if (!reg.test(this.phone)) {
+          Toast('Vui lòng nhập đúng số điện thoại')
         } else {
-          Toast(data.msg)
-        }
-      },
-      checkCodeBox() {
-        if (isNull(this.phone) || !isPhone(this.phone)) {
-          Toast('请输入正确的手机号')
-        } else {
-          this.checkPhone()
-        }
-      },
-      async checkCode() {
-        let data = await api.checkCode({ code: this.code2 })
-        this.ischeckImg = data
-      },
-      async checkImg() {
-        if (!this.code2) {
-          Toast('您输入的验证码有误,请重新输入')
-          this.checkCodeState = false
-          return
-        }
-        // await this.checkCode()
-        let data = await api.checkCode({ code: this.code2 })
-        if (data === 'true' || data === true) {
-          this.getcode()
-          this.dialogShow = false
-          this.checkCodeState = true
-        } else {
-          Toast('您输入的验证码有误,请重新输入')
-          this.checkCodeState = false
-          this.adminUrl = process.env.API_HOST + '1'
-          this.adminUrl = process.env.API_HOST
-          if (this.adminUrl === undefined) {
-            this.adminUrl = ''
-          }
-        }
-      },
-      async getcode() {
-        // if(!this.checkCode()){
-        //     // 验证图形码是否正确
-        //     Toast('请输入正确图形验证码')
-        //     return
-        // }
-        // 获取验证码
-        if (this.clickFalg !== 0) {
-          this.clickFalg = 0
-          return
-        }
-        this.clickFalg++
-        //   var reg = 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/
-        let reg = /^[0-9]{11}$/ // 手机号码验证
-        if (isNull(this.phone)) {
-          Toast('手机号不可为空')
-        } else {
-          if (!reg.test(this.phone)) {
-            Toast('请输入正确的手机号码')
-          } else {
-            //   var sign  = this.$md5(this.phone+'W&WzL42v').toUpperCase()
-            let result = await api.getCode({ phoneNum: this.phone })
-            if (result.status === 0) {
-              const TIME_COUNT = 60
-              if (!this.timer) {
-                this.count = TIME_COUNT
-                this.codeshow = false
-                this.clickFalg = 0
-                this.timer = setInterval(() => {
-                  if (this.count > 0 && this.count <= TIME_COUNT) {
-                    this.count--
-                  } else {
-                    this.codeshow = true
-                    clearInterval(this.timer)
-                    this.timer = null
-                  }
-                }, 1000)
-              } else {
-                Toast(result.msg)
-              }
+          //   var sign  = this.$md5(this.phone+'W&WzL42v').toUpperCase()
+          let result = await api.getCode({ phoneNum: this.phone })
+          if (result.status === 0) {
+            const TIME_COUNT = 60
+            if (!this.timer) {
+              this.count = TIME_COUNT
+              this.codeshow = false
+              this.clickFalg = 0
+              this.timer = setInterval(() => {
+                if (this.count > 0 && this.count <= TIME_COUNT) {
+                  this.count--
+                } else {
+                  this.codeshow = true
+                  clearInterval(this.timer)
+                  this.timer = null
+                }
+              }, 1000)
             } else {
               Toast(result.msg)
             }
+          } else {
+            Toast(result.msg)
           }
         }
-      },
-      async checkPhone() {
-        // 先验证是否已经注册
-        let data = await api.checkPhone({ phoneNum: this.phone })
+      }
+    },
+    async checkPhone () {
+      // 先验证是否已经注册
+      let data = await api.checkPhone({ phoneNum: this.phone })
+      if (data.status === 0) {
+        // 如果用户已存在返回 0
+        Toast('Người dùng đã được đăng ký, vui lòng đăng nhập')
+        this.$router.push('/login')
+      } else {
+        this.dialogShow = false
+        this.adminUrl = process.env.API_HOST
+        if (this.adminUrl === undefined) {
+          this.adminUrl = ''
+        }
+        // this.gook()
+        this.getcode()
+      }
+    },
+    async gook () {
+      // 注册
+      if (!this.agree) {
+        Toast('Cần đồng ý với thỏa thuận đăng ký để đăng ký!')
+      } else if (isNull(this.phone) || !isPhone(this.phone)) {
+        Toast('Vui lòng nhập đúng số điện thoại')
+      } else if (isNull(this.psd)) {
+        Toast('xin vui lòng nhập mật khẩu')
+      } else if (isNull(this.psd2)) {
+        Toast('Vui lòng xác nhận mật khẩu của bạn')
+      } else if (isNull(this.code)) {
+        Toast('vui lòng nhập mã xác nhận')
+      } else if (this.psd !== this.psd2) {
+        Toast('Hai mật khẩu đã nhập không khớp')
+        this.password = 0
+        this.password2 = 0
+      } else if (!pwdReg(this.psd)) {
+        Toast('Mật khẩu là 6 ~ 12 chữ số, số, chữ cái hoặc ký hiệu')
+      } else if (isNull(this.invitecode)) {
+        Toast('Vui lòng nhập mã tổ chức')
+      } else {
+        let opts = {
+          // agentCode:'4023', // SR330001
+          phone: this.phone,
+          yzmCode: this.code,
+          userPwd: this.psd,
+          agentCode: this.invitecode
+        }
+        let data = await api.register(opts)
         if (data.status === 0) {
-          // 如果用户已存在返回 0
-          Toast('用户已注册,请登录')
+          Toast('Đăng ký thành công, vui lòng đăng nhập')
           this.$router.push('/login')
         } else {
-          this.dialogShow = false
-          this.adminUrl = process.env.API_HOST
-          if (this.adminUrl === undefined) {
-            this.adminUrl = ''
-          }
-          // this.gook()
-          this.getcode()
+          Toast(data.msg)
         }
-      },
-      async gook() {
-        // 注册
-        if (!this.agree) {
-          Toast('需同意注册协议才能注册!')
-        } else if (isNull(this.phone) || !isPhone(this.phone)) {
-          Toast('请输入正确的手机号码')
-        } else if (isNull(this.psd)) {
-          Toast('请输入密码')
-        } else if (isNull(this.psd2)) {
-          Toast('请确认密码')
-        } else if (isNull(this.code)) {
-          Toast('请输入验证码')
-        } else if (this.psd !== this.psd2) {
-          Toast('两次输入的密码不一致')
-          this.password = 0
-          this.password2 = 0
-        } else if (!pwdReg(this.psd)) {
-          Toast('密码为6~12位，数字、字母或符号')
-        } else if (isNull(this.invitecode)) {
-          Toast('请输入机构代码')
-        } else {
-          let opts = {
-            // agentCode:'4023', // SR330001
-            phone: this.phone,
-            yzmCode: this.code,
-            userPwd: this.psd,
-            agentCode: this.invitecode
-          }
-          let data = await api.register(opts)
-          if (data.status === 0) {
-            Toast('注册成功，请登录')
-            this.$router.push('/login')
-          } else {
-            Toast(data.msg)
-          }
-        }
-      },
-      goLogin: function () {
-        this.$router.push('/login')
-      },
-      refreshImg() {
-        this.adminUrl = ''
-        this.imgCodeTime = Date.now()
-        this.dialogImgShow = false
-        let this_ = this
-        setTimeout(function () {
-          this_.adminUrl = process.env.API_HOST
-          if (this_.adminUrl === undefined) {
-            this_.adminUrl = ''
-          }
-          this_.dialogImgShow = true
-        }, 500)
-      },
-      isAgree() {
-        let i = false
-        let j = true
-        this.agree = this.agree ? i : j
-      },
-      toagreeUrl() {
-        this.$router.push('/agree')
       }
+    },
+    goLogin: function () {
+      this.$router.push('/login')
+    },
+    refreshImg () {
+      this.adminUrl = ''
+      this.imgCodeTime = Date.now()
+      this.dialogImgShow = false
+      let this_ = this
+      setTimeout(function () {
+        this_.adminUrl = process.env.API_HOST
+        if (this_.adminUrl === undefined) {
+          this_.adminUrl = ''
+        }
+        this_.dialogImgShow = true
+      }, 500)
+    },
+    isAgree () {
+      let i = false
+      let j = true
+      this.agree = this.agree ? i : j
+    },
+    toagreeUrl () {
+      this.$router.push('/agree')
     }
   }
+}
 </script>
 <style lang="less" scoped>
   body {

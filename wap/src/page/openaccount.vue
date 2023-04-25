@@ -39,7 +39,7 @@
             </div>
             <div class="content">
               <!-- <h3>客户至上,优享服务</h3>
-              <p>灵活投资、实现收益最大化</p> -->
+              <p>灵活投资.实现收益最大化</p> -->
                <h3>Khách hàng đầu tiên, dịch vụ ưu đãi</h3>
               <p>Đầu tư linh hoạt để tối đa hóa lợi nhuận</p>
             </div>

@@ -31,7 +31,7 @@
             </div>
             <div class="order-info">
               <p class="clearfix">
-                <span class="col-xs-6"><!--手续费-->{{$t("commission")}}:<b class="space">￥{{item.withFee}}</b></span>
+                <span class="col-xs-6"><!--手续费-->{{$t("commission")}}:<b class="space">{{item.withFee}}VND</b></span>
                 <!-- <span class="col-xs-6">实际到账金额:<b class="space" style="font-size:0.26rem">{{item.withAmt - item.withFee}}</b>元</span>                         -->
               </p>
               <p class="clearfix">

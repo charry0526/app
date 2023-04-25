@@ -155,8 +155,8 @@ export default {
       }
     },
     async loadMore () {
-      // 1、总数小于 该次查询的总页数 不进行加载更多 （无下一页）
-      // 2、当页加载数据还未加载完 不进行下一个加载
+      // 1.总数小于 该次查询的总页数 不进行加载更多 （无下一页）
+      // 2.当页加载数据还未加载完 不进行下一个加载
       if (this.list.length < this.pageSize || this.loading || this.total <= this.currentNum) {
         return
       }

@@ -378,7 +378,7 @@
         <li @click="goDetail">
           <span>
             <!-- <i style="font-size:0.28rem" class="iconfont icon-zijinmingxi"></i> -->
-            <img src="../../assets/ico/zijin.png"
+            <img src="../../assets/img/103.png"
                  style="width:.27rem;height:.24rem;margin-right: 0.15rem;">
             {{$t("FundingDetails")}}
             <icon name="right66"
@@ -389,7 +389,7 @@
         <li @click="toRechargeList">
           <span>
             <!-- <i style="font-size:0.28rem" class="iconfont icon-dingdanjilu1"></i> -->
-            <img src="../../assets/ico/chongzhi.png"
+            <img src="../../assets/img/101.png"
                  style="width:.27rem;height:.27rem;margin-right: 0.15rem;">
             {{$t("RechargeRecord")}}
             <icon name="right66"
@@ -400,7 +400,7 @@
         <li @click="toCashList">
           <span>
             <!-- <i style="font-size:0.28rem" class="iconfont icon-dingdanjilu1"></i> -->
-            <img src="../../assets/ico/tixian.png"
+            <img src="../../assets/img/102.png"
                  style="width:.24rem;height:.24rem;margin-right: 0.15rem;">
             {{$t("WithdrawalsRecord")}}
             <icon name="right66"

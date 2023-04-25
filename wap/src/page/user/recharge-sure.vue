@@ -101,7 +101,7 @@
           <p><i class="iconfont icon-jinggao1"></i>注意事项：</p>
           <p class="tip-text"><i class="iconfont icon-jingpaibuzhou"></i>由于支付收款上限限制，每次收款公户可能不一样，<span class="red">请每次充值前获取最新的二维码完成支付</span>
           </p>
-          <p class="tip-text"><i class="iconfont icon-jingpaibuzhou3"></i>如果您的网络环境不稳定，或由于设备、环境、偏好、行为、关系、账户、身份等维度问题，<span
+          <p class="tip-text"><i class="iconfont icon-jingpaibuzhou3"></i>如果您的网络环境不稳定，或由于设备.环境.偏好.行为.关系.账户.身份等维度问题，<span
             class="red">可能导致支付宝风控系统提示风险，请您在安全的环境下发起支付</span></p>
           <p class="tip-text"><i class="iconfont icon-jingpaibuzhou2"></i>为确保入金及时到账，<span class="red">请确认您输入的金额和提交的充值金额一致</span>.
           </p>

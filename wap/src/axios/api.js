@@ -349,7 +349,7 @@ export function findSpreadRateOne (options) {
   return post('/apis/api/user/findSpreadRateOne.do', options)
 }
 
-// ==================最新修改内容：日线、添加自选等，2020年7月10日15:37:20======================
+// ==================最新修改内容：日线.添加自选等，2020年7月10日15:37:20======================
 // 期货分钟-k线图
 export function getFuturesMinKEcharts (options) {
   return post('/apis/api/stock/getFuturesMinK_Echarts.do', options)
@@ -384,7 +384,7 @@ export function queryFuturesByCode (options) {
   return get('/apis/api/futures/queryFuturesByCode.do', options)
 }
 
-// ==================最新修改内容：新版-新闻资讯、交易大厅，2020年8月26日10:39======================
+// ==================最新修改内容：新版-新闻资讯.交易大厅，2020年8月26日10:39======================
 
 // 查询期货详情
 export function queryNewsList (type) {

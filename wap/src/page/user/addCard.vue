@@ -30,12 +30,12 @@
     <div class="rule-box">
       <div class="title">gợi ý：</div>
       <ul>
-        <!-- <li>1、新用户注册后必须通过添加银行卡。</li>
-        <li>2、用户只能添加一张本人银行卡。</li>
-        <li>3、真实姓名必须和出金银行卡户名一致。</li> -->
-         <li>1、Sau khi đăng ký, người dùng mới phải thêm thẻ ngân hàng。</li>
-        <li>2、Người dùng chỉ có thể thêm một thẻ ngân hàng cá nhân。</li>
-        <li>3、Tên thật phải trùng với tên tài khoản thẻ ngân hàng rút tiền。</li>
+        <!-- <li>1.新用户注册后必须通过添加银行卡。</li>
+        <li>2.用户只能添加一张本人银行卡。</li>
+        <li>3.真实姓名必须和出金银行卡户名一致。</li> -->
+         <li>1.Sau khi đăng ký, người dùng mới phải thêm thẻ ngân hàng。</li>
+        <li>2.Người dùng chỉ có thể thêm một thẻ ngân hàng cá nhân。</li>
+        <li>3.Tên thật phải trùng với tên tài khoản thẻ ngân hàng rút tiền。</li>
       </ul>
     </div>
     <div class="btnbox">

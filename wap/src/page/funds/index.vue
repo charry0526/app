@@ -28,7 +28,7 @@
                   :style="{color:$state.theme =='red'&&'#000'}"
                   >沪深账户
                   <span
-                  >(￥{{(Number($store.state.userInfo.enableAmt + $store.state.userInfo.allFreezAmt)).toFixed(2)}})</span>
+                  >({{(Number($store.state.userInfo.enableAmt + $store.state.userInfo.allFreezAmt)).toFixed(2)}})VND</span>
                   </span>
                   <span style="font-size: .2rem"
                   :style="{color:$state.theme =='red'&&'#000'}"
@@ -45,7 +45,7 @@
                       >
                       <div class="acc-item">
                           <div class="acc-item_title">沪深总资金</div>
-                          <div class="acc-item_num">￥{{(Number($store.state.userInfo.enableAmt + $store.state.userInfo.allFreezAmt)).toFixed(2)}}</div>
+                          <div class="acc-item_num">{{(Number($store.state.userInfo.enableAmt + $store.state.userInfo.allFreezAmt)).toFixed(2)}}VND</div>
                       </div>
                   </div>
                   <div class=" acc">
@@ -54,7 +54,7 @@
                       >
                       <div class="acc-item">
                           <div class="acc-item_title">沪深冻结保证金</div>
-                          <div class="acc-item_num">￥{{$store.state.hide?'****':$store.state.userInfo.allFreezAmt}}</div>
+                          <div class="acc-item_num">{{$store.state.hide?'****':$store.state.userInfo.allFreezAmt}}VND</div>
                       </div>
                   </div>
                   <div class=" acc">
@@ -63,7 +63,7 @@
                       >
                       <div class="acc-item">
                           <div class="acc-item_title">沪深可用资金</div>
-                          <div class="acc-item_num">￥{{$store.state.hide?'****':$store.state.userInfo.enableAmt}}</div>
+                          <div class="acc-item_num">{{$store.state.hide?'****':$store.state.userInfo.enableAmt}}VND</div>
                       </div>
                   </div>
                   <div class=" acc">
@@ -72,7 +72,7 @@
                       >
                       <div class="acc-item">
                           <div class="acc-item_title">沪深持仓总盈亏</div>
-                          <div class="acc-item_num">￥{{$store.state.hide?'****':$store.state.userInfo.tradingAmount}}</div>
+                          <div class="acc-item_num">{{$store.state.hide?'****':$store.state.userInfo.tradingAmount}}VND</div>
                       </div>
                   </div>
               </div>

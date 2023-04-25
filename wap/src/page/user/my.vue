@@ -28,7 +28,7 @@
       </div>
       <div class="form-block">
         <mt-field label="旧密码" type="password" placeholder="请输入旧密码" v-model="nextPsd"></mt-field>
-        <mt-field label="新密码" placeholder="密码为6~12位，数字、字母或符号" type="password" v-model="newPsd"></mt-field>
+        <mt-field label="新密码" placeholder="密码为6~12位，数字.字母或符号" type="password" v-model="newPsd"></mt-field>
       </div>
       <div class="text-center">
         <mt-button class="btn-sure" type="default" @click="changeLoginPsd">确定</mt-button>
@@ -77,7 +77,7 @@ export default {
       if (isNull(this.nextPsd) || isNull(this.newPsd)) {
         Toast('请输入新旧密码')
       } else if (!pwdReg(this.newPsd)) {
-        Toast('密码为6~12位，数字、字母或符号')
+        Toast('密码为6~12位，数字.字母或符号')
       } else {
         // 修改密码
         let opts = {

@@ -52,7 +52,7 @@
       <div class="upload-btn">
         <el-upload :with-credentials='true'
                    class="avatar-uploader"
-                   :action="admin+'/user/upload.do'"
+                   :action="admin+'/apis/user/upload.do'"
                    list-type="picture-card"
                    name="upload_file"
                    :show-file-list="false"
@@ -77,7 +77,7 @@
       <div class="upload-btn">
         <el-upload :with-credentials='true'
                    class="avatar-uploader"
-                   :action="admin+'/user/upload.do'"
+                   :action="admin+'/apis/user/upload.do'"
                    list-type="picture-card"
                    name="upload_file"
                    :show-file-list="false"
@@ -117,9 +117,9 @@
     <div class="rule-box">
       <div class="title">{{$t("ruleTitle")}}：</div>
       <ul>
-        <li>1、{{$t("ruleTip1")}}。</li>
-        <li>2、{{$t("ruleTip2")}}。</li>
-        <li>3、{{$t("ruleTip3")}}。</li>
+        <li>1.{{$t("ruleTip1")}}。</li>
+        <li>2.{{$t("ruleTip2")}}。</li>
+        <li>3.{{$t("ruleTip3")}}。</li>
       </ul>
     </div>
     <div v-show="showBtn"

@@ -53,19 +53,21 @@
                  infinite-scroll-distance="10"
                  class="table">
             <th>Mã</th>
-            <th>Giá thị trường</th>
+            <th>Giá khớp lệnh</th>
             <th>Giá phát hành</th>
-            <th>Khối lượng</th>
-            <th>Giá hiện tại</th>
-            <!-- <th>tình trạng</th> -->
-            <th></th>
+            <th>SL</th>
+            <th>Đòn bẩy</th>
+            <th>Giá TT</th>
+            <th>Mua</th>
             <tr v-for="(item,index) in tendorseListDate"
                 :key="index">
               <td>{{item.xgname}}</td>
-              <td>{{item.sz}}</td>
+              <td></td>
+              <td></td>
               <td>{{item.nums}}</td>
               <td>{{item.gg}}</td>
-              <td>{{item.bzj}}</td>
+              <td>{{item.sz}}</td>
+              <td></td>
               <!-- <td :class="item.zts==2?'tdActive':''">
                 {{item.zts==1?'vượt qua':item.zts==2?'không vượt qua':item.zts==4?'Hoàn thành':'không được xem xét'}}
               </td> -->
