@@ -72,7 +72,7 @@
             <div v-for="i in optionsPay" :key="i.key" class="pay-radio">
               <!-- 1 ==> 支付宝 2 ==> 微信 3 ==> 对公转账-->
               <div @click="changeType(i)" :class="i.id == id?'pay-list on':'pay-list'" style="display: flex;">
-                          <span class="col-md-4 pay-icon">
+                          <span class="pay-icon">
                               <!-- <img class="pay-miniimg" :src="i.channelImg" > -->
                              <i v-if="i.ctype == 0" style="color:#1296db;" class="iconfont icon-zhifubao"></i>
                              <i v-else-if="i.ctype == 1" style="color:#36ae55;" class="iconfont icon-yinlian"></i>
@@ -80,7 +80,7 @@
                             <!-- <i v-if="i.value == 3" style="color:#009688;" class="iconfont icon-weixin"></i> -->
                              {{i.channelType}}
                           </span>
-                <span class="col-md-4 pull-right" style="text-align: right;">
+                <span>
                               <i :class="id == i.id?'icon-on iconfont icon-xuanzhong':'iconfont icon-weixuanze'"></i>
                           </span>
               </div>
@@ -547,7 +547,8 @@ export default {
 
     .pay-list {
       border-radius: 0.2rem;
-
+      justify-content: space-between;
+      padding: 0 0.2rem;
       .pay-miniimg {
         width: 18px;
         vertical-align: middle;

@@ -21,7 +21,7 @@ const tipObj = {
 const home = {
   homeNavList1: 'Bảng giá', // 行情
   homeNavList2: 'Tài sản', // 持仓
-  homeNavList3: 'Không bắt buộc', // 自选
+  homeNavList3: 'Tự chọn', // 自选
   homeNavList4: 'Của tôi', // 我的
   NewsList: 'Tin tức', // 新闻列表
   search: 'Tìm kiếm', // 搜索
@@ -99,12 +99,12 @@ const uesr = {
   Verified: 'Đã xác minh', // 实名认证
   examinationPassed: 'Kiểm tra thông qua', // 审核通过
   NotReviewed: 'Không được xem xét', // 未审核
-  bank: 'Thẻ ngân hàng', // 银行卡
+  bank: 'Liên kết ngân hàng', // 银行卡
   RegisterbuyESOP: 'Đăng ký mua mã ESOP', // 注册购买 ESOP 代码
   changePassword: 'Dổi mật khẩu', // 修改密码
-  FundingDetails: 'Chi tiết tài trợ', // 资金明细
-  RechargeRecord: 'Hồ sơ nạp tiền', // 充值记录
-  WithdrawalsRecord: 'Hồ sơ rút tiền' // 提现记录
+  FundingDetails: 'Lịch sử giao dịch', // 资金明细
+  RechargeRecord: 'Lịch sử nạp tiền', // 充值记录
+  WithdrawalsRecord: 'Lịch sử rút tiền' // 提现记录
 }
 const cardBind = {
   cashText: 'Số tiền có thể rút ( VND )',

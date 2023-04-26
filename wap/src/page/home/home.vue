@@ -8,10 +8,10 @@
         <img src="../../assets/ico/wogerenziliao.png" >
       </div>
       <div class="home-search-input">
-        <img src="../../assets/ico/fangdajing.png" alt="">
+        <!-- <img src="../../assets/ico/fangdajing.png" alt=""> -->
         <input type="text"
         @focus="$router.push('/Searchlist')"
-        :placeholder="$t('searchText')">
+       >
       </div>
       <div class="home-search-ctl">
         <img class="lingdang" src="../../assets/ico/lingdang.png" alt=""
@@ -45,7 +45,7 @@
     <div class="icon-router clearfix home-ico-router">
 
       <div class="col-xs-3 text-center">
-        <a class='icon-wrap animated zoomIn' @click="goList" href="javascript:;">
+        <a class='icon-wrap chicang-activeanimated zoomIn' @click="goList" href="javascript:;">
           <img
           class="icon-img"
           src="../../assets/ico/hangqing.png" alt="">

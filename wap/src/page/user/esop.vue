@@ -58,7 +58,7 @@
             <th>SL</th>
             <th>Đòn bẩy</th>
             <th>Giá TT</th>
-            <th>Mua</th>
+            <th>Xét duyệ</th>
             <tr v-for="(item,index) in tendorseListDate"
                 :key="index">
               <td>{{item.xgname}}</td>
@@ -72,6 +72,10 @@
               </td> -->
               <td>
                 <div class="button-box">
+                  <span v-if="item.zts!=1">
+                      {{item.zts==2?'Chưa thông qu':'Đang xét duyệt'}}
+
+                  </span>
                  <mt-button v-if="item.zts==1" class="btn-red pull-right"
                              size="small"
                              type="danger"

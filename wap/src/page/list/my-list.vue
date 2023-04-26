@@ -25,7 +25,7 @@
         </div>
       </div>
     </div>
-    <ul class="table-list">
+    <!-- <ul class="table-list">
       <li class="title">
         <div>
           <ul class='clearfix'>
@@ -39,7 +39,7 @@
         </div>
 
       </li>
-    </ul>
+    </ul> -->
     <ul class="table-list table-list-body"
         v-infinite-scroll="loadMore"
         infinite-scroll-disabled="loading"
@@ -273,7 +273,7 @@ export default {
   }
 
   .account-box {
-    margin-top: 0.5rem;
+    // margin-top: 0.5rem;
     background-color: #16171d;
     .box-contain {
     background-color: #16171d;
