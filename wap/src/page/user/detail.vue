@@ -13,7 +13,7 @@
         <div class="account text-center">
           <!-- <p class="title">当前可用余额（元）</p> -->
           <p class="title">Số dư khả dụng (VND)</p>
-          <p class="red number">{{moneyDot($store.state.userInfo.enableAmt)||''}}</p>
+          <p class="red number">{{$moneyDot($store.state.userInfo.enableAmt)||''}}</p>
         </div>
         <div class="account-panel">
           <div class="col-xs-6">

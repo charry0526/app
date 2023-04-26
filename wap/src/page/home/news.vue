@@ -44,10 +44,11 @@ export default {
   margin-bottom: .3rem;
 }
 /deep/ table{
-  max-width: 100%;
+  display: block;
+  max-width: 100% !important;
 }
-/deep/img {
-  max-width: 100%;
+/deep/ img {
+  max-width: 100% !important;
   object-fit: contain;
 }
 </style>

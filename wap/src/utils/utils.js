@@ -137,18 +137,31 @@ export function checkCookie () {
     }
   }
 }
-export function moneyDot (value, num) {
-  num = num > 0 && num <= 20 ? num : 2
-  value = parseFloat((value + '').replace(/[^\d\.-]/g, '')).toFixed(num) + '' // 将金额转成比如 123.45的字符串
-  var valueArr = value.split('.')[0].split('').reverse() // 将字符串的数变成数组
-  const valueFloat = value.split('.')[1] // 取到 小数点后的值
-  let valueString = ''
-  for (let i = 0; i < valueArr.length; i++) {
-    valueString +=
-          valueArr[i] +
-          ((i + 1) % 3 == 0 && i + 1 != valueArr.length ? ',' : '') // 循环 取数值并在每三位加个','
+export function moneyDot (value) {
+  let suffix = ''
+  if (value && value !== 'NULL' && value !== 'undefined' && isNaN(Number(value))) {
+    return value
+  } else if (!value) {
+    return '-'
+  } else {
+    let pSuffix = ''
+    value = value.toString()
+    let intPart = Math.floor(Math.abs(Number(value))) // 获取整数部分
+    let intPartFormat = intPart.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') // 将整数部分逢三一断
+    intPartFormat = pSuffix + intPartFormat
+    let floatPart = '' // 预定义小数部分
+    let value2Array = value.split('.')
+    // =2表示数据有小数位
+    if (value2Array.length === 2) {
+      floatPart = value2Array[1].toString() // 拿到小数部分
+      if (floatPart.length === 1) {
+        // 补0,实际上用不着
+        return intPartFormat + '.' + floatPart + '0' + suffix
+      } else {
+        return intPartFormat + '.' + floatPart + suffix
+      }
+    } else {
+      return intPartFormat + floatPart + suffix
+    }
   }
-  const Geldbetrag = valueString.split('').reverse().join('')
-  const money = Geldbetrag + '.' + valueFloat // 拼接上小数位
-  return money
 }

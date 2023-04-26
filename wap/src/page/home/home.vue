@@ -32,10 +32,10 @@
         :key="i.key">
           <div :index='index' class="name">{{i.indexName}}</div>
           <p :class="changeTextClass[index] == true?'price heartBeat':'price'">
-            {{Number(i.currentPoint).toFixed(2)}}
+            {{$moneyDot(Number(i.currentPoint).toFixed(2))}}
             </p>
           <div class="status">
-            <span >{{Number(i.floatPoint).toFixed(2)}}</span>
+            <span >{{$moneyDot(Number(i.floatPoint).toFixed(2))}}</span>
             <span >{{i.floatRate}}%</span>
           </div>
         </div>
@@ -159,19 +159,19 @@
       </div>
       <ul class="firma-info">
         <li>
-          <p class="label">Địa chỉ</p>：
+          <p class="labels">Địa chỉ</p>：
           <p class="con">Landmark81 Building, 720A Điện Biên Phủ, Quận Bình Thạnh, Tp .Hồ Chí Minh</p>
         </li>
         <li>
-          <p class="label">CSKH</p>：
+          <p class="labels">CSKH</p>：
         </li>
         <li>
-          <p class="label">Email</p>：
+          <p class="labels">Email</p>：
         </li>
         <li>
-          <p class="label">Web</p>：
+          <p class="labels">Web</p>：
         </li>
-        
+
       </ul>
       <mt-navbar v-model="news">
         <mt-tab-item id="tab_0">
@@ -1018,6 +1018,14 @@ export default {
     background-color: #fff;
   }
   .news-tab{
+    background: white;
+    //  color: #000000;
+     .firma-info{
+      color: #656565;
+      li{
+        color: #656565;
+      }
+     }
     /deep/.mint-navbar{
       background: white;
       .mint-tab-item{
@@ -1096,8 +1104,8 @@ export default {
     font-size: 0.4rem;
     margin-bottom: 0.2rem;
     display: flex;
-    color:#fff;
-    .label{
+    // color:#fff;
+    .labels{
       width:1.3rem;
     }
     .con{

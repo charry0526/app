@@ -68,24 +68,23 @@
                alt="">
 
           <span class="ti">{{$t("uesrTotle")}}</span>
+
           <span class="de">
             <div>
               <p v-if="this.$store.state.settingForm.indexDisplay && !this.$store.state.settingForm.futuresDisplay "
-                 class="account">¥{{$store.state.hide?'****':Number($store.state.userInfo.userAmt +
-                $store.state.userInfo.userIndexAmt).toFixed(2)}}</p>
+                 class="account">{{$store.state.hide?'****':$moneyDot(Number($store.state.userInfo.userAmt +$store.state.userInfo.userIndexAmt).toFixed(2))}}</p>
               <p v-else-if="!this.$store.state.settingForm.indexDisplay && this.$store.state.settingForm.futuresDisplay"
-                 class="account">¥{{$store.state.hide?'****':Number($store.state.userInfo.userAmt +
-                $store.state.userInfo.userFuturesAmt).toFixed(2)}}</p>
+                 class="account">{{$store.state.hide?'****':$moneyDot(Number($store.state.userInfo.userAmt +$store.state.userInfo.userFuturesAmt).toFixed(2))}}</p>
               <p v-else-if="!this.$store.state.settingForm.indexDisplay && !this.$store.state.settingForm.futuresDisplay"
-                 class="account">¥{{$store.state.hide?'****':Number($store.state.userInfo.userAmt).toFixed(2)}}</p>
+                 class="account">{{$moneyDot($store.state.hide?'****':Number($store.state.userInfo.userAmt).toFixed(2))}}</p>
               <p v-else-if="this.$store.state.settingForm.indexDisplay && this.$store.state.settingForm.futuresDisplay"
-                 class="account">¥{{$store.state.hide?'****':Number($store.state.userInfo.userAmt +
-                $store.state.userInfo.userIndexAmt + $store.state.userInfo.userFuturesAmt).toFixed(2)}}</p>
+                 class="account">{{$moneyDot($store.state.hide?'****':Number($store.state.userInfo.userAmt +
+                $store.state.userInfo.userIndexAmt + $store.state.userInfo.userFuturesAmt).toFixed(2))}}</p>
             </div>
           </span>
         </div>
         <div class="acc-pre-center">
-          <div>{{$t("userAuth")}}: <span style="font-size: .22rem;">{{$store.state.hide?'****':$store.state.userInfo.userAmt}}.VND</span></div>
+          <div>{{$t("userAuth")}}: <span style="font-size: .22rem;">{{$moneyDot($store.state.hide?'****':$store.state.userInfo.userAmt)}}</span></div>
           <!-- <div>指数账户: <span>￥{{$store.state.hide?'****':$store.state.userInfo.userIndexAmt}}</span></div> -->
           <!-- <div>期货账户: <span>￥{{$store.state.hide?'****':Number($store.state.userInfo.userFuturesAmt).toFixed(2)}}</span></div> -->
         </div>
@@ -138,13 +137,13 @@
                   <div class="name">{{$t("uesrTotle")}}</div>
                   <p v-if="item.name == '指数'"
                      class="number yellow">
-                    {{$store.state.hide?'****':$store.state.userInfo.userIndexAmt}}.VND</p>
+                    {{$store.state.hide?'****':$moneyDot($store.state.userInfo.userIndexAmt)}}.VND</p>
                   <p v-if="item.name == '我的'"
                      class="number yellow">
-                    {{$store.state.hide?'****':$store.state.userInfo.userAmt}}.VND</p>
+                    {{$store.state.hide?'****':$moneyDot($store.state.userInfo.userAmt)}}.VND</p>
                   <p v-if="item.name == '期货'"
                      class="number yellow">
-                    {{$store.state.hide?'****':Number($store.state.userInfo.userFuturesAmt).toFixed(2)}}.VND</p>
+                    {{$store.state.hide?'****':$moneyDot(Number($store.state.userInfo.userFuturesAmt).toFixed(2))}}.VND</p>
                 </div>
               </li>
               <li>
@@ -155,13 +154,13 @@
                   <div class="name">{{$t("AvailableFunds")}}</div>
                   <p v-if="item.name == '指数'"
                      class="number yellow">
-                    {{$store.state.hide?'****':$store.state.userInfo.enableIndexAmt}}</p>
+                    {{$store.state.hide?'****':$moneyDot($store.state.userInfo.enableIndexAmt)}}</p>
                   <p v-if="item.name == '我的'"
                      class="number yellow">
-                    {{$store.state.hide?'****':$store.state.userInfo.enableAmt}}</p>
+                    {{$store.state.hide?'****':$moneyDot($store.state.userInfo.enableAmt)}}</p>
                   <p v-if="item.name == '期货'"
                      class="number yellow">
-                    {{$store.state.hide?'****':$store.state.userInfo.enableFuturesAmt}}</p>
+                    {{$store.state.hide?'****':$moneyDot($store.state.userInfo.enableFuturesAmt)}}</p>
                 </div>
               </li>
               <li>
@@ -169,26 +168,26 @@
                 <div class="name">{{$t("FreezeMargin")}}</div>
                 <p v-if="item.name == '指数'"
                    class="number yellow">
-                  {{$store.state.hide?'****':$store.state.userInfo.allIndexFreezAmt}}</p>
+                  {{$store.state.hide?'****':$moneyDot($store.state.userInfo.allIndexFreezAmt)}}</p>
                 <p v-if="item.name == '我的'"
                    class="number yellow">
-                  {{$store.state.hide?'****':$store.state.userInfo.allFreezAmt}}</p>
+                  {{$store.state.hide?'****':$moneyDot($store.state.userInfo.allFreezAmt)}}</p>
                 <p v-if="item.name == '期货'"
                    class="number yellow">
-                  {{$store.state.hide?'****':$store.state.userInfo.allFuturesFreezAmt}}</p>
+                  {{$store.state.hide?'****':$moneyDot($store.state.userInfo.allFuturesFreezAmt)}}</p>
               </li>
               <li>
                 <i class="iconfont icon-yingkuixuanzhong"></i>
                 <div class="name">{{$t("TotalprofitAndLoss")}}</div>
                 <p v-if="item.name == '指数'"
                    :class="$store.state.userInfo.allIndexProfitAndLose>0?'number red':$store.state.userInfo.allIndexProfitAndLose<0?'number green':'number'">
-                  {{$store.state.hide?'****':$store.state.userInfo.allIndexProfitAndLose}}</p>
+                  {{$store.state.hide?'****':$moneyDot($store.state.userInfo.allIndexProfitAndLose)}}</p>
                 <p v-if="item.name == '我的'"
                    :class="$store.state.userInfo.allProfitAndLose>0?'number red':$store.state.userInfo.allProfitAndLose<0?'number green':'number'">
-                  {{$store.state.hide?'****':$store.state.userInfo.allProfitAndLose}}</p>
+                  {{$store.state.hide?'****':$moneyDot($store.state.userInfo.allProfitAndLose)}}</p>
                 <p v-if="item.name == '期货'"
                    :class="$store.state.userInfo.allFuturesProfitAndLose>0?'number red':$store.state.userInfo.allFuturesProfitAndLose<0?'number green':'number'">
-                  {{$store.state.hide?'****':Number($store.state.userInfo.allFuturesProfitAndLose).toFixed(2)}}</p>
+                  {{$store.state.hide?'****':$moneyDot(Number($store.state.userInfo.allFuturesProfitAndLose).toFixed(2))}}</p>
               </li>
               <!-- <li>
                 <i class="iconfont icon-dongjiezijin"></i>
@@ -207,11 +206,11 @@
             <!-- Của bạn{{item.name}}Dòng buộc thanh lý tài khoản là -->
             THANH LÝ BẮT BUỘC TẠI
             <span v-if="item.name == '指数'"
-                  style="font-weight:bold;font-size:0.26rem;">{{$store.state.hide?'****':Number(($store.state.userInfo.enableIndexAmt + $store.state.userInfo.allIndexFreezAmt) * indexSettingInfo.forceSellPercent).toFixed(2)}} </span>
+                  style="font-weight:bold;font-size:0.26rem;">{{$store.state.hide?'****':$moneyDot(Number(($store.state.userInfo.enableIndexAmt + $store.state.userInfo.allIndexFreezAmt) * indexSettingInfo.forceSellPercent).toFixed(2))}} </span>
             <span v-if="item.name == '我的'"
-                  style="font-weight:bold;font-size:0.26rem;">{{$store.state.hide?'****':Number(($store.state.userInfo.enableAmt + $store.state.userInfo.allFreezAmt) * settingInfo.forceStopPercent).toFixed(2)}} </span>
+                  style="font-weight:bold;font-size:0.26rem;">{{$store.state.hide?'****':$moneyDot(Number(($store.state.userInfo.enableAmt + $store.state.userInfo.allFreezAmt) * settingInfo.forceStopPercent).toFixed(2))}} </span>
             <span v-if="item.name == '期货'"
-                  style="font-weight:bold;font-size:0.26rem;">{{$store.state.hide?'****':Number(($store.state.userInfo.enableFuturesAmt + $store.state.userInfo.allFuturesFreezAmt) * futuresSettingInfo.forceSellPercent).toFixed(2)}} </span>
+                  style="font-weight:bold;font-size:0.26rem;">{{$store.state.hide?'****':$moneyDot(Number(($store.state.userInfo.enableFuturesAmt + $store.state.userInfo.allFuturesFreezAmt) * futuresSettingInfo.forceSellPercent).toFixed(2))}} </span>
             <!-- 请实时注意账户风险 -->
             <i @click="focePromptPopup = true"
                ref="button"
@@ -481,7 +480,7 @@ export default {
       focePromptPopup: false, // 强制平仓提示框
       buttonBottom: 0,
       account: [
-        { name: '我的', link: 'stock', isShow: true, isDisplay: false }
+        { name: '我的', link: 'stock', isShow: true, isDisplay: false },
         // { name: '指数', link: 'index', isShow: false, isDisplay: false },
         // { name: '期货', link: 'futures', isShow: false, isDisplay: false }
       ],
@@ -545,10 +544,12 @@ export default {
       let data = await api.getProductSetting()
       if (data.status === 0) {
         this.$store.state.settingForm = data.data
+        console.log(this.account,data.data.indexDisplay,'data.data')
+        return false
         // if(this.$store.state.userInfo.accountType != 1){
         this.account[0].isDisplay = data.data.stockDisplay
-        this.account[1].isDisplay = data.data.indexDisplay
-        this.account[2].isDisplay = data.data.futuresDisplay
+        // this.account[1].isDisplay = data.data.indexDisplay
+        // this.account[2].isDisplay = data.data.futuresDisplay
         // }else{
         //     this.account[0].isDisplay = true
         //     this.account[1].isDisplay = true
@@ -1222,7 +1223,7 @@ body {
     .acc-pre-left {
       width: 1.92rem;
       height: 1.92rem;
-      background-image: url(../../assets/ico/round.png);
+      background-image: url('../../assets/ico/round.png');
       background-size: cover;
       display: flex;
       flex-direction: column;
@@ -1256,7 +1257,7 @@ body {
         position: absolute;
         top: -0.16rem;
         right: -0.44rem;
-        background-image: url(../../assets/ico/round-r.png);
+        background-image: url('../../assets/ico/round-r.png');
         background-size: cover;
       }
     }

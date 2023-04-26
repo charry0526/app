@@ -8,7 +8,7 @@
                     <img class="ino-ico" v-show="$state.theme =='red' " src="../../assets/ico/zongzichan-red.png">
                     <span class="ino-title">沪深资产总计</span>
                     <span class="ino-money">
-                    <span style="font-size: .3rem">¥</span>
+                    <span style="font-size: .3rem">VND</span>
                     {{(Number($store.state.userInfo.enableAmt + $store.state.userInfo.allFreezAmt)).toFixed(2)}}</span>
                 </div>
                 <div class="money-info_progress">
@@ -33,7 +33,7 @@
                   <span style="font-size: .2rem"
                   :style="{color:$state.theme =='red'&&'#000'}"
                   >资金互转
-                  <i 
+                  <i
                   style="font-size: .2rem"
                   class="iconfont icon-you"></i>
                   </span>
@@ -89,7 +89,7 @@
             <div class="funds-list-item__title">
                 <span class="funds-list-item__title-left">
                     <!-- <span class="zhishu">
-                        
+
                     </span> -->
                     总操盘资金：
                     <span class="green">{{i.totalTradingAmount}}</span>
@@ -142,48 +142,48 @@
 import * as api from '../../axios/api'
 
 export default {
-    data() {
-        return {
-            list:{
-                list:[]
-            }
-        }
-    },
-    computed:{
-        progress() {
-            let per = this.$store.state.userInfo.userAmt/(this.$store.state.userInfo.userAmt+this.$store.state.userInfo.userIndexAmt) * 100 > 100?100:this.$store.state.userInfo.userAmt/(this.$store.state.userInfo.userAmt+this.$store.state.userInfo.userIndexAmt) * 100 > 100?this.$store.state.userInfo.userAmt/(this.$store.state.userInfo.userAmt+this.$store.state.userInfo.userIndexAmt) * 100 > 100?100:this.$store.state.userInfo.userAmt/(this.$store.state.userInfo.userAmt+this.$store.state.userInfo.userIndexAmt) * 100:100
-            return per
-        }
-    },
-    created() {
-        this.getlist()
-    },
-    methods:{
-        toRecharge () {
-      // 充值
-        this.$router.push('/recharge')
-        },
-        toCash () {
-        // 提现
-        this.$router.push('/cash')
-        },
-        async getlist () {
-            // 获取持仓列表
-            let opt = {
-            userId: 0, 
-            pageNum: this.pageNum,
-            pageSize: this.pageSize
-            }
-            console.log(opt)
-            let data = await api.getUserApplyList(opt)
-            if (data.status === 0) {
-                this.list = data.data
-            } 
-            // else {
-            //     this.$message.error(data.msg)
-            // }
-        },
+  data () {
+    return {
+      list: {
+        list: []
+      }
     }
+  },
+  computed: {
+    progress () {
+      let per = this.$store.state.userInfo.userAmt / (this.$store.state.userInfo.userAmt + this.$store.state.userInfo.userIndexAmt) * 100 > 100 ? 100 : this.$store.state.userInfo.userAmt / (this.$store.state.userInfo.userAmt + this.$store.state.userInfo.userIndexAmt) * 100 > 100 ? this.$store.state.userInfo.userAmt / (this.$store.state.userInfo.userAmt + this.$store.state.userInfo.userIndexAmt) * 100 > 100 ? 100 : this.$store.state.userInfo.userAmt / (this.$store.state.userInfo.userAmt + this.$store.state.userInfo.userIndexAmt) * 100 : 100
+      return per
+    }
+  },
+  created () {
+    this.getlist()
+  },
+  methods: {
+    toRecharge () {
+      // 充值
+      this.$router.push('/recharge')
+    },
+    toCash () {
+      // 提现
+      this.$router.push('/cash')
+    },
+    async getlist () {
+      // 获取持仓列表
+      let opt = {
+        userId: 0,
+        pageNum: this.pageNum,
+        pageSize: this.pageSize
+      }
+      console.log(opt)
+      let data = await api.getUserApplyList(opt)
+      if (data.status === 0) {
+        this.list = data.data
+      }
+      // else {
+      //     this.$message.error(data.msg)
+      // }
+    }
+  }
 }
 </script>
 
@@ -301,7 +301,7 @@ export default {
             }
         }
     }
-    
+
   }
   .funds-list {
     display: block;
@@ -337,7 +337,7 @@ export default {
             &-right {
                 font-size: .24rem;
             }
-        } 
+        }
         .account {
             padding: 0;
             .order-title {
@@ -403,7 +403,7 @@ export default {
               }
           }
       }
-      
+
       .funds-list-loadmore {
           background-color: #BC1816;
       }

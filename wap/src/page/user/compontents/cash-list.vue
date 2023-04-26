@@ -16,7 +16,7 @@
                         <!-- 提现至银行卡 -->
                         Rút về thẻ ngân hàng
                     </span>
-              <span class="payNumber">¥{{item.withAmt}}</span>
+              <span class="payNumber">{{item.withAmt}}VND</span>
               <span class="red pull-right">
                         <!-- {{item.withStatus == 1?'提现成功':item.withStatus == 2?'提现失败':item.withStatus == 3?'订单取消':'审核中'}} -->
                        {{item.withStatus == 1?'thành công':item.withStatus == 2?'thất bại':item.withStatus == 3?'Hủy bỏ':'đang xem xét'}}

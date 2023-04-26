@@ -24,7 +24,7 @@
 
                         <!-- {{item.payChannel == 0?'支付宝':item.payChannel == 1?'对公转账':item.payChannel}} -->
                     </span>
-              <span class="payNumber">nạp điện：<span :style="{color:$state.theme =='red'?'#BB1815':''}">{{item.payAmt}}VND</span></span>
+              <span class="payNumber">nạp điện：<span :style="{color:$state.theme =='red'?'#BB1815':''}">{{$moneyDot(item.payAmt)}}VND</span></span>
 
               <!-- <span class="payNumber">充值：<span :style="{color:$state.theme =='red'?'#BB1815':''}">￥{{item.payAmt}}</span></span> -->
               <span

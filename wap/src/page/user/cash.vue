@@ -19,7 +19,7 @@
           <div class="account text-center">
             <!-- <p class="title">可提现金额（元）</p> -->
             <p class="title">{{$t("cashText")}}</p>
-            <p class="red number">{{$store.state.userInfo.enableAmt}}</p>
+            <p class="red number">{{$moneyDot($store.state.userInfo.enableAmt)}}</p>
           </div>
         </div>
       </div>

@@ -94,6 +94,38 @@ Vue.prototype.checkCookie = function () {
     }
   }
 }
+
+Vue.prototype.$moneyDot = function (value) {
+  if (value < 0 || !value) {
+    return value
+  }
+  let suffix = ''
+  if (value && value !== 'NULL' && value !== 'undefined' && isNaN(Number(value))) {
+    return value
+  } else if (!value) {
+    return '-'
+  } else {
+    let pSuffix = ''
+    value = value.toString()
+    let intPart = Math.floor(Math.abs(Number(value))) // 获取整数部分
+    let intPartFormat = intPart.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') // 将整数部分逢三一断
+    intPartFormat = pSuffix + intPartFormat
+    let floatPart = '' // 预定义小数部分
+    let value2Array = value.split('.')
+    // =2表示数据有小数位
+    if (value2Array.length === 2) {
+      floatPart = value2Array[1].toString() // 拿到小数部分
+      if (floatPart.length === 1) {
+        // 补0,实际上用不着
+        return intPartFormat + '.' + floatPart + '0' + suffix
+      } else {
+        return intPartFormat + '.' + floatPart + suffix
+      }
+    } else {
+      return intPartFormat + floatPart + suffix
+    }
+  }
+}
 // router.beforeEach((to, from, next) => {
 // console.log(to.path)
 // store.state.select = to.path

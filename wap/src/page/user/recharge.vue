@@ -23,9 +23,9 @@
         <div class="account text-center">
           <p class="title">
             <!-- 当前可用余额（元） -->
-             số dư khả dụng hiện tại（VND）
+             Số dư khả dụng hiện tại（VND）
           </p>
-          <p class="red number">{{$store.state.userInfo.enableAmt}}</p>
+          <p class="red number">{{$moneyDot($store.state.userInfo.enableAmt)}}</p>
         </div>
       </div>
     </div>
@@ -35,7 +35,7 @@
           <!-- 银行卡信息 -->
           <p class="title">
             <!-- 选择面额(元) -->
-             chọn mệnh giá(VND)
+             Chọn mệnh giá(VND)
           </p>
           <div class="box-tab">
             <input v-model="selectNumber" class="btn-default" type="number">
@@ -56,7 +56,7 @@
             <p style="padding-bottom:0.3rem">
               <!-- 最小充值金额为 -->
               Số tiền nạp tối thiểu là
-              {{settingInfo.chargeMinAmt}}
+              {{$moneyDot(settingInfo.chargeMinAmt)}}
               <!-- 元 -->
               VND
             </p>
@@ -102,7 +102,7 @@
       <div class="btnbox">
             <span v-if="!dialogShow" class="text-center btnok" @click="toSure">
                 <!-- 立即充值 -->
-                nạp tiền ngay bây giờ
+                Nạp tiền ngay bây giờ
                 <i v-show="isloading" style="color:#fff;" class="iconfont icon-jiazaizhong"></i>
                 <i v-show="isloading"></i>
             </span>
@@ -123,7 +123,7 @@
           </form>
           <button class="submitBtn" type="submit" @click="onsubmit()">
             <!-- 立即充值 -->
-            nạp tiền ngay bây giờ
+            Nạp tiền ngay bây giờ
           </button>
         </div>
       </div>
@@ -158,7 +158,7 @@
           <div v-if="stopTime" class="alert-box">
             <i class="iconfont icon-jinggao2"></i>
             <!-- 支付已过期 -->
-            thanh toán đã hết hạn
+            Thanh toán đã hết hạn
           </div>
         </div>
         <div class="timer-box">

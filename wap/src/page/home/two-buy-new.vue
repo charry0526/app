@@ -9,7 +9,7 @@
       <div class="clearfix">
         <div class="pull-left hangqin-left col-xs-4">
           <p :class="detail.hcrate == 0?'price yellow':detail.hcrate > 0?'price green':detail.hcrate<0?'price red':''">
-            {{Number(detail.nowPrice).toFixed(2)}}</p>
+            {{$moneyDot(Number(detail.nowPrice).toFixed(2))}}</p>
           <p :class="detail.hcrate == 0?'gain yellow':detail.hcrate > 0?'gain green':detail.hcrate<0?'gain red':''">
             <span>{{Number(detail.hcrate).toFixed(2)}}</span>
             <span style="margin-left: .1rem;">{{Number(detail.hcrate/(detail.nowPrice-detail.hcrate)*100).toFixed(2)}}%</span>
@@ -172,8 +172,8 @@
     </div>
     <div class="footer-btn">
       <div class="total">
-        <p class="pay">{{$t("paybond")}}<span class="protem">{{total?total:0}}</span></p>
-        <p class="account">({{$t("accountbalance")}}:{{$store.state.userInfo.enableAmt}})</p>
+        <p class="pay">{{$t("paybond")}}<span class="protem">{{total?$moneyDot(total):0}}</span></p>
+        <p class="account">({{$t("accountbalance")}}:{{$moneyDot($store.state.userInfo.enableAmt)}})</p>
       </div>
       <!-- <mt-button :disabled="buying" class="btn-red" size="small" type="danger" @click="toInquiry">下单</mt-button> -->
       <div class="right-btn">

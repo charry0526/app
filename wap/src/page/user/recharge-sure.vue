@@ -11,11 +11,11 @@
       <div class="form-block page-part">
         <!-- <mt-field label="充值金额" placeholder="充值金额" disabled type="number" v-model="selectNumber"></mt-field> -->
 
-        <mt-field label="số tiền nạp" placeholder="số tiền nạp" disabled type="number" v-model="selectNumber"></mt-field>
+        <mt-field label="Số tiền nạp" placeholder="Số tiền nạp" disabled type="number" v-model="selectNumber"></mt-field>
 
         <div v-if="type == 0">
           <!-- <mt-field label="支付宝名称" placeholder="支付宝名称" disabled type="text" v-model="payInfo.channelName"> -->
-          <mt-field label="tên alipay" placeholder="tên alipay" disabled type="text" v-model="payInfo.channelName">
+          <mt-field label="Tên alipay" placeholder="Tên alipay" disabled type="text" v-model="payInfo.channelName">
 
           </mt-field>
           <!-- <mt-field label="支付宝账号" placeholder="支付宝账号" disabled type="text" v-model="payInfo.channelAccount"> -->
@@ -26,7 +26,7 @@
                           v-clipboard:error="onError">
                         <i class="iconfont icon-fuzhi"></i>
                         <!-- 复制 -->
-                        sao chép
+                        Sao chép
                     </span>
           </mt-field>
           <div class="text-right" style="padding: 0.2rem 0.3rem 0;" @click="popupVisible2 = true">
@@ -43,7 +43,7 @@
                           v-clipboard:error="onError">
                         <i class="iconfont icon-fuzhi"></i>
                         <!-- 复制 -->
-                        sao chép
+                        Sao chép
                     </span>
           </mt-field>
           <!-- <mt-field label="收款银行" placeholder="收款银行" disabled type="text" v-model="payInfo.channelDesc"> -->
@@ -51,7 +51,7 @@
                     <span v-clipboard:copy="payInfo.channelDesc"
                           v-clipboard:success="onCopy"
                           v-clipboard:error="onError">
-                        <i class="iconfont icon-fuzhi"></i>sao chép
+                        <i class="iconfont icon-fuzhi"></i>Sao chép
                     </span>
           </mt-field>
           <!-- <mt-field label="收款支行" placeholder="收款支行" disabled type="text" v-model="payInfo.payBankAddress">
@@ -67,7 +67,7 @@
                     <span v-clipboard:copy="payInfo.channelAccount"
                           v-clipboard:success="onCopy"
                           v-clipboard:error="onError">
-                        <i class="iconfont icon-fuzhi"></i>sao chép
+                        <i class="iconfont icon-fuzhi"></i>Sao chép
                     </span>
           </mt-field>
         </div>
@@ -80,7 +80,7 @@
                     <span v-clipboard:copy="payInfo.channelAccount"
                           v-clipboard:success="onCopy"
                           v-clipboard:error="onError">
-                        <i class="iconfont icon-fuzhi"></i>sao chép
+                        <i class="iconfont icon-fuzhi"></i>Sao chép
                     </span>
           </mt-field>
           <mt-field v-if="payInfo.channelDesc" label="Nhận xét" placeholder="Nhận xét" disabled type="text"
@@ -88,7 +88,7 @@
                     <span v-clipboard:copy="payInfo.channelDesc"
                           v-clipboard:success="onCopy"
                           v-clipboard:error="onError">
-                        <i class="iconfont icon-fuzhi"></i>sao chép
+                        <i class="iconfont icon-fuzhi"></i>Sao chép
                     </span>
           </mt-field>
           <div v-if="payInfo.channelImg" class="eq-code-img">

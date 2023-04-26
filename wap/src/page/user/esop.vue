@@ -28,8 +28,8 @@
             <tr v-for="(item,index) in stockList"
                 :key="index">
               <td>{{item.names}}</td>
-              <td>{{item.scprice}}</td>
-              <td>{{item.price}}</td>
+              <td>{{$moneyDot(item.scprice)}}</td>
+              <td>{{$moneyDot(item.price)}}</td>
               <td>
                 <div class="button-box">
                   <mt-button class="btn-red pull-right"
@@ -62,18 +62,17 @@
             <tr v-for="(item,index) in tendorseListDate"
                 :key="index">
               <td>{{item.xgname}}</td>
-              <td></td>
-              <td></td>
+              <td>{{$moneyDot(item.finalPrice)}}</td>
+              <td>{{$moneyDot(item.issuePrice)}}</td>
               <td>{{item.nums}}</td>
               <td>{{item.gg}}</td>
-              <td>{{item.sz}}</td>
-              <td></td>
+              <td>{{$moneyDot(item.sz)}}</td>
               <!-- <td :class="item.zts==2?'tdActive':''">
                 {{item.zts==1?'vượt qua':item.zts==2?'không vượt qua':item.zts==4?'Hoàn thành':'không được xem xét'}}
               </td> -->
               <td>
                 <div class="button-box">
-                  <mt-button v-if="item.zts==1" class="btn-red pull-right"
+                 <mt-button v-if="item.zts==1" class="btn-red pull-right"
                              size="small"
                              type="danger"
                              @click="toCash(item)">

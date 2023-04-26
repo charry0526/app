@@ -28,7 +28,7 @@
                         Cập nhật:
                         <b v-if="item.now_price == 0">-</b>
                         <b v-else
-                           :class="item.now_price-item.buyOrderPrice<0?'space red':item.now_price-item.buyOrderPrice==0?'space':'space green'">{{item.now_price}}</b>
+                           :class="item.now_price-item.buyOrderPrice<0?'space red':item.now_price-item.buyOrderPrice==0?'space':'space green'">{{$moneyDot(item.now_price)}}</b>
                     </span>
             </div>
             <div class="order-info">
@@ -36,34 +36,34 @@
                 <span class="col-xs-4">
                   <!-- 买入价格 -->
                   Giá mua:
-                  <b class="space">{{item.buyOrderPrice}}</b></span>
+                  <b class="space">{{$moneyDot(item.buyOrderPrice)}}</b></span>
                 <span class="col-xs-4 text-center">
                   <!-- 数量 -->
                   Số lượng:
-                  <b class="space">{{item.orderNum}}</b></span>
+                  <b class="space">{{$moneyDot(item.orderNum)}}</b></span>
                 <span class="col-xs-4 text-right">
                   <!-- 市值 -->
                   Giá thị trường:
-                  <b class="space">{{item.orderTotalPrice}}</b></span>
+                  <b class="space">{{$moneyDot(item.orderTotalPrice)}}</b></span>
               </p>
               <p class="clearfix">
                 <span class="col-xs-4">
                   <!-- 手续费 -->
                   Phí giao dịch:
-                  <b class="space">{{item.orderFee}}</b></span>
+                  <b class="space">{{$moneyDot(item.orderFee)}}</b></span>
                 <!-- <span class="col-xs-4 text-center">
                   tem đóng thuế
                   :
                   <b class="space">{{item.orderSpread}}</b></span> -->
                 <span class="col-xs-4 text-right">
                   <!-- 留仓费 -->
-                  Phí qua đêm:{{item.orderStayFee}}
+                  Phí qua đêm:{{$moneyDot(item.orderStayFee)}}
                   <!-- <b class="space">{{item.orderStayFee}}</b>--></span>
                 <span class="col-xs-4 text-right">
                   Lãi/lỗ:
                  <b v-if="item.now_price == 0">-</b>
                     <b v-else
-                       :class="item.allProfitAndLose<0?'space red':item.allProfitAndLose>=0?'space':'space green'">{{item.allProfitAndLose}}</b>
+                       :class="item.allProfitAndLose<0?'space red':item.allProfitAndLose>=0?'space':'space green'">{{$moneyDot(item.allProfitAndLose)}}</b>
                 </span>
               </p>
               <p class="clearfix">
