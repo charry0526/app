@@ -806,7 +806,8 @@
           //   }
           let data = await api.addOption({code: this.$route.query.code})
           if (data.status === 0) {
-            Toast('添加自选成功')
+             // Toast('添加自选成功')
+        Toast('Thêm thành công tùy chọn')
             this.isOptionOpt = true
           } else {
             Toast(data.msg)
@@ -815,7 +816,8 @@
         async deteleOptions () {
           let data = await api.delOption({code: this.$route.query.code})
           if (data.status === 0) {
-            Toast('删除自选股成功')
+            // Toast('删除自选股成功')
+        Toast('Xóa hàng tự chọn thành công')
             this.isOptionOpt = false
           } else {
             Toast(data.msg)

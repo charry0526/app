@@ -19,7 +19,7 @@
       <div class="clearfix">
         <div class="pull-left col-xs-7">
           <p :class="detail.hcrate == 0?'price yellow':detail.hcrate > 0?'price green':detail.hcrate<0?'price red':''">
-            {{Number(detail.nowPrice/1000).toFixed(2)}}M</p>
+            {{Number(detail.nowPrice/1000).toFixed(2)}}</p>
 
           <p>
           <p :class="detail.hcrate == 0?' yellow':detail.hcrate > 0?' green':detail.hcrate<0?' red':''"

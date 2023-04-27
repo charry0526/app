@@ -8,10 +8,10 @@
         <img src="../../assets/ico/wogerenziliao.png" >
       </div>
       <div class="home-search-input">
-        <img src="../../assets/ico/fangdajing.png" alt="">
+        <!-- <img src="../../assets/ico/fangdajing.png" alt=""> -->
         <input type="text"
         @focus="$router.push('/Searchlist')"
-        :placeholder="$t('searchText')">
+        >
       </div>
       <div class="home-search-ctl">
         <img class="lingdang" src="../../assets/ico/lingdang.png" alt=""
@@ -164,12 +164,15 @@
         </li>
         <li>
           <p class="labels">CSKH</p>：
+          <p class="con">1900996665</p>
         </li>
         <li>
           <p class="labels">Email</p>：
+           <p class="con">cskh@vn-xtb.com </p>
         </li>
         <li>
           <p class="labels">Web</p>：
+          <p class="con">https://vn-xtb.com/</p>
         </li>
 
       </ul>

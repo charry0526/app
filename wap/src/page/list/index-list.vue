@@ -160,7 +160,7 @@ export default {
           }
         })
       } else {
-        Toast('该指数暂不能交易!')
+        Toast('Chỉ số tạm thời không có sẵn để giao dịch!')
       }
     },
     toSearch () {

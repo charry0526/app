@@ -85,7 +85,8 @@ export default {
   methods: {
     checkCodeBox () {
       if (isNull(this.phone) || !isPhone(this.phone)) {
-        Toast('请输入正确的手机号')
+        // Toast('请输入正确的手机号')
+          Toast('Xin vui lòng nhập một số điện thoại hợp lệ')
       } else {
         this.checkPhone()
       }
@@ -97,7 +98,8 @@ export default {
     async checkImg () {
       if (!this.code2) {
         this.checkCodeState = false
-        Toast('您输入的验证码有误,请重新输入')
+        // Toast('您输入的验证码有误,请重新输入')
+        Toast('Mã xác minh bạn đã nhập sai, vui lòng nhập lại')
         return
       }
       // await this.checkCode()
@@ -108,7 +110,8 @@ export default {
         this.checkCodeState = true
       } else {
         this.checkCodeState = false
-        Toast('您输入的验证码有误,请重新输入')
+        // Toast('您输入的验证码有误,请重新输入')
+        Toast('Mã xác minh bạn đã nhập sai, vui lòng nhập lại')
         this.adminUrl = process.env.API_HOST + '1'
         this.adminUrl = process.env.API_HOST
         if (this.adminUrl === undefined) {
@@ -125,10 +128,10 @@ export default {
       // var reg = 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/
       let reg = /^[0-9]{11}$/ // 手机号码验证
       if (isNull(this.phone)) {
-        Toast('手机号不可为空')
+        Toast('Số điện thoại không được để trống')
       } else {
         if (!reg.test(this.phone)) {
-          Toast('请输入正确的手机号码')
+          Toast('Vui lòng nhập đúng số điện thoại')
         } else {
           let result = await api.sendForgetSms({ phoneNum: this.phone })
           if (result.status === 0) {
@@ -165,21 +168,27 @@ export default {
         }
         // this.gook()
       } else {
-        Toast('用户还未注册,请注册')
+        // Toast('用户还未注册,请注册')
+        Toast('Người dùng chưa đăng ký, vui lòng đăng ký')
         this.$router.push('/register')
       }
     },
     async gook () {
       if (isNull(this.phone) || !isPhone(this.phone)) {
-        Toast('请输入正确的手机号码')
+        // Toast('请输入正确的手机号码')
+        Toast('Vui lòng nhập đúng số điện thoại')
       } else if (isNull(this.password)) {
-        Toast('请输入密码')
+        // Toast('请输入密码')
+        Toast('xin vui lòng nhập mật khẩu')
       } else if (isNull(this.password2)) {
-        Toast('请确认密码')
+        // Toast('请确认密码')
+        Toast('Vui lòng xác nhận mật khẩu của bạn')
       } else if (isNull(this.code)) {
-        Toast('请输入验证码')
+        // Toast('请输入验证码')
+        Toast('vui lòng nhập mã xác nhận')
       } else if (this.password !== this.password2) {
-        Toast('两次输入的密码不一致')
+        // Toast('两次输入的密码不一致')
+        Toast('Hai mật khẩu đã nhập không khớp')
         this.password = 0
         this.password2 = 0
       } else {
@@ -190,10 +199,10 @@ export default {
         }
         let data = await api.forgetPas(opts)
         if (data.status === 0) {
-          Toast('修改成功,请登录!')
+          Toast('Sửa đổi thành công, vui lòng đăng nhập!')
           this.$router.push('/login')
         } else {
-          Toast(data.msg ? data.msg : '修改失败,请重新修改')
+          Toast(data.msg ? data.msg : 'Sửa đổi không thành công, vui lòng sửa đổi lại')
         }
       }
     },

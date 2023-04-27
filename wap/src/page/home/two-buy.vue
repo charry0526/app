@@ -9,10 +9,10 @@
       <div class="clearfix">
         <div class="pull-left hangqin-left col-xs-4">
           <p :class="detail.hcrate == 0?'price yellow':detail.hcrate > 0?'price green':detail.hcrate<0?'price red':''">
-            {{Number(detail.nowPrice).toFixed(2)}}</p>
+            {{$moneyDot(Number(detail.nowPrice).toFixed(2))}}</p>
           <p :class="detail.hcrate == 0?'gain yellow':detail.hcrate > 0?'gain green':detail.hcrate<0?'gain red':''">
-            <span>{{Number(detail.hcrate).toFixed(2)}}</span>
-            <span style="margin-left: .1rem;">{{Number(detail.hcrate/(detail.nowPrice-detail.hcrate)*100).toFixed(2)}}%</span>
+            <span>{{$moneyDot(Number(detail.hcrate).toFixed(2))}}</span>
+            <span style="margin-left: .1rem;">{{$moneyDot(Number(detail.hcrate/(detail.nowPrice-detail.hcrate)*100).toFixed(2))}}%</span>
           </p>
         </div>
         <div class="pull-right hangqin-right col-xs-8">
@@ -21,19 +21,19 @@
               <!-- <p class="title"></p> -->
               <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
                 <span class="title">O</span>
-                {{Number(detail.open_px).toFixed(2)}}
+                {{$moneyDot(Number(detail.open_px).toFixed(2))}}
               </p>
             </li>
             <li style="text-align:left">
               <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
                 <span class="title ">H</span>
-                {{Number(detail.today_max).toFixed(2)}}
+                {{$moneyDot(Number(detail.today_max).toFixed(2))}}
               </p>
             </li>
             <li>
               <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
                 <span class="title">L</span>
-                {{Number(detail.today_min).toFixed(2)}}
+                {{$moneyDot(Number(detail.today_min).toFixed(2))}}
               </p>
             </li>
             <!-- <li> -->
@@ -91,7 +91,7 @@
     <div class="box-tab">
       <div class="tab-title">
         <span class="circle"></span>{{$t("selectNumber")}}
-        <p class="notify">{{$t("purchaseRules")}}({{$t("strand")}}) </p>
+        <p class="notify">{{$t("purchaseRules")}} </p>
       </div>
       <div class="tab-con">
         <ul class="radio-group clearfix">
@@ -106,10 +106,10 @@
             <!-- {{$t("strand")}} -->
           </li>
         </ul>
-        <p class="clearfix tipBox">
+        <!-- <p class="clearfix tipBox">
           <span class="pull-left">{{$t("minPur")}}{{Number(settingInfo.buyMinNum)}}{{$t("strand")}}</span>
           <span class="protem pull-right">{{$t("maxPur")}}{{Number(settingInfo.buyMaxNum)}}{{$t("strand")}}</span>
-        </p>
+        </p> -->
       </div>
     </div>
     <div class="box-tab" style="display:none">
@@ -215,7 +215,7 @@ export default {
         { label: '2500', value: '2500' },
         { label: '3000', value: '3000' },
         { label: '3500', value: '3500' },
-        { label: 'tùy chỉnh', value: '' }
+        { label: 'Tự chọn', value: '' }
       ],
       siteLeverList: [],
       selectNumber: '',
@@ -447,16 +447,16 @@ export default {
       // 下单
 
       if (!this.$store.state.userInfo.idCard) {
-        Toast('您还未实名认证,请先实名认证了再下单')
+        Toast('Bạn chưa xác minh tên thật của mình, vui lòng xác minh tên thật của bạn trước khi đặt hàng')
         this.$router.push('/authentication')
         return
       }
       if (!this.agree) {
-        Toast('需同意合作协议才能交易!')
+        Toast('Cần đồng ý thỏa thuận hợp tác để giao dịch!')
       } else if (isNull(this.selectNumber) && isNull(this.autoNumber)) {
-        Toast('请选择购买手数')
+        Toast('Vui lòng chọn số lô cần mua')
       } else if (isNull(this.selectType)) {
-        Toast('请选择买卖方向')
+        Toast('Vui lòng chọn hướng mua và bán')
       } else {
         this.buying = true
         console.log(this.detail)

@@ -261,11 +261,11 @@ export default {
       //     return
       // }
       if (!this.$store.state.userInfo.idCard) {
-        Toast('您还未实名认证,请先实名认证了再下单')
+        Toast('Bạn chưa xác minh tên thật của mình, vui lòng xác minh tên thật của bạn trước khi đặt hàng')
         this.$router.push('/authentication')
         return
       }
-      MessageBox.confirm('您确定要平仓吗?').then(async action => {
+      MessageBox.confirm('Bạn có chắc chắn muốn đóng vị trí?').then(async action => {
         let opt = {
           positionSn: val
         }

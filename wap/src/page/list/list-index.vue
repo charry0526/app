@@ -125,7 +125,8 @@ export default {
     async addOptions (val) {
       let data = await api.addOption({ code: val.indexCode })
       if (data.status === 0) {
-        Toast('添加自选成功')
+          // Toast('添加自选成功')
+        Toast('Thêm thành công tùy chọn')
       } else {
         Toast(data.msg)
       }
@@ -133,7 +134,8 @@ export default {
     async toDeleteMy (val) {
       let data = await api.delOption({ code: val.indexCode })
       if (data.status === 0) {
-        Toast('删除自选股成功')
+         // Toast('删除自选股成功')
+        Toast('Xóa hàng tự chọn thành công')
         this.refreshList()
       } else {
         Toast(data.msg)

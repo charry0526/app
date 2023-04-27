@@ -27,7 +27,7 @@
                 v-for="i in cardInfo"
                 :key="i.key">
               <div class="col-xs-3">
-                <img src="../../../static/img/pay.png"
+                <img src="../../../static/img/pay.jpg"
                      alt="pay">
               </div>
               <div class="col-xs-9">

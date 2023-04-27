@@ -130,7 +130,8 @@ export default {
         // 如果用户已存在返回 0
         this.loginIN()
       } else {
-        Toast('用户还未注册,请先注册')
+        // Toast('用户还未注册,请先注册')
+         Toast('Người dùng chưa đăng ký, vui lòng đăng ký trước')
         // this.$router.push('/register')
       }
     },
@@ -142,9 +143,9 @@ export default {
       }
       this.clickFalg++
       if (isNull(this.phone) || !isPhone(this.phone)) {
-        Toast('请输入正确的手机号码')
+        Toast('Vui lòng nhập đúng số điện thoại')
       } else if (isNull(this.psd)) {
-        Toast('请输入密码')
+        Toast('xin vui lòng nhập mật khẩu')
       } else {
         this.checkPhone()
       }

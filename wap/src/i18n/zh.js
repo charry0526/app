@@ -21,7 +21,7 @@ const tipObj = {
 const home = {
   homeNavList1: 'Bảng giá', // 行情
   homeNavList2: 'Tài sản', // 持仓
-  homeNavList3: 'Không bắt buộc', // 自选
+  homeNavList3: 'Tự chọn', // 自选
   homeNavList4: 'Của tôi', // 我的
   NewsList: 'Tin tức', // 新闻列表
   search: 'Tìm kiếm', // 搜索
@@ -63,14 +63,14 @@ const optional = {
   optionalList4: 'Xóa bỏ', // 删自选
   AddSelection: 'Thêm tùy chọn', // 添加自选
   deleteSelection: 'Xóa tùy chọn', // 删除自选
-  placeOrder: 'Dặt hàng', // 马上下单
-  selectNumber: 'Chọn số lượng chia sẻ', // 选择股数
-  purchaseRules: 'Mua tối thiểu là 1 cổ phiếu và mua tối đa là 100 cổ phiếu', // 最小购买股数1股，最大可购买数量100股
+  placeOrder: 'Đặt lệnh', // 马上下单
+  selectNumber: 'Chọn số lượng đặt lệnh', // 选择股数
+  purchaseRules: 'Đặt lệnh mua tối thiểu 100 cổ phiếu và mua tối đa 10000 cổ phiếu', // 最小购买股数1股，最大可购买数量100股
   minPur: 'Số lượng cổ phần tối thiểu được mua', // 最小购买股数
   maxPur: 'Số lượng mua tối đa', // 最大可购买数量
-  paybond: 'Trả tiền đặt cọc', // 支付保证金
-  accountbalance: 'Số dư tài khoản', // 账户余额
-  placorderwithliangrong: 'Đặt hàng' // 两融下单
+  paybond: 'Số tiền', // 支付保证金
+  accountbalance: 'Số dư khả dụng', // 账户余额
+  placorderwithliangrong: 'Đặt lệnh' // 两融下单
 }
 const authentication = {
   authenticationFailed: 'Xác thực không thành công, vui lòng xác thực lại', // 认证失败，请重新认证
@@ -99,12 +99,12 @@ const uesr = {
   Verified: 'Đã xác minh', // 实名认证
   examinationPassed: 'Kiểm tra thông qua', // 审核通过
   NotReviewed: 'Không được xem xét', // 未审核
-  bank: 'Thẻ ngân hàng', // 银行卡
+  bank: 'Liên kết ngân hàng', // 银行卡
   RegisterbuyESOP: 'Đăng ký mua mã ESOP', // 注册购买 ESOP 代码
   changePassword: 'Dổi mật khẩu', // 修改密码
-  FundingDetails: 'Chi tiết tài trợ', // 资金明细
-  RechargeRecord: 'Hồ sơ nạp tiền', // 充值记录
-  WithdrawalsRecord: 'Hồ sơ rút tiền' // 提现记录
+  FundingDetails: 'Lịch sử giao dịch', // 资金明细
+  RechargeRecord: 'Lịch sử nạp tiền', // 充值记录
+  WithdrawalsRecord: 'Lịch sử rút tiền' // 提现记录
 }
 const cardBind = {
   cashText: 'Số tiền có thể rút ( VND )',
