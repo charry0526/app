@@ -269,15 +269,15 @@ export default {
       }
     },
     onCopy: function (e) {
-      Toast('复制成功！')
+      Toast('Sao chép thành công!！')
     },
     onError: function (e) {
-      Toast('复制失败，请重试！')
+      Toast('Sao chép không thành công, vui lòng thử lại！')
     },
     toSure () {
       // 充值
       if (this.selectNumber > this.payInfo.channelMaxLimit || this.selectNumber < this.payInfo.channelMinLimit) {
-        Toast('一次最高充值' + this.payInfo.channelMaxLimit + ',最低充值' + this.payInfo.channelMinLimit)
+        Toast('Nạp tiền tối đa một lần' + this.payInfo.channelMaxLimit + ',Nạp tiền tối thiểu' + this.payInfo.channelMinLimit)
       } else {
         this.popupVisible = true
         this.minutes = 5
@@ -297,9 +297,9 @@ export default {
       let data = await api.inMoney(opts)
       if (data.status === 0) {
         // 成功
-        Toast(data.msg ? data.msg : '充值成功!')
+        Toast(data.msg ? data.msg : 'Nạp tiền tối thiểu...!')
       } else {
-        Toast(data.msg ? data.msg : '充值失败,请重新充值')
+        Toast(data.msg ? data.msg : 'Nạp tiền thành công a')
       }
     },
     closePopup () {

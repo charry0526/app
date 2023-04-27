@@ -458,16 +458,21 @@ export default {
       // 下单
 
       if (!this.$store.state.userInfo.idCard) {
-        Toast('您还未实名认证,请先实名认证了再下单')
+        // Toast('您还未实名认证,请先实名认证了再下单')
+         Toast('Bạn chưa xác minh tên thật của mình, vui lòng xác minh tên thật của bạn trước khi đặt hàng')
+
         this.$router.push('/authentication')
         return
       }
       if (!this.agree) {
-        Toast('需同意合作协议才能交易!')
+        // Toast('需同意合作协议才能交易!')
+         Toast('Cần đồng ý thỏa thuận hợp tác để giao dịch!')
       } else if (isNull(this.selectNumber) && isNull(this.autoNumber)) {
-        Toast('请选择购买手数')
+        // Toast('请选择购买手数')
+        Toast('Vui lòng chọn số lô cần mua')
       } else if (isNull(this.selectType)) {
-        Toast('请选择买卖方向')
+        // Toast('请选择买卖方向')
+        Toast('Vui lòng chọn hướng mua và bán')
       } else {
         this.buying = true
         console.log(this.detail)

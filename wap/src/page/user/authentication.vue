@@ -338,7 +338,7 @@ export default {
       }
       let data = await api.userAuth(opts)
       if (data.status === 0) {
-        Toast('提交成功!')
+        Toast('Gửi thành công!')
         this.goBack()
       } else {
         Toast(data.msg)

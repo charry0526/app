@@ -75,9 +75,9 @@ export default {
     },
     async changeLoginPsd () {
       if (isNull(this.nextPsd) || isNull(this.newPsd)) {
-        Toast('请输入新旧密码')
+        Toast('Vui lòng nhập mật khẩu cũ và mới')
       } else if (!pwdReg(this.newPsd)) {
-        Toast('密码为6~12位，数字.字母或符号')
+        Toast('Mật khẩu là 6 ~ 12 chữ số, số, chữ cái hoặc ký hiệu')
       } else {
         // 修改密码
         let opts = {

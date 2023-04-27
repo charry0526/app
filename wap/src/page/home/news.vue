@@ -17,10 +17,18 @@ export default {
     this.newDetail = window.sessionStorage.getItem('newDetail')
     // console.log(this.newDetail, 'this.newDetail ')
   },
-  mounted () {
+ mounted () {
+    if (this.$state.theme == 'red') {
+      document.body.classList.remove('black-bg')
+      document.body.classList.add('red-bg')
+    }
   },
-  methods: {
-  }
+  beforeDestroy () {
+    if (this.$state.theme == 'red') {
+      document.body.classList.remove('red-bg')
+      document.body.classList.add('black-bg')
+    }
+  },
 
 }
 </script>

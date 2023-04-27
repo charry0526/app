@@ -72,10 +72,7 @@
               </td> -->
               <td>
                 <div class="button-box">
-                  <span v-if="item.zts!=1">
-                      {{item.zts==2?'Chưa thông qu':'Đang xét duyệt'}}
-
-                  </span>
+                <span v-if="item.zts!=1">{{item.zts==2?'Chưa thông qua':'Đang xét duyệt'}}</span>
                  <mt-button v-if="item.zts==1" class="btn-red pull-right"
                              size="small"
                              type="danger"

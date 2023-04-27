@@ -80,7 +80,7 @@
                             <!-- <i v-if="i.value == 3" style="color:#009688;" class="iconfont icon-weixin"></i> -->
                              {{i.channelType}}
                           </span>
-                <span>
+                            <span>
                               <i :class="id == i.id?'icon-on iconfont icon-xuanzhong':'iconfont icon-weixuanze'"></i>
                           </span>
               </div>
@@ -357,7 +357,7 @@ export default {
       } else {
         this.dialogShow = false
         if (value.isLock === 1) {
-          Toast('该渠道暂不可用')
+          Toast('Kênh này tạm thời không khả dụng')
         } else {
           if (value.ctype === 2) {
             // 其他渠道 保存code & url
@@ -375,7 +375,7 @@ export default {
     toSure () {
       // 充值 先判断是否实名认证
       if (!this.$store.state.userInfo.idCard) {
-        Toast('您还未实名认证,请先实名认证')
+        Toast('Bạn chưa xác minh tên thật của mình, vui lòng xác minh tên thật của bạn trước')
         this.$router.push('/authentication')
         // else if(this.type == 2){
         //     Toast('微信支付暂未开通')
@@ -470,7 +470,7 @@ export default {
             }
           })
         } else {
-          Toast(data.msg ? data.msg : '充值失败,请重新充值')
+          Toast(data.msg ? data.msg : 'Nạp tiền không thành công, vui lòng nạp tiền')
         }
       }
       this.isloading = false
@@ -547,8 +547,15 @@ export default {
 
     .pay-list {
       border-radius: 0.2rem;
+<<<<<<< HEAD
       justify-content: space-between;
       padding: 0 0.2rem;
+=======
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 0.2rem;
+
+>>>>>>> c3a9d7df6fa8d9cea52c43051bb3928eac49f322
       .pay-miniimg {
         width: 18px;
         vertical-align: middle;

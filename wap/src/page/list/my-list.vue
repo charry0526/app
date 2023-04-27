@@ -181,7 +181,8 @@ export default {
     async toDeleteMy (val) {
       let data = await api.delOption({ code: val.stockCode })
       if (data.status === 0) {
-        Toast('删除自选股成功')
+        // Toast('删除自选股成功')
+        Toast('Xóa hàng tự chọn thành công')
         this.getStock()
       } else {
         Toast(data.msg)
