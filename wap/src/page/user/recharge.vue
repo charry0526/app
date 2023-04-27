@@ -547,15 +547,8 @@ export default {
 
     .pay-list {
       border-radius: 0.2rem;
-<<<<<<< HEAD
       justify-content: space-between;
       padding: 0 0.2rem;
-=======
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 0.2rem;
-
->>>>>>> c3a9d7df6fa8d9cea52c43051bb3928eac49f322
       .pay-miniimg {
         width: 18px;
         vertical-align: middle;

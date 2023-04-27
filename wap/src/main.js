@@ -96,10 +96,12 @@ Vue.prototype.checkCookie = function () {
 }
 
 Vue.prototype.$moneyDot = function (value) {
-  if (value < 0 || !value) {
+  if (value == 0) {
     return value
   }
   let suffix = ''
+
+  // console.log(isNaN(Number(value)), value)
   if (value && value !== 'NULL' && value !== 'undefined' && isNaN(Number(value))) {
     return value
   } else if (!value) {
@@ -117,12 +119,25 @@ Vue.prototype.$moneyDot = function (value) {
       floatPart = value2Array[1].toString() // 拿到小数部分
       if (floatPart.length === 1) {
         // 补0,实际上用不着
-        return intPartFormat + '.' + floatPart + '0' + suffix
+        let returnValue = intPartFormat + '.' + floatPart + '0' + suffix
+        if (Number(value) >= 0) {
+          return returnValue
+        } else {
+          return '-' + returnValue
+        }
       } else {
-        return intPartFormat + '.' + floatPart + suffix
+        if (Number(value) >= 0) {
+          return intPartFormat + '.' + (floatPart + suffix).substring(0, 2)
+        } else {
+          return '-' + intPartFormat + '.' + (floatPart + suffix).substring(0, 2)
+        }
       }
     } else {
-      return intPartFormat + floatPart + suffix
+      if (Number(value) >= 0) {
+        return intPartFormat + floatPart + suffix
+      } else {
+        return '-' + intPartFormat + floatPart + suffix
+      }
     }
   }
 }

@@ -101,7 +101,7 @@ const uesr = {
   NotReviewed: 'Không được xem xét', // 未审核
   bank: 'Liên kết ngân hàng', // 银行卡
   RegisterbuyESOP: 'Đăng ký mua mã ESOP', // 注册购买 ESOP 代码
-  changePassword: 'Dổi mật khẩu', // 修改密码
+  changePassword: 'Đổi mật khẩu', // 修改密码
   FundingDetails: 'Lịch sử giao dịch', // 资金明细
   RechargeRecord: 'Lịch sử nạp tiền', // 充值记录
   WithdrawalsRecord: 'Lịch sử rút tiền' // 提现记录

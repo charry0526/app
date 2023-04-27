@@ -22,66 +22,66 @@
               </span>
               <span class="pull-right">
                 <!-- 总盈亏 -->
-                tổng lãi lỗ
+                Tổng lãi lỗ
                 :<b
-                :class="item.allProfitAndLose<0?'space green':item.allProfitAndLose==0?'space':'space red'">{{item.allProfitAndLose}}</b></span>
+                :class="item.allProfitAndLose<0?'space green':item.allProfitAndLose==0?'space':'space red'">{{$moneyDot(item.allProfitAndLose)}}</b></span>
             </div>
             <div class="order-info">
               <p class="clearfix">
                 <span class="col-xs-4">
                   <!-- 买入价格 -->
                   Giá mua:
-                  <b class="space">{{item.buyOrderPrice}}</b></span>
+                  <b class="space">{{$moneyDot(item.buyOrderPrice)}}</b></span>
                 <span class="col-xs-4 text-center">
                   <!-- 数量 -->
-                   Số lượng::<b class="space">{{item.orderNum}}</b></span>
+                   Số lượng:<b class="space">{{$moneyDot(item.orderNum)}}</b></span>
                 <span class="col-xs-4 text-right">
                   <!-- 市值 -->
-                  Giá thị trường:<b class="space">{{item.orderTotalPrice}}</b></span>
+                  Giá thị trường:{{$moneyDot(item.orderTotalPrice)}}</span>
               </p>
               <p class="clearfix">
                 <span class="col-xs-4">
                   <!-- 卖出价格 -->
-                  gia ban
-                  :<b class="space">{{item.sellOrderPrice}}</b></span>
+                  Gia ban
+                  :<b class="space">{{$moneyDot(item.sellOrderPrice)}}</b></span>
                 <span class="col-xs-4 text-center"></span>
                 <span class="col-xs-4 text-right">
                   <!-- 点差费 -->
-                  phí lây lan:<b class="space">{{item.orderStayFee}}</b></span>
+                  Phí lây lan:<b class="space">{{$moneyDot(item.orderStayFee)}}</b></span>
               </p>
               <p class="clearfix">
                 <span class="col-xs-4">
                   <!-- 手续费 -->
                   Phí giao dịch:
-                  <b class="space">{{item.orderFee}}</b></span>
+                  <b class="space">{{$moneyDot(item.orderFee)}}</b></span>
                 <span class="col-xs-4 text-center">
                   <!-- 印花税 -->
-                  tem đóng thuế
-                  :<b class="space">{{item.orderSpread}}</b></span>
+                  Tem đóng thuế
+                  :<b class="space">{{$moneyDot(item.orderSpread)}}</b></span>
                 <span class="col-xs-4 text-right">
                   <!-- 留仓费 -->
-                  Phí qua đêm:<b class="space">{{item.orderStayFee}}</b></span>
+                  Phí qua đêm:<b class="space">{{$moneyDot(item.orderStayFee)}}</b></span>
               </p>
 
               <p class="clearfix">
                 <span class="col-xs-5">
                   <!-- 留仓天数 -->
-                  ngày ở lại:<b class="space">{{item.orderStayDays}}</b></span>
+                  Ngày ở lại:<b class="space">{{item.orderStayDays}}</b></span>
                 <span class="col-xs-7 text-right">
                   <!-- 浮动盈亏 -->
                   Lãi lỗ thả nổi:<b
-                  :class="item.profitAndLose<0?'space green':item.profitAndLose==0?'space':'space red'">{{item.profitAndLose}}</b></span>
+                  :class="item.profitAndLose<0?'space green':item.profitAndLose==0?'space':'space red'">{{$moneyDot(item.profitAndLose)}}</b></span>
               </p>
               <p class="clearfix">
                         <span class="secondary col-xs-6">
                           <!-- 买入 -->
-                          mua:
+                          Mua:
                             <b v-if="item.buyOrderTime">{{new Date(item.buyOrderTime) | timeFormat}}</b>
                             <b v-else></b>
                         </span>
                 <span class="secondary col-xs-6 text-right">
                   <!-- 卖出 -->
-                  bán:
+                  Bán:
                             <b v-if="item.sellOrderTime">{{new Date(item.sellOrderTime) | timeFormat}}</b>
                             <b v-else></b>
                         </span>

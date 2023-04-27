@@ -56,7 +56,7 @@
         <a class='icon-wrap animated zoomIn' @click="goOrderlist" href="javascript:;">
           <img
           class="icon-img"
-          src="../../assets/ico/jiaoyi.png" alt="">
+          src="../../assets/ico/jiaoyiy.png" alt="">
         </a>
         <p class="icon-title">{{$t("homeNavList2")}}</p>
       </div>

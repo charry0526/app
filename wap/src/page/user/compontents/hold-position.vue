@@ -51,10 +51,10 @@
                   <!-- 手续费 -->
                   Phí giao dịch:
                   <b class="space">{{$moneyDot(item.orderFee)}}</b></span>
-                <!-- <span class="col-xs-4 text-center">
-                  tem đóng thuế
+                <span class="col-xs-4 text-center">
+                  Tem đóng thuế
                   :
-                  <b class="space">{{item.orderSpread}}</b></span> -->
+                  <b class="space">{{item.orderSpread}}</b></span>
                 <span class="col-xs-4 text-right">
                   <!-- 留仓费 -->
                   Phí qua đêm:{{$moneyDot(item.orderStayFee)}}
@@ -67,8 +67,8 @@
                 </span>
               </p>
               <p class="clearfix">
-                <!-- <span class="col-xs-4">
-                  phí lây lan
+                <span class="col-xs-4">
+                  Phí lây lan
                   :<b class="space">{{item.spreadRatePrice}}</b></span>
                         <span class="col-xs-4 text-center">
                           Lãi lỗ thả nổi
@@ -76,14 +76,14 @@
                             <b v-if="item.now_price == 0">-</b>
                             <b v-else
                                :class="item.profitAndLose<0?'space red':item.profitAndLose>=0?'space':'space green'">{{item.profitAndLose}}</b>
-                        </span> -->
-                <!-- <span class="col-xs-4 text-right big-font">
-                  tổng lãi lỗ
+                        </span>
+                <span class="col-xs-4 text-right big-font">
+                  Tổng lãi lỗ
                   :
                     <b v-if="item.now_price == 0">-</b>
                     <b v-else
                        :class="item.allProfitAndLose<0?'space red':item.allProfitAndLose>=0?'space':'space green'">{{item.allProfitAndLose}}</b>
-                </span> -->
+                </span>
               </p>
             </div>
             <div class="order-foot clearfix">

@@ -46,19 +46,21 @@
       </mt-tab-container-item>
       <mt-tab-container-item class="order-list-two"
                              id="2">
-        <div class="table-box">
+        <div class="table-box" style="overflow-x: scroll;">
           <table v-if="selected==2"
                  v-infinite-scroll="loadMore"
                  :infinite-scroll-disabled="loading"
                  infinite-scroll-distance="10"
                  class="table">
-            <th>Mã</th>
-            <th>Giá khớp lệnh</th>
-            <th>Giá phát hành</th>
-            <th>SL</th>
-            <th>Đòn bẩy</th>
-            <th>Giá TT</th>
-            <th>Xét duyệ</th>
+            <tr>
+              <th>Mã</th>
+              <th>Giá KL</th>
+              <th>Giá PH</th>
+              <th>SL</th>
+              <th>Đòn bẩy</th>
+              <th>Giá TT</th>
+              <th>Xét duyệt</th>
+            </tr>
             <tr v-for="(item,index) in tendorseListDate"
                 :key="index">
               <td>{{item.xgname}}</td>
@@ -72,7 +74,7 @@
               </td> -->
               <td>
                 <div class="button-box">
-                <span v-if="item.zts!=1">{{item.zts==2?'Chưa thông qua':'Đang xét duyệt'}}</span>
+                <span v-if="item.zts!=1">{{item.zts==2?'Chưa thông qua':'Đang XD'}}</span>
                  <mt-button v-if="item.zts==1" class="btn-red pull-right"
                              size="small"
                              type="danger"

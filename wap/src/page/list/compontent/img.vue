@@ -5,7 +5,7 @@
       <mt-tab-item id="2">6m</mt-tab-item>
       <mt-tab-item id="3">3m</mt-tab-item>
       <!-- <mt-tab-item id="4">YTD</mt-tab-item> -->
-      <mt-tab-item id="4">1d</mt-tab-item>
+      <mt-tab-item id="4">1w</mt-tab-item>
     </mt-navbar>
 
     <!-- tab-container -->
@@ -13,7 +13,7 @@
       <mt-tab-container-item id="1">
         <chart5 :selected="selected" :data="data" :code="code" :id="1"></chart5>
       </mt-tab-container-item>
-      
+
       <mt-tab-container-item id="2">
         <chart5 :selected="selected" :data="data" :code="code" :id="2"></chart5>
       </mt-tab-container-item>
@@ -33,7 +33,7 @@
       <!-- <mt-tab-container-item id="6">
         <chart5 :selected="selected" :data="data" :code="code" :id="6"></chart5>
       </mt-tab-container-item> -->
-      
+
       <!-- <mt-tab-container-item id="2">
         <chart2 :selected="selected" :code="code"></chart2>
       </mt-tab-container-item>
@@ -80,7 +80,7 @@ export default {
   data () {
     return {
       selected: '1',
-      data:{},
+      data: {}
     }
   },
   watch: {
@@ -90,12 +90,11 @@ export default {
   computed: {},
   created () {},
   mounted () {
-    this.loadData();
+    this.loadData()
   },
   methods: {
-    async loadData(){
+    async loadData () {
       this.data = await api.getHistory(this.code)
-
     }
   }
 }

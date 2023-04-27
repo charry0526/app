@@ -263,10 +263,13 @@
             <i class="iconfont icon-rongzi2"></i>
             {{$t("myPosition")}}
           </div>
-          <div style="width:27%"
+          <div
                @click="goOrderList(1)"
-               class="col-xs-3">
-            <i class="iconfont icon-rongzilishi"></i>
+               class="col-xs-3 tai-row">
+            <!-- <i class="iconfont icon-rongzilishi"></i> -->
+            <img class="row-icon"
+               src="../../assets/ico/353.png"
+               alt="">
             {{$t("myClosingPosition")}}
           </div>
           <div v-if="this.$store.state.settingForm.indexDisplay"
@@ -480,7 +483,7 @@ export default {
       focePromptPopup: false, // 强制平仓提示框
       buttonBottom: 0,
       account: [
-        { name: '我的', link: 'stock', isShow: true, isDisplay: false },
+        { name: '我的', link: 'stock', isShow: true, isDisplay: false }
         // { name: '指数', link: 'index', isShow: false, isDisplay: false },
         // { name: '期货', link: 'futures', isShow: false, isDisplay: false }
       ],
@@ -544,7 +547,7 @@ export default {
       let data = await api.getProductSetting()
       if (data.status === 0) {
         this.$store.state.settingForm = data.data
-        console.log(this.account,data.data.indexDisplay,'data.data')
+        console.log(this.account, data.data.indexDisplay, 'data.data')
         return false
         // if(this.$store.state.userInfo.accountType != 1){
         this.account[0].isDisplay = data.data.stockDisplay
@@ -1398,5 +1401,17 @@ body {
   width: 0.4rem;
   margin-right: 0.2rem;
   object-fit: contain;
+}
+.tai-row{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  .row-icon{
+    width: 0.27rem;
+    height: 0.3rem;
+    object-fit: contain;
+    margin-bottom: 0.1rem;
+  }
 }
 </style>
