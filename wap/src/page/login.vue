@@ -16,7 +16,7 @@
         <img v-show="$state.theme == 'red'" class="login-ico" src="../assets/ico/loginuser-red.png" alt="">
         <input
         class="login-input"
-        placeholder="tên tài khoản"
+        placeholder="Tên tài khoản"
         type="tel" pattern="[0-9]*"
         v-model="phone"
         >
@@ -24,17 +24,17 @@
       <div class="login-form-item input-model">
         <img v-show="$state.theme != 'red'" class="login-ico" src="../assets/ico/loginpwd.png" alt="">
         <img v-show="$state.theme == 'red'" class="login-ico" src="../assets/ico/loginpwd-pwd.png" alt="">
-        <input class="login-input" type="password" placeholder="mật khẩu" v-model="psd">
+        <input class="login-input" type="password" placeholder="Mật khẩu" v-model="psd">
       </div>
       <div class="login-form-item submit-model" @click="gook">
         <!-- 立即登录 -->
-        đăng nhập ngay lập tức
+        Đăng nhập ngay lập tức
         <i v-show="isloading" style="color:#fff;" class="iconfont icon-jiazaizhong"></i>
       </div>
       <div class="login-form-item extra-model">
         <div style="color:#0E6580"><span @click="toForget">
           <!-- 忘记密码 -->
-          quên mật khẩu？
+          Quên mật khẩu？
           </span></div>
         <div :style="{color:$state.theme =='red'?'#BB1815':'#86CBD1'}">
           <span style="color:#0E6580">
@@ -42,7 +42,7 @@
             Không tài khoản？
             </span><span @click="toRegister">
               <!-- 立即注册 -->
-              đăng ký
+              Đăng ký
             </span></div>
       </div>
     </div>

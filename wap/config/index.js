@@ -28,7 +28,7 @@ module.exports = {
       '/apis': {
         // target: 'https://pc.zsycyy.com',
         // target: 'http://www.shehua56.com',
-        target: 'http://8.213.195.188:8080/stock2c1',
+        target: 'http://xtbistock.com/apis',
         secure: false,
         changeOrigin: true,
         pathRewrite: {

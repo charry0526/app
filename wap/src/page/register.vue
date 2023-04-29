@@ -43,7 +43,7 @@
         <i @click="isAgree"
           :class="agree?'glyphicon glyphicon glyphicon-ok-sign red':'glyphicon glyphicon-ok-circle'"></i>
         <!-- 我已阅读并同意 -->
-        tôi đã đọc và đồng ý
+        Tôi đã đọc và đồng ý
         <a @click="toagreeUrl" style="color:#fff">
           <!-- 《注册协议》 -->
           《Hợp đồng đăng ký》

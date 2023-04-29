@@ -556,7 +556,7 @@ export default new Router({
       path: '/changePassword',
       name: 'changePassword',
       meta: {
-        title: 'Dổi mật khẩu',
+        title: 'Đổi mật khẩu',
         requireAuth: false,
         hasHeader: true
       },
