@@ -274,7 +274,14 @@ export default {
       //     return
       // }
 
-      MessageBox.confirm('Bạn có chắc chắn muốn đóng vị trí?').then(async action => {
+      // MessageBox.confirm('Bạn có chắc chắn muốn đóng vị trí?')
+      MessageBox({
+        title: '',
+        message: 'Bạn có chắc chắn muốn đóng vị trí?',
+        showCancelButton: true,
+        confirmButtonText: 'Xác nhận',
+        cancelButtonText: 'Hủy bỏ'
+      }).confirm.then(async action => {
         let opt = {
           positionSn: val
         }
