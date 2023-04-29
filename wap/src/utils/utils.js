@@ -138,7 +138,12 @@ export function checkCookie () {
   }
 }
 export function moneyDot (value) {
+  if (value == 0) {
+    return value
+  }
   let suffix = ''
+
+  // console.log(isNaN(Number(value)), value)
   if (value && value !== 'NULL' && value !== 'undefined' && isNaN(Number(value))) {
     return value
   } else if (!value) {
@@ -151,17 +156,31 @@ export function moneyDot (value) {
     intPartFormat = pSuffix + intPartFormat
     let floatPart = '' // 预定义小数部分
     let value2Array = value.split('.')
+
     // =2表示数据有小数位
     if (value2Array.length === 2) {
       floatPart = value2Array[1].toString() // 拿到小数部分
       if (floatPart.length === 1) {
         // 补0,实际上用不着
-        return intPartFormat + '.' + floatPart + '0' + suffix
+        let returnValue = intPartFormat + '.' + floatPart + '0' + suffix
+        if (Number(value) >= 0) {
+          return returnValue
+        } else {
+          return '-' + returnValue
+        }
       } else {
-        return intPartFormat + '.' + floatPart + suffix
+        if (Number(value) >= 0) {
+          return intPartFormat + '.' + (floatPart + suffix).substring(0, 2)
+        } else {
+          return '-' + intPartFormat + '.' + (floatPart + suffix).substring(0, 2)
+        }
       }
     } else {
-      return intPartFormat + floatPart + suffix
+      if (Number(value) >= 0) {
+        return intPartFormat + floatPart + suffix
+      } else {
+        return '-' + intPartFormat + floatPart + suffix
+      }
     }
   }
 }

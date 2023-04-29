@@ -89,7 +89,7 @@ const authentication = {
 }
 const uesr = {
   userAuth: 'Tài khoản', // 账户
-  userName: 'Tên nick', // 昵称
+  userName: 'Tên', // 昵称
   assetStatus: 'Tài sản', // 资产状况
   uesrTotle: 'Tổng tài sản', // 总资产
   recharge: 'Nạp tiền', // 充值

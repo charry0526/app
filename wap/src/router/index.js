@@ -328,7 +328,7 @@ export default new Router({
       name: 'detail',
       meta: {
         // title: '资金明细',
-        title: 'Cchi tiết tài trợ',
+        title: 'Lịch sử giao dịch',
         requireAuth: true,
         hasHeader: true
       },
@@ -399,7 +399,7 @@ export default new Router({
       name: 'rechargelist',
       meta: {
         // title: '充值记录',
-        title: 'Hồ sơ nạp tiền',
+        title: 'Lịch sử nạp tiền',
         requireAuth: true,
         hasHeader: true
       },
@@ -430,7 +430,7 @@ export default new Router({
       name: 'cashlist',
       meta: {
         // title: '提现记录',
-        title: 'Hồ sơ rút tiền',
+        title: 'Lịch sử rút tiền',
         requireAuth: true,
         hasHeader: true
 

@@ -24,7 +24,7 @@
                 <!-- 总盈亏 -->
                 Tổng lãi lỗ
                 :<b
-                :class="item.allProfitAndLose<0?'space green':item.allProfitAndLose==0?'space':'space red'">{{$moneyDot(item.allProfitAndLose)}}</b></span>
+                :class="item.allProfitAndLose>0?'space green':item.allProfitAndLose==0?'space':'space red'">{{$moneyDot(item.allProfitAndLose)}}</b></span>
             </div>
             <div class="order-info">
               <p class="clearfix">
@@ -34,20 +34,20 @@
                   <b class="space">{{$moneyDot(item.buyOrderPrice)}}</b></span>
                 <span class="col-xs-4 text-center">
                   <!-- 数量 -->
-                   Số lượng:<b class="space">{{$moneyDot(item.orderNum)}}</b></span>
+                   SL::<b class="space">{{$moneyDot(item.orderNum)}}</b></span>
                 <span class="col-xs-4 text-right">
                   <!-- 市值 -->
-                  Giá thị trường:{{$moneyDot(item.orderTotalPrice)}}</span>
+                  Giá TT::{{$moneyDot(item.orderTotalPrice)}}</span>
               </p>
               <p class="clearfix">
                 <span class="col-xs-4">
                   <!-- 卖出价格 -->
-                  Gia ban
+                  Giá bán:
                   :<b class="space">{{$moneyDot(item.sellOrderPrice)}}</b></span>
                 <span class="col-xs-4 text-center"></span>
                 <span class="col-xs-4 text-right">
                   <!-- 点差费 -->
-                  Phí lây lan:<b class="space">{{$moneyDot(item.orderStayFee)}}</b></span>
+                  Chi phí khác::<b class="space">{{$moneyDot(item.orderStayFee)}}</b></span>
               </p>
               <p class="clearfix">
                 <span class="col-xs-4">
@@ -56,7 +56,7 @@
                   <b class="space">{{$moneyDot(item.orderFee)}}</b></span>
                 <span class="col-xs-4 text-center">
                   <!-- 印花税 -->
-                  Tem đóng thuế
+                  Thuế thu nhập
                   :<b class="space">{{$moneyDot(item.orderSpread)}}</b></span>
                 <span class="col-xs-4 text-right">
                   <!-- 留仓费 -->
@@ -66,11 +66,11 @@
               <p class="clearfix">
                 <span class="col-xs-5">
                   <!-- 留仓天数 -->
-                  Ngày ở lại:<b class="space">{{item.orderStayDays}}</b></span>
+                  Số ngày nắm giữ:<b class="space">{{item.orderStayDays}}</b></span>
                 <span class="col-xs-7 text-right">
                   <!-- 浮动盈亏 -->
-                  Lãi lỗ thả nổi:<b
-                  :class="item.profitAndLose<0?'space green':item.profitAndLose==0?'space':'space red'">{{$moneyDot(item.profitAndLose)}}</b></span>
+                  Lãi lỗ:<b
+                  :class="item.profitAndLose>0?'space green':item.profitAndLose==0?'space':'space red'">{{$moneyDot(item.profitAndLose)}}</b></span>
               </p>
               <p class="clearfix">
                         <span class="secondary col-xs-6">

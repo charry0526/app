@@ -36,7 +36,7 @@
         <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/organization.png" alt="">
         <img class="register-ico" v-show="$state.theme == 'red'" src="../assets/ico/organization-red.png" alt="">
         <!-- <input class="register-input" placeholder="机构代码" type="tel" pattern="[0-9]*" v-model="invitecode"> -->
-                <input class="register-input" placeholder="Mã cơ quan" type="tel" pattern="[0-9]*" v-model="invitecode">
+                <input class="register-input" placeholder="Mã giới thiệu" type="tel" pattern="[0-9]*" v-model="invitecode">
 
       </div>
       <div class="register-form-item agree-model">
@@ -44,10 +44,10 @@
           :class="agree?'glyphicon glyphicon glyphicon-ok-sign red':'glyphicon glyphicon-ok-circle'"></i>
         <!-- 我已阅读并同意 -->
         Tôi đã đọc và đồng ý
-        <a @click="toagreeUrl" style="color:#fff">
-          <!-- 《注册协议》 -->
+        <!-- <a @click="toagreeUrl" style="color:#fff">
+
           《Hợp đồng đăng ký》
-        </a>
+        </a> -->
       </div>
       <div class="register-form-item submit-model" @click="gook">
         <!-- 立即注册 -->
@@ -56,11 +56,11 @@
       <div class="register-form-item " style="margin-top: .23rem;display:flex;justify-content:flex-end">
         <div :style="{'font-size':'.2rem', color:$state.theme =='red'?'#000':'#86CBD1'}">
           <!-- 已有账号？ -->
-          có một tài khoản？
+           Có một tài khoản？
           <span
             :style="{color:$state.theme =='red'?'#BB1815':'#fff'}" @click="goLogin">
             <!-- 返回登录 -->
-            đăng nhập lại
+            Đăng nhập lại
             </span></div>
       </div>
     </div>

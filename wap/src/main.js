@@ -114,6 +114,7 @@ Vue.prototype.$moneyDot = function (value) {
     intPartFormat = pSuffix + intPartFormat
     let floatPart = '' // 预定义小数部分
     let value2Array = value.split('.')
+  
     // =2表示数据有小数位
     if (value2Array.length === 2) {
       floatPart = value2Array[1].toString() // 拿到小数部分

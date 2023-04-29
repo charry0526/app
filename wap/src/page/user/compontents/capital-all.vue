@@ -74,20 +74,17 @@ export default {
         pageSize: 10
       }
       let data = await api.cashDetail(opts)
-      if (data.status === 0)
-      {
+      if (data.status === 0) {
         data.data.list.forEach(element => {
           this.list.push(element)
         })
         this.total = data.data.total
-      } else
-      {
+      } else {
         Toast(data.msg)
       }
     },
     async loadMore () {
-      if (this.list.length < this.pageSize || this.total <= this.pageNum * this.pageSize)
-      {
+      if (this.list.length < this.pageSize || this.total <= this.pageNum * this.pageSize) {
         return
       }
       this.loading = true

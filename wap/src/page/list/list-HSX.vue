@@ -104,7 +104,7 @@ export default {
   data () {
     return {
       loading: false,
-      pageNum: 1,
+      pageNum: 0,
       pageSize: 15,
       currentNum: 15,
       list: [],
@@ -125,6 +125,7 @@ export default {
 
       if (val === '1') {
         this.searchKey = keyArr[val]
+        this.pageNum++
         this.getStock()
         this.timer = setInterval(this.refreshList, 60000)
       } else {
@@ -144,7 +145,7 @@ export default {
     async addOptions (val) {
       let data = await api.addOption({ code: val.code })
       if (data.status === 0) {
-       // Toast('添加自选成功')
+        // Toast('添加自选成功')
         Toast('Thêm thành công tùy chọn')
       } else {
         Toast(data.msg)
@@ -171,6 +172,7 @@ export default {
         data.data.list.forEach(element => {
           this.list.push(element)
         })
+        console.log(this.list, 'this.list')
         this.total = data.data.total
       } else {
         Toast(data.msg)
@@ -198,7 +200,8 @@ export default {
       // clearInterval(this.timer)
       // 加载下一页
       this.pageNum++
-      this.currentNum = this.pageNum * this.pageSize
+      this.currentNum = this.pageNum * this
+
       await this.getStock()
       this.loading = false
     },
