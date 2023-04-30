@@ -14,9 +14,9 @@
         >
       </div>
       <div class="home-search-ctl">
-        <img class="lingdang" src="../../assets/ico/lingdang.png" alt=""
+        <!-- <img class="lingdang" src="../../assets/ico/lingdang.png" alt=""
         @click="$router.push('/notify')"
-        >
+        > -->
         <img class="pifu" src="../../assets/ico/pifu.png" alt="" @click="$state.toggleTheme()">
       </div>
     </div>
