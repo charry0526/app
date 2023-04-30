@@ -25,7 +25,8 @@ export function isEmail (str) {
 // 只能中文
 export function isName (str) {
   let myreg = /^[\u4E00-\u9FA5]+$/
-  return myreg.test(str)
+  // return myreg.test(str)
+  return true
 }
 
 // 手机号码
@@ -51,7 +52,8 @@ export function idCardReg (idcard) {
 // 银行卡校验
 export function bankNoReg (val) {
   var myreg = /^([1-9]{1})(\d{14,18})$/
-  return myreg.test(val)
+  // return myreg.test(val)
+  return true
 }
 
 // 数字隐藏显示 *
