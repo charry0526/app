@@ -128,7 +128,8 @@ export default {
 
       for (let index = this.data.t.length; index >= 0; index--) {
         if (this.data.t[index] > endtime) {
-          data.data.date.push(this.formatDate(this.data.t[index], 'yyyy-MM-dd'))
+          console.log(this.data.t[index])
+          data.data.date.push(this.formatDate(parseInt(this.data.t[index])+3600*12, 'yyyy-MM-dd'))
           data.data.values.push([
             parseFloat(this.data.o[index]),
             parseFloat(this.data.c[index]),
