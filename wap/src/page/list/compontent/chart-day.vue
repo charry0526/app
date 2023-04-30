@@ -130,13 +130,13 @@ export default {
         if (this.data.t[index] > endtime) {
           data.data.date.push(this.formatDate(this.data.t[index], 'yyyy-MM-dd'))
           data.data.values.push([
-            this.data.o[index],
-            this.data.c[index],
-            this.data.h[index],
-            this.data.l[index]
-
+            parseFloat(this.data.o[index]),
+            parseFloat(this.data.c[index]),
+            parseFloat(this.data.h[index]),
+            parseFloat(this.data.l[index]),
+            parseFloat(this.data.v[index]),
           ])
-          data.data.volumes.push([index, this.data.v[index], -1])
+          data.data.volumes.push([index, parseFloat(this.data.v[index]), parseFloat(this.data.c[index]) == parseFloat(this.data.o[index])?-1: parseFloat(this.data.c[index])> parseFloat(this.data.o[index])?-1:1])
         }
       }
 
@@ -191,7 +191,7 @@ export default {
       for (var i = 0; i < rawData.length; i++) {
         categoryData.push(rawData[i].splice(0, 1)[0])
         values.push(rawData[i])
-        volumes.push([i, rawData[i][4], rawData[i][0] > rawData[i][1] ? 1 : -1])
+        volumes.push([i, rawData[i][4], rawData[i][0] > rawData[i][4] ? 1 : -1])
       }
       return {
         categoryData: categoryData,
@@ -216,7 +216,7 @@ export default {
     },
     initEchartMap (data) {
 
-      console.log(data.values)
+      console.log(data)
       let this_ = this
       let upColor = '#00da3c'
       let downColor = '#ec0000'
@@ -257,13 +257,14 @@ export default {
               param2 = param[1]
               param = param[0]
             }
+            
             return [
               this_.code + '<hr size=1 style="margin: 3px 0">',
               'O: ' + param.data[1] + '<br/>',
               'H: ' + param.data[3] + '<br/>',
               'L: ' + param.data[4] + '<br/>',
               'C: ' + param.data[2] + '<br/>',
-              // 'Khối lượng: ' + param.data[4] + '<br/>',
+              'Khối lượng: ' + data.volumes[param['dataIndex']][1] + '<br/>',
 
               param.name
             ].join('')
@@ -442,6 +443,43 @@ export default {
               }
             }
           },
+
+           {
+          name: 'MA5',
+          type: 'line',
+          data: [],
+          smooth: true,
+          lineStyle: {
+            opacity: 0.5
+          }
+        },
+        {
+          name: 'MA10',
+          type: 'line',
+          data: [],
+          smooth: true,
+          lineStyle: {
+            opacity: 0.5
+          }
+        },
+        {
+          name: 'MA20',
+          type: 'line',
+          data: [],
+          smooth: true,
+          lineStyle: {
+            opacity: 0.5
+          }
+        },
+        {
+          name: 'MA30',
+          type: 'line',
+          data: [],
+          smooth: true,
+          lineStyle: {
+            opacity: 0.5
+          }
+        },
           {
             name: '成交量',
             type: 'bar',
@@ -451,6 +489,8 @@ export default {
           }
         ]
       }
+      console.log(data.values)
+      console.log(data.volumes)
       myChart.setOption(option)
       // myChart.dispatchAction({
       //     type: 'brush',
