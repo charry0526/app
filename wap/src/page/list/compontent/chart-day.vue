@@ -131,9 +131,10 @@ export default {
           data.data.date.push(this.formatDate(this.data.t[index], 'yyyy-MM-dd'))
           data.data.values.push([
             this.data.o[index],
+            this.data.c[index],
             this.data.h[index],
-            this.data.l[index],
-            this.data.c[index]
+            this.data.l[index]
+
           ])
           data.data.volumes.push([index, this.data.v[index], -1])
         }
@@ -214,6 +215,8 @@ export default {
       return result
     },
     initEchartMap (data) {
+
+      console.log(data.values)
       let this_ = this
       let upColor = '#00da3c'
       let downColor = '#ec0000'
@@ -257,9 +260,9 @@ export default {
             return [
               this_.code + '<hr size=1 style="margin: 3px 0">',
               'O: ' + param.data[1] + '<br/>',
-              'H: ' + param.data[2] + '<br/>',
-              'L: ' + param.data[3] + '<br/>',
-              'C: ' + param.data[4] + '<br/>',
+              'H: ' + param.data[3] + '<br/>',
+              'L: ' + param.data[4] + '<br/>',
+              'C: ' + param.data[2] + '<br/>',
               // 'Khối lượng: ' + param.data[4] + '<br/>',
 
               param.name
