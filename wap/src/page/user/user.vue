@@ -212,9 +212,9 @@
             <span v-if="item.name == '期货'"
                   style="font-weight:bold;font-size:0.26rem;">{{$store.state.hide?'****':$moneyDot(Number(($store.state.userInfo.enableFuturesAmt + $store.state.userInfo.allFuturesFreezAmt) * futuresSettingInfo.forceSellPercent).toFixed(2))}} </span>
             <!-- 请实时注意账户风险 -->
-            <i @click="focePromptPopup = true"
+            <!-- <i @click="focePromptPopup = true"
                ref="button"
-               class="iconfont icon-xinshou"></i>
+               class="iconfont icon-xinshou"></i> -->
           </div>
         </div>
       </div>

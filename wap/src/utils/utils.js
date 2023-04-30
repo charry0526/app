@@ -32,7 +32,7 @@ export function isName (str) {
 // 手机号码
 export function isPhone (mobile) {
   // let myreg = /^[1][3,4,5,7,8][0-9]{9}$/  //手机号码验证
-  let myreg = /^[0-9]{11}$/ // 手机号码验证
+  let myreg = /^[0-9]{10}$/ // 手机号码验证
   return myreg.test(mobile)
 }
 
@@ -45,8 +45,10 @@ export function pwdReg (psd) {
 
 // 身份证校验
 export function idCardReg (idcard) {
-  var myreg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
-  return myreg.test(idcard)
+  // var myreg = /^[1-9]\d{5}(?:18|19|20)\d{2}(?:0[1-9]|10|11|12)(?:0[1-9]|[1-2]\d|30|31)\d{3}[\dXx]$/
+  // var myreg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
+  // return myreg.test(idcard)
+  return true
 }
 
 // 银行卡校验
@@ -69,15 +71,25 @@ export function hideNumberTo (str) {
 
 // 时间戳转换为时间格式
 export function timeFormat (date) {
-  let fmt = 'yyyy-MM-dd hh:mm:ss'
+  // let fmt = 'yyyy-MM-dd hh:mm:ss'
+  let fmt = 'dd-MM-yyyy hh:mm:ss'
   // let date = new Date(time)
   if (/(y+)/.test(fmt)) {
     fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length))
   }
+  // let o = {
+  //   'M+': date.getMonth() + 1,
+  //   'd+': date.getDate(),
+  //   'h+': date.getHours(),
+  //   'm+': date.getMinutes(),
+  //   's+': date.getSeconds()
+  // }
   let o = {
-    'M+': date.getMonth() + 1,
-    'd+': date.getDate(),
+
     'h+': date.getHours(),
+    'd+': date.getDate(),
+    'M+': date.getMonth() + 1,
+
     'm+': date.getMinutes(),
     's+': date.getSeconds()
   }

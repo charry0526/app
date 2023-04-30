@@ -19,16 +19,16 @@
         <!-- <mt-field label="银行名称" placeholder="例:中国工商银行（全称）" type="text" v-model="bankName"></mt-field>
       <mt-field label="开户支行" placeholder="需要精确到分行或者支行" type="text" v-model="bankAddress"></mt-field>
       <mt-field label="银行卡号" placeholder="请输入银行卡号" v-model="bankNo"></mt-field> -->
-      <mt-field label="tên" placeholder="Ví dụ: Ngân hàng Công thương Trung Quốc" type="text" v-model="bankName"></mt-field>
-      <mt-field label="chi nhánh" placeholder="Cần chính xác đến tận chi nhánh" type="text" v-model="bankAddress"></mt-field>
-      <mt-field label="số thẻ" placeholder="Vui lòng nhập số thẻ ngân hàng" v-model="bankNo"></mt-field>
+      <mt-field label="Tên" placeholder="Ví dụ: Ngân hàng Công thương Trung Quốc" type="text" v-model="bankName"></mt-field>
+      <mt-field label="Chi nhánh" placeholder="Cần chính xác đến tận chi nhánh" type="text" v-model="bankAddress"></mt-field>
+      <mt-field label="Số thẻ/số tài khoản" placeholder="Vui lòng nhập số thẻ ngân hàng" v-model="bankNo"></mt-field>
     </div>
     <!-- <div class="form-block page-part">
         <mt-field label="持卡人姓名" placeholder="和银行卡绑定一致" type="text" v-model="username"></mt-field>
         <mt-field label="银行预留手机号" placeholder="请输入持卡人手机号" type="text" v-model="username"></mt-field>
     </div> -->
     <div class="rule-box">
-      <div class="title">gợi ý：</div>
+      <div class="title">Gợi ý:：</div>
       <ul>
         <!-- <li>1.新用户注册后必须通过添加银行卡。</li>
         <li>2.用户只能添加一张本人银行卡。</li>
@@ -133,5 +133,9 @@ export default {
 
   .transaction {
     // padding-bottom: 0.2rem;
+  }
+  /deep/.mint-cell-title{
+    width:40%;
+    text-align: right;
   }
 </style>

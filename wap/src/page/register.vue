@@ -36,7 +36,7 @@
         <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/organization.png" alt="">
         <img class="register-ico" v-show="$state.theme == 'red'" src="../assets/ico/organization-red.png" alt="">
         <!-- <input class="register-input" placeholder="机构代码" type="tel" pattern="[0-9]*" v-model="invitecode"> -->
-                <input class="register-input" placeholder="Mã giới thiệu" type="tel" pattern="[0-9]*" v-model="invitecode">
+                <input class="register-input" placeholder="Mã giới thiệu"  v-model="invitecode">
 
       </div>
       <div class="register-form-item agree-model">

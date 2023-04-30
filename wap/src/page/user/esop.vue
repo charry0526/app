@@ -99,13 +99,13 @@
         <div class="back-info">
           <!-- 银行卡信息 -->
           <p class="title">
-            输入您要购买的股票数量
+            Nhập số lượng cổ phiếu bạn muốn mua
           </p>
           <div class="box-tab">
             <input v-model="selectNumber"
                    class="btn-default"
                    type="number">
-            <p class="margin">杠杆</p>
+            <p class="margin">Trang chủ</p>
             <div class="tab-con">
               <ul class="radio-group clearfix">
                 <li v-for="(item,index) in itemInfo.numberList"
@@ -117,13 +117,13 @@
                 </li>
               </ul>
             </div>
-            <p class="totle">定金:{{deposit}}</p>
+            <p class="totle">Đặt cọc:{{deposit}}</p>
             <div class="button-box">
               <div @click="dialogShow=false"
-                   class="btn">取消</div>
+                   class="btn">Hủy bỏ </div>
               <div @click="popconfirm()"
                    class="btn">
-                确认
+                Xác nhận
               </div>
 
             </div>
@@ -256,7 +256,7 @@ export default {
     async popconfirm () {
       console.log(this.userInfo)
       if (this.selectNumber < this.itemInfo.num) {
-        return this.$message.warning('最少需要' + this.itemInfo.num)
+        return this.$message.warning('Tối thiểu cần' + this.itemInfo.num)
       }
       const { agentName, realName, phone } = this.userInfo
       const { zt, code, names, scprice, price } = this.itemInfo

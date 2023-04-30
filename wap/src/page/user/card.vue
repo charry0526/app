@@ -45,7 +45,7 @@
          class="btnbox">
       <!-- <span class="text-center btnok" @click="addCard">添加银行卡</span> -->
       <span class="text-center btnok"
-            @click="addCard">thêm thẻ ngân hàng</span>
+            @click="addCard">Thêm thẻ ngân hàng</span>
     </div>
     <div v-else
          class="btnbox">
@@ -158,7 +158,7 @@ export default {
 }
 
 .btnbox {
-  width: 30%;
+  // width: 48%;
   margin: 0 auto;
 }
 </style>
