@@ -157,13 +157,14 @@ export default {
       }
       this.isloading = true
       let data = await api.login(opts)
+      console.log(data)
       this.clickFalg = 0
       if (data.status === 0) {
         this.$store.state.userInfo.phone = this.phone
-        // this.$store.state.userInfo.token = data.data.cookie
+        this.$store.state.userInfo.token = data.data.cookie
         this.clickFalg = 0
         // this.clearCookie()
-        // this.setCookie(data.data.key,data.data.token,0)
+        this.setCookie(data.data.key,data.data.token)
         this.$router.push('/home')
       } else {
         Toast(data.msg)
