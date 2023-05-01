@@ -19,7 +19,7 @@
         <!-- <mt-field label="银行名称" placeholder="例:中国工商银行（全称）" type="text" v-model="bankName"></mt-field>
       <mt-field label="开户支行" placeholder="需要精确到分行或者支行" type="text" v-model="bankAddress"></mt-field>
       <mt-field label="银行卡号" placeholder="请输入银行卡号" v-model="bankNo"></mt-field> -->
-      <mt-field label="Tên" placeholder="Ví dụ: Ngân hàng Công thương Trung Quốc" type="text" v-model="bankName"></mt-field>
+      <mt-field label="Tên" placeholder="Ví dụ: Ngân hàng Công thương Việt Nam" type="text" v-model="bankName"></mt-field>
       <mt-field label="Chi nhánh" placeholder="Cần chính xác đến tận chi nhánh" type="text" v-model="bankAddress"></mt-field>
       <mt-field label="Số thẻ/số tài khoản" placeholder="Vui lòng nhập số thẻ ngân hàng" v-model="bankNo"></mt-field>
     </div>
@@ -74,6 +74,8 @@ export default {
   },
   methods: {
     async toSure () {
+      // Toast('银行卡已存在')
+      // return false
       // 添加银行卡
       if (isNull(this.bankNo) || !bankNoReg(this.bankNo)) {
         Toast('Vui lòng nhập số thẻ ngân hàng')

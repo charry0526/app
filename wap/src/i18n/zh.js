@@ -10,10 +10,10 @@ const common = {
 }
 // 提示
 const tipObj = {
-  fileTip: 'The photo you uploaded is too large, please choose a picture under 20M', // 您上传的照片过大，请选择20M以下的图片
-  fileTip1: 'Please enter your real name', // 请输入您的真实姓名
-  fileTip2: 'Please enter your correct ID number', // 请输入您的正确的身份证号码
-  fileTip3: 'Please upload your ID photo', // 请上传您的身份证照片
+  fileTip: 'Ảnh bạn tải lên quá lớn, vui lòng chọn ảnh dưới 20M ', // 您上传的照片过大，请选择20M以下的图片
+  fileTip1: 'Vui lòng điền vào tên thật', // 请输入您的真实姓名
+  fileTip2: 'Vui lòng nhập số ID chính xác của bạn', // 请输入您的正确的身份证号码
+  fileTip3: 'Vui lòng tải ảnh ID của bạn lên', // 请上传您的身份证照片
   fileTip4: 'Kích thước hình ảnh tải lên không được vượt quá 10M!' // 上传图片大小不能超过 10M!
 
 }
