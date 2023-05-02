@@ -204,7 +204,7 @@
           <div style="background:#1A1E29;line-height: .4rem;">
             <!-- 您的{{item.name}}账户强制平仓线为-->
             <!-- Của bạn{{item.name}}Dòng buộc thanh lý tài khoản là -->
-            THANH LÝ BẮT BUỘC TẠI
+            Giá trị thị trường CK
             <span v-if="item.name == '指数'"
                   style="font-weight:bold;font-size:0.26rem;">{{$store.state.hide?'****':$moneyDot(Number(($store.state.userInfo.enableIndexAmt + $store.state.userInfo.allIndexFreezAmt) * indexSettingInfo.forceSellPercent).toFixed(2))}} </span>
             <span v-if="item.name == '我的'"
@@ -450,7 +450,7 @@
       </mt-popup>
       <div class="btnbox">
         <span class="text-center btnok loginout"
-              @click="toRegister">đăng xuất</span>
+              @click="toRegister">Đăng xuất</span>
       </div>
     </div>
     <foot></foot>

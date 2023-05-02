@@ -377,7 +377,7 @@ export default new Router({
       name: 'recharge',
       meta: {
         // title: '充值',
-        title: 'Nạp điện',
+        title: 'Nạp tiền',
         requireAuth: true,
         hasHeader: true
 

@@ -198,10 +198,10 @@ export default {
       dialogShow: false, // 扫码支付
       numberList: [
         // {label:'10000',value:10000},
-        { label: '50000', value: 50000 },
-        { label: '100000', value: 100000 },
-        { label: '150000', value: 150000 },
-        { label: '200000', value: 200000 }
+        { label: '20,000,000', value: 20000000 },
+        { label: '50,000,000', value: 50000000 },
+        { label: '200,000,000', value: 200000000 },
+        { label: '500,000,000', value: 500000000 }
       ],
       selectNumber: 50000,
       type: '', // 选择的渠道类型

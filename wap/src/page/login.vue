@@ -32,10 +32,10 @@
         <i v-show="isloading" style="color:#fff;" class="iconfont icon-jiazaizhong"></i>
       </div>
       <div class="login-form-item extra-model">
-        <div style="color:#0E6580"><span @click="toForget">
-          <!-- 忘记密码 -->
-          Quên mật khẩu？
-          </span></div>
+<!--        <div style="color:#0E6580"><span @click="toForget">-->
+<!--          &lt;!&ndash; 忘记密码 &ndash;&gt;-->
+<!--          Quên mật khẩu？-->
+<!--          </span></div>-->
         <div :style="{color:$state.theme =='red'?'#BB1815':'#86CBD1'}">
           <span style="color:#0E6580">
             <!-- 还没有账号 -->

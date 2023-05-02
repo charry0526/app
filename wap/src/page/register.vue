@@ -248,7 +248,7 @@ export default {
       }
       this.clickFalg++
       //   var reg = 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/
-      let reg = /^[0-9]{11}$/ // 手机号码验证
+      let reg = /^[0-9]{10}$/ // 手机号码验证
       if (isNull(this.phone)) {
         Toast('Số điện thoại di động không được để trống')
       } else {

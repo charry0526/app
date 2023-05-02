@@ -52,7 +52,7 @@
                   Phí giao dịch:
                   <b class="space">{{$moneyDot(item.orderFee)}}</b></span>
                 <span class="col-xs-4 text-center">
-                  Tem đóng thuế
+                  Thuế thu nhập
                   :
                   <b class="space">{{$moneyDot(item.orderSpread)}}</b></span>
                 <span class="col-xs-4 text-right">
@@ -68,17 +68,17 @@
               </p>
               <p class="clearfix">
                 <span class="col-xs-4">
-                  Phí lây lan
+                  Chi phí khác
                   :<b class="space">{{item.spreadRatePrice}}</b></span>
                         <span class="col-xs-4 text-center">
-                          Lãi lỗ thả nổi
+                          Lãi/lỗ
                           :
                             <b v-if="item.now_price == 0">-</b>
                             <b v-else
                                :class="item.profitAndLose<0?'space red':item.profitAndLose>=0?'space':'space green'">{{$moneyDot(item.profitAndLose)}}</b>
                         </span>
                 <span class="col-xs-4 text-right big-font">
-                  Tổng lãi lỗ
+                  Tổng lãi/lỗ
                   :
                     <b v-if="item.now_price == 0">-</b>
                     <b v-else
@@ -274,14 +274,14 @@ export default {
       //     return
       // }
 
-      // MessageBox.confirm('Bạn có chắc chắn muốn đóng vị trí?')
+      // MessageBox.confirm('Bạn có chắc chắn muốn bán ra?')
       MessageBox({
         title: '',
-        message: 'Bạn có chắc chắn muốn đóng vị trí?',
+        message: 'Bạn có chắc chắn muốn bán ra?',
         showCancelButton: true,
         confirmButtonText: 'Xác nhận',
         cancelButtonText: 'Hủy bỏ'
-      }).confirm.then(async action => {
+      }).then(async action => {
         let opt = {
           positionSn: val
         }

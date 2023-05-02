@@ -24,7 +24,7 @@
 
                         <!-- {{item.payChannel == 0?'支付宝':item.payChannel == 1?'对公转账':item.payChannel}} -->
                     </span>
-              <span class="payNumber"> Nạp điện：<span :style="{color:$state.theme =='red'?'#BB1815':''}">{{$moneyDot(item.payAmt)}}VND</span></span>
+              <span class="payNumber"> Nạp tiền：<span :style="{color:$state.theme =='red'?'#BB1815':''}">{{$moneyDot(item.payAmt)}}VND</span></span>
 
               <!-- <span class="payNumber">充值：<span :style="{color:$state.theme =='red'?'#BB1815':''}">￥{{item.payAmt}}</span></span> -->
               <span
@@ -35,7 +35,7 @@
                         <i v-if="item.orderStatus == 3"
                            class="iconfont icon-iconfontweitongguo animated bounceInDown"></i>
                         <!-- 1 => 成功 2 失败 3取消 4 等待 -->
-                        {{item.orderStatus == 1?'thành công':item.orderStatus == 2?'thất bại':item.orderStatus == 3?'Hủy bỏ':'Đang xem xét'}}
+                        {{item.orderStatus == 1?'thành công':item.orderStatus == 2?'thất bại':item.orderStatus == 3?'Hủy bỏ':'Đang xét duyệt'}}
 
                         <!-- {{item.orderStatus == 1?'充值成功':item.orderStatus == 2?'充值失败':item.orderStatus == 3?'取消充值':'审核中'}} -->
 

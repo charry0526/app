@@ -105,7 +105,7 @@
             <input v-model="selectNumber"
                    class="btn-default"
                    type="number">
-            <p class="margin">Trang chủ</p>
+            <p class="margin">Đòn bẩy</p>
             <div class="tab-con">
               <ul class="radio-group clearfix">
                 <li v-for="(item,index) in itemInfo.numberList"
@@ -117,7 +117,7 @@
                 </li>
               </ul>
             </div>
-            <p class="totle">Đặt cọc:{{deposit}}</p>
+            <p class="totle">Số tiền: {{$moneyDot(deposit)}}</p>
             <div class="button-box">
               <div @click="dialogShow=false"
                    class="btn">Hủy bỏ </div>

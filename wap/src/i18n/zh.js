@@ -47,11 +47,11 @@ const orderList = {
   nums: 'Số lượng', // 数量
   marketValue: 'Giá trị thị trường', // 市值
   commission: 'Phí xử lý', // 手续费
-  stampDuty: 'Tem đóng thuế', // 印花税
+  stampDuty: 'Thuế thu nhập', // 印花税
   warehouseRetentionFee: 'Phí lưu trữ', // 留仓费
-  pointdifferenceFee: 'Phí lây lan', // 点差费
-  Floating: 'Lãi lỗ thả nổi', // 浮动盈亏
-  TotalprofitAndLoss: 'Tổng lãi lỗ', // 总盈亏
+  pointdifferenceFee: 'Chi phí khác', // 点差费
+  Floating: 'Lãi/lỗ', // 浮动盈亏
+  TotalprofitAndLoss: 'Tổng lãi/lỗ', // 总盈亏
   closeAposition: 'Bán ra', // 我要平仓
   ShortPinyinQueryPosition: 'Vị trí truy vấn pin đơn giản' // 可输入股票简拼查询持仓
 }

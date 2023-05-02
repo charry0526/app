@@ -16,10 +16,10 @@
                         <!-- 提现至银行卡 -->
                         Rút về thẻ ngân hàng
                     </span>
-              <span class="payNumber">{{item.withAmt}}VND</span>
+              <span class="payNumber">{{$moneyDot(item.withAmt)}}VND</span>
               <span class="red pull-right">
                         <!-- {{item.withStatus == 1?'提现成功':item.withStatus == 2?'提现失败':item.withStatus == 3?'订单取消':'审核中'}} -->
-                       {{item.withStatus == 1?'thành công':item.withStatus == 2?'thất bại':item.withStatus == 3?'Hủy bỏ':'đang xem xét'}}
+                       {{item.withStatus == 1?'thành công':item.withStatus == 2?'thất bại':item.withStatus == 3?'Hủy bỏ':'Đang xét duyệt'}}
 
                         <i v-if="item.withStatus == 1" class="iconfont icon-tongguo4 animated bounceIn"></i>
                         <i v-if="item.withStatus==0" class="iconfont icon-dengdai animated bounceInDown"></i>
@@ -40,7 +40,7 @@
               <p class="clearfix">
                 <span class="col-xs-12">
                   <!-- 卡号 -->
-                  số thẻ
+                  Số tài khoản
                   :<b class="space">{{item.bankNo}}</b></span>
               </p>
               <p v-if="item.withStatus == 3" class="clearfix">
@@ -58,7 +58,7 @@
               <p class="clearfix">
                         <span class="secondary col-xs-6">
                           <!-- 时间 -->
-                          thời gian:
+                          Thời gian:
                             <b v-if="item.applyTime">{{new Date(item.applyTime) | timeFormat}}</b>
                             <b v-else></b>
                         </span>
@@ -68,7 +68,7 @@
               <div @click="cancle(item.id)" class="foot-btn">
                 <i class='font-icon'></i>
                 <!-- 取消提现 -->
-                hủy rút tiền
+                Hủy rút tiền
               </div>
             </div>
 

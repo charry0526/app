@@ -37,7 +37,7 @@
         <div v-else-if="type == 1">
           <!-- <mt-field label="收款名称" placeholder="收款名称" disabled type="text" v-model="payInfo.channelName"> -->
 
-          <mt-field label="Tên hóa đơn" placeholder="Tên hóa đơn" disabled type="text" v-model="payInfo.channelName">
+          <mt-field label="Tên người TH" placeholder="Tên người TH" disabled type="text" v-model="payInfo.channelName">
                     <span v-clipboard:copy="payInfo.channelName"
                           v-clipboard:success="onCopy"
                           v-clipboard:error="onError">
@@ -47,7 +47,7 @@
                     </span>
           </mt-field>
           <!-- <mt-field label="收款银行" placeholder="收款银行" disabled type="text" v-model="payInfo.channelDesc"> -->
-            <mt-field label="ngân hàng" placeholder="ngân hàng" disabled type="text" v-model="payInfo.channelDesc">
+            <mt-field label="Ngân hàng:" placeholder="Ngân hàng:" disabled type="text" v-model="payInfo.channelDesc">
                     <span v-clipboard:copy="payInfo.channelDesc"
                           v-clipboard:success="onCopy"
                           v-clipboard:error="onError">
@@ -62,7 +62,7 @@
               </span>
           </mt-field> -->
           <!-- <mt-field label="收款账号" placeholder="收款账号" disabled type="text" v-model="payInfo.channelAccount"> -->
-          <mt-field label="tài khoản" placeholder="tài khoản" disabled type="text" v-model="payInfo.channelAccount">
+          <mt-field label="Tài khoản" placeholder="Tài khoản" disabled type="text" v-model="payInfo.channelAccount">
 
                     <span v-clipboard:copy="payInfo.channelAccount"
                           v-clipboard:success="onCopy"
@@ -74,7 +74,7 @@
         <div v-else>
           <!-- <mt-field label="收款方" placeholder="收款方" disabled type="text" v-model="payInfo.channelName"> -->
 
-          <mt-field label="người thụ hưởng" placeholder="người thụ hưởng" disabled type="text" v-model="payInfo.channelName">
+          <mt-field label="Người thụ hưởng" placeholder="Người thụ hưởng" disabled type="text" v-model="payInfo.channelName">
           </mt-field>
           <mt-field label="tài khoản" placeholder="tài khoản" disabled type="text" v-model="payInfo.channelAccount">
                     <span v-clipboard:copy="payInfo.channelAccount"
@@ -127,7 +127,7 @@
           <p class="tip-text"><i class="iconfont icon-jingpaibuzhou"></i>为了及时到账，充值成功后务必联系线上客服提交核对转账明细，确保入金安全！</p>
         </div> -->
         <div class="tips-group">
-          <p><i class="iconfont icon-jinggao1"></i>Các biện pháp phòng ngừa：</p>
+          <p><i class="iconfont icon-jinggao1"></i>Lưu ý:</p>
           <p class="tip-text"><i class="iconfont icon-jingpaibuzhou"></i>Do giới hạn trên của bộ sưu tập thanh toán, tài khoản công cộng có thể khác nhau mỗi lần,<span class="red">Vui lòng lấy mã QR mới nhất trước mỗi lần nạp tiền để hoàn tất thanh toán</span>
           </p>
           <p class="tip-text"><i class="iconfont icon-jingpaibuzhou3"></i>Nếu môi trường mạng của bạn không ổn định hoặc do thiết bị, môi trường, sở thích, hành vi, mối quan hệ, tài khoản, danh tính và các yếu tố khác，<span
@@ -147,13 +147,15 @@
       </div>
       <div v-else-if="type == 1">
         <div class="tips-group">
-          <p><i class="iconfont icon-liucheng"></i>Thủ tục điều hành：</p>
+          <p><i class="iconfont icon-liucheng"></i>Thao tác nạp tiền：</p>
           <p class="tip-text"><i class="iconfont icon-buzhou"></i>Nhấp vào "Sao chép" để sao chép thông tin</p>
           <p class="tip-text"><i class="iconfont icon-buzhou2"></i>Sau khi sao chép, mở ngân hàng di động để chuyển</p>
         </div>
         <div class="tips-group red">
-          <p><i class="iconfont icon-jinggao1"></i>Các biện pháp phòng ngừa：</p>
-          <p class="tip-text"><i class="iconfont icon-jingpaibuzhou"></i>Để đến tài khoản kịp thời, sau khi nạp tiền thành công, hãy nhớ liên hệ với dịch vụ khách hàng trực tuyến để gửi chi tiết chuyển khoản xác minh để đảm bảo an toàn cho khoản tiền gửi！</p>
+          <p><i class="iconfont icon-jinggao1"></i>Lưu ý:</p>
+          <p class="tip-text"><i class="iconfont icon-jingpaibuzhou"></i>
+            Để số tiền kịp thời đến tài khoản CK của bạn, sau khi nạp tiền thành công, hãy liên hệ với người hỗ trợ để gửi chi tiết chuyển khoản xác minh để đảm bảo an toàn cho khoản tiền gửi !
+          </p>
         </div>
       </div>
       <div v-else>

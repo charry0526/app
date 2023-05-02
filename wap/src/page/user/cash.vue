@@ -29,7 +29,7 @@
 
           <span @click="changeAllNumber">
             <!-- 全部 -->
-            tất cả
+            Tất cả
           </span>
         </mt-field>
         <!-- <mt-field label="到账银行" placeholder="请输入提现金额" type="number" v-model="card"></mt-field> -->

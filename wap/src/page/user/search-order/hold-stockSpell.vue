@@ -252,7 +252,7 @@ export default {
         this.$router.push('/authentication')
         return
       }
-      MessageBox.confirm('Bạn có chắc chắn muốn đóng vị trí?').then(async action => {
+      MessageBox.confirm('Bạn có chắc chắn muốn bán ra?').then(async action => {
         let opt = {
           positionSn: val
         }

@@ -22,7 +22,7 @@
               </span>
               <span class="pull-right">
                 <!-- 总盈亏 -->
-                Tổng lãi lỗ
+                Tổng lãi/lỗ
                 :<b
                 :class="item.allProfitAndLose>0?'space green':item.allProfitAndLose==0?'space':'space red'">{{$moneyDot(item.allProfitAndLose)}}</b></span>
             </div>
