@@ -22,6 +22,11 @@ axios.interceptors.request.use(
     //     config.headers["USER_TOKEN"] = store.state.token;
     // }
     // console.log(config)
+    if (!config.params) {
+      config.headers = {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+      }
+    }
     return config
   },
   err => {

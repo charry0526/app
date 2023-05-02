@@ -12274,7 +12274,7 @@ button.close {
   opacity: .5
 }
 
-.picker {
+/* .picker {
   overflow: hidden
 }
 
@@ -12415,7 +12415,7 @@ button.close {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   transition-timing-function: ease-out
-}
+} */
 
 .mt-progress {
   position: relative;

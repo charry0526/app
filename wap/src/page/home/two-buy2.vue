@@ -1,8 +1,8 @@
 <template>
-  <div class="wrapper"> 
+  <div class="wrapper">
     <div class="detail-part">
       <div class="index-name">
-        <p>{{detail.name}} 
+        <p>{{detail.name}}
           <span class="index-name_code">{{detail.code}}</span>
         </p>
       </div>
@@ -21,7 +21,7 @@
               <!-- <p class="title"></p> -->
               <p :class="detail.floatPoint<0?'number green': 'number red'">
                 <span class="title">涨跌</span>
-                {{Number(detail.floatPoint).toFixed(2)}} 
+                {{Number(detail.floatPoint).toFixed(2)}}
               </p>
             </li>
             <li>
@@ -152,7 +152,7 @@
         </p>
 
       </div>
-    </div> --> 
+    </div> -->
     <div class="agree">
       <p style="line-height: 0.4rem;padding: 0 0.2rem;">
         当该指数涨幅达到<span class="red">涨停限制</span>时,不能买涨；达到<span class="green">跌停限制</span>时，不能买跌.
@@ -166,7 +166,7 @@
     <div class="footer-btn">
       <div class="total">
         <p class="pay">支付保证金<span class="protem">{{total?total:0}}</span></p>
-        <p class="account">(账户余额:{{$store.state.userInfo.enableIndexAmt}}元)</p>
+        <p class="account">(账户余额:{{$moneyDot($store.state.userInfo.enableIndexAmt)}}元)</p>
       </div>
       <!-- <mt-button :disabled="buying" class="btn-red" size="small" type="danger" @click="toInquiry">下单</mt-button> -->
       <div class="right-btn">
@@ -176,7 +176,7 @@
         </div>
       </div>
     </div>
-   
+
     <foot></foot>
   </div>
 </template>
@@ -243,14 +243,14 @@ export default {
       dialogShow: false,
       timer: null,
       buying: false, // 点击下单
-      siteLeverList:[]
+      siteLeverList: []
     }
   },
   watch: {},
   computed: {
     total () {
       if (this.autoNumber) {
-        return (this.detail.depositAmt * this.autoNumber  / this.selectCycle).toFixed(2)
+        return (this.detail.depositAmt * this.autoNumber / this.selectCycle).toFixed(2)
       } else if (this.selectNumber) {
         return (this.detail.depositAmt * this.selectNumber / this.selectCycle).toFixed(2)
       } else {
@@ -296,7 +296,6 @@ export default {
       if (data.status === 0) {
         // 成功
         this.settingInfo = data.data
-        
       } else {
         Toast(data.msg)
       }
@@ -309,23 +308,23 @@ export default {
         // 杠杆倍数
         this.selectCycle = data.data.siteLever
         // console.log(this.$store.state.userInfo)
-        if(this.$store.state.userInfo !== undefined && this.$store.state.userInfo !== null && this.$store.state.userInfo.phone !== '' && this.$store.state.userInfo.siteLever !== null){
-            this.selectCycle = data.data.siteLever.split('/')[0]
-            this.siteLeverList = []
-            for (let i = 0; i < data.data.siteLever.split('/').length; i++) {
-              let val = data.data.siteLever.split('/')[i]
-              let item = { label: val + '倍', value: val }
-              this.siteLeverList.push(item)
-            }
-          } else {
-            this.selectCycle = data.data.siteLever.split('/')[0]
-            this.siteLeverList = []
-            for (let i = 0; i < data.data.siteLever.split('/').length; i++) {
-              let val = data.data.siteLever.split('/')[i]
-              let item = { label: val + '倍', value: val }
-              this.siteLeverList.push(item)
-            }
+        if (this.$store.state.userInfo !== undefined && this.$store.state.userInfo !== null && this.$store.state.userInfo.phone !== '' && this.$store.state.userInfo.siteLever !== null) {
+          this.selectCycle = data.data.siteLever.split('/')[0]
+          this.siteLeverList = []
+          for (let i = 0; i < data.data.siteLever.split('/').length; i++) {
+            let val = data.data.siteLever.split('/')[i]
+            let item = { label: val + '倍', value: val }
+            this.siteLeverList.push(item)
           }
+        } else {
+          this.selectCycle = data.data.siteLever.split('/')[0]
+          this.siteLeverList = []
+          for (let i = 0; i < data.data.siteLever.split('/').length; i++) {
+            let val = data.data.siteLever.split('/')[i]
+            let item = { label: val + '倍', value: val }
+            this.siteLeverList.push(item)
+          }
+        }
       } else {
         Toast(data.msg)
       }
@@ -349,7 +348,7 @@ export default {
     //     Toast(data.msg)
     //   }
     // },
-    async getDetail() {
+    async getDetail () {
       let opts = {
         code: this.$route.query.code
       }
@@ -366,7 +365,6 @@ export default {
       this.selectCycle = value
     },
     selectNumberFun (value) {
-      
       this.selectNumber = value
       if (value !== 0) {
         this.autoNumber = ''
@@ -413,7 +411,7 @@ export default {
       }
       if (!this.agree) {
         // Toast('需同意合作协议才能交易!')
-         Toast('Cần đồng ý thỏa thuận hợp tác để giao dịch!')
+        Toast('Cần đồng ý thỏa thuận hợp tác để giao dịch!')
       } else if (isNull(this.selectNumber) && isNull(this.autoNumber)) {
         // Toast('请选择购买手数')
         Toast('Vui lòng chọn số lô cần mua')

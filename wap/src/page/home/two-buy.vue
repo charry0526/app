@@ -167,7 +167,7 @@
     <div class="footer-btn">
       <div class="total">
         <p class="pay">{{$t("paybond")}}<span class="protem">{{total?total:0}}</span></p>
-        <p class="account">({{$t("accountbalance")}}:{{$store.state.userInfo.enableAmt}})</p>
+        <p class="account">({{$t("accountbalance")}}:{{$moneyDot($store.state.userInfo.enableAmt)}})</p>
         <!-- 元 -->
       </div>
       <!-- <mt-button :disabled="buying" class="btn-red" size="small" type="danger" @click="toInquiry">下单</mt-button> -->

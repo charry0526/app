@@ -19,8 +19,8 @@ import VueI18n from 'vue-i18n'
 import zh from './i18n/zh'
 import en from './i18n/en'
 import '../static/css/public2.css'
-
 // import VueTouch from 'vue-touch'
+import 'vant/lib/index.css'
 
 Vue.use(animated)
 Vue.use(ElementUI)
@@ -114,7 +114,7 @@ Vue.prototype.$moneyDot = function (value) {
     intPartFormat = pSuffix + intPartFormat
     let floatPart = '' // 预定义小数部分
     let value2Array = value.split('.')
-  
+
     // =2表示数据有小数位
     if (value2Array.length === 2) {
       floatPart = value2Array[1].toString() // 拿到小数部分

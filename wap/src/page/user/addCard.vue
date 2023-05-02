@@ -19,7 +19,7 @@
         <!-- <mt-field label="银行名称" placeholder="例:中国工商银行（全称）" type="text" v-model="bankName"></mt-field>
       <mt-field label="开户支行" placeholder="需要精确到分行或者支行" type="text" v-model="bankAddress"></mt-field>
       <mt-field label="银行卡号" placeholder="请输入银行卡号" v-model="bankNo"></mt-field> -->
-      <mt-field label="Tên" placeholder="Ví dụ: Ngân hàng Công thương Việt Nam" type="text" v-model="bankName"></mt-field>
+      <mt-field @click.native="selectBank" label="Tên" placeholder="Ví dụ: Ngân hàng Công thương Việt Nam" :readonly="true" type="text" v-model="bankName"></mt-field>
       <mt-field label="Chi nhánh" placeholder="Cần chính xác đến tận chi nhánh" type="text" v-model="bankAddress"></mt-field>
       <mt-field label="Số tài khoản" placeholder="Vui lòng nhập số thẻ ngân hàng" v-model="bankNo"></mt-field>
     </div>
@@ -41,7 +41,18 @@
     <div class="btnbox">
       <span class="text-center btnok" @click="toSure"> {{$t("config")}}</span>
     </div>
-
+    <van-popup v-model="bankShow" round position="bottom">
+      <van-picker
+        title="Chọn thẻ ngân hàng"
+        show-toolbar
+        :columns="bankCol"
+        confirm-button-text	="Xác nhận"
+        cancel-button-text	="Hủy bỏ"
+        value-key="name"
+        @confirm="onConfirm"
+        @cancel="bankShow = false"
+      />
+    </van-popup>
   </div>
 </template>
 
@@ -49,12 +60,21 @@
 import * as api from '@/axios/api'
 import { Toast } from 'mint-ui'
 import { isNull, bankNoReg, isName } from '@/utils/utils'
-
+import Picker from 'vant/lib/Picker'
+import Popup from 'vant/lib/popup'
+import { bankCol } from '@/utils/data.js'
 export default {
-  components: {},
+  components: {
+    // Picker,
+    [Picker.name]: Picker,
+    [Popup.name]: Popup
+
+  },
   props: {},
   data () {
     return {
+      bankShow: false,
+      bankCol: bankCol,
       bankName: '',
       bankNo: '',
       bankAddress: '', // 支行地址
@@ -73,6 +93,15 @@ export default {
     }
   },
   methods: {
+    selectBank () {
+      console.log(111)
+      this.bankShow = !this.bankShow
+    },
+    onConfirm ({name}, index) {
+      this.bankName = name
+      this.bankShow = !this.bankShow
+    },
+
     async toSure () {
       // Toast('银行卡已存在')
       // return false

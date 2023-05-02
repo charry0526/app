@@ -71,20 +71,26 @@
 
           <span class="de">
             <div>
+               <!-- <p
+                 class="account">{{$moneyDot(Number((1000000+603900902.40)/1000000).toFixed(2))}}M</p> -->
               <p v-if="this.$store.state.settingForm.indexDisplay && !this.$store.state.settingForm.futuresDisplay "
-                 class="account">{{$store.state.hide?'****':$moneyDot(Number($store.state.userInfo.userAmt +$store.state.userInfo.userIndexAmt).toFixed(2))}}</p>
+                 class="account">{{$store.state.hide?'****':$moneyDot(Number(($store.state.userInfo.userAmt +$store.state.userInfo.userIndexAmt)/1000000).toFixed(2))}}</p>
               <p v-else-if="!this.$store.state.settingForm.indexDisplay && this.$store.state.settingForm.futuresDisplay"
-                 class="account">{{$store.state.hide?'****':$moneyDot(Number($store.state.userInfo.userAmt +$store.state.userInfo.userFuturesAmt).toFixed(2))}}</p>
+                 class="account">{{$store.state.hide?'****':$moneyDot(Number(($store.state.userInfo.userAmt +$store.state.userInfo.userFuturesAmt)/1000000).toFixed(2))}}</p>
               <p v-else-if="!this.$store.state.settingForm.indexDisplay && !this.$store.state.settingForm.futuresDisplay"
-                 class="account">{{$moneyDot($store.state.hide?'****':Number($store.state.userInfo.userAmt).toFixed(2))}}</p>
+                 class="account">{{$moneyDot($store.state.hide?'****':Number($store.state.userInfo.userAmt/1000000).toFixed(2))}}</p>
               <p v-else-if="this.$store.state.settingForm.indexDisplay && this.$store.state.settingForm.futuresDisplay"
-                 class="account">{{$moneyDot($store.state.hide?'****':Number($store.state.userInfo.userAmt +
-                $store.state.userInfo.userIndexAmt + $store.state.userInfo.userFuturesAmt).toFixed(2))}}</p>
+                 class="account">{{$moneyDot($store.state.hide?'****':Number(($store.state.userInfo.userAmt +$store.state.userInfo.userIndexAmt + $store.state.userInfo.userFuturesAmt)/1000000).toFixed(2))}}</p>
             </div>
           </span>
         </div>
         <div class="acc-pre-center">
-          <div>{{$t("userAuth")}}: <span style="font-size: .22rem;">{{$moneyDot($store.state.hide?'****':$store.state.userInfo.userAmt)}}</span></div>
+          <div>{{$t("userAuth")}}:
+            <p style="font-size: .35rem;">
+            <!-- 303 900 902.40 -->
+            {{$moneyDot($store.state.hide?'****':$store.state.userInfo.userAmt)}}
+            </p>
+          </div>
           <!-- <div>指数账户: <span>￥{{$store.state.hide?'****':$store.state.userInfo.userIndexAmt}}</span></div> -->
           <!-- <div>期货账户: <span>￥{{$store.state.hide?'****':Number($store.state.userInfo.userFuturesAmt).toFixed(2)}}</span></div> -->
         </div>
@@ -1271,10 +1277,11 @@ body {
       justify-content: space-around;
       font-family: lightnumber;
       color: #ccc;
-      span {
+      p {
         color: #fff;
         font-family: lightnumber;
         font-weight: 300;
+        text-align: center;
       }
     }
     .acc-pre-right {
@@ -1284,11 +1291,12 @@ body {
       flex-direction: column;
       justify-content: space-around;
       .btn {
-        width: 1.3rem;
-        color: #fff;
-        padding: 0 10px;
-        border-radius: 0.2rem;
-        font-size: 0.1rem;
+       width: 1.3rem;
+      color: #fff;
+      padding: 0.06rem 0.15rem;
+      border-radius: 0.6rem;
+      font-size: 0.25rem;
+
       }
       .redbtn {
         background-color: #e6003e;
@@ -1324,7 +1332,7 @@ body {
   }
   .acc-pre-center {
     color: #333 !important;
-    span {
+    p {
       color: #333 !important;
     }
   }

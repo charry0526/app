@@ -27,7 +27,8 @@
                 v-for="i in cardInfo"
                 :key="i.key">
               <div class="col-xs-3">
-                <img src="../../../static/img/pay.jpg"
+                <img v-if="isImage(i.bankName)"
+                     :src="require('@/assets/bank/' + i.bankName+ '.jpg')"
                      alt="pay">
               </div>
               <div class="col-xs-9">
@@ -54,6 +55,8 @@
             @click="addCard('edit')">Đổi thông tin tài khoản ngân hàng</span>
 
     </div>
+    <!-- <img :src="require('@/assets/bank/' + bankCol[0].image + '.jpg')" alt="" /> -->
+
   </div>
 </template>
 
@@ -62,15 +65,27 @@ import * as api from '@/axios/api'
 import { Toast } from 'mint-ui'
 
 export default {
-  components: {},
+
   props: {},
   data () {
     return {
+      bankShow: false,
       cardInfo: []
     }
   },
   watch: {},
-  computed: {},
+  computed: {
+    isImage () {
+      return function (imgurl) {
+        try {
+          require('@/assets/bank/' + imgurl + '.jpg')
+          return true
+        } catch (e) {
+          return false
+        }
+      }
+    }
+  },
   created () {
 
   },
@@ -88,6 +103,7 @@ export default {
     this.getCardDetail()
   },
   methods: {
+
     // 添加银行卡
     addCard (val) {
       if (val === 'edit') {
@@ -112,6 +128,7 @@ export default {
         this.cardInfo = []
         this.cardInfo.push(data.data)
         this.$store.state.bankInfo = data.data
+        console.log(this.cardInfo, 'this.cardInfo')
       } else {
         Toast(data.msg)
       }

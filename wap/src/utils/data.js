@@ -373,3 +373,33 @@ export const endorseList = [
   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 },
   { code: '1001', fxtime: '2023-04-15 00:00:00', lever: '1/5', names: 'test', newlist_id: 9, num: 1000, price: '8888', scprice: '8000', zt: 1, bzj: 1000 }
 ]
+
+export const bankCol = [
+  {
+    name: 'BIDV'
+  },
+  {
+    name: 'VietinBank'
+  },
+  {
+    name: 'vietcombank'
+  },
+  {
+    name: 'MB'
+  },
+  {
+    name: 'Techcombank'
+  }, {
+    name: 'Agribank'
+  }, {
+    name: 'ACB'
+  }, {
+    name: 'Sacombank'
+  }, {
+    name: 'HSBC'
+  }, {
+    name: 'DongA Bank'
+  }, {
+    name: 'Khác'
+  }
+]
