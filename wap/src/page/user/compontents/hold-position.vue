@@ -18,7 +18,7 @@
         <li v-for="(item) in list" :key="item.key">
           <div class="order-info-box">
             <div class="order-title">
-              <span @click="toDetail(item.stockCode)" class="main">{{item.stockName}}</span>
+              <span @click="toDetail(item)" class="main">{{item.stockName}}</span>
               <span class="secondary">({{item.stockCode}})</span>
               <span v-if="item.isNew==1" :class="item.isNew=='1'?'type type-up':'type type-down'">{{item.isNew=='1'?'ESOP':''}}</span>
               <!-- <span :class="item.orderDirection=='买涨'?'type type-up':'type type-down'">{{item.orderDirection=='买涨'?'买涨':'买跌'}}</span> -->
@@ -296,11 +296,18 @@ export default {
         }
       })
     },
-    toDetail (code) {
+    toDetail (val) {
+      // this.$router.push({
+      //   path: '/listdetail',
+      //   query: {
+      //     code: code
+      //   }
+      // })
       this.$router.push({
-        path: '/listdetail',
+        path: '/listdetail2',
         query: {
-          code: code
+          code: val.stockCode,
+          stock_type: val.stockPlate
         }
       })
     }

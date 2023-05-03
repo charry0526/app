@@ -74,13 +74,13 @@
                <!-- <p
                  class="account">{{$moneyDot(Number((1000000+603900902.40)/1000000).toFixed(2))}}M</p> -->
               <p v-if="this.$store.state.settingForm.indexDisplay && !this.$store.state.settingForm.futuresDisplay "
-                 class="account">{{$store.state.hide?'****':$moneyDot(Number(($store.state.userInfo.userAmt +$store.state.userInfo.userIndexAmt)/1000000).toFixed(2))}}</p>
+                 class="account">{{$store.state.hide?'****':$moneyDot(Number(($store.state.userInfo.userAmt +$store.state.userInfo.userIndexAmt)/1000000).toFixed(2))+'M'}}</p>
               <p v-else-if="!this.$store.state.settingForm.indexDisplay && this.$store.state.settingForm.futuresDisplay"
-                 class="account">{{$store.state.hide?'****':$moneyDot(Number(($store.state.userInfo.userAmt +$store.state.userInfo.userFuturesAmt)/1000000).toFixed(2))}}</p>
+                 class="account">{{$store.state.hide?'****':$moneyDot(Number(($store.state.userInfo.userAmt +$store.state.userInfo.userFuturesAmt)/1000000).toFixed(2))+'M'}}</p>
               <p v-else-if="!this.$store.state.settingForm.indexDisplay && !this.$store.state.settingForm.futuresDisplay"
-                 class="account">{{$moneyDot($store.state.hide?'****':Number($store.state.userInfo.userAmt/1000000).toFixed(2))}}</p>
+                 class="account">{{$store.state.hide?'****':$moneyDot(Number($store.state.userInfo.userAmt/1000000).toFixed(2))+'M'}}</p>
               <p v-else-if="this.$store.state.settingForm.indexDisplay && this.$store.state.settingForm.futuresDisplay"
-                 class="account">{{$moneyDot($store.state.hide?'****':Number(($store.state.userInfo.userAmt +$store.state.userInfo.userIndexAmt + $store.state.userInfo.userFuturesAmt)/1000000).toFixed(2))}}</p>
+                 class="account">{{$store.state.hide?'****':$moneyDot(Number(($store.state.userInfo.userAmt +$store.state.userInfo.userIndexAmt + $store.state.userInfo.userFuturesAmt)/1000000).toFixed(2))+'M'}}</p>
             </div>
           </span>
         </div>
@@ -88,7 +88,7 @@
           <div>{{$t("userAuth")}}:
             <p style="font-size: .35rem;">
             <!-- 303 900 902.40 -->
-            {{$moneyDot($store.state.hide?'****':$store.state.userInfo.userAmt)}}
+            {{$moneyDot($store.state.hide?'****':$store.state.userInfo.userAmt?$store.state.userInfo.userAmt+'VND':$store.state.userInfo.userAmt)}}
             </p>
           </div>
           <!-- <div>指数账户: <span>￥{{$store.state.hide?'****':$store.state.userInfo.userIndexAmt}}</span></div> -->
@@ -123,8 +123,8 @@
                    class="iconfont"
                    src="../../assets/ico/jia-red.png">
               <span :style="{color:$state.theme =='red'?'#000':'#fff'}">TÀI SẢN CỦA TÔI {{$t("userAuth")}}</span>
-              <span v-if="item.name == '指数'">({{$store.state.hide?'****':$store.state.userInfo.userIndexAmt}})</span>
-              <span v-if="item.name == '我的'">({{$store.state.hide?'****':$store.state.userInfo.userAmt}})</span>
+              <span v-if="item.name == '指数'">({{$store.state.hide?'****':$store.state.userInfo.userIndexAmt?$store.state.userInfo.userIndexAmt+'VND':$store.state.userInfo.userIndexAmt}})</span>
+              <span v-if="item.name == '我的'">({{$store.state.hide?'****':$store.state.userInfo.userAmt?$moneyDot($store.state.userInfo.userAmt)+'VND':$store.state.userInfo.userAmt}})</span>
               <span v-if="item.name == '期货'">({{$store.state.hide?'****':Number($store.state.userInfo.userFuturesAmt).toFixed(2)}})
               </span>
             </div>
@@ -143,13 +143,13 @@
                   <div class="name">{{$t("uesrTotle")}}</div>
                   <p v-if="item.name == '指数'"
                      class="number yellow">
-                    {{$store.state.hide?'****':$moneyDot($store.state.userInfo.userIndexAmt)}}.VND</p>
+                    {{$store.state.hide?'****':$moneyDot($store.state.userInfo.userIndexAmt)}}VND</p>
                   <p v-if="item.name == '我的'"
                      class="number yellow">
-                    {{$store.state.hide?'****':$moneyDot($store.state.userInfo.userAmt)}}.VND</p>
+                    {{$store.state.hide?'****':$moneyDot($store.state.userInfo.userAmt)}}VND</p>
                   <p v-if="item.name == '期货'"
                      class="number yellow">
-                    {{$store.state.hide?'****':$moneyDot(Number($store.state.userInfo.userFuturesAmt).toFixed(2))}}.VND</p>
+                    {{$store.state.hide?'****':$moneyDot(Number($store.state.userInfo.userFuturesAmt).toFixed(2))}}VND</p>
                 </div>
               </li>
               <li>
@@ -160,13 +160,13 @@
                   <div class="name">{{$t("AvailableFunds")}}</div>
                   <p v-if="item.name == '指数'"
                      class="number yellow">
-                    {{$store.state.hide?'****':$moneyDot($store.state.userInfo.enableIndexAmt)}}</p>
+                    {{$store.state.hide?'****':$moneyDot($store.state.userInfo.enableIndexAmt)+'VND'}}</p>
                   <p v-if="item.name == '我的'"
                      class="number yellow">
-                    {{$store.state.hide?'****':$moneyDot($store.state.userInfo.enableAmt)}}</p>
+                    {{$store.state.hide?'****':$moneyDot($store.state.userInfo.enableAmt)+'VND'}}</p>
                   <p v-if="item.name == '期货'"
                      class="number yellow">
-                    {{$store.state.hide?'****':$moneyDot($store.state.userInfo.enableFuturesAmt)}}</p>
+                    {{$store.state.hide?'****':$moneyDot($store.state.userInfo.enableFuturesAmt)+'VND'}}</p>
                 </div>
               </li>
               <li>
@@ -174,26 +174,26 @@
                 <div class="name">{{$t("FreezeMargin")}}</div>
                 <p v-if="item.name == '指数'"
                    class="number yellow">
-                  {{$store.state.hide?'****':$moneyDot($store.state.userInfo.allIndexFreezAmt)}}</p>
+                  {{$store.state.hide?'****':$moneyDot($store.state.userInfo.allIndexFreezAmt)+'VND'}}</p>
                 <p v-if="item.name == '我的'"
                    class="number yellow">
-                  {{$store.state.hide?'****':$moneyDot($store.state.userInfo.allFreezAmt)}}</p>
+                  {{$store.state.hide?'****':$moneyDot($store.state.userInfo.allFreezAmt)+'VND'}}</p>
                 <p v-if="item.name == '期货'"
                    class="number yellow">
-                  {{$store.state.hide?'****':$moneyDot($store.state.userInfo.allFuturesFreezAmt)}}</p>
+                  {{$store.state.hide?'****':$moneyDot($store.state.userInfo.allFuturesFreezAmt)+'VND'}}</p>
               </li>
               <li>
                 <i class="iconfont icon-yingkuixuanzhong"></i>
                 <div class="name">{{$t("TotalprofitAndLoss")}}</div>
                 <p v-if="item.name == '指数'"
-                   :class="$store.state.userInfo.allIndexProfitAndLose>0?'number red':$store.state.userInfo.allIndexProfitAndLose<0?'number green':'number'">
-                  {{$store.state.hide?'****':$moneyDot($store.state.userInfo.allIndexProfitAndLose)}}</p>
+                   :class="$store.state.userInfo.allIndexProfitAndLose<0?'number red':$store.state.userInfo.allIndexProfitAndLose>0?'number green':'number'">
+                  {{$store.state.hide?'****':$moneyDot($store.state.userInfo.allIndexProfitAndLose)+'VND'}}</p>
                 <p v-if="item.name == '我的'"
-                   :class="$store.state.userInfo.allProfitAndLose>0?'number red':$store.state.userInfo.allProfitAndLose<0?'number green':'number'">
-                  {{$store.state.hide?'****':$moneyDot($store.state.userInfo.allProfitAndLose)}}</p>
+                   :class="$store.state.userInfo.allProfitAndLose<0?'number red':$store.state.userInfo.allProfitAndLose>0?'number green':'number'">
+                  {{$store.state.hide?'****':$moneyDot($store.state.userInfo.allProfitAndLose)+'VND'}}</p>
                 <p v-if="item.name == '期货'"
-                   :class="$store.state.userInfo.allFuturesProfitAndLose>0?'number red':$store.state.userInfo.allFuturesProfitAndLose<0?'number green':'number'">
-                  {{$store.state.hide?'****':$moneyDot(Number($store.state.userInfo.allFuturesProfitAndLose).toFixed(2))}}</p>
+                   :class="$store.state.userInfo.allFuturesProfitAndLose<0?'number red':$store.state.userInfo.allFuturesProfitAndLose>0?'number green':'number'">
+                  {{$store.state.hide?'****':$moneyDot(Number($store.state.userInfo.allFuturesProfitAndLose).toFixed(2))+'VND'}}</p>
               </li>
               <!-- <li>
                 <i class="iconfont icon-dongjiezijin"></i>
@@ -1410,8 +1410,8 @@ body {
     justify-content: center;
     align-items: center;
   .row-icon{
-    width: 0.27rem;
-    height: 0.3rem;
+    width: 0.35rem;
+    height: 0.36rem;
     object-fit: contain;
     margin-bottom: 0.1rem;
   }

@@ -36,7 +36,7 @@
                              size="small"
                              type="danger"
                              @click="popUp(item)">
-                    Mua
+                     Ứng dụng
                   </mt-button>
                 </div>
               </td>
@@ -74,12 +74,12 @@
               </td> -->
               <td>
                 <div class="button-box">
-                <span v-if="item.zts!=1">{{item.zts==2?'Chưa thông qua':'Đang XD'}}</span>
+                <span v-if="item.zts!=1">{{item.zts==2?'Chưa thông qua':item.zts==4?'Hoàn thành':'Đang XD'}}</span>
                  <mt-button v-if="item.zts==1" class="btn-red pull-right"
                              size="small"
                              type="danger"
                              @click="toCash(item)">
-                    Bán
+                    Mua
                   </mt-button>
                 </div>
               </td>
