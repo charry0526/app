@@ -34,10 +34,10 @@
                   <b class="space">{{$moneyDot(item.buyOrderPrice)}}</b></span>
                 <span class="col-xs-4 text-center">
                   <!-- 数量 -->
-                   SL::<b class="space">{{$moneyDot(item.orderNum)}}</b></span>
+                   SL:<b class="space">{{$moneyDot(item.orderNum)}}</b></span>
                 <span class="col-xs-4 text-right">
                   <!-- 市值 -->
-                  Giá TT::{{$moneyDot(item.orderTotalPrice)}}</span>
+                  Giá TT:{{$moneyDot(item.orderTotalPrice)}}</span>
               </p>
               <p class="clearfix">
                 <span class="col-xs-4">
@@ -47,7 +47,7 @@
                 <span class="col-xs-4 text-center"></span>
                 <span class="col-xs-4 text-right">
                   <!-- 点差费 -->
-                  Chi phí khác::<b class="space">{{$moneyDot(item.orderStayFee)}}</b></span>
+                  Chi phí khác:<b class="space">{{$moneyDot(item.orderStayFee)}}</b></span>
               </p>
               <p class="clearfix">
                 <span class="col-xs-4">
