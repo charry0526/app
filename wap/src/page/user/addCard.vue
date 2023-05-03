@@ -53,6 +53,27 @@
         @cancel="bankShow = false"
       />
     </van-popup>
+    <van-popup v-model="payShow"
+               round
+               position="bottom">
+      <div class="section_1 flex-col">
+        <div class="box_15 flex-row justify-between">
+          <img @click="payShow=false"
+               class="icon_1"
+               referrerpolicy="no-referrer"
+               src="@/assets/img/cha.jpg" />
+        </div>
+        <div class="input_1 flex-col Input">
+          <van-field class="text_23 InputArea"
+                     placeholder="Vui lòng nhập ngân hàng"
+                     v-model="name"></van-field>
+        </div>
+        <button @click="sava"
+                class="button_1 flex-col">
+          <span class="text_24">Lưu</span>
+        </button>
+      </div>
+    </van-popup>
   </div>
 </template>
 
@@ -62,17 +83,22 @@ import { Toast } from 'mint-ui'
 import { isNull, bankNoReg, isName } from '@/utils/utils'
 import Picker from 'vant/lib/Picker'
 import Popup from 'vant/lib/popup'
+import Field from 'vant/lib/Field'
+
 import { bankCol } from '@/utils/data.js'
 export default {
   components: {
     // Picker,
     [Picker.name]: Picker,
-    [Popup.name]: Popup
+    [Popup.name]: Popup,
+    [Field.name]: Field
 
   },
   props: {},
   data () {
     return {
+      name: '',
+      payShow: false,
       bankShow: false,
       bankCol: bankCol,
       bankName: '',
@@ -93,11 +119,24 @@ export default {
     }
   },
   methods: {
+    sava () {
+      if (!this.name) {
+        return Toast('Vui lòng nhập')
+      }
+      this.bankName = this.name
+      this.payShow = !this.payShow
+      this.name = ''
+    },
     selectBank () {
-      console.log(111)
+      // this.payShow = !this.payShow
       this.bankShow = !this.bankShow
     },
     onConfirm ({name}, index) {
+      if (index == 10) {
+        this.bankShow = !this.bankShow
+        this.payShow = !this.payShow
+        return false
+      }
       this.bankName = name
       this.bankShow = !this.bankShow
     },
@@ -169,4 +208,81 @@ export default {
     // width:40%;
     // text-align: right;
   }
+  .section_1 {
+  background-color: rgba(255, 255, 255, 1);
+  padding: 1rem .2rem;
+  .box_15 {
+
+    .icon_1 {
+      position: absolute;
+      right: .3rem;
+      top: .3rem;
+      width: .4rem;
+      height: .4rem;
+    }
+  }
+  .input_1 {
+    background-color: rgba(255, 255, 255, 1);
+    // border-radius: 8px;
+    border: .03rem solid rgba(205, 205, 205, 1);
+    margin: .3rem 0 0 4px;
+    padding-left: .3rem;
+    width: 90%;
+    border-radius: .5rem;
+    // height: 1rem;
+    // padding-right: 25px;
+    margin:0 auto;
+    .text_23 {
+      overflow-wrap: break-word;
+      color: rgba(187, 187, 187, 1);
+      font-size: .2rem;
+      font-weight: NaN;
+      text-align: left;
+      white-space: nowrap;
+      // line-height: 40px;
+      // padding: 0 0 0 0px;
+      background: none;
+      border: 0;
+      flex: auto;
+    }
+    .van-field__body {
+      // height: 84px;
+    }
+  }
+  .button_1 {
+    width: 80%;
+    background-color: rgba(56, 129, 242, 1);
+    border-radius: .5rem;
+    border: .1rem solid rgba(56, 129, 242, 1);
+    margin: 1rem auto .2rem;
+    padding: .2rem;
+    .text_24 {
+      width: 100%;
+      overflow-wrap: break-word;
+      color: rgba(255, 255, 255, 1);
+      font-size: .2rem;
+      font-family: PingFangSC-Medium;
+      font-weight: 500;
+      text-align: center;
+      white-space: nowrap;
+      // line-height: 40px;
+    }
+  }
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.justify-between {
+  justify-content: space-between;
+}
+::v-deep .van-field__body {
+  height: 100% !important;
+}
+::v-deep .van-overlay {
+  z-index: 20010000 !important;
+}
+::v-deep .van-popup {
+  z-index: 20010000 !important;
+}
 </style>

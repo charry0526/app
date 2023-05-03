@@ -91,7 +91,7 @@
     </div>
     <div class="box-tab">
       <div class="tab-title">
-        <span class="circle"></span>{{$t("selectNumber")}}({{$t("strand")}})
+        <span class="circle"></span>{{$t("selectNumber")}}
         <!-- <div class="notify">最小购买股数{{Number(routeQuery.buyMinNum)}}股</div> -->
       </div>
       <div class="tab-con">
@@ -298,7 +298,7 @@ export default {
     this.routeQuery = this.$route.query
     console.log(this.routeQuery, 'this.routeQuery')
     this.selectNumber = this.routeQuery.buyMinNum
-    let items = { label: this.selectNumber + 'mắc cạn', value: this.selectNumber }
+    let items = { label: this.selectNumber, value: this.selectNumber }
     console.log(this.selectNumber, items)
     this.numberList.push(items)
     this.selectCycle = this.routeQuery.leverValue
@@ -459,14 +459,14 @@ export default {
 
       if (!this.$store.state.userInfo.idCard) {
         // Toast('您还未实名认证,请先实名认证了再下单')
-         Toast('Bạn chưa xác minh tên thật của mình, vui lòng xác minh tên thật của bạn trước khi đặt hàng')
+        Toast('Bạn chưa xác minh tên thật của mình, vui lòng xác minh tên thật của bạn trước khi đặt hàng')
 
         this.$router.push('/authentication')
         return
       }
       if (!this.agree) {
         // Toast('需同意合作协议才能交易!')
-         Toast('Cần đồng ý thỏa thuận hợp tác để giao dịch!')
+        Toast('Cần đồng ý thỏa thuận hợp tác để giao dịch!')
       } else if (isNull(this.selectNumber) && isNull(this.autoNumber)) {
         // Toast('请选择购买手数')
         Toast('Vui lòng chọn số lô cần mua')

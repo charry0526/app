@@ -203,13 +203,12 @@
             </ul>
           </div>
         </div>
-        <div v-show="item.isShow"
+        <!-- <div v-show="item.isShow"
              class="pcx"
              style="padding: 0.12rem 0.4rem 0.15rem;">
-          <!-- 强制平仓线为 ： 可用资金 + 冻结保证金 * 0.6 -->
+
           <div style="background:#1A1E29;line-height: .4rem;">
-            <!-- 您的{{item.name}}账户强制平仓线为-->
-            <!-- Của bạn{{item.name}}Dòng buộc thanh lý tài khoản là -->
+
             Giá trị thị trường CK
             <span v-if="item.name == '指数'"
                   style="font-weight:bold;font-size:0.26rem;">{{$store.state.hide?'****':$moneyDot(Number(($store.state.userInfo.enableIndexAmt + $store.state.userInfo.allIndexFreezAmt) * indexSettingInfo.forceSellPercent).toFixed(2))}} </span>
@@ -217,12 +216,9 @@
                   style="font-weight:bold;font-size:0.26rem;">{{$store.state.hide?'****':$moneyDot(Number(($store.state.userInfo.enableAmt + $store.state.userInfo.allFreezAmt) * settingInfo.forceStopPercent).toFixed(2))}} </span>
             <span v-if="item.name == '期货'"
                   style="font-weight:bold;font-size:0.26rem;">{{$store.state.hide?'****':$moneyDot(Number(($store.state.userInfo.enableFuturesAmt + $store.state.userInfo.allFuturesFreezAmt) * futuresSettingInfo.forceSellPercent).toFixed(2))}} </span>
-            <!-- 请实时注意账户风险 -->
-            <!-- <i @click="focePromptPopup = true"
-               ref="button"
-               class="iconfont icon-xinshou"></i> -->
+
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <!-- <div class="panel">
