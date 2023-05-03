@@ -16,9 +16,9 @@
         :infinite-scroll-disabled="loading"
         infinite-scroll-distance="0">
         <li v-for="(item) in list" :key="item.key">
-          <div class="order-info-box">
+          <div  @click="toDetail(item)" class="order-info-box">
             <div class="order-title">
-              <span @click="toDetail(item)" class="main">{{item.stockName}}</span>
+              <span class="main">{{item.stockName}}</span>
               <span class="secondary">({{item.stockCode}})</span>
               <span v-if="item.isNew==1" :class="item.isNew=='1'?'type type-up':'type type-down'">{{item.isNew=='1'?'ESOP':''}}</span>
               <!-- <span :class="item.orderDirection=='买涨'?'type type-up':'type type-down'">{{item.orderDirection=='买涨'?'买涨':'买跌'}}</span> -->
