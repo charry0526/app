@@ -29,7 +29,7 @@ module.exports = {
         // target: 'https://pc.zsycyy.com',
         // target: 'http://www.shehua56.com',
         target: 'http://8.213.195.188:8080/stock2c1',
-        // target: 'http://localhost:8080',
+        // target: 'http://8.213.195.188:8080',
         secure: false,
         changeOrigin: true,
         pathRewrite: {

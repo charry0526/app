@@ -95,7 +95,7 @@ const uesr = {
   recharge: 'Nạp tiền', // 充值
   withdraw: 'Rút tiền', // 提现
   AvailableFunds: 'SỐ DƯ KHẢ DỤNG', // 可用资金
-  FreezeMargin: 'TỔNG SỐ KÝ QUỸ', // 冻结保证金
+  FreezeMargin: 'Tổng số ký quỹ', // 冻结保证金
   Verified: 'Đã xác minh', // 实名认证
   examinationPassed: 'Kiểm tra thông qua', // 审核通过
   NotReviewed: 'Không được xem xét', // 未审核

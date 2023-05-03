@@ -23,7 +23,7 @@
               <div class="col-xs-4">总金额:34558.000</div>
           </div> -->
           <div class="pro clearfix">
-            <div class="col-xs-12 text-right">xây dựng thời gian:{{new Date(item.addTime) | timeFormat}}</div>
+            <div class="col-xs-12 text-right">Thời gian:{{new Date(item.addTime) | timeFormat}}</div>
 
             <!-- <div class="col-xs-12 text-right">生成时间:{{new Date(item.addTime) | timeFormat}}</div> -->
           </div>
