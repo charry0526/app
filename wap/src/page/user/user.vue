@@ -553,8 +553,6 @@ export default {
       let data = await api.getProductSetting()
       if (data.status === 0) {
         this.$store.state.settingForm = data.data
-        console.log(this.account, data.data.indexDisplay, 'data.data')
-        return false
         // if(this.$store.state.userInfo.accountType != 1){
         this.account[0].isDisplay = data.data.stockDisplay
         // this.account[1].isDisplay = data.data.indexDisplay
