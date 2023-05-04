@@ -37,21 +37,26 @@
                             </li> -->
             <li>
               <p class="title">Tham chiếu</p>
-              <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
+              <!-- <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
+                {{Number(detail.open_px/1000).toFixed(2)}}</p> -->
+               <p style="color:#C4BA4F" class="number">
                 {{Number(detail.open_px/1000).toFixed(2)}}</p>
 
             </li>
             <li>
               <p class="title">Trần</p>
-              <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
+              <!-- <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
+                {{Number(detail.today_max/1000).toFixed(2)}}</p> -->
+               <p style="color:#B955CA" class="number">
                 {{Number(detail.today_max/1000).toFixed(2)}}</p>
 
             </li>
             <li>
               <p class="title">Sàn</p>
-              <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
+              <!-- <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
+                {{Number(detail.today_min/1000).toFixed(2)}}</p> -->
+             <p style="color:#2AB0B2" class="number">
                 {{Number(detail.today_min/1000).toFixed(2)}}</p>
-
             </li>
           </ul>
         </div>

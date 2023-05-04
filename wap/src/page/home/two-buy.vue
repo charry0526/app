@@ -19,21 +19,33 @@
           <ul class="price-detail text-center clearfix grup-ul">
             <li>
               <!-- <p class="title"></p> -->
-              <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
+              <!-- <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
                 <span class="title">Tham chiếu</span>
                 {{$moneyDot(Number(detail.open_px).toFixed(2))}}
+              </p> -->
+               <p style="color:#C4BA4F" class="number">
+                <span class="title">Tham chiếu</span>
+                {{Number(detail.open_px).toFixed(2)}}
               </p>
             </li>
             <li style="text-align:left">
-              <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
+              <!-- <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
                 <span class="title ">Trần</span>
                 {{$moneyDot(Number(detail.today_max).toFixed(2))}}
+              </p> -->
+                <p style="color:#B955CA" class="number">
+                <span class="title ">Trần</span>
+                {{Number(detail.today_max).toFixed(2)}}
               </p>
             </li>
             <li>
-              <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
+              <!-- <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
                 <span class="title">Sàn</span>
                 {{$moneyDot(Number(detail.today_min).toFixed(2))}}
+              </p> -->
+                <p style="color:#2AB0B2" class="number">
+                <span class="title">Sàn</span>
+                {{Number(detail.today_min).toFixed(2)}}
               </p>
             </li>
             <!-- <li> -->
