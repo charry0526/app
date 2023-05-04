@@ -86,7 +86,7 @@
         </div>
         <div class="acc-pre-center">
           <div>{{$t("userAuth")}}:
-            <p style="font-size: .35rem;">
+            <p style="margin-top:.3rem;font-size: .35rem;">
             <!-- 303 900 902.40 -->
             {{$moneyDot($store.state.hide?'****':$store.state.userInfo.userAmt?$store.state.userInfo.userAmt+'VND':$store.state.userInfo.userAmt)}}
             </p>
