@@ -15,24 +15,24 @@
             <span style="margin-left: .1rem;">{{$moneyDot(Number(detail.hcrate/(detail.nowPrice-detail.hcrate)*100).toFixed(2))}}%</span>
           </p>
         </div>
-        <div class="pull-right hangqin-right col-xs-8">
-          <ul class="price-detail text-center">
+        <div style="padding-left: .5rem;" class="pull-right hangqin-right col-xs-8">
+          <ul class="price-detail text-center clearfix grup-ul">
             <li>
               <!-- <p class="title"></p> -->
               <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
-                <span class="title">O</span>
+                <span class="title">Tham chiếu</span>
                 {{$moneyDot(Number(detail.open_px).toFixed(2))}}
               </p>
             </li>
             <li style="text-align:left">
               <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
-                <span class="title ">H</span>
+                <span class="title ">Trần</span>
                 {{$moneyDot(Number(detail.today_max).toFixed(2))}}
               </p>
             </li>
             <li>
               <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
-                <span class="title">L</span>
+                <span class="title">Sàn</span>
                 {{$moneyDot(Number(detail.today_min).toFixed(2))}}
               </p>
             </li>
@@ -166,7 +166,7 @@
     </div>
     <div class="footer-btn">
       <div class="total">
-        <p class="pay">{{$t("paybond")}}<span class="protem">{{total?total:0}}</span></p>
+        <p class="pay">{{$t("paybond")}}<span class="protem">{{total?$moneyDot(total):0}}</span></p>
         <p class="account">({{$t("accountbalance")}}:{{$moneyDot($store.state.userInfo.enableAmt)}})</p>
         <!-- 元 -->
       </div>
@@ -665,7 +665,8 @@ export default {
 
     .price-detail {
       li {
-        width: 60%;
+        margin-left: .2rem;
+        // width: 60%;
         float: left;
         margin-bottom: 0.15rem;
         margin-top: 0.15rem;
@@ -674,7 +675,7 @@ export default {
           background-color: #2D2E3B;
         }
         &:nth-child(odd) {
-          width: 40%;
+          // width: 40%;
           text-align: left;
         }
       }
@@ -705,7 +706,7 @@ export default {
     }
   }
   .hangqin-right{
-    padding: 0 .3rem 0 0.1rem;
+    // padding: 0 .3rem 0 0.1rem;
   }
   .box-tab {
     margin :0.15rem .3rem;
@@ -825,5 +826,10 @@ export default {
         .pull-right{
           text-align: right;
         }
+    }
+    .grup-ul{
+      display: flex;
+      flex-wrap: wrap;
+
     }
 </style>

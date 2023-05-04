@@ -16,23 +16,23 @@
           </p>
         </div>
         <div class="pull-right hangqin-right col-xs-8">
-          <ul class="price-detail text-center">
+          <ul class="price-detail text-center clearfix grup-ul">
             <li>
               <!-- <p class="title"></p> -->
               <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
-                <span class="title">O</span>
+                <span class="title">Tham chiếu</span>
                 {{Number(detail.open_px).toFixed(2)}}
               </p>
             </li>
             <li style="text-align:left">
               <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
-                <span class="title ">H</span>
+                <span class="title ">Trần</span>
                 {{Number(detail.today_max).toFixed(2)}}
               </p>
             </li>
             <li>
               <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
-                <span class="title">L</span>
+                <span class="title">Sàn</span>
                 {{Number(detail.today_min).toFixed(2)}}
               </p>
             </li>
@@ -682,7 +682,8 @@ body {
 
   .price-detail {
     li {
-      width: 60%;
+      margin-left: .2rem;
+      // width: 60%;
       float: left;
       margin-bottom: 0.15rem;
       margin-top: 0.15rem;
@@ -691,7 +692,7 @@ body {
         background-color: #2d2e3b;
       }
       &:nth-child(odd) {
-        width: 40%;
+        // width: 40%;
         text-align: left;
       }
     }
@@ -722,7 +723,7 @@ body {
   }
 }
 .hangqin-right {
-  padding: 0 0.3rem 0 0.1rem;
+  // padding: 0 0.3rem 0 0;
 }
 .box-tab {
   margin: 0.15rem 0.3rem;
@@ -834,4 +835,9 @@ body {
   width: 2rem;
   padding: 0 .2rem;
 }
+ .grup-ul{
+      display: flex;
+      flex-wrap: wrap;
+
+    }
 </style>

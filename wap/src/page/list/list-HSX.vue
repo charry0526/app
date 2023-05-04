@@ -56,7 +56,7 @@
               <li class="li-base">
                 <span v-if="item.hcrate == 0" class="yellow">-</span>
                 <span v-else-if="item.hcrate < 0" class="red"> {{item.hcrate?item.hcrate/1000:'0'}}  {{Number(item.hcrate/(item.nowPrice-item.hcrate)*100).toFixed(2)}}%</span>
-                <span v-else class="green"> {{item.hcrate?item.hcrate/1000:'0'}} {{Number(item.hcrate/(item.nowPrice-item.hcrate)*100).toFixed(2)}}%</span>
+                <span v-else class="green"> {{item.hcrate?(item.hcrate/1000).toFixed(2):'0'}} {{Number(item.hcrate/(item.nowPrice-item.hcrate)*100).toFixed(2)}}%</span>
 
               </li>
               <!-- <li class="li-base no-bold">

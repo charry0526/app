@@ -36,19 +36,19 @@
                                     {{detail.preclose_px}}</p>
                             </li> -->
             <li>
-              <p class="title">O</p>
+              <p class="title">Tham chiếu</p>
               <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
                 {{Number(detail.open_px/1000).toFixed(2)}}</p>
 
             </li>
             <li>
-              <p class="title">H</p>
+              <p class="title">Trần</p>
               <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
                 {{Number(detail.today_max/1000).toFixed(2)}}</p>
 
             </li>
             <li>
-              <p class="title">L</p>
+              <p class="title">Sàn</p>
               <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
                 {{Number(detail.today_min/1000).toFixed(2)}}</p>
 
