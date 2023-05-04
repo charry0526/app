@@ -43,7 +43,7 @@
                   <b class="space">{{$moneyDot(item.orderNum)}}</b></span>
                 <span class="col-xs-4 text-right">
                   <!-- 市值 -->
-                  Giá thị trường:
+                  Hành tiền:
                   <b class="space">{{$moneyDot(item.orderTotalPrice)}}</b></span>
               </p>
               <p class="clearfix">
@@ -82,7 +82,7 @@
                   :
                     <b v-if="item.now_price == 0">-</b>
                     <b v-else
-                       :class="item.allProfitAndLose<0?'space red':item.allProfitAndLose>=0?'space':'space green'">{{$moneyDot(item.allProfitAndLose)}}</b>
+                       :class="item.allProfitAndLose<0?'space red':item.allProfitAndLose==0?'space':'space green'">{{$moneyDot(item.allProfitAndLose)}}</b>
                 </span>
               </p>
             </div>
@@ -91,7 +91,7 @@
                 <b v-if="item.buyOrderTime">{{new Date(item.buyOrderTime) | timeFormat}}</b>
                 <b v-else></b>
               </div>
-              <div @click="sell(item.positionSn)" class="foot-btn">
+              <div @click.stop="sell(item.positionSn)" class="foot-btn">
                 <i class='font-icon'></i>
                 <!-- 我要平仓 -->
                 Bán ra
@@ -275,13 +275,12 @@ export default {
       // }
 
       // MessageBox.confirm('Bạn có chắc chắn muốn bán ra?')
-      MessageBox({
-        title: '',
-        message: 'Bạn có chắc chắn muốn bán ra?',
-        showCancelButton: true,
-        confirmButtonText: 'Xác nhận',
-        cancelButtonText: 'Hủy bỏ'
-      }).then(async action => {
+      // MessageBox.confirm('Bạn có chắc chắn muốn bán ra?', '', {confirmButtonText: 'Xác nhận',cancelButtonText: 'Hủy bỏ'}).then(async action => {
+      //   console.log('我确定了')
+      // })
+
+      // return false
+      MessageBox.confirm('Bạn có chắc chắn muốn bán ra?', '', {confirmButtonText: 'Xác nhận', cancelButtonText: 'Hủy bỏ'}).then(async action => {
         let opt = {
           positionSn: val
         }

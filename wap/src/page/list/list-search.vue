@@ -62,7 +62,7 @@
         {{$t("allLoaded")}}
       </div>
       <div v-show="!hasSearch" class="load-all text-center">
-        <p class="text">Nhập mã chứng khoán hoặc chính tả đơn giản mà bạn muốn truy vấn</p>
+        <p class="text">Vui lòng nhập mã chứng khoán</p>
       </div>
     </mt-search>
     <foot></foot>
