@@ -9,7 +9,7 @@
       <div class="clearfix">
         <div class="pull-left hangqin-left col-xs-4">
           <p :class="detail.hcrate == 0?'price yellow':detail.hcrate > 0?'price green':detail.hcrate<0?'price red':''">
-            {{$moneyDot(Number(detail.nowPrice).toFixed(2))}}</p>
+            {{$moneyDot((Number(detail.nowPrice)/1000).toFixed(2))}}</p>
           <p :class="detail.hcrate == 0?'gain yellow':detail.hcrate > 0?'gain green':detail.hcrate<0?'gain red':''">
             <span>{{$moneyDot(Number(detail.hcrate).toFixed(2))}}</span>
             <span style="margin-left: .1rem;">{{$moneyDot(Number(detail.hcrate/(detail.nowPrice-detail.hcrate)*100).toFixed(2))}}%</span>
@@ -25,7 +25,7 @@
               </p> -->
                <p style="color:#C4BA4F" class="number">
                 <span class="title">Tham chiếu</span>
-                {{Number(detail.open_px).toFixed(2)}}
+                {{(Number(detail.open_px)/1000).toFixed(2)}}
               </p>
             </li>
             <li style="text-align:left">
@@ -35,7 +35,7 @@
               </p> -->
                 <p style="color:#B955CA" class="number">
                 <span class="title ">Trần</span>
-                {{Number(detail.today_max).toFixed(2)}}
+                {{(Number(detail.today_max)/1000).toFixed(2)}}
               </p>
             </li>
             <li>
@@ -45,7 +45,7 @@
               </p> -->
                 <p style="color:#2AB0B2" class="number">
                 <span class="title">Sàn</span>
-                {{Number(detail.today_min).toFixed(2)}}
+                {{(Number(detail.today_min)/1000).toFixed(2)}}
               </p>
             </li>
             <!-- <li> -->
