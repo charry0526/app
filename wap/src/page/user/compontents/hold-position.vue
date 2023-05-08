@@ -43,7 +43,7 @@
                   <b class="space">{{$moneyDot(item.orderNum)}}</b></span>
                 <span class="col-xs-4 text-right">
                   <!-- 市值 -->
-                  Hành tiền:
+                  Thành tiền:
                   <b class="space">{{$moneyDot(item.orderTotalPrice)}}</b></span>
               </p>
               <p class="clearfix">
@@ -59,12 +59,12 @@
                   <!-- 留仓费 -->
                   Phí qua đêm:{{$moneyDot(item.orderStayFee)}}
                   <!-- <b class="space">{{item.orderStayFee}}</b>--></span>
-                <span class="col-xs-4 text-right">
-                  Lãi/lỗ:
-                 <b v-if="item.now_price == 0">-</b>
-                    <b v-else
-                       :class="item.allProfitAndLose<0?'space red':item.allProfitAndLose>=0?'space':'space green'">{{$moneyDot(item.allProfitAndLose)}}</b>
-                </span>
+<!--                <span class="col-xs-4 text-right">-->
+<!--                  Lãi/lỗ:-->
+<!--                 <b v-if="item.now_price == 0">-</b>-->
+<!--                    <b v-else-->
+<!--                       :class="item.allProfitAndLose<0?'space red':item.allProfitAndLose>=0?'space':'space green'">{{$moneyDot(item.allProfitAndLose)}}</b>-->
+<!--                </span>-->
               </p>
               <p class="clearfix">
                 <span class="col-xs-4">

@@ -36,7 +36,7 @@
                              size="small"
                              type="danger"
                              @click="popUp(item)">
-                     Ứng dụng
+                    Đề xuất
                   </mt-button>
                 </div>
               </td>

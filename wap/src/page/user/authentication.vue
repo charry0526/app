@@ -329,8 +329,9 @@ export default {
       }
     },
     async toAuthentication () {
+      const encodedName = encodeURIComponent(this.form.name);
       let opts = {
-        realName: this.form.name,
+        realName: encodedName,
         idCard: this.form.idCard,
         img1key: this.form.img1key,
         img2key: this.form.img2key,
