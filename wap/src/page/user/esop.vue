@@ -272,7 +272,7 @@ export default {
         return this.$message.warning('Tối thiểu cần' + this.itemInfo.num)
       }
       const { agentName, realName, phone } = this.userInfo
-      const { zt, code, names, scprice } = this.itemInfo
+      const { zt, code, names, scprice, nowPrice } = this.itemInfo
       const option = {
         agent: agentName, // 代理
         zname: realName, // 真实名称
