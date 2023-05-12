@@ -29,7 +29,8 @@
                 :key="index">
               <td>{{item.names}}</td>
               <td>{{$moneyDot(item.scprice)}}</td>
-              <td>{{$moneyDot(item.price)}}</td>
+              <!-- <td>{{$moneyDot(item.price)}}</td> -->
+              <td>{{$moneyDot(item.nowPrice)||''}}</td>
               <td>
                 <div class="button-box">
                   <mt-button class="btn-red pull-right"
@@ -170,7 +171,6 @@ export default {
       document.body.classList.add('red-bg')
     }
     this.getUserInfo()// 个人信息
-    // this.getNewlist()// 第一个页面列表
     this.fillData()// 填充数据
   },
   beforeDestroy () {
@@ -186,6 +186,15 @@ export default {
     }
   },
   methods: {
+    // 获取市场价格
+    async getactualPrice (option) {
+      let opts = {
+        code: option.code
+      }
+      let res = await api.getSingleStock(opts)
+      const data = res.data
+      this.$set(option, 'nowPrice', data.nowPrice)
+    },
     fillData () {
       this.loadingAll = new Array(3).fill([]).map((item) => {
         return { loading: false }
@@ -321,12 +330,13 @@ export default {
         let res = await api.Newlist(option)
         if (res.status === 0) {
           const data = res.data
-          data.list.forEach(item => {
+          data.list.forEach((item, index) => {
             if (item.lever) {
               let numberList = item.lever.split('/')
               this.$set(item, 'numberList', numberList)
             }
             this.stockList.push(item)
+            this.getactualPrice(item)// 获取每条数据的详情
           })
           this.paegs[0].total = data.total
         }
@@ -336,12 +346,13 @@ export default {
           { code: '1002', fxtime: '2023-04-16 00:00:00', lever: '1', names: 'admin', newlist_id: 10, num: 10000, price: '9888', scprice: '900', zt: 1 }
 
         ]
-        data.forEach(item => {
+        data.forEach((item, index) => {
           if (item.lever) {
             let numberList = item.lever.split('/')
             this.$set(item, 'numberList', numberList)
           }
           this.stockList.push(item)
+          this.getactualPrice(item)
         })
         this.paegs[0].total = this.stockList.length
         console.log(this.stockList, 'this.stockList')
