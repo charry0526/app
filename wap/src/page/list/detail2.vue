@@ -25,7 +25,7 @@
           <p :class="detail.hcrate == 0?' yellow':detail.hcrate > 0?' green':detail.hcrate<0?' red':''"
              style="width:50%;float:left;">{{detail.hcrate/1000}}</p>
           <p :class="detail.hcrate == 0?' yellow':detail.hcrate > 0?' green':detail.hcrate<0?' red':''"
-             style="width:50%;float:left;">{{Number(detail.hcrate/(detail.nowPrice-detail.hcrate)*100).toFixed(2)}}%</p>
+             style="width:50%;float:left;">{{Number(detail.hcratePercentage).toFixed(2)}}%</p>
           </p>
         </div>
         <div class="pull-right col-xs-5">

@@ -12,7 +12,7 @@
             {{$moneyDot((Number(detail.nowPrice)/1000).toFixed(2))}}</p>
           <p :class="detail.hcrate == 0?'gain yellow':detail.hcrate > 0?'gain green':detail.hcrate<0?'gain red':''">
             <span>{{$moneyDot(Number(detail.hcrate).toFixed(2))}}</span>
-            <span style="margin-left: .1rem;">{{$moneyDot(Number(detail.hcrate/(detail.nowPrice-detail.hcrate)*100).toFixed(2))}}%</span>
+            <span style="margin-left: .1rem;">{{$moneyDot(Number(detail.hcratePercentage).toFixed(2))}}%</span>
           </p>
         </div>
         <div style="padding-left: .5rem;" class="pull-right hangqin-right col-xs-8">
