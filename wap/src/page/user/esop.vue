@@ -193,7 +193,7 @@ export default {
     // 获取市场价格
     async getactualPrice (option) {
       let opts = {
-        code: option.code
+        code: option.names
       }
       let res = await api.getSingleStock(opts)
       const data = res.data
