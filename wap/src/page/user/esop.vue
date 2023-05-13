@@ -28,9 +28,8 @@
             <tr v-for="(item,index) in stockList"
                 :key="index">
               <td>{{item.names}}</td>
-              <td>{{$moneyDot(item.scprice)}}</td>
-              <!-- <td>{{$moneyDot(item.price)}}</td> -->
               <td>{{$moneyDot(item.nowPrice)||''}}</td>
+              <td>{{$moneyDot(item.price)}}</td>
               <td>
                 <div class="button-box">
                   <mt-button class="btn-red pull-right"
@@ -181,12 +180,8 @@ export default {
   },
   computed: {
     deposit () {
-      const { price, nowPrice } = this.itemInfo
-      if (nowPrice) {
-        return this.selectNumber * nowPrice / this.leverValue
-      } else {
-        return this.selectNumber * price / this.leverValue
-      }
+      const { price } = this.itemInfo
+      return this.selectNumber * price / this.leverValue
     }
   },
   methods: {
@@ -272,7 +267,7 @@ export default {
         return this.$message.warning('Tối thiểu cần' + this.itemInfo.num)
       }
       const { agentName, realName, phone } = this.userInfo
-      const { zt, code, names, scprice, nowPrice } = this.itemInfo
+      const { zt, code, names, scprice, price } = this.itemInfo
       const option = {
         agent: agentName, // 代理
         zname: realName, // 真实名称
@@ -282,9 +277,10 @@ export default {
         // codes: code, // 新股代码
         nums: this.selectNumber, // 数量
         bzj: this.deposit, // 保证金
+        // price: price,
         gg: this.leverValue, // 杠杆
-        // sz: Number(this.selectNumber) * Number(price), // 市值
-        sz: Number(this.selectNumber) * Number(nowPrice), // 市值
+        sz: Number(this.selectNumber) * Number(price), // 市值
+        // scprice: scprice,
         mrsj: formatTime() // 提交日期
       }
       try {
