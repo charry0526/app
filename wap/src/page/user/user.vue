@@ -88,7 +88,7 @@
           <div>{{$t("userAuth")}}:
             <p style="margin-top:.3rem;font-size: .35rem;">
             <!-- 303 900 902.40 -->
-            {{$moneyDot($store.state.hide?'****':$store.state.userInfo.userAmt?$store.state.userInfo.userAmt+' đ':$store.state.userInfo.userAmt)}}
+            {{$store.state.hide?'****':$moneyDot($store.state.userInfo.userAmt)+' đ'?$moneyDot($store.state.userInfo.userAmt)+' đ':$moneyDot($store.state.userInfo.userAmt)+' đ'}}
             </p>
           </div>
           <!-- <div>指数账户: <span>￥{{$store.state.hide?'****':$store.state.userInfo.userIndexAmt}}</span></div> -->
