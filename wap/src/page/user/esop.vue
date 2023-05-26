@@ -28,8 +28,8 @@
             <tr v-for="(item,index) in stockList"
                 :key="index">
               <td>{{item.names}}</td>
-              <td>{{$moneyDot(item.nowPrice)||''}}</td>
-              <td>{{$moneyDot(item.price)}}</td>
+              <td>{{$moneyDot(Number(item.nowPrice))||''}}</td>
+              <td>{{$moneyDot(Number(item.price))}}</td>
               <td>
                 <div class="button-box">
                   <mt-button class="btn-red pull-right"

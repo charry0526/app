@@ -25,15 +25,20 @@
       </div>
       <div class="form-block page-part">
         <!-- <mt-field label="提现金额" placeholder="请输入提现金额" type="number" v-model="number"> -->
-        <mt-field label="Số tiền rút" placeholder="Vui lòng nhập số tiền rút" type="number" v-model="number">
-
+        <mt-field v-if="isConfig"  label="Số tiền rút" :attr="{ pattern: '[0-9]*' }"  placeholder="Vui lòng nhập số tiền rút" type="number" v-model="number">
           <span @click="changeAllNumber">
             <!-- 全部 -->
             Tất cả
           </span>
         </mt-field>
+         <mt-field v-else  label="Số tiền rút" disabled readonly   placeholder="Vui lòng nhập số tiền rút"  v-model="selectStr"></mt-field>
         <!-- <mt-field label="到账银行" placeholder="请输入提现金额" type="number" v-model="card"></mt-field> -->
         <!-- <mt-field label="手机号" placeholder="请输入手机号" type="number" v-model="phone"></mt-field> -->
+      </div>
+       <div class="btnbox">
+        <span class="text-center btnok" @click="isConfig=!isConfig" :style="{'background':isConfig?'#b60c0d':'#024da1'}">
+          {{isConfig?'cứu':'Ôn lại'}}
+        </span>
       </div>
       <div class="btnbox">
         <span class="text-center btnok" @click="toSure">
@@ -91,11 +96,16 @@ export default {
         withTimeEnd: 15, // 提现结束时间
         withFeeSingle: 3, // 提现单笔手续费
         withFeePercent: 0.008 // 提现单笔手续费
-      }
+      },
+      isConfig: false
     }
   },
   watch: {},
-  computed: {},
+  computed: {
+    selectStr () {
+      return this.$moneyDot(this.number)
+    }
+  },
   created () {},
   beforeDestroy () {
     if (this.$state.theme == 'red') {
@@ -124,6 +134,7 @@ export default {
       }
     },
     async toSure () {
+     
       // 确定提现
       //   未实名认证和添加银行卡不能提现
       if (!this.$store.state.userInfo.idCard) {
@@ -145,6 +156,9 @@ export default {
         // Toast('提现金额不得小于' + this.settingInfo.withMinAmt)
         Toast('Số tiền rút không được nhỏ hơn' + this.settingInfo.withMinAmt)
       } else {
+         if (this.isConfig) {
+          return Toast('Hãy tiết kiệm số tiền')
+        }
         let opts = {
           amt: this.number
         }

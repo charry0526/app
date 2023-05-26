@@ -84,14 +84,14 @@ export default {
         console.log('当前浏览器不支持ononline属性')
       }
 
-      if ('onoffline' in window) {
-        window.addEventListener('offline', () => {
-          this.network = false
-          this.$message.error('mạng bị ngắt kết nối')
-        })
-      } else {
-        console.log('当前浏览器不支持onoffline属性')
-      }
+    //   if ('onoffline' in window) {
+    //     window.addEventListener('offline', () => {
+    //       this.network = false
+    //       this.$message.error('mạng bị ngắt kết nối')
+    //     })
+    //   } else {
+    //     console.log('当前浏览器不支持onoffline属性')
+    //   }
     }
   }
 }

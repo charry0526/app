@@ -21,6 +21,7 @@ import en from './i18n/en'
 import '../static/css/public2.css'
 // import VueTouch from 'vue-touch'
 import 'vant/lib/index.css'
+import * as api from '@/axios/api'
 
 Vue.use(animated)
 Vue.use(ElementUI)
@@ -50,13 +51,17 @@ Vue.prototype.$setgoindex = function () {
   if (window.history.length <= 1) {
     if (location.href.indexOf('?') === -1) {
       window.location.href = location.href + '?goindex=true'
-    } else if (location.href.indexOf('?') !== -1 && location.href.indexOf('goindex') === -1) {
+    } else if (
+      location.href.indexOf('?') !== -1 &&
+      location.href.indexOf('goindex') === -1
+    ) {
       window.location.href = location.href + '&goindex=true'
     }
   }
 }
 Vue.prototype.setCookie = function (name, value, day) {
-  if (day !== 0) { // 当设置的时间等于0时，不设置expires属性，cookie在浏览器关闭后删除
+  if (day !== 0) {
+    // 当设置的时间等于0时，不设置expires属性，cookie在浏览器关闭后删除
     var curDate = new Date()
     var curTamp = curDate.getTime()
     var curWeeHours = new Date(curDate.toLocaleDateString()).getTime() - 1
@@ -64,7 +69,8 @@ Vue.prototype.setCookie = function (name, value, day) {
     var leftTamp = 24 * 60 * 60 * 1000 - passedTamp
     var leftTime = new Date()
     leftTime.setTime(leftTamp + curTamp)
-    document.cookie = name + '=' + escape(value) + ';expires=' + leftTime.toGMTString()
+    document.cookie =
+      name + '=' + escape(value) + ';expires=' + leftTime.toGMTString()
   } else {
     document.cookie = name + '=' + escape(value)
   }
@@ -102,7 +108,12 @@ Vue.prototype.$moneyDot = function (value) {
   let suffix = ''
 
   // console.log(isNaN(Number(value)), value)
-  if (value && value !== 'NULL' && value !== 'undefined' && isNaN(Number(value))) {
+  if (
+    value &&
+    value !== 'NULL' &&
+    value !== 'undefined' &&
+    isNaN(Number(value))
+  ) {
     return value
   } else if (!value) {
     return '-'
@@ -110,7 +121,9 @@ Vue.prototype.$moneyDot = function (value) {
     let pSuffix = ''
     value = value.toString()
     let intPart = Math.floor(Math.abs(Number(value))) // 获取整数部分
-    let intPartFormat = intPart.toString().replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') // 将整数部分逢三一断
+    let intPartFormat = intPart
+      .toString()
+      .replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') // 将整数部分逢三一断
     intPartFormat = pSuffix + intPartFormat
     let floatPart = '' // 预定义小数部分
     let value2Array = value.split('.')
@@ -130,7 +143,9 @@ Vue.prototype.$moneyDot = function (value) {
         if (Number(value) >= 0) {
           return intPartFormat + '.' + (floatPart + suffix).substring(0, 2)
         } else {
-          return '-' + intPartFormat + '.' + (floatPart + suffix).substring(0, 2)
+          return (
+            '-' + intPartFormat + '.' + (floatPart + suffix).substring(0, 2)
+          )
         }
       }
     } else {
@@ -140,6 +155,7 @@ Vue.prototype.$moneyDot = function (value) {
         return '-' + intPartFormat + floatPart + suffix
       }
     }
+
   }
 }
 // router.beforeEach((to, from, next) => {
@@ -173,6 +189,41 @@ Vue.prototype.$moneyDot = function (value) {
 router.beforeEach((to, from, next) => {
   store.state.select = to.path
   document.title = to.meta.title
+  if (navigator.onLine) {
+    // ElementUI.Message({
+    //   message: 'mạng trở lại bình thường',
+    //   type: 'success'
+    // })
+  } else {
+    ElementUI.Message({
+      message: 'mạng bị ngắt kết nối',
+      type: 'error'
+    })
+  }
+  // if ('addEventListener' in window) {
+  //   if ('ononline' in window) {
+
+  //     // 当前浏览器支持ononline属性
+  //     window.addEventListener('online', () => {
+  //       ElementUI.Message({
+  //         message: 'mạng trở lại bình thường',
+  //         type: 'success'
+  //       })
+  //     })
+  //   } else {
+  //     console.log('当前浏览器不支持ononline属性')
+  //   }
+  //   if ('onoffline' in window) {
+  //     window.addEventListener('offline', () => {
+  //       ElementUI.Message({
+  //         message: 'mạng bị ngắt kết nối',
+  //         type: 'error'
+  //       })
+  //     })
+  //   } else {
+  //     console.log('当前浏览器不支持onoffline属性')
+  //   }
+  // }
   // if (!to.query.url && from.query.url) {
   //   to.query.url = from.query.url
   // }

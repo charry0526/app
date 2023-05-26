@@ -38,7 +38,14 @@
              Chọn mệnh giá(VND)
           </p>
           <div class="box-tab">
-            <input v-model="selectNumber" class="btn-default" type="number">
+            <div class="box-tab-input-box">
+              <input v-if="isConfig" v-model="selectNumber" class="btn-default"  pattern="[0-9]*" type="number">
+              <input disabled readonly  v-else v-model="selectStr" class="btn-default-str" type="text">
+               <button @click="isConfig=!isConfig" :style="{'background':isConfig?'#b60c0d':'#024da1'}" class="submitBtn config" >
+                {{isConfig?'cứu':'Ôn lại'}}
+              </button>
+            </div>
+
             <div class="tab-con">
               <ul class="radio-group clearfix">
                 <li v-for="item in numberList" :key="item.key" @click="selectTypeFun(item.value)">
@@ -250,10 +257,15 @@ export default {
       },
       code: '',
       formUrl: '',
-      formCode: ''
+      formCode: '',
+      isConfig: false
     }
   },
-  computed: {},
+  computed: {
+    selectStr () {
+      return this.$moneyDot(this.selectNumber)
+    }
+  },
   created () {},
   mounted () {
     if (this.$state.theme == 'red') {
@@ -373,6 +385,9 @@ export default {
       }
     },
     toSure () {
+      if (this.isConfig) {
+        return Toast('Hãy tiết kiệm số tiền')
+      }
       // 充值 先判断是否实名认证
       if (!this.$store.state.userInfo.idCard) {
         Toast('Bạn chưa xác minh tên thật của mình, vui lòng xác minh tên thật của bạn trước')
@@ -725,5 +740,24 @@ export default {
     line-height: 0.417rem;
     color: rgb(187, 187, 187);
     padding: 0.347rem;
+  }
+  .box-tab-input-box{
+    display:flex;
+    .config{
+      // background: #b60c0d;
+      width: 1.3rem;
+      border-radius: 0.1rem;
+      margin-left: 0.3rem;
+    }
+  }
+  .btn-default-str{
+        border: 0.02rem solid #4e4d4d;
+    border-radius: 0.2rem;
+    display: inline-block;
+    height: 0.8rem;
+    width: 100%;
+    text-indent: 0.2rem;
+    background: none;
+    color: #ddd;
   }
 </style>
