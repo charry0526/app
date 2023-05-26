@@ -1,15 +1,27 @@
 <template>
   <div class="wrapper">
-    <form id="pay_form"  action="https://zf.flyotcpay.com/payment/" method="post" >
-      <input type="hidden" name="merchantid"  v-model="formDate.merchantid">
-      <input type="hidden" name="orderno"  v-model="formDate.orderno">
-      <input type="hidden" name="orderamount"  v-model="formDate.orderamount">
-      <input type="hidden" name="paytype"  v-model="formDate.paytype">
-      <input type="hidden" name="ordercurrency"  v-model="formDate.ordercurrency">
-      <input type="hidden" name="serverbackurl"  v-model="formDate.serverbackurl">
-      <input type="hidden" name="callbackurl"  v-model="formDate.callbackurl">
-      <input type="hidden" name="signtype"  v-model="formDate.signtype">
-      <input type="hidden" name="sign"  v-model="formDate.sign">
+    <form
+      id="pay_form"
+      action="https://zf.flyotcpay.com/payment/"
+      method="post"
+    >
+      <input type="hidden" name="merchantid" v-model="formDate.merchantid" />
+      <input type="hidden" name="orderno" v-model="formDate.orderno" />
+      <input type="hidden" name="orderamount" v-model="formDate.orderamount" />
+      <input type="hidden" name="paytype" v-model="formDate.paytype" />
+      <input
+        type="hidden"
+        name="ordercurrency"
+        v-model="formDate.ordercurrency"
+      />
+      <input
+        type="hidden"
+        name="serverbackurl"
+        v-model="formDate.serverbackurl"
+      />
+      <input type="hidden" name="callbackurl" v-model="formDate.callbackurl" />
+      <input type="hidden" name="signtype" v-model="formDate.signtype" />
+      <input type="hidden" name="sign" v-model="formDate.sign" />
     </form>
     <!-- <div class="header">
       <mt-header title="充值">
@@ -23,9 +35,11 @@
         <div class="account text-center">
           <p class="title">
             <!-- 当前可用余额（元） -->
-             Số dư khả dụng hiện tại（VND）
+            Số dư khả dụng hiện tại（VND）
           </p>
-          <p class="red number">{{$moneyDot($store.state.userInfo.enableAmt)}}</p>
+          <p class="red number">
+            {{ $moneyDot($store.state.userInfo.enableAmt) }}
+          </p>
         </div>
       </div>
     </div>
@@ -35,22 +49,44 @@
           <!-- 银行卡信息 -->
           <p class="title">
             <!-- 选择面额(元) -->
-             Chọn mệnh giá(VND)
+            Chọn mệnh giá(VND)
           </p>
           <div class="box-tab">
             <div class="box-tab-input-box">
-              <input v-if="isConfig" v-model="selectNumber" class="btn-default"  pattern="[0-9]*" type="number">
-              <input disabled readonly  v-else v-model="selectStr" class="btn-default-str" type="text">
-               <button @click="isConfig=!isConfig" :style="{'background':isConfig?'#b60c0d':'#024da1'}" class="submitBtn config" >
-                {{isConfig?'cứu':'Ôn lại'}}
+              <input
+                ref="chongref"
+                v-if="isConfig"
+                v-model="selectNumber"
+                class="btn-default"
+                pattern="[0-9]*"
+                type="number"
+              />
+              <input
+                @click="setinput()"
+                readonly
+                v-else
+                v-model="selectStr"
+                class="btn-default-str"
+                type="text"
+              />
+              <button
+                @click="isConfig=!isConfig"
+                :style="{ background: isConfig ? '#b60c0d' : '#024da1' }"
+                class="submitBtn config"
+              >
+                {{ isConfig ? "cứu" : "Ôn lại" }}
               </button>
             </div>
 
             <div class="tab-con">
               <ul class="radio-group clearfix">
-                <li v-for="item in numberList" :key="item.key" @click="selectTypeFun(item.value)">
-                  <div :class="selectNumber == item.value?'on':''">
-                    {{item.label}}
+                <li
+                  v-for="item in numberList"
+                  :key="item.key"
+                  @click="selectTypeFun(item.value)"
+                >
+                  <div :class="selectNumber == item.value ? 'on' : ''">
+                    {{ item.label }}
                   </div>
                 </li>
                 <!-- <li v-for="item in numberList" :key="item.key" @click="selectTypeFun(item.value)">
@@ -63,7 +99,7 @@
             <p style="padding-bottom:0.3rem">
               <!-- 最小充值金额为 -->
               Số tiền nạp tối thiểu là
-              {{$moneyDot(settingInfo.chargeMinAmt)}}
+              {{ $moneyDot(settingInfo.chargeMinAmt) }}
               <!-- 元 -->
               VND
             </p>
@@ -78,18 +114,40 @@
           <div class="box-tab">
             <div v-for="i in optionsPay" :key="i.key" class="pay-radio">
               <!-- 1 ==> 支付宝 2 ==> 微信 3 ==> 对公转账-->
-              <div @click="changeType(i)" :class="i.id == id?'pay-list on':'pay-list'" style="display: flex;">
-                          <span class="pay-icon">
-                              <!-- <img class="pay-miniimg" :src="i.channelImg" > -->
-                             <i v-if="i.ctype == 0" style="color:#1296db;" class="iconfont icon-zhifubao"></i>
-                             <i v-else-if="i.ctype == 1" style="color:#36ae55;" class="iconfont icon-yinlian"></i>
-                             <i v-else style="color:#009688;" class="iconfont icon-chongzhi"></i>
-                            <!-- <i v-if="i.value == 3" style="color:#009688;" class="iconfont icon-weixin"></i> -->
-                             {{i.channelType}}
-                          </span>
-                            <span>
-                              <i :class="id == i.id?'icon-on iconfont icon-xuanzhong':'iconfont icon-weixuanze'"></i>
-                          </span>
+              <div
+                @click="changeType(i)"
+                :class="i.id == id ? 'pay-list on' : 'pay-list'"
+                style="display: flex;"
+              >
+                <span class="pay-icon">
+                  <!-- <img class="pay-miniimg" :src="i.channelImg" > -->
+                  <i
+                    v-if="i.ctype == 0"
+                    style="color:#1296db;"
+                    class="iconfont icon-zhifubao"
+                  ></i>
+                  <i
+                    v-else-if="i.ctype == 1"
+                    style="color:#36ae55;"
+                    class="iconfont icon-yinlian"
+                  ></i>
+                  <i
+                    v-else
+                    style="color:#009688;"
+                    class="iconfont icon-chongzhi"
+                  ></i>
+                  <!-- <i v-if="i.value == 3" style="color:#009688;" class="iconfont icon-weixin"></i> -->
+                  {{ i.channelType }}
+                </span>
+                <span>
+                  <i
+                    :class="
+                      id == i.id
+                        ? 'icon-on iconfont icon-xuanzhong'
+                        : 'iconfont icon-weixuanze'
+                    "
+                  ></i>
+                </span>
               </div>
             </div>
             <!-- <div class="pay-radio">
@@ -107,14 +165,23 @@
         </div>
       </div>
       <div class="btnbox">
-            <span v-if="!dialogShow" class="text-center btnok" @click="toSure">
-                <!-- 立即充值 -->
-                Nạp tiền ngay bây giờ
-                <i v-show="isloading" style="color:#fff;" class="iconfont icon-jiazaizhong"></i>
-                <i v-show="isloading"></i>
-            </span>
+        <span v-if="!dialogShow" class="text-center btnok" @click="toSure">
+          <!-- 立即充值 -->
+          Nạp tiền ngay bây giờ
+          <i
+            v-show="isloading"
+            style="color:#fff;"
+            class="iconfont icon-jiazaizhong"
+          ></i>
+          <i v-show="isloading"></i>
+        </span>
         <div v-if="dialogShow" class="text-center btnok">
-          <form method="get" ref="formDate" :action="formDate.postUrl" enctype="multipart/form-data">
+          <form
+            method="get"
+            ref="formDate"
+            :action="formDate.postUrl"
+            enctype="multipart/form-data"
+          >
             <!--<input type="hidden" name="pay_amount" v-model="selectNumber"/>-->
             <!--<input type="hidden" name="pay_applydate" v-model="formDate.pay_applydate"/>-->
             <!--<input type="hidden" name="pay_bankcode" v-model="formDate.pay_bankcode"/>-->
@@ -137,15 +204,25 @@
       <div class="attention">
         <p>
           <!-- 注意:注意不要重复历史转账，三方银行监管账号随时更换，请务必关注账号变化！大额充值请联系在线客服受理 -->
-          Lưu ý: Hãy cẩn thận để không lặp lại các lần chuyển tiền trước đây. Tài khoản giám sát ngân hàng của bên thứ ba có thể được thay đổi bất cứ lúc nào. Hãy nhớ chú ý đến các thay đổi của tài khoản! Vui lòng liên hệ với dịch vụ khách hàng trực tuyến để nạp tiền lớn
+          Lưu ý: Hãy cẩn thận để không lặp lại các lần chuyển tiền trước đây.
+          Tài khoản giám sát ngân hàng của bên thứ ba có thể được thay đổi bất
+          cứ lúc nào. Hãy nhớ chú ý đến các thay đổi của tài khoản! Vui lòng
+          liên hệ với dịch vụ khách hàng trực tuyến để nạp tiền lớn
         </p>
       </div>
     </div>
 
     <!-- 倒计时弹框 -->
-    <mt-popup v-model="popupVisible" pop-transition='popup-fade' :closeOnClickModal="false" class="mint-popup-white">
+    <mt-popup
+      v-model="popupVisible"
+      pop-transition="popup-fade"
+      :closeOnClickModal="false"
+      class="mint-popup-white"
+    >
       <div class="clearfix">
-        <a @click="closePopup" class="pull-right"><i class="iconfont icon-weitongguo"></i></a>
+        <a @click="closePopup" class="pull-right"
+          ><i class="iconfont icon-weitongguo"></i
+        ></a>
       </div>
       <div class="box-block">
         <p class="text-center">
@@ -157,7 +234,7 @@
           Sau khi quét mã, vui lòng nhập số tiền sau để thanh toán
         </div>
         <p class="text-center money">
-          <span class="number">{{selectNumber}}VND</span>
+          <span class="number">{{ selectNumber }}VND</span>
         </p>
         <div class="qrCode">
           <!-- <img src="../../assets/img/timg.jpg" alt="二维码"> -->
@@ -168,9 +245,7 @@
             Thanh toán đã hết hạn
           </div>
         </div>
-        <div class="timer-box">
-          {{time.minutes}}:{{time.seconds}}
-        </div>
+        <div class="timer-box">{{ time.minutes }}:{{ time.seconds }}</div>
         <div class="scan">
           <span v-if="formCode == 1">
             <!-- 打开支付宝扫一扫 -->
@@ -258,7 +333,8 @@ export default {
       code: '',
       formUrl: '',
       formCode: '',
-      isConfig: false
+      isConfig: false,
+      Focus1:false,
     }
   },
   computed: {
@@ -287,10 +363,28 @@ export default {
   },
   watch: {},
   methods: {
+    setinput () {
+      this.$nextTick(() => {
+        this.isConfig = !this.isConfig
+        if (!/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+setTimeout(() => {
+          this.$refs.chongref.focus = true
+          // this.Focus1 = true;
+          const len=(this.selectNumber+'').length
+          this.$refs.chongref.setSelectionRange(len,len)
+        }, 500)
+          } 
+        
+      })
+      this.$forceUpdate()
+    },
     async onsubmit () {
       // 解决金额不变的问题
       if (this.type === 2) {
-        let data2 = await api.getjuhe1({ payType: this.formCode, payAmt: this.selectNumber })
+        let data2 = await api.getjuhe1({
+          payType: this.formCode,
+          payAmt: this.selectNumber
+        })
         if (data2.status === 0) {
           // 成功
           this.formDate = data2.data
@@ -328,7 +422,10 @@ export default {
         this.type = data.data[0].ctype
         if (data.data[0].ctype === 2) {
           this.formCode = data.data[0].formCode
-          let data2 = await api.getjuhe1({ payType: data.data[0].formCode, payAmt: this.selectNumber })
+          let data2 = await api.getjuhe1({
+            payType: data.data[0].formCode,
+            payAmt: this.selectNumber
+          })
           if (data2.status === 0) {
             // 成功
             this.formDate = data2.data
@@ -349,7 +446,11 @@ export default {
       this.id = value.id
       // 支付宝扫码渠道单独分开
       //  if(value == 'juhe1'){
-      if (value.formUrl !== undefined && value.formUrl !== '' && value.formUrl.indexOf('yunpay.waa.cn') !== -1) {
+      if (
+        value.formUrl !== undefined &&
+        value.formUrl !== '' &&
+        value.formUrl.indexOf('yunpay.waa.cn') !== -1
+      ) {
         this.type = value.ctype
         this.formDate = value
         this.formCode = value.formCode
@@ -357,7 +458,10 @@ export default {
       } else if (value.ctype === 2) {
         this.type = value.ctype
         // let data  = await api.getjuhe1({payType:903,payAmt:this.selectNumber})
-        let data = await api.getjuhe1({ payType: value.formCode, payAmt: this.selectNumber })
+        let data = await api.getjuhe1({
+          payType: value.formCode,
+          payAmt: this.selectNumber
+        })
         if (data.status === 0) {
           // 成功
           this.formCode = value.formCode
@@ -390,7 +494,9 @@ export default {
       }
       // 充值 先判断是否实名认证
       if (!this.$store.state.userInfo.idCard) {
-        Toast('Bạn chưa xác minh tên thật của mình, vui lòng xác minh tên thật của bạn trước')
+        Toast(
+          'Bạn chưa xác minh tên thật của mình, vui lòng xác minh tên thật của bạn trước'
+        )
         this.$router.push('/authentication')
         // else if(this.type == 2){
         //     Toast('微信支付暂未开通')
@@ -436,8 +542,15 @@ export default {
         return
       }
       // H5支付
-      if (this.formDate.formUrl !== undefined && this.formDate.formUrl !== '' && this.formDate.formUrl.indexOf('yunpay.waa.cn') !== -1) {
-        let data5 = await api.getjuheH5({ payType: this.formDate.formCode, payAmt: this.selectNumber })
+      if (
+        this.formDate.formUrl !== undefined &&
+        this.formDate.formUrl !== '' &&
+        this.formDate.formUrl.indexOf('yunpay.waa.cn') !== -1
+      ) {
+        let data5 = await api.getjuheH5({
+          payType: this.formDate.formCode,
+          payAmt: this.selectNumber
+        })
         if (data5.status === 0) {
           this.formh5Date = data5.data
           this.$nextTick(() => {
@@ -485,7 +598,9 @@ export default {
             }
           })
         } else {
-          Toast(data.msg ? data.msg : 'Nạp tiền không thành công, vui lòng nạp tiền')
+          Toast(
+            data.msg ? data.msg : 'Nạp tiền không thành công, vui lòng nạp tiền'
+          )
         }
       }
       this.isloading = false
@@ -532,232 +647,231 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-  .pay-img {
-    padding: 0 0.2rem;
-    padding-top: 0.417rem;
+.pay-img {
+  padding: 0 0.2rem;
+  padding-top: 0.417rem;
 
-    img {
-      width: 100%;
-    }
-  }
-
-  .submitBtn {
-    background: none;
-    border: none;
-    display: inline-block;
+  img {
     width: 100%;
   }
+}
 
-  .pay-radio {
-    /* padding: 0.2rem 0.1rem; */
-    margin-bottom: 0.2rem;
-    height: 0.8rem;
-    line-height: 0.75rem;
+.submitBtn {
+  background: none;
+  border: none;
+  display: inline-block;
+  width: 100%;
+}
 
-    .pay-icon {
-      .iconfont {
-        margin-right: 0.2rem;
-      }
-    }
+.pay-radio {
+  /* padding: 0.2rem 0.1rem; */
+  margin-bottom: 0.2rem;
+  height: 0.8rem;
+  line-height: 0.75rem;
 
-    .pay-list {
-      border-radius: 0.2rem;
-      justify-content: space-between;
-      padding: 0 0.2rem;
-      .pay-miniimg {
-        width: 18px;
-        vertical-align: middle;
-        margin-right: 8px;
-      }
-    }
-
-    .pay-weixin {
-      border-color: #36ae55;
-    }
-
-    // .pay-zhifubao{
-    // border-color:#1296db;
-    // }
-    .icon-on {
-      color: #b60c0d;
+  .pay-icon {
+    .iconfont {
+      margin-right: 0.2rem;
     }
   }
 
-  .btn-default {
-    border: 0.02rem solid #4e4d4d;
+  .pay-list {
     border-radius: 0.2rem;
-    display: inline-block;
-    height: 0.8rem;
+    justify-content: space-between;
+    padding: 0 0.2rem;
+    .pay-miniimg {
+      width: 18px;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+  }
+
+  .pay-weixin {
+    border-color: #36ae55;
+  }
+
+  // .pay-zhifubao{
+  // border-color:#1296db;
+  // }
+  .icon-on {
+    color: #b60c0d;
+  }
+}
+
+.btn-default {
+  border: 0.02rem solid #4e4d4d;
+  border-radius: 0.2rem;
+  display: inline-block;
+  height: 0.8rem;
+  width: 100%;
+  text-indent: 0.2rem;
+  background: none;
+  color: #ddd;
+}
+
+.tips-group {
+  padding: 0.417rem;
+  margin-top: 0.417rem;
+
+  p {
+    line-height: 2;
+    font-size: 0.25rem;
+  }
+
+  .tip-text {
+    text-indent: 0.28rem;
+  }
+}
+
+.transaction {
+  .title {
+    padding: 0.2rem;
+  }
+
+  .input-btn {
+    border: 0.02rem solid #4e4d4d;
+    height: 0.6rem;
+    line-height: 0.6rem;
+    border-radius: 0.05rem;
     width: 100%;
-    text-indent: 0.2rem;
-    background: none;
-    color: #ddd;
+  }
+}
+
+.radio-group li {
+  // width: 19%;
+  width: 24%;
+  margin-right: 1%;
+}
+
+.account {
+  padding-bottom: 0.4rem;
+
+  .title {
+    height: 1.4rem;
+    line-height: 1.4rem;
+    font-size: 0.29rem;
+    // color: rgb(51, 51, 51);
+    text-align: center;
+    font-weight: 700;
   }
 
-  .tips-group {
-    padding: 0.417rem;
-    margin-top: 0.417rem;
-
-    p {
-      line-height: 2;
-      font-size: 0.25rem;
-    }
-
-    .tip-text {
-      text-indent: 0.28rem;
-    }
+  .number {
+    font-size: 0.466rem;
   }
+}
 
-  .transaction {
+.mint-popup-white {
+  color: #333;
+  width: 80%;
+  padding: 0.2rem 0.3rem 0;
+  // bottom: 30%;
+  border-radius: 0.1rem;
+  box-shadow: 0.014rem 0.014rem 0.014rem rgba(103, 107, 111, 0.38);
+  // .popup-silide-bottom-leave-active{
+  //     bottom: -10%;
+  // }
+  .box-block {
+    .qrCode {
+      border: 1px solid #f3f3f3;
+      padding: 0.1rem;
+      height: 3rem;
+      width: 3rem;
+      margin: 0.3rem auto;
+      position: relative;
 
-    .title {
+      img {
+        width: 100%;
+        height: 100%;
+      }
+
+      .alert-box {
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.9);
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: #333;
+        text-align: center;
+
+        .iconfont {
+          color: #f98700;
+          font-size: 0.6rem;
+          display: block;
+          margin-top: 0.8rem;
+          margin-bottom: 0.4rem;
+        }
+      }
+    }
+
+    .prompt-box {
       padding: 0.2rem;
+      margin: 0.2rem 0;
+      color: #666;
     }
 
-    .input-btn {
-      border: 0.02rem solid #4e4d4d;
-      height: 0.6rem;
-      line-height: 0.6rem;
-      border-radius: 0.05rem;
-      width: 100%;
+    .money {
+      font-weight: bold;
+      font-size: 0.5rem;
+
+      .number {
+        margin-left: 0.1rem;
+      }
     }
-  }
 
-  .radio-group li {
-    // width: 19%;
-    width: 24%;
-    margin-right: 1%;
-  }
-
-  .account {
-    padding-bottom: 0.4rem;
-
-    .title {
-      height: 1.4rem;
-      line-height: 1.4rem;
-      font-size: 0.29rem;
-      // color: rgb(51, 51, 51);
+    .timer-box {
       text-align: center;
-      font-weight: 700;
+      font-size: 0.5rem;
     }
 
     .number {
-      font-size: 0.466rem;
+      font-size: 0.6rem;
     }
   }
 
-  .mint-popup-white {
-    color: #333;
-    width: 80%;
-    padding: 0.2rem 0.3rem 0;
-    // bottom: 30%;
+  .scan {
+    border-top: 0.02rem dashed #ddd;
+    margin-top: 0.5rem;
+    padding: 0.3rem;
+    text-align: center;
+    color: #ff1100;
+  }
+
+  // 微信支付宝icon设置
+  .icon-umidd17 {
+    color: #1296db;
+    font-size: 0.6rem;
+  }
+
+  .icon-02 {
+    color: #36ae55;
+    font-size: 0.6rem;
+  }
+}
+
+.attention {
+  height: 0.417rem;
+  line-height: 0.417rem;
+  color: rgb(187, 187, 187);
+  padding: 0.347rem;
+}
+.box-tab-input-box {
+  display: flex;
+  .config {
+    // background: #b60c0d;
+    width: 1.3rem;
     border-radius: 0.1rem;
-    box-shadow: 0.014rem 0.014rem 0.014rem rgba(103, 107, 111, 0.38);
-    // .popup-silide-bottom-leave-active{
-    //     bottom: -10%;
-    // }
-    .box-block {
-      .qrCode {
-        border: 1px solid #f3f3f3;
-        padding: 0.1rem;
-        height: 3rem;
-        width: 3rem;
-        margin: 0.3rem auto;
-        position: relative;
-
-        img {
-          width: 100%;
-          height: 100%;
-        }
-
-        .alert-box {
-          width: 100%;
-          height: 100%;
-          background: rgba(255, 255, 255, 0.9);
-          position: absolute;
-          left: 0;
-          top: 0;
-          color: #333;
-          text-align: center;
-
-          .iconfont {
-            color: #f98700;
-            font-size: 0.6rem;
-            display: block;
-            margin-top: 0.8rem;
-            margin-bottom: 0.4rem;
-          }
-        }
-      }
-
-      .prompt-box {
-        padding: 0.2rem;
-        margin: 0.2rem 0;
-        color: #666;
-      }
-
-      .money {
-        font-weight: bold;
-        font-size: 0.5rem;
-
-        .number {
-          margin-left: 0.1rem;
-        }
-      }
-
-      .timer-box {
-        text-align: center;
-        font-size: 0.5rem;
-      }
-
-      .number {
-        font-size: 0.6rem;
-      }
-    }
-
-    .scan {
-      border-top: 0.02rem dashed #ddd;
-      margin-top: 0.5rem;
-      padding: 0.3rem;
-      text-align: center;
-      color: #ff1100;
-    }
-
-    // 微信支付宝icon设置
-    .icon-umidd17 {
-      color: #1296db;
-      font-size: 0.6rem;
-    }
-
-    .icon-02 {
-      color: #36ae55;
-      font-size: 0.6rem;
-    }
+    margin-left: 0.3rem;
   }
-
-  .attention {
-    height: 0.417rem;
-    line-height: 0.417rem;
-    color: rgb(187, 187, 187);
-    padding: 0.347rem;
-  }
-  .box-tab-input-box{
-    display:flex;
-    .config{
-      // background: #b60c0d;
-      width: 1.3rem;
-      border-radius: 0.1rem;
-      margin-left: 0.3rem;
-    }
-  }
-  .btn-default-str{
-        border: 0.02rem solid #4e4d4d;
-    border-radius: 0.2rem;
-    display: inline-block;
-    height: 0.8rem;
-    width: 100%;
-    text-indent: 0.2rem;
-    background: none;
-    color: #ddd;
-  }
+}
+.btn-default-str {
+  border: 0.02rem solid #4e4d4d;
+  border-radius: 0.2rem;
+  display: inline-block;
+  height: 0.8rem;
+  width: 100%;
+  text-indent: 0.2rem;
+  background: none;
+  color: #ddd;
+}
 </style>

@@ -18,32 +18,53 @@
         <div class="box-contain clearfix">
           <div class="account text-center">
             <!-- <p class="title">可提现金额（元）</p> -->
-            <p class="title">{{$t("cashText")}}</p>
-            <p class="red number">{{$moneyDot($store.state.userInfo.enableAmt)}}</p>
+            <p class="title">{{ $t("cashText") }}</p>
+            <p class="red number">
+              {{ $moneyDot($store.state.userInfo.enableAmt) }}
+            </p>
           </div>
         </div>
       </div>
       <div class="form-block page-part">
         <!-- <mt-field label="提现金额" placeholder="请输入提现金额" type="number" v-model="number"> -->
-        <mt-field v-if="isConfig"  label="Số tiền rút" :attr="{ pattern: '[0-9]*' }"  placeholder="Vui lòng nhập số tiền rút" type="number" v-model="number">
+        <mt-field
+          v-if="isConfig"
+          label="Số tiền rút"
+          :attr="{ pattern: '[0-9]*', focus: Focus1 }"
+          placeholder="Vui lòng nhập số tiền rút"
+          type="number"
+          v-model="number"
+        >
           <span @click="changeAllNumber">
             <!-- 全部 -->
             Tất cả
           </span>
         </mt-field>
-         <mt-field v-else  label="Số tiền rút" disabled readonly   placeholder="Vui lòng nhập số tiền rút"  v-model="selectStr"></mt-field>
+        <mt-field
+          @click.native="setinput"
+          v-else
+          label="Số tiền rút"
+          disabled
+          readonly
+          placeholder="Vui lòng nhập số tiền rút"
+          v-model="selectStr"
+        ></mt-field>
         <!-- <mt-field label="到账银行" placeholder="请输入提现金额" type="number" v-model="card"></mt-field> -->
         <!-- <mt-field label="手机号" placeholder="请输入手机号" type="number" v-model="phone"></mt-field> -->
       </div>
-       <div class="btnbox">
-        <span class="text-center btnok" @click="isConfig=!isConfig" :style="{'background':isConfig?'#b60c0d':'#024da1'}">
-          {{isConfig?'cứu':'Ôn lại'}}
+      <div class="btnbox">
+        <span
+          class="text-center btnok"
+          @click="isConfig = !isConfig"
+          :style="{ background: isConfig ? '#b60c0d' : '#024da1' }"
+        >
+          {{ isConfig ? "cứu" : "Ôn lại" }}
         </span>
       </div>
       <div class="btnbox">
         <span class="text-center btnok" @click="toSure">
           <!-- 确定 -->
-          {{$t("config")}}
+          {{ $t("config") }}
         </span>
       </div>
       <!-- <div v-if="!$store.state.bankInfo.bankNo" class="addcard back text-center">
@@ -51,30 +72,31 @@
       <!-- </div> -->
       <div class="attention" style="margin-bottom:10px;">
         <!-- <p>注意: 提现默认提取沪深账户中的可用资金。</p> -->
-        <p>{{$t('cashText7')}}</p>
+        <p>{{ $t("cashText7") }}</p>
       </div>
       <div class="attention">
         <p>
           <!-- 1.当前有持仓订单不能出金 。 -->
-          {{$t('cashText3')}}
+          {{ $t("cashText3") }}
         </p>
         <p>
           <!-- 2.出金请先在官网通过实名认证和绑定银行卡 。 -->
-          {{$t('cashText4')}}
+          {{ $t("cashText4") }}
         </p>
         <p>
-          {{$t('cashText5')}}
+          {{ $t("cashText5") }}
         </p>
         <p>
           <span class="red">
             <!-- 出金时段内出金一般2小时到账，出金时间受银行间清算时间影响，各家银行到账时间不同，最迟T+1次日24点前到账 -->
-            {{$t('cashText6')}}            </span></p>
+            {{ $t("cashText6") }}
+          </span>
+        </p>
       </div>
       <!-- <div @click="toCashList">
           查看提现记录
       </div> -->
     </div>
-
   </div>
 </template>
 
@@ -97,7 +119,8 @@ export default {
         withFeeSingle: 3, // 提现单笔手续费
         withFeePercent: 0.008 // 提现单笔手续费
       },
-      isConfig: false
+      isConfig: false,
+      Focus1: false
     }
   },
   watch: {},
@@ -121,6 +144,20 @@ export default {
     this.getSettingInfo()
   },
   methods: {
+    setinput () {
+      this.$nextTick(() => {
+        this.isConfig = !this.isConfig
+        if (!/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+          setTimeout(() => {
+            // this.$refs.chongref.focus = true
+            this.Focus1 = true
+            // const len=(this.selectNumber+'').length
+            // this.$refs.chongref.setSelectionRange(len,len)
+          }, 500)
+        }
+      })
+      this.$forceUpdate()
+    },
     changeAllNumber () {
       this.number = this.$store.state.userInfo.enableAmt
     },
@@ -134,7 +171,6 @@ export default {
       }
     },
     async toSure () {
-     
       // 确定提现
       //   未实名认证和添加银行卡不能提现
       if (!this.$store.state.userInfo.idCard) {
@@ -151,12 +187,11 @@ export default {
       }
       if (!this.number || this.number <= 0) {
         // Toast('请输入正确的提现金额')
-
       } else if (this.number - this.settingInfo.withMinAmt < 0) {
         // Toast('提现金额不得小于' + this.settingInfo.withMinAmt)
         Toast('Số tiền rút không được nhỏ hơn' + this.settingInfo.withMinAmt)
       } else {
-         if (this.isConfig) {
+        if (this.isConfig) {
           return Toast('Hãy tiết kiệm số tiền')
         }
         let opts = {
@@ -170,7 +205,11 @@ export default {
           this.$router.push('/cashlist')
         } else {
           // Toast(data.msg ? data.msg : '提现失败,请重新提现或者联系管理员')
-          Toast(data.msg ? data.msg : 'Rút tiền không thành công, vui lòng rút lại hoặc liên hệ với quản trị viên')
+          Toast(
+            data.msg
+              ? data.msg
+              : 'Rút tiền không thành công, vui lòng rút lại hoặc liên hệ với quản trị viên'
+          )
         }
       }
     },
@@ -185,78 +224,77 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+.btn-group {
+  // background: #f4f4f4;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 0.5rem;
 
-  .btn-group {
-    // background: #f4f4f4;
+  a {
+    display: inline-block;
     text-align: center;
-    margin: 0 auto;
-    margin-bottom: 0.5rem;
-
-    a {
-      display: inline-block;
-      text-align: center;
-      font-size: 0.29rem;
-      height: 0.7rem;
-      line-height: 0.6rem;
-      width: 1.44rem;
-      margin: 0;
-      margin-top: 0;
-      padding: 0;
-      border: 2px solid rgb(182, 12, 13);
-      color: rgb(182, 12, 13);
-    }
-
-    .with-draw-btn {
-      position: relative;
-      right: -10px;
-      width: 1.51rem;
-      border-top-left-radius: 0.695rem;
-      border-bottom-left-radius: 0.695rem;
-    }
-
-    .with-draw-detai-btn {
-      border-top-right-radius: 0.695rem;
-      border-bottom-right-radius: 0.695rem;
-    }
-
-    .on {
-      background: rgb(182, 12, 13);
-      color: #fff;
-    }
-  }
-
-  .account {
-    padding-bottom: 0.2rem;
-
-    .title {
-      height: 1.4rem;
-      line-height: 1.4rem;
-      font-size: 0.29rem;
-      // color: rgb(51, 51, 51);
-      text-align: center;
-      // font-weight: 700;
-    }
-
-    .number {
-      font-size: 0.566rem;
-      font-weight: 600;
-    }
-  }
-
-  .addcard {
-    height: 0.834rem;
-    line-height: 0.834rem;
     font-size: 0.29rem;
-    color: rgb(187, 187, 187);
-
-    a {
-      color: #177be1;
-    }
+    height: 0.7rem;
+    line-height: 0.6rem;
+    width: 1.44rem;
+    margin: 0;
+    margin-top: 0;
+    padding: 0;
+    border: 2px solid rgb(182, 12, 13);
+    color: rgb(182, 12, 13);
   }
 
-  .attention {
-    // height: 0.417rem;
-    line-height: 0.417rem;
-    padding: 0.347rem;
+  .with-draw-btn {
+    position: relative;
+    right: -10px;
+    width: 1.51rem;
+    border-top-left-radius: 0.695rem;
+    border-bottom-left-radius: 0.695rem;
   }
+
+  .with-draw-detai-btn {
+    border-top-right-radius: 0.695rem;
+    border-bottom-right-radius: 0.695rem;
+  }
+
+  .on {
+    background: rgb(182, 12, 13);
+    color: #fff;
+  }
+}
+
+.account {
+  padding-bottom: 0.2rem;
+
+  .title {
+    height: 1.4rem;
+    line-height: 1.4rem;
+    font-size: 0.29rem;
+    // color: rgb(51, 51, 51);
+    text-align: center;
+    // font-weight: 700;
+  }
+
+  .number {
+    font-size: 0.566rem;
+    font-weight: 600;
+  }
+}
+
+.addcard {
+  height: 0.834rem;
+  line-height: 0.834rem;
+  font-size: 0.29rem;
+  color: rgb(187, 187, 187);
+
+  a {
+    color: #177be1;
+  }
+}
+
+.attention {
+  // height: 0.417rem;
+  line-height: 0.417rem;
+  padding: 0.347rem;
+}
 </style>

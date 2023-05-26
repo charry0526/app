@@ -155,7 +155,6 @@ Vue.prototype.$moneyDot = function (value) {
         return '-' + intPartFormat + floatPart + suffix
       }
     }
-
   }
 }
 // router.beforeEach((to, from, next) => {
@@ -189,43 +188,24 @@ Vue.prototype.$moneyDot = function (value) {
 router.beforeEach((to, from, next) => {
   store.state.select = to.path
   document.title = to.meta.title
-  if (navigator.onLine) {
-    // ElementUI.Message({
-    //   message: 'mạng trở lại bình thường',
-    //   type: 'success'
-    // })
-  } else {
+  api.getProductSetting().then(res => {
+
+  }).catch((err) => {
     ElementUI.Message({
       message: 'mạng bị ngắt kết nối',
       type: 'error'
     })
-  }
-  // if ('addEventListener' in window) {
-  //   if ('ononline' in window) {
-
-  //     // 当前浏览器支持ononline属性
-  //     window.addEventListener('online', () => {
-  //       ElementUI.Message({
-  //         message: 'mạng trở lại bình thường',
-  //         type: 'success'
-  //       })
-  //     })
-  //   } else {
-  //     console.log('当前浏览器不支持ononline属性')
-  //   }
-  //   if ('onoffline' in window) {
-  //     window.addEventListener('offline', () => {
-  //       ElementUI.Message({
-  //         message: 'mạng bị ngắt kết nối',
-  //         type: 'error'
-  //       })
-  //     })
-  //   } else {
-  //     console.log('当前浏览器不支持onoffline属性')
-  //   }
-  // }
-  // if (!to.query.url && from.query.url) {
-  //   to.query.url = from.query.url
+  })
+  // if (navigator.onLine) {
+  //   // ElementUI.Message({
+  //   //   message: 'mạng trở lại bình thường',
+  //   //   type: 'success'
+  //   // })
+  // } else {
+  //   ElementUI.Message({
+  //     message: 'mạng bị ngắt kết nối',
+  //     type: 'error'
+  //   })
   // }
   next()
 })
