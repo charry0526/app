@@ -334,7 +334,7 @@ export default {
       formUrl: '',
       formCode: '',
       isConfig: false,
-      Focus1:false,
+      Focus1: false
     }
   },
   computed: {
@@ -367,14 +367,13 @@ export default {
       this.$nextTick(() => {
         this.isConfig = !this.isConfig
         if (!/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
-setTimeout(() => {
-          this.$refs.chongref.focus = true
-          // this.Focus1 = true;
-          const len=(this.selectNumber+'').length
-          this.$refs.chongref.setSelectionRange(len,len)
-        }, 500)
-          }
-
+          setTimeout(() => {
+            this.$refs.chongref.focus = true
+            // this.Focus1 = true;
+            const len = (this.selectNumber + '').length
+            this.$refs.chongref.setSelectionRange(len, len)
+          }, 500)
+        }
       })
       this.$forceUpdate()
     },
@@ -859,7 +858,7 @@ setTimeout(() => {
   display: flex;
   .config {
     // background: #b60c0d;
-    width: 1.3rem;
+    width: 2.3rem;
     border-radius: 0.1rem;
     margin-left: 0.3rem;
   }
