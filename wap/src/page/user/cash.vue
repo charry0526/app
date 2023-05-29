@@ -58,7 +58,7 @@
           @click="isConfig = !isConfig"
           :style="{ background: isConfig ? '#b60c0d' : '#024da1' }"
         >
-          {{ isConfig ? "cứu" : "Ôn lại" }}
+          {{ isConfig ? "Xác nhận" : "Nhập số tiền" }}
         </span>
       </div>
       <div class="btnbox">

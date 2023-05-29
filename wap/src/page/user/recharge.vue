@@ -74,7 +74,7 @@
                 :style="{ background: isConfig ? '#b60c0d' : '#024da1' }"
                 class="submitBtn config"
               >
-                {{ isConfig ? "cứu" : "Ôn lại" }}
+                {{ isConfig ? "Xác nhận" : "Nhập số tiền" }}
               </button>
             </div>
 
@@ -373,8 +373,8 @@ setTimeout(() => {
           const len=(this.selectNumber+'').length
           this.$refs.chongref.setSelectionRange(len,len)
         }, 500)
-          } 
-        
+          }
+
       })
       this.$forceUpdate()
     },
