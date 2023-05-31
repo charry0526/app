@@ -28,7 +28,8 @@ module.exports = {
       '/apis': {
         // target: 'https://pc.zsycyy.com',
         // target: 'http://www.shehua56.com',
-        target: 'http://8.213.195.188:8080/stock2c1',
+        // target: 'http://8.213.195.188:8080/stock2c1',
+        target: 'http://xtbistock.com/apis',
         // target: 'http://8.213.195.188:8080',
         secure: false,
         changeOrigin: true,
@@ -47,8 +48,8 @@ module.exports = {
     //   })
     // ],
     // Various Dev Server settings
-    host: '127.0.0.1', // can be overwritten by process.env.HOST
-    // host: '0.0.0.0',
+    // host: '127.0.0.1', // can be overwritten by process.env.HOST
+    host: '0.0.0.0',
     port: 8085, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
