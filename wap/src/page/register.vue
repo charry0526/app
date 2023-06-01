@@ -11,12 +11,16 @@
                 <input class="register-input" placeholder="Vui lòng nhập số điện thoại" type="tel" pattern="[0-9]*" v-model="phone">
 
       </div>
+        <!-- 获取验证码 -->
       <!-- <div class="register-form-item input-model">
         <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/vertify.png" alt="">
         <img class="register-ico" v-show="$state.theme == 'red'" src="../assets/ico/vertify-red.png" alt="">
-        <input class="register-input" style="width:1.4rem" placeholder="验证码" type="tel" pattern="[0-9]*" v-model="code">
-        <div v-if="codeshow" class="getcode" @click="checkCodeBox">获取验证码</div>
-        <div v-if="!codeshow" class="getcode">{{count}}s</div>
+        <input class="register-input" style="width:1.4rem" placeholder="mã xác nhận" type="tel" pattern="[0-9]*" v-model="code">
+        <div v-if="codeshow" class="getcode" @click="checkCodeBox">
+        
+          lấy mã xác minh
+        </div>
+        <div v-if="!codeshow" class="getcode">{{count}}</div>
       </div> -->
       <div class="register-form-item input-model">
         <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/loginpwd.png" alt="">
@@ -157,7 +161,7 @@ export default {
   data () {
     return {
       phone: '',
-      code: '1',
+      code: '',
       code2: '',
       psd: '',
       psd2: '',
@@ -242,11 +246,11 @@ export default {
       //     return
       // }
       // 获取验证码
-      if (this.clickFalg !== 0) {
-        this.clickFalg = 0
-        return
-      }
-      this.clickFalg++
+      // if (this.clickFalg !== 0) {
+      //   this.clickFalg = 0
+      //   return
+      // }
+      // this.clickFalg++
       //   var reg = 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/
       let reg = /^[0-9]{10}$/ // 手机号码验证
       if (isNull(this.phone)) {
@@ -289,11 +293,11 @@ export default {
         Toast('Người dùng đã được đăng ký, vui lòng đăng nhập')
         this.$router.push('/login')
       } else {
-        this.dialogShow = false
-        this.adminUrl = process.env.API_HOST
-        if (this.adminUrl === undefined) {
-          this.adminUrl = ''
-        }
+        // this.dialogShow = false
+        // this.adminUrl = process.env.API_HOST
+        // if (this.adminUrl === undefined) {
+        //   this.adminUrl = ''
+        // }
         // this.gook()
         this.getcode()
       }

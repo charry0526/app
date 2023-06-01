@@ -1,6 +1,6 @@
 <template>
     <div>
-       <canvas ref="canvas" id="canvas" width="300" height="300"></canvas>
+       <canvas ref="canvas" id="canvas"></canvas>
     </div>
     <!-- <template>
   <div @touchmove.prevent class="box">
@@ -34,16 +34,20 @@ import Blackboard from '@/utils/sign'
 export default {
   data () {
     return {
+
     }
   },
   created () {
   },
   mounted () {
-    this.$nextTick(() => {
-      this.el = this.$refs.canvas
-      new Blackboard(this.el)
-      // console.log(this.el, Blackboard)
-    })
+    // this.$nextTick(() => {
+    //   this.el = this.$refs.canvas
+    //   this.el.width = document.documentElement.clientWidth
+    //   this.el.height = document.documentElement.clientHeight
+    //   /* eslint-disable no-new */
+    //   new Blackboard(this.el)
+    //   // console.log(this.el, Blackboard)
+    // })
   },
   methods: {
   }
@@ -51,4 +55,15 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+#canvas{
+  width:100%;
+  height:100%;
+   /*ios，如果不行可以加一个透明遮罩层*/
+    -webkit-touch-callout:none;
+    touch-callout:none;
+
+    /*安卓*/
+    -webkit-user-select: none;
+    user-select: none;
+}
 </style>

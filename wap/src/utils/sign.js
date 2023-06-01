@@ -1,14 +1,15 @@
 class Blackboard {
-  constructor (el) {
+  constructor (el, width, height) {
     this.el = el
     this.app = this.el.getContext('2d')
     this.width = this.el.width
     this.height = this.el.height
     this.btns = document.createElement('div')
-    this.bgcolor = '#34D399'
+    this.bgcolor = '#000'
     this.linecolor = '#fff'
     this.initCanvas()
     this.BindEvent()
+    console.log(window.innerHeight, this.el.width, width, height, 'width, height')
   }
   BindEvent () {
     const callBack = this.drawLine.bind(this)
@@ -23,7 +24,7 @@ class Blackboard {
   }
   drawLine (e) {
     const event = e.touches[0]
-    console.log(event)
+    // console.log(event)
     this.app.lineTo(
       e.touches[0].clientX - this.el.offsetLeft,
       e.touches[0].clientY - this.el.offsetTop
@@ -36,13 +37,13 @@ class Blackboard {
     this.el.insertAdjacentElement('afterend', this.btns)
   }
   clear () {
-    let el = document.createElement('button')
-    el.innerText = '重置'
-    this.btns.insertAdjacentElement('afterbegin', el)
-    el.addEventListener('click', () => {
-      this.app.fillStyle = this.bgcolor
-      this.app.fillRect(0, 0, this.width, this.height)
-    })
+    // let el = document.createElement('button')
+    // el.innerText = '重置'
+    // this.btns.insertAdjacentElement('afterbegin', el)
+    // el.addEventListener('click', () => {
+    this.app.fillStyle = this.bgcolor
+    this.app.fillRect(0, 0, this.width, this.height)
+    // })
     return this
   }
   setBgColor (color) {
@@ -50,7 +51,11 @@ class Blackboard {
     this.app.fillStyle = color
     this.app.fillRect(0, 0, this.width, this.height)
   }
+  downLoadImage (canvas) {
+    var dataURL = canvas.toDataURL() // 将canvas转换为base64编码的图片数据
+    console.log(dataURL, 'dataURL')
+  }
 }
 // const blackboard = new Blackboard()
-// blackboard.clear().setBgColor('#34D399')
+
 export default Blackboard
