@@ -118,6 +118,13 @@
               </ul>
             </div>
             <p class="totle">Số tiền: {{$moneyDot(deposit)}}</p>
+            <!-- <div class="isagree-box">
+                <div
+                    class="check"
+                    @click="getAgreeShow()"
+                    :class="agreeShow ? 'tick' : ' '"
+                ></div>
+            </div> -->
             <div class="button-box">
               <div @click="dialogShow=false"
                    class="btn">Hủy bỏ </div>
@@ -161,7 +168,8 @@ export default {
       paegs: [],
       loadingAll: [],
       loading: false,
-      tendorseListDate: []
+      tendorseListDate: [],
+      isagree: false
     }
   },
   mounted () {

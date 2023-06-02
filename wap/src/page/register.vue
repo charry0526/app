@@ -12,16 +12,16 @@
 
       </div>
         <!-- 获取验证码 -->
-      <!-- <div class="register-form-item input-model">
+      <div class="register-form-item input-model">
         <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/vertify.png" alt="">
         <img class="register-ico" v-show="$state.theme == 'red'" src="../assets/ico/vertify-red.png" alt="">
         <input class="register-input" style="width:1.4rem" placeholder="mã xác nhận" type="tel" pattern="[0-9]*" v-model="code">
         <div v-if="codeshow" class="getcode" @click="checkCodeBox">
-        
+
           lấy mã xác minh
         </div>
         <div v-if="!codeshow" class="getcode">{{count}}</div>
-      </div> -->
+      </div>
       <div class="register-form-item input-model">
         <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/loginpwd.png" alt="">
         <img class="register-ico" v-show="$state.theme == 'red'" src="../assets/ico/loginpwd-pwd.png" alt="">
@@ -180,7 +180,8 @@ export default {
       logindialogShow: false, // 注册协议
       agreeUrl: '', // 注册协议地址
       siteInfo: {},
-      imgCodeTime: 0
+      imgCodeTime: 0,
+      msgId: undefined
     }
   },
   mounted: function () {
@@ -198,7 +199,7 @@ export default {
         this.agreeUrl = data.data.regAgree
         this.siteInfo = data.data
         if (this.siteInfo.smsDisplay === false) {
-          this.code = '6666'
+          // this.code = '6666'
         }
         this.$store.state.siteInfo = this.siteInfo
         // this.invitecode = this.siteInfo.agentCode
@@ -260,8 +261,11 @@ export default {
           Toast('Vui lòng nhập đúng số điện thoại')
         } else {
           //   var sign  = this.$md5(this.phone+'W&WzL42v').toUpperCase()
-          let result = await api.getCode({ phoneNum: this.phone })
+          // let result = await api.getCode({ phoneNum: this.phone })
+          const inter = this.msgId ? api.getseMessageCode : api.getMessageCode
+          let result = await inter({ phone: 84 + this.phone, msgId: this.msgId })
           if (result.status === 0) {
+            this.msgId = result.data
             const TIME_COUNT = 60
             if (!this.timer) {
               this.count = TIME_COUNT
@@ -287,20 +291,20 @@ export default {
     },
     async checkPhone () {
       // 先验证是否已经注册
-      let data = await api.checkPhone({ phoneNum: this.phone })
-      if (data.status === 0) {
-        // 如果用户已存在返回 0
-        Toast('Người dùng đã được đăng ký, vui lòng đăng nhập')
-        this.$router.push('/login')
-      } else {
-        // this.dialogShow = false
-        // this.adminUrl = process.env.API_HOST
-        // if (this.adminUrl === undefined) {
-        //   this.adminUrl = ''
-        // }
-        // this.gook()
-        this.getcode()
-      }
+      // let data = await api.checkPhone({ phoneNum: this.phone })
+      // if (data.status === 0) {
+      //   // 如果用户已存在返回 0
+      //   Toast('Người dùng đã được đăng ký, vui lòng đăng nhập')
+      //   this.$router.push('/login')
+      // } else {
+      // this.dialogShow = false
+      // this.adminUrl = process.env.API_HOST
+      // if (this.adminUrl === undefined) {
+      //   this.adminUrl = ''
+      // }
+      // this.gook()
+      this.getcode()
+      // }
     },
     async gook () {
       // 注册
@@ -325,6 +329,7 @@ export default {
       } else {
         let opts = {
           // agentCode:'4023', // SR330001
+          // yzmCode: this.code,
           phone: this.phone,
           yzmCode: this.code,
           userPwd: this.psd,

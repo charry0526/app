@@ -460,3 +460,11 @@ export function allNewList (options) {
 export function bestandslisteList (options) {
   return get('/wifeed/api/tin-tuc/co-phieu', options)
 }
+// 获取验证码
+export function getMessageCode (options) {
+  return get('/apis/api/admin/sendMessages.do', options)
+}
+// 重新获取验证码
+export function getseMessageCode (options) {
+  return get('/apis/api/admin/resendMessages.do', options)
+}
