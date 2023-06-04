@@ -153,7 +153,6 @@ export default {
 
   .table-list {
     padding: 0.2rem 0;
-
     .list-body {
       padding: 0.1rem 0.3rem;
 
@@ -164,7 +163,7 @@ export default {
       .capital {
         padding: 0.2rem;
         // border-radius: 0.2rem;
-        border-bottom: 0.01rem solid #3f444a;
+        border-bottom: 0.01rem solid #49484e;
 
         div {
           line-height: 0.4rem;
@@ -190,8 +189,10 @@ export default {
     }
   }
   /deep/.order-info-box {
-    background-color: #16171d;
+    background-color:#302F37;// #16171d;
     padding: 0;
+    border-bottom: 0.01rem solid #3f444a;
+
     .main{
       padding: 0.05rem .15rem;
       letter-spacing:0;

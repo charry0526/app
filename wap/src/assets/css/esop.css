@@ -5,10 +5,10 @@
 }
 .table-box {
   margin-top: 0.2rem;
-  border-top: 0.2rem solid #1F2636;
-  border-bottom: 0.2rem solid #1F2636;
+  border-top: 0.2rem solid #3B3A3F;
+  border-bottom: 0.2rem solid #3B3A3F;
   padding: 0 0.16rem;
-  background-color: #08080D;
+  background-color: #302F37;
 }
 .mint-tab-container-item {
   padding-top: 0.8rem;
@@ -174,12 +174,12 @@
 }
 .top-navbar {
   top: 1rem !important;
-  background-color: #16171d !important;
+  background-color: #302F37 !important;
   justify-content: center;
 }
 .top-navbar .mint-tab-item {
   padding: 0.3rem 0;
-  background-color: #16171d;
+  background-color: #302F37;
 }
 .top-navbar .top-nav-item {
   position: relative;

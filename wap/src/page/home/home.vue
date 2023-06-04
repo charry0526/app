@@ -2,31 +2,30 @@
   <div class="wrapper">
     <!-- 搜索框 -->
     <div class="home-search">
-      <div class="home-search-me"
-      @click="$router.push('/user')"
-      >
-        <img src="../../assets/ico/wogerenziliao.png" >
-      </div>
+
       <div class="home-search-input">
         <!-- <img src="../../assets/ico/fangdajing.png" alt=""> -->
         <input type="text"
         @focus="$router.push('/Searchlist')"
         >
       </div>
-      <div class="home-search-ctl">
-        <!-- <img class="lingdang" src="../../assets/ico/lingdang.png" alt=""
-        @click="$router.push('/notify')"
-        > -->
-        <img class="pifu" src="../../assets/ico/pifu.png" alt="" @click="$state.toggleTheme()">
+       <div class="home-search-me"
+          @click="$router.push('/user')"
+          >
+            <img src="../../assets/ico/wogerenziliao.png" >
       </div>
+      <!-- <div class="home-search-ctl">
+        <img class="lingdang" src="../../assets/ico/lingdang.png" alt=""
+        @click="$router.push('/notify')"
+        >
+        <img class="pifu" src="../../assets/ico/pifu.png" alt="" @click="$state.toggleTheme()">
+      </div> -->
     </div>
     <!-- 头部概况 -->
-    <div class="account-box zhishu"
-    :style="{backgroundImage:`url(${$state.theme=='red'?r_bg:b_bg})`}"
-    >
-      <div class="content ">
+    <div v-if="market.length!=0"  class="account-box zhishu">
+      <div class="content">
         <div
-        :class="i.floatPoint<0?'tab greenBg text-center':'tab redBg text-center'"
+        :class="i.floatPoint<0?'tab greenBg text-center':'tab greenBg text-center'"
         v-for="(i,index) in market"
         v-if="index < 3"
         :key="i.key">
@@ -79,9 +78,9 @@
         <p class="icon-title">{{$t("homeNavList4")}}</p>
       </div>
     </div>
-    <div class="shadow-box">
+    <!-- <div class="shadow-box">
       <img class="shadow-ico" src="../../assets/ico/shadow.png" alt="">
-    </div>
+    </div> -->
     <!-- 公告栏 -->
         <!-- <div class="col-xs-24 horseLampModule">
           <div class="horseLamp-box" v-if="artList.artTitle" @click="toAltDetail">
@@ -769,13 +768,14 @@ export default {
 
 .account-box {
   position: relative;
-  background-color: #000C16;
+  background-color: #2A282D;
   padding-top: .2rem;
   .content {
     width:6.86rem;
     height: 1.72rem;
     margin: 0 auto;
-    padding: 0 0.14rem;
+    // padding: 0 0.14rem;
+    padding: 0;
     display: flex;
     justify-content: space-between;
     .tab {
@@ -785,6 +785,8 @@ export default {
       align-items: center;
       justify-content: space-between;
       padding: .25rem 0 .15rem;
+      background-color: #3B3A3F !important;
+      border-radius: 0.2rem;
       .name {
         width: 1.52rem;
         height: .4rem;
@@ -826,8 +828,13 @@ export default {
   font-weight: 400;
 }
 .icon-router.home-ico-router {
-  padding: .4rem 0;
-  background-color: #16171d !important;
+  padding: .4rem 0.14rem;
+  // background-color: #16171d !important;
+  background-color: #3B3A3F !important;
+  // width: 93%;
+  width:6.86rem;
+  margin: .3rem auto;
+  border-radius: .2rem;
 }
 .zhishu {
   // background-image: url(../../../static/img/bg-zhisu.png);
@@ -846,17 +853,21 @@ export default {
 .home-search {
   padding: 0 .3rem;
   height: .8rem;
-  background-color: #000C16;
+  margin-top: 0.3rem;
+  background-color: #2A282D;
+  // background-color: #3B3A3F;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   &-me {
     width: .6rem;
     height: .6rem;
     border-radius: .3rem;
-    border: 1px solid #234B6E;
+    border: 1px solid #4C4A4F;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-left: .3rem;
     >img{
       width: .27rem;
       height: .29rem;
@@ -864,10 +875,11 @@ export default {
   }
   &-input {
     width: 5.4rem;
-    height: .6rem;
-    border-radius: .3rem;
-    border: 1px solid #234B6E;
-    margin-left: .27rem;
+    height: .8rem;
+    border-radius: .2rem;
+    border: 1px solid #4C4A4F;
+    // margin-left: .27rem;
+    margin-left: 0;
     padding: 0 .27rem;
     display: flex;
     align-items: center;
@@ -921,14 +933,19 @@ export default {
 .news-tab {
   min-height: 5rem;
   padding: 0 .3rem;
-  margin-top: .1rem;
-  background-color: #1D1E29;
+  margin-top: .3rem;
+  // background-color: #2A282D;
+  background-color: #302F37!important;
+  border-radius: 0.2rem;
   /deep/.mint-tab-container {
-    background-color: #1D1E29;
+    // background-color: #2A282D;
+    background-color: #302F37;
     padding-bottom: .3rem;
   }
   /deep/.mint-tab-item {
-    background-color: #1D1E29;
+    border-top: 0.01rem solid #49484E;
+    // background-color: #2A282D;
+    background-color: #302F37;
   }
   /deep/.mint-tab-item-label {
     color: #fff;
@@ -937,6 +954,8 @@ export default {
   }
   /deep/.is-selected .tab-name{
     position: relative;
+    color:#EE9827;
+    font-size:.5rem;
   }
   /deep/.mint-navbar .mint-tab-item.is-selected {
     border-bottom:none;
@@ -1025,6 +1044,7 @@ export default {
     //  color: #000000;
      .firma-info{
       color: #656565;
+      margin-bottom: .3rem;
       li{
         color: #656565;
       }
@@ -1103,6 +1123,7 @@ export default {
   }
 }
 .firma-info{
+  margin-bottom: .5rem;
   li{
     font-size: 0.4rem;
     margin-bottom: 0.2rem;
@@ -1120,5 +1141,14 @@ export default {
     }
   }
 
+}
+.greenBg {
+  color: #31b97e;
+  // background: linear-gradient(180deg, #fff 0, #f1fbf0);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1)
+}
+
+.redBg {
+  color: #d50000;
 }
 </style>

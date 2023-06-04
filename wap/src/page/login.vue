@@ -131,7 +131,7 @@ export default {
         this.loginIN()
       } else {
         // Toast('用户还未注册,请先注册')
-         Toast('Người dùng chưa đăng ký, vui lòng đăng ký trước')
+        Toast('Người dùng chưa đăng ký, vui lòng đăng ký trước')
         // this.$router.push('/register')
       }
     },
@@ -164,7 +164,7 @@ export default {
         this.$store.state.userInfo.token = data.data.cookie
         this.clickFalg = 0
         // this.clearCookie()
-        this.setCookie(data.data.key,data.data.token)
+        this.setCookie(data.data.key, data.data.token)
         this.$router.push('/home')
       } else {
         Toast(data.msg)
@@ -220,9 +220,12 @@ export default {
     display: block;
     width: 6.13rem;
     height: 5.58rem;
-    background-color: #1B1C25;
+    // background-color: #1B1C25;
+    background-color: #3B3A3F;
     position: relative;
-    box-shadow: 0 0 .1rem .1rem #0002;
+    // box-shadow: 0 0 .1rem .1rem #0002;
+    box-shadow: 0 0 .1rem .1rem #3B3A3F;
+    border-radius: .2rem;
     .login-avatar {
       width: 1.2rem;
       height: 1.2rem;
@@ -246,7 +249,7 @@ export default {
       border-radius: .33rem;
       margin: .45rem auto 0;
       &.input-model {
-        background-color: #121319;
+        background-color: #2A282D;//#121319;
         padding: 0 .33rem;
         display: flex;
         align-items: center;
@@ -292,5 +295,3 @@ export default {
     }
   }
 </style>
-
-

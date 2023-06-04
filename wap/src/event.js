@@ -6,12 +6,12 @@ const state = new Vue({
   },
   methods: {
     toggleTheme: function () {
-      this.theme = (this.theme === 'black' ? 'red' : 'black')
+      this.theme = 'black' || (this.theme === 'black' ? 'red' : 'black')
       window.localStorage.setItem('vue-liang-rong-wap-theme', JSON.stringify({data: this.theme}))
     }
   },
   created: function () {
-    const theme = JSON.parse(window.localStorage.getItem('vue-liang-rong-wap-theme'))
+    const theme = 'black' || JSON.parse(window.localStorage.getItem('vue-liang-rong-wap-theme'))
     if (theme && theme.data) {
       this.theme = theme.data
     }

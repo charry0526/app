@@ -74,8 +74,8 @@
               </td> -->
               <td>
                 <div class="button-box">
-                <span v-if="item.zts!=1">{{item.zts==2?'Chưa thông qua':item.zts==4?'Hoàn thành':'Đang XD'}}</span>
-                 <mt-button v-if="item.zts==1" class="btn-red pull-right"
+                <span  v-if="item.zts!=1">{{item.zts==2?'Chưa thông qua':item.zts==4?'Hoàn thành':'Đang XD'}}</span>
+                 <mt-button  v-if="item.zts==1" class="btn-red pull-right"
                              size="small"
                              type="danger"
                              @click="toCash(item)">

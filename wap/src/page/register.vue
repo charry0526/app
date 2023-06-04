@@ -394,10 +394,11 @@ export default {
   .register-form {
     width: 6.14rem;
     height: 6.9rem;
-    background-color: #1B1C25;
+    background-color: #3B3A3F;//#1B1C25;
     position: relative;
-    box-shadow: 0 0 .1rem .1rem #0002;
-
+    // box-shadow: 0 0 .1rem .1rem #0002;
+    box-shadow: 0 0 .1rem .1rem #3B3A3F;
+    border-radius: .2rem;
     .register-avatar {
       width: 1.2rem;
       height: 1.2rem;
@@ -424,7 +425,7 @@ export default {
       margin: .15rem auto 0;
 
       &.input-model {
-        background-color: #121319;
+        background-color: #2A282D;
         padding: 0 .33rem;
         display: flex;
         align-items: center;

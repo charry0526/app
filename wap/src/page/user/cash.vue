@@ -286,7 +286,7 @@ export default {
   line-height: 0.834rem;
   font-size: 0.29rem;
   color: rgb(187, 187, 187);
-
+ 
   a {
     color: #177be1;
   }
@@ -296,5 +296,10 @@ export default {
   // height: 0.417rem;
   line-height: 0.417rem;
   padding: 0.347rem;
+}
+.wrapper {
+  /deep/.mint-field {
+    background: #3b3a3f;
+  }
 }
 </style>

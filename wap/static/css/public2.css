@@ -1049,10 +1049,12 @@ input[type=checkbox]:checked + label[data-v-39817102]:before {
 }
 
 .order-info-box {
-  background: #21252a;
+  /* background: #21252a; */
   color: #cfd0d1;
-  background: #25292e;
-  padding: 0 .2rem
+  /* background: #25292e; */
+  padding: 0 .2rem;
+  background-color:#3B3A3F;
+  border-radius:.2rem;
 }
 
 .order-info-box .space {
@@ -1143,7 +1145,8 @@ input[type=checkbox]:checked + label[data-v-39817102]:before {
 .load-all {
   height: .88rem;
   line-height: .88rem;
-  background: #21252a
+  /* background: #21252a */
+  background: #3B3A3F;
 }
 
 .order-list {
@@ -17117,7 +17120,8 @@ body {
 }
 
 .box, .box-contain, .box-title, .nav-bg, .tipstexts {
-  background-color: #21252a
+  /* background-color: #21252a; */
+  background-color: #302F37;
 }
 
 .account-box .box-contain {
@@ -17215,14 +17219,14 @@ body {
   color: #cfd0d1
 }
 
-.box .box-contain .tab.greenBg {
+.box .box-contain .tab .greenBg {
   color: #31b97e;
   background: linear-gradient(180deg, #fff 0, #f1fbf0);
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1)
 }
 
-.box .box-contain .tab.redBg {
-  color: #d50000;
+.box .box-contain .tab .redBg {
+  color: #d50000 !important;
   /* background: linear-gradient(180deg, #fff 0, #fff3f5); */
   /* box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1) */
 }

@@ -55,7 +55,8 @@ export default {
 
   .wrapper {
     // padding-top: 1.5rem;
-    background-color: #16171d;
+    background-color: #3B3A3F;//#16171d;
+    padding-bottom: 0;
   }
 
   .btn-group {
@@ -108,9 +109,9 @@ export default {
   }
 
   .box.page-part.transaction {
-    background-color: #16171d;
+    background-color: #302F37;//#16171d;
     .box-contain {
-      background-color: #16171d;
+      background-color: #302F37;//#16171d;
     }
   }
   .red-theme {
@@ -129,6 +130,6 @@ export default {
         }
       }
     }
-    
+
   }
 </style>

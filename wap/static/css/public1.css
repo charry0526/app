@@ -17334,15 +17334,18 @@ body {
 }
 
 .btn-group a, .pay-radio .icon-on {
-  color: #b60c0d
+  /* color: #b60c0d */
+  color: #ff8000;
 }
 
 .btn-group a {
-  border: 2px solid #b60c0d
+  border: 2px solid #302F37 
+  /* #b60c0d */
 }
 
 .btn-group .on {
-  background: #b60c0d
+  background:#3B3A3F
+   /* #b60c0d */
 }
 
 .red-bg, body.red-bg {

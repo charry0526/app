@@ -64,6 +64,9 @@ export default {
     // background: #f4f4f4;
     margin-bottom: 0.2rem;
   }
+  .box{
+    background-color: #302F37;
+  }
 
   .btn-group {
     // background: #f4f4f4;

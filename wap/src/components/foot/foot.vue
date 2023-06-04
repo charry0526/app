@@ -176,7 +176,9 @@ export default {
     background-color: #ffffff !important;
   }
   .black-theme .mint-tabbar{
-    background-color: #040506 !important;
+    /* background-color: #040506 !important; */
+    background: linear-gradient(#3A373E, #2C2A2F);
+
   }
 
 </style>
