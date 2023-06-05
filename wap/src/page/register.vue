@@ -425,7 +425,7 @@ export default {
       margin: .15rem auto 0;
 
       &.input-model {
-        background-color: #2A282D;
+        background-color: #252429;//#2A282D;
         padding: 0 .33rem;
         display: flex;
         align-items: center;

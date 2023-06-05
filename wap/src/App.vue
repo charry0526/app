@@ -143,7 +143,7 @@ export default {
   }
   &.black-theme {
     // background: #16171d;
-    background:#2A282D;
+    background:#252429;//#2A282D;
   }
 }
 .search-right {

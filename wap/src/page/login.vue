@@ -249,7 +249,7 @@ export default {
       border-radius: .33rem;
       margin: .45rem auto 0;
       &.input-model {
-        background-color: #2A282D;//#121319;
+        background-color: #252429;//#121319;
         padding: 0 .33rem;
         display: flex;
         align-items: center;

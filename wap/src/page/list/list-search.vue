@@ -9,13 +9,13 @@
       @keyup.enter.native="getStock"
       placeholder="Mã chứng khoán hoặc chính tả đơn giản"
     >
-      <ul class="table-list">
+      <ul class="table-list table-header">
         <li class="title">
           <div>
             <ul class='clearfix'>
-              <li class="li-title">Mã CK</li>
-              <li class="li-base">Giá hiện tại</li>
-              <li class="li-base">Thay đổi </li>
+              <li class="li-title li-nav">Mã CK</li>
+              <li class="li-base li-nav">Giá hiện tại</li>
+              <li class="li-base li-nav">Thay đổi </li>
             </ul>
           </div>
         </li>
@@ -187,7 +187,8 @@ export default {
   .table-list {
     .li-title {
       width: 34%;
-
+      display: flex;
+      align-items: center;
     }
 
     .li-base {
@@ -201,7 +202,21 @@ export default {
       }
     }
   }
-
+  .li-nav:nth-child(3){
+    width:40%;
+  }
+  .table-list ul .li-title .name {
+    margin-top: 0;
+    margin-right: .2rem;
+  }
+  .table-list ul .li-title .hushen-mark {
+    background: #a65b66;
+    display: inline-block;
+    background: transparent;
+    border: 0.01rem solid #D18A34;
+    color: #D18A34;
+    padding: 0.06rem 0.05rem;
+}
   .search-btn-list {
     position: fixed;
     right: 0;

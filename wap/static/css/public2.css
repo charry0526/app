@@ -1041,7 +1041,8 @@ input[type=checkbox]:checked + label[data-v-39817102]:before {
 }
 
 .yellow {
-  color: #f5ca07
+  /* color: #f5ca07 */
+  color: #D18A34;
 }
 
 .blue {
@@ -1266,7 +1267,8 @@ input[type=checkbox]:checked + label[data-v-39817102]:before {
 .table-list ul .li-title .name {
   font-size: .28rem;
   line-height: .5rem;
-  margin-top: .1rem;
+  /* margin-top: .1rem; */
+  margin-top: 0rem;
   color: #ddd
 }
 
@@ -1298,7 +1300,8 @@ input[type=checkbox]:checked + label[data-v-39817102]:before {
 .table-list .title {
   color: #ccc;
   background: #2e3138;
-  background: #21252a;
+  /* background: #21252a; */
+  background: #353338;
   position: fixed;
   width: 100%;
   z-index: 10;

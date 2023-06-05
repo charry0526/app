@@ -14,6 +14,11 @@
           >
             <img src="../../assets/ico/wogerenziliao.png" >
       </div>
+      <div class="home-search-me"
+          @click="$router.push('/user')"
+          >
+            <img src="../../assets/ico/wogerenziliao.png" >
+      </div>
       <!-- <div class="home-search-ctl">
         <img class="lingdang" src="../../assets/ico/lingdang.png" alt=""
         @click="$router.push('/notify')"
@@ -768,7 +773,7 @@ export default {
 
 .account-box {
   position: relative;
-  background-color: #2A282D;
+  background-color: #252429;//#2A282D;
   padding-top: .2rem;
   .content {
     width:6.86rem;
@@ -785,13 +790,13 @@ export default {
       align-items: center;
       justify-content: space-between;
       padding: .25rem 0 .15rem;
-      background-color: #3B3A3F !important;
+      background-color: #2A292E !important;
       border-radius: 0.2rem;
       .name {
         width: 1.52rem;
         height: .4rem;
         line-height: .4rem;
-        border:1px solid rgba(255, 255, 255, .2);
+        // border:1px solid rgba(255, 255, 255, .2);
         border-radius: .2rem;
         font-size: .24rem;
       }
@@ -806,7 +811,7 @@ export default {
         padding: 0 .1rem;
         color: #fff8;
         &::before{
-          display: block;
+          display: none;
           position: absolute;
           content: '';
           width: 100%;
@@ -854,7 +859,7 @@ export default {
   padding: 0 .3rem;
   height: .8rem;
   margin-top: 0.3rem;
-  background-color: #2A282D;
+  background-color: #252429;//#2A282D;
   // background-color: #3B3A3F;
   display: flex;
   align-items: center;
@@ -867,7 +872,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: .3rem;
+    margin-left: .2rem;
     >img{
       width: .27rem;
       height: .29rem;

@@ -17,17 +17,20 @@
       <mt-tab-item id="2">HNX</mt-tab-item>
       <mt-tab-item id="3">UPCOM</mt-tab-item>
     </mt-navbar>
-     <div :class="i.floatPoint>0?'tab greenBg':'tab redBg'" v-for="(i,index) in market" v-if="index < 3"
-                 :key="i.key">
-        <p :index='index' class="name">{{i.indexName}}</p>
-        <p :class="changeTextClass[index] == true?'price heartBeat':'price'">
-          {{$moneyDot(Number(i.currentPoint).toFixed(2))}}
-        </p>
-        <div class="status">
-            <span :class="i.floatPoint>0?'pifting green':'pifting red'">{{Number(i.floatPoint).toFixed(2)}}</span>
-            <span :class="i.floatRate>0?'Percentage green':'Percentage red'">{{i.floatRate}}%</span>
-        </div>
+    <div class="content">
+      <div :class="i.floatPoint>0?'tab greenBg':'tab redBg'" v-for="(i,index) in market" v-if="index < 3"
+                  :key="i.key">
+          <p :index='index' class="name">{{i.indexName}}</p>
+          <p :class="changeTextClass[index] == true?'price heartBeat':'price'">
+            {{$moneyDot(Number(i.currentPoint).toFixed(2))}}
+          </p>
+          <div class="status">
+              <span :class="i.floatPoint>0?'pifting green':'pifting red'">{{Number(i.floatPoint).toFixed(2)}}</span>
+              <span :class="i.floatRate>0?'Percentage green':'Percentage red'">{{i.floatRate}}%</span>
+          </div>
+      </div>
     </div>
+
     <mt-tab-container class="order-list" v-model="selected">
       <!-- <mt-tab-container-item id="0">
           <List0 :changeNavOptions='changeNavOptions'/>
@@ -243,32 +246,46 @@ export default {
     .top-navbar{
       position: absolute;
       top: 0;
-      left: 50%;
-      width: 70%;
-      margin-left: -35%;
+      left: 0;
+      width: 100%;
+      margin-left:0;
       background: none;
       box-shadow: none;
+      border-bottom: .07rem solid #2B2A2F;
+      width: 100%;
+      padding: 0 .4rem;
       /deep/.mint-tab-item{
         .mint-tab-item-label{
-          font-size:0.28rem;
+          font-size:0.22rem;
           font-family:MicrosoftYaHeiLight;
           font-weight:400;
           color:rgba(255,255,255,1);
+
         }
         &.is-selected{
           position: relative;
-          background:linear-gradient(0deg,rgba(27,166,208,1),rgba(2,116,150,1));
+          // background:linear-gradient(0deg,rgba(27,166,208,1),rgba(2,116,150,1));
+          background: #343338;
+          // border-bottom: 0.07rem solid #BA9261;
+          // padding: 0.1rem;
+
+          border-top-left-radius: .05rem;
+          border-top-right-radius: .05rem;
+          .mint-tab-item-label{
+            color: #BC9563;
+          }
           &::after{
             position: absolute;
             content: '';
             display: block;
-            width: 0.67rem;
-            height: 0.06rem;
-            background-color: #138EB4;
-            bottom: 0;
-            left: 50%;
-            margin-left: -0.335rem;
-            display: none;
+            width: 100%;
+            height: 0.07rem;
+            background-color: #BC9563;
+            bottom: -0.06rem;
+            left: 0;
+            // margin-left: -0.335rem;
+            // display: none;
+            // border-bottom: 0.07rem solid #BA9261;
           }
         }
       }
@@ -316,30 +333,83 @@ export default {
       }
     }
   }
-   .tab {
-      float: left;
-      width: 31%;
-      margin: 0.05rem 1%;
-      margin-top: 0;
-      text-align: center;
-      padding: 0.1rem 0;
-      background: none !important;
-
-      p {
-        margin-top: 0.1rem;
-      }
-
-      .name {
-        font-size: .22rem;
-      }
-
-      .price {
-        font-size: 0.34rem;
-      }
-
-      .status {
-        margin-top: 0.1rem;
-        font-size: .22rem;
+   .content {
+    width:6.86rem;
+    height: 1.72rem;
+    margin: 0 auto;
+    // padding: 0 0.14rem;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+      .tab {
+        width: 2.04rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        padding: .25rem 0 .15rem;
+        background-color: #2A292E !important;
+        border-radius: 0.2rem;
+        .name {
+          width: 1.52rem;
+          height: .4rem;
+          line-height: .4rem;
+          // border:1px solid rgba(255, 255, 255, .2);
+          border-radius: .2rem;
+          font-size: .24rem;
+          text-align: center;
+        }
+        .price {
+          font-size: .24rem;
+        }
+        .status {
+          position: relative;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          padding: 0 .1rem;
+          color: #fff8;
+          &::before{
+            display: none;
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 1px;
+            left: 0%;
+            top: -.1rem;
+            background-color: #fff3;
+          }
+        }
       }
     }
+.table-list .title{
+  background: #353338;
+}
+  //  .tab {
+  //     float: left;
+  //     width: 31%;
+  //     margin: 0.05rem 1%;
+  //     margin-top: 0;
+  //     text-align: center;
+  //     padding: 0.1rem 0;
+  //     background: none !important;
+
+  //     p {
+  //       margin-top: 0.1rem;
+  //     }
+
+  //     .name {
+  //       font-size: .22rem;
+  //     }
+
+  //     .price {
+  //       font-size: 0.34rem;
+  //     }
+
+  //     .status {
+  //       margin-top: 0.1rem;
+  //       font-size: .22rem;
+  //     }
+  //   }
+
 </style>

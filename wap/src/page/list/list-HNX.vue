@@ -356,6 +356,11 @@ export default {
       box-sizing: border-box;
       overflow-y: auto;
       padding-top: 0.6rem;
+       >.table-list{
+         >li:nth-child(odd){
+          background-color: #212025;
+        }
+      }
       ul{
         li.li-base{
           width: 30%;
@@ -377,12 +382,15 @@ export default {
         }
         .li-title{
           width: 40%;
+          display: flex;
+          align-items: center;
           .name{
             color: #fff;
-            width: 100%;
+            width: 70%;
             display: flex;
             align-items: center;
             margin-top: 0.05rem;
+            // margin-right: .1rem;
             img{
               width: 0.32rem;
               margin-right: 0.05rem;

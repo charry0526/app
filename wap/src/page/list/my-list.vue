@@ -270,14 +270,15 @@ export default {
 
   .wrapper {
     padding-top: 0.2rem;
-    background-color: #16171d;
+    // background-color: #16171d;
   }
 
   .account-box {
     // margin-top: 0.5rem;
-    background-color: #16171d;
+    background-color: #252429;
     .box-contain {
-    background-color: #16171d;
+      height: 1.72rem;
+    background-color: #252429;
     }
   }
 
@@ -288,7 +289,10 @@ export default {
   /*大盘指数*/
   .box-contain {
     min-height: 1.3rem;
-
+    margin: 0 auto;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
     .more {
       position: absolute;
       right: 0;
@@ -297,30 +301,70 @@ export default {
       cursor: pointer;
     }
 
+    // .tab {
+    //   float: left;
+    //   width: 31%;
+    //   margin: 0.05rem 1%;
+    //   margin-top: 0;
+    //   text-align: center;
+    //   padding: 0.1rem 0;
+    //   background: none !important;
+
+    //   p {
+    //     margin-top: 0.1rem;
+    //   }
+
+    //   .name {
+    //     font-size: .22rem;
+    //   }
+
+    //   .price {
+    //     font-size: 0.34rem;
+    //   }
+
+    //   .status {
+    //     margin-top: 0.1rem;
+    //     font-size: .22rem;
+    //   }
+    // }
     .tab {
-      float: left;
-      width: 31%;
-      margin: 0.05rem 1%;
-      margin-top: 0;
-      text-align: center;
-      padding: 0.1rem 0;
-      background: none !important;
-
-      p {
-        margin-top: 0.1rem;
-      }
-
+      width: 2.04rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: .25rem 0 .15rem;
+      background: #2A292E !important;
+      border-radius: 0.2rem;
       .name {
-        font-size: .22rem;
+        width: 1.52rem;
+        height: .4rem;
+        line-height: .4rem;
+        // border:1px solid rgba(255, 255, 255, .2);
+        border-radius: .2rem;
+        font-size: .24rem;
+        text-align: center;
       }
-
       .price {
-        font-size: 0.34rem;
+        font-size: .24rem;
       }
-
       .status {
-        margin-top: 0.1rem;
-        font-size: .22rem;
+        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 .1rem;
+        color: #fff8;
+        &::before{
+          display: none;
+          position: absolute;
+          content: '';
+          width: 100%;
+          height: 1px;
+          left: 0%;
+          top: -.1rem;
+          background-color: #fff3;
+        }
       }
     }
   }
@@ -354,9 +398,14 @@ export default {
   }
 
   .li-title{
-    width: 30% !important;;
+    width: 30% !important;
+    display: flex;
+    align-items: center;
   }
   .del{
     width:25% !important;
+  }
+  .table-list ul .li-title .name{
+    margin-right: .2rem;
   }
 </style>
