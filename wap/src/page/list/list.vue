@@ -229,7 +229,7 @@ export default {
     .mint-tab-item {
       padding: 0.2rem 0;
       width: 1.42rem;
-      height: 0.44rem;
+      // height: 0.44rem;
       margin: 0.3rem 0.1rem 0 0.1rem;
       display: flex;
       justify-content: center;
@@ -269,10 +269,10 @@ export default {
           // border-bottom: 0.07rem solid #BA9261;
           // padding: 0.1rem;
 
-          border-top-left-radius: .05rem;
-          border-top-right-radius: .05rem;
+          border-top-left-radius: .1rem;
+          border-top-right-radius: .1rem;
           .mint-tab-item-label{
-            color: #BC9563;
+            color: #DF9F3E !important;
           }
           &::after{
             position: absolute;
@@ -280,7 +280,7 @@ export default {
             display: block;
             width: 100%;
             height: 0.07rem;
-            background-color: #BC9563;
+            background-color: #DF9F3E;
             bottom: -0.06rem;
             left: 0;
             // margin-left: -0.335rem;
@@ -336,7 +336,7 @@ export default {
    .content {
     width:6.86rem;
     height: 1.72rem;
-    margin: 0 auto;
+    margin: .2rem auto;
     // padding: 0 0.14rem;
     padding: 0;
     display: flex;

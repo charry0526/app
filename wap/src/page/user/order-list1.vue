@@ -6,7 +6,7 @@
         </router-link>
     </mt-header> -->
     <mt-navbar class="sub-navbar" v-model="selected">
-      <mt-tab-item id="1"></i>{{$t("myPosition")}}</mt-tab-item>
+      <mt-tab-item id="1">{{$t("myPosition")}}</mt-tab-item>
       <mt-tab-item id="2">{{$t("myClosingPosition")}}</mt-tab-item>
     </mt-navbar>
     <mt-tab-container class="order-list" v-model="selected">
@@ -131,86 +131,99 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-  .is-selected .mint-tab-item-label:hover {
-    text-decoration: none;
-  }
-
-  .wrapper /deep/ .mint-tab-item-label {
-    font-size: 0.264rem;
-  }
-
-  .mint-navbar .mint-tab-item.is-selected {
-    border-bottom: 2px solid #d50000;
-    text-decoration: none;
-  }
-
-  .mint-tab-container-item {
-    // padding-top: 1.2rem;
-    .mint-button--default {
-      padding: 0 0.2rem;
-      font-size: 0.24rem;
-      height: 0.5rem;
-      margin: 0.2rem 0.2rem 0;
-      color: #607d8b;
-      box-shadow: 0 0 1px #3b71b9;
-      background: none;
-    }
-  }
-
-  .mint-navbar {
-    box-shadow: 0px 0px 4px rgba(6, 0, 1, 0.2);
-
-    .mint-tab-item {
-      // background: #21252a;
-      padding: 0.2rem 0;
-
-      &.is-selected {
-        border: none;
-        margin-bottom: 0;
-      }
-
-      .mint-tab-item-label {
-        font-size: 0.22rem;
-      }
-
-      .iconfont {
-        // display: block;
-        font-size: 0.46rem;
-        margin-bottom: 0.12rem;
-        vertical-align: middle;
-        margin-right: 0.12rem;
-      }
-    }
-  }
   .sub-navbar {
-    background-color: #16171D !important;
-    height: .7rem;
+    background: transparent;
     justify-content: center;
     box-shadow: none;
-
-    /deep/.mint-tab-item-label {
-        font-size: .24rem;
-      }
-    .mint-tab-item {
-      position: relative;
-      flex-grow: 0;
-      flex-shrink:1;
-      flex-basis:auto;
-      width: 1.9rem;
-      height: .4rem;
-      background-color: #3D4456;
-      padding: 0;
-      line-height: .4rem;
-      margin: 0.3rem .2rem 0;
-      /deep/.mint-tab-item-label {
-        line-height: .4rem;
-        height: .4rem;
-      }
-      &.is-selected {
-        color: #fff;
-        background-color: #138EB4;
-      }
+    border-bottom: 0.07rem solid #2B2A2F;
+    width: 100%;
+    padding: 0 1.3rem;
+    .mint-tab-item{
+          padding: 0.2rem 0;
+          width: 1.42rem;
+          height: auto;
+          margin: 0.3rem 0.1rem 0 0.1rem;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-pack: center;
+          -ms-flex-pack: center;
+          justify-content: center;
+          -webkit-box-align: center;
+          -ms-flex-align: center;
+          align-items: center;
+          border-radius: 0.01rem;
+          background: transparent;
+       /deep/.mint-tab-item-label{
+            color: #fff;
+            font-size: 0.264rem;
+        }
     }
+    .is-selected{
+      position: relative;
+      background: #343338;
+      border-top-left-radius: .1rem;
+      border-top-right-radius: .1rem;
+        /deep/.mint-tab-item-label{
+            color: #DF9F3E;
+        }
+    }
+    .is-selected::after{
+       position: absolute;
+       content: '';
+       display: block;
+       width: 100%;
+       height: 0.07rem;
+       background-color: #DF9F3E;
+       bottom: -0.06rem;
+      left: 0;
+            // margin-left: -0.335rem;
+            // display: none;
+            // border-bottom: 0.07rem solid #BA9261;
+      }
+    // background-color: #16171D !important;
+    // height: .7rem;
+    // justify-content: center;
+    // box-shadow: none;
+
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   width: 100%;
+    //   margin-left:0;
+    //   background: none;
+    //   box-shadow: none;
+    //   border-bottom: .07rem solid #2B2A2F;
+    //   width: 100%;
+    //   padding: 0 .4rem;
+
+    // /deep/.mint-tab-item-label {
+    //     font-size: .24rem;
+    //   }
+    // .mint-tab-item {
+    //   position: relative;
+    //   flex-grow: 0;
+    //   flex-shrink:1;
+    //   flex-basis:auto;
+    //   width: 1.9rem;
+    //   height: .4rem;
+    //   background-color: #3D4456;
+    //   padding: 0;
+    //   line-height: .4rem;
+    //   margin: 0.3rem .2rem 0;
+    //   /deep/.mint-tab-item-label {
+    //     line-height: .4rem;
+    //     height: .4rem;
+    //   }
+    //   &.is-selected {
+    //     // color: #fff;
+    //     // background-color: #138EB4;
+    //      position: relative;
+    //       background: #343338;
+    //       border-top-left-radius: .05rem;
+    //       border-top-right-radius: .05rem;
+    //   }
+    // }
   }
   #app.red-theme {
     .sub-navbar {

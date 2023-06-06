@@ -399,13 +399,16 @@ export default {
 
   .li-title{
     width: 30% !important;
-    display: flex;
-    align-items: center;
+    // display: flex;
+    // align-items: center;
   }
   .del{
     width:25% !important;
   }
   .table-list ul .li-title .name{
     margin-right: .2rem;
+  }
+  .kechuang-mark{
+      border-radius: 0.05rem !important;
   }
 </style>

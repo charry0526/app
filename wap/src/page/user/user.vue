@@ -16,20 +16,24 @@
     </div> -->
     <div class="account-info">
       <div class="account-info_avatar">
-        <img src="../../assets/ico/wogerenziliao.png"
-             alt="">
+        <img src="../../assets/ico/wogerenziliao.png" alt="" />
       </div>
       <div class="account-info_detail">
-        <div class="account-phone">{{$t("userAuth")}}：{{$store.state.userInfo.phone || $t("notLoggedL")}}</div>
-        <div class="account-name">{{$t("userName")}}：{{$store.state.userInfo.nickName || $t("notLoggedL")}}</div>
+        <div class="account-name">
+          {{ $t("userName") }}：{{
+            $store.state.userInfo.nickName || $t("notLoggedL")
+          }}
+        </div>
+        <div class="account-phone">
+          {{ $t("userAuth") }}：{{
+            $store.state.userInfo.phone || $t("notLoggedL")
+          }}
+        </div>
       </div>
-      <div class="account-info_ctl"
-           @click="hideNumber">
-        {{$t("assetStatus")}}
-        <i v-show="$store.state.hide"
-           class="iconfont icon-yanjing"></i>
-        <i v-show="!$store.state.hide"
-           class="iconfont icon-yanjing1"></i>
+      <div class="account-info_ctl" @click="hideNumber">
+        {{ $t("assetStatus") }}
+        <i v-show="$store.state.hide" class="iconfont icon-yanjing"></i>
+        <i v-show="!$store.state.hide" class="iconfont icon-yanjing1"></i>
       </div>
     </div>
     <div class="account-container">
@@ -60,140 +64,326 @@
       </div> -->
       <div class="account-preview">
         <div class="acc-pre-left">
-          <img v-show="$state.theme!='red'"
-               src="../../assets/img/vnd.png"
-               alt="">
-          <img v-show="$state.theme=='red'"
-               src="../../assets/img/vnd-red.png"
-               alt="">
+          <img
+            v-show="$state.theme != 'red'"
+            src="../../assets/img/vnd.png"
+            alt=""
+          />
+          <img
+            v-show="$state.theme == 'red'"
+            src="../../assets/img/vnd-red.png"
+            alt=""
+          />
 
-          <span class="ti">{{$t("uesrTotle")}}</span>
+          <span class="ti">{{ $t("uesrTotle") }}</span>
 
           <span class="de">
             <div>
-               <!-- <p
+              <!-- <p
                  class="account">{{$moneyDot(Number((1000000+603900902.40)/1000000).toFixed(2))}}M</p> -->
-              <p v-if="this.$store.state.settingForm.indexDisplay && !this.$store.state.settingForm.futuresDisplay "
-                 class="account">{{$store.state.hide?'****':$moneyDot(Number(($store.state.userInfo.userAmt +$store.state.userInfo.userIndexAmt)/1000000).toFixed(2))+'M'}}</p>
-              <p v-else-if="!this.$store.state.settingForm.indexDisplay && this.$store.state.settingForm.futuresDisplay"
-                 class="account">{{$store.state.hide?'****':$moneyDot(Number(($store.state.userInfo.userAmt +$store.state.userInfo.userFuturesAmt)/1000000).toFixed(2))+'M'}}</p>
-              <p v-else-if="!this.$store.state.settingForm.indexDisplay && !this.$store.state.settingForm.futuresDisplay"
-                 class="account">{{$store.state.hide?'****':$moneyDot(Number($store.state.userInfo.userAmt/1000000).toFixed(2))+'M'}}</p>
-              <p v-else-if="this.$store.state.settingForm.indexDisplay && this.$store.state.settingForm.futuresDisplay"
-                 class="account">{{$store.state.hide?'****':$moneyDot(Number(($store.state.userInfo.userAmt +$store.state.userInfo.userIndexAmt + $store.state.userInfo.userFuturesAmt)/1000000).toFixed(2))+'M'}}</p>
+              <p
+                v-if="
+                  this.$store.state.settingForm.indexDisplay &&
+                    !this.$store.state.settingForm.futuresDisplay
+                "
+                class="account"
+              >
+                {{
+                  $store.state.hide
+                    ? "****"
+                    : $moneyDot(
+                        Number(
+                          ($store.state.userInfo.userAmt +
+                            $store.state.userInfo.userIndexAmt) /
+                            1000000
+                        ).toFixed(2)
+                      ) + "M"
+                }}
+              </p>
+              <p
+                v-else-if="
+                  !this.$store.state.settingForm.indexDisplay &&
+                    this.$store.state.settingForm.futuresDisplay
+                "
+                class="account"
+              >
+                {{
+                  $store.state.hide
+                    ? "****"
+                    : $moneyDot(
+                        Number(
+                          ($store.state.userInfo.userAmt +
+                            $store.state.userInfo.userFuturesAmt) /
+                            1000000
+                        ).toFixed(2)
+                      ) + "M"
+                }}
+              </p>
+              <p
+                v-else-if="
+                  !this.$store.state.settingForm.indexDisplay &&
+                    !this.$store.state.settingForm.futuresDisplay
+                "
+                class="account"
+              >
+                {{
+                  $store.state.hide
+                    ? "****"
+                    : $moneyDot(
+                        Number($store.state.userInfo.userAmt / 1000000).toFixed(
+                          2
+                        )
+                      ) + "M"
+                }}
+              </p>
+              <p
+                v-else-if="
+                  this.$store.state.settingForm.indexDisplay &&
+                    this.$store.state.settingForm.futuresDisplay
+                "
+                class="account"
+              >
+                {{
+                  $store.state.hide
+                    ? "****"
+                    : $moneyDot(
+                        Number(
+                          ($store.state.userInfo.userAmt +
+                            $store.state.userInfo.userIndexAmt +
+                            $store.state.userInfo.userFuturesAmt) /
+                            1000000
+                        ).toFixed(2)
+                      ) + "M"
+                }}
+              </p>
             </div>
           </span>
         </div>
         <div class="acc-pre-center">
-          <div>{{$t("userAuth")}}:
+          <div>
+            {{ $t("userAuth") }}:
             <p style="margin-top:.3rem;font-size: .3rem;">
-            <!-- 303 900 902.40 -->
-            {{$store.state.hide?'****':$moneyDot($store.state.userInfo.userAmt)+' đ'?$moneyDot($store.state.userInfo.userAmt)+' đ':$moneyDot($store.state.userInfo.userAmt)+' đ'}}
+              <!-- 303 900 902.40 -->
+              {{
+                $store.state.hide
+                  ? "****"
+                  : $moneyDot($store.state.userInfo.userAmt) + " đ"
+                  ? $moneyDot($store.state.userInfo.userAmt) + " đ"
+                  : $moneyDot($store.state.userInfo.userAmt) + " đ"
+              }}
             </p>
           </div>
           <!-- <div>指数账户: <span>￥{{$store.state.hide?'****':$store.state.userInfo.userIndexAmt}}</span></div> -->
           <!-- <div>期货账户: <span>￥{{$store.state.hide?'****':Number($store.state.userInfo.userFuturesAmt).toFixed(2)}}</span></div> -->
         </div>
         <div class="acc-pre-right">
-          <div class="redbtn btn"
-               @click="toRecharge">{{$t("recharge")}}</div>
-          <div class="bluebtn btn"
-               @click="toCash">{{$t("withdraw")}}</div>
+          <div class="redbtn btn" @click="toRecharge">{{ $t("recharge") }}</div>
+          <div class="bluebtn btn" @click="toCash">{{ $t("withdraw") }}</div>
         </div>
       </div>
-      <div v-for="item in account"
-           :key="item.key">
-        <div class="account-box"
-             v-if="item.isDisplay">
-          <div class="header"
-               @click="item.isShow = item.isShow?false:true">
+      <div v-for="item in account" :key="item.key">
+        <div class="account-box" v-if="item.isDisplay">
+          <div class="header" @click="item.isShow = item.isShow ? false : true">
             <!-- <i v-if="item.isShow" class="iconfont jian"></i>
             <i v-else class="iconfont jia"></i> -->
             <div class="header-left">
-              <img v-if="item.isShow&&$state.theme =='red'"
-                   class="iconfont"
-                   src="../../assets/ico/jian-red.png">
-              <img v-else-if="item.isShow&&$state.theme !='red'"
-                   class="iconfont"
-                   src="../../assets/ico/jian.png">
-              <img v-else-if="!item.isShow&&$state.theme !='red'"
-                   class="iconfont"
-                   src="../../assets/ico/jia.png">
-              <img v-else
-                   class="iconfont"
-                   src="../../assets/ico/jia-red.png">
-              <span :style="{color:$state.theme =='red'?'#000':'#fff'}">TÀI SẢN CỦA TÔI {{$t("userAuth")}}</span>
-              <span v-if="item.name == '指数'">({{$store.state.hide?'****':$store.state.userInfo.userIndexAmt?$store.state.userInfo.userIndexAmt+' đ':$store.state.userInfo.userIndexAmt}})</span>
-              <span v-if="item.name == '我的'">({{$store.state.hide?'****':$store.state.userInfo.userAmt?$moneyDot($store.state.userInfo.userAmt)+' đ':$store.state.userInfo.userAmt}})</span>
-              <span v-if="item.name == '期货'">({{$store.state.hide?'****':Number($store.state.userInfo.userFuturesAmt).toFixed(2)}})
+              <img
+                v-if="item.isShow && $state.theme == 'red'"
+                class="iconfont"
+                src="../../assets/ico/jian-red.png"
+              />
+              <img
+                v-else-if="item.isShow && $state.theme != 'red'"
+                class="iconfont"
+                src="../../assets/ico/jian.png"
+              />
+              <img
+                v-else-if="!item.isShow && $state.theme != 'red'"
+                class="iconfont"
+                src="../../assets/ico/jia.png"
+              />
+              <img v-else class="iconfont" src="../../assets/ico/jia-red.png" />
+              <span :style="{ color: $state.theme == 'red' ? '#000' : '#fff' }"
+                >TÀI SẢN CỦA TÔI {{ $t("userAuth") }}</span
+              >
+              <span v-if="item.name == '指数'"
+                >({{
+                  $store.state.hide
+                    ? "****"
+                    : $store.state.userInfo.userIndexAmt
+                    ? $store.state.userInfo.userIndexAmt + " đ"
+                    : $store.state.userInfo.userIndexAmt
+                }})</span
+              >
+              <span v-if="item.name == '我的'"
+                >({{
+                  $store.state.hide
+                    ? "****"
+                    : $store.state.userInfo.userAmt
+                    ? $moneyDot($store.state.userInfo.userAmt) + " đ"
+                    : $store.state.userInfo.userAmt
+                }})</span
+              >
+              <span v-if="item.name == '期货'"
+                >({{
+                  $store.state.hide
+                    ? "****"
+                    : Number($store.state.userInfo.userFuturesAmt).toFixed(2)
+                }})
               </span>
             </div>
             <!-- <a class="pull-right" @click="toTransfer(1)">
               <span :style="{color:$state.theme == 'red'?'#000':'#fff'}">资金互转<i class="iconfont icon-you"></i></span>
             </a> -->
           </div>
-          <div v-show="item.isShow"
-               class="content">
+          <div v-show="item.isShow" class="content">
             <ul class="content-ul">
               <li>
                 <!-- <i class="iconfont icon-zijin1"></i> -->
-                <img class="zijin1"
-                     src="../../assets/img/zijin1.png">
+                <img class="zijin1" src="../../assets/img/zijin1.png" />
                 <div>
-                  <div class="name">{{$t("uesrTotle")}}</div>
-                  <p v-if="item.name == '指数'"
-                     class="number yellow">
-                    {{$store.state.hide?'****':$moneyDot($store.state.userInfo.userIndexAmt)}} đ</p>
-                  <p v-if="item.name == '我的'"
-                     class="number yellow">
-                    {{$store.state.hide?'****':$moneyDot($store.state.userInfo.userAmt)}} đ</p>
-                  <p v-if="item.name == '期货'"
-                     class="number yellow">
-                    {{$store.state.hide?'****':$moneyDot(Number($store.state.userInfo.userFuturesAmt).toFixed(2))}} đ</p>
+                  <div class="name">{{ $t("uesrTotle") }}</div>
+                  <p v-if="item.name == '指数'" class="number yellow">
+                    {{
+                      $store.state.hide
+                        ? "****"
+                        : $moneyDot($store.state.userInfo.userIndexAmt)
+                    }}
+                    đ
+                  </p>
+                  <p v-if="item.name == '我的'" class="number yellow">
+                    {{
+                      $store.state.hide
+                        ? "****"
+                        : $moneyDot($store.state.userInfo.userAmt)
+                    }}
+                    đ
+                  </p>
+                  <p v-if="item.name == '期货'" class="number yellow">
+                    {{
+                      $store.state.hide
+                        ? "****"
+                        : $moneyDot(
+                            Number(
+                              $store.state.userInfo.userFuturesAmt
+                            ).toFixed(2)
+                          )
+                    }}
+                    đ
+                  </p>
                 </div>
               </li>
               <li>
                 <!-- <i class="iconfont icon-keyongzijin"></i> -->
-                <img class="zijin1"
-                     src="../../assets/img/keyongzijin.png">
+                <img class="zijin1" src="../../assets/img/keyongzijin.png" />
                 <div>
-                  <div class="name">{{$t("AvailableFunds")}}</div>
-                  <p v-if="item.name == '指数'"
-                     class="number yellow">
-                    {{$store.state.hide?'****':$moneyDot($store.state.userInfo.enableIndexAmt)+' đ'}}</p>
-                  <p v-if="item.name == '我的'"
-                     class="number yellow">
-                    {{$store.state.hide?'****':$moneyDot($store.state.userInfo.enableAmt)+' đ'}}</p>
-                  <p v-if="item.name == '期货'"
-                     class="number yellow">
-                    {{$store.state.hide?'****':$moneyDot($store.state.userInfo.enableFuturesAmt)+' đ'}}</p>
+                  <div class="name">{{ $t("AvailableFunds") }}</div>
+                  <p v-if="item.name == '指数'" class="number yellow">
+                    {{
+                      $store.state.hide
+                        ? "****"
+                        : $moneyDot($store.state.userInfo.enableIndexAmt) + " đ"
+                    }}
+                  </p>
+                  <p v-if="item.name == '我的'" class="number yellow">
+                    {{
+                      $store.state.hide
+                        ? "****"
+                        : $moneyDot($store.state.userInfo.enableAmt) + " đ"
+                    }}
+                  </p>
+                  <p v-if="item.name == '期货'" class="number yellow">
+                    {{
+                      $store.state.hide
+                        ? "****"
+                        : $moneyDot($store.state.userInfo.enableFuturesAmt) +
+                          " đ"
+                    }}
+                  </p>
                 </div>
               </li>
               <li>
                 <i class="iconfont icon-dongjiezijin"></i>
-                <div class="name">{{$t("FreezeMargin")}}</div>
-                <p v-if="item.name == '指数'"
-                   class="number yellow">
-                  {{$store.state.hide?'****':$moneyDot($store.state.userInfo.allIndexFreezAmt)+' đ'}}</p>
-                <p v-if="item.name == '我的'"
-                   class="number yellow">
-                  {{$store.state.hide?'****':$moneyDot($store.state.userInfo.allFreezAmt)+' đ'}}</p>
-                <p v-if="item.name == '期货'"
-                   class="number yellow">
-                  {{$store.state.hide?'****':$moneyDot($store.state.userInfo.allFuturesFreezAmt)+' đ'}}</p>
+                <div class="name">{{ $t("FreezeMargin") }}</div>
+                <p v-if="item.name == '指数'" class="number yellow">
+                  {{
+                    $store.state.hide
+                      ? "****"
+                      : $moneyDot($store.state.userInfo.allIndexFreezAmt) + " đ"
+                  }}
+                </p>
+                <p v-if="item.name == '我的'" class="number yellow">
+                  {{
+                    $store.state.hide
+                      ? "****"
+                      : $moneyDot($store.state.userInfo.allFreezAmt) + " đ"
+                  }}
+                </p>
+                <p v-if="item.name == '期货'" class="number yellow">
+                  {{
+                    $store.state.hide
+                      ? "****"
+                      : $moneyDot($store.state.userInfo.allFuturesFreezAmt) +
+                        " đ"
+                  }}
+                </p>
               </li>
               <li>
                 <i class="iconfont icon-yingkuixuanzhong"></i>
-                <div class="name">{{$t("TotalprofitAndLoss")}}</div>
-                <p v-if="item.name == '指数'"
-                   :class="$store.state.userInfo.allIndexProfitAndLose<0?'number red':$store.state.userInfo.allIndexProfitAndLose>0?'number green':'number'">
-                  {{$store.state.hide?'****':$moneyDot($store.state.userInfo.allIndexProfitAndLose)+' đ'}}</p>
-                <p v-if="item.name == '我的'"
-                   :class="$store.state.userInfo.allProfitAndLose<0?'number red':$store.state.userInfo.allProfitAndLose>0?'number green':'number'">
-                  {{$store.state.hide?'****':$moneyDot($store.state.userInfo.allProfitAndLose)+' đ'}}</p>
-                <p v-if="item.name == '期货'"
-                   :class="$store.state.userInfo.allFuturesProfitAndLose<0?'number red':$store.state.userInfo.allFuturesProfitAndLose>0?'number green':'number'">
-                  {{$store.state.hide?'****':$moneyDot(Number($store.state.userInfo.allFuturesProfitAndLose).toFixed(2))+' đ'}}</p>
+                <div class="name">{{ $t("TotalprofitAndLoss") }}</div>
+                <p
+                  v-if="item.name == '指数'"
+                  :class="
+                    $store.state.userInfo.allIndexProfitAndLose < 0
+                      ? 'number red'
+                      : $store.state.userInfo.allIndexProfitAndLose > 0
+                      ? 'number green'
+                      : 'number'
+                  "
+                >
+                  {{
+                    $store.state.hide
+                      ? "****"
+                      : $moneyDot($store.state.userInfo.allIndexProfitAndLose) +
+                        " đ"
+                  }}
+                </p>
+                <p
+                  v-if="item.name == '我的'"
+                  :class="
+                    $store.state.userInfo.allProfitAndLose < 0
+                      ? 'number red'
+                      : $store.state.userInfo.allProfitAndLose > 0
+                      ? 'number green'
+                      : 'number'
+                  "
+                >
+                  {{
+                    $store.state.hide
+                      ? "****"
+                      : $moneyDot($store.state.userInfo.allProfitAndLose) + " đ"
+                  }}
+                </p>
+                <p
+                  v-if="item.name == '期货'"
+                  :class="
+                    $store.state.userInfo.allFuturesProfitAndLose < 0
+                      ? 'number red'
+                      : $store.state.userInfo.allFuturesProfitAndLose > 0
+                      ? 'number green'
+                      : 'number'
+                  "
+                >
+                  {{
+                    $store.state.hide
+                      ? "****"
+                      : $moneyDot(
+                          Number(
+                            $store.state.userInfo.allFuturesProfitAndLose
+                          ).toFixed(2)
+                        ) + " đ"
+                  }}
+                </p>
               </li>
               <!-- <li>
                 <i class="iconfont icon-dongjiezijin"></i>
@@ -256,28 +446,30 @@
     </div> -->
     <div class="panel">
       <div class="panel-head">
-        <span class="font-w">{{$t("myPosition")}}</span>
+        <span class="font-w">{{ $t("myPosition") }}</span>
       </div>
       <div class="panel-body">
         <div class="row">
-          <div @click="goOrderList(1)"
-               class="col-xs-3">
-            <i class="iconfont icon-rongzi2"></i>
-            {{$t("myPosition")}}
+          <div @click="goOrderList(1)" class="col-xs-4">
+            <div class="img-box"><i class="iconfont icon-rongzi2"></i></div>
+            {{ $t("myPosition") }}
+          </div>
+          <div @click="goOrderList(1)" class="col-xs-4 tai-row">
+            <!-- <i class="iconfont icon-rongzilishi"></i> -->
+            <div class="img-box">
+              <img class="row-icon" src="../../assets/ico/353.png" alt="" />
+            </div>
+
+            {{ $t("myClosingPosition") }}
           </div>
           <div
-               @click="goOrderList(1)"
-               class="col-xs-3 tai-row">
-            <!-- <i class="iconfont icon-rongzilishi"></i> -->
-            <img class="row-icon"
-               src="../../assets/ico/353.png"
-               alt="">
-            {{$t("myClosingPosition")}}
-          </div>
-          <div v-if="this.$store.state.settingForm.indexDisplay"
-               @click="goEsop()"
-               class="col-xs-3">
-            <i class="iconfont icon-zhishuyidong"></i>
+            v-if="this.$store.state.settingForm.indexDisplay"
+            @click="goEsop()"
+            class="col-xs-4"
+          >
+            <div class="img-box">
+              <i class="iconfont icon-zhishuyidong"></i>
+            </div>
             ESOP
           </div>
           <!-- <div v-if="this.$store.state.settingForm.indexDisplay" @click="goOrderList(2)" class="col-xs-3">
@@ -295,164 +487,223 @@
         </div>
       </div>
     </div>
+    <div class="panel">
+      <div class="panel-body">
+          <ul class="row">
+            <li @click="toAuthentication" class="col-xs-4">
+              <div class="img-box"> <img class="row-icon" src="../../assets/ico/shimin.png" alt="" /></div>
+              <span>{{ $t("Verified") }}</span>
+            </li>
+            <li @click="goCard" class="col-xs-4 tai-row">
+              <div class="img-box">
+                <img class="row-icon" src="../../assets/ico/yinhangka.png" alt="" />
+              </div>
+              {{ $t("bank") }}
+            </li>
+            <li @click="goEsop" class="col-xs-4 tai-row">
+              <div class="img-box">
+                <img class="row-icon" src="../../assets/ico/yinhangka.png" alt="" />
+              </div>
+             {{ $t("RegisterbuyESOP") }}
+            </li>
+            <li  @click="gochangepass" class="col-xs-4 tai-row">
+              <div class="img-box">
+                <img class="row-icon" src="../../assets/ico/gaimima.png" alt="" />
+              </div>
+             {{ $t("changePassword") }}
+            </li>
+          </ul>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-body">
+          <ul class="row">
+            <li @click="goDetail" class="col-xs-4">
+              <div class="img-box"> <img class="row-icon" src="../../assets/img/103.png" alt="" /></div>
+              <span>{{ $t("Verified") }}</span>
+            </li>
+            <li @click="toRechargeList" class="col-xs-4 tai-row">
+              <div class="img-box">
+                <img class="row-icon"  src="../../assets/img/101.png" alt="" />
+              </div>
+              {{ $t("bank") }}
+            </li>
+            <li @click="toCashList" class="col-xs-4 tai-row">
+              <div class="img-box">
+                <img class="row-icon"  src="../../assets/img/102.png" alt="" />
+              </div>
+             {{ $t("RegisterbuyESOP") }}
+            </li>
+          </ul>
+      </div>
+    </div>
     <div class="other">
-      <ul class="after">
+      <!-- <ul class="after">
         <li @click="toAuthentication">
           <span>
-            <!-- <icon name="shoufei" slot="icon"></icon> -->
-            <!-- <i style="font-size:0.34rem" class="iconfont icon-shenfenrenzheng"></i> -->
-            <img src="../../assets/ico/shimin.png"
-                 style="width:.28rem;height:.24rem;margin-right: 0.15rem;">
-            {{$t("Verified")}}
-            <span class="renzhen done"
-                  v-if="$store.state.userInfo.isActive == 2">
+            <img
+              src="../../assets/ico/shimin.png"
+              style="width:.28rem;height:.24rem;margin-right: 0.15rem;"
+            />
+            {{ $t("Verified") }}
+            <span
+              class="renzhen done"
+              v-if="$store.state.userInfo.isActive == 2"
+            >
               <i class="iconfont el-icon-circle-check"></i>
-              {{$t("examinationPassed")}}
+              {{ $t("examinationPassed") }}
             </span>
-            <span class="renzhen ing"
-                  v-if="$store.state.userInfo.isActive == 0 || $store.state.userInfo.isActive == 3"
-                  style="color:red;font-size: 0.7rem;">
+            <span
+              class="renzhen ing"
+              v-if="
+                $store.state.userInfo.isActive == 0 ||
+                  $store.state.userInfo.isActive == 3
+              "
+              style="color:red;font-size: 0.7rem;"
+            >
               <i class="iconfont el-icon-circle-close"></i>
-              {{$t("NotReviewed")}}
+              {{ $t("NotReviewed") }}
             </span>
-            <!-- <i v-if="$store.state.userInfo.isActive == 1" style="color:red;font-size: 0.7rem;"
-                       class="iconfont icon-shenhezhong"></i>
-                    <i v-if="$store.state.userInfo.isActive == 2" style="color:red;font-size: 0.7rem;"
-                       class="iconfont icon-tongguo1"></i>
-                    <i v-if="$store.state.userInfo.isActive == 0 || $store.state.userInfo.isActive == 3"
-                       style="color:red;font-size: 0.75rem;" class="iconfont icon-icon-test"></i> -->
-            <icon name="right66"
-                  class="right"
-                  slot="icon"></icon>
+            <icon name="right66" class="right" slot="icon"></icon>
           </span>
         </li>
         <li @click="goCard">
           <span>
-            <!-- <i style="font-size:0.28rem" class="iconfont icon-yinhangqia"></i> -->
-            <img src="../../assets/ico/yinhangka.png"
-                 style="width:.28rem;height:.24rem;margin-right: 0.15rem;">
-            {{$t("bank")}}
-            <!-- <i v-if="!$store.state.bankInfo.bankNo" style="color:red;font-size: 0.3rem;margin-left: 0.1rem;"
-                       class="iconfont icon-iconfontweitongguo"></i>
-                    <i v-if="$store.state.bankInfo.bankNo" style="color:red;font-size: 0.3rem;margin-left: 0.1rem;"
-                       class="iconfont icon-yanzhengma"></i> -->
-            <icon name="right66"
-                  class="right"
-                  slot="icon"></icon>
+            <img
+              src="../../assets/ico/yinhangka.png"
+              style="width:.28rem;height:.24rem;margin-right: 0.15rem;"
+            />
+            {{ $t("bank") }}
+            <icon name="right66" class="right" slot="icon"></icon>
           </span>
         </li>
         <li @click="goEsop">
           <span>
-            <img src="../../assets/ico/yinhangka.png"
-                 style="width:.28rem;height:.24rem;margin-right: 0.15rem;">
-            {{$t("RegisterbuyESOP")}}
-            <icon name="right66"
-                  class="right"
-                  slot="icon"></icon>
+            <img
+              src="../../assets/ico/yinhangka.png"
+              style="width:.28rem;height:.24rem;margin-right: 0.15rem;"
+            />
+            {{ $t("RegisterbuyESOP") }}
+            <icon name="right66" class="right" slot="icon"></icon>
           </span>
         </li>
         <li @click="gochangepass">
           <span>
-            <!-- <i style="font-size:0.28rem" class="iconfont icon-yinhangqia"></i> -->
-            <img src="../../assets/ico/gaimima.png"
-                 style="width:.24rem;height:.24rem;margin-right: 0.15rem;">
-            {{$t("changePassword")}}
-            <!-- <i v-if="!$store.state.bankInfo.bankNo" style="color:red;font-size: 0.3rem;margin-left: 0.1rem;"
-                    class="iconfont icon-iconfontweitongguo"></i>
-                <i v-if="$store.state.bankInfo.bankNo" style="color:red;font-size: 0.3rem;margin-left: 0.1rem;"
-                    class="iconfont icon-yanzhengma"></i> -->
-            <icon name="right66"
-                  class="right"
-                  slot="icon"></icon>
+            <img
+              src="../../assets/ico/gaimima.png"
+              style="width:.24rem;height:.24rem;margin-right: 0.15rem;"
+            />
+            {{ $t("changePassword") }}
+            <icon name="right66" class="right" slot="icon"></icon>
           </span>
         </li>
-      </ul>
-      <ul class="after">
-        <!-- <li  @click="goOrderList">
-            <span>
-              <i style="font-size:0.28rem" class="iconfont icon-chicang"></i>
-              我的持仓
-              <icon name="right66" class="right" slot="icon"></icon>
-            </span>
-        </li> -->
-
-      </ul>
-      <ul class="after">
-
+      </ul> -->
+      <!-- <ul class="after">
         <li @click="goDetail">
           <span>
-            <!-- <i style="font-size:0.28rem" class="iconfont icon-zijinmingxi"></i> -->
-            <img src="../../assets/img/103.png"
-                 style="width:.27rem;height:.24rem;margin-right: 0.15rem;">
-            {{$t("FundingDetails")}}
-            <icon name="right66"
-                  class="right"
-                  slot="icon"></icon>
+            <img
+              src="../../assets/img/103.png"
+              style="width:.27rem;height:.24rem;margin-right: 0.15rem;"
+            />
+            {{ $t("FundingDetails") }}
+            <icon name="right66" class="right" slot="icon"></icon>
           </span>
         </li>
         <li @click="toRechargeList">
           <span>
-            <!-- <i style="font-size:0.28rem" class="iconfont icon-dingdanjilu1"></i> -->
-            <img src="../../assets/img/101.png"
-                 style="width:.27rem;height:.27rem;margin-right: 0.15rem;">
-            {{$t("RechargeRecord")}}
-            <icon name="right66"
-                  class="right"
-                  slot="icon"></icon>
+            <img
+              src="../../assets/img/101.png"
+              style="width:.27rem;height:.27rem;margin-right: 0.15rem;"
+            />
+            {{ $t("RechargeRecord") }}
+            <icon name="right66" class="right" slot="icon"></icon>
           </span>
         </li>
         <li @click="toCashList">
           <span>
-            <!-- <i style="font-size:0.28rem" class="iconfont icon-dingdanjilu1"></i> -->
-            <img src="../../assets/img/102.png"
-                 style="width:.24rem;height:.24rem;margin-right: 0.15rem;">
-            {{$t("WithdrawalsRecord")}}
-            <icon name="right66"
-                  class="right"
-                  slot="icon"></icon>
+            <img
+              src="../../assets/img/102.png"
+              style="width:.24rem;height:.24rem;margin-right: 0.15rem;"
+            />
+            {{ $t("WithdrawalsRecord") }}
+            <icon name="right66" class="right" slot="icon"></icon>
           </span>
         </li>
-      </ul>
-      <!-- <ul class="after">
-          <li  @click="changeStyle">
-              <span>
-                <i style="font-size:0.28rem" class="iconfont icon-shouye"></i>
-                主题换肤
-                <span class="right">
-                    <i v-if="styleName == 'red'" style="color:#ff9800" class="iconfont icon-baitian"></i>
-                    <i v-if="styleName == 'black'" style="color:#ff9800" class="iconfont icon-yewan1"></i>
-                </span>
-              </span>
-          </li>
       </ul> -->
-      <mt-popup v-model="focePromptPopup"
-                popup-transition="popup-fade"
-                class="mint-popup-white">
+
+      <mt-popup
+        v-model="focePromptPopup"
+        popup-transition="popup-fade"
+        class="mint-popup-white"
+      >
         <div class="clearfix">
-          <a @click="focePromptPopup = false"
-             class="pull-right"><i class="iconfont icon-weitongguo"></i></a>
+          <a @click="focePromptPopup = false" class="pull-right"
+            ><i class="iconfont icon-weitongguo"></i
+          ></a>
         </div>
-        <p class="font-title">{{$t("popupTip1")}}？</p>
+        <p class="font-title">{{ $t("popupTip1") }}？</p>
         <!--  账户可用资金 +  -->
-        <p v-if="$store.state.settingForm.stockDisplay"
-           class="font-bold">{{$t("popupTip2")}}
-          {{settingInfo.forceStopPercent ? settingInfo.forceStopPercent:0}}</p>
-        <p v-if="$store.state.settingForm.indexDisplay"
-           class="font-bold">{{$t("popupTip3")}}
-          {{indexSettingInfo.forceSellPercent ? indexSettingInfo.forceSellPercent:0}}</p>
-        <p v-if="$store.state.settingForm.futuresDisplay"
-           class="font-bold">{{$t("popupTip4")}}
-          {{futuresSettingInfo.forceSellPercent ? futuresSettingInfo.forceSellPercent:0}}</p>
-        <p v-if="$store.state.settingForm.stockDisplay">{{$t("popupTip5")}}<span class="green number">-{{Number(($store.state.userInfo.enableAmt + $store.state.userInfo.allFreezAmt) * settingInfo.forceStopPercent).toFixed(2)}}</span>{{$t("popupTip6")}}
+        <p v-if="$store.state.settingForm.stockDisplay" class="font-bold">
+          {{ $t("popupTip2") }}
+          {{ settingInfo.forceStopPercent ? settingInfo.forceStopPercent : 0 }}
         </p>
-        <p v-if="$store.state.settingForm.indexDisplay">{{$t("popupTip7")}}<span class="green number">-{{Number(($store.state.userInfo.allIndexFreezAmt + $store.state.userInfo.enableIndexAmt) * indexSettingInfo.forceSellPercent).toFixed(2)}}</span>{{$t("popupTip6")}}
+        <p v-if="$store.state.settingForm.indexDisplay" class="font-bold">
+          {{ $t("popupTip3") }}
+          {{
+            indexSettingInfo.forceSellPercent
+              ? indexSettingInfo.forceSellPercent
+              : 0
+          }}
         </p>
-        <p v-if="$store.state.settingForm.futuresDisplay">{{$t("popupTip9")}}<span class="green number">-{{Number(($store.state.userInfo.allFuturesFreezAmt + $store.state.userInfo.enableFuturesAmt) * futuresSettingInfo.forceSellPercent).toFixed(2)}}</span>{{$t("popupTip6")}}
+        <p v-if="$store.state.settingForm.futuresDisplay" class="font-bold">
+          {{ $t("popupTip4") }}
+          {{
+            futuresSettingInfo.forceSellPercent
+              ? futuresSettingInfo.forceSellPercent
+              : 0
+          }}
+        </p>
+        <p v-if="$store.state.settingForm.stockDisplay">
+          {{ $t("popupTip5")
+          }}<span class="green number"
+            >-{{
+              Number(
+                ($store.state.userInfo.enableAmt +
+                  $store.state.userInfo.allFreezAmt) *
+                  settingInfo.forceStopPercent
+              ).toFixed(2)
+            }}</span
+          >{{ $t("popupTip6") }}
+        </p>
+        <p v-if="$store.state.settingForm.indexDisplay">
+          {{ $t("popupTip7")
+          }}<span class="green number"
+            >-{{
+              Number(
+                ($store.state.userInfo.allIndexFreezAmt +
+                  $store.state.userInfo.enableIndexAmt) *
+                  indexSettingInfo.forceSellPercent
+              ).toFixed(2)
+            }}</span
+          >{{ $t("popupTip6") }}
+        </p>
+        <p v-if="$store.state.settingForm.futuresDisplay">
+          {{ $t("popupTip9")
+          }}<span class="green number"
+            >-{{
+              Number(
+                ($store.state.userInfo.allFuturesFreezAmt +
+                  $store.state.userInfo.enableFuturesAmt) *
+                  futuresSettingInfo.forceSellPercent
+              ).toFixed(2)
+            }}</span
+          >{{ $t("popupTip6") }}
         </p>
       </mt-popup>
       <div class="btnbox">
-        <span class="text-center btnok loginout"
-              @click="toRegister"> đăng xuất</span>
+        <span class="text-center btnok loginout" @click="toRegister">
+          đăng xuất</span
+        >
       </div>
     </div>
     <foot></foot>
@@ -692,7 +943,7 @@ export default {
 
 <style lang="less" scoped>
 // @bgColor: #fff;
-@bgColor: #16171d;
+@bgColor: #2a282d;
 @fontColor: #fff;
 @borderColor: #676b6f;
 body {
@@ -1036,7 +1287,7 @@ body {
   // margin-bottom: 0.12rem;
   padding: 0 0.2rem;
   // padding: 0 0.35rem;
-  background-color: #1f2636;
+  background-color: #302f35; // #1f2636;
   .header {
     font-size: 0.22rem;
     line-height: 0.7rem;
@@ -1133,14 +1384,15 @@ body {
 .panel {
   margin: 0.2rem 0.28rem;
   padding: 0 0.2rem;
-  background-color: #1f2636;
-
+  background-color: #302f35; //#1f2636;
+  border: 0.05rem solid #38363B;
   .panel-head {
     height: 0.88rem;
     line-height: 0.88rem;
     padding-top: 0.1rem;
     text-align: center;
     font-weight: bold;
+    border: none;
     .font-w {
       font-size: 0.28rem;
       // font-weight: 600;
@@ -1149,16 +1401,45 @@ body {
   }
 
   .panel-body {
-    padding: 0 0.2rem;
+    padding: 0.3rem 0rem;
     text-align: center;
+    .row{
+          width: 100%;
+          margin: 0 auto;
+          /* justify-content: space-between; */
+          gap: 0.2rem;
+          row-gap: 0;
+          flex-wrap: nowrap;
+          align-items: start;
+    }
 
+    .tai-row {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+    }
+    .img-box {
+        background-color: #505050;
+        width: 100%;
+        height: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.1rem;
+        margin-bottom: 0.2rem;
+    }
+    .row-icon {
+      width: 0.35rem;
+      height: 0.36rem;
+      object-fit: contain;
+    }
     .iconfont {
       display: block;
       font-size: 20px;
-      margin-bottom: 0.1rem;
       color: #138db2;
     }
-
     .font {
       font-size: 0.3rem;
       color: #000;
@@ -1166,8 +1447,9 @@ body {
       line-height: 0.5rem;
     }
 
-    .col-xs-3 {
-      padding: 0.2rem 0;
+    .col-xs-4{
+      // width: auto;
+      padding: 0;
     }
   }
 }
@@ -1198,7 +1480,8 @@ body {
     flex: 1;
     .account-phone {
       font-size: 0.3rem;
-      color: #fff;
+      // color: #fff;
+      color: #ec9e2f;
     }
     .account-name {
       color: #636a93;
@@ -1214,7 +1497,8 @@ body {
   margin: 0.28rem auto;
   border-radius: 5px;
   overflow: hidden;
-  background-color: #1f2636;
+  background-color: #302f35; //#1f2636;
+  border: 0.05rem solid #38363B;
   .pcx {
     margin: 0.2rem;
     // background-color: #1F2636;
@@ -1226,7 +1510,7 @@ body {
     .acc-pre-left {
       width: 1.92rem;
       height: 1.92rem;
-      background-image: url('../../assets/ico/round.png');
+      background-image: url("../../assets/ico/round.png");
       background-size: cover;
       display: flex;
       flex-direction: column;
@@ -1260,7 +1544,7 @@ body {
         position: absolute;
         top: -0.16rem;
         right: -0.44rem;
-        background-image: url('../../assets/ico/round-r.png');
+        background-image: url("../../assets/ico/round-r.png");
         background-size: cover;
       }
     }
@@ -1285,18 +1569,17 @@ body {
       flex-direction: column;
       justify-content: space-around;
       .btn {
-       width: 1.3rem;
-      color: #fff;
-      padding: 0.06rem 0.15rem;
-      border-radius: 0.6rem;
-      font-size: 0.25rem;
-
+        width: 1.3rem;
+        color: #fff;
+        padding: 0.06rem 0.15rem;
+        border-radius: 0.6rem;
+        font-size: 0.25rem;
       }
       .redbtn {
-        background-color: #e6003e;
+        background-color: #f5991d; //#e6003e;
       }
       .bluebtn {
-        background-color: #024da1;
+        background-color: #505050; //#024da1;
       }
     }
   }
@@ -1388,13 +1671,14 @@ body {
   li {
     width: 50%;
   }
-  li:nth-of-type(1),li:nth-of-type(2)  {
+  li:nth-of-type(1),
+  li:nth-of-type(2) {
     padding-left: 0;
     padding-right: 0;
     display: flex;
     align-items: center;
   }
-  li:nth-of-type(2){
+  li:nth-of-type(2) {
     padding-right: 0;
   }
 }
@@ -1403,17 +1687,5 @@ body {
   width: 0.4rem;
   margin-right: 0.2rem;
   object-fit: contain;
-}
-.tai-row{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  .row-icon{
-    width: 0.35rem;
-    height: 0.36rem;
-    object-fit: contain;
-    margin-bottom: 0.1rem;
-  }
 }
 </style>

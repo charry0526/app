@@ -402,17 +402,21 @@ export default {
             align-items: center;
           }
           .kechuang-mark{
-            color: #138EB4;
+            // color: #138EB4;
+             color:#BC9563;
             background: none;
             margin-left: 0.1rem;
-            border:1px solid rgba(20, 142, 180, 1);
+            // border:1px solid rgba(20, 142, 180, 1);
+            border:1px solid #BC9563;
+            
             // width: 0.65rem;
             height: 0.28rem;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 0.1rem;
-            padding: 0;
+            // padding: 0;
+            padding: 0.16rem 0.1rem;
           }
           .code-wra{
             // width: 1.35rem;
