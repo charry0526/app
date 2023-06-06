@@ -17097,7 +17097,8 @@ body {
 }
 
 .box, .box-contain, .box-title, .nav-bg, .tipstexts {
-  background-color: #21252a
+  /* background-color: #21252a */
+  background-color: #2A282D;
 }
 
 .account-box .box-contain {

@@ -55,7 +55,7 @@ export default {
 
   .wrapper {
     // padding-top: 1.5rem;
-    background-color: #3B3A3F;//#16171d;
+    background-color: #302F37;//#16171d;
     padding-bottom: 0;
   }
 

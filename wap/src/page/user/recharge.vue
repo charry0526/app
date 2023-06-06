@@ -71,7 +71,7 @@
               />
               <button
                 @click="isConfig=!isConfig"
-                :style="{ background: isConfig ? '#b60c0d' : '#024da1' }"
+                :style="{ background: isConfig ? '#b60c0d' : '#505050' }"
                 class="submitBtn config"
               >
                 {{ isConfig ? "Xác nhận" : "Nhập số tiền" }}
@@ -872,5 +872,11 @@ export default {
   text-indent: 0.2rem;
   background: none;
   color: #ddd;
+}
+.page-part .box-contain{
+  width: 98%;
+    margin: 0 auto;
+   border: 0.05rem solid #38363B;
+    border-radius: 0.1rem;
 }
 </style>

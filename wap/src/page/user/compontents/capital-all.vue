@@ -107,7 +107,7 @@ export default {
       padding: 0.2rem;
       border-radius: 0.2rem;
       border: 0.01rem solid #3f444a;
-
+         background: #3B3A3F;
       div {
         line-height: 0.4rem;
       }

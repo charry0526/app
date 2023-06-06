@@ -458,7 +458,7 @@ export default {
         height: .66rem;
         line-height: .66rem;
         margin-top: .3rem;
-        background-color: #024DA1;
+        background-color: #F39C0F;//#024DA1;
         border-radius: .33rem;
         color: #FFFFFF;
         font-size: .24rem;

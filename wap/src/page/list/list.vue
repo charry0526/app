@@ -255,6 +255,7 @@ export default {
       width: 100%;
       padding: 0 .4rem;
       /deep/.mint-tab-item{
+        background: transparent;
         .mint-tab-item-label{
           font-size:0.22rem;
           font-family:MicrosoftYaHeiLight;

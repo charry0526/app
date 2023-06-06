@@ -275,10 +275,10 @@ export default {
 
   .account-box {
     // margin-top: 0.5rem;
-    background-color: #252429;
+    background-color: #2A282D;
     .box-contain {
       height: 1.72rem;
-    background-color: #252429;
+    background-color: #2A282D;
     }
   }
 

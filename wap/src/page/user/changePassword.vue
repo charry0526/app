@@ -98,4 +98,7 @@ export default {
   .transaction {
     // padding-bottom: 0.2rem;
   }
+  .wrapper /deep/.mint-cell{
+    background: #302F37;
+  }
 </style>

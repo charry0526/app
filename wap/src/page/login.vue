@@ -266,7 +266,7 @@ export default {
         }
       }
       &.submit-model {
-        background-color: #024DA1;
+        background-color: #F39C0F;//#024DA1;
         line-height: .66rem;
         text-align: center;
         color: #ffffff;

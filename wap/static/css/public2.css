@@ -17062,7 +17062,8 @@ li {
   line-height: .82rem;
   font-size: .3rem;
   letter-spacing: .014rem;
-  background: #b60c0d;
+  /* background: #b60c0d; */
+  background: #F6981D;
   margin-top: .28rem;
   border-radius: .07rem;
   overflow: hidden;
@@ -17146,7 +17147,9 @@ body {
 .red {
   color: #d50000
 }
-
+.yellow {
+  color: #ec9e2f;
+}
 .bg-green {
   background-color: #31b97e
 }

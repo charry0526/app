@@ -60,6 +60,9 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+.wrapper{
+//  background-color: #302F37;
+}
   .mint-header {
     // background: #f4f4f4;
     margin-bottom: 0.2rem;

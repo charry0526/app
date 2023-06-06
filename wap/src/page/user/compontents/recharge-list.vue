@@ -204,7 +204,7 @@ export default {
         background-color: #138EB4;
       }
       &.cart {
-        background-color: #7266BA;
+        background-color: #DF9F3E;//#7266BA;
       }
       &.wechat {
         background-color: #009C46;

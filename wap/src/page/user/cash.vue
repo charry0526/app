@@ -56,7 +56,7 @@
         <span
           class="text-center btnok"
           @click="isConfig = !isConfig"
-          :style="{ background: isConfig ? '#b60c0d' : '#024da1' }"
+          :style="{ background: isConfig ? '#b60c0d' : '#505050' }"
         >
           {{ isConfig ? "Xác nhận" : "Nhập số tiền" }}
         </span>
@@ -286,7 +286,7 @@ export default {
   line-height: 0.834rem;
   font-size: 0.29rem;
   color: rgb(187, 187, 187);
- 
+
   a {
     color: #177be1;
   }
@@ -299,7 +299,7 @@ export default {
 }
 .wrapper {
   /deep/.mint-field {
-    background: #3b3a3f;
+    // background: #3b3a3f;
   }
 }
 </style>
