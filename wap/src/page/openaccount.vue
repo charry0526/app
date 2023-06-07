@@ -170,11 +170,16 @@ export default {
     box-sizing: border-box;
     padding: 0rem 0rem 1rem;
     .top-wrapper{
-      width: 100%;
+      width: 98%;
       box-sizing: border-box;
       padding: 0 0.5rem;
-      background: url('/static/img/openAccount/top-bg.png');
+      // background: url('/static/img/openAccount/top-bg.png');
       background-size: cover;
+      background-color: #302f35;
+      border: 0.05rem solid #38363B;
+      margin: 0.3rem auto 0;
+      border-radius: 0.2rem;
+      box-shadow: inset 0px 0px 0.4rem -0.2rem #888;
       .title-wrapper{
         font-size:0.3rem;
         font-family:Microsoft YaHei;
@@ -202,7 +207,7 @@ export default {
             display: block;
             width: 10px;
             height: 10px;
-            background-color: #E6003E;
+            background-color: #ec9e2f;
             border-radius: 10px;
             left: 50%;
             top: 50%;
@@ -232,7 +237,7 @@ export default {
         .icon{
           width: 0.67rem;
           height: 0.67rem;
-          background-color: #E6003E;
+          background-color: #ec9e2f;
           display: flex;
           justify-content: center;
           align-items: center;
@@ -256,7 +261,7 @@ export default {
             font-size:0.24rem;
             font-family:Microsoft YaHei;
             font-weight:400;
-            color:#E6003E;
+            color:#ec9e2f;
             line-height:0.42rem;
           }
         }
@@ -270,14 +275,14 @@ export default {
         width: 3rem;
         height: 0.6rem;
         line-height: 0.6rem;
-        background: #024EA2;
+        background: #f5991d;
         margin: 0 0.2rem;
       }
       .register{
         width: 3rem;
         height: 0.6rem;
         line-height: 0.6rem;
-        background: #024EA2;
+        background: #f5991d;
         margin: 0 0.2rem;
       }
     }
@@ -354,7 +359,7 @@ export default {
         .icon{
           width: 0.55rem;
           height: 0.55rem;
-          background-color: #E6003E;
+          background-color: #ec9e2f;
           border-radius: 1rem;
           display: flex;
           justify-content: center;

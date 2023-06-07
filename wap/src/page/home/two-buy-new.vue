@@ -532,7 +532,7 @@ body {
   background: #fff;
 }
 .wrapper {
-  background-color: #16171d;
+  background-color: #2A282D;//#16171d;
 }
 .protem {
   color: #ff8000;
@@ -740,9 +740,10 @@ body {
 .box-tab {
   margin: 0.15rem 0.3rem;
   width: 6.9rem;
-  background-color: #1b1c25;
+  background-color: #302F35;//#1b1c25;
   border-bottom: none;
   border-radius: 0.1rem;
+  box-shadow: inset 0px 0px 0.4rem -0.2rem #888;
   .tab-title {
     margin-bottom: 0;
     margin-top: 0.14rem;
@@ -767,7 +768,7 @@ body {
   border: none;
 }
 .radio-group li div.on {
-  background-color: #e00101;
+  background-color: #ec9e2f;//#e00101;
 }
 .radio-group li input {
   background-color: #2d2e3b;

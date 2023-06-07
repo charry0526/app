@@ -247,3 +247,9 @@
 #app.red-theme .table-box th {
   color: #000;
 }
+.radio-group li div.on {
+  background-color: #ec9e2f;
+}
+.btn-red {
+  background-color: #f5991d;
+}
