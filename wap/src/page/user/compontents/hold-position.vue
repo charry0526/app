@@ -345,4 +345,8 @@ export default {
       color: #000;
     }
   }
+  .foot-btn{
+    border-color: #f5991d !important;
+    color: #ec9e2f !important;
+  }
 </style>

@@ -750,7 +750,7 @@ export default {
     border: none;
   }
   .radio-group li div.on {
-    background-color: #E00101;
+    background-color: #ec9e2f;
   }
   .radio-group li input {
     background-color: #2D2E3B;

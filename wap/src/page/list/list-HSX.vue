@@ -29,9 +29,13 @@
                 @click='toDetail(item)'>
               <li class="li-title">
                 <p class="name">
+
+                  <!-- <img
+                  @click.stop="toDeleteMy(item)"
+                  v-if="item.isOption == '1'" :src="require(`../../../static/img/list/${$state.theme === 'red' ? 'red-' : ''}loved-icon.png`)" alt=""> -->
                   <img
                   @click.stop="toDeleteMy(item)"
-                  v-if="item.isOption == '1'" :src="require(`../../../static/img/list/${$state.theme === 'red' ? 'red-' : ''}loved-icon.png`)" alt="">
+                  v-if="item.isOption == '1'" src="../../assets/ico/loved-icon.png" alt="">
                   <img v-else
                   @click.stop="addOptions(item)"
                   :src="require(`../../../static/img/list/${$state.theme === 'red' ? 'red-' : ''}love-icon.png`)" alt="">

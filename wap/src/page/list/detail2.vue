@@ -528,4 +528,12 @@ export default {
     }
   }
 }
+.agree-footer .bottom-btn {
+  color: #EE9827;
+}
+.agree-footer .on {
+    background: #f5991d;
+    color: #fff;
+}
+
 </style>

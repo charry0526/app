@@ -29,9 +29,12 @@
                 @click='toDetail(item)'>
               <li class="li-title">
                 <p class="name">
-                  <img
+                  <!-- <img
                   @click.stop="toDeleteMy(item)"
-                  v-if="item.isOption == '1'" :src="require(`../../../static/img/list/${$state.theme === 'red' ? 'red-' : ''}loved-icon.png`)" alt="">
+                  v-if="item.isOption == '1'" :src="require(`../../../static/img/list/${$state.theme === 'red' ? 'red-' : ''}loved-icon.png`)" alt=""> -->
+                    <img
+                  @click.stop="toDeleteMy(item)"
+                  v-if="item.isOption == '1'" src="../../assets/ico/loved-icon.png" alt="">
                   <img v-else
                   @click.stop="addOptions(item)"
                   :src="require(`../../../static/img/list/${$state.theme === 'red' ? 'red-' : ''}love-icon.png`)" alt="">
@@ -408,7 +411,7 @@ export default {
             margin-left: 0.1rem;
             // border:1px solid rgba(20, 142, 180, 1);
             border:1px solid #BC9563;
-            
+
             // width: 0.65rem;
             height: 0.28rem;
             display: flex;

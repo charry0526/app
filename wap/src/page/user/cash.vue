@@ -19,7 +19,7 @@
           <div class="account text-center">
             <!-- <p class="title">可提现金额（元）</p> -->
             <p class="title">{{ $t("cashText") }}</p>
-            <p class="red number">
+            <p class="yellow number">
               {{ $moneyDot($store.state.userInfo.enableAmt) }}
             </p>
           </div>
@@ -87,7 +87,7 @@
           {{ $t("cashText5") }}
         </p>
         <p>
-          <span class="red">
+          <span class="yellow">
             <!-- 出金时段内出金一般2小时到账，出金时间受银行间清算时间影响，各家银行到账时间不同，最迟T+1次日24点前到账 -->
             {{ $t("cashText6") }}
           </span>

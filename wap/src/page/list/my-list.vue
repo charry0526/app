@@ -6,10 +6,7 @@
       <!-- </router-link>
       <mt-button slot="right" icon="search" @click="toSearch"></mt-button>
     </mt-header>  -->
-    <div class="account-box">
-      <div class="content">
-        <div class="box page-part">
-          <div class="box-contain clearfix">
+    <div class="content">
             <div :class="i.floatPoint>0?'tab greenBg':'tab redBg'" v-for="(i,index) in market" v-if="index < 3"
                  :key="i.key">
               <p :index='index' class="name">{{i.indexName}}</p>
@@ -21,9 +18,6 @@
               </div>
             </div>
 
-          </div>
-        </div>
-      </div>
     </div>
     <!-- <ul class="table-list">
       <li class="title">
@@ -165,6 +159,7 @@ export default {
       this.isRefresh = true
       let data = await api.getMyList(opt)
       this.list = data.data.list
+
       this.isRefresh = false
     },
     async loadMore () {
@@ -263,6 +258,14 @@ export default {
   .table-list-body {
     // padding-top:0.62rem;
     // margin-top: 40px;
+          >li{
+            height: 1rem;
+          }
+         >li:nth-child(odd){
+
+          background-color: #212025;
+        }
+
     .li-base{
       font-size: .3rem;
     }
@@ -411,4 +414,32 @@ export default {
   .kechuang-mark{
       border-radius: 0.05rem !important;
   }
+    .content {
+    width:6.86rem;
+    height: 1.72rem;
+    margin: .2rem auto;
+    // padding: 0 0.14rem;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+   .tab {
+    width: 2.04rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 0.25rem 0 0.15rem;
+    background-color: #2A292E !important;
+    border-radius: 0.2rem;
+}
+    }
 </style>

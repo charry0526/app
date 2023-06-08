@@ -37,7 +37,7 @@
             <!-- 当前可用余额（元） -->
             Số dư khả dụng hiện tại（VND）
           </p>
-          <p class="red number">
+          <p class="yellow number">
             {{ $moneyDot($store.state.userInfo.enableAmt) }}
           </p>
         </div>

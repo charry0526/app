@@ -12,15 +12,15 @@
         <img
           class="foot-icon"
           v-if="$store.state.select == '/home'"
-          :src="require(`../../../static/img/foot/${$state.theme}/home-active.png`)" alt=""
+          :src="require(`../../../static/img/news/foot/home-active.png`)" alt=""
         >
         <img
           class="foot-icon"
           v-else
-          :src="require(`../../../static/img/foot/${$state.theme}/home.png`)" alt=""
+          :src="require(`../../../static/img/news/foot/home.png`)" alt=""
         >
 
-        <p v-if="$store.state.select == '/home'" :style="{color: $state.theme === 'black' ? '#138DB3' : '#C11815'}">{{$t("tabbar1")}}<!-- 首页 --></p>
+        <p v-if="$store.state.select == '/home'" :style="{color: $state.theme === 'black' ? '#EE9827' : '#C11815'}">{{$t("tabbar1")}}<!-- 首页 --></p>
         <p v-else :style="{color: $state.theme === 'black' ? '#FFFFFF' : '#656565'}">{{$t("tabbar1")}}</p>
 
       </mt-tab-item>
@@ -30,14 +30,14 @@
         <img
           class="foot-icon"
           v-if="$store.state.select == '/list'"
-          :src="require(`../../../static/img/foot/${$state.theme}/hangqing-active.png`)" alt=""
+          :src="require(`../../../static/img/news/foot/hangqing-active.png`)" alt=""
         >
         <img
           class="foot-icon"
           v-else
-          :src="require(`../../../static/img/foot/${$state.theme}/hangqing.png`)" alt=""
+          :src="require(`../../../static/img/news/foot/hangqing.png`)" alt=""
         >
-        <p v-if="$store.state.select == '/list'" :style="{color: $state.theme === 'black' ? '#138DB3' : '#C11815'}">{{$t("tabbar2")}}<!-- 行情 --></p>
+        <p v-if="$store.state.select == '/list'" :style="{color: $state.theme === 'black' ? '#EE9827' : '#C11815'}">{{$t("tabbar2")}}<!-- 行情 --></p>
         <p v-else :style="{color: $state.theme === 'black' ? '#FFFFFF' : '#656565'}">{{$t("tabbar2")}}</p>
 
       </mt-tab-item>
@@ -47,14 +47,14 @@
         <img
           class="foot-icon"
           v-if="$store.state.select == '/orderlist'"
-          :src="require(`../../../static/img/foot/${$state.theme}/chicang-active.png`)" alt=""
+          :src="require(`../../../static/img/news/foot/chicang-active.png`)" alt=""
         >
         <img
           class="foot-icon"
           v-else
-          :src="require(`../../../static/img/foot/${$state.theme}/chicang.png`)" alt=""
+          :src="require(`../../../static/img/news/foot/chicang.png`)" alt=""
         >
-        <p v-if="$store.state.select == '/orderlist'" :style="{color: $state.theme === 'black' ? '#138DB3' : '#C11815'}">{{$t("tabbar3")}}<!-- 行情 --></p>
+        <p v-if="$store.state.select == '/orderlist'" :style="{color: $state.theme === 'black' ? '#EE9827' : '#C11815'}">{{$t("tabbar3")}}<!-- 行情 --></p>
         <p v-else :style="{color: $state.theme === 'black' ? '#FFFFFF' : '#656565'}">{{$t("tabbar3")}}</p>
       </mt-tab-item>
       <mt-tab-item id="mylist" :class="$store.state.select == '/mylist' ? 'on' : ''">
@@ -63,14 +63,14 @@
         <img
           class="foot-icon"
           v-if="$store.state.select == '/mylist'"
-          :src="require(`../../../static/img/foot/${$state.theme}/zixuan-active.png`)" alt=""
+          :src="require(`../../../static/img/news/foot/zixuan-active.png`)" alt=""
         >
         <img
           class="foot-icon"
           v-else
-          :src="require(`../../../static/img/foot/${$state.theme}/zixuan.png`)" alt=""
+          :src="require(`../../../static/img/news/foot/zixuan.png`)" alt=""
         >
-        <p v-if="$store.state.select == '/mylist'" :style="{color: $state.theme === 'black' ? '#138DB3' : '#C11815'}">{{$t("tabbar4")}}<!-- 行情 --></p>
+        <p v-if="$store.state.select == '/mylist'" :style="{color: $state.theme === 'black' ? '#EE9827' : '#C11815'}">{{$t("tabbar4")}}<!-- 行情 --></p>
         <p v-else :style="{color: $state.theme === 'black' ? '#FFFFFF' : '#656565'}">{{$t("tabbar4")}}</p>
 
       </mt-tab-item>
@@ -80,14 +80,14 @@
         <img
           class="foot-icon"
           v-if="$store.state.select == '/user'"
-          :src="require(`../../../static/img/foot/${$state.theme}/user-active.png`)" alt=""
+          :src="require(`../../../static/img/news/foot/user-active.png`)" alt=""
         >
         <img
           class="foot-icon"
           v-else
-          :src="require(`../../../static/img/foot/${$state.theme}/user.png`)" alt=""
+          :src="require(`../../../static/img/news/foot/user.png`)" alt=""
         >
-        <p v-if="$store.state.select == '/user'" :style="{color: $state.theme === 'black' ? '#138DB3' : '#C11815'}">{{$t("tabbar5")}}<!-- 行情 --></p>
+        <p v-if="$store.state.select == '/user'" :style="{color: $state.theme === 'black' ? '#EE9827' : '#C11815'}">{{$t("tabbar5")}}<!-- 行情 --></p>
         <p v-else :style="{color: $state.theme === 'black' ? '#FFFFFF' : '#656565'}">{{$t("tabbar5")}}</p>
 
       </mt-tab-item>
@@ -178,7 +178,8 @@ export default {
   .black-theme .mint-tabbar{
     /* background-color: #040506 !important; */
     background: linear-gradient(#3A373E, #2C2A2F);
-
+    border-top-left-radius: .2rem;
+    border-top-right-radius: .2rem;
   }
 
 </style>

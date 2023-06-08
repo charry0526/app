@@ -162,7 +162,7 @@
         <div class="acc-pre-center">
           <div>
             {{ $t("userAuth") }}:
-            <p style="margin-top:.3rem;font-size: .3rem;">
+            <p style="margin-top:.3rem;font-size: .25rem;">
               <!-- 303 900 902.40 -->
               {{
                 $store.state.hide
@@ -240,7 +240,7 @@
             <ul class="content-ul">
               <li>
                 <!-- <i class="iconfont icon-zijin1"></i> -->
-                <img class="zijin1" src="../../assets/img/zijin1.png" />
+                <img class="zijin1" src="../../assets/ico/icon1.png" />
                 <div>
                   <div class="name">{{ $t("uesrTotle") }}</div>
                   <p v-if="item.name == '指数'" class="number yellow">
@@ -275,7 +275,7 @@
               </li>
               <li>
                 <!-- <i class="iconfont icon-keyongzijin"></i> -->
-                <img class="zijin1" src="../../assets/img/keyongzijin.png" />
+                <img class="zijin1" src="../../assets/ico/icon2.png" />
                 <div>
                   <div class="name">{{ $t("AvailableFunds") }}</div>
                   <p v-if="item.name == '指数'" class="number yellow">
@@ -303,8 +303,9 @@
                 </div>
               </li>
               <li>
-                <i class="iconfont icon-dongjiezijin"></i>
-                <div class="name">{{ $t("FreezeMargin") }}</div>
+                <img class="zijin1" src="../../assets/ico/icon3.png" />
+                <div>
+                  <div class="name">{{ $t("FreezeMargin") }}</div>
                 <p v-if="item.name == '指数'" class="number yellow">
                   {{
                     $store.state.hide
@@ -326,10 +327,11 @@
                       : $moneyDot($store.state.userInfo.allFuturesFreezAmt) +
                         " đ"
                   }}
-                </p>
+                </p></div>
               </li>
               <li>
-                <i class="iconfont icon-yingkuixuanzhong"></i>
+               <img class="zijin1" src="../../assets/ico/icon4.png" />
+               <div>
                 <div class="name">{{ $t("TotalprofitAndLoss") }}</div>
                 <p
                   v-if="item.name == '指数'"
@@ -383,7 +385,7 @@
                           ).toFixed(2)
                         ) + " đ"
                   }}
-                </p>
+                </p></div>
               </li>
               <!-- <li>
                 <i class="iconfont icon-dongjiezijin"></i>
@@ -451,13 +453,13 @@
       <div class="panel-body">
         <div class="row">
           <div @click="goOrderList(1)" class="col-xs-4">
-            <div class="img-box"><i class="iconfont icon-rongzi2"></i></div>
+            <div class="img-box"><img class="row-icon" src="../../assets/ico/icon5.png" alt="" /></div>
             {{ $t("myPosition") }}
           </div>
           <div @click="goOrderList(1)" class="col-xs-4 tai-row">
             <!-- <i class="iconfont icon-rongzilishi"></i> -->
             <div class="img-box">
-              <img class="row-icon" src="../../assets/ico/353.png" alt="" />
+              <img class="row-icon" src="../../assets/ico/icon6.png" alt="" />
             </div>
 
             {{ $t("myClosingPosition") }}
@@ -1431,8 +1433,8 @@ body {
         margin-bottom: 0.2rem;
     }
     .row-icon {
-      width: 0.35rem;
-      height: 0.36rem;
+      width: 0.4rem;
+      height: 0.4rem;
       object-fit: contain;
     }
     .iconfont {
@@ -1671,12 +1673,14 @@ body {
   li {
     width: 50%;
   }
-  li:nth-of-type(1),
-  li:nth-of-type(2) {
+  li {
     padding-left: 0;
     padding-right: 0;
     display: flex;
     align-items: center;
+  }
+  li:nth-of-type(1),li:nth-of-type(3) {
+    padding-left: 0;
   }
   li:nth-of-type(2) {
     padding-right: 0;

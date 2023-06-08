@@ -191,6 +191,7 @@ export default {
       height: 0.5rem;
       line-height: 0.5rem;
       margin-bottom: 0.2rem;
+      color: #DF9F3E;
     }
 
     ul {

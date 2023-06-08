@@ -4,7 +4,7 @@
     <div class="home-search">
 
       <div class="home-search-input">
-        <!-- <img src="../../assets/ico/fangdajing.png" alt=""> -->
+        <img src="../../assets/ico/sousuo.png" alt="">
         <input type="text"
         @focus="$router.push('/Searchlist')"
         >
@@ -12,12 +12,12 @@
        <div class="home-search-me"
           @click="$router.push('/user')"
           >
-            <img src="../../assets/ico/wogerenziliao.png" >
+            <img src="../../assets/ico/avatar.png" >
       </div>
       <div class="home-search-me"
           @click="$router.push('/user')"
           >
-            <img src="../../assets/ico/wogerenziliao.png" >
+            <img src="../../assets/ico/lianxi.png" >
       </div>
       <!-- <div class="home-search-ctl">
         <img class="lingdang" src="../../assets/ico/lingdang.png" alt=""
@@ -52,7 +52,7 @@
         <a class='icon-wrap chicang-activeanimated zoomIn' @click="goList" href="javascript:;">
           <img
           class="icon-img"
-          src="../../assets/ico/hangqing.png" alt="">
+          src="../../assets/ico/Bang1.png" alt="">
         </a>
         <p class="icon-title">{{ $t("homeNavList1") }}</p>
       </div>
@@ -60,7 +60,7 @@
         <a class='icon-wrap animated zoomIn' @click="goOrderlist" href="javascript:;">
           <img
           class="icon-img"
-          src="../../assets/ico/jiaoyiy.png" alt="">
+          src="../../assets/ico/Bang3.png" alt="">
         </a>
         <p class="icon-title">{{$t("homeNavList2")}}</p>
       </div>
@@ -68,7 +68,7 @@
         <a class='icon-wrap animated zoomIn' @click="goMyList" href="javascript:;">
           <img
           class="icon-img"
-          src="../../assets/ico/xuanze.png" alt="">
+          src="../../assets/ico/Bang4.png" alt="">
           <!-- <i class="iconfont icon-xinshou"></i> -->
         </a>
         <p class="icon-title">{{$t("homeNavList3")}}</p>
@@ -77,7 +77,7 @@
         <a class='icon-wrap animated zoomIn' @click="goMyinfo" href="javascript:;">
           <img
           class="icon-img"
-          src="../../assets/ico/wo.png" alt="">
+          src="../../assets/ico/Bang2.png" alt="">
           <!-- <i class="iconfont icon-xinshou"></i> -->
         </a>
         <p class="icon-title">{{$t("homeNavList4")}}</p>
@@ -825,10 +825,14 @@ export default {
   }
 }
 .icon-img{
-  width: .4rem;
-  height: .4rem;
+  // width: .4rem;
+  // height: .4rem;
+  width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 .icon-title {
+  margin-top: .2rem;
   font-size: .24rem;
   font-weight: 400;
 }
@@ -865,17 +869,18 @@ export default {
   align-items: center;
   justify-content: space-between;
   &-me {
-    width: .6rem;
-    height: .6rem;
+    width: .5rem;
+    height: .5rem;
     border-radius: .3rem;
-    border: 1px solid #4C4A4F;
+    // border: 1px solid #4C4A4F;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-left: .2rem;
     >img{
-      width: .27rem;
-      height: .29rem;
+      width: 100%;
+      height: 100%;
+       object-fit: contain;
     }
   }
   &-input {
@@ -889,8 +894,8 @@ export default {
     display: flex;
     align-items: center;
     >img{
-      width: .26rem;
-      height: .26rem;
+      width: .4rem;
+      height: .4rem;
       margin-right: .26rem;
     }
     >input {
@@ -1134,6 +1139,7 @@ export default {
     margin-bottom: 0.2rem;
     display: flex;
     // color:#fff;
+    color:"#8C8B90";
     .labels{
       width:1.3rem;
     }
