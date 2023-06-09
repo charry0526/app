@@ -470,7 +470,7 @@
             class="col-xs-4"
           >
             <div class="img-box">
-              <i class="iconfont icon-zhishuyidong"></i>
+              <img class="row-icon" src="../../assets/ico/icon7.png" alt="" />
             </div>
             ESOP
           </div>
@@ -493,24 +493,24 @@
       <div class="panel-body">
           <ul class="row">
             <li @click="toAuthentication" class="col-xs-4">
-              <div class="img-box"> <img class="row-icon" src="../../assets/ico/shimin.png" alt="" /></div>
+              <div class="img-box"> <img class="row-icon" src="../../assets/ico/icon9.png" alt="" /></div>
               <span>{{ $t("Verified") }}</span>
             </li>
             <li @click="goCard" class="col-xs-4 tai-row">
               <div class="img-box">
-                <img class="row-icon" src="../../assets/ico/yinhangka.png" alt="" />
+                <img class="row-icon" src="../../assets/ico/icon8.png" alt="" />
               </div>
               {{ $t("bank") }}
             </li>
             <li @click="goEsop" class="col-xs-4 tai-row">
               <div class="img-box">
-                <img class="row-icon" src="../../assets/ico/yinhangka.png" alt="" />
+                <img class="row-icon" src="../../assets/ico/icon2.png" alt="" />
               </div>
              {{ $t("RegisterbuyESOP") }}
             </li>
             <li  @click="gochangepass" class="col-xs-4 tai-row">
               <div class="img-box">
-                <img class="row-icon" src="../../assets/ico/gaimima.png" alt="" />
+                <img class="row-icon" src="../../assets/ico/icon4.png" alt="" />
               </div>
              {{ $t("changePassword") }}
             </li>
@@ -521,18 +521,18 @@
       <div class="panel-body">
           <ul class="row">
             <li @click="goDetail" class="col-xs-4">
-              <div class="img-box"> <img class="row-icon" src="../../assets/img/103.png" alt="" /></div>
+              <div class="img-box"> <img class="row-icon" src="../../assets/ico/icon1.png" alt="" /></div>
               <span>{{ $t("Verified") }}</span>
             </li>
             <li @click="toRechargeList" class="col-xs-4 tai-row">
               <div class="img-box">
-                <img class="row-icon"  src="../../assets/img/101.png" alt="" />
+                <img class="row-icon" src="../../assets/ico/icon2.png" alt="" />
               </div>
               {{ $t("bank") }}
             </li>
             <li @click="toCashList" class="col-xs-4 tai-row">
               <div class="img-box">
-                <img class="row-icon"  src="../../assets/img/102.png" alt="" />
+                <img class="row-icon" src="../../assets/ico/icon3.png" alt="" />
               </div>
              {{ $t("RegisterbuyESOP") }}
             </li>

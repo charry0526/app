@@ -8,7 +8,8 @@
         <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/loginuser.png" alt="">
         <img class="register-ico" v-show="$state.theme == 'red'" src="../assets/ico/loginuser-red.png" alt="">
         <!-- <input class="register-input" placeholder="请输入手机号码" type="tel" pattern="[0-9]*" v-model="phone"> -->
-                <input class="register-input" placeholder="Vui lòng nhập số điện thoại" type="tel" pattern="[0-9]*" v-model="phone">
+         <!-- <label class="label-input">84</label> -->
+         <input class="register-input input-phone" placeholder="Vui lòng nhập số điện thoại" type="tel" pattern="[0-9]*" v-model="phone">
 
       </div>
         <!-- 获取验证码 -->
@@ -501,5 +502,9 @@ export default {
     .register-form-item.submit-model {
       background-color: #BB1815;
     }
+  }
+  .label-input{
+    margin: 0 0rem 0 0.1rem;
+    color: #666;
   }
 </style>
