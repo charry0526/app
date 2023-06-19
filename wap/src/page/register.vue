@@ -7,7 +7,7 @@
       <div class="register-form-item input-model" style="margin-top:1.11rem">
         <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/loginuser.png" alt="">
         <img class="register-ico" v-show="$state.theme == 'red'" src="../assets/ico/loginuser-red.png" alt="">
-        <!-- <input class="register-input" placeholder="请输入 手机号码" type="tel" pattern="[0-9]*" v-model="phone"> -->
+        <!-- <input class="register-input" placeholder="请输入手机号码" type="tel" pattern="[0-9]*" v-model="phone"> -->
          <label class="label-input">84</label>
          <input class="register-input input-phone" placeholder="Vui lòng nhập số điện thoại" type="tel" pattern="[0-9]*" v-model="phone">
 
