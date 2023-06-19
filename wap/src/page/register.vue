@@ -8,7 +8,7 @@
         <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/loginuser.png" alt="">
         <img class="register-ico" v-show="$state.theme == 'red'" src="../assets/ico/loginuser-red.png" alt="">
         <!-- <input class="register-input" placeholder="请输入手机号码" type="tel" pattern="[0-9]*" v-model="phone"> -->
-         <!-- <label class="label-input">84</label> -->
+         <label class="label-input">84</label>
          <input class="register-input input-phone" placeholder="Vui lòng nhập số điện thoại" type="tel" pattern="[0-9]*" v-model="phone">
 
       </div>
@@ -254,7 +254,7 @@ export default {
       // }
       // this.clickFalg++
       //   var reg = 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/
-      let reg = /^[0-9]{10}$/ // 手机号码验证
+      let reg = /^[0-9]{9}$/ // 手机号码验证
       if (isNull(this.phone)) {
         Toast('Số điện thoại di động không được để trống')
       } else {
@@ -309,9 +309,10 @@ export default {
     },
     async gook () {
       // 注册
+      let reg = /^[0-9]{9}$/
       if (!this.agree) {
         Toast('Cần đồng ý với thỏa thuận đăng ký để đăng ký!')
-      } else if (isNull(this.phone) || !isPhone(this.phone)) {
+      } else if (isNull(this.phone) || !reg.test(this.phone)) {
         Toast('Vui lòng nhập đúng số điện thoại')
       } else if (isNull(this.psd)) {
         Toast('xin vui lòng nhập mật khẩu')
