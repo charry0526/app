@@ -16,10 +16,9 @@
       <div class="register-form-item input-model">
         <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/vertify.png" alt="">
         <img class="register-ico" v-show="$state.theme == 'red'" src="../assets/ico/vertify-red.png" alt="">
-        <input class="register-input" style="width:1.4rem" placeholder="mã xác nhận" type="tel" pattern="[0-9]*" v-model="code">
+        <input class="register-input" style="width:1.4rem" placeholder="Mã xác nhận" type="tel" pattern="[0-9]*" v-model="code">
         <div v-if="codeshow" class="getcode" @click="checkCodeBox">
-
-          lấy mã xác minh
+          Lấy mã xác minh
         </div>
         <div v-if="!codeshow" class="getcode">{{count}}</div>
       </div>
@@ -61,11 +60,11 @@
       <div class="register-form-item " style="margin-top: .23rem;display:flex;justify-content:flex-end">
         <div :style="{'font-size':'.2rem', color:$state.theme =='red'?'#000':'#86CBD1'}">
           <!-- 已有账号？ -->
-           Có một tài khoản？
+          Quên mật khẩu？
           <span
             :style="{color:$state.theme =='red'?'#BB1815':'#fff'}" @click="goLogin">
             <!-- 返回登录 -->
-            Đăng nhập lại
+            Đăng nhập
             </span></div>
       </div>
     </div>

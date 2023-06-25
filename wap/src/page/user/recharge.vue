@@ -207,7 +207,7 @@
           Lưu ý: Hãy cẩn thận để không lặp lại các lần chuyển tiền trước đây.
           Tài khoản giám sát ngân hàng của bên thứ ba có thể được thay đổi bất
           cứ lúc nào. Hãy nhớ chú ý đến các thay đổi của tài khoản! Vui lòng
-          liên hệ với dịch vụ khách hàng trực tuyến để nạp tiền lớn
+          liên hệ với dịch vụ CSKH trực tuyến để nạp tiền
         </p>
       </div>
     </div>

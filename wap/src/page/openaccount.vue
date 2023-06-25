@@ -110,7 +110,7 @@
             Mạng wifi
             </h3>
           <p>
-            mạng 3G/4G
+            Mạng 3G/4G
             <!-- 3G/4G网络 -->
             </p>
         </li>

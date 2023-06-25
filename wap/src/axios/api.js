@@ -468,3 +468,7 @@ export function getMessageCode (options) {
 export function getseMessageCode (options) {
   return get('/apis/api/admin/resendMessages.do', options)
 }
+//
+export function wifeedDutop (options) {
+  return get('/wifeed/api/du-lieu-gia-eod/top', options)
+}

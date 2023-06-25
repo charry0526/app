@@ -28,7 +28,7 @@
       </div>
       <div class="login-form-item submit-model" @click="gook">
         <!-- 立即登录 -->
-        Đăng nhập ngay lập tức
+        Đăng nhập
         <i v-show="isloading" style="color:#fff;" class="iconfont icon-jiazaizhong"></i>
       </div>
       <div class="login-form-item extra-model">
@@ -39,7 +39,7 @@
         <div :style="{color:$state.theme =='red'?'#BB1815':'#86CBD1'}">
           <span style="color:#0E6580">
             <!-- 还没有账号 -->
-            Không tài khoản？
+            Quên mật khẩu？
             </span><span @click="toRegister">
               <!-- 立即注册 -->
               Đăng ký

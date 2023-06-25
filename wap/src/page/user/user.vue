@@ -204,7 +204,10 @@
               />
               <img v-else class="iconfont" src="../../assets/ico/jia-red.png" />
               <span :style="{ color: $state.theme == 'red' ? '#000' : '#fff' }"
-                >TÀI SẢN CỦA TÔI {{ $t("userAuth") }}</span
+                >
+                Tài sản của tôi
+                <!-- TÀI SẢN CỦA TÔI {{ $t("userAuth") }} -->
+                </span
               >
               <span v-if="item.name == '指数'"
                 >({{
@@ -247,17 +250,17 @@
                     {{
                       $store.state.hide
                         ? "****"
-                        : $moneyDot($store.state.userInfo.userIndexAmt)
+                        : $moneyDot($store.state.userInfo.userIndexAmt)+'đ'
                     }}
-                    đ
+
                   </p>
                   <p v-if="item.name == '我的'" class="number yellow">
                     {{
                       $store.state.hide
                         ? "****"
-                        : $moneyDot($store.state.userInfo.userAmt)
+                        : $moneyDot($store.state.userInfo.userAmt)+'đ'
                     }}
-                    đ
+
                   </p>
                   <p v-if="item.name == '期货'" class="number yellow">
                     {{
@@ -267,9 +270,9 @@
                             Number(
                               $store.state.userInfo.userFuturesAmt
                             ).toFixed(2)
-                          )
+                          )+'đ'
                     }}
-                    đ
+
                   </p>
                 </div>
               </li>
@@ -522,19 +525,23 @@
           <ul class="row">
             <li @click="goDetail" class="col-xs-4">
               <div class="img-box"> <img class="row-icon" src="../../assets/ico/icon1.png" alt="" /></div>
-              <span>{{ $t("Verified") }}</span>
+              <!-- <span>{{ $t("Verified") }}</span> -->
+              <span>Lịch sử giao dịch</span>
             </li>
             <li @click="toRechargeList" class="col-xs-4 tai-row">
               <div class="img-box">
                 <img class="row-icon" src="../../assets/ico/icon2.png" alt="" />
               </div>
-              {{ $t("bank") }}
+              <!-- {{ $t("bank") }} -->
+
+              <span>Lịch sử nạp tiền</span>
             </li>
             <li @click="toCashList" class="col-xs-4 tai-row">
               <div class="img-box">
                 <img class="row-icon" src="../../assets/ico/icon3.png" alt="" />
               </div>
-             {{ $t("RegisterbuyESOP") }}
+             <!-- {{ $t("RegisterbuyESOP") }} -->
+             <span>Lịch sử rút tiền</span>
             </li>
           </ul>
       </div>
@@ -704,7 +711,7 @@
       </mt-popup>
       <div class="btnbox">
         <span class="text-center btnok loginout" @click="toRegister">
-          đăng xuất</span
+          Đăng xuất</span
         >
       </div>
     </div>

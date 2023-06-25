@@ -109,11 +109,11 @@ const uesr = {
 const cardBind = {
   cashText: 'Số tiền có thể rút ( VND )',
   cashText2: 'Hoàn thành',
-  cashText3: '1 : Để thực hiện rút tiền , vui lòng xác thực tên thật và liên kết tài khoản ngân hàng chính chủ.',
-  cashText4: '2 : Thời gian rút tiền từ 09:00 đến 17:00 trừ ngày thứ 7 chủ nhật, ngày lễ .',
+  cashText3: '1 : Để thực hiện rút tiền, vui lòng xác thực tên thật và liên kết tài khoản ngân hàng chính chủ.',
+  cashText4: '2 : Thời gian rút tiền từ 09:00 đến 17:00 trừ ngày thứ 7 chủ nhật, ngày lễ.',
   cashText5: '3 : Số tiền rút tối thiểu cho mỗi lần rút 100.000 VND.',
-  cashText6: '4 : Thời gian hoàn thành giao dịch rút trong vòng 24 giờ tính từ lúc lệnh rút được thông qua,tùy thuộc vào ngân hàng thụ hưởng.',
-  cashText7: 'Lưu ý :Số tiền rút không được vượt quá số dư khả dụng trong tài khoản của bạn.'
+  cashText6: '4 : Thời gian hoàn thành giao dịch rút trong vòng 24 giờ tính từ lúc lệnh rút được thông qua, tùy thuộc vào ngân hàng thụ hưởng.',
+  cashText7: 'Lưu ý ：Số tiền rút không được vượt quá số dư khả dụng trong tài khoản của bạn.'
 }
 const openaccount = {
   process1: 'Đăng ký',

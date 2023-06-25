@@ -3,7 +3,7 @@
     <div class="form-block page-part">
       <mt-field label="Mật khẩu cũ" placeholder="Vui lòng nhập mật khẩu ban đầu" type="text" v-model="objPassword.oldPwd"></mt-field>
       <mt-field label="Mật khẩu mới" placeholder="Vui lòng nhập mật khẩu mới nhất" type="password" v-model="objPassword.newPwd"></mt-field>
-      <mt-field label="Xác nhận mật khẩu" placeholder="Vui lòng nhập mật khẩu của bạn ở đây" type="password" v-model="objPassword.config"></mt-field>
+      <mt-field label="Xác nhận mật khẩu" placeholder="Vui lòng nhập lại mật khẩu mới" type="password" v-model="objPassword.config"></mt-field>
 
     </div>
     <div class="btnbox">

@@ -16,6 +16,8 @@
       <mt-tab-item id="1">HSX</mt-tab-item>
       <mt-tab-item id="2">HNX</mt-tab-item>
       <mt-tab-item id="3">UPCOM</mt-tab-item>
+      <mt-tab-item id="4">VN30</mt-tab-item>
+      <mt-tab-item id="5">HNX30</mt-tab-item>
     </mt-navbar>
     <div class="content">
       <div :class="i.floatPoint>0?'tab greenBg':'tab redBg'" v-for="(i,index) in market" v-if="index < 3"
@@ -67,6 +69,12 @@
       <mt-tab-container-item id="3">
         <List3 :selectedNumber='selected'/>
       </mt-tab-container-item>
+      <mt-tab-container-item id="4">
+        <List4 v-if="selected==4" :selectedNumber='selected'/>
+      </mt-tab-container-item>
+      <mt-tab-container-item id="5">
+        <List4 v-if="selected==5" :selectedNumber='selected'/>
+      </mt-tab-container-item>
     </mt-tab-container>
     <foot></foot>
   </div>
@@ -86,7 +94,7 @@ import foot from '@/components/foot/foot'
 import List1 from './list-HSX'
 import List2 from './list-HNX'
 import List3 from './list-UPCOM'
-
+import List4 from './list-vn'
 import * as api from '@/axios/api'
 import { Toast } from 'mint-ui'
 
@@ -96,7 +104,8 @@ export default {
     // List0,
     List1,
     List2,
-    List3
+    List3,
+    List4
     // List4,
     // List5,
     // List6
