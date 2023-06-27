@@ -52,9 +52,9 @@ export default {
       }
     },
     async getAddress () {
-      this.address =
-        'https://www.baidu.com/'
-        // 'https://uniapp.dcloud.net.cn/api/other/authorize.html#authorize'
+      this.address = ''
+      // 'https://www.baidu.com/'
+      // 'https://uniapp.dcloud.net.cn/api/other/authorize.html#authorize'
       const res = await api.getCusAddress()
       if (res.status === 0) {
         this.address = res.data
