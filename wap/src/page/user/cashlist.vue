@@ -7,12 +7,12 @@
         </router-link>
       </mt-header>
     </div> -->
-    <div class="text-center">
+    <!-- <div class="text-center">
       <div class="btn-group">
         <a href="#/cash" class="with-draw-btn">{{$t("withdraw")}}</a>
-        <a href="javascript:;" class="with-draw-detai-btn on">Ghi  <!--记录--></a>
+        <a href="javascript:;" class="with-draw-detai-btn on">Ghi </a>
       </div>
-    </div>
+    </div> -->
     <div>
       <div class="box page-part transaction">
         <div class="box-contain clearfix">

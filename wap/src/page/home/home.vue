@@ -15,7 +15,7 @@
             <img src="../../assets/ico/avatar.png" >
       </div>
       <div class="home-search-me"
-          @click="$router.push('/user')"
+          @click="$router.push('/custome')"
           >
             <img src="../../assets/ico/lianxi.png" >
       </div>
@@ -292,11 +292,13 @@ export default {
       newsContent4: [], // 7*24全球
       newsContent5: [], // 商品资讯,
       b_bg: require('../../../static/img/bg-zhisu.png'),
-      r_bg: require('../../../static/img/bg-zhisu-red.png')
+      r_bg: require('../../../static/img/bg-zhisu-red.png'),
+      address: ''
     }
   },
   created () {
     this.getProductSetting()
+    this.getAddress()
     // this.timer = setInterval(this.refreshList, 3000)
   },
 
@@ -312,6 +314,17 @@ export default {
     }
   },
   methods: {
+    pagecus () {
+      window.location.href = this.address
+    },
+    getAddress () {
+      this.address='https://www.baidu.com/'
+      api.getCusAddress().then(res => {
+        if (res.status === 0) {
+          this.address = res.data
+        }
+      })
+    },
     // 跳转新闻详情
     pageNews (option) {
       this.$router.push({

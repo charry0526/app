@@ -46,6 +46,7 @@ import OpenAccount from '@/page/openaccount'
 import FundsList from '@/page/funds/funds-list'
 import News from '@/page/home/news'
 import changePassword from '@/page/user/changePassword'
+import custome from '@/page/custome'
 
 Vue.use(Router)
 
@@ -561,6 +562,15 @@ export default new Router({
         hasHeader: true
       },
       component: changePassword
+    }, {
+      path: '/custome',
+      name: 'custome',
+      meta: {
+        title: 'Tư vấn khách hàng',
+        requireAuth: false,
+        hasHeader: true
+      },
+      component: custome
     },
     {
       // 会匹配所有路径

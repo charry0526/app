@@ -472,3 +472,12 @@ export function getseMessageCode (options) {
 export function wifeedDutop (options) {
   return get('/wifeed/api/du-lieu-gia-eod/top', options)
 }
+// 设置客服地址
+export function setCusAddress (options) {
+  return get('/api/admin/setCSAddress.do', options)
+}
+
+// 获取客服地址
+export function getCusAddress (options) {
+  return get('/apis/api/admin/getCSAddress.do', options)
+}
