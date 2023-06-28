@@ -4,7 +4,6 @@
       :height="height"
       id="iframe"
       :src="address"
-      @load="loaded"
       frameborder="0"
     />
   </div>
