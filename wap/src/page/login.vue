@@ -4,14 +4,13 @@
         <mt-button icon="back" slot="left" @click="$router.go(-1)"></mt-button>
     </mt-header>
     <div class="contain-box">
-      <img @load="imgOnload()" ref="loginBg" class="login-bg" src="../assets/img/login-bg.jpg" alt="" srcset="">
+      <img @load="imgOnload()" ref="loginBg" class="login-bg" src="../assets/img/login-bg.png" alt="" srcset="">
       <div class="contain-main">
         <div class="logo-box">
           <img class="logo"  src="../assets/img/1-01.png" alt="">
         </div>
         <div class="login-form-item input-model">
-            <img v-show="$state.theme != 'red'" class="login-ico" src="../assets/ico/loginuser.png" alt="">
-            <img v-show="$state.theme == 'red'" class="login-ico" src="../assets/ico/loginuser-red.png" alt="">
+            <img class="login-ico" src="../assets/img/loginuser.png" alt="">
             <input
             class="login-input"
             placeholder="Tên tài khoản"
@@ -20,18 +19,18 @@
             >
           </div>
           <div class="login-form-item input-model">
-            <img v-show="$state.theme != 'red'" class="login-ico" src="../assets/ico/loginpwd.png" alt="">
-            <img v-show="$state.theme == 'red'" class="login-ico" src="../assets/ico/loginpwd-pwd.png" alt="">
-            <input class="login-input" type="password" placeholder="Mật khẩu" v-model="psd">
+            <img class="login-ico" src="../assets/img/loginpwd.png" alt="">
+            <input class="login-input" :type="isShowPass?'text':'password'" placeholder="Mật khẩu" v-model="psd">
+            <img @click="isShowPass=!isShowPass" class="login-ico showPasImg" src="../assets/img/show.png" alt="">
           </div>
-          <div class="login-form-item submit-model" @click="gook">
+          <div style="marginTop:1.16rem" class="login-form-item submit-model" @click="gook">
             Đăng nhập
             <i v-show="isloading" style="color:#fff;" class="iconfont icon-jiazaizhong"></i>
           </div>
           <div class="login-form-item submit-model goregister" @click="toRegister">
-            Đăng ký
+            Mở tài khoản
           </div>
-          <p class="tips">Quên mật khẩu？</p>
+          <p class="tips">Quên mật khẩu?</p>
       </div>
     </div>
     <!-- <div class="login-form">
@@ -87,7 +86,8 @@ export default {
       codeshow: true,
       count: '', // 倒计时
       clickFalg: 0, //  点击次数
-      logo: '' // 设置信息
+      logo: '', // 设置信息
+      isShowPass: false
     }
   },
   created: function () {
@@ -111,7 +111,7 @@ export default {
         let containMainHeight = document.querySelector('.contain-main')
         var containStyles = window.getComputedStyle(containMainHeight)
         var containStyleMarTop = (containStyles.marginTop.replace('px', '')) * 1
-        containMainHeight.style.height = (window.innerHeight - imgheight + Math.abs(containStyleMarTop)) + 'px'
+        containMainHeight.style.minHeight = (window.innerHeight - imgheight + Math.abs(containStyleMarTop)) + 'px'
       })
     },
     async getInfoSite () {
@@ -190,7 +190,9 @@ export default {
   body {
     background-color: #16171d;
   }
-
+  .mint-header{
+    border: none;
+  }
   .wrapper {
     color: #888;
     height: 100%;
@@ -203,30 +205,31 @@ export default {
 
   }
   .contain-box{
-    width:7rem;
     // padding: 0 .2rem;
-    background-color: #28094B;
-    margin:0 auto
+    // background-color: #28094B;
   }
   .login-bg{
     width: 100%;
+    height:4rem;
+    object-fit: cover;
     margin-top: -40px;
   }
   .contain-main{
-    background-color: #1F1E23;
+    background: #29282E;
     width:100%;
     // height:10rem;
-    border-top-left-radius: .8rem;
-    border-top-right-radius: .8rem;
-    margin-top: -0.3rem;
+    border-top-left-radius: .65rem;
+    border-top-right-radius: .65rem;
     position: relative;
+    margin:-0.9rem auto 0;
     .logo-box{
       display: flex;
       justify-content: center;
-      padding-top: .8rem;
-      margin-bottom: 1rem;
+      padding-top: 1rem;
+      margin-bottom: .88rem;
         .logo{
-          width: 2rem;
+          width: 3rem;
+          // height
           object-fit: contain;
         }
       }
@@ -260,36 +263,45 @@ export default {
   //     }
   //   }
     .login-form-item {
-      width: 90%;
+      width: 6.9rem;
       height: .8rem;
-      border-radius: .1rem;
+      border-radius: .08rem;
       margin: .45rem auto 0;
-
-      border: 0.04rem solid #66636A;
+      border: 0.04rem solid #5E5D65;
       &.input-model {
         background-color: #252429;//#121319;
         padding: 0 .2rem;
         display: flex;
         align-items: center;
         img.login-ico {
-          width: .2rem;
-          height: .23rem;
+          width: .28rem;
+          height: .32rem;
+          object-fit: contain;
+        }
+        img.showPasImg{
+          width: .42rem;
+          height: .28rem;
+          object-fit: contain;
         }
         .login-input {
           flex: 1;
           padding: 0 .2rem;
           color:#F5F5F9;
+          font-size: .1rem;
           &::-webkit-input-placeholder {
             color: #AEADB2;
           }
         }
       }
       &.submit-model {
-        background-color: #F39C0F;//#024DA1;
-        line-height: .8rem;
+        background-color: #F39A1A;//#024DA1;
+        line-height: .7rem;
+        height: 0.7rem;
         text-align: center;
-        color: #ffffff;
+        font-size: .28rem;
+        color: #E8E6EA;
         border:none;
+        margin-top: .2rem;
       }
       &.extra-model {
         margin-top: .24rem;
@@ -324,4 +336,5 @@ export default {
     text-align: center;
     margin-top: 1rem;
   }
+
 </style>
