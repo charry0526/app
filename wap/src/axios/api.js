@@ -481,3 +481,7 @@ export function setCusAddress (options) {
 export function getCusAddress (options) {
   return get('/apis/api/admin/getCSAddress.do', options)
 }
+// 修改用户信息
+export function setUserInfo (options) {
+  return get('/apis/api/admin/setAvatar.do', options)
+}

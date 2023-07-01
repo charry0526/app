@@ -7,6 +7,7 @@ import Mint from 'mint-ui'
 import store from './store/index'
 import axios from './axios/index'
 import ElementUI from 'element-ui'
+import locales from 'element-ui/lib/locale/lang/vi'
 import VueClipboard from 'vue-clipboard2' // 复制
 import state from './event'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -24,7 +25,7 @@ import 'vant/lib/index.css'
 import * as api from '@/axios/api'
 
 Vue.use(animated)
-Vue.use(ElementUI)
+Vue.use(ElementUI, { locales })
 Vue.use(VueClipboard)
 Vue.use(VueI18n)
 
@@ -101,7 +102,7 @@ Vue.prototype.checkCookie = function () {
   }
 }
 
-Vue.prototype.$moneyDot = function (value) {
+Vue.prototype.$moneyDot = function (value, isdot = true) {
   if (value == 0) {
     return value
   }
@@ -130,6 +131,9 @@ Vue.prototype.$moneyDot = function (value) {
 
     // =2表示数据有小数位
     if (value2Array.length === 2) {
+      if (isdot == false) {
+        return value2Array[0]
+      }
       floatPart = value2Array[1].toString() // 拿到小数部分
       if (floatPart.length === 1) {
         // 补0,实际上用不着

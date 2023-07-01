@@ -101,7 +101,7 @@ export default new Router({
       meta: {
         // title: '账户登录',
         title: 'Đăng nhập tài khoản',
-        hasHeader: true
+        hasHeader: false
       },
       component: Login
     }, {

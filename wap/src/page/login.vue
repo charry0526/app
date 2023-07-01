@@ -1,11 +1,40 @@
 <template>
   <div class="wrapper">
-    <!-- <mt-header fixed title="">
-      <router-link to="/home" slot="left">
-        <mt-button icon="back"></mt-button>
-      </router-link>
-    </mt-header> -->
-    <div class="login-form">
+    <mt-header title="Đăng nhập tài khoản">
+        <mt-button icon="back" slot="left" @click="$router.go(-1)"></mt-button>
+    </mt-header>
+    <div class="contain-box">
+      <img @load="imgOnload()" ref="loginBg" class="login-bg" src="../assets/img/login-bg.jpg" alt="" srcset="">
+      <div class="contain-main">
+        <div class="logo-box">
+          <img class="logo"  src="../assets/img/1-01.png" alt="">
+        </div>
+        <div class="login-form-item input-model">
+            <img v-show="$state.theme != 'red'" class="login-ico" src="../assets/ico/loginuser.png" alt="">
+            <img v-show="$state.theme == 'red'" class="login-ico" src="../assets/ico/loginuser-red.png" alt="">
+            <input
+            class="login-input"
+            placeholder="Tên tài khoản"
+            type="tel" pattern="[0-9]*"
+            v-model="phone"
+            >
+          </div>
+          <div class="login-form-item input-model">
+            <img v-show="$state.theme != 'red'" class="login-ico" src="../assets/ico/loginpwd.png" alt="">
+            <img v-show="$state.theme == 'red'" class="login-ico" src="../assets/ico/loginpwd-pwd.png" alt="">
+            <input class="login-input" type="password" placeholder="Mật khẩu" v-model="psd">
+          </div>
+          <div class="login-form-item submit-model" @click="gook">
+            Đăng nhập
+            <i v-show="isloading" style="color:#fff;" class="iconfont icon-jiazaizhong"></i>
+          </div>
+          <div class="login-form-item submit-model goregister" @click="toRegister">
+            Đăng ký
+          </div>
+          <p class="tips">Quên mật khẩu？</p>
+      </div>
+    </div>
+    <!-- <div class="login-form">
       <div class="login-avatar">
         <img class="login-ico" src="../assets/ico/wogerenziliao.png" alt="">
       </div>
@@ -27,63 +56,18 @@
         <input class="login-input" type="password" placeholder="Mật khẩu" v-model="psd">
       </div>
       <div class="login-form-item submit-model" @click="gook">
-        <!-- 立即登录 -->
         Đăng nhập
         <i v-show="isloading" style="color:#fff;" class="iconfont icon-jiazaizhong"></i>
       </div>
       <div class="login-form-item extra-model">
-<!--        <div style="color:#0E6580"><span @click="toForget">-->
-<!--          &lt;!&ndash; 忘记密码 &ndash;&gt;-->
-<!--          Quên mật khẩu？-->
-<!--          </span></div>-->
         <div :style="{color:$state.theme =='red'?'#BB1815':'#86CBD1'}">
           <span style="color:#0E6580">
-            <!-- 还没有账号 -->
             Quên mật khẩu？
             </span><span @click="toRegister">
-              <!-- 立即注册 -->
               Đăng ký
             </span></div>
       </div>
-    </div>
-    <!-- <div class="text-center">
-      <img class="banenr" :src="logo" alt="logo">
     </div> -->
-    <!-- <div class="forms"> -->
-      <!-- <div class="form-view">
-        <icon class="form-ic" name="phone" slot="icon"></icon>
-        <i class="iconfont icon-yonghu"></i>
-        <input type="tel" pattern="[0-9]*" placeholder="手机号码" v-model="phone">
-      </div> -->
-      <!-- <div class="form-view">
-          <i class="iconfont icon-yanzhengma"></i>
-          <input type="number" pattern="[0-9]*" placeholder="验证码" v-model="code">
-          <span v-if="codeshow" class="getcode" @click="getcode">获取验证码</span>
-          <span v-if="!codeshow" class="getcode">{{count}}s</span>
-      </div> -->
-      <!-- <div class="form-view"> -->
-        <!-- <icon class="form-ic" name="safe" slot="icon"></icon> -->
-        <!-- <i class="iconfont icon-lr_password"></i> -->
-        <!-- <input type="password" autocomplete="new-password" pattern="[0-9]*" placeholder="请输入密码" v-model="psd"> -->
-      <!-- </div> -->
-    <!-- </div> -->
-    <!-- <div class="chebox">
-        <span class="checked">
-            <input id="checkcode" type="checkbox" :checked="isChecked" @click="handleDisabled"/>
-            <label for="checkcode"></label>一天内自动登陆
-        </span>
-    </div> -->
-    <!-- <div class="btnbox">
-        <span class="btnok" @click="gook">
-            确定
-            <i v-show="isloading" style="color:#fff;" class="iconfont icon-jiazaizhong"></i>
-        </span>
-    </div>
-    <div>
-      <mt-button class="text-btn fl" type="default" @click="toForget">忘记密码</mt-button>
-      <mt-button class="text-btn fr" type="default" @click="toRegister">注册</mt-button>
-    </div> -->
-
   </div>
 </template>
 <script>
@@ -112,8 +96,24 @@ export default {
   mounted: function () {
     this.getInfoSite()
     this.phone = this.$store.state.userInfo.phone
+    let header = document.querySelector('.mint-header')
+    let bodyBox = document.querySelector('.body-box')
+    header.style.backgroundColor = 'transparent'
+    bodyBox.style.height = '100%'
+    // this.$nextTick(() => {
+    //     console.log(this.$refs.loginBg)
+    // })
   },
   methods: {
+    imgOnload () {
+      this.$nextTick(() => {
+        let imgheight = this.$refs.loginBg.height
+        let containMainHeight = document.querySelector('.contain-main')
+        var containStyles = window.getComputedStyle(containMainHeight)
+        var containStyleMarTop = (containStyles.marginTop.replace('px', '')) * 1
+        containMainHeight.style.height = (window.innerHeight - imgheight + Math.abs(containStyleMarTop)) + 'px'
+      })
+    },
     async getInfoSite () {
       // 获取 logo
       let data = await api.getInfoSite()
@@ -179,23 +179,9 @@ export default {
         this.isDisabled = false
       }
     },
-    toForget () {
-      // 忘记密码
-      this.$router.push('/forget')
-    },
     toRegister () {
       // 注册
       this.$router.push('/register')
-    },
-    toHome () {
-      this.$router.push('/home')
-    },
-    goBack () {
-      if (this.$route.query.goindex === 'true') {
-        this.$router.push('/')
-      } else {
-        this.$router.back(-1)
-      }
     }
   }
 }
@@ -208,49 +194,81 @@ export default {
   .wrapper {
     color: #888;
     height: 100%;
-    padding-bottom: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    // display: flex;
+    // flex-direction: column;
+    // justify-content: center;
+    // align-items: center;
     border-radius: .1rem;
-  }
+    background-color: #131313;
 
-  .login-form {
-    display: block;
-    width: 6.13rem;
-    height: 5.58rem;
-    // background-color: #1B1C25;
-    background-color: #3B3A3F;
+  }
+  .contain-box{
+    width:7rem;
+    // padding: 0 .2rem;
+    background-color: #28094B;
+    margin:0 auto
+  }
+  .login-bg{
+    width: 100%;
+    margin-top: -40px;
+  }
+  .contain-main{
+    background-color: #1F1E23;
+    width:100%;
+    // height:10rem;
+    border-top-left-radius: .8rem;
+    border-top-right-radius: .8rem;
+    margin-top: -0.3rem;
     position: relative;
-    // box-shadow: 0 0 .1rem .1rem #0002;
-    box-shadow: 0 0 .1rem .1rem #3B3A3F;
-    border-radius: .2rem;
-    .login-avatar {
-      width: 1.2rem;
-      height: 1.2rem;
-      background-color: #444656;
-      border-radius: 50%;
-      position: absolute;
-      top: -.6rem;
-      left: 2.46rem;
+    .logo-box{
       display: flex;
-      align-items: center;
       justify-content: center;
-      box-shadow: 0 0 .1rem .1rem #0002;
-      img {
-        width: .55rem;
-        height: .58rem;
+      padding-top: .8rem;
+      margin-bottom: 1rem;
+        .logo{
+          width: 2rem;
+          object-fit: contain;
+        }
       }
     }
+
+  // .login-form {
+  //   display: block;
+  //   width: 6.13rem;
+  //   height: 5.58rem;
+  //   // background-color: #1B1C25;
+  //   background-color: #3B3A3F;
+  //   position: relative;
+  //   // box-shadow: 0 0 .1rem .1rem #0002;
+  //   box-shadow: 0 0 .1rem .1rem #3B3A3F;
+  //   border-radius: .2rem;
+  //   .login-avatar {
+  //     width: 1.2rem;
+  //     height: 1.2rem;
+  //     background-color: #444656;
+  //     border-radius: 50%;
+  //     position: absolute;
+  //     top: -.6rem;
+  //     left: 2.46rem;
+  //     display: flex;
+  //     align-items: center;
+  //     justify-content: center;
+  //     box-shadow: 0 0 .1rem .1rem #0002;
+  //     img {
+  //       width: .55rem;
+  //       height: .58rem;
+  //     }
+  //   }
     .login-form-item {
-      width: 4.95rem;
-      height: .66rem;
-      border-radius: .33rem;
+      width: 90%;
+      height: .8rem;
+      border-radius: .1rem;
       margin: .45rem auto 0;
+
+      border: 0.04rem solid #66636A;
       &.input-model {
         background-color: #252429;//#121319;
-        padding: 0 .33rem;
+        padding: 0 .2rem;
         display: flex;
         align-items: center;
         img.login-ico {
@@ -260,16 +278,18 @@ export default {
         .login-input {
           flex: 1;
           padding: 0 .2rem;
+          color:#F5F5F9;
           &::-webkit-input-placeholder {
-            color: #363636;
+            color: #AEADB2;
           }
         }
       }
       &.submit-model {
         background-color: #F39C0F;//#024DA1;
-        line-height: .66rem;
+        line-height: .8rem;
         text-align: center;
         color: #ffffff;
+        border:none;
       }
       &.extra-model {
         margin-top: .24rem;
@@ -278,20 +298,30 @@ export default {
         font-size: .2rem;
       }
     }
+  // }
+  // .red-theme{
+  //   .login-avatar{
+  //     background-color: #222222;
+  //   }
+  //   .login-form{
+  //     background-color: #fff;
+  //   }
+  //   .login-form-item.input-model{
+  //     background-color: #fff;
+  //     border: 1px solid #C9C9C9;
+  //   }
+  //   .login-form-item.submit-model{
+  //     background-color: #BB1815;
+  //   }
+  // }
+  .goregister{
+    background-color: transparent !important;
+    color: #F5F4F9 !important;
+    border: 0.04rem solid #66636A !important;
   }
-  .red-theme{
-    .login-avatar{
-      background-color: #222222;
-    }
-    .login-form{
-      background-color: #fff;
-    }
-    .login-form-item.input-model{
-      background-color: #fff;
-      border: 1px solid #C9C9C9;
-    }
-    .login-form-item.submit-model{
-      background-color: #BB1815;
-    }
+  .tips{
+    color: #D9D8DC;
+    text-align: center;
+    margin-top: 1rem;
   }
 </style>

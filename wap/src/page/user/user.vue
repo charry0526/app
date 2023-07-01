@@ -15,9 +15,26 @@
       </mt-header>
     </div> -->
     <div class="account-info">
-      <div class="account-info_avatar">
-        <img src="../../assets/ico/wogerenziliao.png" alt="" />
-      </div>
+
+          <div class="account-info_avatar">
+            <el-upload
+              class="avatar-uploader"
+              name="upload_file"
+              :action="admin+'/apis/user/upload.do'"
+              :show-file-list="false"
+              :with-credentials='true'
+              :on-success="handleAvatarSuccess"
+              :on-error='handleError'
+              :before-upload="beforeAvatarUpload">
+              <div v-if="$store.state.userInfo.avatar" class="avatar-box">
+                <img  :src="$store.state.userInfo.avatar" alt="" />
+              </div>
+              <div v-else class="default-avatar-box">
+                <img   src="../../assets/ico/wogerenziliao.png" alt="" />
+              </div>
+            </el-upload>
+          </div>
+
       <div class="account-info_detail">
         <div class="account-name">
           {{ $t("userName") }}：{{
@@ -38,7 +55,7 @@
     </div>
     <div class="account-container">
       <!-- <div class="account-header">
-        <h2 class="title">账户总资产 <span class="sub-title">( 沪深账户 <i
+        <h2 class="title">账户总 资产  <span class="sub-title">( 沪深账户 <i
           v-if="this.$store.state.settingForm.indexDisplay">+ 指数账户</i> <i
           v-if="this.$store.state.settingForm.futuresDisplay"> + 期货账户</i>)</span></h2>
         <div>
@@ -167,9 +184,9 @@
               {{
                 $store.state.hide
                   ? "****"
-                  : $moneyDot($store.state.userInfo.userAmt) + " đ"
-                  ? $moneyDot($store.state.userInfo.userAmt) + " đ"
-                  : $moneyDot($store.state.userInfo.userAmt) + " đ"
+                  : $moneyDot($store.state.userInfo.userAmt,false) + " đ"
+                  ? $moneyDot($store.state.userInfo.userAmt,false) + " đ"
+                  : $moneyDot($store.state.userInfo.userAmt,false) + " đ"
               }}
             </p>
           </div>
@@ -239,6 +256,7 @@
               <span :style="{color:$state.theme == 'red'?'#000':'#fff'}">资金互转<i class="iconfont icon-you"></i></span>
             </a> -->
           </div>
+
           <div v-show="item.isShow" class="content">
             <ul class="content-ul">
               <li>
@@ -250,7 +268,7 @@
                     {{
                       $store.state.hide
                         ? "****"
-                        : $moneyDot($store.state.userInfo.userIndexAmt)+'đ'
+                        : $moneyDot($store.state.userInfo.userIndexAmt,false)+'đ'
                     }}
 
                   </p>
@@ -258,7 +276,7 @@
                     {{
                       $store.state.hide
                         ? "****"
-                        : $moneyDot($store.state.userInfo.userAmt)+'đ'
+                        : $moneyDot($store.state.userInfo.userAmt,false)+'đ'
                     }}
 
                   </p>
@@ -269,7 +287,7 @@
                         : $moneyDot(
                             Number(
                               $store.state.userInfo.userFuturesAmt
-                            ).toFixed(2)
+                            ).toFixed(2),false
                           )+'đ'
                     }}
 
@@ -285,21 +303,21 @@
                     {{
                       $store.state.hide
                         ? "****"
-                        : $moneyDot($store.state.userInfo.enableIndexAmt) + " đ"
+                        : $moneyDot($store.state.userInfo.enableIndexAmt,false) + " đ"
                     }}
                   </p>
                   <p v-if="item.name == '我的'" class="number yellow">
                     {{
                       $store.state.hide
                         ? "****"
-                        : $moneyDot($store.state.userInfo.enableAmt) + " đ"
+                        : $moneyDot($store.state.userInfo.enableAmt,false) + " đ"
                     }}
                   </p>
                   <p v-if="item.name == '期货'" class="number yellow">
                     {{
                       $store.state.hide
                         ? "****"
-                        : $moneyDot($store.state.userInfo.enableFuturesAmt) +
+                        : $moneyDot($store.state.userInfo.enableFuturesAmt,false) +
                           " đ"
                     }}
                   </p>
@@ -313,21 +331,21 @@
                   {{
                     $store.state.hide
                       ? "****"
-                      : $moneyDot($store.state.userInfo.allIndexFreezAmt) + " đ"
+                      : $moneyDot($store.state.userInfo.allIndexFreezAmt,false) + " đ"
                   }}
                 </p>
                 <p v-if="item.name == '我的'" class="number yellow">
                   {{
                     $store.state.hide
                       ? "****"
-                      : $moneyDot($store.state.userInfo.allFreezAmt) + " đ"
+                      : $moneyDot($store.state.userInfo.allFreezAmt,false) + " đ"
                   }}
                 </p>
                 <p v-if="item.name == '期货'" class="number yellow">
                   {{
                     $store.state.hide
                       ? "****"
-                      : $moneyDot($store.state.userInfo.allFuturesFreezAmt) +
+                      : $moneyDot($store.state.userInfo.allFuturesFreezAmt,false) +
                         " đ"
                   }}
                 </p></div>
@@ -349,7 +367,7 @@
                   {{
                     $store.state.hide
                       ? "****"
-                      : $moneyDot($store.state.userInfo.allIndexProfitAndLose) +
+                      : $moneyDot($store.state.userInfo.allIndexProfitAndLose,false) +
                         " đ"
                   }}
                 </p>
@@ -366,7 +384,7 @@
                   {{
                     $store.state.hide
                       ? "****"
-                      : $moneyDot($store.state.userInfo.allProfitAndLose) + " đ"
+                      : $moneyDot($store.state.userInfo.allProfitAndLose,false) + " đ"
                   }}
                 </p>
                 <p
@@ -385,7 +403,7 @@
                       : $moneyDot(
                           Number(
                             $store.state.userInfo.allFuturesProfitAndLose
-                          ).toFixed(2)
+                          ).toFixed(2),false
                         ) + " đ"
                   }}
                 </p></div>
@@ -751,7 +769,9 @@ export default {
       ],
       showChangeBtn: false, // 是否显示资金互转按钮
       styleName: 'black',
-      shengoudj: ''
+      shengoudj: '',
+      admin: '',
+      imageUrl: ''
     }
   },
   watch: {
@@ -773,6 +793,10 @@ export default {
     this.changeHideStatus = this.$store.state.hide
     if (this.$store.state.settingForm.indexDisplay || this.$store.state.settingForm.futuresDisplay) {
       this.showChangeBtn = true
+    }
+    this.admin = process.env.API_HOST
+    if (this.admin === undefined) {
+      this.admin = ''
     }
   },
   methods: {
@@ -945,6 +969,20 @@ export default {
         Toast(data.msg)
       }
       this.$store.state.user = this.user
+    },
+    handleAvatarSuccess (res, file) {
+      this.imageUrl = res.data.url
+      this.editInfo()
+    },
+    handleError () {
+
+    },
+    beforeAvatarUpload (file) {
+      console.log(file)
+    },
+    async editInfo () {
+      let data = await api.setUserInfo({avatar: this.imageUrl, id: this.$store.state.userInfo.id})
+      this.$store.state.userInfo.avatar = this.imageUrl
     }
   }
 }
@@ -1472,14 +1510,38 @@ body {
     height: 1.13rem;
     line-height: 1.13rem;
     border-radius: 50%;
-    background-color: #444656;
+    // background-color: #444656;
     display: flex;
     align-items: center;
     justify-content: center;
-    img {
-      width: 0.55rem;
-      height: 0.58rem;
+    .avatar-box{
+      width: 1.13rem;
+      height: 1.13rem;
+      line-height: 1.13rem;
+      border-radius: 50%;
+      overflow: hidden;
+      img{
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+      }
     }
+    .default-avatar-box{
+      width: 1.13rem;
+      height: 1.13rem;
+      line-height: 1.13rem;
+      border-radius: 50%;
+      background-color: #444656;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img {
+        width: 0.55rem;
+        height: 0.58rem;
+      }
+    }
+
   }
   &_detail {
     padding-left: 0.22rem;
@@ -1698,5 +1760,11 @@ body {
   width: 0.4rem;
   margin-right: 0.2rem;
   object-fit: contain;
+}
+/deep/ .el-upload__input{
+  display: none;
+}
+/deep/ .el-upload{
+  display: flex;
 }
 </style>
