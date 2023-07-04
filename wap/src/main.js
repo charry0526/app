@@ -131,10 +131,10 @@ Vue.prototype.$moneyDot = function (value, isdot = true) {
 
     // =2表示数据有小数位
     if (value2Array.length === 2) {
-      if (isdot == false) {
-        return value2Array[0]
-      }
       floatPart = value2Array[1].toString() // 拿到小数部分
+      if (isdot == false) {
+        return intPartFormat
+      }
       if (floatPart.length === 1) {
         // 补0,实际上用不着
         let returnValue = intPartFormat + '.' + floatPart + '0' + suffix

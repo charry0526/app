@@ -1406,6 +1406,7 @@ body {
 
       .number {
         font-size: 0.27rem;
+        font-family: lightnumber;
       }
     }
   }

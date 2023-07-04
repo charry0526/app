@@ -55,29 +55,12 @@
             <div class="box-tab-input-box">
               <input
                 ref="chongref"
-                v-if="isConfig"
-                v-model="selectNumber"
+                v-model="formattedInput"
                 class="btn-default"
-                pattern="[0-9]*"
-                type="number"
-              />
-              <input
-                @click="setinput()"
-                readonly
-                v-else
-                v-model="selectStr"
-                class="btn-default-str"
                 type="text"
+                @input="handleInput"
               />
-              <button
-                @click="isConfig=!isConfig"
-                :style="{ background: isConfig ? '#b60c0d' : '#505050' }"
-                class="submitBtn config"
-              >
-                {{ isConfig ? "Xác nhận" : "Nhập số tiền" }}
-              </button>
             </div>
-
             <div class="tab-con">
               <ul class="radio-group clearfix">
                 <li
@@ -334,13 +317,15 @@ export default {
       formUrl: '',
       formCode: '',
       isConfig: false,
-      Focus1: false
+      Focus1: false,
+      formattedInput: '50,000'
     }
   },
   computed: {
-    selectStr () {
-      return this.$moneyDot(this.selectNumber)
-    }
+    // selectStr () {
+    //   return this.$moneyDot(this.selectNumber)
+    // }
+
   },
   created () {},
   mounted () {
@@ -363,19 +348,22 @@ export default {
   },
   watch: {},
   methods: {
-    setinput () {
-      this.$nextTick(() => {
-        this.isConfig = !this.isConfig
-        if (!/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
-          setTimeout(() => {
-            this.$refs.chongref.focus = true
-            // this.Focus1 = true;
-            const len = (this.selectNumber + '').length
-            this.$refs.chongref.setSelectionRange(len, len)
-          }, 500)
-        }
-      })
-      this.$forceUpdate()
+    handleInput (eventOrValue) {
+      let input = ''
+      if (typeof eventOrValue === 'string' || typeof eventOrValue === 'number') {
+        input = String(eventOrValue)
+      } else if (eventOrValue.target && eventOrValue.target.value) {
+        input = eventOrValue.target.value
+      }
+      const filteredValue = input.replace(/\D/g, '') // 过滤非数字字符
+      const parsedValue = parseInt(filteredValue)
+
+      if (!isNaN(parsedValue)) { // 检查输入是否为有效的数字
+        this.selectNumber = parsedValue
+        this.formattedInput = parsedValue.toLocaleString()
+      } else {
+        this.formattedInput = '' // 清空格式化的值
+      }
     },
     async onsubmit () {
       // 解决金额不变的问题
@@ -440,6 +428,7 @@ export default {
     selectTypeFun (value) {
       // 选择充值金额
       this.selectNumber = value
+      this.handleInput(value)
     },
     async changeType (value) {
       this.id = value.id
@@ -488,9 +477,6 @@ export default {
       }
     },
     toSure () {
-      if (this.isConfig) {
-        return Toast('Hãy tiết kiệm số tiền')
-      }
       // 充值 先判断是否实名认证
       if (!this.$store.state.userInfo.idCard) {
         Toast(

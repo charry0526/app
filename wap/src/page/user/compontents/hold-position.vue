@@ -23,7 +23,7 @@
               <span v-if="item.isNew==1" :class="item.isNew=='1'?'type type-up':'type type-down'">{{item.isNew=='1'?'ESOP':''}}</span>
               <!-- <span :class="item.orderDirection=='买涨'?'type type-up':'type type-down'">{{item.orderDirection=='买涨'?'买涨':'买跌'}}</span> -->
               <span v-if="item.stockPlate=='科创'" :class="item.stockPlate=='科创'?'type':''">科创</span>
-              <span class="direction pull-right big-font">
+              <span class="direction pull-right">
                         <!-- 最新: -->
                         Cập nhật:
                         <b v-if="item.now_price == 0">-</b>
@@ -77,7 +77,7 @@
                             <b v-else
                                :class="item.profitAndLose<0?'space red':item.profitAndLose>=0?'space':'space green'">{{$moneyDot(item.profitAndLose)}}</b>
                         </span>
-                <span class="col-xs-4 text-right big-font">
+                <span class="col-xs-4 text-right">
                   Tổng lãi/lỗ
                   :
                     <b v-if="item.now_price == 0">-</b>
