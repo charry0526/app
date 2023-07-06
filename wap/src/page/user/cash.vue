@@ -26,41 +26,35 @@
         </div>
       </div>
       <div class="form-block page-part">
-        <!-- <mt-field label="提现金额" placeholder="请输入提现金额" type="number" v-model="number"> -->
-        <mt-field
-          v-if="isConfig"
+       <div class="sum-box">
+         <div class="sum-wrapper">
+          <label>Số tiền rút</label>
+          <input
+                  ref="chongref"
+                  v-model="formattedInput"
+                  placeholder="Vui lòng nhập số tiền rút"
+                  class="btn-default"
+                  type="text"
+                  @input="handleInput"
+                />
+          <span @click="changeAllNumber" class="all-in">Tất cả</span>
+         </div>
+       </div>
+       <!-- <mt-field
           label="Số tiền rút"
           :attr="{ pattern: '[0-9]*', focus: Focus1 }"
+          ref="chongref"
           placeholder="Vui lòng nhập số tiền rút"
-          type="number"
+          type="text"
           v-model="number"
+          @input="handleInput"
         >
           <span @click="changeAllNumber">
-            <!-- 全部 -->
             Tất cả
           </span>
-        </mt-field>
-        <mt-field
-          @click.native="setinput"
-          v-else
-          label="Số tiền rút"
-          disabled
-          readonly
-          placeholder="Vui lòng nhập số tiền rút"
-          v-model="selectStr"
-        ></mt-field>
-        <!-- <mt-field label="到账银行" placeholder="请输入提现金额" type="number" v-model="card"></mt-field> -->
-        <!-- <mt-field label="手机号" placeholder="请输入手机号" type="number" v-model="phone"></mt-field> -->
+        </mt-field> -->
       </div>
-      <div class="btnbox">
-        <span
-          class="text-center btnok"
-          @click="isConfig = !isConfig"
-          :style="{ background: isConfig ? '#b60c0d' : '#505050' }"
-        >
-          {{ isConfig ? "Xác nhận" : "Nhập số tiền" }}
-        </span>
-      </div>
+
       <div class="btnbox">
         <span class="text-center btnok" @click="toSure">
           <!-- 确定 -->
@@ -119,8 +113,8 @@ export default {
         withFeeSingle: 3, // 提现单笔手续费
         withFeePercent: 0.008 // 提现单笔手续费
       },
-      isConfig: false,
-      Focus1: false
+      Focus1: false,
+      formattedInput: ''
     }
   },
   watch: {},
@@ -144,22 +138,26 @@ export default {
     this.getSettingInfo()
   },
   methods: {
-    setinput () {
-      this.$nextTick(() => {
-        this.isConfig = !this.isConfig
-        if (!/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
-          setTimeout(() => {
-            // this.$refs.chongref.focus = true
-            this.Focus1 = true
-            // const len=(this.selectNumber+'').length
-            // this.$refs.chongref.setSelectionRange(len,len)
-          }, 500)
-        }
-      })
-      this.$forceUpdate()
+    handleInput (eventOrValue) {
+      let input = ''
+      if (typeof eventOrValue === 'string' || typeof eventOrValue === 'number') {
+        input = String(eventOrValue)
+      } else if (eventOrValue.target && eventOrValue.target.value) {
+        input = eventOrValue.target.value
+      }
+      const filteredValue = input.replace(/\D/g, '') // 过滤非数字字符
+      const parsedValue = parseInt(filteredValue)
+
+      if (!isNaN(parsedValue)) { // 检查输入是否为有效的数字
+        this.number = parsedValue
+        this.formattedInput = parsedValue.toLocaleString()
+      } else {
+        this.formattedInput = '' // 清空格式化的值
+      }
     },
     changeAllNumber () {
-      this.number = this.$store.state.userInfo.enableAmt
+      this.number = this.$store.state.userInfo.enableAmt||''
+      this.handleInput(this.number)
     },
     async getSettingInfo () {
       let data = await api.getSetting()
@@ -177,13 +175,11 @@ export default {
         // Toast('请先实名认证')
         Toast('Vui lòng xác minh tên thật của bạn trước')
         this.$router.push('/authentication')
-        return
       }
       if (!this.$store.state.bankInfo.bankNo) {
         // Toast('请先绑定银行卡')
         Toast('Vui lòng liên kết thẻ ngân hàng trước')
         this.$router.push('/addCard')
-        return
       }
       if (!this.number || this.number <= 0) {
         // Toast('请输入正确的提现金额')
@@ -191,9 +187,6 @@ export default {
         // Toast('提现金额不得小于' + this.settingInfo.withMinAmt)
         Toast('Số tiền rút không được nhỏ hơn' + this.settingInfo.withMinAmt)
       } else {
-        if (this.isConfig) {
-          return Toast('Hãy tiết kiệm số tiền')
-        }
         let opts = {
           amt: this.number
         }
@@ -301,5 +294,37 @@ export default {
   /deep/.mint-field {
     // background: #3b3a3f;
   }
+}
+.sum-box{
+  width: 100%;
+
+  padding: 0 .33rem;
+  background-color: #21252A;
+  height: 1rem;
+  line-height: 1rem;
+
+  .sum-wrapper{
+    border-bottom: .01rem solid hsla(252, 5%, 79%, .5);
+    display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height:100%;
+    label{
+      width:30%;
+      text-align: center;
+      font-size: .29rem;
+      color: white;
+    }
+    .btn-default{
+      flex: 1;
+      padding-left: .2rem;
+      color: #CAD0D1;
+      background-color: transparent;
+    }
+    .all-in{
+
+    }
+  }
+
 }
 </style>

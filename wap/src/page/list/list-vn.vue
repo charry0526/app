@@ -177,12 +177,12 @@ export default {
     // },
     async getStock () {
       let opt = {
-        apikey,
-        code: this.searchKey,
-        'to-date': timestampToTime(),
-        'from-date': timestampToTime()
+        apikey
+        // code: this.searchKey,
+        // 'to-date': timestampToTime(),
+        // 'from-date': timestampToTime()
       }
-      let data = await api.wifeedDutop(opt)
+      let {data} = await api.wifeedDutop(opt)
       if (data.length == 0) return this.loading = false
       this.loading = true
       // data.forEach(element => {

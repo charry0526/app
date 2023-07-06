@@ -470,7 +470,7 @@ export function getseMessageCode (options) {
 }
 //
 export function wifeedDutop (options) {
-  return get('/wifeed/api/du-lieu-gia-eod/top', options)
+  return get('/wifeed/api/du-lieu-gia-eod/ohcl', options)
 }
 // 设置客服地址
 export function setCusAddress (options) {

@@ -336,5 +336,14 @@ export default {
     text-align: center;
     margin-top: 1rem;
   }
-
+  input:-webkit-autofill,
+	input:-webkit-autofill:hover,
+	input:-webkit-autofill:focus,
+	input:-webkit-autofill:active {
+		transition-delay: 999999999s;
+	    transition: color  999999999s ease-out, background-color  999999999s ease-out;
+	    -webkit-transition-delay:  999999999s;
+	    -webkit-transition: color  999999999s ease-out, background-color  999999999s ease-out;
+	    -webkit-text-fill-color: #fff;
+	}
 </style>

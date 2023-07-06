@@ -46,7 +46,8 @@
       </mt-tab-container-item>
       <mt-tab-container-item class="order-list-two"
                              id="2">
-        <div class="table-box" style="overflow-x: scroll;">
+                             <!-- style="overflow-x: scroll;" -->
+        <div class="table-box" >
           <table v-if="selected==2"
                  v-infinite-scroll="loadMore"
                  :infinite-scroll-disabled="loading"
@@ -58,7 +59,7 @@
               <th>Giá PH</th>
               <th>SL</th>
               <th>Đòn bẩy</th>
-              <th>Giá TT</th>
+              <!-- <th>Giá TT</th> -->
               <th>Xét duyệt</th>
             </tr>
             <tr v-for="(item,index) in tendorseListDate"
@@ -68,7 +69,7 @@
               <td>{{$moneyDot(item.issuePrice)}}</td>
               <td>{{item.nums}}</td>
               <td>{{item.gg}}</td>
-              <td>{{$moneyDot(item.sz)}}</td>
+              <!-- <td>{{$moneyDot(item.sz)}}</td> -->
               <!-- <td :class="item.zts==2?'tdActive':''">
                 {{item.zts==1?'vượt qua':item.zts==2?'không vượt qua':item.zts==4?'Hoàn thành':'không được xem xét'}}
               </td> -->
