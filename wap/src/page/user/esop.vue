@@ -236,14 +236,6 @@ export default {
           await this.getUserInfo()
         }
         await this.getendorseList()
-        // try {
-        //   if (Object.keys(this.userInfo).length == 0) {
-        //     await this.getUserInfo()
-        //   }
-        //   await this.getendorseList()
-        // } catch (e) {
-        //   await this.getendorseList()
-        // }
       }
 
       loadingAll.loading = false

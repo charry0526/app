@@ -61,7 +61,7 @@
 }
 .order-list-two .table td,
 .order-list-two .table th {
-  padding: 0.16rem 0.3rem;
+  padding: 0.16rem 0;
   color: #ccc;
   text-align: center;
   font-size: 0.26rem;
