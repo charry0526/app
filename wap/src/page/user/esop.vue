@@ -34,7 +34,7 @@
                 <div class="button-box">
                   <mt-button class="btn-red pull-right"
                              size="small"
-                             type="danger"
+                             type="danger" style="background-color: #f5991d !important;"
                              @click="popUp(item)">
                     Đề xuất
                   </mt-button>
@@ -78,7 +78,7 @@
                 <span  v-if="item.zts!=1">{{item.zts==2?'Chưa thông qua':item.zts==4?'Hoàn thành':'Đang XD'}}</span>
                  <mt-button  v-if="item.zts==1" class="btn-red pull-right"
                              size="small"
-                             type="danger"
+                             type="danger" style="background-color: #f5991d !important;"
                              @click="toCash(item)">
                     Mua
                   </mt-button>
