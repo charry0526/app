@@ -158,8 +158,8 @@
     <!-- tab -->
     <div class="news-tab">
       <div class="firma-logo">
-        <img src="../../assets/img/2-1.png" alt="" srcset="">
-        <p>CTY CPCK XTB VIỆT NAM</p>
+        <img src="../../assets/img/2-2.jpg" alt="" srcset="">
+        <p>CÔNG TY CP CK FILEDITY VIỆT NAM</p>
       </div>
       <ul class="firma-info">
         <li>
@@ -172,11 +172,11 @@
         </li>
         <li>
           <p class="labels">Email</p>：
-           <p class="con">cskh@vn-xtb.com </p>
+           <p class="con">cskh@vn-etrade.com</p>
         </li>
         <li>
           <p class="labels">Web</p>：
-          <p class="con">https://vn-xtb.com/</p>
+          <p class="con">https://stock-fidelity.com</p>
         </li>
 
       </ul>
@@ -318,7 +318,7 @@ export default {
       window.location.href = this.address
     },
     getAddress () {
-      this.address='https://www.baidu.com/'
+      this.address = 'https://www.baidu.com/'
       api.getCusAddress().then(res => {
         if (res.status === 0) {
           this.address = res.data
@@ -1134,15 +1134,18 @@ export default {
 .firma-logo{
   display:flex;
   align-items: center;
+  padding: .3rem 0;
   img{
-    width: 2rem;
-    height: 1.5rem;
+    width: 1rem;
+    height: 1rem;
     object-fit: contain;
   }
   p{
+    padding-left: .3rem;
     font-weight: bold;
     font-size: .33rem;
     color: #fff;
+    line-height: 0.5rem !important;
   }
 }
 .firma-info{
