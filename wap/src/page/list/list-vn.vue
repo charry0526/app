@@ -177,7 +177,8 @@ export default {
     // },
     async getStock () {
       let opt = {
-        apikey
+        apikey,
+        san: this.searchKey
         // code: this.searchKey,
         // 'to-date': timestampToTime(),
         // 'from-date': timestampToTime()
@@ -367,7 +368,7 @@ export default {
       height: 100%;
       box-sizing: border-box;
       overflow-y: auto;
-      padding: 0.6rem 0 .8rem;
+      padding: 0.6rem 0 1.5rem;
       >.table-list{
          >li:nth-child(odd){
           background-color: #212025;
