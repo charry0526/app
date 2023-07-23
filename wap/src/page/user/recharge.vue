@@ -318,7 +318,7 @@ export default {
       formCode: '',
       isConfig: false,
       Focus1: false,
-      formattedInput: '50,000'
+      formattedInput: '0'
     }
   },
   computed: {

@@ -8,7 +8,7 @@
         <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/loginuser.png" alt="">
         <img class="register-ico" v-show="$state.theme == 'red'" src="../assets/ico/loginuser-red.png" alt="">
         <!-- <input class="register-input" placeholder="请输入手机号码" type="tel" pattern="[0-9]*" v-model="phone"> -->
-         <label class="label-input">84</label>
+<!--         <label class="label-input">0</label>-->
          <input class="register-input input-phone" placeholder="Vui lòng nhập số điện thoại" type="tel" pattern="[0-9]*" v-model="phone">
 
       </div>
@@ -208,7 +208,7 @@ export default {
       }
     },
     checkCodeBox () {
-      if (isNull(this.phone) || !isPhone(this.phone)) {
+      if (isNull(this.phone)) {
         Toast('Xin vui lòng nhập một số điện thoại hợp lệ')
       } else {
         this.checkPhone()
@@ -253,7 +253,7 @@ export default {
       // }
       // this.clickFalg++
       //   var reg = 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/
-      let reg = /^[0-9]{9}$/ // 手机号码验证
+      let reg = /^[0-9]{10}$/ // 手机号码验证
       if (isNull(this.phone)) {
         Toast('Số điện thoại di động không được để trống')
       } else {
@@ -263,7 +263,7 @@ export default {
           //   var sign  = this.$md5(this.phone+'W&WzL42v').toUpperCase()
           // let result = await api.getCode({ phoneNum: this.phone })
           const inter = this.msgId ? api.getseMessageCode : api.getMessageCode
-          let result = await inter({ phone: 84 + this.phone, msgId: this.msgId })
+          let result = await inter({ phone: this.phone, msgId: this.msgId })
           if (result.status === 0) {
             this.msgId = result.data
             const TIME_COUNT = 60
