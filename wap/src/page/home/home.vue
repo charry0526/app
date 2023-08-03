@@ -172,7 +172,7 @@
         </li>
         <li>
           <p class="labels">Email</p>：
-           <p class="con">cskh@vn-etrade.com</p>
+           <p class="con">cskh@vn-fidelity.com</p>
         </li>
         <li>
           <p class="labels">Web</p>：

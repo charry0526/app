@@ -1,159 +1,121 @@
 <template>
-  <div class="wrapper">
-    <div class="register-form">
-      <div class="register-avatar">
-        <img class="register-ico" src="../assets/ico/wogerenziliao.png" alt="">
-      </div>
-      <div class="register-form-item input-model" style="margin-top:1.11rem">
-        <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/loginuser.png" alt="">
-        <img class="register-ico" v-show="$state.theme == 'red'" src="../assets/ico/loginuser-red.png" alt="">
-        <!-- <input class="register-input" placeholder="请输入手机号码" type="tel" pattern="[0-9]*" v-model="phone"> -->
-<!--         <label class="label-input">0</label>-->
-         <input class="register-input input-phone" placeholder="Vui lòng nhập số điện thoại" type="tel" pattern="[0-9]*" v-model="phone">
+  <div>
+    <div class="wrapper">
+      <div class="contain-box">
+        <img ref="oginBg" class="login-bg" src="../assets/img/login-bg.png" alt="" srcset="">
+        <div class="contain-main">
+          <div class="logo-box">
+            <img class="logo" src="../assets/img/1-01.png" alt="">
+          </div>
+          <div class="register-form-item input-model" style="margin-top:0.11rem">
+            <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/loginuser.png" alt="">
+            <img class="register-ico" v-show="$state.theme == 'red'" src="../assets/ico/loginuser-red.png" alt="">
+            <!-- <input class="register-input" placeholder="请输入手机号码" type="tel" pattern="[0-9]*" v-model="phone"> -->
+            <!--         <label class="label-input">0</label>-->
+            <input class="register-input input-phone" placeholder="Vui lòng nhập số điện thoại" type="tel"
+                   pattern="[0-9]*" v-model="phone">
 
-      </div>
-        <!-- 获取验证码 -->
-      <div class="register-form-item input-model">
-        <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/vertify.png" alt="">
-        <img class="register-ico" v-show="$state.theme == 'red'" src="../assets/ico/vertify-red.png" alt="">
-        <input class="register-input" style="width:1.4rem" placeholder="Mã xác nhận" type="tel" pattern="[0-9]*" v-model="code">
-        <div v-if="codeshow" class="getcode" @click="checkCodeBox">
-          Lấy mã xác minh
-        </div>
-        <div v-if="!codeshow" class="getcode">{{count}}</div>
-      </div>
-      <div class="register-form-item input-model">
-        <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/loginpwd.png" alt="">
-        <img class="register-ico" v-show="$state.theme == 'red'" src="../assets/ico/loginpwd-pwd.png" alt="">
-        <input class="register-input" placeholder="Mật khẩu là 6 ~ 12 chữ số, chữ cái hoặc ký hiệu" type="password" pattern="[0-9]*" v-model="psd">
+          </div>
+          <!-- 获取验证码 -->
+          <div class="register-form-item input-model">
+            <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/vertify.png" alt="">
+            <img class="register-ico" v-show="$state.theme == 'red'" src="../assets/ico/vertify-red.png" alt="">
+            <input class="register-input" style="width:1.4rem" placeholder="Mã xác nhận" type="tel" pattern="[0-9]*"
+                   v-model="code">
+            <div v-if="codeshow" class="getcode" @click="checkCodeBox">
+              Lấy mã xác minh
+            </div>
+            <div v-if="!codeshow" class="getcode">{{ count }}</div>
+          </div>
+          <div class="register-form-item input-model">
+            <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/loginpwd.png" alt="">
+            <img class="register-ico" v-show="$state.theme == 'red'" src="../assets/ico/loginpwd-pwd.png" alt="">
+            <input class="register-input" placeholder="Mật khẩu là 6 ~ 12 chữ số, chữ cái hoặc ký hiệu" type="password"
+                   pattern="[0-9]*" v-model="psd">
 
-        <!-- <input class="register-input" placeholder="密码为6~12位数字、字母或符号" type="password" pattern="[0-9]*" v-model="psd"> -->
-      </div>
-      <div class="register-form-item input-model">
-        <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/loginpwd.png" alt="">
-        <img class="register-ico" v-show="$state.theme == 'red'" src="../assets/ico/loginpwd-pwd.png" alt="">
-        <!-- <input class="register-input" placeholder="请再次确认密码" type="password" pattern="[0-9]*" v-model="psd2"> -->
-                <input class="register-input" placeholder="Vui lòng xác nhận lại mật khẩu" type="password" pattern="[0-9]*" v-model="psd2">
+            <!-- <input class="register-input" placeholder="密码为6~12位数字、字母或符号" type="password" pattern="[0-9]*" v-model="psd"> -->
+          </div>
+          <div class="register-form-item input-model">
+            <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/loginpwd.png" alt="">
+            <img class="register-ico" v-show="$state.theme == 'red'" src="../assets/ico/loginpwd-pwd.png" alt="">
+            <!-- <input class="register-input" placeholder="请再次确认密码" type="password" pattern="[0-9]*" v-model="psd2"> -->
+            <input class="register-input" placeholder="Vui lòng xác nhận lại mật khẩu" type="password" pattern="[0-9]*"
+                   v-model="psd2">
 
-      </div>
-      <div class="register-form-item input-model">
-        <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/organization.png" alt="">
-        <img class="register-ico" v-show="$state.theme == 'red'" src="../assets/ico/organization-red.png" alt="">
-        <!-- <input class="register-input" placeholder="机构代码" type="tel" pattern="[0-9]*" v-model="invitecode"> -->
-                <input class="register-input" placeholder="Mã giới thiệu"  v-model="invitecode">
+          </div>
+          <div class="register-form-item input-model">
+            <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/organization.png" alt="">
+            <img class="register-ico" v-show="$state.theme == 'red'" src="../assets/ico/organization-red.png" alt="">
+            <!-- <input class="register-input" placeholder="机构代码" type="tel" pattern="[0-9]*" v-model="invitecode"> -->
+            <input class="register-input" placeholder="Mã giới thiệu" v-model="invitecode">
 
-      </div>
-      <div class="register-form-item agree-model">
-        <i @click="isAgree"
-          :class="agree?'glyphicon glyphicon glyphicon-ok-sign red':'glyphicon glyphicon-ok-circle'"></i>
-        <!-- 我已阅读并同意 -->
-        Tôi đã đọc và đồng ý
-        <!-- <a @click="toagreeUrl" style="color:#fff">
+          </div>
+          <div class="register-form-item agree-model">
+            <i @click="isAgree"
+               :class="agree?'glyphicon glyphicon glyphicon-ok-sign red':'glyphicon glyphicon-ok-circle'"></i>
+            <!-- 我已阅读并同意 -->
+            Tôi đã đọc và đồng ý
+            <!-- <a @click="toagreeUrl" style="color:#fff">
 
-          《Hợp đồng đăng ký》
-        </a> -->
-      </div>
-      <div class="register-form-item submit-model" @click="gook">
-        <!-- 立即注册 -->
-        Đăng ký ngay
-      </div>
-      <div class="register-form-item " style="margin-top: .23rem;display:flex;justify-content:flex-end">
-        <div :style="{'font-size':'.2rem', color:$state.theme =='red'?'#000':'#86CBD1'}">
-          <!-- 已有账号？ -->
-          Quên mật khẩu？
-          <span
-            :style="{color:$state.theme =='red'?'#BB1815':'#fff'}" @click="goLogin">
+              《Hợp đồng đăng ký》
+            </a> -->
+          </div>
+          <div class="register-form-item submit-model" @click="gook">
+            <!-- 立即注册 -->
+            Đăng ký ngay
+          </div>
+          <div class="register-form-item " style="margin-top: .23rem;display:flex;justify-content:flex-end">
+            <div :style="{'font-size':'.2rem', color:$state.theme =='red'?'#000':'#86CBD1'}">
+              <!-- 已有账号？ -->
+              Quên mật khẩu？
+              <span
+                :style="{color:$state.theme =='red'?'#BB1815':'#fff'}" @click="goLogin">
             <!-- 返回登录 -->
             Đăng nhập
             </span></div>
-      </div>
-    </div>
-    <!-- <div class="text-center">
-      <img class="banenr" :src="logo" alt="logo">
-    </div>
-    <div class="forms">
-      <div class="form-view"> -->
-    <!-- <icon class="form-ic" name="phone" slot="icon"></icon> -->
-    <!-- <i class="iconfont icon-yonghu"></i>
-        <input type="tel" pattern="[0-9]*" placeholder="手机号码" v-model="phone">
-      </div>
-      <div class="form-view" v-if="$store.state.siteInfo.smsDisplay">
-        <i class="iconfont icon-yanzhengma"></i>
-        <input type="number" pattern="[0-9]*" placeholder="验证码" v-model="code">
-        <span v-if="codeshow" class="getcode" @click="checkCodeBox">获取验证码</span>
-        <span v-if="!codeshow" class="getcode">{{count}}s</span>
-      </div>
-      <div class="form-view"> -->
-    <!-- <icon class="form-ic" name="safe" slot="icon"></icon> -->
-    <!-- <i class="iconfont icon-lr_password"></i>
-        <input type="password" placeholder="密码为6~12位，数字、字母或符号" v-model="psd">
-      </div>
-      <div class="form-view"> -->
-    <!-- <icon class="form-ic" name="safe" slot="icon"></icon> -->
-    <!-- <i class="iconfont icon-lr_password"></i>
-        <input type="password" placeholder="请再次确认密码" v-model="psd2">
-      </div>
-      <div class="form-view">
-        <i class="iconfont icon-tuijian"></i>
-        <input type="text" v-model="invitecode" placeholder="输入机构代码">
-      </div>
-    </div>
-    <div class="chebox">
-      <i @click="isAgree"
-         :class="agree?'glyphicon glyphicon glyphicon-ok-sign red':'glyphicon glyphicon-ok-circle'"></i>
-      我已阅读并同意
-      <a @click="toagreeUrl">《注册协议》</a>
-    </div>
-    <div class="btnbox">
-      <span class="btnok" @click="gook">确定</span>
-    </div>
-    <div class="back">
-      已有账户？<a href="javascript:;" @click="goLogin">返回登录</a>
-    </div> -->
-    <!-- <mt-popup v-model="logindialogShow" :closeOnClickModal="false" class="mint-popup-box mint-popup-white">
-        <div class="clearfix">
-            <a @click="logindialogShow = false" class="pull-right"><i class="iconfont icon-weitongguo"></i></a>
-        </div>
-        <iframe :src="agreeUrl" frameborder="0"></iframe>
-        <div class="text-center">
-            <mt-button type="primary" @click="logindialogShow">我已阅读并同意注册协议</mt-button>
-        </div>
-    </mt-popup> -->
-    <mt-popup v-model="dialogShow" :closeOnClickModal="false" class="mint-popup-box mint-popup-white">
-      <div class="clearfix">
-        <a @click="dialogShow = false" class="pull-right"><i class="iconfont icon-weitongguo"></i></a>
-      </div>
-      <div class="">
-        <div class="row check-box">
-          <div class="title">
-            <!-- 输入图片上的验证码 -->
-            Nhập mã xác nhận trên hình
-          </div>
-          <!-- <mt-field label="验证码" placeholder="请输入验证码" v-model="code2"> -->
-          <mt-field label="mã xác nhận" placeholder="vui lòng nhập mã xác nhận" v-model="code2">
-
-            <img @click="refreshImg" :src="adminUrl+'/code/getCode.do?time='+ imgCodeTime" height="45px" width="100px">
-          </mt-field>
-          <p class="red" v-if="!checkCodeState">
-            <!-- 您输入的验证码有误,请重新输入 -->
-            Mã xác minh bạn đã nhập sai, vui lòng nhập lại
-          </p>
-          <div class="text-center">
-            <mt-button type="primary" @click="checkImg">
-              <!-- 确定 -->
-              Chắc chắn
-            </mt-button>
-            <!-- <mt-button style="margin-left: 10%;width:22%" type="default" @click="dialogShow = false">返回</mt-button> -->
           </div>
         </div>
       </div>
-    </mt-popup>
-
+      <!-- <div class="login-form">
+        <div class="login-avatar">
+          <img class="login-ico" src="../assets/ico/wogerenziliao.png" alt="">
+        </div>
+        <div class="login-form-item input-model"
+        style="margin-top:1.32rem;"
+        >
+          <img v-show="$state.theme != 'red'" class="login-ico" src="../assets/ico/loginuser.png" alt="">
+          <img v-show="$state.theme == 'red'" class="login-ico" src="../assets/ico/loginuser-red.png" alt="">
+          <input
+          class="login-input"
+          placeholder="Tên tài khoản"
+          type="tel" pattern="[0-9]*"
+          v-model="phone"
+          >
+        </div>
+        <div class="login-form-item input-model">
+          <img v-show="$state.theme != 'red'" class="login-ico" src="../assets/ico/loginpwd.png" alt="">
+          <img v-show="$state.theme == 'red'" class="login-ico" src="../assets/ico/loginpwd-pwd.png" alt="">
+          <input class="login-input" type="password" placeholder="Mật khẩu" v-model="psd">
+        </div>
+        <div class="login-form-item submit-model" @click="gook">
+          Đăng nhập
+          <i v-show="isloading" style="color:#fff;" class="iconfont icon-jiazaizhong"></i>
+        </div>
+        <div class="login-form-item extra-model">
+          <div :style="{color:$state.theme =='red'?'#BB1815':'#86CBD1'}">
+            <span style="color:#0E6580">
+              Quên mật khẩu？
+              </span><span @click="toRegister">
+                Đăng ký
+              </span></div>
+        </div>
+      </div> -->
+    </div>
   </div>
 </template>
 <script>
-import { Toast } from 'mint-ui'
-import { isNull, isPhone, pwdReg } from '@/utils/utils'
+import {Toast} from 'mint-ui'
+import {isNull, isPhone, pwdReg} from '@/utils/utils'
 // import APIUrl from '@/axios/api.url'
 import * as api from '@/axios/api'
 
@@ -189,6 +151,8 @@ export default {
       this.invitecode = this.$route.query.code
     }
     this.getInfoSite()
+    let bodyBox = document.querySelector('.body-box')
+    bodyBox.style.height = '100%'
   },
   methods: {
     async getInfoSite () {
@@ -215,7 +179,7 @@ export default {
       }
     },
     async checkCode () {
-      let data = await api.checkCode({ code: this.code2 })
+      let data = await api.checkCode({code: this.code2})
       this.ischeckImg = data
     },
     async checkImg () {
@@ -225,7 +189,7 @@ export default {
         return
       }
       // await this.checkCode()
-      let data = await api.checkCode({ code: this.code2 })
+      let data = await api.checkCode({code: this.code2})
       if (data === 'true' || data === true) {
         this.getcode()
         this.dialogShow = false
@@ -258,12 +222,13 @@ export default {
         Toast('Số điện thoại di động không được để trống')
       } else {
         if (!reg.test(this.phone)) {
+          console.log(this.phone)
           Toast('Vui lòng nhập đúng số điện thoại')
         } else {
           //   var sign  = this.$md5(this.phone+'W&WzL42v').toUpperCase()
           // let result = await api.getCode({ phoneNum: this.phone })
           const inter = this.msgId ? api.getseMessageCode : api.getMessageCode
-          let result = await inter({ phone: this.phone, msgId: this.msgId })
+          let result = await inter({phone: this.phone, msgId: this.msgId})
           if (result.status === 0) {
             this.msgId = result.data
             const TIME_COUNT = 60
@@ -308,7 +273,7 @@ export default {
     },
     async gook () {
       // 注册
-      let reg = /^[0-9]{9}$/
+      let reg = /^[0-9]{10}$/
       if (!this.agree) {
         Toast('Cần đồng ý với thỏa thuận đăng ký để đăng ký!')
       } else if (isNull(this.phone) || !reg.test(this.phone)) {
@@ -333,6 +298,7 @@ export default {
           // yzmCode: this.code,
           phone: this.phone,
           yzmCode: this.code,
+          msgId : this.msgId,
           userPwd: this.psd,
           agentCode: this.invitecode
         }
@@ -373,138 +339,317 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-  body {
-    background-color: #fff;
-  }
+body {
+  background-color: #fff;
+}
 
-  #app .body-box {
-    height: 100%
-  }
+::v-deep .body-box {
+  height: 100% !important
+}
 
-  .wrapper {
-    color: #888;
-    height: 100%;
-    padding-bottom: 0;
+.wrapper {
+  color: #888;
+  height: 100%;
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: .1rem;
+}
+
+.register-form {
+  width: 6.14rem;
+  height: 6.9rem;
+  background-color: #3B3A3F; //#1B1C25;
+  position: relative;
+  // box-shadow: 0 0 .1rem .1rem #0002;
+  box-shadow: 0 0 .1rem .1rem #3B3A3F;
+  border-radius: .2rem;
+
+  .register-avatar {
+    width: 1.2rem;
+    height: 1.2rem;
+    background-color: #444656;
+    border-radius: 50%;
+    position: absolute;
+    top: -.6rem;
+    left: 2.46rem;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    border-radius: .1rem;
+    justify-content: center;
+    box-shadow: 0 0 .1rem .1rem #0002;
+
+    img {
+      width: .55rem;
+      height: .58rem;
+    }
+  }
+}
+
+.register-form-item {
+  width: 5.95rem;
+  height: .83rem;
+  border-radius: .265rem;
+  margin: .2rem auto 0;
+
+  &.input-model {
+    background-color: #29282E; //#2A282D;
+    padding: 0 .33rem;
+    display: flex;
+    align-items: center;
+
+    img.register-ico {
+      width: .2rem;
+      height: .23rem;
+    }
+
+    .register-input {
+      flex: 1;
+      padding: 0 .2rem;
+      height: 100%;
+      font-size: .24rem;
+
+      &::-webkit-input-placeholder {
+        color: #363636;
+      }
+    }
+  }
+
+  &.agree-model {
+    height: auto;
+    margin-top: .3rem;
+    font-size: .18rem;
+    color: #86CBD1;
+  }
+
+  &.submit-model {
+    height: .66rem;
+    line-height: .66rem;
+    margin-top: .3rem;
+    background-color: #F39C0F; //#024DA1;
+    border-radius: .33rem;
+    color: #FFFFFF;
+    font-size: .24rem;
+    text-align: center;
+  }
+}
+
+.glyphicon-ok-sign.red {
+  color: #409EFF;
+}
+
+.getcode {
+  font-size: .24rem;
+}
+
+.red-theme {
+  .register-avatar {
+    background-color: #222;
   }
 
   .register-form {
-    width: 6.14rem;
-    height: 6.9rem;
-    background-color: #3B3A3F;//#1B1C25;
-    position: relative;
-    // box-shadow: 0 0 .1rem .1rem #0002;
-    box-shadow: 0 0 .1rem .1rem #3B3A3F;
-    border-radius: .2rem;
-    .register-avatar {
-      width: 1.2rem;
-      height: 1.2rem;
-      background-color: #444656;
-      border-radius: 50%;
-      position: absolute;
-      top: -.6rem;
-      left: 2.46rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 .1rem .1rem #0002;
+    background-color: #fff;
+  }
 
-      img {
-        width: .55rem;
-        height: .58rem;
-      }
+  .register-form-item.input-model {
+    background-color: #fff;
+    border-color: #C9C9C9;
+    border: .01rem solid #c9c9c9;
+  }
+
+  .register-form-item.agree-model {
+    color: #000;
+
+    a {
+      color: #BB1815 !important;
+    }
+  }
+
+  .register-form-item.submit-model {
+    background-color: #BB1815;
+  }
+}
+
+.label-input {
+  margin: 0 0rem 0 0.1rem;
+  color: #666;
+}
+
+
+body {
+}
+
+.mint-header {
+  border: none;
+}
+
+.wrapper {
+  color: #888;
+  height: 100%;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
+  border-radius: .1rem;
+  background-color: #131313;
+
+}
+
+.contain-box {
+  // padding: 0 .2rem;
+  // background-color: #28094B;
+}
+
+.login-bg {
+  width: 100%;
+  height: 4rem;
+  object-fit: cover;
+  margin-top: -40px;
+}
+
+.contain-main {
+  background: #252429;
+  width: 100%;
+  // height:10rem;
+  border-top-left-radius: .65rem;
+  border-top-right-radius: .65rem;
+  position: relative;
+  margin: -0.9rem auto 0;
+
+  .logo-box {
+    display: flex;
+    justify-content: center;
+    padding-top: 0.8rem;
+    margin-bottom: .68rem;
+
+    .logo {
+      width: 3rem;
+      // height
+      object-fit: contain;
+    }
+  }
+}
+
+// .login-form {
+//   display: block;
+//   width: 6.13rem;
+//   height: 5.58rem;
+//   // background-color: #1B1C25;
+//   background-color: #3B3A3F;
+//   position: relative;
+//   // box-shadow: 0 0 .1rem .1rem #0002;
+//   box-shadow: 0 0 .1rem .1rem #3B3A3F;
+//   border-radius: .2rem;
+//   .login-avatar {
+//     width: 1.2rem;
+//     height: 1.2rem;
+//     background-color: #444656;
+//     border-radius: 50%;
+//     position: absolute;
+//     top: -.6rem;
+//     left: 2.46rem;
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     box-shadow: 0 0 .1rem .1rem #0002;
+//     img {
+//       width: .55rem;
+//       height: .58rem;
+//     }
+//   }
+.login-form-item {
+  width: 6.9rem;
+  height: .8rem;
+  border-radius: .08rem;
+  margin: .45rem auto 0;
+  border: 0.04rem solid #5E5D65;
+
+  &.input-model {
+    background-color: #29282E; //#121319;
+    padding: 0 .2rem;
+    display: flex;
+    align-items: center;
+
+    img.login-ico {
+      width: .28rem;
+      height: .32rem;
+      object-fit: contain;
     }
 
-    .register-form-item {
-      width: 4.95rem;
-      height: .53rem;
-      border-radius: .265rem;
-      margin: .15rem auto 0;
+    img.showPasImg {
+      width: .42rem;
+      height: .28rem;
+      object-fit: contain;
+    }
 
-      &.input-model {
-        background-color: #252429;//#2A282D;
-        padding: 0 .33rem;
-        display: flex;
-        align-items: center;
+    .login-input {
+      flex: 1;
+      padding: 0 .2rem;
+      color: #F5F5F9;
+      font-size: .1rem;
 
-        img.register-ico {
-          width: .2rem;
-          height: .23rem;
-        }
-
-        .register-input {
-          flex: 1;
-          padding: 0 .2rem;
-          height: 100%;
-          font-size: .24rem;
-
-          &::-webkit-input-placeholder {
-            color: #363636;
-          }
-        }
-      }
-
-      &.agree-model {
-        height: auto;
-        margin-top: .3rem;
-        font-size: .18rem;
-        color: #86CBD1;
-      }
-
-      &.submit-model {
-        height: .66rem;
-        line-height: .66rem;
-        margin-top: .3rem;
-        background-color: #F39C0F;//#024DA1;
-        border-radius: .33rem;
-        color: #FFFFFF;
-        font-size: .24rem;
-        text-align: center;
+      &::-webkit-input-placeholder {
+        color: #AEADB2;
       }
     }
   }
 
-  .glyphicon-ok-sign.red {
-    color: #409EFF;
+  &.submit-model {
+    background-color: #F39A1A; //#024DA1;
+    line-height: .7rem;
+    height: 0.7rem;
+    text-align: center;
+    font-size: .28rem;
+    color: #E8E6EA;
+    border: none;
+    margin-top: .2rem;
   }
 
-  .getcode {
-    font-size: .24rem;
+  &.extra-model {
+    margin-top: .24rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: .2rem;
   }
+}
 
-  .red-theme {
-    .register-avatar {
-      background-color: #222;
-    }
+// }
+// .red-theme{
+//   .login-avatar{
+//     background-color: #222222;
+//   }
+//   .login-form{
+//     background-color: #fff;
+//   }
+//   .login-form-item.input-model{
+//     background-color: #fff;
+//     border: 1px solid #C9C9C9;
+//   }
+//   .login-form-item.submit-model{
+//     background-color: #BB1815;
+//   }
+// }
+.goregister {
+  background-color: transparent !important;
+  color: #F5F4F9 !important;
+  border: 0.04rem solid #66636A !important;
+}
 
-    .register-form {
-      background-color: #fff;
-    }
+.tips {
+  color: #D9D8DC;
+  text-align: center;
+  margin-top: 1rem;
+}
 
-    .register-form-item.input-model {
-      background-color: #fff;
-      border-color: #C9C9C9;
-      border: .01rem solid #c9c9c9;
-    }
-
-    .register-form-item.agree-model {
-      color: #000;
-
-      a {
-        color: #BB1815 !important;
-      }
-    }
-
-    .register-form-item.submit-model {
-      background-color: #BB1815;
-    }
-  }
-  .label-input{
-    margin: 0 0rem 0 0.1rem;
-    color: #666;
-  }
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition-delay: 999999999s;
+  transition: color 999999999s ease-out, background-color 999999999s ease-out;
+  -webkit-transition-delay: 999999999s;
+  -webkit-transition: color 999999999s ease-out, background-color 999999999s ease-out;
+  -webkit-text-fill-color: #fff;
+}
 </style>

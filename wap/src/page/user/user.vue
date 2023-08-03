@@ -727,7 +727,7 @@
           >{{ $t("popupTip6") }}
         </p>
       </mt-popup>
-      <div class="btnbox">
+      <div class="btnbox" style="margin-bottom:70px">
         <span class="text-center btnok loginout" @click="toRegister">
           Đăng xuất</span
         >

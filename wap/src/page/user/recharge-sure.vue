@@ -11,7 +11,7 @@
       <div class="form-block page-part">
         <!-- <mt-field label="充值金额" placeholder="充值金额" disabled type="number" v-model="selectNumber"></mt-field> -->
 
-        <mt-field label="Số tiền nạp" placeholder="Số tiền nạp" disabled type="number" v-model="selectNumber"></mt-field>
+        <mt-field label="Số tiền nạp:" placeholder="Số tiền nạp" disabled type="number" v-model="selectNumber"></mt-field>
 
         <div v-if="type == 0">
           <!-- <mt-field label="支付宝名称" placeholder="支付宝名称" disabled type="text" v-model="payInfo.channelName"> -->
@@ -37,7 +37,7 @@
         <div v-else-if="type == 1">
           <!-- <mt-field label="收款名称" placeholder="收款名称" disabled type="text" v-model="payInfo.channelName"> -->
 
-          <mt-field label="Tên người TH" placeholder="Tên người TH" disabled type="text" v-model="payInfo.channelName">
+          <mt-field label="Tên người TH:" placeholder="Tên người TH" disabled type="text" v-model="payInfo.channelName">
                     <span v-clipboard:copy="payInfo.channelName"
                           v-clipboard:success="onCopy"
                           v-clipboard:error="onError">
@@ -62,7 +62,7 @@
               </span>
           </mt-field> -->
           <!-- <mt-field label="收款账号" placeholder="收款账号" disabled type="text" v-model="payInfo.channelAccount"> -->
-          <mt-field label="Tài khoản" placeholder="Tài khoản" disabled type="text" v-model="payInfo.channelAccount">
+          <mt-field label="Tài khoản:" placeholder="Tài khoản" disabled type="text" v-model="payInfo.channelAccount">
 
                     <span v-clipboard:copy="payInfo.channelAccount"
                           v-clipboard:success="onCopy"

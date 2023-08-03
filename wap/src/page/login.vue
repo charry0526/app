@@ -16,11 +16,12 @@
             placeholder="Tên tài khoản"
             type="tel" pattern="[0-9]*"
             v-model="phone"
+            style="font-size: 16px"
             >
           </div>
           <div class="login-form-item input-model">
             <img class="login-ico" src="../assets/img/loginpwd.png" alt="">
-            <input class="login-input" :type="isShowPass?'text':'password'" placeholder="Mật khẩu" v-model="psd">
+            <input class="login-input" :type="isShowPass?'text':'password'" style="font-size: 16px" placeholder="Mật khẩu" v-model="psd">
             <img @click="isShowPass=!isShowPass" class="login-ico showPasImg" src="../assets/img/show.png" alt="">
           </div>
           <div style="marginTop:1.16rem" class="login-form-item submit-model" @click="gook">
