@@ -1,28 +1,33 @@
 <template>
   <div class="wrapper">
     <div class="header">
-      <mt-header title="忘记密码">
+<!--      忘记密码页面-->
+      <mt-header title="Quên mật khẩu">
         <router-link to="/login" slot="left">
           <mt-button icon="back"></mt-button>
         </router-link>
       </mt-header>
     </div>
     <div class="form-group">
+<!--      请输入手机号码-->
       <div class="title">
-        输入您的手机号
+        Vui lòng nhập số điện thoại
       </div>
       <div class="page-part">
-        <mt-field label="+86" type="tel" placeholder="请输入手机号" v-model="phone"></mt-field>
-        <mt-field label="获取验证码" type="number" placeholder="输入验证码" v-model="code">
-          <span v-if="codeshow" class="getcode" @click="checkCodeBox">获取验证码</span>
-          <span v-if="!codeshow" class="getcode">{{count}}s</span>
+        <mt-field label="+86" type="tel" placeholder="Vui lòng nhập số điện thoại" v-model="phone"></mt-field>
+        <mt-field style="font-size: 0.875rem;" label="Nhận mã xác nhận" type="number" placeholder="Nhập mã xác nhận" v-model="code" >
+          <span v-if="codeshow" class="getcode" @click="checkCodeBox" >Nhận mã xác nhận</span>
+          <span v-if="!codeshow" class="getcode">{{count}}</span>
         </mt-field>
-        <mt-field label="输入密码" placeholder="请输入密码" type="password" v-model="password"></mt-field>
-        <mt-field label="输入密码" placeholder="确认您输入的密码" type="password" v-model="password2"></mt-field>
+<!--        新密码-->
+        <mt-field label="Mật khẩu mới" placeholder="Nhập mật khẩu" type="password" v-model="password">
+        </mt-field>
+<!--        确认新密码-->
+        <mt-field label="Xác nhận mật khẩu mới" placeholder="Xác nhận mật khẩu mới" type="password" v-model="password2"></mt-field>
       </div>
     </div>
     <div class="btnbox">
-      <span class="text-center btnok" @click="gook">确定</span>
+      <span class="text-center btnok" @click="gook">Xác nhận</span>
     </div>
     <mt-popup v-model="dialogShow" :closeOnClickModal="false" class="mint-popup-box mint-popup-white">
       <div class="clearfix">
@@ -86,7 +91,7 @@ export default {
     checkCodeBox () {
       if (isNull(this.phone) || !isPhone(this.phone)) {
         // Toast('请输入正确的手机号')
-          Toast('Xin vui lòng nhập một số điện thoại hợp lệ')
+        Toast('Xin vui lòng nhập một số điện thoại hợp lệ')
       } else {
         this.checkPhone()
       }
@@ -232,7 +237,6 @@ export default {
   body /deep/ .mint-toast {
     z-index: 1000000;
   }
-
   .form-group {
     padding: 0rem 0.97rem;
     font-size: 0.29rem;
@@ -242,7 +246,6 @@ export default {
       margin-bottom: 0.34rem;
       margin-top: 1.40rem;
     }
-
     .mint-cell {
       padding: 0;
     }

@@ -4,7 +4,7 @@ import Home from '@/page/home/home'
 import Buy from '@/page/home/buy'
 import Alertdetail from '@/page/home/components/alert' // 公告详情
 import Register from '@/page/register'
-import Forget from '@/page/forget'
+import Forget from '@/page/toForget' // 忘记密码
 import Login from '@/page/login'
 import List from '@/page/list/list'
 import Searchlist from '@/page/list/list-search'
@@ -88,8 +88,8 @@ export default new Router({
       },
       component: Register
     }, {
-      path: '/forget',
-      name: 'forget',
+      path: '/toForget',
+      name: 'toForget',
       meta: {
         // title: '忘记密码'
         title: 'Quên mật khẩu'

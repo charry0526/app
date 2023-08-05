@@ -409,9 +409,10 @@ body {
       padding: 0 .2rem;
       height: 100%;
       font-size: .24rem;
-
+      color: #F5F5F9;
       &::-webkit-input-placeholder {
-        color: #363636;
+        //color: #363636;
+        color: #AEADB2;
       }
     }
   }

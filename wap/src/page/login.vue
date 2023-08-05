@@ -31,7 +31,7 @@
           <div class="login-form-item submit-model goregister" @click="toRegister">
             Mở tài khoản
           </div>
-          <p class="tips">Quên mật khẩu?</p>
+          <p class="tips" @click="toForget">Quên mật khẩu?</p>
       </div>
     </div>
     <!-- <div class="login-form">
@@ -183,6 +183,11 @@ export default {
     toRegister () {
       // 注册
       this.$router.push('/register')
+    },
+    toForget () {
+      // 忘记密码
+      this.$router.push('/toForget')
+      // this.$router.push('/forget')
     }
   }
 }
