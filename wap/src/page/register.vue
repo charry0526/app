@@ -118,6 +118,10 @@ import {Toast} from 'mint-ui'
 import {isNull, isPhone, pwdReg} from '@/utils/utils'
 // import APIUrl from '@/axios/api.url'
 import * as api from '@/axios/api'
+// 引入对称加密方法
+import { encAes, genRandKey } from '@/utils/aes'
+// 引入加密模块
+const JSEncrypt = require('encryptlong')
 
 export default {
   data () {
@@ -127,6 +131,8 @@ export default {
       code2: '',
       psd: '',
       psd2: '',
+      encPassword: '', // 加密后的秘文
+      prKey: '', // 前端加密的密钥
       invitecode: '',
       codeshow: true,
       count: '', // 倒计时
@@ -293,14 +299,32 @@ export default {
       } else if (isNull(this.invitecode)) {
         Toast('Vui lòng nhập mã tổ chức')
       } else {
+        // 通过接口获取公钥，后端有私钥进行解密
+        let PKopts = {
+          contents: this.phone
+        }
+        let pdata = await api.getPKConfig(PKopts)
+        if (pdata.status === 0) {
+          const pubKey = pdata.data
+          // 获取公钥，后用公钥对随机密钥非对称加密
+          this.publicKey = pubKey
+          // 生成随机密钥，用随机密钥对称加密加密用户名，密码
+          const randomKey = genRandKey()
+          // 密码加密
+          this.encPassword = encAes(this.psd, randomKey)
+          // 前端随机密钥通过后端提供的公钥进行加密
+          this.prKey = this.creatEncry(this.publicKey, randomKey)
+        } else {
+          this.$message.error('Thông tin sai, vui lòng gửi lại！')
+        }
+        // 提交注册请求参数拼接
         let opts = {
-          // agentCode:'4023', // SR330001
-          // yzmCode: this.code,
           phone: this.phone,
           yzmCode: this.code,
           msgId : this.msgId,
-          userPwd: this.psd,
-          agentCode: this.invitecode
+          userPwd: this.encPassword,
+          agentCode: this.invitecode,
+          pKey: this.prKey
         }
         let data = await api.register(opts)
         if (data.status === 0) {
@@ -310,6 +334,15 @@ export default {
           Toast(data.msg)
         }
       }
+    },
+    // 非对称加密方法
+    creatEncry (publicKey, param) {
+      console.log('publicKey---: ', publicKey)
+      const encryptor = new JSEncrypt.JSEncrypt()
+      // 设置公钥
+      encryptor.setPublicKey(publicKey)
+      // 加密随机密钥
+      return encryptor.encryptLong(param)
     },
     goLogin: function () {
       this.$router.push('/login')

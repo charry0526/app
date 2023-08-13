@@ -74,6 +74,10 @@
 import { Toast } from 'mint-ui'
 import { isNull, isPhone } from '@/utils/utils'
 import * as api from '@/axios/api'
+// 引入对称加密方法
+import { encAes, genRandKey } from '@/utils/aes'
+// 引入加密模块
+const JSEncrypt = require('encryptlong')
 
 export default {
   data () {
@@ -82,6 +86,8 @@ export default {
       phone: '',
       code: '',
       psd: '',
+      encPassword: '', // 加密后的秘文
+      prKey: '', // 前端加密的密钥
       isChecked: true, // 自动登录
       isDisabled: false,
       codeshow: true,
@@ -152,9 +158,29 @@ export default {
       }
     },
     async loginIN () {
+      // 通过接口获取公钥，后端有私钥进行解密
+      let PKopts = {
+        contents: this.phone
+      }
+      let pdata = await api.getPKConfig(PKopts)
+      if (pdata.status === 0) {
+        const pubKey = pdata.data
+        // 获取公钥，后用公钥对随机密钥非对称加密
+        this.publicKey = pubKey
+        // 生成随机密钥，用随机密钥对称加密加密用户名，密码
+        const randomKey = genRandKey()
+        // 密码加密
+        this.encPassword = encAes(this.psd, randomKey)
+        // 前端随机密钥通过后端提供的公钥进行加密
+        this.prKey = this.creatEncry(this.publicKey, randomKey)
+      } else {
+        this.$message.error('Thông tin sai, vui lòng đăng nhập lại！')
+      }
+      // 登录请求参数拼接
       let opts = {
         phone: this.phone,
-        userPwd: this.psd
+        userPwd: this.encPassword,
+        pKey: this.prKey
       }
       this.isloading = true
       let data = await api.login(opts)
@@ -171,6 +197,15 @@ export default {
         Toast(data.msg)
       }
       this.isloading = false
+    },
+    // 非对称加密方法
+    creatEncry (publicKey, param) {
+      console.log('publicKey---: ', publicKey)
+      const encryptor = new JSEncrypt.JSEncrypt()
+      // 设置公钥
+      encryptor.setPublicKey(publicKey)
+      // 加密随机密钥
+      return encryptor.encryptLong(param)
     },
     handleDisabled: function () {
       this.isChecked = !this.isChecked

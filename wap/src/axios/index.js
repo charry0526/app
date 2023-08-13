@@ -8,6 +8,7 @@ import APIUrl from './api.url' // 引入api.url.js
 // axios 默认配置  更多配置查看Axios中文文档
 axios.defaults.timeout = 50000 // 超时默认值
 axios.defaults.baseURL = APIUrl.baseURL // 默认baseURL
+// axios.defaults.baseURL = 'http://127.0.0.1:8080/stock2c1_war/'// 本地url
 axios.defaults.responseType = 'json' // 默认数据响应类型
 axios.defaults.headers.common['Content-Type'] = 'application/json;charset=UTF-8'
 // axios.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded';
@@ -21,7 +22,7 @@ axios.interceptors.request.use(
     //     // config.headers.Authorization = `USER_TOKEN = ${store.state.token}`;
     //     config.headers["USER_TOKEN"] = store.state.token;
     // }
-    // console.log(config) 
+    // console.log(config)
     if (!config.params) {
       config.headers = {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'

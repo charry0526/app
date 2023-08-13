@@ -485,3 +485,7 @@ export function getCusAddress (options) {
 export function setUserInfo (options) {
   return get('/apis/api/admin/setAvatar.do', options)
 }
+// 获取加密公钥
+export function getPKConfig (options) {
+  return post('/apis/api/user/getUPKConfig.do', options)
+}
