@@ -14,10 +14,13 @@
           >
             <img src="../../assets/ico/avatar.png" >
       </div>
-      <div class="home-search-me"
-          @click="$router.push('/custome')"
-          >
-            <img src="../../assets/ico/lianxi.png" >
+<!--      <div class="home-search-me"-->
+<!--          @click="$router.push('/custome')"-->
+<!--          >-->
+<!--            <img src="../../assets/ico/lianxi.png" >-->
+<!--      </div>-->
+      <div class="home-search-me">
+        <img src="../../assets/ico/lianxi.png" >
       </div>
       <!-- <div class="home-search-ctl">
         <img class="lingdang" src="../../assets/ico/lingdang.png" alt=""
