@@ -440,7 +440,7 @@ export function sellFunds (options) {
 export function Newlist (options) {
   return get('/apis/api/admin/getEsopList.do', options)
 }
-// 新股-提出列表 提出
+// 新股-申请列表
 export function ListsAdd (options) {
   return post('/apis/api/admin/addESOP_sq.do', options)
 }

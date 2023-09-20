@@ -118,7 +118,10 @@
                 </li>
               </ul>
             </div>
-            <p class="totle">Số tiền: {{$moneyDot(deposit)}}</p>
+<!--            <p class="totle">Số tiền: {{$moneyDot(deposit)}}</p>-->
+            <p class="totle margin">杠杆值: {{$moneyDot(leverageValue)}}</p>
+            <p class="totle margin">购买金额: {{$moneyDot(deposit)}}</p>
+            <p class="totle margin">冻结资金额度: {{$moneyDot(fundsFrozen)}}</p>
             <!-- <div class="isagree-box">
                 <div
                     class="check"
@@ -190,7 +193,25 @@ export default {
   computed: {
     deposit () {
       const { price } = this.itemInfo
-      return this.selectNumber * price / this.leverValue
+      // 购买数量乘以单价再除以杠杆
+      // return this.selectNumber * price / this.leverValue
+      return this.selectNumber * price
+    },
+    // 杠杆值
+    leverageValue () {
+      // 购买数量乘以杠杆
+      return this.selectNumber * this.leverValue
+    },
+    // 冻结资金
+    fundsFrozen () {
+      // 获取账户可用余额：可用金-购买金 = 购买后的可用金
+      const p_price = this.deposit
+      const entPrice = this.userInfo.enableAmt - p_price
+      // 获取保证金比例
+      const mr = this.itemInfo.marginRatio
+      // 计算冻结资金额度 可用余额乘以保证金
+      // const bzj = entPrice * mr
+      return entPrice * mr
     }
   },
   methods: {
@@ -263,7 +284,7 @@ export default {
      * 确认购买股票
      */
     async popconfirm () {
-      console.log(this.userInfo)
+      // console.log(this.userInfo)
       if (this.selectNumber < this.itemInfo.num) {
         return this.$message.warning('Tối thiểu cần' + this.itemInfo.num)
       }
@@ -277,7 +298,8 @@ export default {
         // zts: zt, // 状态
         // codes: code, // 新股代码
         nums: this.selectNumber, // 数量
-        bzj: this.deposit, // 保证金
+        bzj: this.fundsFrozen, // 保证金
+        marginRatio: this.itemInfo.marginRatio, // 保证金比例
         // price: price,
         gg: this.leverValue, // 杠杆
         sz: Number(this.selectNumber) * Number(price), // 市值

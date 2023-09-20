@@ -46,8 +46,9 @@
                   :<b class="space">{{$moneyDot(item.sellOrderPrice)}}</b></span>
                 <span class="col-xs-4 text-center"></span>
                 <span class="col-xs-4 text-right">
-                  <!-- 点差费 -->
-                  Chi phí khác:<b class="space">{{$moneyDot(item.orderStayFee)}}</b></span>
+                  <!-- 其他费用 -点差费 -->
+<!--                  Chi phí khác:<b class="space">{{$moneyDot(item.orderStayFee)}}</b></span>-->
+                保证金:<b class="space">{{$moneyDot(item.newBzj)}}</b></span>
               </p>
               <p class="clearfix">
                 <span class="col-xs-4">
@@ -59,8 +60,9 @@
                   Thuế thu nhập
                   :<b class="space">{{$moneyDot(item.orderSpread)}}</b></span>
                 <span class="col-xs-4 text-right">
-                  <!-- 留仓费 -->
-                  Phí qua đêm:<b class="space">{{$moneyDot(item.orderStayFee)}}</b></span>
+                  <!-- 隔夜费 -留仓费 -->
+<!--                  Phí qua đêm:<b class="space">{{$moneyDot(item.orderStayFee)}}</b></span>-->
+                杠杆数值:<b class="space">{{$moneyDot(item.orderLever)}}</b></span>
               </p>
 
               <p class="clearfix">
