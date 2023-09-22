@@ -52,6 +52,7 @@ const orderList = {
   pointdifferenceFee: 'Chi phí khác', // 点差费
   Floating: 'Lãi/lỗ', // 浮动盈亏
   TotalprofitAndLoss: 'Tổng lãi/lỗ', // 总盈亏
+  FrozenMargin: 'Đóng băng tiền gửi', // 冻结保证金
   closeAposition: 'Bán ra', // 我要平仓
   ShortPinyinQueryPosition: 'Vị trí truy vấn pin đơn giản' // 可输入股票简拼查询持仓
 }

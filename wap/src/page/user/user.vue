@@ -408,11 +408,15 @@
                   }}
                 </p></div>
               </li>
-              <!-- <li>
+               <li>
                 <i class="iconfont icon-dongjiezijin"></i>
-                <div class="name">新股冻结保证金</div>
-                <p>{{shengoudj.djzj}}</p>
-              </li> -->
+                 <div class="name">{{ $t("FrozenMargin") }}</div>
+                <p>{{
+                  $store.state.hide
+                  ? "****"
+                  : $moneyDot($store.state.userInfo.djbzj,false) + " đ"
+                  }}</p>
+              </li>
             </ul>
           </div>
         </div>
@@ -485,6 +489,7 @@
 
             {{ $t("myClosingPosition") }}
           </div>
+
           <div
             v-if="this.$store.state.settingForm.indexDisplay"
             @click="goEsop()"
@@ -494,6 +499,17 @@
               <img class="row-icon" src="../../assets/ico/icon7.png" alt="" />
             </div>
             ESOP
+          </div>
+          <!-- 信用金 -->
+          <div
+            v-if="this.$store.state.settingForm.indexDisplay"
+            @click="goCredit()"
+            class="col-xs-4"
+          >
+            <div class="img-box">
+              <img class="row-icon" src="../../assets/ico/icon5.png" alt="" />
+            </div>
+             信用金
           </div>
           <!-- <div v-if="this.$store.state.settingForm.indexDisplay" @click="goOrderList(2)" class="col-xs-3">
             <i class="iconfont icon-geguyingkui"></i>
@@ -869,6 +885,10 @@ export default {
     },
     goEsop () {
       this.$router.push('/esop')
+    },
+    //信用金
+    goCredit () {
+      this.$router.push('/credist')
     },
     //
     toAggre: function () {
