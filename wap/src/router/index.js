@@ -23,6 +23,7 @@ import sellOrderList2 from '@/page/user/search-order/sell-stockSpell'
 import Detail from '@/page/user/detail'
 import Card from '@/page/user/card'
 import Esop from '@/page/user/esop'
+import Credist from '@/page/user/credist'
 
 import Authentication from '@/page/user/authentication'
 import Aggre from '@/page/user/agreement'
@@ -353,6 +354,16 @@ export default new Router({
         hasHeader: true
       },
       component: Esop
+    },
+    {
+      path: '/credist',
+      name: 'credist',
+      meta: {
+        title: 'Credist',
+        requireAuth: true,
+        hasHeader: true
+      },
+      component: Credist
     },
     {
       path: '/authentication',

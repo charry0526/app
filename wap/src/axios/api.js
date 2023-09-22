@@ -258,6 +258,22 @@ export function outMoney (options) {
 export function canceloutMoney (options) {
   return post('/apis/user/withdraw/cancel.do', options)
 }
+// 信用金------------------
+export function moneyCredit (options) {
+  return post('/apis/user/moneyCredit/loan.do', options)
+}
+//信用金详情
+export function moneyCreditInfo (options) {
+  return post('/apis/user/moneyCredit/details.do', options)
+}
+// 用户信用金饼图
+export function pieChart (options) {
+  return post('/apis/user/pieChart/loan.do', options)
+}
+// 信用金充值
+export function topUp (options) {
+  return post('/apis/user/topupMoney/topUp.do', options)
+}
 
 // k线图
 export function getMinK (options) {
