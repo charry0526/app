@@ -69,8 +69,8 @@
               </p>
               <p class="clearfix">
                 <span class="col-xs-4">
-                  Chi phí khác
-                  :<b class="space">{{item.spreadRatePrice}}</b></span>
+                  Tiền đặt cọc
+                  :<b class="space">{{item.newBzj}}</b></span>
                         <span class="col-xs-4 text-center">
                           Lãi/lỗ
                           :
