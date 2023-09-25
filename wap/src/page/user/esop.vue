@@ -206,12 +206,13 @@ export default {
     fundsFrozen () {
       // 获取账户可用余额：可用金-购买金 = 购买后的可用金
       const p_price = this.deposit
-      const entPrice = this.userInfo.enableAmt - p_price
+     // const entPrice = this.userInfo.enableAmt - p_price
       // 获取保证金比例
       const mr = this.itemInfo.marginRatio
       // 计算冻结资金额度 可用余额乘以保证金
       // const bzj = entPrice * mr
-      return entPrice * mr
+      //购买金额 * 保证金比率
+      return p_price * mr
     }
   },
   methods: {
