@@ -410,7 +410,7 @@
               </li>
 
               <li>
-                <img class="zijin1" src="../../assets/ico/icon5.png" />
+                <img class="zijin1" src="../../assets/ico/icon2.png" />
                 <div>
                   <div class="name">{{ $t("FrozenMargin") }}</div>
                   <p class="number yellow">{{
