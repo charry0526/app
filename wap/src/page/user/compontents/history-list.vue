@@ -62,7 +62,7 @@
                 <span class="col-xs-4 text-right">
                   <!-- 隔夜费 -留仓费 -->
 <!--                  Phí qua đêm:<b class="space">{{$moneyDot(item.orderStayFee)}}</b></span>-->
-                杠杆数值:<b class="space">{{$moneyDot(item.orderLever)}}</b></span>
+                Margin X:<b class="space">{{$moneyDot(item.orderLever)}}</b></span>
               </p>
 
               <p class="clearfix">

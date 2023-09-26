@@ -17,16 +17,16 @@
             <div class="info">
               <div class="info_item">
                 <div>{{ credistInfo.creditScore }}</div>
-                <div>信用评分</div>
+                <div style="font-size: 15px;">Đánh giá tín dụng</div>
               </div>
               <div class="info_list">
                 <div class="info_item">
                   <div>{{ credistInfo.creditLimit }}</div>
-                  <div>贷款限额</div>
+                  <div style="font-size: 14px;">Hạn mức vay tiền</div>
                 </div>
                 <div class="info_item">
                   <div>{{ credistInfo.residualCredit }}</div>
-                  <div>借款限额</div>
+                  <div style="font-size: 14px;">Hạn mức mượn tiền</div>
                 </div>
               </div>
             </div>
@@ -39,7 +39,7 @@
                                size="small"
                                type="danger" style="background-color: deepskyblue !important;"
                                @click="popUp02()">
-                      贷款
+                      Vay tiền
                     </mt-button>
                   </div>
                 </td>
@@ -49,7 +49,7 @@
                                size="small"
                                type="danger" style="background-color: #f5991d !important;"
                                @click="popUp()">
-                      付款
+                      Trả tiền
                     </mt-button>
                   </div>
                 </td>
@@ -70,14 +70,14 @@
       <div class=" page-part transaction">
         <div class="back-info">
           <p class="title">
-            请输入付款金额
+            Vui lòng nhập số tiền thanh toán
           </p>
           <div class="box-tab">
             <input v-model="selectNumber"
                    class="btn-default"
                    type="number">
 
-            <p class="margin">选择付款金额</p>
+            <p class="margin">Chọn số tiền thanh toán</p>
             <div class="tab-con">
               <ul class="radio-group clearfix">
                 <li v-for="(item,index) in numberList"
@@ -92,7 +92,7 @@
             <div class="button-box">
               <div @click="topUpSubmit()"
                    class="btn" style="background: #2AB0B2;color: #000000;width: 4rem;">
-                提交
+                nộp
               </div>
 
             </div>
@@ -111,7 +111,7 @@
       <div class=" page-part transaction">
         <div class="back-info">
           <p class="title">
-            请输入贷款金额
+            Vui lòng nhập số tiền vay
           </p>
           <div class="box-tab">
             <input v-model="selectNumber02"
@@ -120,7 +120,7 @@
             <div class="button-box">
               <div @click="popconfirm()"
                    class="btn" style="background: #2AB0B2;color: #000000;width: 4rem;">
-                提交
+                nộp
               </div>
 
             </div>
@@ -168,10 +168,10 @@ export default {
       isagree: false,
       // 测试饼图
       charts: '',
-      opinion:['贷款','借款'],
+      opinion:['Vay tiền','Mượn tiền'],
       opinionData:[
-        {value:335, name:'贷款'},
-        {value:20, name:'借款'}
+        {value:335, name:'Vay tiền'},
+        {value:20, name:'Mượn tiền'}
       ]
     };
   },
@@ -251,11 +251,11 @@ export default {
       this.opinionData = [
         {
           value: data.data.creditLimit,
-          name:'贷款'
+          name:'Vay tiền'
         },
         {
           value:data.data.residualCredit,
-          name:'借款'
+          name:'Mượn tiền'
         }
       ]
       this.drawPie('main')
