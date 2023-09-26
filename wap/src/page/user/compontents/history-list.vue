@@ -48,7 +48,7 @@
                 <span class="col-xs-4 text-right">
                   <!-- 其他费用 -点差费 -->
 <!--                  Chi phí khác:<b class="space">{{$moneyDot(item.orderStayFee)}}</b></span>-->
-                lề:<b class="space">{{$moneyDot(item.newBzj)}}</b></span>
+                lề:<b class="space">{{$moneyDot(item.newBzj==null?0:item.newBzj)}}</b></span>
               </p>
               <p class="clearfix">
                 <span class="col-xs-4">
