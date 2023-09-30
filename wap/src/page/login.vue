@@ -4,10 +4,12 @@
         <mt-button icon="back" slot="left" @click="$router.go(-1)"></mt-button>
     </mt-header>
     <div class="contain-box">
-      <img @load="imgOnload()" ref="loginBg" class="login-bg" src="../assets/img/login-bg.png" alt="" srcset="">
+<!--      <img @load="imgOnload()" ref="loginBg" class="login-bg" src="../assets/img/login-bg.png" alt="" srcset="">-->
+      <img @load="imgOnload()" ref="loginBg" class="login-bg" src="../assets/img/bg-one.jpg" alt="" srcset="">
       <div class="contain-main">
         <div class="logo-box">
-          <img class="logo"  src="../assets/img/1-01.png" alt="">
+<!--          <img class="logo"  src="../assets/img/1-01.png" alt="">-->
+          <img class="logo"  src="../assets/img/LOGO-02.png" alt="">
         </div>
         <div class="login-form-item input-model">
             <img class="login-ico" src="../assets/img/loginuser.png" alt="">
