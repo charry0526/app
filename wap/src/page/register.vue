@@ -2,10 +2,10 @@
   <div>
     <div class="wrapper">
       <div class="contain-box">
-        <img ref="oginBg" class="login-bg" src="../assets/img/login-bg.png" alt="" srcset="">
+        <img ref="oginBg" class="login-bg" src="../assets/img/bg-one.jpg" alt="" srcset="">
         <div class="contain-main">
           <div class="logo-box">
-            <img class="logo" src="../assets/img/1-01.png" alt="">
+            <img class="logo" src="../assets/img/LOGO-02.png" alt="">
           </div>
           <div class="register-form-item input-model" style="margin-top:0.11rem">
             <img class="register-ico" v-show="$state.theme != 'red'" src="../assets/ico/loginuser.png" alt="">

@@ -14,13 +14,10 @@
           >
             <img src="../../assets/ico/avatar.png" >
       </div>
-<!--      <div class="home-search-me"-->
-<!--          @click="$router.push('/custome')"-->
-<!--          >-->
-<!--            <img src="../../assets/ico/lianxi.png" >-->
-<!--      </div>-->
-      <div class="home-search-me">
-        <img src="../../assets/ico/lianxi.png" >
+      <div class="home-search-me"
+          @click="$router.push('/custome')"
+          >
+            <img src="../../assets/ico/lianxi.png" >
       </div>
       <!-- <div class="home-search-ctl">
         <img class="lingdang" src="../../assets/ico/lingdang.png" alt=""
@@ -41,10 +38,10 @@
           <p :class="changeTextClass[index] == true?'price heartBeat':'price'">
             {{$moneyDot(Number(i.currentPoint).toFixed(2))}}
             </p>
-          <div class="status">
-            <span >{{$moneyDot(Number(i.floatPoint).toFixed(2))}}</span>
-            <span >{{i.floatRate}}%</span>
-          </div>
+<!--          <div class="status">-->
+<!--            <span >{{$moneyDot(Number(i.floatPoint).toFixed(2))}}</span>-->
+<!--            <span >{{i.floatRate}}%</span>-->
+<!--          </div>-->
         </div>
       </div>
     </div>
@@ -161,25 +158,25 @@
     <!-- tab -->
     <div class="news-tab">
       <div class="firma-logo">
-        <img src="../../assets/img/2-2.jpg" alt="" srcset="">
-        <p>CÔNG TY CP CK FILEDITY VIỆT NAM</p>
+        <img src="../../assets/img/GP-logo.png" alt="" srcset="">
+        <p>CÔNG TY CP CK STATE STREET VIỆT NAM</p>
       </div>
       <ul class="firma-info">
         <li>
           <p class="labels">Địa chỉ</p>：
-          <p class="con">Landmark81 Building, 720A Điện Biên Phủ, Quận Bình Thạnh, Tp .Hồ Chí Minh</p>
+          <p class="con">Tòa nhà Bitexco, Số 02 Hải Triều, Bến Nghé, Quận 1, Thành phố Hồ Chí Minh</p>
         </li>
         <li>
           <p class="labels">CSKH</p>：
-          <p class="con">1900996665</p>
+          <p class="con">1900998882</p>
         </li>
         <li>
           <p class="labels">Email</p>：
-           <p class="con">cskh@vn-fidelity.com</p>
+           <p class="con">cskh@vn-statestreet.com</p>
         </li>
         <li>
           <p class="labels">Web</p>：
-          <p class="con">https://stock-fidelity.com</p>
+          <p class="con">https://istock-statestreet.com/</p>
         </li>
 
       </ul>
