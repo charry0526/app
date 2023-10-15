@@ -16914,8 +16914,8 @@ li {
   border: none;
   font-size: 2.1rem;
   color: #fff;
-  -ms-touch-action: none;
-  touch-action: none
+  /*-ms-touch-action: none;*/
+  /*touch-action: none*/
 }
 
 .page-part {
@@ -17340,7 +17340,7 @@ body {
 }
 
 .btn-group a {
-  border: 2px solid #302F37 
+  border: 2px solid #302F37
   /* #b60c0d */
 }
 

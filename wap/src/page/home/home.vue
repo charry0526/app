@@ -327,10 +327,10 @@ export default {
     },
     // 跳转新闻详情
     pageNews (option) {
+      window.sessionStorage.setItem('newDetail', option.maincontent)
       this.$router.push({
         path: '/news'
       })
-      window.sessionStorage.setItem('newDetail', option.maincontent)
     },
     // 加载更多
     async loadMore () {

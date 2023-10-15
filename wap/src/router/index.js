@@ -260,8 +260,8 @@ export default new Router({
       meta: {
         // title: '我的',
         title: 'Của tôi',
-        requireAuth: false,
-        hasHeader: true
+        requireAuth: true
+        // hasHeader: true
       },
       component: User
     },
