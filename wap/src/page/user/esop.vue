@@ -119,9 +119,9 @@
               </ul>
             </div>
 <!--            <p class="totle">Số tiền: {{$moneyDot(deposit)}}</p>-->
-            <p class="totle margin">杠杆值: {{$moneyDot(leverageValue)}}</p>
-            <p class="totle margin">购买金额: {{$moneyDot(deposit)}}</p>
-            <p class="totle margin">冻结资金额度: {{$moneyDot(fundsFrozen)}}</p>
+            <p class="totle margin">Margin: {{$moneyDot(leverageValue)}}</p>
+            <p class="totle margin">Tiền mua vào: {{$moneyDot(deposit)}}</p>
+            <p class="totle margin">Tiền bảo chứng: {{$moneyDot(fundsFrozen)}}</p>
             <!-- <div class="isagree-box">
                 <div
                     class="check"

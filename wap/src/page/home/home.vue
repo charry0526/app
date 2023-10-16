@@ -310,6 +310,7 @@ export default {
   // 更新的时候运动
   updated () {
     if (!this.moveStats) {
+      console.log(11,this.moveStats)
       this.move()
     }
   },
@@ -1170,7 +1171,7 @@ export default {
 
 }
 .greenBg {
-  color: #31b97e;
+  color: #cfd0d1;
   // background: linear-gradient(180deg, #fff 0, #f1fbf0);
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1)
 }

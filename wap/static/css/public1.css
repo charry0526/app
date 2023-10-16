@@ -16914,8 +16914,8 @@ li {
   border: none;
   font-size: 2.1rem;
   color: #fff;
-  /*-ms-touch-action: none;*/
-  /*touch-action: none*/
+  -ms-touch-action: none;
+  touch-action: none
 }
 
 .page-part {

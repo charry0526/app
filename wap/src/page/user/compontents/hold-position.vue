@@ -70,7 +70,7 @@
               <p class="clearfix">
                 <span class="col-xs-4">
                   Tiền đặt cọc
-                  :<b class="space">{{item.newBzj}}</b></span>
+                  :<b class="space">{{$moneyDot(item.newBzj)}}</b></span>
                         <span class="col-xs-4 text-center">
                           Lãi/lỗ
                           :
