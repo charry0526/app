@@ -199,7 +199,14 @@ export default {
       this.form.img1key = res.data.url
     },
     beforeAvatarUpload (file) {
+      // 清空图片内容
+      this.form.img1key = ''
       this.imgStatus = true
+      const isLt10M = file.size / 1024 / 1024 < 10
+      if (!isLt10M) {
+        this.$message.error(this.fileTip4)
+        return false
+      }
       //     const isJPG = file.type === 'image/jpg' || file.type === 'image/jpeg' || file.type === 'image/png';
       //     const isLt2M = file.size / 1024 / 1024 < 20;
       //     if (!isJPG) {
@@ -243,20 +250,22 @@ export default {
     //   }
     // },
     beforeAvatarUpload2 (file) {
+      // 清空图片内容
+      this.form.img2key = ''
       this.imgStatus2 = true
       // const _that = this
       const isLt10M = file.size / 1024 / 1024 < 10
       if (!isLt10M) {
         this.$message.error(this.fileTip4)
         return false
-      } else {
-        this.form.img2key = URL.createObjectURL(file)
-        compress(file, function (val) {
+      // } else {
+      //   this.form.img2key = URL.createObjectURL(file)
+      //   compress(file, function (val) {
           // _that.theForm.picUrl = val
           // _that.imgFile = val
           // _that.showDelete = true
           // _that.$refs['addBuildingForm'].validateField('picUrl')
-        })
+        // })
       }
       // const isJPG = file.type === 'image/jpeg' || file.type === 'image/png';
       // const isLt2M = file.size / 1024 / 1024 < 20;
@@ -269,14 +278,14 @@ export default {
     handleAvatarSuccess3 (res, file) {
       this.form.img3key = res.data.url // URL.createObjectURL(file.raw);
     },
-    beforeAvatarUpload3 (file) {
+    // beforeAvatarUpload3 (file) {
       // const isJPG = file.type === 'image/jpeg' || file.type === 'image/jpeg' || file.type === 'image/png';
       // const isLt2M = file.size / 1024 / 1024 < 20;
       // if (!isJPG) {
       //     Toast('请选择jpg或者png的图片格式!');
       // }
       // return isJPG && isLt2M;
-    },
+    // },
     // 上传
     handleFile: function (e) {
       // var that = this
