@@ -227,10 +227,10 @@ export default {
         { label: '20', value: '20' },
         { label: '30', value: '30' }
       ],
-      selectCycle: 1,
+      selectCycle: 1, // 杠杆
       numberList: [],
       siteLeverList: [],
-      selectNumber: '',
+      selectNumber: '', // 购买的数量
       autoNumber: '',
       type: [
         { label: '买涨', value: '0' },
@@ -276,12 +276,14 @@ export default {
         this.settingSpreadRate.spreadRate = 0
       }
       if (this.autoNumber) {
-        let payfee = (this.detail.nowPrice * 1 * this.autoNumber / this.selectCycle)
+        // let payfee = (this.detail.nowPrice * 1 * this.autoNumber / this.selectCycle)
+        let payfee = (this.detail.nowPrice * 1 * this.selectNumber)
         return (payfee + (payfee * this.settingInfo.buyFee) + (payfee * this.settingInfo.dutyFee) + (payfee * this.settingSpreadRate.spreadRate)).toFixed(2)
         // return (this.detail.nowPrice * this.autoNumber * 100 / this.selectCycle).toFixed(2)
       } else if (this.selectNumber) {
         // alert("bb"+this.detail.nowPrice+"cc==="+this.selectNumber+"ff==="+this.selectCycle+"==="+this.settingSpreadRate.spreadRate)
-        let payfee = (this.detail.nowPrice * 1 * this.selectNumber / this.selectCycle)
+        // let payfee = (this.detail.nowPrice * 1 * this.selectNumber / this.selectCycle)
+        let payfee = (this.detail.nowPrice * 1 * this.selectNumber)
         return (payfee + (payfee * this.settingInfo.buyFee) + (payfee * this.settingInfo.dutyFee) + (payfee * this.settingSpreadRate.spreadRate)).toFixed(2)
         // return (this.detail.nowPrice * this.selectNumber * 100 / this.selectCycle).toFixed(2)
       } else {
