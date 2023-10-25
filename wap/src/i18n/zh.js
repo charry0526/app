@@ -52,7 +52,7 @@ const orderList = {
   pointdifferenceFee: 'Chi phí khác', // 点差费
   Floating: 'Lãi/lỗ', // 浮动盈亏
   TotalprofitAndLoss: 'Tổng lãi/lỗ', // 总盈亏
-  FrozenMargin: 'Đóng băng tiền gửi', // 冻结保证金
+  FrozenMargin: 'Đóng băng tiền gửi', // 红利股保证金
   closeAposition: 'Bán ra', // 我要平仓
   ShortPinyinQueryPosition: 'Vị trí truy vấn pin đơn giản' // 可输入股票简拼查询持仓
 }
@@ -96,7 +96,7 @@ const uesr = {
   recharge: 'Nạp tiền', // 充值
   withdraw: 'Rút tiền', // 提现
   AvailableFunds: 'Số dư khả dụng', // 可用资金
-  FreezeMargin: 'Tổng số ký quỹ', // 冻结保证金
+  FreezeMargin: 'Tổng số ký quỹ', // 订单总保证金：订单总价+订单追加保证金（不包含红利股）
   Verified: 'Đã xác minh', // 实名认证
   examinationPassed: 'Kiểm tra thông qua', // 审核通过
   NotReviewed: 'Không được xem xét', // 未审核
