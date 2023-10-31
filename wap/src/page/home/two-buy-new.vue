@@ -190,7 +190,7 @@
       <!-- <mt-button :disabled="buying" class="btn-red" size="small" type="danger" @click="toInquiry">下单</mt-button> -->
       <div class="right-btn">
         <div class="btn-buy"
-             @click="toInquiry">
+             @click="handclick">
           <img src="../../assets/ico/hangqing-btn.png"
                alt=""
                srcset="">
@@ -206,7 +206,7 @@
 <script>
 import foot from '../../components/foot/foot'
 import { Toast } from 'mint-ui'
-import { isNull } from '@/utils/utils'
+import { isNull,debounceJArgs } from '@/utils/utils'
 import * as api from '@/axios/api'
 
 export default {
@@ -328,6 +328,10 @@ export default {
     // this.detail = this.$route.query.info
   },
   methods: {
+    //防抖
+    handclick:debounceJArgs(function(e){
+      this.toInquiry()
+    },(3000)),
     changeAutoNumber () {
       // 自定义手数
       this.selectNumber = ''

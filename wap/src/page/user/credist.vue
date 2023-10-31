@@ -90,7 +90,7 @@
               </ul>
             </div>
             <div class="button-box">
-              <div @click="topUpSubmit()"
+              <div @click="handclick()"
                    class="btn" style="background: #2AB0B2;color: #000000;width: 4rem;">
                 nộp
               </div>
@@ -118,7 +118,7 @@
                    class="btn-default"
                    type="number">
             <div class="button-box">
-              <div @click="popconfirm()"
+              <div @click="handclick2()"
                    class="btn" style="background: #2AB0B2;color: #000000;width: 4rem;">
                 nộp
               </div>
@@ -142,6 +142,7 @@ import {
 import * as api from "@/axios/api";
 import { formatTime } from "@/utils/imgupload";
 import echarts from 'echarts'
+import { debounceJArgs } from '@/utils/utils'
 export default {
   name: '',
   components: {},
@@ -196,6 +197,14 @@ export default {
     ]
   },
   methods: {
+    //防抖
+    handclick:debounceJArgs(function(e){
+      this.topUpSubmit()
+    },(3000)),
+      //防抖
+    handclick2:debounceJArgs(function(e){
+      this.popconfirm()
+    },(3000)),
     // 提交贷款
     async popconfirm(){
       console.log('popconfirm',this.selectNumber02)

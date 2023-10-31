@@ -207,3 +207,30 @@ export function timestampToTime (timestamp) {
   // return Y+M+D+h+m+s;
   return Y + M + D
 }
+
+ // 立即执行防抖
+ export  function debounceJArgs(func, wait) {
+
+  var timeout = null;
+
+  return function (...args) {
+
+    if (timeout) {
+
+      clearTimeout(timeout);
+
+    }
+
+    var callNow = !timeout;
+
+    timeout = setTimeout(function () {
+
+      timeout = null;
+
+    }, wait)
+
+    if (callNow) func.apply(this, args)
+
+  }
+
+}

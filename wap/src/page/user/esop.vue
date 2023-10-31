@@ -132,7 +132,7 @@
             <div class="button-box">
               <div @click="dialogShow=false"
                    class="btn">Hủy bỏ </div>
-              <div @click="popconfirm()"
+              <div @click="handclick()"
                    class="btn">
                 Xác nhận
               </div>
@@ -151,6 +151,7 @@ import { Toast, MessageBox } from 'mint-ui'
 import { CodeList, endorseList, CodeDateFormat, CodeDateFormatFrist } from '@/utils/data.js'
 import * as api from '@/axios/api'
 import { formatTime } from '@/utils/imgupload'
+import { debounceJArgs } from '@/utils/utils'
 export default {
   components: {
   },
@@ -216,6 +217,10 @@ export default {
     }
   },
   methods: {
+    //防抖
+    handclick:debounceJArgs(function(e){
+      this.popconfirm()
+    },(3000)),
     // 获取市场价格
     async getactualPrice (option) {
       let opts = {
