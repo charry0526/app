@@ -4,6 +4,10 @@ import { post, get } from '@/axios/index'
 // var img_url = APIUrl.util.image // 这个就是图片上传的api url
 
 // 就可以使用 post 和 get 了
+export function activateInfo (options) {
+  return post('/apis/api/user/activateInfo.do', options)
+}
+
 // 获取产品配置信息
 export function getProductSetting (options) {
   return post('/apis/api/admin/getProductSetting.do', options)

@@ -48,6 +48,7 @@ import FundsList from '@/page/funds/funds-list'
 import News from '@/page/home/news'
 import changePassword from '@/page/user/changePassword'
 import custome from '@/page/custome'
+import Maintenance from '@/page/maintenance'
 
 Vue.use(Router)
 
@@ -70,6 +71,16 @@ export default new Router({
         requireAuth: true
       },
       component: Home
+    },
+    {
+      path: '/maintenance',
+      name: 'maintenance',
+      meta: {
+        // title: '首页',
+        title: '',
+        requireAuth: true
+      },
+      component: Maintenance
     }, {
       path: '/buy',
       name: 'buy',

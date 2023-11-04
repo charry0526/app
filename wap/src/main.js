@@ -189,29 +189,35 @@ Vue.prototype.$moneyDot = function (value, isdot = true) {
 // }
 // }
 // })
-router.beforeEach((to, from, next) => {
-  store.state.select = to.path
-  document.title = to.meta.title
-  api.getProductSetting().then(res => {
 
-  }).catch((err) => {
-    ElementUI.Message({
-      message: 'mạng bị ngắt kết nối',
-      type: 'error'
-    })
+router.beforeEach((to, from, next) => {
+  api.activateInfo().then(res => {
+    if(res.data.isActivate == 1 && to.name != 'maintenance'){
+      router.push({
+        path: '/maintenance',
+        query: {
+          imgUrl: res.data.imgUrl
+        }
+      })
+    }else if(res.data.isActivate == 0 && to.name == 'maintenance'){
+      console.log(11)
+      router.push({
+        path: '/'
+      })
+    }else{
+      store.state.select = to.path
+      document.title = to.meta.title
+      api.getProductSetting().then(resData => {
+      }).catch((err) => {
+        ElementUI.Message({
+          message: 'mạng bị ngắt kết nối',
+          type: 'error'
+        })
+      })
+      next()
+    }
   })
-  // if (navigator.onLine) {
-  //   // ElementUI.Message({
-  //   //   message: 'mạng trở lại bình thường',
-  //   //   type: 'success'
-  //   // })
-  // } else {
-  //   ElementUI.Message({
-  //     message: 'mạng bị ngắt kết nối',
-  //     type: 'error'
-  //   })
-  // }
-  next()
+
 })
 // // 设置title
 // router.beforeEach((to, from, next) => {
