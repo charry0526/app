@@ -56,7 +56,8 @@
       </div>
 
       <div class="btnbox">
-        <span class="text-center btnok" @click="toSure">
+<!--        <span class="text-center btnok" @click="toSure">-->
+          <span class="text-center btnok" @click="handclick()">
           <!-- 确定 -->
           {{ $t("config") }}
         </span>
@@ -97,6 +98,7 @@
 <script>
 import * as api from '@/axios/api'
 import { Toast } from 'mint-ui'
+import { debounceJArgs } from '@/utils/utils'
 
 export default {
   components: {},
@@ -138,6 +140,10 @@ export default {
     this.getSettingInfo()
   },
   methods: {
+    //防抖
+    handclick:debounceJArgs(function(e){
+      this.toSure()
+    },(3000)),
     handleInput (eventOrValue) {
       let input = ''
       if (typeof eventOrValue === 'string' || typeof eventOrValue === 'number') {
