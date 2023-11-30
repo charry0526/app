@@ -14,22 +14,38 @@
           <div id="main" style="width: 400px;height: 200px;display: flex;flex-direction: row-reverse;justify-content: space-around;margin: 0 auto"></div>
         </div>
         <template>
-            <div class="info">
+<!--            <div class="info">-->
+<!--              <div class="info_item">-->
+<!--                <div>{{ credistInfo.creditScore }}</div>-->
+<!--                <div style="font-size: 15px;">Đánh giá tín dụng</div>-->
+<!--              </div>-->
+<!--              <div class="info_list">-->
+<!--                <div class="info_item">-->
+<!--                  <div>{{ credistInfo.creditLimit }}</div>-->
+<!--                  <div style="font-size: 14px;">Hạn mức vay tiền</div>-->
+<!--                </div>-->
+<!--                <div class="info_item">-->
+<!--                  <div>{{ credistInfo.residualCredit }}</div>-->
+<!--                  <div style="font-size: 14px;">Hạn mức mượn tiền</div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+          <div class="info">
+            <div class="info_item">
+              <div>{{ userInfo.creditScore }}</div>
+              <div style="font-size: 15px;">Đánh giá tín dụng</div>
+            </div>
+            <div class="info_list">
               <div class="info_item">
-                <div>{{ credistInfo.creditScore }}</div>
-                <div style="font-size: 15px;">Đánh giá tín dụng</div>
+                <div>{{ userInfo.creditLimit }}</div>
+                <div style="font-size: 14px;">Hạn mức vay tiền</div>
               </div>
-              <div class="info_list">
-                <div class="info_item">
-                  <div>{{ credistInfo.creditLimit }}</div>
-                  <div style="font-size: 14px;">Hạn mức vay tiền</div>
-                </div>
-                <div class="info_item">
-                  <div>{{ credistInfo.residualCredit }}</div>
-                  <div style="font-size: 14px;">Hạn mức mượn tiền</div>
-                </div>
+              <div class="info_item">
+                <div>{{ userInfo.amountBorrowed }}</div>
+                <div style="font-size: 14px;color: #ed801a;">Hạn mức mượn tiền</div>
               </div>
             </div>
+          </div>
           <div style="height: 100%">
             <table infinite-scroll-distance="10" class="table">
               <tr>
@@ -171,8 +187,8 @@ export default {
       charts: '',
       opinion:['Vay tiền','Mượn tiền'],
       opinionData:[
-        {value:335, name:'Vay tiền'},
-        {value:20, name:'Mượn tiền'}
+        {value:0, name:'Vay tiền'},
+        {value:0, name:'Mượn tiền'}
       ]
     };
   },
@@ -183,7 +199,7 @@ export default {
     }
     this.getUserInfo(); // 个人信息
     this.fillData(); // 填充数据
-    this.getCredist(); //信用金
+    // this.getCredist(); //信用金
     // 测试饼图
     this.$nextTick(function() {
       this.drawPie('main')
@@ -216,6 +232,7 @@ export default {
         this.$message.success(data.msg);
         this.selectNumber02 = 0
         this.dialogShow02 = false
+        this.getUserInfo() // 个人信息刷新
       } else {
         this.$message.error(data.msg);
       }
@@ -251,24 +268,36 @@ export default {
       if (data.status === 0) {
         // 判断是否登录
         this.userInfo = data.data;
+        console.log("userInfo: ",this.userInfo)
+        this.opinionData = [
+          {
+            value: data.data.creditLimit,
+            name:'Vay tiền'
+          },
+          {
+            value: data.data.amountBorrowed,
+            name:'Mượn tiền'
+          }
+        ]
+        this.drawPie('main')
       }
     },
     // 获取信用金
-    async getCredist() {
-      let data = await api.moneyCreditInfo();
-      this.credistInfo = data.data;
-      this.opinionData = [
-        {
-          value: data.data.creditLimit,
-          name:'Vay tiền'
-        },
-        {
-          value:data.data.residualCredit,
-          name:'Mượn tiền'
-        }
-      ]
-      this.drawPie('main')
-    },
+    // async getCredist() {
+    //   let data = await api.moneyCreditInfo();
+    //   this.credistInfo = data.data;
+    //   this.opinionData = [
+    //     {
+    //       value: data.data.creditLimit,
+    //       name:'Vay tiền'
+    //     },
+    //     {
+    //       value:data.data.residualCredit,
+    //       name:'Mượn tiền'
+    //     }
+    //   ]
+    //   this.drawPie('main')
+    // },
     change(e) {
       this.$forceUpdate();
     },
@@ -391,7 +420,7 @@ export default {
 }
 .info_item>div:nth-child(2){
   margin-top: .1rem;
-  color: #cfd0d1;
+  color: #b3b8be;
   font-weight: 500;
 }
 .btn{
