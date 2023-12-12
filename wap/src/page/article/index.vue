@@ -64,7 +64,7 @@
     <Header />
     <div class="page-main">
       <div class="article-list-container">
-        <div class="article-list-detail" v-for="article in articleList" @click="pageNews(article.content)">
+        <div class="article-list-detail" v-for="article in articleList" @click="pageNews(article)">
           <div class="article-detail-date">
             <div>{{ article.year }}</div>
             <div class="month">
@@ -152,11 +152,11 @@ export default {
         console.log(error);
       }
     },
-    pageNews(content) {
+    pageNews(option) {
+      window.sessionStorage.setItem('newDetail', option.content)
       this.$router.push({
         path: '/news'
       })
-      window.sessionStorage.setItem('newDetail', content)
     },
   },
 };

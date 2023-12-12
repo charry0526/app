@@ -15,7 +15,6 @@ export default {
   },
   created () {
     this.newDetail = window.sessionStorage.getItem('newDetail')
-    // console.log(this.newDetail, 'this.newDetail ')
   },
  mounted () {
     if (this.$state.theme == 'red') {

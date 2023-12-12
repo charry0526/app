@@ -5,23 +5,23 @@
       <div class="about_top">
         <div class="about_top_logo">logo</div>
         <div class="about_top_info">
-          <div class="name">APP名称 3.28.2</div>
+          <div class="name">Công ty CP CK Charles Schwab Việt Nam</div>
           <div class="dec">
-            这是一个APP的功能描述，最最多2行，知道吗知道吗知道吗知道吗知道吗知道吗知道吗知道吗知道吗
+            Charles Schwab Việt Nam là công ty tiên phong trong lĩnh vực giao dịch trực tuyến cho các nhà đầu tư cá nhân và hiện là một phần của Charles Schwab Corporation – tập đoàn cung cấp dịch vụ tài chính và quản lý tài sản lớn Top 5 trên thế giới được công nhận về khả năng quản lý tài sản vượt trội, dịch vụ tư vấn, đội ngũ chuyên gia phân tích thị trường và hàng loạt những nghiên cứu đột phá. Với mục tiêu nâng cấp trải nghiệm giao dịch của khách hàng bằng sáng tạo công nghệ đỉnh cao, Charles Schwab đang xây dựng trên các nền tảng và giải pháp dịch vụ kỹ thuật số mạnh mẽ của mình để giúp khách hàng chuyển đổi và phát triển trong nền kinh tế kỹ thuật số mới.
           </div>
         </div>
       </div>
-      <div class="company">这是个公司名称</div>
+      <div class="company">公司信息描述</div>
       <div class="companyInfo tel">400-123-455</div>
-      <div class="companyInfo email">002312123@qq.com</div>
+      <div class="companyInfo email">cskh@stockvn-schwab.com</div>
       <div class="companyInfo url">www.xxxx.com</div>
       <div class="companyInfo add">
-        广东省广州市天河区林和西路888号中国市长大厦88楼88号
+        Landmark 81 có địa chỉ tại số 720A Điện Biên Phủ, Phường 22, quận Bình Thạnh, Thành phố Hồ Chí Minh.
       </div>
     </div>
   </div>
 </template>
-  
+
 <script>
 // import { NavBar } from "../../components/index.js";
 import NavBar from "../../components/NavBar";
@@ -116,4 +116,3 @@ export default {
   }
 }
 </style>
-  

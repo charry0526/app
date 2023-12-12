@@ -118,7 +118,6 @@ export default new Router({
       path: "/login",
       name: "login",
       meta: {
-        // title: '账户登录',
         title: "Đăng nhập tài khoản",
         hasHeader: false
       },
@@ -130,7 +129,7 @@ export default new Router({
       meta: {
         // title: 'mở một tài khoản',
         title: "Đăng nhập tài khoản",
-        hasHeader: true
+        hasHeader: false
       },
       component: OpenAccount
     },
@@ -287,7 +286,6 @@ export default new Router({
       path: "/user",
       name: "user",
       meta: {
-        // title: '我的',
         title: "Của tôi",
         requireAuth: true
         // hasHeader: true
@@ -653,7 +651,7 @@ export default new Router({
       path: "/about",
       name: "about",
       meta: {
-        title: "about",
+        title: "关于我们",
         requireAuth: false,
         hasHeader: false
       },
@@ -693,9 +691,9 @@ export default new Router({
       path: "/users",
       name: "user-center",
       meta: {
-        title: "User Center",
+        title: "个人中心",
         requireAuth: true,
-        hasHeader: false
+        hasHeader: true
       },
       component: () => import("../page/users/index.vue")
     },

@@ -123,7 +123,8 @@
 // import { Toast } from 'mint-ui'
 // import { isNull, isPhone } from '@/utils/utils'
 // import * as api from '@/axios/api'
-import foot from '@/components/foot/foot'
+// import foot from '@/components/foot/foot'
+import foot from "../components/Footer";
 export default {
   data () {
     return {

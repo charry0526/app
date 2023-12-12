@@ -233,15 +233,15 @@
           <div class="info-list" v-if="isShowSystemInfo">
             <div>
               <div>版本信息</div>
-              <div>3.28.2</div>
+              <div>1.3.00</div>
             </div>
             <div>
               <div><router-link to="/about">关于我们</router-link></div>
             </div>
           </div>
 
-          <div class="icon-title between-box no-border-bottom">
-            <div class="image-text">
+          <div class="icon-title between-box no-border-bottom" @click="toRegister">
+            <div class="image-text" >
               <div>
                 <img src="../../assets/images/users/loginout.png" alt="" />
               </div>
@@ -277,6 +277,18 @@ export default {
     this.getUserInfo()
   },
   methods: {
+    // 退出登录
+    async toRegister () {
+      // 注销登陆
+      this.clearCookie()
+      let data = await api.logout()
+      if (data.status === 0) {
+        this.$router.push('/login')
+      } else {
+        Toast(data.msg)
+      }
+      this.$router.push('/login')
+    },
     goPage(url){
       if(!url)
       {
