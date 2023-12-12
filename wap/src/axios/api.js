@@ -509,3 +509,22 @@ export function setUserInfo (options) {
 export function getPKConfig (options) {
   return post('/apis/api/user/getUPKConfig.do', options)
 }
+
+//我的资产
+export function getUserProperty (options) {
+  return post('/apis/user/getUserProperty.do', options)
+}
+
+//资产汇总
+export function getUserPropertyTotal (options) {
+  return post('/apis/user/position/percentage.do', options)
+}
+
+// 信贷记录
+export function creditRecord (options) {
+  return post('/apis/user/moneyCredit/list.do', options)
+}
+// 还款
+export function repaymentRecord (options) {
+  return post('/apis/user/topupMoney/list.do', options)
+}

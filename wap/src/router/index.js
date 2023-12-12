@@ -1,603 +1,738 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from '@/page/home/home'
-import Buy from '@/page/home/buy'
-import Alertdetail from '@/page/home/components/alert' // 公告详情
-import Register from '@/page/register'
-import Forget from '@/page/toForget' // 忘记密码
-import Login from '@/page/login'
-import List from '@/page/list/list'
-import Searchlist from '@/page/list/list-search'
-import IndexSearchlist from '@/page/list/indexlist-search' // 指数查询
-import SearchMylist from '@/page/list/my-list-search'
-import ListDetail from '@/page/list/detail'
-import ListDetail2 from '@/page/list/detail2'
-import MyList from '@/page/list/my-list'
-import Inquiry from '@/page/home/inquiry'
-import User from '@/page/user/user'
-import OrderList from '@/page/user/order-list'
-import holdOrderList from '@/page/user/search-order/hold-stockCode'
-import holdOrderList2 from '@/page/user/search-order/hold-stockSpell'
-import sellOrderList from '@/page/user/search-order/sell-stockCode'
-import sellOrderList2 from '@/page/user/search-order/sell-stockSpell'
-import Detail from '@/page/user/detail'
-import Card from '@/page/user/card'
-import Esop from '@/page/user/esop'
-import Credist from '@/page/user/credist'
+import Vue from "vue";
+import Router from "vue-router";
+import Home from "@/page/home/index";
+import Buy from "@/page/home/buy";
+import Alertdetail from "@/page/home/components/alert"; // 公告详情
+import Register from "@/page/register";
+import Forget from "@/page/toForget"; // 忘记密码
+import Login from "@/page/login";
+import List from "@/page/list/list";
+import Searchlist from "@/page/list/list-search";
+import IndexSearchlist from "@/page/list/indexlist-search"; // 指数查询
+import SearchMylist from "@/page/list/my-list-search";
+import ListDetail from "@/page/list/detail";
+import ListDetail2 from "@/page/list/detail2";
+import MyList from "@/page/list/my-list";
+import Inquiry from "@/page/home/inquiry";
+import User from "@/page/user/user";
+import OrderList from "@/page/user/order-list";
+import holdOrderList from "@/page/user/search-order/hold-stockCode";
+import holdOrderList2 from "@/page/user/search-order/hold-stockSpell";
+import sellOrderList from "@/page/user/search-order/sell-stockCode";
+import sellOrderList2 from "@/page/user/search-order/sell-stockSpell";
+import Detail from "@/page/user/detail";
+import Card from "@/page/user/card";
+import Esop from "@/page/user/esop";
+import Credist from "@/page/user/credist";
 
-import Authentication from '@/page/user/authentication'
-import Aggre from '@/page/user/agreement'
-import Recharge from '@/page/user/recharge'
-import RechargeSure from '@/page/user/recharge-sure'
-import RechargeList from '@/page/user/rechargelist'
-import Cash from '@/page/user/cash'
-import Cashlist from '@/page/user/cashlist'
-import AddCard from '@/page/user/addCard'
-import Setting from '@/page/user/my'
-import Transfer from '@/page/user/transfer'
-import IndexList from '@/page/list/index-list'
-import indexBuy from '@/page/home/index-buy'
-import TwoBuy from '@/page/home/two-buy'
-import TwoBuyNew from '@/page/home/two-buy-new'
-import SubWarehouseBuy from '@/page/home/sub-warehouse-buy'
-import futuresBuy from '@/page/home/futures-buy'
-import Agree from '@/page/registerAgree'
-import Trage from '@/page/tradeAgree'
-import OpenAccount from '@/page/openaccount'
-import FundsList from '@/page/funds/funds-list'
-import News from '@/page/home/news'
-import changePassword from '@/page/user/changePassword'
-import custome from '@/page/custome'
-import Maintenance from '@/page/maintenance'
+import Authentication from "@/page/user/authentication";
+import Aggre from "@/page/user/agreement";
+import Recharge from "@/page/user/recharge";
+import RechargeSure from "@/page/user/recharge-sure";
+import RechargeList from "@/page/user/rechargelist";
+import Cash from "@/page/user/cash";
+import Cashlist from "@/page/user/cashlist";
+import AddCard from "@/page/user/addCard";
+import Setting from "@/page/user/my";
+import Transfer from "@/page/user/transfer";
+import IndexList from "@/page/list/index-list";
+import indexBuy from "@/page/home/index-buy";
+import TwoBuy from "@/page/home/two-buy";
+import TwoBuyNew from "@/page/home/two-buy-new";
+import SubWarehouseBuy from "@/page/home/sub-warehouse-buy";
+import futuresBuy from "@/page/home/futures-buy";
+import Agree from "@/page/registerAgree";
+import Trage from "@/page/tradeAgree";
+import OpenAccount from "@/page/openaccount";
+import FundsList from "@/page/funds/funds-list";
+import News from "@/page/home/news";
+import changePassword from "@/page/user/changePassword";
+import custome from "@/page/custome";
+import Maintenance from "@/page/maintenance";
 
-Vue.use(Router)
+import articleList from "@/page/article/index";
 
-const routerPush = Router.prototype.push
-Router.prototype.push = function push (location) {
-  return routerPush.call(this, location).catch(error => error)
-}
+Vue.use(Router);
+
+const routerPush = Router.prototype.push;
+Router.prototype.push = function push(location) {
+  return routerPush.call(this, location).catch(error => error);
+};
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      redirect: '/home'
-    }, {
-      path: '/home',
-      name: 'home',
+      path: "/",
+      redirect: "/home"
+    },
+    {
+      path: "/home",
+      name: "home",
       meta: {
         // title: '首页',
-        title: 'Trang đầu',
-        requireAuth: true
+        title: "Trang đầu",
+        requireAuth: false
       },
       component: Home
     },
     {
-      path: '/maintenance',
-      name: 'maintenance',
+      path: "/maintenance",
+      name: "maintenance",
       meta: {
         // title: '首页',
-        title: '',
+        title: "",
         requireAuth: true
       },
       component: Maintenance
-    }, {
-      path: '/buy',
-      name: 'buy',
+    },
+    {
+      path: "/buy",
+      name: "buy",
       meta: {
         // title: '购买',
-        title: 'Trang đầu',
+        title: "Trang đầu",
         requireAuth: true,
         hasHeader: true
       },
       component: Buy
-    }, {
-      path: '/register',
-      name: 'register',
+    },
+    {
+      path: "/register",
+      name: "register",
       meta: {
         // title: '注册'
-        title: 'Đăng ký'
+        title: "Đăng ký"
       },
       component: Register
-    }, {
-      path: '/toForget',
-      name: 'toForget',
+    },
+    {
+      path: "/toForget",
+      name: "toForget",
       meta: {
         // title: '忘记密码'
-        title: 'Quên mật khẩu'
+        title: "Quên mật khẩu"
       },
       component: Forget
-    }, {
-      path: '/login',
-      name: 'login',
+    },
+    {
+      path: "/login",
+      name: "login",
       meta: {
         // title: '账户登录',
-        title: 'Đăng nhập tài khoản',
+        title: "Đăng nhập tài khoản",
         hasHeader: false
       },
       component: Login
-    }, {
-      path: '/openaccount',
-      name: 'openaccount',
+    },
+    {
+      path: "/openaccount",
+      name: "openaccount",
       meta: {
         // title: 'mở một tài khoản',
-        title: 'Đăng nhập tài khoản',
+        title: "Đăng nhập tài khoản",
         hasHeader: true
       },
       component: OpenAccount
-    }, {
-      path: '/list',
-      name: 'list',
+    },
+    {
+      path: "/list",
+      name: "list",
       meta: {
         // title: '行情',
-        title: 'Bảng giá',
+        title: "Bảng giá",
         requireAuth: false,
         hasHeader: true
       },
       component: List
-    }, {
-      path: '/indexsearchlist',
-      name: '指数查询',
+    },
+    {
+      path: "/indexsearchlist",
+      name: "指数查询",
       meta: {
         // title: '指数查询'
-        title: 'Truy vấn chỉ mục'
+        title: "Truy vấn chỉ mục"
       },
       component: IndexSearchlist
-    }, {
-      path: '/indexlist',
-      name: 'indexlist',
+    },
+    {
+      path: "/indexlist",
+      name: "indexlist",
       meta: {
         // title: '指数列表',
-        title: 'Danh sách chỉ mục',
+        title: "Danh sách chỉ mục",
         requireAuth: false
       },
       component: IndexList
-    }, {
-      path: '/searchlist',
-      name: '个股查询',
+    },
+    {
+      path: "/searchlist",
+      name: "个股查询",
       meta: {
         // title: '个股查询'
-        title: 'Truy vấn chứng khoán cá nhân'
+        title: "Truy vấn chứng khoán cá nhân"
       },
       component: Searchlist
-    }, {
-      path: '/searchmylist',
-      name: 'searchmylist',
+    },
+    {
+      path: "/searchmylist",
+      name: "searchmylist",
       meta: {
         // title: '自选查询',
-        title: 'Truy vấn tùy chọn',
+        title: "Truy vấn tùy chọn",
         requireAuth: true
       },
       component: SearchMylist
-    }, {
-      path: '/mylist',
-      name: 'mylist',
+    },
+    {
+      path: "/mylist",
+      name: "mylist",
       meta: {
         // title: '自选列表',
-        title: 'Danh sách theo dõi',
+        title: "Danh sách theo dõi",
         requireAuth: true,
         hasHeader: true
-
       },
       component: MyList
-    }, {
-      path: '/listdetail',
-      name: 'listdetail',
+    },
+    {
+      path: "/listdetail",
+      name: "listdetail",
       meta: {
-        title: 'Thông tin chi tiết',
+        title: "Thông tin chi tiết",
         requireAuth: false,
         hasHeader: true
       },
       component: ListDetail
-    }, {
-      path: '/listdetail2',
-      name: 'listdetail2',
+    },
+    {
+      path: "/listdetail2",
+      name: "listdetail2",
       meta: {
-        title: 'Thông tin chi tiết',
+        title: "Thông tin chi tiết",
         requireAuth: false,
         hasHeader: true
       },
       component: ListDetail2
     },
     {
-      path: '/indexBuy',
-      name: 'indexBuy',
+      path: "/indexBuy",
+      name: "indexBuy",
       meta: {
         // title: '指数购买',
-        title: 'Chỉ số mua',
+        title: "Chỉ số mua",
         requireAuth: false,
         hasHeader: true,
-        iconRight: 'search'
+        iconRight: "search"
       },
       component: indexBuy
     },
     {
-      path: '/twoBuy',
-      name: 'TwoBuy',
+      path: "/twoBuy",
+      name: "TwoBuy",
       meta: {
         // title: '两融交易',
-        title: 'Hai giao dịch tài chính',
+        title: "Hai giao dịch tài chính",
         requireAuth: false,
         hasHeader: true,
-        iconRight: 'search'
+        iconRight: "search"
       },
       component: TwoBuy
     },
     {
-      path: '/twoBuyNew',
-      name: 'TwoBuyNew',
+      path: "/twoBuyNew",
+      name: "TwoBuyNew",
       meta: {
         // title: '两融交易',
-        title: 'Hai giao dịch tài chính',
+        title: "Hai giao dịch tài chính",
         requireAuth: false,
         hasHeader: true,
-        iconRight: 'search'
+        iconRight: "search"
       },
       component: TwoBuyNew
     },
     {
-      path: '/subWarehouseBuy',
-      name: 'SubWarehouseBuy',
+      path: "/subWarehouseBuy",
+      name: "SubWarehouseBuy",
       meta: {
         // title: '分仓交易',
-        title: 'Chia nhỏ giao dịch',
+        title: "Chia nhỏ giao dịch",
         requireAuth: false,
         hasHeader: true,
-        iconRight: 'search'
+        iconRight: "search"
       },
       component: SubWarehouseBuy
-    }, {
-      path: '/futuresBuy',
-      name: 'futuresBuy',
+    },
+    {
+      path: "/futuresBuy",
+      name: "futuresBuy",
       meta: {
         // title: '期货购买',
-        title: 'Mua tương lai',
+        title: "Mua tương lai",
         requireAuth: false,
         hasHeader: true
       },
       component: futuresBuy
-    }, {
-      path: '/inquiry',
-      name: 'inquiry',
+    },
+    {
+      path: "/inquiry",
+      name: "inquiry",
       meta: {
         // title: '询价',
-        title: 'Cuộc điều tra',
+        title: "Cuộc điều tra",
         requireAuth: true
       },
       component: Inquiry
-    }, {
-      path: '/user',
-      name: 'user',
+    },
+    {
+      path: "/user",
+      name: "user",
       meta: {
         // title: '我的',
-        title: 'Của tôi',
+        title: "Của tôi",
         requireAuth: true
         // hasHeader: true
       },
       component: User
     },
     {
-      path: '/transfer',
-      name: 'transfer',
+      path: "/transfer",
+      name: "transfer",
       meta: {
         // title: '资金互转',
-        title: 'Chuyển tiền lẫn nhau',
+        title: "Chuyển tiền lẫn nhau",
         requireAuth: true
       },
       component: Transfer
-    }, {
-      path: '/orderlist',
-      name: 'orderlist',
+    },
+    {
+      path: "/orderlist",
+      name: "orderlist",
       meta: {
         // title: '持仓',
-        title: 'Tài sản',
+        title: "Tài sản",
         requireAuth: false,
         hasHeader: true
       },
       component: OrderList
     },
     {
-      path: '/holdorderlist',
-      name: 'holdorderlist',
+      path: "/holdorderlist",
+      name: "holdorderlist",
       meta: {
         // title: '查询持仓',
-        title: 'Vị trí truy vấn',
+        title: "Vị trí truy vấn",
         requireAuth: true,
         hasHeader: true
       },
       component: holdOrderList
-    }, {
-      path: '/holdorderlist2',
-      name: 'holdorderlist2',
+    },
+    {
+      path: "/holdorderlist2",
+      name: "holdorderlist2",
       meta: {
         // title: '查询持仓',
-        title: 'Vị trí truy vấn',
+        title: "Vị trí truy vấn",
         requireAuth: true,
         hasHeader: true
       },
       component: holdOrderList2
-    }, {
-      path: '/sellorderlist',
-      name: 'sellorderlist',
+    },
+    {
+      path: "/sellorderlist",
+      name: "sellorderlist",
       meta: {
         // title: '查询平仓',
-        title: 'Truy vấn để đóng một vị trí',
+        title: "Truy vấn để đóng một vị trí",
         requireAuth: true,
         hasHeader: true
       },
       component: sellOrderList
-    }, {
-      path: '/sellorderlist2',
-      name: 'sellorderlist2',
+    },
+    {
+      path: "/sellorderlist2",
+      name: "sellorderlist2",
       meta: {
         // title: '查询平仓',
-        title: 'Truy vấn để đóng một vị trí',
+        title: "Truy vấn để đóng một vị trí",
         requireAuth: true,
         hasHeader: true
       },
       component: sellOrderList2
-    }, {
-      path: '/detail',
-      name: 'detail',
+    },
+    {
+      path: "/detail",
+      name: "detail",
       meta: {
         // title: '资金明细',
-        title: 'Lịch sử giao dịch',
+        title: "Lịch sử giao dịch",
         requireAuth: true,
         hasHeader: true
       },
       component: Detail
-    }, {
-      path: '/card',
-      name: 'card',
+    },
+    {
+      path: "/card",
+      name: "card",
       meta: {
         // title: '银行卡',
-        title: 'Liên kết ngân hàng',
+        title: "Liên kết ngân hàng",
         requireAuth: true,
         hasHeader: true
       },
       component: Card
-    }, {
-      path: '/esop',
-      name: 'esop',
+    },
+    {
+      path: "/esop",
+      name: "esop",
       meta: {
-        title: 'Esop',
+        title: "Esop",
         requireAuth: true,
         hasHeader: true
       },
       component: Esop
     },
     {
-      path: '/credist',
-      name: 'credist',
+      path: "/credist",
+      name: "credist",
       meta: {
-        title: 'Credist',
+        title: "Credist",
         requireAuth: true,
         hasHeader: true
       },
       component: Credist
     },
     {
-      path: '/authentication',
-      name: 'authentication',
+      path: "/authentication",
+      name: "authentication",
       meta: {
         // title: '认证',
-        title: 'Xác thực',
+        title: "Xác thực",
         requireAuth: true,
         hasHeader: true
       },
       component: Authentication
-    }, {
-      path: '/aggre',
-      name: 'aggre',
+    },
+    {
+      path: "/aggre",
+      name: "aggre",
       meta: {
         // title: '合作协议',
-        title: 'Thỏa thuận hợp tác',
+        title: "Thỏa thuận hợp tác",
         requireAuth: true
       },
       component: Aggre
-    }, {
-      path: '/recharge',
-      name: 'recharge',
+    },
+    {
+      path: "/recharge",
+      name: "recharge",
       meta: {
         // title: '充值',
-        title: 'Nạp tiền',
+        title: "Nạp tiền",
         requireAuth: true,
         hasHeader: true
-
       },
       component: Recharge
-    }, {
-      path: '/rechargeSure',
-      name: 'rechargeSure',
+    },
+    {
+      path: "/rechargeSure",
+      name: "rechargeSure",
       meta: {
         // title: '确认充值',
-        title: 'Xác nhận nạp tiền',
+        title: "Xác nhận nạp tiền",
         requireAuth: true,
         hasHeader: true
-
       },
       component: RechargeSure
-    }, {
-      path: '/rechargelist',
-      name: 'rechargelist',
+    },
+    {
+      path: "/rechargelist",
+      name: "rechargelist",
       meta: {
         // title: '充值记录',
-        title: 'Lịch sử nạp tiền',
+        title: "Lịch sử nạp tiền",
         requireAuth: true,
         hasHeader: true
       },
       component: RechargeList
-    }, {
-      path: '/cash',
-      name: 'cash',
+    },
+    {
+      path: "/cash",
+      name: "cash",
       meta: {
         // title: '提现',
-        title: 'Rút',
+        title: "Rút",
         requireAuth: true,
         hasHeader: true
       },
       component: Cash
-    }, {
-      path: '/addCard',
-      name: 'addCard',
+    },
+    {
+      path: "/addCard",
+      name: "addCard",
       meta: {
         // title: '添加银行卡',
-        title: 'Thêm thẻ ngân hàng',
+        title: "Thêm thẻ ngân hàng",
         requireAuth: true,
         hasHeader: true
-
       },
       component: AddCard
-    }, {
-      path: '/cashlist',
-      name: 'cashlist',
+    },
+    {
+      path: "/cashlist",
+      name: "cashlist",
       meta: {
         // title: '提现记录',
-        title: 'Lịch sử rút tiền',
+        title: "Lịch sử rút tiền",
         requireAuth: true,
         hasHeader: true
-
       },
       component: Cashlist
-    }, {
-      path: '/setting',
-      name: 'setting',
+    },
+    {
+      path: "/setting",
+      name: "setting",
       meta: {
         // title: '设置',
-        title: 'Cài đặt',
+        title: "Cài đặt",
         requireAuth: true
       },
       component: Setting
-    }, {
-      path: '/agree',
-      name: 'agree',
+    },
+    {
+      path: "/agree",
+      name: "agree",
       meta: {
         // title: '注册协议',
-        title: 'Thỏa thuận đăng ký',
+        title: "Thỏa thuận đăng ký",
         requireAuth: true
       },
       component: Agree
-    }, {
-      path: '/trade',
-      name: 'trade',
+    },
+    {
+      path: "/trade",
+      name: "trade",
       meta: {
         // title: '交易⻛险揭示书',
-        title: 'Tiết lộ Rủi ro Giao dịch',
+        title: "Tiết lộ Rủi ro Giao dịch",
         requireAuth: true
       },
       component: Trage
     },
     {
-      path: '/alertdetail',
-      name: 'alertdetail',
+      path: "/alertdetail",
+      name: "alertdetail",
       meta: {
         // title: '公告详情',
-        title: 'Chi tiết thông báo',
+        title: "Chi tiết thông báo",
         requireAuth: true
       },
       component: Alertdetail
     },
     {
-      path: '/funds',
-      name: 'funds',
+      path: "/funds",
+      name: "funds",
       meta: {
         // title: '配资主页',
-        title: 'Trang chủ tài trợ',
+        title: "Trang chủ tài trợ",
         requireAuth: true,
         hasHeader: true,
-        iconRight: 'setting'
+        iconRight: "setting"
       },
-      component: () => import('../page/funds/index')
+      component: () => import("../page/funds/index")
     },
     {
-      path: '/days',
-      name: 'days',
+      path: "/days",
+      name: "days",
       meta: {
         // title: '按天配资',
-        title: 'Cấp vốn theo ngày',
+        title: "Cấp vốn theo ngày",
         requireAuth: true,
         hasHeader: true,
-        iconRight: 'setting'
+        iconRight: "setting"
       },
-      component: () => import('../page/funds/days')
+      component: () => import("../page/funds/days")
     },
     {
-      path: '/xingu',
-      name: 'xingu',
+      path: "/xingu",
+      name: "xingu",
       meta: {
         // title: '新股申购',
-        title: 'IPO',
+
+        title: "IPO",
         requireAuth: true,
         hasHeader: true,
-        iconRight: 'setting'
+        iconRight: "setting"
       },
-      component: () => import('../page/funds/xingu')
+      component: () => import("../page/funds/xingu")
     },
     {
-      path: '/searchStock',
-      name: 'searchStock',
+      path: "/searchStock",
+      name: "searchStock",
       meta: {
         // title: '查询股票',
-        title: 'Kiểm tra chứng khoán',
+        title: "Kiểm tra chứng khoán",
         requireAuth: true,
         hasHeader: true
       },
-      component: () => import('../page/list/search')
+      component: () => import("../page/list/search")
     },
     {
-      path: '/notify',
-      name: 'notify',
+      path: "/notify",
+      name: "notify",
       meta: {
         // title: '消息记录',
-        title: 'Nhật ký tin nhắn',
+        title: "Nhật ký tin nhắn",
         requireAuth: true,
         hasHeader: true
       },
-      component: () => import('../page/user/notify')
-    }, {
-      path: '/fundslist',
-      name: 'fundslist',
+      component: () => import("../page/user/notify")
+    },
+    {
+      path: "/fundslist",
+      name: "fundslist",
       meta: {
         // title: '分仓配资',
-        title: 'Phân bổ vị trí phụ',
+        title: "Phân bổ vị trí phụ",
         requireAuth: false,
         hasHeader: true
       },
       component: FundsList
     },
     {
-      path: '/news',
-      name: 'news',
+      path: "/news",
+      name: "news",
       meta: {
         // title: '详情',
-        title: 'Chi tiết',
+        title: "Chi tiết",
         requireAuth: false,
         hasHeader: true
       },
       component: News
-    }, {
-      path: '/changePassword',
-      name: 'changePassword',
+    },
+    {
+      path: "/changePassword",
+      name: "changePassword",
       meta: {
-        title: 'Đổi mật khẩu',
+        title: "Đổi mật khẩu",
         requireAuth: false,
         hasHeader: true
       },
       component: changePassword
-    }, {
-      path: '/custome',
-      name: 'custome',
+    },
+    {
+      path: "/custome",
+      name: "custome",
       meta: {
-        title: 'Tư vấn khách hàng',
+        title: "Tư vấn khách hàng",
         requireAuth: false,
         hasHeader: true
       },
       component: custome
     },
     {
+      path: "/article",
+      name: "article",
+      meta: {
+        title: "article",
+        requireAuth: false,
+        hasHeader: false
+      },
+      component: articleList
+    },
+    {
+      path: "/property",
+      name: "property",
+      meta: {
+        title: "property",
+        requireAuth: true,
+        hasHeader: false
+      },
+      component: () => import("../page/property/index.vue")
+    },
+    {
+      path: "/about",
+      name: "about",
+      meta: {
+        title: "about",
+        requireAuth: false,
+        hasHeader: false
+      },
+      component: () => import("../page/about/index.vue")
+    },
+    {
+      path: "/search",
+      name: "search",
+      meta: {
+        title: "search",
+        requireAuth: false,
+        hasHeader: false
+      },
+      component: () => import("../page/search/index.vue")
+    },
+    {
+      path: "/order",
+      name: "order",
+      meta: {
+        title: "order",
+        requireAuth: true,
+        hasHeader: false
+      },
+      component: () => import("../page/order/index.vue")
+    },
+    {
+      path: "/more",
+      name: "more",
+      meta: {
+        title: "More",
+        requireAuth: false,
+        hasHeader: false
+      },
+      component: () => import("../page/more/index.vue")
+    },
+    {
+      path: "/users",
+      name: "user-center",
+      meta: {
+        title: "User Center",
+        requireAuth: true,
+        hasHeader: false
+      },
+      component: () => import("../page/users/index.vue")
+    },
+    {
+      path: "/user/creditRecord",
+      name: "creditRecord",
+      meta: {
+        title: "借贷记录",
+        requireAuth: true,
+        hasHeader: true
+      },
+      component: () => import("../page/user/credit-record.vue")
+    },
+    {
+      path: "/user/repaymentRecord",
+      name: "repaymentRecord",
+      meta: {
+        title: "还款记录",
+        requireAuth: true,
+        hasHeader: true
+      },
+      component: () => import("../page/user/repayment-record.vue")
+    },
+    {
+      path: "/detail-new",
+      name: "repaymentRecord",
+      meta: {
+        title: "Thông tin chi tiết",
+        requireAuth: true,
+        hasHeader: true
+      },
+      component: () => import("../page/list/detail-new.vue")
+    },
+    {
       // 会匹配所有路径
-      path: '*',
-      redirect: '/home'
+      path: "*",
+      redirect: "/home"
     }
   ]
-})
+});
