@@ -1,0 +1,461 @@
+<template>
+  <div :class="`wrapper ${$state.theme === 'red' ? 'red-theme' : 'black-theme'}`">
+    <!-- <mt-header fixed title="开户">
+      <router-link to="/home" slot="left">
+        <mt-button icon="back"></mt-button>
+      </router-link>
+    </mt-header> -->
+    <div class="top-wrapper">
+      <div class="title-wrapper">
+        <!-- 交易流程 -->
+        Quy trình giao dịch
+      </div>
+      <div class="content-box">
+        <el-steps :active="0" class="steps-box" align-center>
+          <!-- <el-step title="注册"></el-step>
+          <el-step title="认证"></el-step>
+          <el-step title="入金"></el-step>
+          <el-step title="交易"></el-step> -->
+          <el-step :title="$t('process1')"></el-step>
+          <el-step :title="$t('process2')"></el-step>
+          <el-step :title="$t('process3')"></el-step>
+          <el-step :title="$t('process4')"></el-step>
+        </el-steps>
+        <ul class="list">
+          <li class="list-item animated fadeInLeft">
+            <div class="icon">
+              <img :src="openIcon1" alt="">
+            </div>
+            <div class="content">
+              <!-- <h3>行情分发,极速稳定</h3>
+              <p>专线直连交易所,毫秒级下单速度</p> -->
+              <h3>Phân phối thị trường, cực nhanh và ổn định</h3>
+              <p>Đường dây chuyên dụng được kết nối trực tiếp với sàn giao dịch, đặt lệnh tính bằng mili giây</p>
+            </div>
+          </li>
+          <li class="list-item animated fadeInRight">
+            <div class="icon">
+              <img :src="openIcon2" alt="">
+            </div>
+            <div class="content">
+              <!-- <h3>客户至上,优享服务</h3>
+              <p>灵活投资.实现收益最大化</p> -->
+               <h3>Khách hàng đầu tiên, dịch vụ ưu đãi</h3>
+              <p>Đầu tư linh hoạt để tối đa hóa lợi nhuận</p>
+            </div>
+          </li>
+          <li class="list-item animated fadeInLeft">
+            <div class="icon">
+              <img :src="openIcon3" alt="">
+            </div>
+            <div class="content">
+              <!-- <h3>极速开户,超高配额</h3>
+              <p>0资金门槛,无需线下见证</p> -->
+                <h3>Mở tài khoản nhanh, hạn mức siêu cao</h3>
+              <p>Không mất phí</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="btnbox animated fadeInUp text-center">
+        <span class="login btnok" @click="toLogin">
+            <!-- 登录 -->
+            Đăng nhập
+        </span>
+        <span class="register btnok" @click="toRegister">
+          <!-- 注册 -->
+          Đăng ký
+        </span>
+      </div>
+    </div>
+
+    <div class="bottom-prompt">
+      <h2 class="text-center">
+        <!-- 开户前请准备好 -->
+        Vui lòng chuẩn bị trước khi mở tài khoản
+      </h2>
+      <ul class="list list2 clearfix">
+        <li>
+          <div class="icon">
+            <img :src="dataIcon1" alt="">
+          </div>
+          <h3>
+            <!-- 身份证 -->
+           CCCD/CMND
+            </h3>
+          <p>
+            CCCD/CMND còn thời hạn sử dụng
+            <!-- 有效期内的二代身份证 -->
+          </p>
+        </li>
+        <li>
+          <div class="icon">
+            <img :src="dataIcon2" alt="">
+          </div>
+          <h3>
+            <!-- 银行卡 -->
+            Thẻ ngân hàng
+            </h3>
+          <p>
+            Thẻ ngân hàng chính chủ
+            <!-- 户名与身份证一致的银行卡 -->
+          </p>
+        </li>
+        <li>
+          <div class="icon">
+            <img :src="dataIcon3" alt="">
+          </div>
+          <h3>
+            <!-- WIFI网络 -->
+            Mạng wifi
+            </h3>
+          <p>
+            Mạng 3G/4G
+            <!-- 3G/4G网络 -->
+            </p>
+        </li>
+      </ul>
+    </div>
+    <foot></foot>
+  </div>
+</template>
+<script>
+// import { Toast } from 'mint-ui'
+// import { isNull, isPhone } from '@/utils/utils'
+// import * as api from '@/axios/api'
+// import foot from '@/components/foot/foot'
+import foot from "../components/Footer";
+export default {
+  data () {
+    return {
+      openIcon1: require('../../static/img/openAccount/open-icon1.png'),
+      openIcon2: require('../../static/img/openAccount/open-icon2.png'),
+      openIcon3: require('../../static/img/openAccount/open-icon3.png'),
+      dataIcon1: require('../../static/img/openAccount/data-icon1.png'),
+      dataIcon2: require('../../static/img/openAccount/data-icon2.png'),
+      dataIcon3: require('../../static/img/openAccount/data-icon3.png')
+    }
+  },
+  components: {
+    foot
+  },
+  created () {
+    this.$setgoindex()
+  },
+  mounted () {
+
+  },
+  methods: {
+    toLogin () {
+      // 登录
+      this.$router.push('/login')
+    },
+    toRegister () {
+      // 注册
+      this.$router.push('/register')
+    },
+    goBack () {
+      if (this.$route.query.goindex === 'true') {
+        this.$router.push('/')
+      } else {
+        this.$router.back(-1)
+      }
+    }
+  }
+}
+</script>
+<style lang="less" scoped>
+  .wrapper {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 0rem 0rem 1rem;
+    .top-wrapper{
+      width: 98%;
+      box-sizing: border-box;
+      padding: 0 0.5rem;
+      // background: url('/static/img/openAccount/top-bg.png');
+      background-size: cover;
+      background-color: #302f35;
+      border: 0.05rem solid #38363B;
+      margin: 0.3rem auto 0;
+      border-radius: 0.2rem;
+      box-shadow: inset 0px 0px 0.4rem -0.2rem #888;
+      .title-wrapper{
+        font-size:0.3rem;
+        font-family:Microsoft YaHei;
+        font-weight:400;
+        color:rgba(255,255,255,1);
+        line-height:1rem;
+        text-align: center;
+      }
+
+    }
+    .content-box {
+      padding-top: 0.1rem;
+      /deep/.steps-box{
+        .el-step__icon{
+          // background: #E6003E;
+          // color: #E6003E;
+          // border-color: #EDECEC;
+
+          background: rgba(255, 255, 255, 0.3);
+          border: 0;
+          position: relative;
+          &::after{
+            position: absolute;
+            content: '';
+            display: block;
+            width: 10px;
+            height: 10px;
+            background-color: #ec9e2f;
+            border-radius: 10px;
+            left: 50%;
+            top: 50%;
+            margin-left: -5px;
+            margin-top: -5px;
+          }
+        }
+        .el-step__line{
+          background-color: #EDECEC;
+          top: 9px;
+        }
+        .el-step__main{
+          .el-step__title{
+            font-size: 0.26rem;
+            font-family:Microsoft YaHei;
+            font-weight:400;
+            color:rgba(255,255,255,1);
+            line-height:0.7rem;
+          }
+        }
+      }
+      .list-item{
+        display: flex;
+        align-items: center;
+        padding: 0;
+        margin: 0.38rem 0;
+        .icon{
+          width: 0.67rem;
+          height: 0.67rem;
+          background-color: #ec9e2f;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 1rem;
+          margin-right: 0.25rem;
+          img{
+            width: 0.32rem;
+          }
+        }
+        .content{
+          width:5rem;
+          h3{
+            font-size:0.26rem;
+            font-family:Microsoft YaHei;
+            font-weight:400;
+            color:rgba(255,255,255,1);
+            line-height:0.42rem;
+            margin: 0;
+          }
+          p{
+            font-size:0.24rem;
+            font-family:Microsoft YaHei;
+            font-weight:400;
+            color:#ec9e2f;
+            line-height:0.42rem;
+          }
+        }
+      }
+    }
+    .btnbox{
+      margin-top: 0.8rem;
+      padding-bottom: 0.5rem;
+      display: flex;
+      .login{
+        width: 3rem;
+        height: 0.6rem;
+        line-height: 0.6rem;
+        background: #f5991d;
+        margin: 0 0.2rem;
+      }
+      .register{
+        width: 3rem;
+        height: 0.6rem;
+        line-height: 0.6rem;
+        background: #f5991d;
+        margin: 0 0.2rem;
+      }
+    }
+  }
+
+  .list {
+    width: 6rem;
+    margin: 0 auto;
+    li {
+      position: relative;
+      padding: 0.25rem 0.1rem;
+      padding-left: 1.1rem;
+      padding-bottom: 0.3rem;
+
+      h3 {
+        font-size: 0.3rem;
+        margin-bottom: 0.15rem;
+      }
+
+      p {
+        line-height: 0.3rem;
+        color: #999;
+        font-size: 0.24rem;
+      }
+    }
+
+    .iconfont {
+      position: absolute;
+      left: 0;
+      font-size: 0.8rem;
+      color: #ff6006;
+      top: 0.22rem;
+    }
+  }
+
+  .list2 {
+    padding: 0.4rem 0.6rem;
+
+    li {
+      width: 48%;
+      float: left;
+      padding-left: 1rem;
+    }
+
+    li:nth-child(2) {
+      margin-left: 2%;
+    }
+  }
+
+  .bottom-prompt {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 0.2rem 1rem 0.2rem;
+    h2 {
+      font-size:0.3rem;
+      font-family:Microsoft YaHei;
+      font-weight:400;
+      color:rgba(255,255,255,1);
+      line-height: 0.92rem;
+    }
+    ul{
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      margin-top: 0.5rem;
+      li{
+        padding: 0;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .icon{
+          width: 0.55rem;
+          height: 0.55rem;
+          background-color: #ec9e2f;
+          border-radius: 1rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          img{
+            width: 0.23rem;
+          }
+        }
+        h3{
+          font-size:0.24rem;
+          font-family:Microsoft YaHei;
+          font-weight:400;
+          color:rgba(255,255,255,1);
+          line-height:0.46rem;
+        }
+        p{
+          font-size: 0.2rem;
+          font-family:Microsoft YaHei;
+          font-weight:400;
+          color:rgba(208,208,208,1);
+          line-height:0.42rem;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .btnbox {
+    width: 100%;
+  }
+
+  .btnbox .btnok {
+    width: 40%;
+    /*height: 0.92rem;*/
+    margin: 20px auto 0 auto;
+    font-size: 14px;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 0.46rem;
+    // background: #d50000;
+    margin: 4.5%;
+  }
+
+  .red-theme{
+    .top-wrapper{
+      background: white;
+      .btnbox{
+        .login{
+          background-color: #BB1715;
+        }
+        .register{
+          background-color: #212121;
+        }
+      }
+      .title-wrapper{
+        color: #212121;
+      }
+      /deep/.el-steps{
+        .el-step__title{
+          color: #212121 !important;
+        }
+        .el-step__icon{
+          background: rgba(0,0,0,0.1);
+          &::after{
+            background-color: #BB1815;
+          }
+        }
+      }
+      .list-item{
+        .icon{
+          background-color: #BB1815;
+        }
+        .content{
+          h3{
+            color: #212121;
+          }
+          p{
+            color: #BB1815;
+          }
+        }
+      }
+    }
+    .bottom-prompt{
+      .icon{
+        background-color: #BB1815;
+      }
+      h2{
+        color: #212121;
+      }
+      h3{
+        color: #212121;
+      }
+      p{
+        color: #212121;
+      }
+    }
+  }
+</style>
