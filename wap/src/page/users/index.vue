@@ -129,6 +129,12 @@
 .no-border-bottom {
   border-bottom: none !important;
 }
+/deep/ .el-upload__input{
+  display: none;
+}
+/deep/ .el-upload{
+  display: flex;
+}
 </style>
 <template>
   <div class="app-wrapper">
@@ -136,7 +142,20 @@
     <div class="page-main user-center">
       <div class="user-info">
         <div class="user-avatar">
-          <img :src="$store.state.userInfo.avatar" alt="" />
+          <el-upload
+              class="avatar-uploader"
+              name="upload_file"
+              action="/apis/user/upload.do"
+              :show-file-list="false"
+              :with-credentials='true'
+              :on-success="handleAvatarSuccess">
+            <div v-if="$store.state.userInfo.avatar" class="avatar-box">
+              <img :src="$store.state.userInfo.avatar" alt="" />
+            </div>
+            <div v-else class="default-avatar-box">
+              <img   src="../../assets/ico/wogerenziliao.png" alt="" />
+            </div>
+          </el-upload>
         </div>
         <div class="user-title">
           <p>{{ $store.state.userInfo.nickName }}</p>
@@ -258,7 +277,6 @@
 </template>
 
 <script>
-import Header from "../../components/Header.vue";
 import Footer from "../../components/Footer.vue";
 import * as api from "@/axios/api";
 import {Toast} from "mint-ui";
@@ -321,6 +339,16 @@ export default {
       } else {
         this.$message.error(data.msg)
       }
+    },
+
+    handleAvatarSuccess (res, file) {
+      this.imageUrl = res.data.url
+      this.editInfo()
+    },
+
+    async editInfo () {
+      await api.setUserInfo({avatar: this.imageUrl, id: this.$store.state.userInfo.id})
+      this.$store.state.userInfo.avatar = this.imageUrl
     }
   },
 };

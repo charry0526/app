@@ -8,6 +8,7 @@
       </div>
       <div>
         <div v-if="!isOptionOpt" @click="addOptions"><img src="../../assets/images/details/join.png"></div>
+        <div v-else @click="deteleOptions"><img style="max-width:20px" src="../../assets/images/home/close@x2.png"></div>
         <div style="margin-left: 5px;" @click="toBuy"><img src="../../assets/images/details/buy.png"></div>
       </div>
     </div>
@@ -50,11 +51,11 @@
           </div>
           <div>
             <p>平均价</p>
-            <p>{{ Number(detail.avgprice/1000).toFixed(2) }}</p>
+            <p style="text-align: right">{{ Number(detail.avgprice/1000).toFixed(2) }}</p>
           </div>
           <div>
             <p>最高价(调)</p>
-            <p>{{ Number(detail.hightAdjust/1000).toFixed(2) }}</p>
+            <p style="text-align: right">{{ Number(detail.hightAdjust/1000).toFixed(2) }}</p>
           </div>
         </div>
       </div>
@@ -275,12 +276,6 @@ export default {
       }
     },
     async addOptions () {
-      //   if(!this.$store.state.userInfo.phone){
-      //     MessageBox.confirm('您还未登录，是否去登录?').then(action => {
-      //         this.$router.push('/login')
-      //     });
-      //     return
-      //   }
       let data = await api.addOption({code: this.$route.query.code})
       if (data.status === 0) {
         Toast('Thêm thành công tùy chọn')

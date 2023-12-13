@@ -8,7 +8,7 @@
             <b>{{ item.indexName }}</b>{{ item.maxNum }}
           </div>
           <div class="stock_price " :class="numberColorFn(item.currentPoint) ? 'text_red' : 'text_green'">{{
-             Number(item.currentPoint).toFixed(2) }}</div>
+            Number(item.currentPoint).toFixed(2) }}</div>
           <div class="stock_percentage">
             <span :class="numberColorFn(item.floatPoint) ? 'text_red' : 'text_green'">{{ item.floatPoint }}</span>
             <span :class="numberColorFn(item.floatRate) ? 'text_red' : 'text_green'">{{ item.floatRate }}%</span>
@@ -146,7 +146,7 @@ export default {
      */
     async getendorseList(pageNum) {
       try {
-        const option = { pageNum: pageNum || this.pageNum, pageSize: this.pageSize, phone: '0000000001' }
+        const option = { pageNum: pageNum || this.pageNum, pageSize: this.pageSize, phone: this.$store.state.userInfo.phone }
         let data = await api.endorseList(option)
         console.log('getendorseList-----', data)
         if (data.status === 0) {
@@ -212,12 +212,12 @@ export default {
                 isChange: 0 //0表示表头不可点击切换 例如百分比和金额切换
               },
               {
-                name: "市场价格",
+                name: "申购价格",
                 isChange: 0
               },
               {
-                name: "涨幅",
-                isChange: 1
+                name: "市场价格",
+                isChange: 0
               },
               {
                 name: "操作",
@@ -312,54 +312,45 @@ export default {
         pKey: sessionStorage.getItem('pKey')
       }
       let data = await api.getMyList(opt)
-      console.log('getUserStock----', data)
       if (data.status === 0) {
-        if (pageNum) {
-          if (pageNum == 1) {
-            // this.proList = {}
-            this.proList = {
-              watchListData: {
-                list: []
-              }
-            }
-            this.proList.watchListData.list = data.data.list
-          } else {
-            this.proList.watchListData.list.push(...data.data.list)
-          }
-          this.proList.pageNum = pageNum
-        } else {
-          let watchListData = {
-            tabList: [
-              {
-                name: "商品名称",
-                isChange: 0 //0表示表头不可点击切换 例如百分比和金额切换
-              },
-              {
-                name: "市场价格",
-                isChange: 0
-              },
-              {
-                name: "涨幅",
-                isChange: 1
-              },
-              {
-                name: "商品金额",
-                isChange: 0
-              },
-              {
-                name: "操作",
-                isChange: 0,
-                actionClass: "del" //操作类型，删除  购买
-              }
-            ],
-            watchListData: {
-              total: data.data.total, //总数
-              list: data.data.list
+        let watchListData = {
+          tabList: [
+            {
+              name: "商品名称",
+              isChange: 0 //0表示表头不可点击切换 例如百分比和金额切换
             },
-            lastPage: data.data.lastPage,
-            fn: 'getUserStock'
-          }
+            {
+              name: "市场价格",
+              isChange: 0
+            },
+            {
+              name: "涨幅",
+              isChange: 1
+            },
+            {
+              name: "商品金额",
+              isChange: 0
+            },
+            {
+              name: "操作",
+              isChange: 0,
+              actionClass: "del" //操作类型，删除  购买
+            }
+          ],
+          watchListData: {
+            total: data.data.total, //总数
+            list: []
+          },
+          lastPage: data.data.lastPage,
+          fn: 'getUserStock'
+        }
+
+        if (!pageNum || pageNum === 1) {
+          watchListData.watchListData.list = data.data.list
           this.proList = watchListData
+        }
+        else {
+          this.proList.watchListData.list.push(...data.data.list)
         }
       } else {
         Toast(data.msg)

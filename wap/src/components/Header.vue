@@ -8,7 +8,7 @@
       <router-link to="/kefu" class="header_nav_icon">
         <img src="../assets/images/header/kefu@x2.png" />
       </router-link>
-      <router-link to="/users" class="header_nav_icon">
+      <router-link to="/user" class="header_nav_icon">
       <img
         src="../assets/images/header/user@x2.png"
       />
@@ -20,7 +20,7 @@
       :style="{ height: '80%' }"
       class="loginPopup"
     >
-      <div > 
+      <div >
         <img src="../assets/images/login/logo.png" />
       </div>
       <div class="login_from">

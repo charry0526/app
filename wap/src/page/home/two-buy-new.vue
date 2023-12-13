@@ -199,19 +199,19 @@
       </div>
     </div>
 
-    <foot></foot>
+    <Footer />
   </div>
 </template>
 
 <script>
-import foot from '../../components/foot/foot'
+import Footer from '../../components/Footer.vue'
 import { Toast } from 'mint-ui'
 import { isNull,debounceJArgs } from '@/utils/utils'
 import * as api from '@/axios/api'
 
 export default {
   components: {
-    foot
+    Footer
   },
   props: {},
   data () {
@@ -859,4 +859,7 @@ body {
       flex-wrap: wrap;
 
     }
+.footer_tabbar{
+  position: absolute !important;
+}
 </style>

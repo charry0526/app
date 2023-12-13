@@ -3,7 +3,7 @@
     <NavBar />
     <div class="page-main">
       <div class="about_top">
-        <div class="about_top_logo">logo</div>
+        <div class="about_top_logo"><img  class="logo" src="../../assets/images/login/login-01.png" alt=""></div>
         <div class="about_top_info">
           <div class="name">Công ty CP CK Charles Schwab Việt Nam</div>
           <div class="dec">
@@ -44,6 +44,15 @@ export default {
 .page-main {
   padding: 0 15px;
 
+  .logo {
+    width: 93px;
+    height: 70px;
+   // background: #ff7b23;
+    border-radius: 2px;
+    line-height: 28px;
+    text-align: center;
+    font-size: 16px;
+  }
   .about_top {
     margin-top: 30px;
     display: flex;
@@ -51,8 +60,6 @@ export default {
 
     .about_top_logo {
       height: 68px;
-      width: 68px;
-      background: #ff7b23;
       text-align: center;
       line-height: 68px;
       border-radius: 10px;

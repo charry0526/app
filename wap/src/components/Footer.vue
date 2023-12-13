@@ -8,7 +8,7 @@
     </van-tabbar-item>
   </van-tabbar>
 </template>
-  
+
 <script>
 import Vue from "vue";
 import { Tabbar, TabbarItem } from "vant";
@@ -46,7 +46,7 @@ export default {
           name: "订单",
           active: require("@/assets/images/tabBar/order@x2.png"),
           inactive: require("@/assets/images/tabBar/order2@x2.png"),
-          path: "/order"
+          path: "/orderlist"
         },
         {
           id: 4,
@@ -69,8 +69,8 @@ export default {
   },
 };
 </script>
-  
-  
+
+
 <style >
 #app .body-box {
   height: 100% !important;

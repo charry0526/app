@@ -281,16 +281,16 @@ export default new Router({
       },
       component: Inquiry
     },
-    {
-      path: "/user",
-      name: "user",
-      meta: {
-        title: "Của tôi",
-        requireAuth: true
-        // hasHeader: true
-      },
-      component: User
-    },
+    // {
+    //   path: "/user",
+    //   name: "user",
+    //   meta: {
+    //     title: "Của tôi",
+    //     requireAuth: true
+    //     // hasHeader: true
+    //   },
+    //   component: User
+    // },
     {
       path: "/transfer",
       name: "transfer",
@@ -301,17 +301,17 @@ export default new Router({
       },
       component: Transfer
     },
-    {
-      path: "/orderlist",
-      name: "orderlist",
-      meta: {
-        // title: '持仓',
-        title: "Tài sản",
-        requireAuth: false,
-        hasHeader: true
-      },
-      component: OrderList
-    },
+    // {
+    //   path: "/orderlist",
+    //   name: "orderlist",
+    //   meta: {
+    //     // title: '持仓',
+    //     title: "Tài sản",
+    //     requireAuth: false,
+    //     hasHeader: true
+    //   },
+    //   component: OrderList
+    // },
     {
       path: "/holdorderlist",
       name: "holdorderlist",
@@ -667,7 +667,7 @@ export default new Router({
       component: () => import("../page/search/index.vue")
     },
     {
-      path: "/order",
+      path: "/orderlist",
       name: "order",
       meta: {
         title: "order",
@@ -687,7 +687,7 @@ export default new Router({
       component: () => import("../page/more/index.vue")
     },
     {
-      path: "/users",
+      path: "/user",
       name: "user-center",
       meta: {
         title: "个人中心",

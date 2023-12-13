@@ -1,6 +1,5 @@
 <style src="../../../src/assets/styles/common.css"/>
 <style lang="less" scoped>
-
 .tabBox {
   .tabChildren {
     padding: 10px 15px 0 15px;
@@ -53,8 +52,23 @@
     }
   }
 }
-</style>
-<style scoped lang="less">
+
+.between-box {
+  &.property-total-icon {
+    display: block;
+  }
+
+  .between-box_item {
+    float: left;
+    width: 50%;
+
+    .item_number {
+      overflow-wrap: break-word;
+      line-height: 14px;
+    }
+  }
+}
+
 .app-wrapper {
   background-color: #29282e;
   font-size: 12px;
@@ -158,9 +172,9 @@
   margin-bottom: 5px;
 }
 
-.property-total-icon>div:first-child {
-  margin-right: 30px;
-}
+// .property-total-icon>div:first-child {
+//   margin-right: 30px;
+// }
 
 .property-detail-title {
   font-size: 14px;
@@ -184,7 +198,7 @@
   margin-left: 5px;
 }
 </style>
-<style >
+<style>
 .van-circle__text {
   color: #fff
 }
@@ -218,32 +232,36 @@
               <div style="font-size: 14px">总资产</div>
               <div
                 style="font-size: 18px; margin-top: 10px; margin-bottom: 25px; word-wrap: break-word; overflow-wrap: break-word;">
-                {{ (propertyInfo.userAmt + propertyInfo.enableAmt).toLocaleString('en-US') }}
+                {{ $moneyDot(propertyInfo.userAmt + propertyInfo.enableAmt) }}
               </div>
               <div class="between-box property-total-icon">
-                <div>
+                <div class="between-box_item">
                   <div class="between-box">
                     <div class="origin-box origin-green"></div>
                     <div>持有资产</div>
                   </div>
-                  <div style="overflow-wrap:anywhere; word-wrap: break-word;">{{
-                    propertyInfo.shareholdingAmt.toLocaleString('en-US') }}</div>
+                  <div class="item_number">{{
+                    $moneyDot(propertyInfo.shareholdingAmt)
+                    }}
+                  </div>
                 </div>
-                <div>
+                <div class="between-box_item">
                   <div class="between-box">
                     <div class="origin-box origin-yellow"></div>
                     <div>可用资产</div>
                   </div>
-                  <div style="overflow-wrap:anywhere; word-wrap: break-word;">{{
-                    propertyInfo.availableAmount.toLocaleString('en-US') }}</div>
+                  <div class="item_number">{{
+                    $moneyDot(propertyInfo.availableAmount)
+                    }}
+                  </div>
                 </div>
               </div>
             </div>
             <div class="bingtu">
-              <van-circle v-model=" currentRate " size="111px" :rate=" rate " layer-color="#5bba6e" stroke-width=80
-                :color=" red " />
+              <van-circle v-model=" currentRate " size="111px" :rate=" rate " layer-color="#5bba6e" stroke-width=80 />
               <div class="bingtu_text">
-                总资产<p> <span style="color: #5bba6e">{{ rate }}%</span> / <span style="color: #ff7b23">{{ 100-rate
+                总资产<p><span style="color: #5bba6e">{{ rate }}%</span> / <span style="color: #ff7b23">{{
+                    100 - rate
                     }}%</span></p>
               </div>
             </div>
@@ -262,7 +280,7 @@
           <div class="between-box property-detail-subtitle property-detail-title">
             <div>证券资产</div>
             <div class="between-box">
-              <div>{{ propertyInfo.userAmt.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.userAmt) }}</div>
               <div class="fold-icon" @click="property_1 = property_1 === 1 ? 0 : 1">
                 <img v-if=" property_1 === 1 " src="../../assets/images/property/dropdown.png" alt="" />
                 <img v-else src="../../assets/images/users/more.png" alt="" />
@@ -272,22 +290,22 @@
           <div class="property-list-template" v-if=" property_1 ">
             <div class="between-box">
               <div>持股总市值</div>
-              <div>{{ propertyInfo.shareholdingAmt.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.shareholdingAmt) }}</div>
             </div>
             <div class="between-box">
               <div>持股总数</div>
-              <div>{{ propertyInfo.shareholdingNumber.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.shareholdingNumber) }}</div>
             </div>
             <div class="between-box">
               <div>持股损益总金额</div>
-              <div>{{ propertyInfo.shareholdingProperty.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.shareholdingProperty) }}</div>
             </div>
           </div>
 
           <div class="between-box property-detail-subtitle property-detail-title">
             <div>现金</div>
             <div class="between-box">
-              <div>{{ propertyInfo.enableAmt.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.enableAmt) }}</div>
               <div class="fold-icon" @click="property_2 = property_2 === 1 ? 0 : 1">
                 <img src="../../assets/images/property/dropdown.png" alt="" />
               </div>
@@ -296,26 +314,26 @@
           <div class="property-list-template" v-if=" property_2 ">
             <div class="between-box">
               <div>可用金额</div>
-              <div>{{ propertyInfo.availableAmount.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.availableAmount) }}</div>
             </div>
             <div class="between-box">
               <div>可提取资金</div>
-              <div>{{ propertyInfo.extractableAmount.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.extractableAmount) }}</div>
             </div>
             <div class="between-box">
               <div>冻结资金</div>
-              <div>{{ propertyInfo.freezeAmount.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.freezeAmount) }}</div>
             </div>
             <div class="between-box">
               <div>保证金</div>
-              <div>{{ propertyInfo.margin.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.margin) }}</div>
             </div>
           </div>
 
           <div class="between-box property-detail-subtitle property-detail-title">
             <div>债务</div>
             <div class="between-box">
-              <div>{{ propertyInfo.debtAmt.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.debtAmt) }}</div>
               <div class="fold-icon" @click="property_3 = property_3 === 1 ? 0 : 1">
                 <img src="../../assets/images/property/dropdown.png" alt="" />
               </div>
@@ -324,19 +342,19 @@
           <div class="property-list-template" style="border: none" v-if=" property_3 ">
             <div class="between-box">
               <div>信用金额度</div>
-              <div>{{ propertyInfo.creditLimit.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.creditLimit) }}</div>
             </div>
             <div class="between-box">
               <div>信用金可贷金额</div>
-              <div>{{ propertyInfo.creditAvailableLimit.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.creditAvailableLimit) }}</div>
             </div>
             <div class="between-box">
               <div>信用金已贷金额</div>
-              <div>{{ propertyInfo.creditBorrowedAmt.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.creditBorrowedAmt) }}</div>
             </div>
             <div class="between-box">
               <div>信用金已还金额</div>
-              <div>{{ propertyInfo.creditStillAmt.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.creditStillAmt) }}</div>
             </div>
           </div>
         </div>
@@ -348,18 +366,23 @@
           <div class="tabChildren isContent MyCard">
             <div class="isContent_list">
               <div class="isContent_item"><span>持有成本</span><span>P/L</span></div>
-              <div class="isContent_item"><span>{{ holdingTotal.orderTotalPrice.toLocaleString('en-US')
+              <div class="isContent_item"><span>{{
+                  $moneyDot(holdingTotal.orderTotalPrice)
                   }}</span><span>{{
-                  holdingTotal.profitMoney.toLocaleString('en-US') }}</span></div>
+                  $moneyDot(holdingTotal.profitMoney)
+                  }}</span></div>
             </div>
             <div class="isContent_list">
               <div class="isContent_item"><span>持有市场价</span><span>P/L</span></div>
-              <div class="isContent_item"><span>{{ holdingTotal.nowPrice.toLocaleString('en-US')
+              <div class="isContent_item"><span>{{
+                  $moneyDot(holdingTotal.nowPrice)
                   }}</span><span :class=" holdingTotal.profitMoney < 0 ? 'text_red' : 'text_green' ">{{
-                  holdingTotal.percentage }}%</span></div>
+                  holdingTotal.percentage
+                  }}%</span></div>
             </div>
           </div>
-          <my-list :proList=" proList " :listType=" listType " @changeData=" changeData " :fromListType=" fromListType " />
+          <my-list :proList=" proList " :listType=" listType " @changeData=" changeData "
+            :fromListType=" fromListType " />
         </div>
       </template>
     </div>
@@ -370,14 +393,15 @@
 
 
 <script>
-import Vue from 'vue';
-import { Circle } from 'vant';
+import Vue from 'vue'
+import { Circle } from 'vant'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import MyList from '../../components/MyList'
 import * as api from '@/axios/api'
 import { getUserPropertyTotal } from '../../axios/api'
-Vue.use(Circle);
+
+Vue.use(Circle)
 
 export default {
   name: 'articlePage',
@@ -426,8 +450,7 @@ export default {
         data.then(result => {
           this.holdingTotal = result.data
         })
-      }
-      catch (error) {
+      } catch (error) {
         console.log(error)
       }
     },

@@ -16,82 +16,95 @@
       <div class="infinite-list-wrapper" ref="wrapper" v-if="productList.length">
         <ul class="list" v-infinite-scroll="load" infinite-scroll-disabled="disabled">
           <li v-for="(item, index) in productList" class="list-item" :key="index" @click="goDetail(item, fromListType)">
-            <div class="list-item_text" v-if="item.stockName || item.name || item.names || item.xgname">
-              {{ item.stockName || item.name || item.names || item.xgname }}
-            </div>
-            <div class="list-item_text" v-if="item.nowPrice || item.price"
-              :class="numberColorFn(((item.nowPrice || item.price) / 1000).toFixed(2)) ? 'text_red' : 'text_green'">{{
+            <div class="list-item_box" :class="colorTextFn(item, proList)">
+              <div class="list-item_text fitst_name" v-if="item.stockName || item.name || item.names || item.xgname">
+                {{ item.stockName || item.name || item.names || item.xgname }}
+              </div>
+              <div class="list-item_text" v-if="item.nowPrice || item.price">{{
                 ((item.nowPrice || item.price) / 1000).toFixed(2) }}</div>
-            <template v-if="item.nowPrice || item.hcrate || item.price">
-              <div class="list-item_text" v-if="PriceOrPercentage && !proList.zccyList">
-                <template v-if="item.price">
-                  <span
-                    :class="numberColorFn(((item.price - item.scprice) / item.price * 100).toFixed(2)) ? 'text_red' : 'text_green'">{{
+              <template v-if="item.nowPrice || item.hcrate || item.price">
+                <div class="list-item_text" v-if="PriceOrPercentage && !proList.zccyList">
+                  <template v-if="item.price">
+                    <span v-if="proList.welfare"> {{
+                        (item.scprice / 1000).toFixed(2) }}</span>
+                    <span v-else> {{
                       ((item.price - item.scprice) / item.price * 100).toFixed(2) }}%</span>
-                </template>
-                <template v-else>
-                  <span
-                    :class="numberColorFn((item.hcrate / (item.nowPrice - item.hcrate) * 100).toFixed(2)) ? 'text_red' : 'text_green'">
-                    {{ (item.hcrate / (item.nowPrice - item.hcrate) * 100).toFixed(2) }}%</span>
-                </template>
-              </div>
-              <div class="list-item_text" v-else>
-                <span :class="numberColorFn(item.preclose_px || item.price) ? 'text_red' : 'text_green'">{{
-                  item.preclose_px || item.price }}</span>
-              </div>
-            </template>
+                  </template>
+                  <template v-else>
+                    <span>
+                      {{ (item.hcrate / (item.nowPrice - item.hcrate) * 100).toFixed(2) }}%</span>
+                  </template>
+                </div>
+                <div class="list-item_text" v-else>
+                  <span v-if="proList.watchListData">{{
+                    item.hcrate }}</span>
+                  <span v-else-if="proList.market">{{
+                    item.nowPrice - item.hcrate }}</span>
+                  <span v-else-if="proList.welfare">{{
+                    item.scprice }}</span>
+                  <span v-else>{{
+                    item.preclose_px || item.price }}</span>
+                </div>
+              </template>
 
-            <div class="list-item_text" v-if="item.preclose_px">
-              <span :class="numberColorFn(item.preclose_px) ? 'text_red' : 'text_green'">{{ item.preclose_px }}</span>
-            </div>
-            <div class="list-item_text" v-if="item.orderNum">
-              <span :class="numberColorFn(item.orderNum) ? 'text_red' : 'text_green'">{{ item.orderNum }}</span>
-            </div>
-            <div class="list-item_text" v-if="item.buyOrderPrice">
-              <span :class="numberColorFn(item.buyOrderPrice) ? 'text_red' : 'text_green'">{{ item.buyOrderPrice }}</span>
-            </div>
-            <div class="list-item_text" v-if="item.now_price">
-              <span :class="numberColorFn(item.now_price) ? 'text_red' : 'text_green'">{{ item.now_price }}</span>
-            </div>
+              <div class="list-item_text" v-if="proList.watchListData || proList.market">
+                <span>{{ $moneyDot(item.volume ? (item.volume / 1000).toFixed(2) :
+                  0) }}</span>
+              </div>
 
-            <div class="list-item_text" v-if="PriceOrPercentage && proList.zccyList">
-              <span
-                :class="numberColorFn((item.allProfitAndLose / item.orderTotalPrice * 100 / item.orderLever).toFixed(2)) ? 'text_red' : 'text_green'">{{
+              <div class="list-item_text" v-if="item.preclose_px && !(proList.watchListData || proList.market)">
+                <span>{{ item.preclose_px }}</span>
+              </div>
+
+
+              <div class="list-item_text" v-if="item.orderNum">
+                <span>{{ $moneyDot(item.orderNum) }}</span>
+              </div>
+              <div class="list-item_text" v-if="item.buyOrderPrice">
+                <span>{{ item.buyOrderPrice }}</span>
+              </div>
+              <div class="list-item_text" v-if="item.now_price">
+                <span>{{ item.now_price }}</span>
+              </div>
+
+              <div class="list-item_text" v-if="PriceOrPercentage && proList.zccyList">
+                <span>{{
                   (item.allProfitAndLose / item.orderTotalPrice * 100 / item.orderLever).toFixed(2) }}%</span>
-            </div>
-            <div class="list-item_text" v-if="!PriceOrPercentage && proList.zccyList">
-              <span :class="numberColorFn(item.allProfitAndLose || '0') ? 'text_red' : 'text_green'">{{
-                item.allProfitAndLose || '0'
-              }}</span>
-            </div>
+              </div>
+              <div class="list-item_text" v-if="!PriceOrPercentage && proList.zccyList">
+                <span>{{
+                  $moneyDot(item.allProfitAndLose) || '0.00'
+                }}</span>
+              </div>
 
 
-            <div class="list-item_text" v-if="item.issuePrice || proList.stateList">
-              <span :class="numberColorFn(item.issuePrice || '0') ? 'text_red' : 'text_green'">{{ item.issuePrice || '0'
-              }}</span>
-            </div>
-            <div class="list-item_text" v-if="item.bzj">
-              <span :class="numberColorFn(item.bzj || '0') ? 'text_red' : 'text_green'">{{ item.bzj }}</span>
-            </div>
-            <div class="list-item_text" v-if="isShowActionBtn">
-              <img v-if="actionClass === 'del'" src="../assets/images/home/close@x2.png"
-                @click.stop="actionHandelClick(index, item, 'del')" />
-              <span v-if="actionClass === 'buy'" class="buyItemBtn"
-                @click.stop="actionHandelClick(index, item, 'buy')">购买</span>
-            </div>
+              <div class="list-item_text" v-if="item.issuePrice || proList.stateList">
+                <span>{{ $moneyDot(item.issuePrice || '0.00')
+                }}</span>
+              </div>
+              <div class="list-item_text" v-if="item.bzj">
+                <span>{{ $moneyDot(item.bzj) }}</span>
+              </div>
+              <div class="list-item_text" v-if="isShowActionBtn">
+                <img v-if="actionClass === 'del'" src="../assets/images/home/close@x2.png"
+                  @click.stop="actionHandelClick(index, item, 'del')" />
+                <span v-if="actionClass === 'buy'" class="buyItemBtn"
+                  @click.stop="actionHandelClick(index, item, 'buy')">购买</span>
+              </div>
 
-            <div class="list-item_text" v-if="item.oldPrice || proList.stateList">
-              <span :class="numberColorFn(item.oldPrice || '0') ? 'text_red' : 'text_green'">{{ item.oldPrice || '0'
-              }}</span>
-            </div>
-            <div class="list-item_text" v-if="item.gg">
-              {{ item.gg }}
-            </div>
-            <div class="list-item_text" v-if="item.zts">
+              <div class="list-item_text" v-if="item.nums || proList.stateList">
+                <span>{{ $moneyDot(item.nums) || '0'
+                }}</span>
+              </div>
+              <div class="list-item_text" v-if="item.gg">
+                {{ item.gg }}
+              </div>
+              <div class="list-item_text" v-if="item.zts">
                 <span v-if="item.zts == 1" class="buyItemBtn" @click.stop="toCash(item)">BUY</span>
                 <span class="textState" v-else-if="item.zts == '2'">Chưa thông qua</span>
                 <span class="textState" v-else-if="item.zts == '4'">Hoàn thành</span>
                 <span class="textState" v-else>Đang XD</span>
+              </div>
             </div>
           </li>
         </ul>
@@ -108,106 +121,112 @@
               <div class="sub_title" v-if="item.stockCode">({{ item.stockCode }})</div>
               <div class="title_tag" v-if="item.isNew">员工福利扶持</div>
               <div class="updateTime" v-if="state === 0">
-                更新：<span style="color: rgb(91, 186, 110)" v-if="item.now_price > 0">{{ item.now_price }}</span>
-                      <span style="color: #d02551;" v-else="item.now_price < 0">{{ item.now_price }}</span>
+                更新：<span style="color: rgb(91, 186, 110)" v-if="item.now_price > 0">{{ $moneyDot(item.now_price) }}</span>
+                <span style="color: #d02551;" v-else="item.now_price < 0">{{ $moneyDot(item.now_price) }}</span>
               </div>
               <div class="updateTime" v-if="state === 1">
-                总损益：<span style="color: rgb(91, 186, 110)" v-if="item.allProfitAndLose > 0">{{ item.allProfitAndLose }}</span>
-                        <span style="color: #d02551;" v-else="item.allProfitAndLose < 0">{{ item.allProfitAndLose }}</span>
+                总损益：<span style="color: rgb(91, 186, 110)" v-if="item.allProfitAndLose > 0">{{
+                  $moneyDot(item.allProfitAndLose) }}</span>
+                <span style="color: #d02551;" v-else="item.allProfitAndLose < 0">{{ $moneyDot(item.allProfitAndLose)
+                }}</span>
               </div>
             </div>
             <template v-if="state === 0">
               <div class="cardItemInfo" @click="goDetail(item, 'holding')">
                 <div class="cardItemInfo_item">
                   <span>购买价格</span>
-                  <span>{{ item.buyOrderPrice }}</span>
+                  <span>{{ $moneyDot(item.buyOrderPrice) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
                   <span>数量</span>
-                  <span>{{ item.orderNum }}</span>
+                  <span>{{ $moneyDot(item.orderNum) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
                   <span>金额</span>
-                  <span>{{ item.orderTotalPrice }}</span>
+                  <span>{{ $moneyDot(item.orderTotalPrice) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
                   <span>交易费用</span>
-                  <span>{{ item.orderFee }}</span>
+                  <span>{{ $moneyDot(item.orderFee) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
                   <span>所得税</span>
-                  <span>{{ item.orderSpread }}</span>
+                  <span>{{ $moneyDot(item.orderSpread) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
                   <span>倍数</span>
-                  <span>{{ item.orderLever }}</span>
+                  <span>{{ $moneyDot(item.orderLever) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
                   <span>押金</span>
-                  <span>{{ item.newBzj }}</span>
+                  <span>{{ $moneyDot(item.newBzj) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
                   <span>因损益</span>
-                  <span>{{ item.profitAndLose }}</span>
+                  <span>{{ $moneyDot(item.profitAndLose) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
                   <span>实际损益</span>
-                  <span :class="item.allProfitAndLose < 0 ? 'text_red' : 'text_green'">{{ item.allProfitAndLose }}</span>
+                  <span>{{ $moneyDot(item.allProfitAndLose)
+                  }}</span>
                 </div>
               </div>
               <div class="cardItem_title noBorder">
-                <div class="sub_title">{{new Date(item.buyOrderTime) | timeFormat}}</div>
+                <div class="sub_title">{{ new Date(item.buyOrderTime) | timeFormat }}</div>
                 <div class="cardItem_footer_btn" @click.stop="handSellClick(item.positionSn)">卖出</div>
               </div>
             </template>
             <template v-else>
-              <div class="cardItemInfo"  @click="goDetail(item, 'sell')">
+              <div class="cardItemInfo" @click="goDetail(item, 'sell')">
                 <div class="cardItemInfo_item">
                   <span>购买价格</span>
-                  <span>{{ item.buyOrderPrice }}</span>
+                  <span>{{ $moneyDot(item.buyOrderPrice) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
                   <span>数量</span>
-                  <span>{{ item.orderNum }}</span>
+                  <span>{{ $moneyDot(item.orderNum) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
                   <span>总价</span>
-                  <span>{{ item.orderTotalPrice }}</span>
+                  <span>{{ $moneyDot(item.orderTotalPrice) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
                   <span>售价</span>
-                  <span>{{ item.sellOrderPrice }}</span>
+                  <span>{{ $moneyDot(item.sellOrderPrice) }}</span>
                 </div>
                 <div class="cardItemInfo_item"></div>
                 <div class="cardItemInfo_item">
                   <span>保证金</span>
-                  <span>{{ item.newBzj }}</span>
+                  <span>{{ $moneyDot(item.newBzj) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
                   <span>交易费用</span>
-                  <span>{{ item.orderFee }}</span>
+                  <span>{{ $moneyDot(item.orderFee) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
                   <span>所得税</span>
-                  <span>{{ item.orderSpread }}</span>
+                  <span>{{ $moneyDot(item.orderSpread) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
                   <span>杠杆</span>
-                  <span>{{ item.orderLever }}</span>
+                  <span>{{ $moneyDot(item.orderLever) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
                   <span>举办天数</span>
-                  <span>{{ item.orderStayDays }}</span>
+                  <span>{{ $moneyDot(item.orderStayDays) }}</span>
                 </div>
                 <div class="cardItemInfo_item"></div>
                 <div class="cardItemInfo_item">
                   <span>损益</span>
-                  <span :class="item.profitAndLose < 0 ? 'text_red' : 'text_green'">{{ item.profitAndLose }}</span>
+                  <span>{{ $moneyDot(item.profitAndLose)
+                  }}</span>
                 </div>
               </div>
               <div class="cardItem_title noBorder" style="display: flex;justify-content: space-between">
-                <div class="sub_title" style="margin-left: 0; font-size: 12px;">买入:{{new Date(item.buyOrderTime) | timeFormat}}</div>
-                <div class="sub_title" style="margin-left: 0; font-size: 12px;">售出:{{new Date(item.sellOrderTime) | timeFormat}}</div>
+                <div class="sub_title" style="margin-left: 0; font-size: 12px;">买入:{{ new Date(item.buyOrderTime) |
+                  timeFormat }}</div>
+                <div class="sub_title" style="margin-left: 0; font-size: 12px;">售出:{{ new Date(item.sellOrderTime) |
+                  timeFormat }}</div>
               </div>
             </template>
           </li>
@@ -260,10 +279,10 @@
 <script>
 import Vue from "vue";
 import { Empty, Loading } from "vant";
-import { numberColor, debounceJArgs} from '@/utils/utils'
+import { numberColor, debounceJArgs } from '@/utils/utils'
 import * as api from '@/axios/api'
 import { formatTime } from '@/utils/imgupload'
-import {MessageBox, Toast} from 'mint-ui'
+import { MessageBox, Toast } from 'mint-ui'
 Vue.use(Empty);
 Vue.use(Loading);
 
@@ -289,7 +308,7 @@ export default {
   },
   data() {
     return {
-      userInfo:{},
+      userInfo: {},
       leverValue: 0,
       itemInfo: {},
       selecIndex: 0,
@@ -390,6 +409,33 @@ export default {
     },
   },
   methods: {
+    colorTextFn(item, list) {
+      if (list.watchListData) {
+        if (((item.hcrate / (item.nowPrice - item.hcrate) * 100).toFixed(2)) >= 0) {
+          return 'text_green'
+        } else {
+          return 'text_red'
+        }
+      } else if (list.market) {
+        if (((item.hcrate / (item.nowPrice - item.hcrate) * 100).toFixed(2)) >= 0) {
+          return 'text_green'
+        } else {
+          return 'text_red'
+        }
+      } else if (list.welfare) {
+        // if ((((item.price - item.scprice) / item.price * 100).toFixed(2)) >= 0) {
+        //   return 'text_green'
+        // } else {
+        //   return 'text_red'
+        // }
+      } else if (list.zccyList) {
+        if (((item.allProfitAndLose / item.orderTotalPrice * 100 / item.orderLever).toFixed(2)) >= 0) {
+          return 'text_green'
+        } else {
+          return 'text_red'
+        }
+      }
+    },
     // 重置表单
     reset() {
       this.selectNumber = ''
@@ -568,12 +614,12 @@ export default {
         }
       })
     },
-    handSellClick:debounceJArgs(function(val){
-      MessageBox.confirm('Bạn có chắc chắn muốn bán ra?', '', {confirmButtonText: 'Xác nhận', cancelButtonText: 'Hủy bỏ'}).then(async action => {
+    handSellClick: debounceJArgs(function (val) {
+      MessageBox.confirm('Bạn có chắc chắn muốn bán ra?', '', { confirmButtonText: 'Xác nhận', cancelButtonText: 'Hủy bỏ' }).then(async action => {
         this.sell(val)
       })
-    },(3000)),
-    async sell (val) {
+    }, (3000)),
+    async sell(val) {
       let opt = {
         positionSn: val
       }
@@ -660,10 +706,18 @@ export default {
 
     .list {
       .list-item {
-        height: 36px;
-        display: flex;
-        align-items: center;
+
         background: #1a191f;
+
+        .list-item_box {
+          display: flex;
+          align-items: center;
+          height: 36px;
+
+          .fitst_name {
+            color: #fff !important;
+          }
+        }
 
         &:nth-child(2n) {
           background: #29282e;
@@ -683,6 +737,7 @@ export default {
             background: #f99420;
             padding: 5px 11px;
             border-radius: 6px;
+            color: #fff !important;
           }
 
           .textState {

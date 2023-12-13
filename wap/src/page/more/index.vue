@@ -161,7 +161,7 @@
                 <img :src="$store.state.userInfo.avatar ? $store.state.userInfo.avatar : '../../assets/images/users/default.png'" alt="" />
               </div>
             <!-- </el-upload> -->
-          
+
             <div class="user-title">
               <p><a href="#/users" style="color: #f99420;">{{ $store.state.userInfo.nickName }}</a></p>
               <p>{{ $store.state.userInfo.phone }}</p>
@@ -211,23 +211,23 @@
             </div>
             <div class="between-box property-detail-title">
               <div>总资产</div>
-              <div>{{ (propertyInfo.userAmt + propertyInfo.enableAmt).toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot((propertyInfo.userAmt + propertyInfo.enableAmt)) }}</div>
             </div>
             <div class="between-box property-detail-title">
               <div>可用资产</div>
-              <div>{{ propertyInfo.enableAmt.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.enableAmt) }}</div>
             </div>
             <div class="between-box property-detail-title">
               <div>总保证金</div>
-              <div>{{ propertyInfo.margin.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.margin) }}</div>
             </div>
             <div class="between-box property-detail-title">
               <div>总冻结资产</div>
-              <div>{{ propertyInfo.freezeAmount.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.freezeAmount) }}</div>
             </div>
             <div class="between-box property-detail-title">
               <div>总损益</div>
-              <div>{{ propertyInfo.shareholdingProperty.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.shareholdingProperty) }}</div>
             </div>
           </div>
           <div class="property-template">
@@ -237,15 +237,15 @@
             </div>
             <div class="between-box property-detail-title">
               <div>总持股市值</div>
-              <div>{{ propertyInfo.shareholdingAmt.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.shareholdingAmt) }}</div>
             </div>
             <div class="between-box property-detail-title">
               <div>总持股数量</div>
-              <div>{{ propertyInfo.shareholdingNumber.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.shareholdingNumber) }}</div>
             </div>
             <div class="between-box property-detail-title">
               <div>总持股损益</div>
-              <div>{{ propertyInfo.shareholdingProperty.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.shareholdingProperty) }}</div>
             </div>
           </div>
           <div class="property-template">
@@ -255,19 +255,19 @@
             </div>
             <div class="between-box property-detail-title">
               <div>信用金额度</div>
-              <div>{{ propertyInfo.creditLimit.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.creditLimit) }}</div>
             </div>
             <div class="between-box property-detail-title">
               <div>信用金可贷金额</div>
-              <div>{{ propertyInfo.creditAvailableLimit.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.creditAvailableLimit) }}</div>
             </div>
             <div class="between-box property-detail-title">
               <div>信用金已贷金额</div>
-              <div>{{ propertyInfo.creditBorrowedAmt.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.creditBorrowedAmt) }}</div>
             </div>
             <div class="between-box property-detail-title">
               <div>信用金已还金额</div>
-              <div>{{ propertyInfo.creditStillAmt.toLocaleString('en-US') }}</div>
+              <div>{{ $moneyDot(propertyInfo.creditStillAmt) }}</div>
             </div>
           </div>
         </div>
