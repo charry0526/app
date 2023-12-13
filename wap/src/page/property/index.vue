@@ -1,6 +1,5 @@
 <style src="../../../src/assets/styles/common.css"/>
 <style lang="less" scoped>
-@import "../../../src/assets/styles/index.less";
 
 .tabBox {
   .tabChildren {
@@ -125,8 +124,8 @@
       font-size: 16px;
       box-sizing: border-box;
 
-      span {
-        margin: 5px 20px;
+      p {
+        margin: 8px 10px;
         overflow: hidden;
       }
     }
@@ -199,13 +198,14 @@
     <Header />
     <div class="page-main">
       <div class="property-menu">
-        <div :class="showTemplate === 1 ? 'property-menu-active' : ''" @click="showTemplate = 1; getHoldingsList(1)">
+        <div :class="showTemplate === 1 ? 'property-menu-active' : ''"
+          @click="showTemplate = 1; getHoldingsList(1); getHoldingsTotal">
           持有信息
         </div>
-        <div :class="showTemplate === 2 ? 'property-menu-active' : ''" @click="getPropertyInfo();">资产报告
+        <div :class=" showTemplate === 2 ? 'property-menu-active' : '' " @click="getPropertyInfo();">资产报告
         </div>
       </div>
-      <template v-if="showTemplate === 2">
+      <template v-if=" showTemplate === 2 ">
         <div class="property-template">
           <div class="property-title">
             <div class="property-icon">
@@ -216,7 +216,8 @@
           <div class="between-box property-detail">
             <div class="between-box_left">
               <div style="font-size: 14px">总资产</div>
-              <div style="font-size: 20px; margin-top: 10px; margin-bottom: 20px">
+              <div
+                style="font-size: 18px; margin-top: 10px; margin-bottom: 25px; word-wrap: break-word; overflow-wrap: break-word;">
                 {{ (propertyInfo.userAmt + propertyInfo.enableAmt).toLocaleString('en-US') }}
               </div>
               <div class="between-box property-total-icon">
@@ -225,22 +226,25 @@
                     <div class="origin-box origin-green"></div>
                     <div>持有资产</div>
                   </div>
-                  <div>{{ propertyInfo.shareholdingAmt.toLocaleString('en-US') }}</div>
+                  <div style="overflow-wrap:anywhere; word-wrap: break-word;">{{
+                    propertyInfo.shareholdingAmt.toLocaleString('en-US') }}</div>
                 </div>
                 <div>
                   <div class="between-box">
                     <div class="origin-box origin-yellow"></div>
                     <div>可用资产</div>
                   </div>
-                  <div>{{ propertyInfo.availableAmount.toLocaleString('en-US') }}</div>
+                  <div style="overflow-wrap:anywhere; word-wrap: break-word;">{{
+                    propertyInfo.availableAmount.toLocaleString('en-US') }}</div>
                 </div>
               </div>
             </div>
             <div class="bingtu">
-              <van-circle v-model="currentRate" size="111px" :rate="rate" layer-color="#5bba6e" stroke-width=80
-                          :color="red" />
+              <van-circle v-model=" currentRate " size="111px" :rate=" rate " layer-color="#5bba6e" stroke-width=80
+                :color=" red " />
               <div class="bingtu_text">
-                总资产<span> {{ (propertyInfo.userAmt + propertyInfo.enableAmt).toLocaleString('en-US') }}</span>
+                总资产<p> <span style="color: #5bba6e">{{ rate }}%</span> / <span style="color: #ff7b23">{{ 100-rate
+                    }}%</span></p>
               </div>
             </div>
           </div>
@@ -260,12 +264,12 @@
             <div class="between-box">
               <div>{{ propertyInfo.userAmt.toLocaleString('en-US') }}</div>
               <div class="fold-icon" @click="property_1 = property_1 === 1 ? 0 : 1">
-                <img v-if="property_1 === 1" src="../../assets/images/property/dropdown.png" alt="" />
+                <img v-if=" property_1 === 1 " src="../../assets/images/property/dropdown.png" alt="" />
                 <img v-else src="../../assets/images/users/more.png" alt="" />
               </div>
             </div>
           </div>
-          <div class="property-list-template" v-if="property_1">
+          <div class="property-list-template" v-if=" property_1 ">
             <div class="between-box">
               <div>持股总市值</div>
               <div>{{ propertyInfo.shareholdingAmt.toLocaleString('en-US') }}</div>
@@ -289,7 +293,7 @@
               </div>
             </div>
           </div>
-          <div class="property-list-template" v-if="property_2">
+          <div class="property-list-template" v-if=" property_2 ">
             <div class="between-box">
               <div>可用金额</div>
               <div>{{ propertyInfo.availableAmount.toLocaleString('en-US') }}</div>
@@ -317,7 +321,7 @@
               </div>
             </div>
           </div>
-          <div class="property-list-template" style="border: none" v-if="property_3">
+          <div class="property-list-template" style="border: none" v-if=" property_3 ">
             <div class="between-box">
               <div>信用金额度</div>
               <div>{{ propertyInfo.creditLimit.toLocaleString('en-US') }}</div>
@@ -339,21 +343,23 @@
       </template>
 
       <!-- 持股信息 -->
-      <template v-if="showTemplate === 1">
+      <template v-if=" showTemplate === 1 ">
         <div class="tabBox">
           <div class="tabChildren isContent MyCard">
             <div class="isContent_list">
               <div class="isContent_item"><span>持有成本</span><span>P/L</span></div>
-              <div class="isContent_item"><span class="text_red">353,961,300</span><span
-                class="text_green">-42,124,220</span></div>
+              <div class="isContent_item"><span>{{ holdingTotal.orderTotalPrice.toLocaleString('en-US')
+                  }}</span><span>{{
+                  holdingTotal.profitMoney.toLocaleString('en-US') }}</span></div>
             </div>
             <div class="isContent_list">
               <div class="isContent_item"><span>持有市场价</span><span>P/L</span></div>
-              <div class="isContent_item"><span class="text_red">353,961,300</span><span
-                class="text_green">-42,124,220</span></div>
+              <div class="isContent_item"><span>{{ holdingTotal.nowPrice.toLocaleString('en-US')
+                  }}</span><span :class=" holdingTotal.profitMoney < 0 ? 'text_red' : 'text_green' ">{{
+                  holdingTotal.percentage }}%</span></div>
             </div>
           </div>
-          <my-list :proList="proList" :listType="listType" @changeData="changeData" />
+          <my-list :proList=" proList " :listType=" listType " @changeData=" changeData " :fromListType=" fromListType " />
         </div>
       </template>
     </div>
@@ -370,6 +376,7 @@ import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 import MyList from '../../components/MyList'
 import * as api from '@/axios/api'
+import { getUserPropertyTotal } from '../../axios/api'
 Vue.use(Circle);
 
 export default {
@@ -380,16 +387,20 @@ export default {
   },
   data() {
     return {
+      fromListType: '持有信息',
       currentRate: 100,
-      rate: 50,
+      rate: 0,
       property_1: 1,
       property_2: 1,
       property_3: 1,
-      // page: 1,
       listType: 'list',
       showTemplate: 1,
       propertyInfo: {},
-      // holdingsList: [],
+      holdingTotal: {
+        orderTotalPrice: 0,
+        profitMoney: 0,
+        nowPrice: 0,
+      },
       pageNum: 1,
       pageSize: 15,
       proList: {},
@@ -397,11 +408,27 @@ export default {
   },
   mounted() {
     this.getHoldingsList(1)
+    this.getHoldingsTotal()
   },
   methods: {
     changeData(...agrs) {
       if (typeof this[agrs[1]] === 'function') {
         this[agrs[1]](agrs[0])
+      }
+    },
+    getHoldingsTotal() {
+      let obj = {
+        pKey: sessionStorage.getItem('pKey'),
+        state: 0
+      }
+      let data = api.getUserPropertyTotal(obj)
+      try {
+        data.then(result => {
+          this.holdingTotal = result.data
+        })
+      }
+      catch (error) {
+        console.log(error)
       }
     },
     async getHoldingsList(pageNum) {
@@ -445,6 +472,10 @@ export default {
             lastPage: data.data.lastPage || Math.ceil(data.data.total / this.pageSize),
             fn: 'getHoldingsList',
           }
+          data.data.list.map((result, index) => {
+            data.data.list[index].buyOrderPrice = result.buyOrderPrice ? result.buyOrderPrice / 1000 : 0
+            data.data.list[index].now_price = result.now_price ? result.now_price / 1000 : 0
+          })
           if (pageNum == 1) {
             zccyList.zccyList.list = data.data.list
             this.proList = zccyList
@@ -458,13 +489,14 @@ export default {
       }
     },
     getPropertyInfo() {
+      this.showTemplate = 2
       let obj = {
         pKey: sessionStorage.getItem('pKey')
       }
       let res = api.getUserProperty(obj)
       res.then(result => {
+        this.rate = Math.ceil(result.data.userAmt / (result.data.userAmt + result.data.enableAmt) * 100)
         this.propertyInfo = result.data
-        this.showTemplate = 2
       })
     }
   },

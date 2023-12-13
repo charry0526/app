@@ -751,7 +751,7 @@ export const stateList = {
       isChange: 0
     },
     {
-      name: "购买金额",
+      name: "购买数量",
       isChange: 0
     },
     {

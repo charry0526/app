@@ -3,10 +3,10 @@
   <div>
     <div class="wrapper">
       <div class="contain-box">
-        <img ref="oginBg" class="login-bg" src="../assets/img/bg-one.jpg" alt="" srcset="">
+        <img ref="oginBg" class="login-bg" src="../assets/img/login-bg02.jpg" alt="" srcset="">
         <div class="contain-main">
           <div class="logo-box">
-            <img class="logo" src="../assets/img/LOGO-02.png" alt="">
+            <img class="logo" src="../assets/img/login-01.png" alt="">
           </div>
 <!--          输入手机号码-->
           <div class="register-form-item input-model" style="margin-top:0.11rem">

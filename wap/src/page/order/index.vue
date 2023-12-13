@@ -1,8 +1,6 @@
 <style src="../../../src/assets/styles/common.css"/>
 <style lang="less" scoped>
-@import "../../assets/styles/index.less";
-</style>
-<style lang="less" scoped>
+@import "../../../src/assets/styles/index.less";
 .tabBox {
   margin-top: 10px;
 
@@ -64,6 +62,12 @@
     }
   }
 }
+.text_red {
+  color: #d02551;
+}
+.text_green {
+  color: rgb(91, 186, 110);
+}
 </style>
 <style lang="less">
 .van-tabs__wrap {
@@ -105,18 +109,16 @@
               <span>P/L</span>
             </div>
             <div class="isContent_item">
-              <span class="text_red">{{ HoldingsTotal.name_price }}</span>
-              <span class="text_green">{{ HoldingsTotal.pl_price }}</span>
+              <span >{{ HoldingsTotal.name_price }}</span>
+              <span :class="HoldingsTotal.pl_price2 < 0 ? 'text_red' : 'text_green'">{{ HoldingsTotal.pl_price2 }}%</span>
             </div>
           </div>
           <div class="isContent_list">
             <div class="isContent_item">
-              <span>持有市场价</span>
               <span>P/L</span>
             </div>
             <div class="isContent_item">
-              <span class="text_red">{{ HoldingsTotal.name_price2 }}</span>
-              <span class="text_green">{{ HoldingsTotal.pl_price2 }}%</span>
+              <span >{{ HoldingsTotal.pl_price }}</span>
             </div>
           </div>
         </div>
@@ -127,8 +129,8 @@
               <span>P/L</span>
             </div>
             <div class="isContent_item">
-              <span class="text_red">{{ HoldingsTotal2.name_price }}</span>
-              <span class="text_green">{{ HoldingsTotal2.pl_price }}</span>
+              <span >{{ HoldingsTotal2.name_price }}</span>
+              <span >{{ HoldingsTotal2.pl_price }}</span>
             </div>
           </div>
           <div class="isContent_list">
@@ -137,14 +139,14 @@
               <span>P/L</span>
             </div>
             <div class="isContent_item">
-              <span class="text_red">{{ HoldingsTotal2.name_price2 }}</span>
-              <span class="text_green">{{ HoldingsTotal2.pl_price2 }}%</span>
+              <span>{{ HoldingsTotal2.name_price2 }}</span>
+              <span :class="HoldingsTotal2.pl_price2 < 0 ? 'text_red' : 'text_green'">{{ HoldingsTotal2.pl_price2 }}%</span>
             </div>
           </div>
         </div>
 
       </div>
-      <my-list :proList="proList" :listType="listType" @changeData="changeData" :state="state" />
+      <MyList :proList="proList" :listType="listType" :listTab="listTab" :state="state" @changeData="changeData"/>
     </div>
     <Footer />
   </div>
@@ -156,8 +158,7 @@ import Header from "../../components/Header.vue";
 import MyTab from "../../components/MyTab.vue";
 import MyList from "../../components/MyList.vue";
 import * as api from "@/axios/api";
-//mock数据
-import { orderTabList as tabList, stockList, holdingList } from "../../mock";
+import { stockList } from "../../mock";
 
 export default {
   data() {
@@ -172,49 +173,18 @@ export default {
           id: "0",
           name: "持有列表",
           childrenType: "content",
-          // children: [
-          //   {
-          //     name: "持有成本",
-          //     name_price: "",
-          //     plName: "P/L",
-          //     pl_price: ""
-          //   },
-          //   {
-          //     name: "持有市场价",
-          //     name_price: "",
-          //     plName: "P/L",
-          //     pl_price: ""
-          //   }
-          // ]
         },
         {
           id: "2",
           name: "售出列表",
           childrenType: "content",
-          // children: [
-          //   {
-          //     name: "持有成本",
-          //     name_price: "",
-          //     plName: "P/L",
-          //     pl_price: ""
-          //   },
-          //   {
-          //     name: "持有市场价",
-          //     name_price: "",
-          //     plName: "P/L",
-          //     pl_price: ""
-          //   }
-          // ]
         }
       ],
       stockList,
       listType: "MyCard",
+      listTab:1,
       HoldingsTotal2: {},
       HoldingsTotal: {
-        // nowPrice:0,
-        // orderTotalPrice:0,
-        // percentage:0,
-        // profitMoney:0
       }
     };
   },
@@ -230,7 +200,6 @@ export default {
   },
   methods: {
     changeData(...agrs) {
-      console.log('changeData---', agrs)
       if (typeof this[agrs[1]] === 'function') {
         this[agrs[1]](agrs[0]);
       }
@@ -244,9 +213,6 @@ export default {
       }
       let totalRes = api.getUserPropertyTotal(totalObj);
       totalRes.then(result => {
-        console.log('result---', result)
-
-        // this.HoldingsTotal = result.data
         if (state === 1) {
           this.HoldingsTotal = {
             name_price: result.data.orderTotalPrice.toLocaleString('en-US'),
@@ -262,24 +228,7 @@ export default {
             pl_price2: result.data.percentage.toLocaleString('en-US')
           }
         }
-
-
-        // this.tabList[state].children = [
-        //   {
-        //     name: "持有成本",
-        //     name_price: result.data.orderTotalPrice.toLocaleString('en-US'),
-        //     plName: "P/L",
-        //     pl_price: result.data.profitMoney.toLocaleString('en-US')
-        //   },
-        //   {
-        //     name: "持有市场价",
-        //     name_price: result.data.nowPrice.toLocaleString('en-US') ? result.data.nowPrice.toLocaleString('en-US') : '',
-        //     plName: "P/L",
-        //     pl_price: result.data.percentage.toLocaleString('en-US')
-        //   }
-        // ];
       });
-      console.log(this.tabList);
     },
     async getHoldingsList(pageNum, state) {
       let obj = {
@@ -312,16 +261,10 @@ export default {
         console.log(error)
       }
     },
-    tabHandelClick(oneTabItemData, childrenTabItemData) {
-      if (oneTabItemData === '持有列表') {
-        this.getHoldingsList(1, 0)
-        this.getHoldingsTotal(0)
-        this.state = 0
-      } else {
-        this.getHoldingsList(1, 1)
-        this.getHoldingsTotal(1)
-        this.state = 1
-      }
+    tabHandelClick(oneTabItemData) {
+      this.state = oneTabItemData
+      this.getHoldingsList(1, oneTabItemData)
+      this.getHoldingsTotal(oneTabItemData)
     },
   },
 };

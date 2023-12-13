@@ -140,21 +140,33 @@
 .property-detail-title {
   padding-bottom: 8px;
 }
+
 </style>
 <template>
   <div class="app-wrapper">
     <Header />
     <div class="page-main user-center">
       <div style="padding: 30px 15px 20px 15px;">
-        <div class="user-info">
-          <div class="user-avatar">
-            <img :src="userInfo.avatar ? userInfo.avatar : '../../assets/images/users/default.png'" alt="" />
+          <div class="user-info">
+            <!-- <el-upload
+                class="avatar-uploader"
+                name="upload_file"
+                :action="admin+'/apis/user/upload.do'"
+                :show-file-list="false"
+                :with-credentials='true'
+                :on-success="handleAvatarSuccess"
+                :on-error='handleError'
+                :before-upload="beforeAvatarUpload"> -->
+              <div class="user-avatar">
+                <img :src="$store.state.userInfo.avatar ? $store.state.userInfo.avatar : '../../assets/images/users/default.png'" alt="" />
+              </div>
+            <!-- </el-upload> -->
+          
+            <div class="user-title">
+              <p><a href="#/users" style="color: #f99420;">{{ $store.state.userInfo.nickName }}</a></p>
+              <p>{{ $store.state.userInfo.phone }}</p>
+            </div>
           </div>
-          <div class="user-title">
-            <p>{{ userInfo.nickName }}</p>
-            <p>{{ userInfo.phone }}</p>
-          </div>
-        </div>
       </div>
 
       <div class="nav-menu-box nav-menu-tab">
@@ -394,12 +406,24 @@ export default {
     getIconUrl(icon) {
       return require('../../assets/images/' + icon)
     },
-    getUserInfo() {
-      let obj = {
-        pKey: sessionStorage.getItem('pKey')
+    async getUserInfo () {
+      let data = await api.getUserInfo()
+      if (data.status === 0) {
+        this.getProductSetting()
+        this.$store.state.userInfo = data.data
+      } else {
+        Toast(data.msg)
       }
-      let res = api.getUserInfo(obj);
-      res.then(result => { this.userInfo = result.data; });
+      this.$store.state.user = this.user
+    },
+
+    async getProductSetting () {
+      let data = await api.getProductSetting()
+      if (data.status === 0) {
+        this.$store.state.settingForm = data.data
+      } else {
+        this.$message.error(data.msg)
+      }
     },
     getPropertyInfo() {
       let obj = {

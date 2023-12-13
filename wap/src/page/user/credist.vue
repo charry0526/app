@@ -402,7 +402,7 @@ export default {
   box-sizing: border-box;
 }
 .info_list{
-  width: 5rem;
+  width: 5.2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;

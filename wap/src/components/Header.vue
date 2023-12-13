@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <router-link to="/"> <div class="logo">logo</div></router-link>
+    <router-link to="/"> <div class="logo"><img class="logo"  src="../assets/images/login/logo.png" alt=""></div></router-link>
     <div class="header_nav">
       <router-link to="/search" class="header_nav_icon">
         <img src="../assets/images/header/search@x2.png" />
@@ -20,7 +20,9 @@
       :style="{ height: '80%' }"
       class="loginPopup"
     >
-      <div class="logon-img">logo</div>
+      <div > 
+        <img src="../assets/images/login/logo.png" />
+      </div>
       <div class="login_from">
         <div class="login_from_item">
           <div class="login_from_item_lable accountInput">账户</div>
@@ -113,9 +115,9 @@ export default {
   padding: 10px 15px;
   align-items: center;
   .logo {
-    width: 75px;
-    height: 28px;
-    background: #ff7b23;
+    width: 150px;
+    height: 40px;
+   // background: #ff7b23;
     border-radius: 2px;
     line-height: 28px;
     text-align: center;

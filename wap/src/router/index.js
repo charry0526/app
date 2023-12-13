@@ -69,9 +69,8 @@ export default new Router({
       path: "/home",
       name: "home",
       meta: {
-        // title: '首页',
         title: "Trang đầu",
-        requireAuth: false
+        requireAuth: true
       },
       component: Home
     },

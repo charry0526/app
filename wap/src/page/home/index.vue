@@ -7,15 +7,17 @@
           <div class="stock_title">
             <b>{{ item.indexName }}</b>{{ item.maxNum }}
           </div>
-          <div class="stock_price text_red">{{ item.currentPoint }}</div>
+          <div class="stock_price " :class="numberColorFn(item.currentPoint) ? 'text_red' : 'text_green'">{{
+             Number(item.currentPoint).toFixed(2) }}</div>
           <div class="stock_percentage">
-            <span class="text_red">{{ item.floatPoint }}</span>
-            <span class="text_green">{{ item.floatRate }}%</span>
+            <span :class="numberColorFn(item.floatPoint) ? 'text_red' : 'text_green'">{{ item.floatPoint }}</span>
+            <span :class="numberColorFn(item.floatRate) ? 'text_red' : 'text_green'">{{ item.floatRate }}%</span>
           </div>
         </swiper-slide>
       </swiper>
       <my-tab :tabList="tabList" @tabHandelClick="tabHandelClick" />
-      <my-list :proList="proList" :listType="listType" @changeData="changeData" />
+      <my-list :proList="proList" :listType="listType" @changeData="changeData" :fromListType="fromListType"
+        @changeListData="changeListData" />
     </div>
     <Footer />
   </div>
@@ -25,7 +27,7 @@
 import { apikey } from '@/utils/shuhaikeji'
 import { Toast } from 'mint-ui'
 import * as api from '@/axios/api'
-
+import { numberColor } from '@/utils/utils'
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import MyTab from "../../components/MyTab";
@@ -45,6 +47,7 @@ import "swiper/swiper-bundle.min.css";
 export default {
   data() {
     return {
+      fromListType: '关注列表',
       keywords: '',
       pageNum: 1,
       pageSize: 15,
@@ -74,6 +77,14 @@ export default {
             {
               navID: "2",
               name: "UPCOM"
+            },
+            {
+              navID: "3",
+              name: "VN30"
+            },
+            {
+              navID: "4",
+              name: "HNX30"
             }
           ]
         },
@@ -118,6 +129,12 @@ export default {
     this.getUserStock()
   },
   methods: {
+    changeListData() {
+      this.getUserStock()
+    },
+    numberColorFn(val) {
+      return numberColor(val)
+    },
     changeData(...agrs) {
       console.log('changeData---', agrs)
       if (typeof this[agrs[1]] === 'function') {
@@ -148,7 +165,7 @@ export default {
                 isChange: 0
               },
               {
-                name: "购买金额",
+                name: "购买数量",
                 isChange: 0
               },
               {
@@ -349,6 +366,7 @@ export default {
       }
     },
     tabHandelClick(oneTabItemData, childrenTabItemData) {
+      this.fromListType = oneTabItemData.name
       //模拟不同数据// /后面根据真实id发交易
       if (oneTabItemData.name === "关注列表") {
         // this.proList = watchListData;

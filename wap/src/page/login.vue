@@ -4,10 +4,12 @@
         <mt-button icon="back" slot="left" @click="$router.go(-1)"></mt-button>
     </mt-header>
     <div class="contain-box">
+<!--      <img @load="imgOnload()" ref="loginBg" class="login-bg" src="../assets/img/login-bg.png" alt="" srcset="">-->
       <img @load="imgOnload()" ref="loginBg" class="login-bg" src="../assets/images/login/login-bg02.jpg" alt="" srcset="">
       <div class="contain-main">
         <div class="logo-box">
-          <img class="logo"  src="../assets/images/login/login-01.png" alt="">
+<!--          <img class="logo"  src="../assets/img/1-01.png" alt="">-->
+          <img class="logo"  src="../assets/img/logo.png" alt="">
         </div>
         <div class="login-form-item input-model">
             <img class="login-ico" src="../assets/img/loginuser.png" alt="">
@@ -34,6 +36,40 @@
           <p class="tips" @click="toForget">Quên mật khẩu?</p>
       </div>
     </div>
+    <!-- <div class="login-form">
+      <div class="login-avatar">
+        <img class="login-ico" src="../assets/ico/wogerenziliao.png" alt="">
+      </div>
+      <div class="login-form-item input-model"
+      style="margin-top:1.32rem;"
+      >
+        <img v-show="$state.theme != 'red'" class="login-ico" src="../assets/ico/loginuser.png" alt="">
+        <img v-show="$state.theme == 'red'" class="login-ico" src="../assets/ico/loginuser-red.png" alt="">
+        <input
+        class="login-input"
+        placeholder="Tên tài khoản"
+        type="tel" pattern="[0-9]*"
+        v-model="phone"
+        >
+      </div>
+      <div class="login-form-item input-model">
+        <img v-show="$state.theme != 'red'" class="login-ico" src="../assets/ico/loginpwd.png" alt="">
+        <img v-show="$state.theme == 'red'" class="login-ico" src="../assets/ico/loginpwd-pwd.png" alt="">
+        <input class="login-input" type="password" placeholder="Mật khẩu" v-model="psd">
+      </div>
+      <div class="login-form-item submit-model" @click="gook">
+        Đăng nhập
+        <i v-show="isloading" style="color:#fff;" class="iconfont icon-jiazaizhong"></i>
+      </div>
+      <div class="login-form-item extra-model">
+        <div :style="{color:$state.theme =='red'?'#BB1815':'#86CBD1'}">
+          <span style="color:#0E6580">
+            Quên mật khẩu？
+            </span><span @click="toRegister">
+              Đăng ký
+            </span></div>
+      </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -217,7 +253,7 @@ export default {
   }
   .login-bg{
     width: 100%;
-    height:5rem;
+    height:4rem;
     object-fit: cover;
     margin-top: -40px;
   }
@@ -232,8 +268,8 @@ export default {
     .logo-box{
       display: flex;
       justify-content: center;
-      //padding-top: 1rem;
-      //margin-bottom: .88rem;
+      padding-top: 1rem;
+      margin-bottom: .88rem;
         .logo{
           width: 3rem;
           // height

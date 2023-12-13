@@ -19,7 +19,7 @@
         </template>
       </mt-header>
     </div>
-    <div class="body-box">
+    <div class="body-box" id="myDiv">
       <router-view></router-view>
     </div>
   </div>

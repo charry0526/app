@@ -49,15 +49,9 @@ export default {
     };
   },
   computed: {
-    // noMore() {
-    //   return this.count >= 60;
-    // },
     disabled() {
       return this.loading || this.noMore;
     },
-  },
-  mounted() {
-    // this.onSearch();
   },
   components: {
     NavBar,
@@ -65,27 +59,31 @@ export default {
   methods: {
     handleSearchInput() {
       clearTimeout(this.inputTimer.value);
+      this.pageNum = 1;
       this.inputTimer.value = setTimeout(this.onSearch, 700);
     },
     onSearch(pageNum) {
+      this.loading = true;
       let opt = {
-        keyword: this.keyword,
+        keyWords: this.keyword,
         pageNum: pageNum || this.pageNum,
         pageSize: this.pageSize
       }
       let data = api.getStock(opt);
       data.then(result => {
+        this.loading = false;
         if (result.status === 0) {
           this.lastPage = Math.ceil(result.data.total / this.pageSize)
           if (this.searchList.length) {
-            this.searchList.push(...result.data.list)
-          } else {
             this.searchList = result.data.list
+          } else {
+            this.searchList.push(...result.data.list)
           }
         } else {
           Toast(result.msg)
         }
       });
+
     },
     onCancel() {
       this.$router.go(-1);
@@ -95,12 +93,10 @@ export default {
     },
     //异步加载数据
     load() {
-      console.log('加载下一页啦', this.pageNum, this.lastPage)
       let pass = false;
       if (
         this.pageNum === this.lastPage
       ) {
-        console.log('passs')
         pass = true;
       }
 
@@ -111,13 +107,9 @@ export default {
         return;
       }
 
-      this.loading = true;
-      console.log(1111, this.pageNum)
       this.onSearch(this.pageNum)
-      this.loading = false;
       this.pageNum += 1
-      console.log('this.disabled', this.disabled)
-      // this.$emit('changeData', this.pageSize += 1, this.proList.fn)
+      this.loading = false;
     },
   },
 
@@ -126,7 +118,10 @@ export default {
 
 <style lang="less" scoped>
 @import "../../assets/styles/index.less";
-
+.infinite-list-wrapper_tips{
+  text-align: center;
+  font-size: 14px;
+}
 .page-main {
   background: #1a191e;
   padding: 10px 0;
