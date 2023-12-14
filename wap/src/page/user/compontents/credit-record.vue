@@ -78,10 +78,10 @@ export default {
       pageSize: 15,
       total: 0,
       statusName: {
-        0:'审核中',
-        1:'审核通过',
-        2:'审核不通过',
-        3:'未审核',
+        0:'đang được xem xét',
+        1:'Kiểm tra thông qua',
+        2:'Đánh giá không thành công',
+        3:'Không được xem xét',
       }
     }
   },
