@@ -14,13 +14,13 @@
     </div>
     <div class="between-box" style="font-size: 12px; color: #FFFFFF; height: 110px; margin-top: 8px">
       <div class="page-title" style="width: 45%; height: 110px;">
-        <div>价值</div>
+        <div>{{ detail.code }}</div>
         <div class="between-box">
           <div class="price-left-total">
             <div :class="['page-price', detail.hcrate === 0 ? 'yellow' : (detail.hcrate > 0 ? 'green' : 'red')]">
               {{ Number(detail.nowPrice / 1000).toFixed(2) }}
             </div>
-            <div>商品总值</div>
+            <div>Tổng KL</div>
           </div>
           <div class="price-left-total">
             <p :class="detail.hcrate === 0 ? 'yellow' : (detail.hcrate > 0 ? 'green' : 'red')">{{ Number(detail.hcrate / 1000).toFixed(2) }}</p>
@@ -32,29 +32,29 @@
       <div class="price-box page-title price-right">
         <div class="between-box low-price-box">
           <div>
-            <p>最低价</p>
+            <p>Sàn</p>
             <p>{{ Number(detail.lowRoot/1000).toFixed(2) }}</p>
           </div>
           <div>
-            <p>清仓价</p>
+            <p>TC</p>
             <p>{{ Number(detail.closeRoot/1000).toFixed(2)}}</p>
           </div>
           <div>
-            <p>最高价</p>
+            <p>Trần</p>
             <p>{{ Number(detail.ceiling/1000).toFixed(2) }}</p>
           </div>
         </div>
-        <div class="between-box">
+        <div class="between-box" style="width: 100%">
           <div>
-            <p>最低价(调)</p>
+            <p>Thấp</p>
             <p>{{ Number(detail.lowAdjust/1000).toFixed(2) }}</p>
           </div>
           <div>
-            <p>平均价</p>
+            <p>TB</p>
             <p style="text-align: right">{{ Number(detail.avgprice/1000).toFixed(2) }}</p>
           </div>
           <div>
-            <p>最高价(调)</p>
+            <p>Cao</p>
             <p style="text-align: right">{{ Number(detail.hightAdjust/1000).toFixed(2) }}</p>
           </div>
         </div>

@@ -3,7 +3,7 @@ import Router from "vue-router";
 import Home from "@/page/home/index";
 import Buy from "@/page/home/buy";
 import Alertdetail from "@/page/home/components/alert"; // 公告详情
-import Register from "@/page/register";
+import Register from "@/page/register";//注册页面
 import Forget from "@/page/toForget"; // 忘记密码
 import Login from "@/page/login";
 import List from "@/page/list/list";
@@ -69,7 +69,7 @@ export default new Router({
       path: "/home",
       name: "home",
       meta: {
-        title: "Trang đầu",
+        title: "Bảng giá",
         requireAuth: true
       },
       component: Home
@@ -100,7 +100,8 @@ export default new Router({
       name: "register",
       meta: {
         // title: '注册'
-        title: "Đăng ký"
+        title: "Đăng ký",
+        hasHeader: false
       },
       component: Register
     },
@@ -109,7 +110,8 @@ export default new Router({
       name: "toForget",
       meta: {
         // title: '忘记密码'
-        title: "Quên mật khẩu"
+        title: "Quên mật khẩu",
+        hasHeader: false
       },
       component: Forget
     },
@@ -640,7 +642,7 @@ export default new Router({
       path: "/property",
       name: "property",
       meta: {
-        title: "property",
+        title: "Tài sản",
         requireAuth: true,
         hasHeader: false
       },
@@ -650,7 +652,7 @@ export default new Router({
       path: "/about",
       name: "about",
       meta: {
-        title: "关于我们",
+        title: "Theo dõi chúng tôi",
         requireAuth: false,
         hasHeader: false
       },
@@ -680,7 +682,7 @@ export default new Router({
       path: "/more",
       name: "more",
       meta: {
-        title: "More",
+        title: "Khác",
         requireAuth: false,
         hasHeader: false
       },
@@ -690,7 +692,7 @@ export default new Router({
       path: "/user",
       name: "user-center",
       meta: {
-        title: "个人中心",
+        title: "Trung tâm cá nhân",
         requireAuth: true,
         hasHeader: true
       },
@@ -700,7 +702,7 @@ export default new Router({
       path: "/user/creditRecord",
       name: "creditRecord",
       meta: {
-        title: "借贷记录",
+        title: "Chi tiết vay tín dụng",
         requireAuth: true,
         hasHeader: true
       },
@@ -710,7 +712,7 @@ export default new Router({
       path: "/user/repaymentRecord",
       name: "repaymentRecord",
       meta: {
-        title: "还款记录",
+        title: "Chi tiết trả tín dụng",
         requireAuth: true,
         hasHeader: true
       },

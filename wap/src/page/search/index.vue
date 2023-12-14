@@ -1,10 +1,11 @@
 <template>
   <div class="app-wrapper">
     <div class="searchBox">
-      <van-search v-model="keyword" show-action placeholder="请输入搜索关键词 ABC" @input="handleSearchInput(keyword)"
+      <van-search v-model="keyword" show-action placeholder="Mã chứng khoán hoặc chính tả đơn giản" @input="handleSearchInput(keyword)"
         @cancel="onCancel" background="none" :clearable="true" :autofocus="true">
         <template #action>
-          <div @click="onCancel">关闭</div>
+<!--          关闭-->
+          <div @click="onCancel">Khóa</div>
         </template>
       </van-search>
     </div>
@@ -15,8 +16,8 @@
             {{ item.name }}
           </div>
         </div>
-        <p v-if="loading" class="infinite-list-wrapper_tips"><van-loading size="14px">加载中...</van-loading></p>
-        <p v-if="noMore" class="infinite-list-wrapper_tips">没有更多了</p>
+        <p v-if="loading" class="infinite-list-wrapper_tips"><van-loading size="14px">Đang tải...</van-loading></p>
+        <p v-if="noMore" class="infinite-list-wrapper_tips">Không có nhiều hơn</p>
       </div>
     </div>
   </div>

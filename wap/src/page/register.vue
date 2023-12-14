@@ -1,6 +1,9 @@
 <template>
   <div>
     <div class="wrapper">
+      <mt-header title="Đăng ký">
+        <mt-button icon="back" slot="left" @click="$router.go(-1)"></mt-button>
+      </mt-header>
       <div class="contain-box">
         <img ref="oginBg" class="login-bg" src="../assets/img/login-bg02.jpg" alt="" srcset="">
         <div class="contain-main">
@@ -76,47 +79,12 @@
           </div>
         </div>
       </div>
-      <!-- <div class="login-form">
-        <div class="login-avatar">
-          <img class="login-ico" src="../assets/ico/wogerenziliao.png" alt="">
-        </div>
-        <div class="login-form-item input-model"
-        style="margin-top:1.32rem;"
-        >
-          <img v-show="$state.theme != 'red'" class="login-ico" src="../assets/ico/loginuser.png" alt="">
-          <img v-show="$state.theme == 'red'" class="login-ico" src="../assets/ico/loginuser-red.png" alt="">
-          <input
-          class="login-input"
-          placeholder="Tên tài khoản"
-          type="tel" pattern="[0-9]*"
-          v-model="phone"
-          >
-        </div>
-        <div class="login-form-item input-model">
-          <img v-show="$state.theme != 'red'" class="login-ico" src="../assets/ico/loginpwd.png" alt="">
-          <img v-show="$state.theme == 'red'" class="login-ico" src="../assets/ico/loginpwd-pwd.png" alt="">
-          <input class="login-input" type="password" placeholder="Mật khẩu" v-model="psd">
-        </div>
-        <div class="login-form-item submit-model" @click="gook">
-          Đăng nhập
-          <i v-show="isloading" style="color:#fff;" class="iconfont icon-jiazaizhong"></i>
-        </div>
-        <div class="login-form-item extra-model">
-          <div :style="{color:$state.theme =='red'?'#BB1815':'#86CBD1'}">
-            <span style="color:#0E6580">
-              Quên mật khẩu？
-              </span><span @click="toRegister">
-                Đăng ký
-              </span></div>
-        </div>
-      </div> -->
     </div>
   </div>
 </template>
 <script>
 import {Toast} from 'mint-ui'
 import {isNull, isPhone, pwdReg} from '@/utils/utils'
-// import APIUrl from '@/axios/api.url'
 import * as api from '@/axios/api'
 // 引入对称加密方法
 import { encAes, genRandKey } from '@/utils/aes'
@@ -157,7 +125,9 @@ export default {
       this.invitecode = this.$route.query.code
     }
     this.getInfoSite()
+    let header = document.querySelector('.mint-header')
     let bodyBox = document.querySelector('.body-box')
+    header.style.backgroundColor = 'transparent'
     bodyBox.style.height = '100%'
   },
   methods: {
@@ -379,16 +349,20 @@ body {
 ::v-deep .body-box {
   height: 100% !important
 }
+.mint-header {
+  border: none;
+}
 
 .wrapper {
   color: #888;
   height: 100%;
-  padding-bottom: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  //padding-bottom: 0;
+  //display: flex;
+  //flex-direction: column;
+  //justify-content: center;
+  //align-items: center;
   border-radius: .1rem;
+  //background-color: #131313;
 }
 
 .register-form {
@@ -510,25 +484,17 @@ body {
   color: #666;
 }
 
-
-body {
-}
-
-.mint-header {
-  border: none;
-}
-
-.wrapper {
-  color: #888;
-  height: 100%;
+//.wrapper {
+//  color: #888;
+//  height: 100%;
   // display: flex;
   // flex-direction: column;
   // justify-content: center;
   // align-items: center;
-  border-radius: .1rem;
-  background-color: #131313;
-
-}
+//  border-radius: .1rem;
+//  background-color: #131313;
+//
+//}
 
 .contain-box {
   // padding: 0 .2rem;
@@ -537,7 +503,7 @@ body {
 
 .login-bg {
   width: 100%;
-  height: 4rem;
+  //height: 4rem;
   object-fit: cover;
   margin-top: -40px;
 }
@@ -647,23 +613,6 @@ body {
     font-size: .2rem;
   }
 }
-
-// }
-// .red-theme{
-//   .login-avatar{
-//     background-color: #222222;
-//   }
-//   .login-form{
-//     background-color: #fff;
-//   }
-//   .login-form-item.input-model{
-//     background-color: #fff;
-//     border: 1px solid #C9C9C9;
-//   }
-//   .login-form-item.submit-model{
-//     background-color: #BB1815;
-//   }
-// }
 .goregister {
   background-color: transparent !important;
   color: #F5F4F9 !important;

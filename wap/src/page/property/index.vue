@@ -39,7 +39,7 @@
           font-size: 12px;
 
           span {
-            padding: 0 8px 12px 0;
+            padding: 0 5px 12px 0;
             display: inline-block;
             white-space: nowrap;
 
@@ -214,9 +214,9 @@
       <div class="property-menu">
         <div :class="showTemplate === 1 ? 'property-menu-active' : ''"
           @click="showTemplate = 1; getHoldingsList(1); getHoldingsTotal">
-          持有信息
+          Thông tin nắm giữ
         </div>
-        <div :class=" showTemplate === 2 ? 'property-menu-active' : '' " @click="getPropertyInfo();">资产报告
+        <div :class=" showTemplate === 2 ? 'property-menu-active' : '' " @click="getPropertyInfo();">Báo cáo tài sản
         </div>
       </div>
       <template v-if=" showTemplate === 2 ">
@@ -225,11 +225,11 @@
             <div class="property-icon">
               <img src="../../assets/images/property/graphics.png" alt="" />
             </div>
-            <div>图形化展示</div>
+            <div>Biểu đồ hiển thị</div>
           </div>
           <div class="between-box property-detail">
             <div class="between-box_left">
-              <div style="font-size: 14px">总资产</div>
+              <div style="font-size: 14px">Tổng tài sản</div>
               <div
                 style="font-size: 18px; margin-top: 10px; margin-bottom: 25px; word-wrap: break-word; overflow-wrap: break-word;">
                 {{ $moneyDot(propertyInfo.userAmt + propertyInfo.enableAmt) }}
@@ -238,7 +238,7 @@
                 <div class="between-box_item">
                   <div class="between-box">
                     <div class="origin-box origin-green"></div>
-                    <div>持有资产</div>
+                    <div>Giá trị đang nắm giữ</div>
                   </div>
                   <div class="item_number">{{
                     $moneyDot(propertyInfo.shareholdingAmt)
@@ -248,7 +248,7 @@
                 <div class="between-box_item">
                   <div class="between-box">
                     <div class="origin-box origin-yellow"></div>
-                    <div>可用资产</div>
+                    <div>Số dư khả dụng</div>
                   </div>
                   <div class="item_number">{{
                     $moneyDot(propertyInfo.availableAmount)
@@ -260,7 +260,7 @@
             <div class="bingtu">
               <van-circle v-model=" currentRate " size="111px" :rate=" rate " layer-color="#5bba6e" stroke-width=80 />
               <div class="bingtu_text">
-                总资产<p><span style="color: #5bba6e">{{ rate }}%</span> / <span style="color: #ff7b23">{{
+                Tài sản<p><span style="color: #5bba6e">{{ rate }}%</span> / <span style="color: #ff7b23">{{
                     100 - rate
                     }}%</span></p>
               </div>
@@ -273,12 +273,12 @@
             <div class="property-icon">
               <img src="../../assets/images/property/money.png" alt="" />
             </div>
-            <div>资产详情</div>
+            <div>Chi tiết tài sản</div>
           </div>
 
 
           <div class="between-box property-detail-subtitle property-detail-title">
-            <div>证券资产</div>
+            <div>Tài sản CK</div>
             <div class="between-box">
               <div>{{ $moneyDot(propertyInfo.userAmt) }}</div>
               <div class="fold-icon" @click="property_1 = property_1 === 1 ? 0 : 1">
@@ -289,21 +289,21 @@
           </div>
           <div class="property-list-template" v-if=" property_1 ">
             <div class="between-box">
-              <div>持股总市值</div>
+              <div>Giá trị thị trường nắm giữ</div>
               <div>{{ $moneyDot(propertyInfo.shareholdingAmt) }}</div>
             </div>
             <div class="between-box">
-              <div>持股总数</div>
+              <div>Số lượng nắm giữ</div>
               <div>{{ $moneyDot(propertyInfo.shareholdingNumber) }}</div>
             </div>
             <div class="between-box">
-              <div>持股损益总金额</div>
+              <div>Tổng lãi/lỗ</div>
               <div>{{ $moneyDot(propertyInfo.shareholdingProperty) }}</div>
             </div>
           </div>
 
           <div class="between-box property-detail-subtitle property-detail-title">
-            <div>现金</div>
+            <div>Tiền mặt</div>
             <div class="between-box">
               <div>{{ $moneyDot(propertyInfo.enableAmt) }}</div>
               <div class="fold-icon" @click="property_2 = property_2 === 1 ? 0 : 1">
@@ -313,25 +313,25 @@
           </div>
           <div class="property-list-template" v-if=" property_2 ">
             <div class="between-box">
-              <div>可用金额</div>
+              <div>Số dư khả dụng</div>
               <div>{{ $moneyDot(propertyInfo.availableAmount) }}</div>
             </div>
             <div class="between-box">
-              <div>可提取资金</div>
+              <div>Số dư được rút</div>
               <div>{{ $moneyDot(propertyInfo.extractableAmount) }}</div>
             </div>
             <div class="between-box">
-              <div>冻结资金</div>
+              <div>Đóng băng tiền gửi</div>
               <div>{{ $moneyDot(propertyInfo.freezeAmount) }}</div>
             </div>
             <div class="between-box">
-              <div>保证金</div>
+              <div>Tổng số ký quỹ</div>
               <div>{{ $moneyDot(propertyInfo.margin) }}</div>
             </div>
           </div>
 
           <div class="between-box property-detail-subtitle property-detail-title">
-            <div>债务</div>
+            <div>Nợ</div>
             <div class="between-box">
               <div>{{ $moneyDot(propertyInfo.debtAmt) }}</div>
               <div class="fold-icon" @click="property_3 = property_3 === 1 ? 0 : 1">
@@ -341,19 +341,19 @@
           </div>
           <div class="property-list-template" style="border: none" v-if=" property_3 ">
             <div class="between-box">
-              <div>信用金额度</div>
+              <div>Tổng hạn mức tín dụng</div>
               <div>{{ $moneyDot(propertyInfo.creditLimit) }}</div>
             </div>
             <div class="between-box">
-              <div>信用金可贷金额</div>
+              <div>Số tiền khả dụng tín dụng</div>
               <div>{{ $moneyDot(propertyInfo.creditAvailableLimit) }}</div>
             </div>
             <div class="between-box">
-              <div>信用金已贷金额</div>
+              <div>Số tiền đã vay tín dụng</div>
               <div>{{ $moneyDot(propertyInfo.creditBorrowedAmt) }}</div>
             </div>
             <div class="between-box">
-              <div>信用金已还金额</div>
+              <div>Số tiền đã trả tín dụng</div>
               <div>{{ $moneyDot(propertyInfo.creditStillAmt) }}</div>
             </div>
           </div>
@@ -365,20 +365,32 @@
         <div class="tabBox">
           <div class="tabChildren isContent MyCard">
             <div class="isContent_list">
-              <div class="isContent_item"><span>持有成本</span><span>P/L</span></div>
-              <div class="isContent_item"><span>{{
+              <div class="isContent_item">
+                <span>Tổng vốn：</span>
+                <span>P/L：</span>
+              </div>
+              <div class="isContent_item">
+                <span>{{
                   $moneyDot(holdingTotal.orderTotalPrice)
-                  }}</span><span>{{
+                  }}</span>
+                <span>{{
                   $moneyDot(holdingTotal.profitMoney)
-                  }}</span></div>
+                  }}</span>
+              </div>
             </div>
             <div class="isContent_list">
-              <div class="isContent_item"><span>持有市场价</span><span>P/L</span></div>
-              <div class="isContent_item"><span>{{
+              <div class="isContent_item">
+                <span>Tổng GT：</span>
+                <span>Tỉ lệ P/L：</span>
+              </div>
+              <div class="isContent_item">
+                <span>{{
                   $moneyDot(holdingTotal.nowPrice)
-                  }}</span><span :class=" holdingTotal.profitMoney < 0 ? 'text_red' : 'text_green' ">{{
+                  }}</span>
+                <span :class=" holdingTotal.profitMoney < 0 ? 'text_red' : 'text_green' ">{{
                   holdingTotal.percentage
-                  }}%</span></div>
+                  }}%</span>
+              </div>
             </div>
           </div>
           <my-list :proList=" proList " :listType=" listType " @changeData=" changeData "
@@ -411,7 +423,7 @@ export default {
   },
   data() {
     return {
-      fromListType: '持有信息',
+      fromListType: 'Thông tin nắm giữ',
       currentRate: 100,
       rate: 0,
       property_1: 1,
@@ -468,23 +480,23 @@ export default {
           let zccyList = {
             tabList: [
               {
-                name: '商品名称',
+                name: 'Mã CK',
                 isChange: 0
               },
               {
-                name: '数量',
+                name: 'Số lượng',
                 isChange: 0
               },
               {
-                name: '购买价',
+                name: 'Giá mua',
                 isChange: 0
               },
               {
-                name: '市场价',
+                name: 'Khớp',//市场成交价
                 isChange: 0
               },
               {
-                name: '损益',
+                name: 'P/L',
                 isChange: 1
               }
             ],

@@ -22,35 +22,35 @@ export default {
       navList: [
         {
           id: 0,
-          name: "首页",
+          name: "Bảng giá",
           active: require("@/assets/images/tabBar/home@x2.png"),
           inactive: require("@/assets/images/tabBar/home2@2.png"),
           path: "/home"
         },
         {
           id: 1,
-          name: "资讯",
+          name: "Thông tin",
           active: require("@/assets/images/tabBar/new@x2.png"),
           inactive: require("@/assets/images/tabBar/new2@x2.png"),
           path: "/article"
         },
         {
           id: 2,
-          name: "资产",
+          name: "Tài sản",
           active: require("@/assets/images/tabBar/money@x2.png"),
           inactive: require("@/assets/images/tabBar/money2@x2.png"),
           path: "/property"
         },
         {
           id: 3,
-          name: "订单",
+          name: "Đặt lệnh",
           active: require("@/assets/images/tabBar/order@x2.png"),
           inactive: require("@/assets/images/tabBar/order2@x2.png"),
           path: "/orderlist"
         },
         {
           id: 4,
-          name: "更多",
+          name: "Khác",
           active: require("@/assets/images/tabBar/more@X2.png"),
           inactive: require("@/assets/images/tabBar/more2@x2.png"),
           path: "/more"
@@ -78,7 +78,7 @@ export default {
 </style>
 <style lang="less" scoped>
 .footer_tabbar {
-  height: 44px;
+  height: 50px;
   background: url("../assets/images/tabBar/bottomBar@x2.png") no-repeat;
   background-size: 100% 100%;
 

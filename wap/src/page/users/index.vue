@@ -163,29 +163,31 @@
         </div>
       </div>
 
-      <div class="user-info-title">实名认证</div>
+      <div class="user-info-title">Đã xác minh</div>
       <div class="user-auth">
+<!--        暂未实名认证，请认证，下方是实名认证的入口，点击跳转实名页面-->
         <p class="auth-p"  v-if="$store.state.userInfo.isActive !== 2">
-          暂未实名认证，请认证，下方是实名认证的入口，点击跳转实名页面
+          Chưa xác thực, đề nghị xác thực, bấm vào dưới đây để chuyển sang giao diện xác thực
         </p>
+<!--        已实名认证，点击跳转认证详情页面-->
         <p class="auth-p" v-else>
-          已实名认证，点击跳转认证详情页面
+          Đã xác thực, bấm vào để quay lại
         </p>
         <template v-if="$store.state.userInfo.isActive !== 2">
-          <div class="button" @click="goPage('/authentication')">实名认证</div>
+          <div class="button" @click="goPage('/authentication')">Đã xác minh</div>
         </template>
         <template v-else>
-          <div class="button" @click="goPage('/authentication')">已认证</div>
+          <div class="button" @click="goPage('/authentication')">Đã xác thực</div>
         </template>
       </div>
 
-      <div class="user-info-title">帐号信息</div>
+      <div class="user-info-title">Thông tin tài khoản</div>
       <div class="user-info-box">
         <div class="user-info-template">
           <div class="icon-title between-box" @click="isShowInfoClick(1)">
             <div class="image-text">
               <div><img src="../../assets/images/users/user.png" alt="" /></div>
-              <div>个人信息</div>
+              <div>Thông tin cá nhân</div>
             </div>
             <div>
               <img src="../../assets/images/users/down.png" alt="" v-if="isShowUserInfo" />
@@ -194,30 +196,30 @@
           </div>
           <div class="info-list" v-if="isShowUserInfo">
             <div>
-              <div>用户昵称</div>
+              <div>Tên</div>
               <div>{{ $store.state.userInfo.nickName }}</div>
             </div>
             <div>
-              <div>真实姓名</div>
+              <div>Họ tên thât</div>
               <div>{{ $store.state.userInfo.realName }}</div>
             </div>
             <div>
-              <div>手机号码</div>
+              <div>Số điện thoại di động</div>
               <div>{{ $store.state.userInfo.phone }}</div>
             </div>
             <div>
-              <div>代理名称</div>
+              <div>Tên đại lý</div>
               <div>{{ $store.state.userInfo.agentName }}</div>
             </div>
             <div>
-              <div>地址信息</div>
+              <div>Thông tin địa chỉ</div>
               <div style="text-align: left !important; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{ $store.state.userInfo.regAddress }}</div>
             </div>
           </div>
           <div class="icon-title between-box" @click="goPage('/card')">
             <div class="image-text">
               <div><img src="../../assets/images/users/card.png" alt="" /></div>
-              <div>银行卡管理</div>
+              <div>Liên kết ngân hàng</div>
             </div>
             <div><img src="../../assets/images/users/more.png" alt="" /></div>
           </div>
@@ -226,14 +228,14 @@
               <div>
                 <img src="../../assets/images/users/changePassword.png" alt="" />
               </div>
-              <div>修改密码</div>
+              <div>Đổi mật khẩu</div>
             </div>
             <div><img src="../../assets/images/users/more.png" alt="" /></div>
           </div>
         </div>
       </div>
 
-      <div class="user-info-title">应用信息</div>
+      <div class="user-info-title">Thông tin ứng dụng</div>
       <div class="user-info-box">
         <div class="user-info-template">
           <div class="icon-title between-box" @click="isShowInfoClick(2)">
@@ -241,7 +243,7 @@
               <div>
                 <img src="../../assets/images/users/setting.png" alt="" />
               </div>
-              <div>系统信息</div>
+              <div>Thông tin hệ thống</div>
             </div>
             <div>
               <img src="../../assets/images/users/down.png" alt="" v-if="isShowSystemInfo" />
@@ -251,11 +253,11 @@
 
           <div class="info-list" v-if="isShowSystemInfo">
             <div>
-              <div>版本信息</div>
+              <div>Thông tin phiên bản</div>
               <div>1.3.00</div>
             </div>
             <div>
-              <div><router-link to="/about">关于我们</router-link></div>
+              <div><router-link to="/about">Theo dõi chúng tôi</router-link></div>
             </div>
           </div>
 
@@ -264,7 +266,7 @@
               <div>
                 <img src="../../assets/images/users/loginout.png" alt="" />
               </div>
-              <div>退出登录</div>
+              <div>Đăng xuất</div>
             </div>
           </div>
         </div>

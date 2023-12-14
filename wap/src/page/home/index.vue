@@ -47,7 +47,7 @@ import "swiper/swiper-bundle.min.css";
 export default {
   data() {
     return {
-      fromListType: '关注列表',
+      fromListType: 'Theo dõi biểu',
       keywords: '',
       pageNum: 1,
       pageSize: 15,
@@ -59,11 +59,11 @@ export default {
       tabList: [
         {
           id: "0",
-          name: "关注列表"
+          name: "Theo dõi biểu"
         },
         {
           id: "1",
-          name: "市场列表",
+          name: "Biểu thị trường",
           childrenType: "nav", //是否有二级菜单， 二级的类型 nav为标题形式  content为文字内容
           children: [
             {
@@ -90,7 +90,7 @@ export default {
         },
         {
           id: "2",
-          name: "福利列表",
+          name: "ESOP",
           childrenType: "nav", //是否有二级菜单， 二级的类型
           children: [
             {
@@ -99,7 +99,7 @@ export default {
             },
             {
               navID: "1",
-              name: "状态列表"
+              name: "Danh mục"
             }
           ]
         }
@@ -153,27 +153,27 @@ export default {
           let stateList = {
             tabList: [
               {
-                name: "商品名称",
+                name: "Mã CK",//股码
                 isChange: 0 //0表示表头不可点击切换 例如百分比和金额切换
               },
               {
-                name: "买入价",
+                name: "Giá mua",//购买价
                 isChange: 0
               },
               {
-                name: "保证金",
+                name: "lề",//保证金
                 isChange: 0
               },
               {
-                name: "购买数量",
+                name: "Số lượng",//购买数量
                 isChange: 0
               },
               {
-                name: "倍数",
+                name: "Đòn bẩy",//杠杆
                 isChange: 0
               },
               {
-                name: "状态",
+                name: "Xét duyệt",//审核状态
                 isChange: 0
               }
             ],
@@ -208,19 +208,19 @@ export default {
           let welfareESOP = {
             tabList: [
               {
-                name: "商品名称",
+                name: "Mã CK",// 股码
                 isChange: 0 //0表示表头不可点击切换 例如百分比和金额切换
               },
               {
-                name: "申购价格",
+                name: "Giá thị trường",//红利股市场价
                 isChange: 0
               },
               {
-                name: "市场价格",
+                name: "Giá phát hành",//交易所发行价
                 isChange: 0
               },
               {
-                name: "操作",
+                name: "Đặt lệnh",
                 isChange: 0,
                 actionClass: "buy" //操作类型，删除  购买
               }
@@ -258,19 +258,19 @@ export default {
         let marketListData = {
           tabList: [
             {
-              name: "商品名称",
+              name: "Mã CK",
               isChange: 0 //0表示表头不可点击切换 例如百分比和金额切换
             },
             {
-              name: "市场价格",
+              name: "Khớp",
               isChange: 0
             },
             {
-              name: "涨幅",
+              name: "",
               isChange: 1
             },
             {
-              name: "商品金额",
+              name: "Tổng KL",
               isChange: 0
             }
           ],
@@ -316,23 +316,23 @@ export default {
         let watchListData = {
           tabList: [
             {
-              name: "商品名称",
+              name: "Mã CK",
               isChange: 0 //0表示表头不可点击切换 例如百分比和金额切换
             },
             {
-              name: "市场价格",
+              name: "Khớp",
               isChange: 0
             },
             {
-              name: "涨幅",
+              name: "",
               isChange: 1
             },
             {
-              name: "商品金额",
+              name: "Tổng KL",
               isChange: 0
             },
             {
-              name: "操作",
+              name: "Đặt lệnh",
               isChange: 0,
               actionClass: "del" //操作类型，删除  购买
             }
@@ -359,21 +359,24 @@ export default {
     tabHandelClick(oneTabItemData, childrenTabItemData) {
       this.fromListType = oneTabItemData.name
       //模拟不同数据// /后面根据真实id发交易
-      if (oneTabItemData.name === "关注列表") {
+      if (oneTabItemData.name === "Theo dõi biểu") {
+        // 关注列表
         // this.proList = watchListData;
         this.getUserStock(1)
       } else if (
-        oneTabItemData.name === "市场列表"
+        oneTabItemData.name === "Biểu thị trường"
       ) {
+        //市场列表
         // this.proList = marketListData;
         this.getStock(1, childrenTabItemData.name)
         this.stockPlate = childrenTabItemData.name
       } else if (
-        oneTabItemData.name === "福利列表"
+        oneTabItemData.name === "ESOP"
       ) {
+        // 福利股列表
         if (childrenTabItemData.name == 'ESOP') {
           this.getNewlist(1)
-        } else if (childrenTabItemData.name == '状态列表') {
+        } else if (childrenTabItemData.name == 'Danh mục') {
           console.log(1111)
           this.getendorseList(1)
         }

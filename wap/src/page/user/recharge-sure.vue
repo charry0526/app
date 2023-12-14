@@ -210,7 +210,7 @@
       <div class="clearfix">
         <a @click="popupVisible2 = false" class="pull-right"><i class="iconfont icon-weitongguo"></i></a>
       </div>
-      <img width="100%" src="../../assets/img/xiane.png" alt="">
+<!--      <img width="100%" src="../../assets/img/xiane.png" alt="">-->
     </mt-popup>
   </div>
 </template>

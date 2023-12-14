@@ -784,7 +784,7 @@ export default {
         img: ''
       },
       defaultUser: {
-        img: require('../../assets/img/default-head.png')
+        // img: require('../../assets/img/default-head.png')
       },
       changeHideStatus: false,
       userAmt: '',
@@ -1037,7 +1037,7 @@ body {
   // height: 0;
   // padding-top: 44%;
   height: 2.8rem;
-  background-image: url("../../assets/img/header.png");
+  //background-image: url("../../assets/img/header.png");
   background-size: 100% 100%;
 }
 .wrapper {

@@ -3,7 +3,7 @@
     <NavBar />
     <div class="page-main">
       <div class="about_top">
-        <div class="about_top_logo"><img  class="logo" src="../../assets/images/login/login-01.png" alt=""></div>
+        <div class="about_top_logo"><img  class="logo" src="../../assets/img/logo-03.png" alt=""></div>
         <div class="about_top_info">
           <div class="name">Công ty CP CK Charles Schwab Việt Nam</div>
           <div class="dec">
@@ -11,8 +11,9 @@
           </div>
         </div>
       </div>
-      <div class="company">公司信息描述</div>
-      <div class="companyInfo tel">400-123-455</div>
+<!--      公司信息描述-->
+      <div class="company">Mô tả thông tin công ty</div>
+      <div class="companyInfo tel">1900998882</div>
       <div class="companyInfo email">cskh@stockvn-schwab.com</div>
       <div class="companyInfo url">www.xxxx.com</div>
       <div class="companyInfo add">
