@@ -90,7 +90,7 @@
 .app-child-list>div {
   width: 25%;
   text-align: center;
-  margin-bottom: 8px;
+  margin-bottom: 15px;
 }
 
 .app-child-list>div>div {
@@ -170,8 +170,10 @@
       </div>
 
       <div class="nav-menu-box nav-menu-tab">
-        <div :class="[navActive === 1 ? 'select' : '']" @click="navActive = 1">公共产品</div>
-        <div :class="[navActive === 2 ? 'select' : '']" @click="navActive = 2; getPropertyInfo();">我的资产</div>
+<!--        公共产品-->
+        <div :class="[navActive === 1 ? 'select' : '']" @click="navActive = 1">Sản phẩm công cộng</div>
+<!--        我的资产-->
+        <div :class="[navActive === 2 ? 'select' : '']" @click="navActive = 2; getPropertyInfo();">Tài sản của tôi</div>
       </div>
 
       <template v-if="navActive === 1">
@@ -198,8 +200,6 @@
             </template>
           </div>
         </div>
-
-
       </template>
 
       <template v-if="navActive === 2">
@@ -207,66 +207,81 @@
           <div class="property-template">
             <div class="property-title">
               <div class="property-icon"><img src="../../assets/images/others/Assetinformation.png" alt="" /></div>
-              <div>资产信息</div>
+<!--              资产信息-->
+              <div>Chi tiết tài sản</div>
             </div>
             <div class="between-box property-detail-title">
-              <div>总资产</div>
+<!--              总资产-->
+              <div>Tổng tài sản</div>
               <div>{{ $moneyDot((propertyInfo.userAmt + propertyInfo.enableAmt)) }}</div>
             </div>
             <div class="between-box property-detail-title">
-              <div>可用资产</div>
+<!--              可用资产-->
+              <div>Số dư khả dụng</div>
               <div>{{ $moneyDot(propertyInfo.enableAmt) }}</div>
             </div>
             <div class="between-box property-detail-title">
-              <div>总保证金</div>
+<!--              总保证金-->
+              <div>Tổng số ký quỹ</div>
               <div>{{ $moneyDot(propertyInfo.margin) }}</div>
             </div>
             <div class="between-box property-detail-title">
-              <div>总冻结资产</div>
+<!--              总冻结资产-->
+              <div>Đóng băng tiền gửi</div>
               <div>{{ $moneyDot(propertyInfo.freezeAmount) }}</div>
             </div>
             <div class="between-box property-detail-title">
-              <div>总损益</div>
+<!--              总损益-->
+              <div>Tổng lãi/lỗ</div>
               <div>{{ $moneyDot(propertyInfo.shareholdingProperty) }}</div>
             </div>
           </div>
           <div class="property-template">
             <div class="property-title">
               <div class="property-icon"><img src="../../assets/images/others/securitiesassets.png" alt="" /></div>
-              <div>证券资产</div>
+<!--              证券资产-->
+              <div>Tài sản CK</div>
             </div>
             <div class="between-box property-detail-title">
-              <div>总持股市值</div>
+<!--              总持股市值-->
+              <div>Giá trị thị trường nắm giữ</div>
               <div>{{ $moneyDot(propertyInfo.shareholdingAmt) }}</div>
             </div>
             <div class="between-box property-detail-title">
+<!--              总持股数量-->
               <div>总持股数量</div>
               <div>{{ $moneyDot(propertyInfo.shareholdingNumber) }}</div>
             </div>
             <div class="between-box property-detail-title">
-              <div>总持股损益</div>
+<!--              总持股损益-->
+              <div>Số lượng nắm giữ</div>
               <div>{{ $moneyDot(propertyInfo.shareholdingProperty) }}</div>
             </div>
           </div>
           <div class="property-template">
             <div class="property-title">
               <div class="property-icon"><img src="../../assets/images/others/debt.png" alt="" /></div>
-              <div>债务</div>
+<!--              债务-->
+              <div>Nợ</div>
             </div>
             <div class="between-box property-detail-title">
-              <div>信用金额度</div>
+<!--              信用金额度-->
+              <div>Tổng hạn mức tín dụng</div>
               <div>{{ $moneyDot(propertyInfo.creditLimit) }}</div>
             </div>
             <div class="between-box property-detail-title">
-              <div>信用金可贷金额</div>
+<!--              信用金可贷金额-->
+              <div>Số tiền khả dụng tín dụng</div>
               <div>{{ $moneyDot(propertyInfo.creditAvailableLimit) }}</div>
             </div>
             <div class="between-box property-detail-title">
-              <div>信用金已贷金额</div>
+<!--              信用金已贷金额-->
+              <div>Số tiền đã vay tín dụng</div>
               <div>{{ $moneyDot(propertyInfo.creditBorrowedAmt) }}</div>
             </div>
             <div class="between-box property-detail-title">
-              <div>信用金已还金额</div>
+<!--              信用金已还金额-->
+              <div>Số tiền đã trả tín dụng</div>
               <div>{{ $moneyDot(propertyInfo.creditStillAmt) }}</div>
             </div>
           </div>
@@ -290,41 +305,41 @@ export default {
       navActive: 1,
       morePageMenu: [
         {
-          title: '推荐功能',
+          title: 'Chức năng đề xuất',//推荐功能
           child: [
             {
-              title: '充值',
+              title: 'Nạp tiền',//充值
               icon: 'others/CommonFunctions/topup.png',
               url: '/recharge'
             },
             {
-              title: '提现',
+              title: 'Rút tiền',//提现
               icon: 'others/CommonFunctions/withdraw.png',
               url: '/cash'
             },
             {
-              title: '信用贷',
+              title: 'Vay tín dụng',//信用贷
               icon: 'others/CommonFunctions/creditloan.png',
               url: '/credist'
             },
             {
-              title: '红利股',
+              title: 'ESOP',//红利股
               icon: 'others/CommonFunctions/bonustocks.png',
               url: '/esop'
             }
           ]
         },
         {
-          title: '现金交易',
+          title: 'Tài sản giao dịch',//资产交易
           icon: 'others/cashTransaction/cash.png',
           child: [
             {
-              title: '充值记录',
+              title: 'Lịch sử nạp tiền',//充值记录
               icon: 'others/cashTransaction/Rechargerecord.png',
               url: '/rechargelist'
             },
             {
-              title: '提现记录',
+              title: 'Lịch sử rút tiền',//提现记录
               icon: 'others/cashTransaction/withdraw.png',
               url: '/cashlist'
             },
@@ -334,43 +349,43 @@ export default {
             //   url: '/order?'
             // },
             {
-              title: '交易记录',
+              title: 'Lịch sử giao dịch',//交易记录
               icon: 'others/cashTransaction/TransactionRecord.png',
               url: '/detail'
             },
             {
-              title: '信贷记录',
+              title: 'Chi tiết vay tín dụng',//信贷记录
               icon: 'others/cashTransaction/credit.png',
               url: '/user/creditRecord'
             },
             {
-              title: '还款记录',
+              title: 'Chi tiết trả tín dụng',//还贷记录
               icon: 'others/cashTransaction/RepaymentHistory.png',
               url: '/user/repaymentRecord'
             }
           ]
         },
         {
-          title: '其他功能',
+          title: 'Chức năng khác',//其他功能
           icon: 'others/Otherfunctions/app.png',
           child: [
             {
-              title: '银行卡管理',
+              title: 'Liên kết ngân hàng',//银行卡管理
               icon: 'others/Otherfunctions/card.png',
               url: '/card'
             },
             {
-              title: '修改密码',
+              title: 'Đổi mật khẩu',//修改密码
               icon: 'others/Otherfunctions/changePassword.png',
               url: '/changePassword'
             },
             {
-              title: '实名认证',
+              title: 'Đã xác minh',//实名认证
               icon: 'others/Otherfunctions/Verified.png',
               url: '/authentication'
             },
             {
-              title: '关于我们',
+              title: 'Theo dõi chúng tôi',//关于我们
               icon: 'others/Otherfunctions/about.png',
               url: '/about'
             }

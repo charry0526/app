@@ -105,8 +105,8 @@
         <div class="tabChildren isContent" :class="listType" v-if="active === 1">
           <div class="isContent_list">
             <div class="isContent_item">
-              <span>持有成本</span>
-              <span>P/L</span>
+              <span>Tổng vốn：</span>
+              <span>Tỉ lệ P/L：</span>
             </div>
             <div class="isContent_item">
               <span >{{ HoldingsTotal.name_price }}</span>
@@ -115,7 +115,7 @@
           </div>
           <div class="isContent_list">
             <div class="isContent_item">
-              <span>P/L</span>
+              <span>P/L：</span>
             </div>
             <div class="isContent_item">
               <span >{{ HoldingsTotal.pl_price }}</span>
@@ -125,8 +125,8 @@
         <div class="tabChildren isContent" :class="listType" v-else>
           <div class="isContent_list">
             <div class="isContent_item">
-              <span>持有成本</span>
-              <span>P/L</span>
+              <span>Tổng vốn：</span>
+              <span>P/L：</span>
             </div>
             <div class="isContent_item">
               <span >{{ HoldingsTotal2.name_price }}</span>
@@ -135,8 +135,8 @@
           </div>
           <div class="isContent_list">
             <div class="isContent_item">
-              <span>持有市场价</span>
-              <span>P/L</span>
+              <span>Tổng GT：</span>
+              <span>Tỉ lệ P/L：</span>
             </div>
             <div class="isContent_item">
               <span>{{ HoldingsTotal2.name_price2 }}</span>
@@ -171,12 +171,12 @@ export default {
       tabList: [
         {
           id: "0",
-          name: "持有列表",
-          childrenType: "content",
+          name: "Biểu chi tiết đang nắm giữ",//持有列表
+          childrenType: "content",//售罄列表
         },
         {
           id: "2",
-          name: "售出列表",
+          name: "Biểu chi tiết bán ra",
           childrenType: "content",
         }
       ],

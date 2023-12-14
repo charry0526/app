@@ -253,7 +253,7 @@ export default {
   }
   .login-bg{
     width: 100%;
-    height:4rem;
+    //height:4rem;
     object-fit: cover;
     margin-top: -40px;
   }

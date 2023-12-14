@@ -1,7 +1,8 @@
 <template>
-  <van-nav-bar title="关于我们" left-arrow class="navbar" @click-left="onClickBack" />
+<!--  关于我们-->
+  <van-nav-bar title="Theo dõi chúng tôi" left-arrow class="navbar" @click-left="onClickBack" />
 </template>
-  
+
 <script>
 import Vue from "vue";
 import { NavBar } from "vant";
@@ -18,8 +19,8 @@ export default {
   },
 };
 </script>
-  
-  
+
+
 <style lang="less" >
 .navbar {
   background: none;

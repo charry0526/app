@@ -126,9 +126,12 @@
 // import * as api from '@/axios/api'
 import Footer from '../components/Footer.vue'
 import foot from '@/components/foot/foot'
+import foot from '../components/Footer'
+
 export default {
   components: {
-    Footer
+    Footer,
+    foot
   },
   data () {
     return {
@@ -139,9 +142,6 @@ export default {
       dataIcon2: require('../../static/img/openAccount/data-icon2.png'),
       dataIcon3: require('../../static/img/openAccount/data-icon3.png')
     }
-  },
-  components: {
-    foot
   },
   created () {
     this.$setgoindex()

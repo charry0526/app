@@ -39,7 +39,7 @@
                   <span v-if="proList.watchListData">{{
                     item.hcrate }}</span>
                   <span v-else-if="proList.market">{{
-                    $moneyDot(((item.nowPrice - item.hcrate) / 1000).toFixed(2))}}</span>
+                    item.nowPrice - item.hcrate }}</span>
                   <span v-else-if="proList.welfare">{{
                     item.scprice }}</span>
                   <span v-else>{{
@@ -76,8 +76,6 @@
                   $moneyDot(item.allProfitAndLose) || '0.00'
                 }}</span>
               </div>
-
-
               <div class="list-item_text" v-if="item.issuePrice || proList.stateList">
                 <span>{{ $moneyDot(item.issuePrice || '0.00')
                 }}</span>
@@ -89,7 +87,7 @@
                 <img v-if="actionClass === 'del'" src="../assets/images/home/close@x2.png"
                   @click.stop="actionHandelClick(index, item, 'del')" />
                 <span v-if="actionClass === 'buy'" class="buyItemBtn"
-                  @click.stop="actionHandelClick(index, item, 'buy')">购买</span>
+                  @click.stop="actionHandelClick(index, item, 'buy')">Đề xuất</span>
               </div>
 
               <div class="list-item_text" v-if="item.nums || proList.stateList">
@@ -100,7 +98,7 @@
                 {{ item.gg }}
               </div>
               <div class="list-item_text" v-if="item.zts">
-                <span v-if="item.zts == 1" class="buyItemBtn" @click.stop="toCash(item)">BUY</span>
+                <span v-if="item.zts == 1" class="buyItemBtn" @click.stop="toCash(item)">Mua</span>
                 <span class="textState" v-else-if="item.zts == '2'">Chưa thông qua</span>
                 <span class="textState" v-else-if="item.zts == '4'">Hoàn thành</span>
                 <span class="textState" v-else>Đang XD</span>
@@ -108,8 +106,8 @@
             </div>
           </li>
         </ul>
-        <p v-if="loading" class="infinite-list-wrapper_tips"><van-loading size="14px">加载中...</van-loading></p>
-        <p v-if="noMore" class="infinite-list-wrapper_tips">没有更多了</p>
+        <p v-if="loading" class="infinite-list-wrapper_tips"><van-loading size="14px">Đang tải...</van-loading></p>
+        <p v-if="noMore" class="infinite-list-wrapper_tips">Không có nhiều hơn</p>
       </div>
     </template>
     <template v-if="listType === 'MyCard'">
@@ -119,54 +117,66 @@
             <div class="cardItem_title">
               <div class="title">{{ item.stockName }}</div>
               <div class="sub_title" v-if="item.stockCode">({{ item.stockCode }})</div>
-              <div class="title_tag" v-if="item.isNew">员工福利扶持</div>
+              <div class="title_tag" v-if="item.isNew">ESOP</div>
+<!--              更新-->
               <div class="updateTime" v-if="state === 0">
-                更新：<span style="color: rgb(91, 186, 110)" v-if="item.now_price > 0">{{ $moneyDot(item.now_price) }}</span>
+                Cập nhật：<span style="color: rgb(91, 186, 110)" v-if="item.now_price > 0">{{ $moneyDot(item.now_price) }}</span>
                 <span style="color: #d02551;" v-else="item.now_price < 0">{{ $moneyDot(item.now_price) }}</span>
               </div>
+<!--              总损益-->
               <div class="updateTime" v-if="state === 1">
-                总损益：<span style="color: rgb(91, 186, 110)" v-if="item.allProfitAndLose > 0">{{
+                Tổng lãi/lỗ：<span style="color: rgb(91, 186, 110)" v-if="item.allProfitAndLose > 0">{{
                   $moneyDot(item.allProfitAndLose) }}</span>
                 <span style="color: #d02551;" v-else="item.allProfitAndLose < 0">{{ $moneyDot(item.allProfitAndLose)
                 }}</span>
               </div>
             </div>
+<!--            持有列表-->
             <template v-if="state === 0">
               <div class="cardItemInfo" @click="goDetail(item, 'holding')">
                 <div class="cardItemInfo_item">
-                  <span>购买价格</span>
+                  <!-- 买入价格 -->
+                  <span>Giá mua: </span>
                   <span>{{ $moneyDot(item.buyOrderPrice) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
-                  <span>数量</span>
+                  <!-- 数量 -->
+                  <span>Số lượng: </span>
                   <span>{{ $moneyDot(item.orderNum) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
-                  <span>金额</span>
+                  <!-- 市值 -->
+                  <span>Thành tiền: </span>
                   <span>{{ $moneyDot(item.orderTotalPrice) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
-                  <span>交易费用</span>
+                  <!-- 手续费 -->
+                  <span>Phí giao dịch: </span>
                   <span>{{ $moneyDot(item.orderFee) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
-                  <span>所得税</span>
+<!--                  所得税-->
+                  <span>Thuế thu nhập：</span>
                   <span>{{ $moneyDot(item.orderSpread) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
-                  <span>倍数</span>
+<!--                  杠杆-->
+                  <span>Margin X：</span>
                   <span>{{ $moneyDot(item.orderLever) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
-                  <span>押金</span>
+<!--                  保证金-->
+                  <span>Tiền đặt cọc：</span>
                   <span>{{ $moneyDot(item.newBzj) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
-                  <span>因损益</span>
+<!--                  损益值-->
+                  <span>Lãi/lỗ：</span>
                   <span>{{ $moneyDot(item.profitAndLose) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
-                  <span>实际损益</span>
+<!--                  实际总损益-->
+                  <span>Tổng lãi/lỗ：</span>
                   <span style="color: rgb(91, 186, 110)" v-if="item.allProfitAndLose > 0">{{ $moneyDot(item.allProfitAndLose)
                   }}</span>
                    <span style="color: #d02551;" v-else="item.allProfitAndLose < 0">{{ $moneyDot(item.allProfitAndLose)
@@ -175,51 +185,63 @@
               </div>
               <div class="cardItem_title noBorder">
                 <div class="sub_title">{{ new Date(item.buyOrderTime) | timeFormat }}</div>
-                <div class="cardItem_footer_btn" @click.stop="handSellClick(item.positionSn)">卖出</div>
+<!--                平仓操作-->
+                <div class="cardItem_footer_btn" @click.stop="handSellClick(item.positionSn)">Bán ra</div>
               </div>
             </template>
+<!--            售罄列表-->
             <template v-else>
               <div class="cardItemInfo" @click="goDetail(item, 'sell')">
                 <div class="cardItemInfo_item">
-                  <span>购买价格</span>
+<!--                  购买价格-->
+                  <span>Giá mua: </span>
                   <span>{{ $moneyDot(item.buyOrderPrice) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
-                  <span>数量</span>
+<!--                  购买数量-->
+                  <span>Số lượng: </span>
                   <span>{{ $moneyDot(item.orderNum) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
-                  <span>总价</span>
+                  <!-- 市值 -->
+                  <span>Thành tiền: </span>
                   <span>{{ $moneyDot(item.orderTotalPrice) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
-                  <span>售价</span>
+                  <!-- 卖出价格 -->
+                  <span>Giá bán: </span>
                   <span>{{ $moneyDot(item.sellOrderPrice) }}</span>
                 </div>
                 <div class="cardItemInfo_item"></div>
                 <div class="cardItemInfo_item">
-                  <span>保证金</span>
+                  <!-- 其他费用 -点差费 -->
+                  <span>lề: </span>
                   <span>{{ $moneyDot(item.newBzj) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
-                  <span>交易费用</span>
+                  <!-- 手续费 -->
+                  <span>Phí giao dịch: </span>
                   <span>{{ $moneyDot(item.orderFee) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
-                  <span>所得税</span>
+                  <!-- 印花税 -->
+                  <span>Thuế thu nhập：</span>
                   <span>{{ $moneyDot(item.orderSpread) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
-                  <span>杠杆</span>
+<!--                  杠杆-->
+                  <span>Margin X: </span>
                   <span>{{ $moneyDot(item.orderLever) }}</span>
                 </div>
                 <div class="cardItemInfo_item">
-                  <span>举办天数</span>
+                  <!-- 留仓天数 -->
+                  <span>Số ngày nắm giữ: </span>
                   <span>{{ $moneyDot(item.orderStayDays) }}</span>
                 </div>
                 <div class="cardItemInfo_item"></div>
                 <div class="cardItemInfo_item">
-                  <span>损益</span>
+                  <!-- 浮动盈亏 -->
+                  <span>Lãi lỗ: </span>
                    <span style="color: rgb(91, 186, 110)" v-if="item.profitAndLose > 0">{{ $moneyDot(item.profitAndLose)
                   }}</span>
                    <span style="color: #d02551;" v-else="item.profitAndLose < 0">{{ $moneyDot(item.profitAndLose)
@@ -227,19 +249,21 @@
                 </div>
               </div>
               <div class="cardItem_title noBorder" style="display: flex;justify-content: space-between">
-                <div class="sub_title" style="margin-left: 0; font-size: 12px;">买入:{{ new Date(item.buyOrderTime) |
+<!--                买入-->
+                <div class="sub_title" style="margin-left: 0; font-size: 12px;">Mua: {{ new Date(item.buyOrderTime) |
                   timeFormat }}</div>
-                <div class="sub_title" style="margin-left: 0; font-size: 12px;">售出:{{ new Date(item.sellOrderTime) |
+<!--                售出-->
+                <div class="sub_title" style="margin-left: 0; font-size: 12px;">Bán: {{ new Date(item.sellOrderTime) |
                   timeFormat }}</div>
               </div>
             </template>
           </li>
         </ul>
-        <p v-if="loading" class="infinite-list-wrapper_tips"><van-loading size="14px">加载中...</van-loading></p>
-        <p v-if="noMore" class="infinite-list-wrapper_tips">没有更多了</p>
+        <p v-if="loading" class="infinite-list-wrapper_tips"><van-loading size="14px">Đang tải...</van-loading></p>
+        <p v-if="noMore" class="infinite-list-wrapper_tips">Không có nhiều hơn</p>
       </div>
     </template>
-    <van-empty description="暂无数据" v-if="listType === 'list' && !productList.length" />
+    <van-empty description="Không có dữ liệu" v-if="listType === 'list' && !productList.length" />
 
     <mt-popup v-model="dialogShow" :closeOnClickModal="false" class="mint-popup-box mint-popup-white">
       <div class="clearfix">
@@ -397,7 +421,7 @@ export default {
 
         if (this.proList.tabList) {
           for (let i = 0; i < this.proList.tabList.length; i++) {
-            if (this.proList.tabList[i].name === "操作") {
+            if (this.proList.tabList[i].name === "Đặt lệnh") {
               this.isShowActionBtn = true;
               this.actionClass = this.proList.tabList[i].actionClass;
               break;
@@ -458,13 +482,13 @@ export default {
     },
     goDetail(item, fromListType) {
       let code = '', stock_type = ''
-      if (fromListType === '关注列表') {
+      if (fromListType === 'Theo dõi biểu') {
         code = item.stockCode
         stock_type = item.stock_type
-      } else if (fromListType === '市场列表') {
+      } else if (fromListType === 'Biểu thị trường') {
         code = item.code
         stock_type = item.stock_type
-      } else if (fromListType === '福利列表') {
+      } else if (fromListType === 'ESOP') {
         code = item.names
         stock_type = item.names
       }

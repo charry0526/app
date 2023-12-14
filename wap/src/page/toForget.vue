@@ -2,11 +2,14 @@
 <template>
   <div>
     <div class="wrapper">
+      <mt-header title="Quên mật khẩu">
+        <mt-button icon="back" slot="left" @click="$router.go(-1)"></mt-button>
+      </mt-header>
       <div class="contain-box">
         <img ref="oginBg" class="login-bg" src="../assets/img/login-bg02.jpg" alt="" srcset="">
         <div class="contain-main">
           <div class="logo-box">
-            <img class="logo" src="../assets/img/login-01.png" alt="">
+            <img class="logo" src="../assets/img/logo.png" alt="">
           </div>
 <!--          输入手机号码-->
           <div class="register-form-item input-model" style="margin-top:0.11rem">
@@ -101,6 +104,12 @@ export default {
       imgCodeTime: 0,
       msgId: undefined
     }
+  },
+  mounted: function () {
+    let header = document.querySelector('.mint-header')
+    let bodyBox = document.querySelector('.body-box')
+    header.style.backgroundColor = 'transparent'
+    bodyBox.style.height = '100%'
   },
   methods: {
     checkCodeBox () {
@@ -293,7 +302,9 @@ export default {
 body {
   background-color: #fff;
 }
-
+.mint-header {
+  border: none;
+}
 ::v-deep .body-box {
   height: 100% !important
 }
@@ -301,11 +312,11 @@ body {
 .wrapper {
   color: #888;
   height: 100%;
-  padding-bottom: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  //padding-bottom: 0;
+  //display: flex;
+  //flex-direction: column;
+  //justify-content: center;
+  //align-items: center;
   border-radius: .1rem;
 }
 
@@ -428,34 +439,9 @@ body {
   color: #666;
 }
 
-
-body {
-}
-
-.mint-header {
-  border: none;
-}
-
-.wrapper {
-  color: #888;
-  height: 100%;
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: center;
-  // align-items: center;
-  border-radius: .1rem;
-  background-color: #131313;
-
-}
-
-.contain-box {
-  // padding: 0 .2rem;
-  // background-color: #28094B;
-}
-
 .login-bg {
   width: 100%;
-  height: 4rem;
+  //height: 4rem;
   object-fit: cover;
   margin-top: -40px;
 }
