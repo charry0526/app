@@ -1,6 +1,9 @@
 <template>
-  <div class="app-wrapper">
-    <NavBar />
+  <div class="app-wrapper" style="background: #302f35">
+    <mt-header title="Theo dõi chúng tôi">
+      <mt-button icon="back" slot="left" @click="$router.go(-1)"></mt-button>
+    </mt-header>
+<!--    <NavBar />-->
     <div class="page-main">
       <div class="about_top">
         <div class="about_top_logo"><img  class="logo" src="../../assets/img/logo-03.png" alt=""></div>
@@ -24,24 +27,33 @@
 </template>
 
 <script>
-// import { NavBar } from "../../components/index.js";
-import NavBar from "../../components/NavBar";
+// import NavBar from "../../components/NavBar";
 
 export default {
   data() {
     return {};
   },
-  components: {
-    NavBar,
+  // components: {
+    // NavBar,
+  // },
+  mounted: function () {
+    let header = document.querySelector('.mint-header')
+    let bodyBox = document.querySelector('.body-box')
+    header.style.backgroundColor = 'transparent'
+    bodyBox.style.height = '100%'
   },
-  methods: {},
-};
+  methods: {}
+}
 </script>
 
 <style scoped></style>
 <style lang="less" scoped>
 @import "../../assets/styles/index.less";
 
+.mint-header {
+  border: none;
+  //background-color: rgba(20, 45, 55, 0.3);
+}
 .page-main {
   padding: 0 15px;
 

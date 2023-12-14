@@ -121,17 +121,10 @@
 
 </template>
 <script>
-// import { Toast } from 'mint-ui'
-// import { isNull, isPhone } from '@/utils/utils'
-// import * as api from '@/axios/api'
-import Footer from '../components/Footer.vue'
-import foot from '@/components/foot/foot'
-import foot from '../components/Footer'
-
+import Footer from '../components/Footer'
 export default {
   components: {
-    Footer,
-    foot
+    Footer
   },
   data () {
     return {
