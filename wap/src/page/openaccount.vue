@@ -116,15 +116,20 @@
         </li>
       </ul>
     </div>
-    <foot></foot>
+    <Footer />
   </div>
+
 </template>
 <script>
 // import { Toast } from 'mint-ui'
 // import { isNull, isPhone } from '@/utils/utils'
 // import * as api from '@/axios/api'
+import Footer from '../components/Footer.vue'
 import foot from '@/components/foot/foot'
 export default {
+  components: {
+    Footer
+  },
   data () {
     return {
       openIcon1: require('../../static/img/openAccount/open-icon1.png'),

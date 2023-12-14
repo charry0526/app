@@ -8,7 +8,7 @@
       </div>
       <div>
         <div v-if="!isOptionOpt" @click="addOptions"><img src="../../assets/images/details/join.png"></div>
-        <div v-else @click="deteleOptions"><img style="max-width:20px" src="../../assets/images/home/close@x2.png"></div>
+        <div v-else @click="deteleOptions"><img style="max-width:20px" src="../../assets/images/home/close-01.png"></div>
         <div style="margin-left: 5px;" @click="toBuy"><img src="../../assets/images/details/buy.png"></div>
       </div>
     </div>
@@ -25,7 +25,7 @@
           <div class="price-left-total">
             <p :class="detail.hcrate === 0 ? 'yellow' : (detail.hcrate > 0 ? 'green' : 'red')">{{ Number(detail.hcrate / 1000).toFixed(2) }}</p>
             <p :class="detail.hcrate === 0 ? 'yellow' : (detail.hcrate > 0 ? 'green' : 'red')">{{ Number(detail.hcratePercentage).toFixed(2) }}%</p>
-            <p>{{ (Number(detail.volume) / 1000).toFixed(2) }}M</p>
+            <p>{{ (Number(detail.volume) / 1000).toFixed(2) }}</p>
           </div>
         </div>
       </div>

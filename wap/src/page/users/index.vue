@@ -256,6 +256,7 @@
             </div>
             <div>
               <div><router-link to="/about">关于我们</router-link></div>
+              <div></div>
             </div>
           </div>
 

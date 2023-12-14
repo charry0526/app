@@ -163,7 +163,7 @@
             <!-- </el-upload> -->
 
             <div class="user-title">
-              <p><a href="#/users" style="color: #f99420;">{{ $store.state.userInfo.nickName }}</a></p>
+              <p><a href="#/user" style="color: #f99420;">{{ $store.state.userInfo.nickName }}</a></p>
               <p>{{ $store.state.userInfo.phone }}</p>
             </div>
           </div>

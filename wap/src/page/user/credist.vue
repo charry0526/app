@@ -37,7 +37,7 @@
             </div>
             <div class="info_list">
               <div class="info_item">
-                <div>{{ userInfo.creditLimit }}</div>
+                <div>{{ userInfo.creditLimit-userInfo.amountBorrowed }}</div>
                 <div style="font-size: 14px;">Hạn mức vay tiền</div>
               </div>
               <div class="info_item">

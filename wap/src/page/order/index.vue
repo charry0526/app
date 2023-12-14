@@ -208,8 +208,8 @@ export default {
       let totalObj = {
         pKey: sessionStorage.getItem('pKey'),
         state: state,
-        pageNum: 1,
-        pageSize: 1,
+        // pageNum: 1,
+        // pageSize: 1,
       }
       let totalRes = api.getUserPropertyTotal(totalObj);
       totalRes.then(result => {

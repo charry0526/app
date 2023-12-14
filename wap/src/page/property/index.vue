@@ -241,7 +241,7 @@
                     <div>持有资产</div>
                   </div>
                   <div class="item_number">{{
-                    $moneyDot(propertyInfo.shareholdingAmt)
+                    $moneyDot(propertyInfo.userAmt)
                     }}
                   </div>
                 </div>
@@ -251,7 +251,7 @@
                     <div>可用资产</div>
                   </div>
                   <div class="item_number">{{
-                    $moneyDot(propertyInfo.availableAmount)
+                    $moneyDot(propertyInfo.enableAmt)
                     }}
                   </div>
                 </div>

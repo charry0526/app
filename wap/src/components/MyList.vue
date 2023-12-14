@@ -39,7 +39,7 @@
                   <span v-if="proList.watchListData">{{
                     item.hcrate }}</span>
                   <span v-else-if="proList.market">{{
-                    item.nowPrice - item.hcrate }}</span>
+                    $moneyDot(((item.nowPrice - item.hcrate) / 1000).toFixed(2))}}</span>
                   <span v-else-if="proList.welfare">{{
                     item.scprice }}</span>
                   <span v-else>{{
@@ -167,7 +167,9 @@
                 </div>
                 <div class="cardItemInfo_item">
                   <span>实际损益</span>
-                  <span>{{ $moneyDot(item.allProfitAndLose)
+                  <span style="color: rgb(91, 186, 110)" v-if="item.allProfitAndLose > 0">{{ $moneyDot(item.allProfitAndLose)
+                  }}</span>
+                   <span style="color: #d02551;" v-else="item.allProfitAndLose < 0">{{ $moneyDot(item.allProfitAndLose)
                   }}</span>
                 </div>
               </div>
@@ -218,7 +220,9 @@
                 <div class="cardItemInfo_item"></div>
                 <div class="cardItemInfo_item">
                   <span>损益</span>
-                  <span>{{ $moneyDot(item.profitAndLose)
+                   <span style="color: rgb(91, 186, 110)" v-if="item.profitAndLose > 0">{{ $moneyDot(item.profitAndLose)
+                  }}</span>
+                   <span style="color: #d02551;" v-else="item.profitAndLose < 0">{{ $moneyDot(item.profitAndLose)
                   }}</span>
                 </div>
               </div>
