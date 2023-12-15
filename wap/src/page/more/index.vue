@@ -222,7 +222,7 @@
             <div class="between-box property-detail-title">
 <!--              总资产-->
               <div>Tổng tài sản</div>
-              <div>{{ $moneyDot((propertyInfo.userAmt + propertyInfo.enableAmt)) }}</div>
+              <div>{{ $moneyDot((propertyInfo.userAmt)) }}</div>
             </div>
             <div class="between-box property-detail-title">
 <!--              可用资产-->

@@ -237,7 +237,7 @@
               <div style="font-size: 14px">Tổng tài sản</div>
               <div
                 style="font-size: 18px; margin-top: 10px; margin-bottom: 25px; word-wrap: break-word; overflow-wrap: break-word;">
-                {{ $moneyDot(propertyInfo.userAmt + propertyInfo.enableAmt) }}
+                {{ $moneyDot(propertyInfo.userAmt) }}
               </div>
               <div class="between-box property-total-icon">
                 <div class="between-box_item">
@@ -246,7 +246,7 @@
                     <div>Giá trị đang nắm giữ</div>
                   </div>
                   <div class="item_number">{{
-                    $moneyDot(propertyInfo.userAmt)
+                    $moneyDot(propertyInfo.shareholdingAmt)
                     }}
                   </div>
                 </div>
@@ -535,7 +535,7 @@ export default {
       }
       let res = api.getUserProperty(obj)
       res.then(result => {
-        this.rate = Math.ceil(result.data.userAmt / (result.data.userAmt + result.data.enableAmt) * 100)
+        this.rate = Math.ceil(result.data.shareholdingAmt / result.data.enableAmt * 100)
         this.propertyInfo = result.data
       })
     }
