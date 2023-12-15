@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import { apikey } from '@/utils/shuhaikeji'
-import { Toast } from 'mint-ui'
+// import { Toast } from 'mint-ui'
+import { Toast } from "vant";
 import * as api from '@/axios/api'
 import { numberColor } from '@/utils/utils'
 import Footer from "../../components/Footer";
@@ -34,14 +34,7 @@ import MyTab from "../../components/MyTab";
 import MyList from "../../components/MyList";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/swiper-bundle.min.css";
-//mock数据
-// import {
-//   // tabList,
-//   watchListData,
-//   marketListData,
-//   welfareESOP,
-//   stateList,
-// } from "@/mock";
+import { apikey } from '@/utils/shuhaikeji'
 
 
 export default {
@@ -117,18 +110,25 @@ export default {
     Swiper,
     SwiperSlide,
   },
-  // computed: {
-  //   swiper() {
-  //     return this.$refs.mySwiper.$swiper;
-  //   },
-  // },
   mounted() {
-    // console.log("Current Swiper instance object", this.swiper);
-    // this.swiper.slideTo(3, 1000, false);
     this.getMarket()
     this.getUserStock()
   },
   methods: {
+    showLoading() {
+      Toast({
+        className: "login_toast",
+        icon: require("../../assets/images/login/loading.gif"),
+        // duration: 0,
+        overlay: true
+        // onClose: () => {
+        //   this.$router.push("/userInfo");
+        // },
+      });
+    },
+    closeLoading() {
+      Toast.clear()
+    },
     changeListData() {
       this.getUserStock()
     },
@@ -136,7 +136,6 @@ export default {
       return numberColor(val)
     },
     changeData(...agrs) {
-      console.log('changeData---', agrs)
       if (typeof this[agrs[1]] === 'function') {
         this[agrs[1]](agrs[0]);
       }
@@ -146,10 +145,17 @@ export default {
      */
     async getendorseList(pageNum) {
       try {
-        const option = { pageNum: pageNum || this.pageNum, pageSize: this.pageSize, phone: this.$store.state.userInfo.phone }
+        let phone = this.$store.state.userInfo.phone
+        if (!phone) {
+          let userInfo = await api.getUserInfo()
+          if (userInfo.status === 0) {
+            phone = userInfo.data.phone
+          }
+        }
+        const option = { pageNum: pageNum || this.pageNum, pageSize: this.pageSize, phone }
         let data = await api.endorseList(option)
-        console.log('getendorseList-----', data)
         if (data.status === 0) {
+          this.closeLoading()
           let stateList = {
             tabList: [
               {
@@ -184,7 +190,7 @@ export default {
             lastPage: data.data.lastPage,
             fn: 'getendorseList',
           }
-          if (pageNum == 1) {
+          if (pageNum === 1) {
             stateList.stateList.list = data.data.list
             this.proList = stateList
           } else {
@@ -199,12 +205,12 @@ export default {
     * 红利股列表
     */
     async getNewlist(pageNum) {
-      console.log('pageNum---', pageNum)
       try {
         const option = { pageNum: pageNum || this.pageNum, pageSize: this.pageSize }
         let data = await api.Newlist(option)
         console.log('getNewlist-----', data)
         if (data.status === 0) {
+          this.closeLoading()
           let welfareESOP = {
             tabList: [
               {
@@ -246,15 +252,39 @@ export default {
     },
     //市场列表
     async getStock(pageNum, stockPlate) {
-      console.log('pageNum---', pageNum)
+      let isNew = ['VN30', 'HNX30'].includes(stockPlate);
       let opt = {
-        stockPlate: stockPlate || this.stockPlate,
         pageNum: pageNum || this.pageNum,
         pageSize: this.pageSize,
+        stockPlate: stockPlate || this.stockPlate,
       }
-      let data = await api.getStock(opt)
-      console.log('getStock---', data)
+
+      let data = isNew ? await api.wifeedDutop({
+        san: stockPlate || this.stockPlate,
+        apikey
+      }) : await api.getStock(opt);
+
+      if (isNew) {
+        let replaceData = {
+          list: [],
+          total: data.data.length,
+          lastPage: 1
+        };
+        data.status = data.msg ? 1 : 0;
+        data.data.map(result => {
+          replaceData.list.push({
+            name: result.mack,
+            nowPrice: result.high_root,
+            changedRatio: result.changedratio ? result.changedratio : 0, //涨幅度百分比
+            floorPrice: result.changed, //涨幅度金额
+            volume: result.volume_root
+          })
+        })
+        data.data = replaceData
+      }
+
       if (data.status === 0) {
+        this.closeLoading()
         let marketListData = {
           tabList: [
             {
@@ -281,7 +311,7 @@ export default {
           lastPage: data.data.lastPage,
           fn: 'getStock',
         }
-        if (pageNum == 1) {
+        if (pageNum === 1) {
           marketListData.market.list = data.data.list
           this.proList = marketListData
 
@@ -304,6 +334,7 @@ export default {
     },
     //关注列表
     async getUserStock(pageNum) {
+      this.showLoading()
       console.log('pageNum', pageNum)
       let opt = {
         keyWords: this.keywords,
@@ -313,6 +344,7 @@ export default {
       }
       let data = await api.getMyList(opt)
       if (data.status === 0) {
+        this.closeLoading()
         let watchListData = {
           tabList: [
             {
@@ -357,6 +389,7 @@ export default {
       }
     },
     tabHandelClick(oneTabItemData, childrenTabItemData) {
+      this.showLoading()
       this.fromListType = oneTabItemData.name
       //模拟不同数据// /后面根据真实id发交易
       if (oneTabItemData.name === "Theo dõi biểu") {
@@ -377,7 +410,6 @@ export default {
         if (childrenTabItemData.name == 'ESOP') {
           this.getNewlist(1)
         } else if (childrenTabItemData.name == 'Danh mục') {
-          console.log(1111)
           this.getendorseList(1)
         }
       } else {

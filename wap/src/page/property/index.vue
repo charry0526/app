@@ -42,6 +42,7 @@
             padding: 0 5px 12px 0;
             display: inline-block;
             white-space: nowrap;
+            display: block;
 
             &:nth-child(2) {
               padding-bottom: 0;
@@ -172,10 +173,6 @@
   margin-bottom: 5px;
 }
 
-// .property-total-icon>div:first-child {
-//   margin-right: 30px;
-// }
-
 .property-detail-title {
   font-size: 14px;
 }
@@ -198,13 +195,21 @@
   margin-left: 5px;
 }
 </style>
-<style>
+<style lang="less">
 .van-circle__text {
   color: #fff
 }
 
-.van-circle__hover {
-  stroke: #ff8f00
+.van-circle {
+  svg {
+    .van-circle__layer {
+      stroke: rgb(91, 186, 110) !important;
+    }
+
+    .van-circle__hover {
+      stroke: #ff8f00 !important
+    }
+  }
 }
 </style>
 <template>

@@ -35,7 +35,7 @@
               <div>{{ userInfo.creditScore }}</div>
               <div style="font-size: 15px;">Đánh giá tín dụng</div>
             </div>
-            <div class="info_list">
+            <div class="info_list" style="display: flex; justify-content: space-between;">
               <div class="info_item">
                 <div>{{ userInfo.creditLimit-userInfo.amountBorrowed }}</div>
                 <div style="font-size: 14px;">Hạn mức vay tiền</div>
@@ -402,7 +402,7 @@ export default {
   box-sizing: border-box;
 }
 .info_list{
-  width: 5.2rem;
+  width: 90%;
   display: flex;
   align-items: center;
   justify-content: space-between;

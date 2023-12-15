@@ -344,7 +344,7 @@ export default {
       }
     },
 
-    handleAvatarSuccess (res, file) {
+    handleAvatarSuccess (res) {
       this.imageUrl = res.data.url
       this.editInfo()
     },

@@ -653,7 +653,8 @@ export default new Router({
       name: "about",
       meta: {
         title: "Theo dõi chúng tôi",
-        hasHeader: false
+        requireAuth: false,
+        hasHeader: true
       },
       component: () => import("../page/about/index.vue")
     },

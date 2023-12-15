@@ -141,6 +141,12 @@
   padding-bottom: 8px;
 }
 
+/deep/ .el-upload__input{
+  display: none;
+}
+/deep/ .el-upload{
+  display: flex;
+}
 </style>
 <template>
   <div class="app-wrapper">
@@ -148,19 +154,22 @@
     <div class="page-main user-center">
       <div style="padding: 30px 15px 20px 15px;">
           <div class="user-info">
-            <!-- <el-upload
-                class="avatar-uploader"
-                name="upload_file"
-                :action="admin+'/apis/user/upload.do'"
-                :show-file-list="false"
-                :with-credentials='true'
-                :on-success="handleAvatarSuccess"
-                :on-error='handleError'
-                :before-upload="beforeAvatarUpload"> -->
-              <div class="user-avatar">
-                <img :src="$store.state.userInfo.avatar ? $store.state.userInfo.avatar : '../../assets/images/users/default.png'" alt="" />
-              </div>
-            <!-- </el-upload> -->
+            <div class="user-avatar">
+              <el-upload
+                  class="avatar-uploader"
+                  name="upload_file"
+                  action="/apis/user/upload.do"
+                  :show-file-list="false"
+                  :with-credentials='true'
+                  :on-success="handleAvatarSuccess">
+                <div v-if="$store.state.userInfo.avatar" class="avatar-box">
+                  <img :src="$store.state.userInfo.avatar" alt="" />
+                </div>
+                <div v-else class="default-avatar-box">
+                  <img   src="../../assets/ico/wogerenziliao.png" alt="" />
+                </div>
+              </el-upload>
+            </div>
 
             <div class="user-title">
               <p><a href="#/user" style="color: #f99420;">{{ $store.state.userInfo.nickName }}</a></p>
@@ -249,7 +258,7 @@
             </div>
             <div class="between-box property-detail-title">
 <!--              总持股数量-->
-              <div>总持股数量</div>
+              <div>Số lượng nắm giữ</div>
               <div>{{ $moneyDot(propertyInfo.shareholdingNumber) }}</div>
             </div>
             <div class="between-box property-detail-title">
@@ -446,6 +455,15 @@ export default {
       }
       let res = api.getUserProperty(obj);
       res.then(result => { this.propertyInfo = result.data; });
+    },
+    handleAvatarSuccess (res) {
+      this.imageUrl = res.data.url
+      this.editInfo()
+    },
+
+    async editInfo () {
+      await api.setUserInfo({avatar: this.imageUrl, id: this.$store.state.userInfo.id})
+      this.$store.state.userInfo.avatar = this.imageUrl
     }
   },
 };
