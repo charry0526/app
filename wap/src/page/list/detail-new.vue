@@ -4,7 +4,7 @@
     <div class="between-box page-title page-box-start" style="margin-top: 8px">
       <div>
         <div class="title-1">{{ detail.code }}</div>
-        <div class="title-2">({{ detail.code }})</div>
+        <div class="title-2">({{ detail.stockPlate }})</div>
       </div>
       <div>
         <div v-if="!isOptionOpt" @click="addOptions"><img src="../../assets/images/details/join.png"></div>
@@ -14,7 +14,7 @@
     </div>
     <div class="between-box" style="font-size: 12px; color: #FFFFFF; height: 110px; margin-top: 8px">
       <div class="page-title" style="width: 45%; height: 110px;">
-        <div>{{ detail.code }}</div>
+        <div>{{ detail.stockFullname }}</div>
         <div class="between-box">
           <div class="price-left-total">
             <div :class="['page-price', detail.hcrate === 0 ? 'yellow' : (detail.hcrate > 0 ? 'green' : 'red')]">
@@ -479,7 +479,7 @@ export default {
   align-content: space-between;
   flex-direction: column;
   height: 70px;
-  margin-top: 10px;
+  //margin-top: 10px;
   justify-content: space-around;
 }
 .price-box{

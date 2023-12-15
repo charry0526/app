@@ -7,11 +7,16 @@
           <div class="stock_title">
             <b>{{ item.indexName }}</b>{{ item.maxNum }}
           </div>
-          <div class="stock_price " :class="numberColorFn(item.currentPoint) ? 'text_red' : 'text_green'">{{
-            Number(item.currentPoint).toFixed(2) }}</div>
+          <div class="stock_price " :class="numberColorFn(item.volumePoint) ? 'text_red' : 'text_green'">{{
+            Number(item.volumePoint)}}
+          </div>
+<!--          <div class="stock_price " :class="numberColorFn(item.currentPoint) ? 'text_red' : 'text_green'">{{-->
+<!--              Number(item.currentPoint).toFixed(2) }}-->
+<!--          </div>-->
           <div class="stock_percentage">
             <span :class="numberColorFn(item.floatPoint) ? 'text_red' : 'text_green'">{{ item.floatPoint }}</span>
-            <span :class="numberColorFn(item.floatRate) ? 'text_red' : 'text_green'">{{ item.floatRate }}%</span>
+<!--            <span :class="numberColorFn(item.floatRate) ? 'text_red' : 'text_green'">{{ item.floatRate }}%</span>-->
+            <span :class="numberColorFn(item.currentPoint) ? 'text_red' : 'text_green'">{{ Number(item.currentPoint).toFixed(2) }}</span>
           </div>
         </swiper-slide>
       </swiper>
@@ -252,36 +257,37 @@ export default {
     },
     //市场列表
     async getStock(pageNum, stockPlate) {
-      let isNew = ['VN30', 'HNX30'].includes(stockPlate);
+      // let isNew = ['VN30', 'HNX30'].includes(stockPlate);
       let opt = {
         pageNum: pageNum || this.pageNum,
         pageSize: this.pageSize,
         stockPlate: stockPlate || this.stockPlate,
       }
 
-      let data = isNew ? await api.wifeedDutop({
-        san: stockPlate || this.stockPlate,
-        apikey
-      }) : await api.getStock(opt);
+      let data = await api.getStock(opt)
+      // let data = isNew ? await api.wifeedDutop({
+      //   san: stockPlate || this.stockPlate,
+      //   apikey
+      // }) : await api.getStock(opt);
 
-      if (isNew) {
-        let replaceData = {
-          list: [],
-          total: data.data.length,
-          lastPage: 1
-        };
-        data.status = data.msg ? 1 : 0;
-        data.data.map(result => {
-          replaceData.list.push({
-            name: result.mack,
-            nowPrice: result.high_root,
-            changedRatio: result.changedratio ? result.changedratio : 0, //涨幅度百分比
-            floorPrice: result.changed, //涨幅度金额
-            volume: result.volume_root
-          })
-        })
-        data.data = replaceData
-      }
+      // if (isNew) {
+      //   let replaceData = {
+      //     list: [],
+      //     total: data.data.length,
+      //     lastPage: 1
+      //   };
+      //   data.status = data.msg ? 1 : 0;
+      //   data.data.map(result => {
+      //     replaceData.list.push({
+      //       name: result.mack,
+      //       nowPrice: result.high_root,
+      //       changedRatio: result.changedratio ? result.changedratio : 0, //涨幅度百分比
+      //       floorPrice: result.changed, //涨幅度金额
+      //       volume: result.volume_root
+      //     })
+      //   })
+      //   data.data = replaceData
+      // }
 
       if (data.status === 0) {
         this.closeLoading()
@@ -314,7 +320,6 @@ export default {
         if (pageNum === 1) {
           marketListData.market.list = data.data.list
           this.proList = marketListData
-
         } else {
           this.proList.market.list.push(...data.data.list)
         }
