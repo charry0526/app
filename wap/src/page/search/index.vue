@@ -12,7 +12,7 @@
     <div class="page-main">
       <div class="infinite-list-wrapper" ref="wrapper">
         <div v-infinite-scroll="load" infinite-scroll-disabled="disabled">
-          <div class="searchItem" v-for="(item, index) in searchList" :key="index" @click="searchItemClick">
+          <div class="searchItem" v-for="(item, index) in searchList" :key="index" @click="searchItemClick(item)">
             {{ item.name }}
           </div>
         </div>
@@ -90,7 +90,7 @@ export default {
       this.$router.go(-1);
     },
     searchItemClick(item) {
-      console.log(item);
+      this.$router.push('detail-new?code='+(item.name || '')+'&stock_type='+(item.name || ''))
     },
     //异步加载数据
     load() {
