@@ -254,7 +254,7 @@
             <div class="between-box property-detail-title">
 <!--              总持股市值-->
               <div>Giá trị thị trường nắm giữ</div>
-              <div>{{ $moneyDot(propertyInfo.shareholdingAmt) }}</div>
+              <div>{{ $moneyDot(propertyInfo.shareholdingAmt-propertyInfo.shareholdingProperty) }}</div>
             </div>
             <div class="between-box property-detail-title">
 <!--              总持股数量-->
@@ -281,7 +281,7 @@
             <div class="between-box property-detail-title">
 <!--              信用金可贷金额-->
               <div>Số tiền khả dụng tín dụng</div>
-              <div>{{ $moneyDot(propertyInfo.creditAvailableLimit) }}</div>
+              <div>{{ $moneyDot(propertyInfo.creditAvailableLimit-propertyInfo.creditBorrowedAmt) }}</div>
             </div>
             <div class="between-box property-detail-title">
 <!--              信用金已贷金额-->

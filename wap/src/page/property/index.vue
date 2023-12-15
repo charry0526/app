@@ -285,7 +285,7 @@
           <div class="between-box property-detail-subtitle property-detail-title">
             <div>Tài sản CK</div>
             <div class="between-box">
-              <div>{{ $moneyDot(propertyInfo.userAmt) }}</div>
+              <div>{{ $moneyDot(propertyInfo.shareholdingAmt) }}</div>
               <div class="fold-icon" @click="property_1 = property_1 === 1 ? 0 : 1">
                 <img v-if=" property_1 === 1 " src="../../assets/images/property/dropdown.png" alt="" />
                 <img v-else src="../../assets/images/users/more.png" alt="" />
@@ -295,7 +295,7 @@
           <div class="property-list-template" v-if=" property_1 ">
             <div class="between-box">
               <div>Giá trị thị trường nắm giữ</div>
-              <div>{{ $moneyDot(propertyInfo.shareholdingAmt) }}</div>
+              <div>{{ $moneyDot(propertyInfo.shareholdingAmt-propertyInfo.shareholdingProperty) }}</div>
             </div>
             <div class="between-box">
               <div>Số lượng nắm giữ</div>
@@ -351,7 +351,7 @@
             </div>
             <div class="between-box">
               <div>Số tiền khả dụng tín dụng</div>
-              <div>{{ $moneyDot(propertyInfo.creditAvailableLimit) }}</div>
+              <div>{{ $moneyDot(propertyInfo.creditAvailableLimit-propertyInfo.creditBorrowedAmt) }}</div>
             </div>
             <div class="between-box">
               <div>Số tiền đã vay tín dụng</div>
@@ -535,7 +535,7 @@ export default {
       }
       let res = api.getUserProperty(obj)
       res.then(result => {
-        this.rate = Math.ceil(result.data.shareholdingAmt / result.data.enableAmt * 100)
+        this.rate = Math.ceil(result.data.shareholdingAmt / result.data.userAmt  * 100)
         this.propertyInfo = result.data
       })
     }
