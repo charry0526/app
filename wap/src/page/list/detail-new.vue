@@ -16,7 +16,7 @@
             <div style="margin-left: 5px;" @click="toBuy"><img src="../../assets/images/details/buy.png"></div>
           </div>
         </div>
-        <div v-if="showTotalNumber" :class="detail.hcrate > 0 ? 'green' : 'red'" style="padding-top: 10px; height: 23px">
+        <div v-if="showTotalNumber" :class="detail.hcrate === 0 ? 'yellow' : (detail.hcrate > 0 ? 'green' : 'red')" style="padding-top: 10px; height: 23px">
           <span>{{ Number(detail.nowPrice / 1000).toFixed(2) }}</span>
           <span style="margin-left: 10px">{{ Number(detail.hcrate / 1000).toFixed(2) }}</span>
           <span style="margin-left: 10px">{{ Number(detail.hcratePercentage).toFixed(2) }}%</span>

@@ -33,11 +33,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
 <style lang="less" scoped>
-
 .page-main {
-  padding: 0 15px;
+  padding: 0 15px !important;
 
   .logo {
     width: 93px;

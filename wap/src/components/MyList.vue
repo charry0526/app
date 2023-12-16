@@ -487,6 +487,7 @@ export default {
     },
     goDetail(item, fromListType) {
       let code = '', stock_type = ''
+      fromListType = sessionStorage.getItem('oneTabItemData') ? sessionStorage.getItem('oneTabItemData') : fromListType;
       if (fromListType === 'Theo dõi') {
         code = item.stockCode
         stock_type = item.stock_type
