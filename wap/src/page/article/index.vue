@@ -176,7 +176,7 @@ export default {
           title: item.title,
           content: item.maincontent,
           sourcenews: item.sourcenews,
-          date: moment(item.created_at).format("YYYY-MM-DD HH:mm:ss"),
+          date: moment(item.created_at).format("DD/MM/YYYY HH:mm:ss"),
           year: moment(item.created_at).format("YYYY"),
           day: moment(item.created_at).format("DD"),
           month: moment(item.created_at).format("MM")

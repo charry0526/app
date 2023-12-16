@@ -28,9 +28,6 @@ import Vue from "vue";
 import { Search, Toast, Empty, Loading } from "vant";
 import * as api from "@/axios/api";
 
-import NavBar from "../../components/NavBar";
-import { getStock } from "../../axios/api";
-
 Vue.use(Search);
 Vue.use(Toast);
 Vue.use(Empty);
@@ -55,7 +52,6 @@ export default {
     },
   },
   components: {
-    NavBar,
   },
   methods: {
     handleSearchInput() {
@@ -118,7 +114,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import "../../assets/styles/index.less";
 .infinite-list-wrapper_tips{
   text-align: center;
   font-size: 14px;

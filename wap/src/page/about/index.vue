@@ -23,15 +23,11 @@
 </template>
 
 <script>
-// import { NavBar } from "../../components/index.js";
-import NavBar from "../../components/NavBar";
-
 export default {
   data() {
     return {};
   },
   components: {
-    NavBar,
   },
   methods: {},
 };
@@ -39,7 +35,6 @@ export default {
 
 <style scoped></style>
 <style lang="less" scoped>
-@import "../../assets/styles/index.less";
 
 .page-main {
   padding: 0 15px;

@@ -51,6 +51,7 @@
       <!-- <form action=""> -->
       <div class="upload-btn">
         <el-upload :with-credentials='true'
+                   :disabled="!!form.img1key"
                    class="avatar-uploader"
                    :action="admin+'/apis/user/upload.do'"
                    list-type="picture-card"
@@ -76,6 +77,7 @@
       </div>
       <div class="upload-btn">
         <el-upload :with-credentials='true'
+                   :disabled="!!form.img1key"
                    class="avatar-uploader"
                    :action="admin+'/apis/user/upload.do'"
                    list-type="picture-card"

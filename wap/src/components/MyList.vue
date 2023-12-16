@@ -444,14 +444,14 @@ export default {
     colorTextFn(item, list) {
       if (list.watchListData) {
         if (((item.hcrate / (item.nowPrice - item.hcrate) * 100).toFixed(2)) >= 0) {
-          return 'text_green'
+          return ((item.hcrate / (item.nowPrice - item.hcrate) * 100).toFixed(2)) == 0 ? 'text_yellow' : 'text_green'
         } else {
           return 'text_red'
         }
       } else if (list.market) {
         let changedRatio = item.changedRatio ? item.changedRatio : ((item.hcrate / (item.nowPrice - item.hcrate) * 100).toFixed(2))
         if (changedRatio >= 0) {
-          return 'text_green'
+          return changedRatio == 0 ? 'text_yellow' : 'text_green'
         } else {
           return 'text_red'
         }
