@@ -133,6 +133,9 @@ export default {
   background: #1a191e;
   border-radius: 16px 16px 0 0;
 }
+.app-wrapper .page-main{
+  padding: 0 !important;
+}
 </style>
 <style >
 #app .body-box {

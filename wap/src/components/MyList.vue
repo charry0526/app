@@ -487,10 +487,10 @@ export default {
     },
     goDetail(item, fromListType) {
       let code = '', stock_type = ''
-      if (fromListType === 'Theo dõi biểu') {
+      if (fromListType === 'Theo dõi') {
         code = item.stockCode
         stock_type = item.stock_type
-      } else if (fromListType === 'Biểu thị trường') {
+      } else if (fromListType === 'Thị trường') {
         code = item.code
         stock_type = item.stock_type
       } else if (fromListType === 'ESOP') {
@@ -504,6 +504,7 @@ export default {
         code = item.stockCode
         stock_type = item.stock_type
       }
+      console.log(fromListType)
       this.$router.push(`detail-new?code=${code || ''}&stock_type=${stock_type || ''}`)
     },
     numberColorFn(val) {
