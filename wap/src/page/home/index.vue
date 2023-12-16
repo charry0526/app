@@ -5,7 +5,8 @@
       <swiper ref="mySwiper" class="swiper" :options="swiperOptions">
         <swiper-slide class="swiper-slide" v-for="item in stockList" :key="item.id" style="border-radius: 16px;">
           <div class="stock_title">
-            <b>{{ item.indexName }}</b>{{ item.maxNum }}
+<!--            <b>{{ item.indexName }}</b>{{ item.maxNum }}-->
+            <b>{{ item.indexName }}</b>
           </div>
           <div class="stock_price " :class="numberColorFn(item.volumePoint) ? 'text_red' : 'text_green'">{{
             Number(item.volumePoint)}}
@@ -46,7 +47,7 @@ export default {
   data() {
     return {
       active: 0,
-      fromListType: 'Theo dõi biểu',
+      fromListType: 'Theo dõi',
       keywords: '',
       pageNum: 1,
       pageSize: 15,
@@ -58,11 +59,11 @@ export default {
       tabList: [
         {
           id: "0",
-          name: "Theo dõi biểu"
+          name: "Theo dõi"
         },
         {
           id: "1",
-          name: "Biểu thị trường",
+          name: "Thị trường",
           childrenType: "nav", //是否有二级菜单， 二级的类型 nav为标题形式  content为文字内容
           children: [
             {
@@ -121,10 +122,10 @@ export default {
     // console.log(11111111, sessionStorage.getItem('oneTabItemData'))
     // console.log(222222, sessionStorage.getItem('childrenTabItemData'))
     if (sessionStorage.getItem('oneTabItemData')) {
-      if (sessionStorage.getItem('oneTabItemData') === 'Theo dõi biểu') {
+      if (sessionStorage.getItem('oneTabItemData') === 'Theo dõi') {
         this.active = 0
         this.getUserStock()
-      } else if (sessionStorage.getItem('oneTabItemData') === 'Biểu thị trường' && sessionStorage.getItem('childrenTabItemData')) {
+      } else if (sessionStorage.getItem('oneTabItemData') === 'Thị trường' && sessionStorage.getItem('childrenTabItemData')) {
         this.getStock(1, sessionStorage.getItem('childrenTabItemData'))
         this.active = 1
       } else if (sessionStorage.getItem('oneTabItemData') === 'ESOP') {
@@ -319,7 +320,7 @@ export default {
               isChange: 0 //0表示表头不可点击切换 例如百分比和金额切换
             },
             {
-              name: "Khớp",
+              name: "Giá TT",
               isChange: 0
             },
             {
@@ -378,7 +379,7 @@ export default {
               isChange: 0 //0表示表头不可点击切换 例如百分比和金额切换
             },
             {
-              name: "Khớp",
+              name: "Giá TT",
               isChange: 0
             },
             {
@@ -419,17 +420,17 @@ export default {
       this.fromListType = oneTabItemData.name
 
       sessionStorage.setItem('oneTabItemData', oneTabItemData.name);
-      if (oneTabItemData.name !== 'Theo dõi biểu') {
+      if (oneTabItemData.name !== 'Theo dõi') {
         sessionStorage.setItem('childrenTabItemData', childrenTabItemData.name);
       }
       //模拟不同数据// /后面根据真实id发交易
-      if (oneTabItemData.name === "Theo dõi biểu") {
+      if (oneTabItemData.name === "Theo dõi") {
         // 关注列表
         // this.proList = watchListData;
         this.active = 0
         this.getUserStock(1)
       } else if (
-        oneTabItemData.name === "Biểu thị trường"
+        oneTabItemData.name === "Thị trường"
       ) {
         this.active = 1
         //市场列表

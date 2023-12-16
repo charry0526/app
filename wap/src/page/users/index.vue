@@ -196,7 +196,7 @@
               <div>{{ $store.state.userInfo.nickName }}</div>
             </div>
             <div>
-              <div>Họ tên thât</div>
+              <div>Họ tên thật</div>
               <div>{{ $store.state.userInfo.realName }}</div>
             </div>
             <div>
