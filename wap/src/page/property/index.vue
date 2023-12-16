@@ -267,8 +267,8 @@
             <div class="bingtu">
               <van-circle v-model=" currentRate " size="111px" :rate=" rate " layer-color="#5bba6e" stroke-width=80 />
               <div class="bingtu_text">
-                Tài sản<p><span style="color: #5bba6e">{{ rate }}%</span> / <span style="color: #ff7b23">{{
-                    100 - rate
+                Tài sản<p><span style="color: #5bba6e">{{ rate || 0 }}%</span> / <span style="color: #ff7b23">{{
+                  (100 - rate) || 0
                     }}%</span></p>
               </div>
             </div>
