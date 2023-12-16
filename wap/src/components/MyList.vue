@@ -393,11 +393,11 @@ export default {
   watch: {
     proList: {
       handler(newValue, oldValue) {
-        console.log('newValue-----', newValue)
-        console.log('oldValue-----', oldValue)
+        // console.log('newValue-----', newValue)
+        // console.log('oldValue-----', oldValue)
         // 数据变化时触发的处理函数
         // this.init(); //初始化数据
-        console.log('this.proList.pageNum---', this.proList.pageNum)
+        // console.log('this.proList.pageNum---', this.proList.pageNum)
         if (this.proList.pageNum == 1) {
           this.init()
           // this.load()
@@ -713,7 +713,7 @@ export default {
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-left: 5px;
+        // margin-left: 5px;
 
         &::before {
           content: "";

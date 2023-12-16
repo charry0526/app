@@ -1,5 +1,7 @@
 <style src="../../../src/assets/styles/common.css"/>
 <style lang="less" scoped>
+@import "../../assets/styles/index.less";
+
 .tabBox {
   .tabChildren {
     padding: 10px 15px 0 15px;
@@ -537,7 +539,7 @@ export default {
       }
       let res = api.getUserProperty(obj)
       res.then(result => {
-        this.rate = Math.ceil(result.data.shareholdingAmt / result.data.userAmt  * 100)
+        this.rate = Math.ceil(result.data.shareholdingAmt / result.data.userAmt * 100)
         this.propertyInfo = result.data
       })
     }

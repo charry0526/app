@@ -1,5 +1,5 @@
 <template>
-  <van-tabbar v-model="active" inactive-color="#fff " active-color="#f99420" class="footer_tabbar">
+  <van-tabbar v-model="active" inactive-color="#fff " active-color="#f99420" class="footer_tabbar" id="footer_tabbar">
     <van-tabbar-item :to="item.path" v-for="item in navList" :key="item.id">
       <span>{{ item.name }}</span>
       <template #icon="props">
@@ -66,7 +66,29 @@ export default {
         break
       }
     }
+    this.$nextTick(() => {
+      console.log(2222)
+      // 获取当前窗口的可视区域高度
+      var viewportHeight = window.innerHeight;
+
+      // console.log("可视区域高度：" + viewportHeight);
+      //  获取窗口对象
+      const windowObj = window;
+      //  定义一个函数来处理可见区域高度变化
+      function handleVisibilityHeightChange(event) {
+        console.log("Visible  height:", event.target.innerHeight);
+        var element = document.getElementById("footer_tabbar");
+        element.style.top = `${(event.target.innerHeight || viewportHeight) - 50}px`;
+      }
+      windowObj.addEventListener("resize", handleVisibilityHeightChange);
+      //  在页面加载完成后，立即调用handleVisibilityHeightChange
+      windowObj.addEventListener("load", () => {
+        handleVisibilityHeightChange(event);
+      });
+    });
+
   },
+
 };
 </script>
 
@@ -77,8 +99,8 @@ export default {
 }
 
 .footer_tabbar {
-  position: absolute !important;
-  ;
+  position: fixed !important;
+  z-index: 9999;
 }
 </style>
 <style lang="less" scoped>
@@ -87,6 +109,7 @@ export default {
   background: url("../assets/images/tabBar/bottomBar@x2.png") no-repeat;
   background-size: 100% 100%;
   bottom: 0;
+  // bottom: auto;
   width: 100%;
   left: 0;
 

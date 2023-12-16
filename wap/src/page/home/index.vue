@@ -20,7 +20,7 @@
           </div>
         </swiper-slide>
       </swiper>
-      <my-tab :tabList="tabList" @tabHandelClick="tabHandelClick" />
+      <my-tab :tabList="tabList" @tabHandelClick="tabHandelClick" :activeFromIndex="active" />
       <my-list :proList="proList" :listType="listType" @changeData="changeData" :fromListType="fromListType"
         @changeListData="changeListData" />
     </div>
@@ -39,12 +39,13 @@ import MyTab from "../../components/MyTab";
 import MyList from "../../components/MyList";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/swiper-bundle.min.css";
-import { apikey } from '@/utils/shuhaikeji'
+// import { apikey } from '@/utils/shuhaikeji'
 
 
 export default {
   data() {
     return {
+      active: 0,
       fromListType: 'Theo dõi biểu',
       keywords: '',
       pageNum: 1,
@@ -117,7 +118,27 @@ export default {
   },
   mounted() {
     this.getMarket()
-    this.getUserStock()
+    // console.log(11111111, sessionStorage.getItem('oneTabItemData'))
+    // console.log(222222, sessionStorage.getItem('childrenTabItemData'))
+    if (sessionStorage.getItem('oneTabItemData')) {
+      if (sessionStorage.getItem('oneTabItemData') === 'Theo dõi biểu') {
+        this.active = 0
+        this.getUserStock()
+      } else if (sessionStorage.getItem('oneTabItemData') === 'Biểu thị trường' && sessionStorage.getItem('childrenTabItemData')) {
+        this.getStock(1, sessionStorage.getItem('childrenTabItemData'))
+        this.active = 1
+      } else if (sessionStorage.getItem('oneTabItemData') === 'ESOP') {
+        this.active = 2
+        if (sessionStorage.getItem('childrenTabItemData') === 'ESOP') {
+          this.getNewlist(1)
+        } else if (sessionStorage.getItem('childrenTabItemData') === 'Danh mục') {
+          this.getendorseList(1)
+        }
+      }
+    } else {
+      this.getUserStock()
+      this.active = 0
+    }
   },
   methods: {
     showLoading() {
@@ -396,14 +417,21 @@ export default {
     tabHandelClick(oneTabItemData, childrenTabItemData) {
       this.showLoading()
       this.fromListType = oneTabItemData.name
+
+      sessionStorage.setItem('oneTabItemData', oneTabItemData.name);
+      if (oneTabItemData.name !== 'Theo dõi biểu') {
+        sessionStorage.setItem('childrenTabItemData', childrenTabItemData.name);
+      }
       //模拟不同数据// /后面根据真实id发交易
       if (oneTabItemData.name === "Theo dõi biểu") {
         // 关注列表
         // this.proList = watchListData;
+        this.active = 0
         this.getUserStock(1)
       } else if (
         oneTabItemData.name === "Biểu thị trường"
       ) {
+        this.active = 1
         //市场列表
         // this.proList = marketListData;
         this.getStock(1, childrenTabItemData.name)
@@ -411,6 +439,7 @@ export default {
       } else if (
         oneTabItemData.name === "ESOP"
       ) {
+        this.active = 2
         // 福利股列表
         if (childrenTabItemData.name == 'ESOP') {
           this.getNewlist(1)

@@ -42,6 +42,10 @@ export default {
       type: String,
       default: "list",
     },
+    activeFromIndex: {
+      type: Number,
+      default: 0,
+    },
   },
   data() {
     return {
@@ -51,12 +55,25 @@ export default {
       tabChildrenType: "", //二级菜单展现方式
     };
   },
+  watch: {
+    activeFromIndex(newVal, oldVal) {
+      this.active = newVal
+      this.tabChildrenType = this.tabList[this.active].childrenType;
+      if (this.tabChildrenType) {
+        this.tabChildrenList = this.tabList[this.active].children;
+      }
+      if (sessionStorage.getItem('childrenTabItemIndex')) {
+        this.childrenActive = JSON.parse(sessionStorage.getItem('childrenTabItemIndex'))
+      }
+    },
+  },
   mounted() {
     this.init(); //初始化二级数据
     //初始化二级的
     this.tabList.forEach((i, index) => {
       this.childrenActive[index] = 0;
     });
+    console.log('tabList', this.tabList)
   },
   methods: {
     init(index) {
@@ -71,7 +88,7 @@ export default {
       this.init(index);
       let oneTabItemData = this.tabList[index];
       if (this.tabList[index].childrenType === "nav") {
-        console.log("二级tab可点击");
+        // console.log("二级tab可点击");
         let childrenTabIndex = this.childrenActive[index];
         let childrenTabItemData =
           this.tabList[index].children[childrenTabIndex];
@@ -85,6 +102,7 @@ export default {
       //二级tab
       this.$set(this.childrenActive, this.active, index);
       this.childrenActive = JSON.parse(JSON.stringify(this.childrenActive));
+      sessionStorage.setItem('childrenTabItemIndex', JSON.stringify(this.childrenActive));
       //传递数据给父元素
       let oneTabItemData = this.tabList[this.active];
       this.$emit("tabHandelClick", oneTabItemData, item);
@@ -156,20 +174,24 @@ export default {
 <style lang="less">
 .van-tabs__wrap {
   height: 37px !important;
+
   .van-tabs__nav {
     .van-tab {
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 14px;
+
       &.van-tab--active {
         background: #3d3c41;
         border-radius: 8px 8px 0 0;
         border-bottom: 2px solid #e8972c;
       }
     }
+
     .van-tabs__line {
       display: none;
     }
   }
-}</style>
+}
+</style>

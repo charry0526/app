@@ -24,10 +24,33 @@ import "../static/css/public2.css";
 import "vant/lib/index.css";
 import * as api from "@/axios/api";
 
+// import VConsole from "vconsole";
+// const vConsole = new VConsole();
+// 或者使用配置参数来初始化，详情见文档
+// const vConsole = new VConsole({ theme: "dark" });
+
 Vue.use(animated);
 Vue.use(ElementUI, { locales });
 Vue.use(VueClipboard);
 Vue.use(VueI18n);
+
+// // 获取当前窗口的可视区域高度
+// var viewportHeight = window.innerHeight;
+
+// // console.log("可视区域高度：" + viewportHeight);
+// //  获取窗口对象
+// const windowObj = window;
+// //  定义一个函数来处理可见区域高度变化
+// function handleVisibilityHeightChange(event) {
+//   console.log("Visible  height:", event.target.innerHeight);
+//   var element = document.getElementById("footer_tabbar");
+//   element.style.top = `${(event.target.innerHeight || viewportHeight) - 50}px`;
+// }
+// windowObj.addEventListener("resize", handleVisibilityHeightChange);
+// //  在页面加载完成后，立即调用handleVisibilityHeightChange
+// windowObj.addEventListener("load", () => {
+//   handleVisibilityHeightChange(event);
+// });
 
 // Vue.use(VueTouch, { name: 'v-touch' })
 // // Vue.prototype.$md5 = md5

@@ -1,18 +1,13 @@
-<style scoped>
-@import "../../assets/styles/index.less";
-</style>
 <style src="../../../src/assets/styles/common.css"/>
-<style scoped>>
-#app .body-box {
-  height: 100% !important;
-}
+<style lang="less" scoped>
+@import "../../../src/assets/styles/index.less";
 
 .app-wrapper {
   font-size: 12px;
   background-color: rgb(25 24 30);
 }
 
-.app-wrapper a{
+.app-wrapper a {
   color: #FFFFFF;
 }
 
@@ -82,12 +77,11 @@
 }
 
 .user-info-box {
-  padding-bottom: 15px;
+  padding: 15px;
 }
 
 .user-info-template {
   padding: 0 !important;
-  margin-top: 15px;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -129,31 +123,33 @@
 .no-border-bottom {
   border-bottom: none !important;
 }
-/deep/ .el-upload__input{
+
+/deep/ .el-upload__input {
   display: none;
 }
-/deep/ .el-upload{
+
+/deep/ .el-upload {
   display: flex;
+}
+</style>
+<style scoped>
+.app-wrapper .page-main {
+  padding-top: 0 !important;
+  padding-bottom: 100px !important;
 }
 </style>
 <template>
   <div class="app-wrapper">
-    <Header />
     <div class="page-main user-center">
       <div class="user-info">
         <div class="user-avatar">
-          <el-upload
-              class="avatar-uploader"
-              name="upload_file"
-              action="/apis/user/upload.do"
-              :show-file-list="false"
-              :with-credentials='true'
-              :on-success="handleAvatarSuccess">
+          <el-upload class="avatar-uploader" name="upload_file" action="/apis/user/upload.do" :show-file-list="false"
+            :with-credentials='true' :on-success="handleAvatarSuccess">
             <div v-if="$store.state.userInfo.avatar" class="avatar-box">
               <img :src="$store.state.userInfo.avatar" alt="" />
             </div>
             <div v-else class="default-avatar-box">
-              <img   src="../../assets/ico/wogerenziliao.png" alt="" />
+              <img src="../../assets/ico/wogerenziliao.png" alt="" />
             </div>
           </el-upload>
         </div>
@@ -165,11 +161,11 @@
 
       <div class="user-info-title">Đã xác minh</div>
       <div class="user-auth">
-<!--        暂未实名认证，请认证，下方是实名认证的入口，点击跳转实名页面-->
-        <p class="auth-p"  v-if="$store.state.userInfo.isActive !== 2">
+        <!--        暂未实名认证，请认证，下方是实名认证的入口，点击跳转实名页面-->
+        <p class="auth-p" v-if="$store.state.userInfo.isActive !== 2">
           Chưa xác thực, đề nghị xác thực, bấm vào dưới đây để chuyển sang giao diện xác thực
         </p>
-<!--        已实名认证，点击跳转认证详情页面-->
+        <!--        已实名认证，点击跳转认证详情页面-->
         <p class="auth-p" v-else>
           Đã xác thực, bấm vào để quay lại
         </p>
@@ -213,7 +209,8 @@
             </div>
             <div>
               <div>Thông tin địa chỉ</div>
-              <div style="text-align: left !important; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{ $store.state.userInfo.regAddress }}</div>
+              <div style="text-align: left !important; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{
+                $store.state.userInfo.regAddress }}</div>
             </div>
           </div>
           <div class="icon-title between-box" @click="goPage('/card')">
@@ -263,7 +260,7 @@
           </div>
 
           <div class="icon-title between-box no-border-bottom" @click="toRegister">
-            <div class="image-text" >
+            <div class="image-text">
               <div>
                 <img src="../../assets/images/users/loginout.png" alt="" />
               </div>
@@ -282,11 +279,11 @@
 <script>
 import Footer from "../../components/Footer.vue";
 import * as api from "@/axios/api";
-import {Toast} from "mint-ui";
+import { Toast } from "mint-ui";
 
 export default {
   name: "user-center",
-  components: {Footer},
+  components: { Footer },
   data() {
     return {
       isShowUserInfo: false,
@@ -299,7 +296,7 @@ export default {
   },
   methods: {
     // 退出登录
-    async toRegister () {
+    async toRegister() {
       // 注销登陆
       this.clearCookie()
       let data = await api.logout()
@@ -310,9 +307,8 @@ export default {
       }
       this.$router.push('/login')
     },
-    goPage(url){
-      if(!url)
-      {
+    goPage(url) {
+      if (!url) {
         return;
       }
       this.$router.push(url)
@@ -324,7 +320,7 @@ export default {
         this.isShowSystemInfo = !this.isShowSystemInfo
       }
     },
-    async getUserInfo () {
+    async getUserInfo() {
       let data = await api.getUserInfo()
       if (data.status === 0) {
         this.getProductSetting()
@@ -335,7 +331,7 @@ export default {
       this.$store.state.user = this.user
     },
 
-    async getProductSetting () {
+    async getProductSetting() {
       let data = await api.getProductSetting()
       if (data.status === 0) {
         this.$store.state.settingForm = data.data
@@ -344,13 +340,13 @@ export default {
       }
     },
 
-    handleAvatarSuccess (res) {
+    handleAvatarSuccess(res) {
       this.imageUrl = res.data.url
       this.editInfo()
     },
 
-    async editInfo () {
-      await api.setUserInfo({avatar: this.imageUrl, id: this.$store.state.userInfo.id})
+    async editInfo() {
+      await api.setUserInfo({ avatar: this.imageUrl, id: this.$store.state.userInfo.id })
       this.$store.state.userInfo.avatar = this.imageUrl
     }
   },

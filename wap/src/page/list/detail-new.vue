@@ -1,18 +1,29 @@
 <style src="../../../src/assets/styles/common.css"/>
 <template>
-  <div class="wrapper" style="padding: 0 15px;">
-    <div class="between-box page-title page-box-start" style="margin-top: 8px">
-      <div>
-        <div class="title-1">{{ detail.code }}</div>
-        <div class="title-2">({{ detail.stockPlate }})</div>
-      </div>
-      <div>
-        <div v-if="!isOptionOpt" @click="addOptions"><img src="../../assets/images/details/join.png"></div>
-        <div v-else @click="deteleOptions"><img style="max-width:20px" src="../../assets/images/home/close-01.png"></div>
-        <div style="margin-left: 5px;" @click="toBuy"><img src="../../assets/images/details/buy.png"></div>
+  <div class="wrapper" style="padding: 0 15px;" id="wrapper">
+    <div style="position: absolute; width: 100%; padding: 8px 15px 0 15px; left: 0; top: 1rem; z-index: 10; "
+      :class="isScroll ? 'Div_active' : ''">
+      <div class="page-title">
+        <div class="between-box page-box-start">
+          <div>
+            <div class="title-1">{{ detail.code }}</div>
+            <div class="title-2">({{ detail.stockPlate }})</div>
+          </div>
+          <div>
+            <div v-if="!isOptionOpt" @click="addOptions"><img src="../../assets/images/details/join.png"></div>
+            <div v-else @click="deteleOptions"><img style="max-width:20px" src="../../assets/images/home/close-01.png">
+            </div>
+            <div style="margin-left: 5px;" @click="toBuy"><img src="../../assets/images/details/buy.png"></div>
+          </div>
+        </div>
+        <div v-if="showTotalNumber" :class="detail.hcrate > 0 ? 'green' : 'red'" style="padding-top: 10px; height: 23px">
+          <span>{{ Number(detail.nowPrice / 1000).toFixed(2) }}</span>
+          <span style="margin-left: 10px">{{ Number(detail.hcrate / 1000).toFixed(2) }}</span>
+          <span style="margin-left: 10px">{{ Number(detail.hcratePercentage).toFixed(2) }}%</span>
+        </div>
       </div>
     </div>
-    <div class="between-box" style="font-size: 12px; color: #FFFFFF; min-height: 110px; margin-top: 8px">
+    <div class="between-box" style="font-size: 12px; color: #FFFFFF; min-height: 110px; margin-top: 58px">
       <div class="page-title" style="width: 45%; min-height: 110px;">
         <div>{{ detail.stockFullname }}</div>
         <div class="between-box" style="margin-top: 10px">
@@ -23,8 +34,10 @@
             <div>Tổng KL</div>
           </div>
           <div class="price-left-total">
-            <p :class="detail.hcrate === 0 ? 'yellow' : (detail.hcrate > 0 ? 'green' : 'red')">{{ Number(detail.hcrate / 1000).toFixed(2) }}</p>
-            <p :class="detail.hcrate === 0 ? 'yellow' : (detail.hcrate > 0 ? 'green' : 'red')">{{ Number(detail.hcratePercentage).toFixed(2) }}%</p>
+            <p :class="detail.hcrate === 0 ? 'yellow' : (detail.hcrate > 0 ? 'green' : 'red')">{{ Number(detail.hcrate /
+              1000).toFixed(2) }}</p>
+            <p :class="detail.hcrate === 0 ? 'yellow' : (detail.hcrate > 0 ? 'green' : 'red')">{{
+              Number(detail.hcratePercentage).toFixed(2) }}%</p>
             <p>{{ (Number(detail.volume) / 1000).toFixed(2) }}</p>
           </div>
         </div>
@@ -33,81 +46,71 @@
         <div class="between-box low-price-box">
           <div>
             <p>Sàn</p>
-            <p style="color: #79d9d7">{{ Number(detail.lowRoot/1000).toFixed(2) }}</p>
+            <p style="color: #79d9d7">{{ Number(detail.lowRoot / 1000).toFixed(2) }}</p>
           </div>
           <div>
             <p>TC</p>
-            <p style="color: #e1ba53">{{ Number(detail.closeRoot/1000).toFixed(2)}}</p>
+            <p style="color: #e1ba53">{{ Number(detail.closeRoot / 1000).toFixed(2) }}</p>
           </div>
           <div>
             <p>Trần</p>
-            <p style="color: #c24fc4">{{ Number(detail.ceiling/1000).toFixed(2) }}</p>
+            <p style="color: #c24fc4">{{ Number(detail.ceiling / 1000).toFixed(2) }}</p>
           </div>
         </div>
         <div class="between-box low-price-box" style="width: 100%">
           <div>
             <p>Thấp</p>
-            <p style="color: #e1ba53">{{ Number(detail.lowAdjust/1000).toFixed(2) }}</p>
+            <p style="color: #e1ba53">{{ Number(detail.lowAdjust / 1000).toFixed(2) }}</p>
           </div>
           <div>
             <p>TB</p>
-            <p style="text-align: right; color: #59b56b;">{{ Number(detail.avgprice/1000).toFixed(2) }}</p>
+            <p style="text-align: right; color: #59b56b;">{{ Number(detail.avgprice / 1000).toFixed(2) }}</p>
           </div>
           <div>
             <p>Cao</p>
-            <p style="text-align: right; color: #59b56b;">{{ Number(detail.hightAdjust/1000).toFixed(2) }}</p>
+            <p style="text-align: right; color: #59b56b;">{{ Number(detail.hightAdjust / 1000).toFixed(2) }}</p>
           </div>
         </div>
       </div>
     </div>
     <div class="page-part box-part">
-      <imgBox :code="$route.query.code"
-              :imgList='detail'/>
+      <imgBox :code="$route.query.code" :imgList='detail' />
     </div>
     <div>
-      <div v-infinite-scroll="loadMore"
-           :infinite-scroll-disabled="bestandslisteLoading"
-           infinite-scroll-distance="10"
-           class="news-content">
-        <div @click="pageNews(item)"
-             class="news-item"
-             v-for="item of bestandslisteContent"
-             :key="item.id">
-          <p class="news-title"
-             style="-webkit-box-orient: vertical;">{{ item.title }}</p>
+      <div v-infinite-scroll="loadMore" :infinite-scroll-disabled="bestandslisteLoading" infinite-scroll-distance="10"
+        class="news-content">
+        <div @click="pageNews(item)" class="news-item" v-for="item of bestandslisteContent" :key="item.id">
+          <p class="news-title" style="-webkit-box-orient: vertical;">{{ item.title }}</p>
           <span class="news-status">
             <!-- <i class="glyphicon glyphicon-eye-open"></i>
                 浏览量：{{item.views}} -->
           </span>
         </div>
       </div>
-      <div v-if="bestandslisteContent.length!=0">
-        <div v-if="bestandslisteContent.length<0"
-             class="load-all text-center">
+      <div v-if="bestandslisteContent.length != 0">
+        <div v-if="bestandslisteContent.length < 0" class="load-all text-center">
           <mt-spinner type="fading-circle"></mt-spinner>
         </div>
 
-        <div v-show="bestandslisteLoading"
-             class="load-all text-center">
+        <div v-show="bestandslisteLoading" class="load-all text-center">
           <mt-spinner type="fading-circle"></mt-spinner>
           {{ $t('loading') }}...
         </div>
-        <div v-show="!bestandslisteLoading && bestandslisteContent.length>0"
-             class="load-all text-center">
+        <div v-show="!bestandslisteLoading && bestandslisteContent.length > 0" class="load-all text-center">
           {{ $t('allLoaded') }}
         </div>
       </div>
 
     </div>
-
+    <!-- <div style="height:500px"></div> -->
   </div>
 </template>
 
 <script>
 import imgBox from './compontent/img'
-import {Toast} from 'mint-ui'
+import { Toast } from 'mint-ui'
 import * as api from '@/axios/api'
-import {apikey} from '@/utils/shuhaikeji'
+import { apikey } from '@/utils/shuhaikeji'
 import Img from './compontent/img.vue'
 
 export default {
@@ -116,8 +119,10 @@ export default {
     imgBox
   },
   props: {},
-  data () {
+  data() {
     return {
+      isScroll: false,
+      showTotalNumber: false,
       bestandslisteContent: [], // 股票列表
       pages: {
         page: 0,
@@ -160,28 +165,29 @@ export default {
         'sell5_num': '11500'
       }, // 详情
       buyList: [
-        {price: 33.5, price2: 14323.5},
-        {price: 33.5, price2: 14323.5},
-        {price: 33.5, price2: 14323.5},
-        {price: 33.5, price2: 14323.5},
-        {price: 33.5, price2: 14323.5}
+        { price: 33.5, price2: 14323.5 },
+        { price: 33.5, price2: 14323.5 },
+        { price: 33.5, price2: 14323.5 },
+        { price: 33.5, price2: 14323.5 },
+        { price: 33.5, price2: 14323.5 }
       ],
       isOptionOpt: false, // 是否已经添加自选
       timer: null,
       loading: false,
       qhinfo: {},
-      zsinfo: {}
+      zsinfo: {},
+      myDiv: 0
     }
   },
   watch: {},
   computed: {},
-  created () {
+  created() {
     this.timer = setInterval(this.refreshList, 5000)
   },
-  beforeDestroy () {
+  beforeDestroy() {
     clearInterval(this.timer)
   },
-  mounted () {
+  mounted() {
     this.getDetail()
     if (this.$store.state.userInfo.phone) {
       // 判断是否登录
@@ -192,17 +198,39 @@ export default {
     }
     this.qhinfo = this.$route.query.qhinfo
     this.zsinfo = this.$route.query.zsinfo
+
+
+    let _this = this
+    // 获取要监听的div元素
+    var div = document.getElementById('myDiv');
+    this.myDiv = div.offsetHeight;
+    // 添加滚动事件监听器
+    div.addEventListener('scroll', function () {
+      /// 获取滚动距离
+      var scrollDistance = div.scrollTop;
+      // 输出滚动到距离顶部多少距离
+      // console.log('滚动距离顶部：' + scrollDistance + 'px');
+      _this.handleScroll(scrollDistance)
+    });
+
+
   },
   methods: {
+    handleScroll(scrollDistance) {
+      // console.log(scrollDistance)
+      // const scrollDistance = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+      //这里加一下，页面滚动把  this.showTotalNumber 设置为true
+      this.showTotalNumber = scrollDistance > 100 ? true : false;
+    },
     // 跳转新闻详情
-    pageNews (option) {
+    pageNews(option) {
       this.$router.push({
         path: '/news'
       })
       window.sessionStorage.setItem('newDetail', option.maincontent)
     },
     // 加载更多
-    async loadMore () {
+    async loadMore() {
       if (this.bestandslisteContent.length == this.pages.total || this.bestandslisteLoading) {
         return
       }
@@ -212,8 +240,8 @@ export default {
       await this.getAllNewList()
       this.bestandslisteLoading = false
     },
-    async getAllNewList () {
-      const {page, limit} = this.pages
+    async getAllNewList() {
+      const { page, limit } = this.pages
       let obj = {
         apikey,
         page,
@@ -230,10 +258,10 @@ export default {
 
       }
     },
-    toSearch () {
+    toSearch() {
       this.$router.push('/searchlist')
     },
-    async getUserInfo () {
+    async getUserInfo() {
       // 获取用户信息
       let data = await api.getUserInfo()
       if (data.status === 0) {
@@ -244,13 +272,13 @@ export default {
       }
       this.$store.state.user = this.user
     },
-    async refreshList () {
+    async refreshList() {
       if (this.loading) {
         return
       }
       this.getDetail()
     },
-    async getOpation () {
+    async getOpation() {
       let opts = {
         code: this.$route.query.code
       }
@@ -262,7 +290,7 @@ export default {
         this.isOptionOpt = true
       }
     },
-    async getDetail () {
+    async getDetail() {
       let opts = {
         code: this.$route.query.code
       }
@@ -271,12 +299,22 @@ export default {
       this.loading = false
       if (data.status === 0) {
         this.detail = data.data
+
+        this.$nextTick(() => {
+          var wrapper = document.getElementById("wrapper"); // 获取id为"myDiv"的div元素
+          var wrapperH = wrapper.offsetHeight;
+          // console.log('wrapperH', wrapperH)
+          if (wrapperH > this.myDiv) {
+            this.isScroll = true
+          }
+        });
+
       } else {
         Toast(data.msg)
       }
     },
-    async addOptions () {
-      let data = await api.addOption({code: this.$route.query.code})
+    async addOptions() {
+      let data = await api.addOption({ code: this.$route.query.code })
       if (data.status === 0) {
         Toast('Thêm thành công tùy chọn')
         this.isOptionOpt = true
@@ -284,8 +322,8 @@ export default {
         Toast(data.msg)
       }
     },
-    async deteleOptions () {
-      let data = await api.delOption({code: this.$route.query.code})
+    async deteleOptions() {
+      let data = await api.delOption({ code: this.$route.query.code })
       if (data.status === 0) {
         Toast('Xóa hàng tự chọn thành công')
         this.isOptionOpt = false
@@ -293,7 +331,7 @@ export default {
         Toast(data.msg)
       }
     },
-    toBuy () {
+    toBuy() {
       this.$router.push({
         path: '/twoBuy',
         query: {
@@ -334,6 +372,10 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+.Div_active {
+  padding: 8px 20px 0px 15px !important;
+}
+
 .btn-box {
   padding: 0;
 }
@@ -469,31 +511,35 @@ export default {
   margin-left: 5px;
 }
 
-.page-box-start > div {
+.page-box-start>div {
   display: flex;
   justify-content: flex-start;
 }
+
 .price-left-total {
   display: flex;
   flex-wrap: wrap;
   align-content: space-between;
   flex-direction: column;
   height: 70px;
-  //margin-top: 10px;
   justify-content: space-around;
 }
-.price-box{
+
+.price-box {
   height: 110px;
 }
+
 .page-price {
   font-size: 18px;
 }
+
 .total-template {
   height: 110px;
   display: flex;
   justify-content: space-evenly;
 }
-.price-right{
+
+.price-right {
   flex: 1;
   margin-left: 8px;
   display: flex;
@@ -501,10 +547,12 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
 }
-.low-price-box{
+
+.low-price-box {
   width: 100%;
 }
-.low-price-box > div > p:last-child{
+
+.low-price-box>div>p:last-child {
   margin-top: 5px;
 }
 </style>
