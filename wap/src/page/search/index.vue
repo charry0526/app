@@ -2,7 +2,7 @@
   <div class="app-wrapper">
     <div class="searchBox">
       <van-search v-model="keyword" show-action placeholder="Mã chứng khoán hoặc chính tả đơn giản" @input="handleSearchInput(keyword)"
-        @cancel="onCancel" background="none" :clearable="true" :autofocus="true">
+        background="none" :clearable="true" :autofocus="true">
         <template #action>
 <!--          关闭-->
           <div @click="onCancel">Khóa</div>
@@ -136,6 +136,7 @@ export default {
 
 .searchBox {
   background: #1a191e;
+  border-radius: 16px 16px 0 0;
 }
 </style>
 <style >

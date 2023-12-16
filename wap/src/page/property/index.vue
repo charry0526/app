@@ -203,11 +203,11 @@
 .van-circle {
   svg {
     .van-circle__layer {
-      stroke: rgb(91, 186, 110) !important;
+      stroke: #ff8f00 !important;
     }
 
     .van-circle__hover {
-      stroke: #ff8f00 !important
+      stroke: rgb(91, 186, 110) !important
     }
   }
 }
@@ -312,7 +312,8 @@
             <div class="between-box">
               <div>{{ $moneyDot(propertyInfo.enableAmt) }}</div>
               <div class="fold-icon" @click="property_2 = property_2 === 1 ? 0 : 1">
-                <img src="../../assets/images/property/dropdown.png" alt="" />
+                <img v-if=" property_2 === 1 " src="../../assets/images/property/dropdown.png" alt="" />
+                <img v-else src="../../assets/images/users/more.png" alt="" />
               </div>
             </div>
           </div>
@@ -340,7 +341,8 @@
             <div class="between-box">
               <div>{{ $moneyDot(propertyInfo.debtAmt) }}</div>
               <div class="fold-icon" @click="property_3 = property_3 === 1 ? 0 : 1">
-                <img src="../../assets/images/property/dropdown.png" alt="" />
+                <img v-if=" property_3 === 1 " src="../../assets/images/property/dropdown.png" alt="" />
+                <img v-else src="../../assets/images/users/more.png" alt="" />
               </div>
             </div>
           </div>

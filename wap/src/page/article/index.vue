@@ -1,7 +1,10 @@
 <style scoped>
 @import "../../assets/styles/index.less";
 .app-wrapper {
-  background-color: #1a191f;
+  background-color: #1a191f !important;
+}
+.header{
+  background-color: #29282e;
 }
 .article-list-container {
   padding: 0 15px;

@@ -12,10 +12,10 @@
         <div style="margin-left: 5px;" @click="toBuy"><img src="../../assets/images/details/buy.png"></div>
       </div>
     </div>
-    <div class="between-box" style="font-size: 12px; color: #FFFFFF; height: 110px; margin-top: 8px">
-      <div class="page-title" style="width: 45%; height: 110px;">
+    <div class="between-box" style="font-size: 12px; color: #FFFFFF; min-height: 110px; margin-top: 8px">
+      <div class="page-title" style="width: 45%; min-height: 110px;">
         <div>{{ detail.stockFullname }}</div>
-        <div class="between-box">
+        <div class="between-box" style="margin-top: 10px">
           <div class="price-left-total">
             <div :class="['page-price', detail.hcrate === 0 ? 'yellow' : (detail.hcrate > 0 ? 'green' : 'red')]">
               {{ Number(detail.nowPrice / 1000).toFixed(2) }}
@@ -33,29 +33,29 @@
         <div class="between-box low-price-box">
           <div>
             <p>Sàn</p>
-            <p>{{ Number(detail.lowRoot/1000).toFixed(2) }}</p>
+            <p style="color: #79d9d7">{{ Number(detail.lowRoot/1000).toFixed(2) }}</p>
           </div>
           <div>
             <p>TC</p>
-            <p>{{ Number(detail.closeRoot/1000).toFixed(2)}}</p>
+            <p style="color: #e1ba53">{{ Number(detail.closeRoot/1000).toFixed(2)}}</p>
           </div>
           <div>
             <p>Trần</p>
-            <p>{{ Number(detail.ceiling/1000).toFixed(2) }}</p>
+            <p style="color: #c24fc4">{{ Number(detail.ceiling/1000).toFixed(2) }}</p>
           </div>
         </div>
-        <div class="between-box" style="width: 100%">
+        <div class="between-box low-price-box" style="width: 100%">
           <div>
             <p>Thấp</p>
-            <p>{{ Number(detail.lowAdjust/1000).toFixed(2) }}</p>
+            <p style="color: #e1ba53">{{ Number(detail.lowAdjust/1000).toFixed(2) }}</p>
           </div>
           <div>
             <p>TB</p>
-            <p style="text-align: right">{{ Number(detail.avgprice/1000).toFixed(2) }}</p>
+            <p style="text-align: right; color: #59b56b;">{{ Number(detail.avgprice/1000).toFixed(2) }}</p>
           </div>
           <div>
             <p>Cao</p>
-            <p style="text-align: right">{{ Number(detail.hightAdjust/1000).toFixed(2) }}</p>
+            <p style="text-align: right; color: #59b56b;">{{ Number(detail.hightAdjust/1000).toFixed(2) }}</p>
           </div>
         </div>
       </div>

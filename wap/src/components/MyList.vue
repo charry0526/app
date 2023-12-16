@@ -136,7 +136,7 @@
             </div>
             <!--            持有列表-->
             <template v-if="state === 0">
-              <div class="cardItemInfo"">
+              <div class="cardItemInfo">
                     <div class=" cardItemInfo_item">
                 <!-- 买入价格 -->
                 <span>Giá mua: </span>
@@ -284,7 +284,7 @@
           <div class="tab-con">
             <ul class="radio-group clearfix">
               <li v-for="(item, index) in itemInfo.numberList" :key="item.key" @click="selectTypeFun(item, index)">
-                <div :class="selecIndex == index ? 'on' : ''">
+                <div :class="selectType === index ? 'on' : ''">
                   {{ item }}
                 </div>
               </li>
@@ -340,10 +340,10 @@ export default {
   },
   data() {
     return {
+      selectType:0,
       userInfo: {},
       leverValue: 0,
       itemInfo: {},
-      selecIndex: 0,
       selectNumber: '',
       dialogShow: false,
       PriceOrPercentage: true,
@@ -472,15 +472,15 @@ export default {
     // 重置表单
     reset() {
       this.selectNumber = ''
-      this.selecIndex = 0
+      this.selectType = 0
+      this.leverValue = 1
     },
     // 提出弹窗操作
     popUp(option) {
       this.itemInfo = option
       option.numberList = option.lever.split('/')
-      if (option.numberList.length != 0) {
+      if (option.numberList.length !== 0) {
         this.leverValue = option.numberList[0]
-        console.log(this.leverValue)
       }
       this.reset()
       this.dialogShow = !this.dialogShow
@@ -636,11 +636,9 @@ export default {
       }
     },
     toCash(option) {
-      console.log(option, 'option')
       if (option.ggstr) {
         this.leverValue = option.ggstr.split('/')[0]
       }
-      console.log(option.lever, 'option.lever')
       this.$router.push({
         path: '/twoBuyNew',
         query: {
@@ -670,7 +668,10 @@ export default {
         Toast(data.msg)
       }
     },
-
+    selectTypeFun (item, index) {
+      this.selectType = index
+      this.leverValue = item
+    },
   },
 };
 </script>

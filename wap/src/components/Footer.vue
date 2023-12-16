@@ -75,12 +75,20 @@ export default {
 #app .body-box {
   height: 100% !important;
 }
+
+.footer_tabbar {
+  position: absolute !important;
+  ;
+}
 </style>
 <style lang="less" scoped>
 .footer_tabbar {
   height: 50px;
   background: url("../assets/images/tabBar/bottomBar@x2.png") no-repeat;
   background-size: 100% 100%;
+  bottom: 0;
+  width: 100%;
+  left: 0;
 
   .van-tabbar-item {
     background: none;

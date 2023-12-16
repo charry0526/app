@@ -3,7 +3,7 @@
     <Header />
     <div class="page-main">
       <swiper ref="mySwiper" class="swiper" :options="swiperOptions">
-        <swiper-slide class="swiper-slide" v-for="item in stockList" :key="item.id">
+        <swiper-slide class="swiper-slide" v-for="item in stockList" :key="item.id" style="border-radius: 16px;">
           <div class="stock_title">
             <b>{{ item.indexName }}</b>{{ item.maxNum }}
           </div>

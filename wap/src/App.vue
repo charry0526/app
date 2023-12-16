@@ -14,9 +14,6 @@
             alt=""
           />
         </template>
-        <template v-else>
-          <mt-button icon="more" slot="right"></mt-button>
-        </template>
       </mt-header>
     </div>
     <div class="body-box" id="myDiv">
@@ -127,7 +124,7 @@ export default {
     height: calc(100% - 1rem);
     box-sizing: border-box;
     overflow-y: auto;
-    
+
   }
   &.red-theme {
     background: #e9e9e9;
