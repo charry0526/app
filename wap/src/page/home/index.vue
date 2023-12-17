@@ -30,7 +30,6 @@
 </template>
 
 <script>
-// import { Toast } from 'mint-ui'
 import { Toast } from "vant";
 import * as api from '@/axios/api'
 import { numberColor } from '@/utils/utils'
@@ -40,8 +39,6 @@ import MyTab from "../../components/MyTab";
 import MyList from "../../components/MyList";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/swiper-bundle.min.css";
-// import { apikey } from '@/utils/shuhaikeji'
-
 
 export default {
   data() {
@@ -119,8 +116,6 @@ export default {
   },
   mounted() {
     this.getMarket()
-    // console.log(11111111, sessionStorage.getItem('oneTabItemData'))
-    // console.log(222222, sessionStorage.getItem('childrenTabItemData'))
     if (sessionStorage.getItem('oneTabItemData')) {
       if (sessionStorage.getItem('oneTabItemData') === 'Theo dõi') {
         this.active = 0
@@ -194,7 +189,7 @@ export default {
                 isChange: 0
               },
               {
-                name: "lề",//保证金
+                name: "Tiền BC",//保证金
                 isChange: 0
               },
               {
@@ -202,7 +197,7 @@ export default {
                 isChange: 0
               },
               {
-                name: "Đòn bẩy",//杠杆
+                name: "Margin",//杠杆
                 isChange: 0
               },
               {

@@ -218,8 +218,8 @@
         </div>
         <div class="cardItemInfo_item"></div>
         <div class="cardItemInfo_item">
-          <!-- 其他费用 -点差费 -->
-          <span>lề: </span>
+          <!-- 保证金 -->
+          <span>Tiền BC: </span>
           <span>{{ $moneyDot(item.newBzj) }}</span>
         </div>
         <div class="cardItemInfo_item">

@@ -46,9 +46,9 @@
                   :<b class="space">{{$moneyDot(item.sellOrderPrice)}}</b></span>
                 <span class="col-xs-4 text-center"></span>
                 <span class="col-xs-4 text-right">
-                  <!-- 其他费用 -点差费 -->
+                  <!-- 保证金 -->
 <!--                  Chi phí khác:<b class="space">{{$moneyDot(item.orderStayFee)}}</b></span>-->
-                lề:<b class="space">{{$moneyDot(item.newBzj==null?0:item.newBzj)}}</b></span>
+                Tiền BC:<b class="space">{{$moneyDot(item.newBzj==null?0:item.newBzj)}}</b></span>
               </p>
               <p class="clearfix">
                 <span class="col-xs-4">

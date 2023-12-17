@@ -42,7 +42,7 @@
               <th>Giá KL</th>
               <th>Giá PH</th>
               <th>SL</th>
-              <th>Đòn bẩy</th>
+              <th>Margin</th>
               <!-- <th>Giá TT</th> -->
               <th>Xét duyệt</th>
             </tr>
