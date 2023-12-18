@@ -501,7 +501,7 @@ export default {
                 isChange: 0
               },
               {
-                name: 'Khớp',//市场成交价
+                name: 'Giá TT',//市场价
                 isChange: 0
               },
               {

@@ -189,7 +189,7 @@ export default {
                 isChange: 0
               },
               {
-                name: "Tiền BC",//保证金
+                name: "Tiền ĐC",//保证金
                 isChange: 0
               },
               {

@@ -394,7 +394,7 @@ export default new Router({
       path: "/credist",
       name: "credist",
       meta: {
-        title: "Credist",
+        title: "Vay tín dụng",
         requireAuth: true,
         hasHeader: true
       },

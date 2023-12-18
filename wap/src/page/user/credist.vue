@@ -42,7 +42,7 @@
               </div>
               <div class="info_item">
                 <div>{{ userInfo.amountBorrowed }}</div>
-                <div style="font-size: 14px;color: #ed801a;">Hạn mức mượn tiền</div>
+                <div style="font-size: 14px;color: #ed801a;">Số tiền cần trả</div>
               </div>
             </div>
           </div>

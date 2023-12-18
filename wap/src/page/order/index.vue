@@ -135,7 +135,7 @@
           </div>
           <div class="isContent_list">
             <div class="isContent_item">
-              <span>Tổng GT：</span>
+              <span>Tổng TT：</span>
               <span>Tỉ lệ P/L：</span>
             </div>
             <div class="isContent_item">
@@ -171,12 +171,12 @@ export default {
       tabList: [
         {
           id: "0",
-          name: "Biểu chi tiết đang nắm giữ",//持有列表
-          childrenType: "content",//售罄列表
+          name: "Danh mục đang nắm giữ",//持有列表
+          childrenType: "content",
         },
         {
           id: "2",
-          name: "Biểu chi tiết bán ra",
+          name: "Đã bán ra",//售罄列表
           childrenType: "content",
         }
       ],
