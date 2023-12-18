@@ -72,14 +72,14 @@
               <div class="list-item_text" v-if="PriceOrPercentage && proList.zccyList">
 <!--                计算损益百分比：订单数量*最新市价 减去 购买总价 再 除以购买总价 最后乘以100-->
                 <span>{{
-                    ((((item.orderNum * Number(item.now_price))-item.orderTotalPrice) / item.orderTotalPrice) * 100).toFixed(2)
+                    ((((item.orderNum * item.now_price)-item.orderTotalPrice) / item.orderTotalPrice) * 100).toFixed(2)
                     }}%
                 </span>
               </div>
               <div class="list-item_text" v-if="!PriceOrPercentage && proList.zccyList">
 <!--                计算损益数值：订单数量*最新市价 减去 购买总价 再 除以购买总价-->
                 <span>{{
-                    $moneyDot(((item.orderNum * Number(item.now_price))-item.orderTotalPrice) / item.orderTotalPrice) || '0.00'
+                    $moneyDot(((item.orderNum * item.now_price)-item.orderTotalPrice) / item.orderTotalPrice) || '0.00'
                   }}
                 </span>
               </div>
