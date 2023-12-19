@@ -172,14 +172,15 @@ export default {
       const res = await api.allNewList(obj);
       let articleInfo=[]
       res.data.map(item => {
+        let utcTime = moment.utc(item.created_at)
         articleInfo.push({
           title: item.title,
           content: item.maincontent,
           sourcenews: item.sourcenews,
-          date: moment(item.created_at).format("DD/MM/YYYY hh:mm:ss"),
-          year: moment(item.created_at).format("YYYY"),
-          day: moment(item.created_at).format("DD"),
-          month: moment(item.created_at).format("MM")
+          date: utcTime.format("DD/MM/YYYY HH:mm:ss"),
+          year: utcTime.format("YYYY"),
+          day: utcTime.format("DD"),
+          month: utcTime.format("MM")
         });
       });
 

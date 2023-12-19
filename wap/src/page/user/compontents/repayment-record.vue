@@ -13,7 +13,7 @@
         <li class="list-body" v-for="(item) in list" :key="item.key">
           <div class="order-info-box">
             <div class="order-title">
-              <span class="payNumber">trả nợ：<span
+              <span class="payNumber">Trả nợ：<span
                 :style="{color:$state.theme =='red'?'#BB1815':''}">{{ $moneyDot(item.topupMoney) }}VND</span></span>
               <span
                 :class="item.topupStatus == 1?'green pull-right':item.topupStatus == 2?'red pull-right':'red pull-right'">

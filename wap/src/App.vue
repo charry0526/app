@@ -21,7 +21,11 @@
     </div>
   </div>
 </template>
-
+<style>
+html,body{
+  background-color: #20272e;
+}
+</style>
 <script>
 export default {
   name: 'App',

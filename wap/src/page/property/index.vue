@@ -517,8 +517,8 @@ export default {
             fn: 'getHoldingsList',
           }
           data.data.list.map((result, index) => {
-            data.data.list[index].buyOrderPrice = result.buyOrderPrice ? result.buyOrderPrice / 1000 : 0
-            data.data.list[index].now_price = result.now_price ? result.now_price / 1000 : 0
+            //data.data.list[index].buyOrderPrice = result.buyOrderPrice ? result.buyOrderPrice / 1000 : 0
+            //data.data.list[index].now_price = result.now_price ? result.now_price / 1000 : 0
           })
           if (pageNum == 1) {
             zccyList.zccyList.list = data.data.list

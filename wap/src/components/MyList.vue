@@ -63,10 +63,10 @@
                 <span>{{ $moneyDot(item.orderNum) }}</span>
               </div>
               <div class="list-item_text" v-if="item.buyOrderPrice">
-                <span>{{ item.buyOrderPrice }}</span>
+                <span>{{ (item.buyOrderPrice/1000).toFixed(2) }}</span>
               </div>
               <div class="list-item_text" v-if="item.now_price">
-                <span>{{ item.now_price }}</span>
+                <span>{{ (item.now_price / 1000).toFixed(2)}}</span>
               </div>
 
               <div class="list-item_text" v-if="PriceOrPercentage && proList.zccyList">
@@ -78,7 +78,8 @@
               </div>
               <div class="list-item_text" v-if="!PriceOrPercentage && proList.zccyList">
 <!--                计算损益数值：订单数量*最新市价 减去 购买总价 再 除以购买总价-->
-                <span>{{
+                <span>
+                  {{
                     $moneyDot(((item.orderNum * item.now_price)-item.orderTotalPrice) / item.orderTotalPrice) || '0.00'
                   }}
                 </span>
@@ -113,7 +114,7 @@
           </li>
         </ul>
         <p v-if="loading" class="infinite-list-wrapper_tips"><van-loading size="14px">Đang tải...</van-loading></p>
-        <p v-if="noMore" class="infinite-list-wrapper_tips">Không có nhiều hơn</p>
+<!--        <p v-if="noMore" class="infinite-list-wrapper_tips">Không có nhiều hơn</p>-->
       </div>
     </template>
     <template v-if="listType === 'MyCard'">

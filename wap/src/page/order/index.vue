@@ -135,7 +135,7 @@
           </div>
           <div class="isContent_list">
             <div class="isContent_item">
-              <span>Tổng TT：</span>
+              <span>Tổng GT：</span>
               <span>Tỉ lệ P/L：</span>
             </div>
             <div class="isContent_item">
