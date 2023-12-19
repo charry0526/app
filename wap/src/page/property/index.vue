@@ -282,8 +282,6 @@
             </div>
             <div>Chi tiết tài sản</div>
           </div>
-
-
           <div class="between-box property-detail-subtitle property-detail-title">
             <div>Tài sản CK</div>
             <div class="between-box">
@@ -297,7 +295,9 @@
           <div class="property-list-template" v-if=" property_1 ">
             <div class="between-box">
               <div>Giá trị thị trường nắm giữ</div>
-              <div>{{ $moneyDot(propertyInfo.shareholdingAmt-propertyInfo.shareholdingProperty) }}</div>
+<!--              持有债券总市值-->
+<!--              <div>{{ $moneyDot(propertyInfo.shareholdingAmt-propertyInfo.shareholdingProperty) }}</div>-->
+              <div>{{ $moneyDot(holdingTotal.nowPrice) }}</div>
             </div>
             <div class="between-box">
               <div>Số lượng nắm giữ</div>
@@ -305,7 +305,9 @@
             </div>
             <div class="between-box">
               <div>Tổng lãi/lỗ</div>
-              <div>{{ $moneyDot(propertyInfo.shareholdingProperty) }}</div>
+<!--              持有债券总损益值-->
+<!--              <div>{{ $moneyDot(propertyInfo.shareholdingProperty) }}</div>-->
+              <div>{{ $moneyDot(holdingTotal.profitMoney) }}</div>
             </div>
           </div>
 
@@ -461,6 +463,7 @@ export default {
         this[agrs[1]](agrs[0])
       }
     },
+    //债券资产汇总更新
     getHoldingsTotal() {
       let obj = {
         pKey: sessionStorage.getItem('pKey'),
@@ -475,14 +478,16 @@ export default {
         console.log(error)
       }
     },
+    //资产持有列表
     async getHoldingsList(pageNum) {
+      //债券资产汇总更新
+      this.getHoldingsTotal()
       let obj = {
         pKey: sessionStorage.getItem('pKey'),
         state: 0,
         pageNum: pageNum || this.pageNum,
         pageSize: this.pageSize,
       }
-
       let data = await api.getOrderList(obj)
       try {
         if (data.status === 0) {
@@ -533,6 +538,8 @@ export default {
       }
     },
     getPropertyInfo() {
+      //债券资产汇总更新
+      this.getHoldingsTotal()
       this.showTemplate = 2
       let obj = {
         pKey: sessionStorage.getItem('pKey')
