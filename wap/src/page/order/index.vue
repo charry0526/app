@@ -159,6 +159,7 @@ import MyTab from "../../components/MyTab.vue";
 import MyList from "../../components/MyList.vue";
 import * as api from "@/axios/api";
 import { stockList } from "../../mock";
+import {Toast as ToastNew} from "vant";
 
 export default {
   data() {
@@ -199,6 +200,17 @@ export default {
     this.getHoldingsTotal(0)
   },
   methods: {
+    showLoading() {
+      ToastNew({
+        className: "login_toast",
+        icon: require("../../assets/images/login/loading.gif"),
+        duration: 0,
+        overlay: true
+      });
+    },
+    closeLoading() {
+      ToastNew.clear()
+    },
     changeData(...agrs) {
       if (typeof this[agrs[1]] === 'function') {
         this[agrs[1]](agrs[0]);
@@ -231,6 +243,7 @@ export default {
       });
     },
     async getHoldingsList(pageNum, state) {
+      this.showLoading()
       let obj = {
         pKey: sessionStorage.getItem('pKey'),
         state: state || this.state,
@@ -260,6 +273,7 @@ export default {
       } catch (error) {
         console.log(error)
       }
+      this.closeLoading()
     },
     tabHandelClick(oneTabItemData) {
       this.state = oneTabItemData

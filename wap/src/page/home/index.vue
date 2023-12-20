@@ -141,11 +141,8 @@ export default {
       Toast({
         className: "login_toast",
         icon: require("../../assets/images/login/loading.gif"),
-        // duration: 0,
+        duration: 0,
         overlay: true
-        // onClose: () => {
-        //   this.$router.push("/userInfo");
-        // },
       });
     },
     closeLoading() {

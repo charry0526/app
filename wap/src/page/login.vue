@@ -169,7 +169,7 @@ export default {
       Toast({
         className: "login_toast",
         icon: require("../assets/images/login/loading.gif"),
-        // duration: 0
+        duration: 0
         // onClose: () => {
         //   this.$router.push("/userInfo");
         // },
@@ -180,7 +180,6 @@ export default {
       }
       let pdata = await api.getPKConfig(PKopts)
       if (pdata.status === 0) {
-        Toast.clear()
         const pubKey = pdata.data
         // 获取公钥，后用公钥对随机密钥非对称加密
         this.publicKey = pubKey
@@ -213,6 +212,7 @@ export default {
       } else {
         Toast(data.msg)
       }
+      Toast.clear()
       this.isloading = false
     },
     // 非对称加密方法

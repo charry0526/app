@@ -1,7 +1,7 @@
 <style src="../../../src/assets/styles/common.css"/>
 <template>
   <div class="wrapper" style="padding: 0 15px;" id="wrapper">
-    <div style="position: absolute; width: 100%; padding: 8px 15px 0 15px; left: 0; top: 1rem; z-index: 10; "
+    <div style="position: absolute; width: 100%; padding: 8px 15px 0 15px; left: 0; top:calc(1rem - 2px); z-index: 10; background-color: #20272e;"
       :class="isScroll ? 'Div_active' : ''">
       <div class="page-title">
         <div class="between-box page-box-start">
@@ -112,6 +112,7 @@ import { Toast } from 'mint-ui'
 import * as api from '@/axios/api'
 import { apikey } from '@/utils/shuhaikeji'
 import Img from './compontent/img.vue'
+import { Toast as ToastNew } from "vant";
 
 export default {
   components: {
@@ -216,6 +217,17 @@ export default {
 
   },
   methods: {
+    showLoading() {
+      ToastNew({
+        className: "login_toast",
+        icon: require("../../assets/images/login/loading.gif"),
+        duration: 0,
+        overlay: true
+      });
+    },
+    closeLoading() {
+      ToastNew.clear()
+    },
     handleScroll(scrollDistance) {
       // console.log(scrollDistance)
       // const scrollDistance = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
@@ -291,6 +303,7 @@ export default {
       }
     },
     async getDetail() {
+      this.showLoading()
       let opts = {
         code: this.$route.query.code
       }
@@ -308,10 +321,10 @@ export default {
             this.isScroll = true
           }
         });
-
       } else {
         Toast(data.msg)
       }
+      this.closeLoading()
     },
     async addOptions() {
       let data = await api.addOption({ code: this.$route.query.code })
