@@ -296,8 +296,7 @@
             <div class="between-box">
               <div>Giá trị thị trường nắm giữ</div>
 <!--              持有债券总市值-->
-<!--              <div>{{ $moneyDot(propertyInfo.shareholdingAmt-propertyInfo.shareholdingProperty) }}</div>-->
-              <div>{{ $moneyDot(holdingTotal.nowPrice) }}</div>
+              <div>{{ $moneyDot(propertyInfo.nowTotalPrice) }}</div>
             </div>
             <div class="between-box">
               <div>Số lượng nắm giữ</div>
@@ -306,8 +305,7 @@
             <div class="between-box">
               <div>Tổng lãi/lỗ</div>
 <!--              持有债券总损益值-->
-<!--              <div>{{ $moneyDot(propertyInfo.shareholdingProperty) }}</div>-->
-              <div>{{ $moneyDot(holdingTotal.profitMoney) }}</div>
+              <div>{{ $moneyDot(propertyInfo.shareholdingProperty) }}</div>
             </div>
           </div>
 
@@ -538,8 +536,6 @@ export default {
       }
     },
     getPropertyInfo() {
-      //债券资产汇总更新
-      this.getHoldingsTotal()
       this.showTemplate = 2
       let obj = {
         pKey: sessionStorage.getItem('pKey')

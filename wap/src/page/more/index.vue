@@ -242,8 +242,8 @@
             <div class="between-box property-detail-title">
 <!--              总损益-->
               <div>Tổng lãi/lỗ</div>
-<!--              <div>{{ $moneyDot(propertyInfo.shareholdingProperty) }}</div>-->
-              <div>{{ $moneyDot(holdingTotal.profitMoney) }}</div>
+              <div>{{ $moneyDot(propertyInfo.shareholdingProperty) }}</div>
+<!--              <div>{{ $moneyDot(holdingTotal.profitMoney) }}</div>-->
             </div>
           </div>
           <div class="property-template">
@@ -255,8 +255,7 @@
             <div class="between-box property-detail-title">
 <!--              总持股市值-->
               <div>Giá trị thị trường nắm giữ</div>
-<!--              <div>{{ $moneyDot(propertyInfo.shareholdingAmt-propertyInfo.shareholdingProperty) }}</div>-->
-              <div>{{ $moneyDot(holdingTotal.nowPrice) }}</div>
+              <div>{{ $moneyDot(propertyInfo.nowTotalPrice) }}</div>
             </div>
             <div class="between-box property-detail-title">
 <!--              总持股数量-->
@@ -266,8 +265,7 @@
             <div class="between-box property-detail-title">
 <!--              总持股损益-->
               <div>Tổng lãi/lỗ</div>
-<!--              <div>{{ $moneyDot(propertyInfo.shareholdingProperty) }}</div>-->
-              <div>{{ $moneyDot(holdingTotal.profitMoney) }}</div>
+              <div>{{ $moneyDot(propertyInfo.shareholdingProperty) }}</div>
             </div>
           </div>
           <div class="property-template">
@@ -417,11 +415,7 @@ export default {
         creditAvailableLimit: 0,
         creditBorrowedAmt: 0,
         creditStillAmt: 0,
-      },
-      holdingTotal: {
-        orderTotalPrice: 0,
-        profitMoney: 0,
-        nowPrice: 0,
+        nowTotalPrice: 0
       },
     };
   },
@@ -458,8 +452,6 @@ export default {
       }
     },
     getPropertyInfo() {
-      //债券资产汇总更新
-      this.getHoldingsTotal()
       let obj = {
         pKey: sessionStorage.getItem('pKey')
       }
@@ -473,21 +465,6 @@ export default {
     async editInfo () {
       await api.setUserInfo({avatar: this.imageUrl, id: this.$store.state.userInfo.id})
       this.$store.state.userInfo.avatar = this.imageUrl
-    },
-    //债券资产汇总更新
-    getHoldingsTotal() {
-      let obj = {
-        pKey: sessionStorage.getItem('pKey'),
-        state: 0
-      }
-      let data = api.getUserPropertyTotal(obj)
-      try {
-        data.then(result => {
-          this.holdingTotal = result.data
-        })
-      } catch (error) {
-        console.log(error)
-      }
     },
   },
 };
