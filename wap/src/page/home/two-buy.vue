@@ -196,15 +196,15 @@
 </template>
 
 <script>
-import Footer from '../../components/Footer.vue'
+//import Footer from '../../components/Footer.vue'
 import { Toast } from 'mint-ui'
 import { isNull,debounceJArgs } from '@/utils/utils'
 import * as api from '@/axios/api'
 
 export default {
-  components: {
-    Footer
-  },
+  // components: {
+  //   Footer
+  // },
   props: {},
   data () {
     return {
@@ -849,7 +849,7 @@ export default {
       flex-wrap: wrap;
 
     }
-  .footer_tabbar{
-    position: absolute !important;
-  }
+  //.footer_tabbar{
+  //  position: absolute !important;
+  //}
 </style>

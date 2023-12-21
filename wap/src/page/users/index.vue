@@ -277,13 +277,13 @@
 </template>
 
 <script>
-import Footer from "../../components/Footer.vue";
+//import Footer from "../../components/Footer.vue";
 import * as api from "@/axios/api";
 import { Toast } from "mint-ui";
 
 export default {
   name: "user-center",
-  components: { Footer },
+ // components: { Footer },
   data() {
     return {
       isShowUserInfo: false,
