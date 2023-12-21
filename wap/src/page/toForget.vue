@@ -257,6 +257,7 @@ export default {
         let opts = {
           phoneNum: this.phone,
           code: this.code,
+          msgId : this.msgId,
           newPwd: this.encPassword,
           pKey: this.prKey
         }
