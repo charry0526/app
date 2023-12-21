@@ -203,10 +203,10 @@
               <div>Số điện thoại di động</div>
               <div>{{ $store.state.userInfo.phone }}</div>
             </div>
-            <div>
-              <div>Tên đại lý</div>
-              <div>{{ $store.state.userInfo.agentName }}</div>
-            </div>
+<!--            <div>-->
+<!--              <div>Tên đại lý</div>-->
+<!--              <div>{{ $store.state.userInfo.agentName }}</div>-->
+<!--            </div>-->
             <div>
               <div>Thông tin địa chỉ</div>
               <div style="text-align: left !important; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">{{

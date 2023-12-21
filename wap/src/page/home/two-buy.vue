@@ -539,7 +539,7 @@ export default {
     z-index: 1;
     width: 100%;
     padding-right: 0;
-    bottom: 0.97rem;
+    bottom: 0rem;
     height: 1.32rem;
     line-height: 1.32rem;
     display: flex;

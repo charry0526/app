@@ -7,12 +7,12 @@
       <mt-header :title="title">
         <mt-button icon="back" slot="left" @click="$router.go(-1)"></mt-button>
         <template v-if="iconRight == 'search'">
-          <img
+<!--          <img
             slot="right"
             class="search-right"
             src="./assets/ico/fangdajing.png"
             alt=""
-          />
+          />-->
         </template>
       </mt-header>
     </div>

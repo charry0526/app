@@ -204,15 +204,15 @@
 </template>
 
 <script>
-import Footer from '../../components/Footer.vue'
+//import Footer from '../../components/Footer.vue'
 import { Toast } from 'mint-ui'
 import { isNull,debounceJArgs } from '@/utils/utils'
 import * as api from '@/axios/api'
 
 export default {
-  components: {
-    Footer
-  },
+  // components: {
+  //   Footer
+  // },
   props: {},
   data () {
     return {
@@ -557,7 +557,7 @@ body {
   z-index: 1;
   width: 100%;
   padding-right: 0;
-  bottom: 0.97rem;
+  bottom: 0rem;
   height: 1.32rem;
   line-height: 1.32rem;
   display: flex;
@@ -859,7 +859,7 @@ body {
       flex-wrap: wrap;
 
     }
-.footer_tabbar{
-  position: absolute !important;
-}
+//.footer_tabbar{
+//  position: absolute !important;
+//}
 </style>
