@@ -156,3 +156,10 @@ export default {
   position: relative !important;
 }
 </style>
+<style>
+.van-toast{
+  overflow-wrap: break-word !important;
+  white-space:normal !important;
+  word-break: normal !important;
+}
+</style>

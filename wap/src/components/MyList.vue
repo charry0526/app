@@ -467,8 +467,10 @@ export default {
         //   return 'text_red'
         // }
       } else if (list.zccyList) {
-        if (((item.allProfitAndLose / item.orderTotalPrice * 100 / item.orderLever).toFixed(2)) >= 0) {
-          return 'text_green'
+        let changeRatio = ((((item.orderNum * item.now_price)-item.orderTotalPrice) / item.orderTotalPrice) * 100).toFixed(2);
+        console.log(changeRatio);
+        if (changeRatio >= 0) {
+          return changeRatio == 0 ? 'text_yellow' : 'text_green'
         } else {
           return 'text_red'
         }

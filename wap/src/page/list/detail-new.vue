@@ -175,6 +175,7 @@ export default {
       isOptionOpt: false, // 是否已经添加自选
       timer: null,
       loading: false,
+      loadingState:true,
       qhinfo: {},
       zsinfo: {},
       myDiv: 0
@@ -303,7 +304,10 @@ export default {
       }
     },
     async getDetail() {
-      this.showLoading()
+      if(this.loadingState)
+      {
+        this.showLoading()
+      }
       let opts = {
         code: this.$route.query.code
       }
@@ -324,7 +328,11 @@ export default {
       } else {
         Toast(data.msg)
       }
-      this.closeLoading()
+      if(this.loadingState)
+      {
+        this.loadingState = false;
+        this.closeLoading()
+      }
     },
     async addOptions() {
       let data = await api.addOption({ code: this.$route.query.code })

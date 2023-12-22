@@ -200,7 +200,7 @@ export default {
         if (data.status === 0) {
           // 成功
           // Toast('申请成功，请等待审核!')
-          Toast('Ứng dụng đã thành công, vui lòng chờ xem xét!')
+          Toast('Lệnh rút tiền thành công!')
           this.$router.push('/cashlist')
         } else {
           // Toast(data.msg ? data.msg : '提现失败,请重新提现或者联系管理员')

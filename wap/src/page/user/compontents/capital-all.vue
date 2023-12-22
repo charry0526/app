@@ -12,8 +12,7 @@
             {{item.deType}}
             <span :class="item.deAmt>0?'pull-right green':'pull-right red'">{{moneyDot(item.deAmt)}}</span>
           </div>
-          <div class="pro clearfix">
-            {{item.deSummary}}
+          <div class="pro clearfix" v-html="item.deSummary">
             <!-- 股票:300092/开山股份 <span class="pull-right">金额:50.241</span> -->
           </div>
           <!-- <div class="clearfix">

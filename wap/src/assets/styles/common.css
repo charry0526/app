@@ -3,3 +3,12 @@
     justify-content: space-between;
     align-items: center;
 }
+.text_red {
+  color: #d02551;
+}
+.text_green {
+  color: rgb(91, 186, 110);
+}
+.text_yellow{
+  color: #fdff12;
+}

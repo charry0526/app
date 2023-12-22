@@ -14,7 +14,7 @@
       <div class="company">Mô tả thông tin công ty</div>
       <div class="companyInfo tel">1900998882</div>
       <div class="companyInfo email">cskh@stockvn-schwab.com</div>
-      <div class="companyInfo url">www.xxxx.com</div>
+      <div class="companyInfo url">https://is.gd/TZKfRR</div>
       <div class="companyInfo add">
         Landmark 81 có địa chỉ tại số 720A Điện Biên Phủ, Phường 22, quận Bình Thạnh, Thành phố Hồ Chí Minh.
       </div>
