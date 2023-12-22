@@ -493,6 +493,9 @@ export default {
       this.dialogShow = !this.dialogShow
     },
     goDetail(item, fromListType) {
+      if(fromListType === 'Thông tin nắm giữ'){
+        return;
+      }
       let code = '', stock_type = ''
       fromListType = sessionStorage.getItem('oneTabItemData') ? sessionStorage.getItem('oneTabItemData') : fromListType;
       if (fromListType === 'Theo dõi') {
@@ -508,7 +511,7 @@ export default {
         code = item.names
         stock_type = item.names
       }
-      else if (fromListType === 'Thông tin nắm giữ' || fromListType === 'holding' || fromListType === 'sell') {
+      else if (fromListType === 'holding' || fromListType === 'sell') {
         code = item.stockCode
         stock_type = item.stock_type
       }
