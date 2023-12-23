@@ -16,7 +16,12 @@
             <div style="margin-left: 5px;" @click="toBuy"><img src="../../assets/images/details/buy.png"></div>
           </div>
         </div>
-        <div v-if="showTotalNumber" :class="detail.hcrate === 0 ? 'yellow' : (detail.hcrate > 0 ? 'green' : 'red')" style="padding-top: 10px; height: 23px">
+<!--        <div v-if="showTotalNumber" :class="detail.hcrate === 0 ? 'yellow' : (detail.hcrate > 0 ? 'green' : 'red')" style="padding-top: 10px; height: 23px">-->
+<!--          <span>{{ Number(detail.nowPrice / 1000).toFixed(2) }}</span>-->
+<!--          <span style="margin-left: 10px">{{ Number(detail.hcrate / 1000).toFixed(2) }}</span>-->
+<!--          <span style="margin-left: 10px">{{ Number(detail.hcratePercentage).toFixed(2) }}%</span>-->
+<!--        </div>-->
+        <div v-if="showTotalNumber" :class="colorTextFn(detail)" style="padding-top: 10px; height: 23px">
           <span>{{ Number(detail.nowPrice / 1000).toFixed(2) }}</span>
           <span style="margin-left: 10px">{{ Number(detail.hcrate / 1000).toFixed(2) }}</span>
           <span style="margin-left: 10px">{{ Number(detail.hcratePercentage).toFixed(2) }}%</span>
@@ -28,16 +33,27 @@
         <div>{{ detail.stockFullname }}</div>
         <div class="between-box" style="margin-top: 10px">
           <div class="price-left-total">
-            <div :class="['page-price', detail.hcrate === 0 ? 'yellow' : (detail.hcrate > 0 ? 'green' : 'red')]">
+<!--            <div :class="['page-price', detail.hcrate === 0 ? 'yellow' : (detail.hcrate > 0 ? 'green' : 'red')]">-->
+<!--              {{ Number(detail.nowPrice / 1000).toFixed(2) }}-->
+<!--            </div>-->
+            <div :class="colorTextFn(detail)">
               {{ Number(detail.nowPrice / 1000).toFixed(2) }}
             </div>
             <div>Tổng KL</div>
           </div>
           <div class="price-left-total">
-            <p :class="detail.hcrate === 0 ? 'yellow' : (detail.hcrate > 0 ? 'green' : 'red')">{{ Number(detail.hcrate /
-              1000).toFixed(2) }}</p>
-            <p :class="detail.hcrate === 0 ? 'yellow' : (detail.hcrate > 0 ? 'green' : 'red')">{{
-              Number(detail.hcratePercentage).toFixed(2) }}%</p>
+<!--            <p :class="detail.hcrate === 0 ? 'yellow' : (detail.hcrate > 0 ? 'green' : 'red')">{{ Number(detail.hcrate /-->
+<!--              1000).toFixed(2) }}-->
+<!--            </p>-->
+<!--            <p :class="detail.hcrate === 0 ? 'yellow' : (detail.hcrate > 0 ? 'green' : 'red')">{{-->
+<!--              Number(detail.hcratePercentage).toFixed(2) }}%-->
+<!--            </p>-->
+            <p :class="colorTextFn(detail)">{{ Number(detail.hcrate /
+              1000).toFixed(2) }}
+            </p>
+            <p :class="colorTextFn(detail)">{{
+                Number(detail.hcratePercentage).toFixed(2) }}%
+            </p>
             <p>{{ (Number(detail.volume) / 1000).toFixed(2) }}</p>
           </div>
         </div>
@@ -46,29 +62,29 @@
         <div class="between-box low-price-box">
           <div>
             <p>Sàn</p>
-            <p style="color: #79d9d7">{{ Number(detail.lowRoot / 1000).toFixed(2) }}</p>
+            <p style="color: #00C9FF">{{ Number(detail.lowRoot / 1000).toFixed(2) }}</p>
           </div>
           <div>
             <p>TC</p>
-            <p style="color: #e1ba53">{{ Number(detail.closeRoot / 1000).toFixed(2) }}</p>
+            <p style="color: #fdff12">{{ Number(detail.closeRoot / 1000).toFixed(2) }}</p>
           </div>
           <div>
             <p>Trần</p>
-            <p style="color: #c24fc4">{{ Number(detail.ceiling / 1000).toFixed(2) }}</p>
+            <p style="color: #F23AFF">{{ Number(detail.ceiling / 1000).toFixed(2) }}</p>
           </div>
         </div>
         <div class="between-box low-price-box" style="width: 100%">
           <div>
             <p>Thấp</p>
-            <p style="color: #e1ba53">{{ Number(detail.lowAdjust / 1000).toFixed(2) }}</p>
+            <p style="color: #fdff12">{{ Number(detail.lowAdjust / 1000).toFixed(2) }}</p>
           </div>
           <div>
             <p>TB</p>
-            <p style="text-align: right; color: #59b56b;">{{ Number(detail.avgprice / 1000).toFixed(2) }}</p>
+            <p style="text-align: right; color: #0BDF39;">{{ Number(detail.avgprice / 1000).toFixed(2) }}</p>
           </div>
           <div>
             <p>Cao</p>
-            <p style="text-align: right; color: #59b56b;">{{ Number(detail.hightAdjust / 1000).toFixed(2) }}</p>
+            <p style="text-align: right; color: #0BDF39;">{{ Number(detail.hightAdjust / 1000).toFixed(2) }}</p>
           </div>
         </div>
       </div>
@@ -132,7 +148,7 @@ export default {
       },
       bestandslisteLoading: false,
       detail: {
-        'name': '青海华鼎',
+        'name': 'Chi tiết',
         'code': '600243',
         'spell': 'qhhd',
         'gid': 'sh600243',
@@ -201,7 +217,6 @@ export default {
     this.qhinfo = this.$route.query.qhinfo
     this.zsinfo = this.$route.query.zsinfo
 
-
     let _this = this
     // 获取要监听的div元素
     var div = document.getElementById('myDiv');
@@ -214,7 +229,6 @@ export default {
       // console.log('滚动距离顶部：' + scrollDistance + 'px');
       _this.handleScroll(scrollDistance)
     });
-
 
   },
   methods: {
@@ -388,6 +402,41 @@ export default {
       //     }
       //   })
       // }
+    },
+    // 涨幅值颜色处理
+    colorTextFn(detail) {
+      if (detail.hcratePercentage >= 0) {
+        if(detail.hcratePercentage == 0){
+          // 不涨不跌为黄色
+          return 'text_yellow'
+        }else if(detail.hcratePercentage >= 7 && detail.stockPlate === 'HOSE'){
+          // Hose类型的股票，大于等于7%就涨停
+          return 'text_purple'
+        }else if(detail.hcratePercentage >= 10 && detail.stockPlate === 'HNX'){
+          // HNX类型的股票，大于等于10%就涨停
+          return 'text_purple'
+        }else if(detail.hcratePercentage >= 14 && detail.stockPlate === 'UPCOM'){
+          // Upcom类型的股票，大于等于14%就涨停
+          return 'text_purple'
+        }else {
+          // 正常涨为绿色
+          return 'text_green'
+        }
+      } else {
+        if(detail.hcratePercentage <= -3 && detail.stockPlate === 'HOSE'){
+          // Hose类型的股票，小于等于-7%就跌停
+          return 'text_blue'
+        }else if(detail.hcratePercentage <= -10 && detail.stockPlate === 'HNX'){
+          // HNX类型的股票，小于等于-10%就跌停
+          return 'text_blue'
+        }else if(detail.hcratePercentage <= -14 && detail.stockPlate === 'UPCOM'){
+          // Upcom类型的股票，小于等于-14%就跌停
+          return 'text_blue'
+        }else {
+          // 正常跌，为红色
+          return 'text_red'
+        }
+      }
     }
   }
 }
@@ -458,16 +507,31 @@ export default {
   padding: 0;
 }
 
-.red {
-  color: rgba(255, 0, 0, 1);
+//.red {
+//  color: rgba(255, 0, 0, 1);
+//}
+//
+//.yellow {
+//  color: rgb(226, 107, 10);
+//}
+//
+//.green {
+//  color: rgb(0, 128, 0);
+//}
+.text_red {
+  color: #FF0017;
 }
-
-.yellow {
-  color: rgb(226, 107, 10);
+.text_green {
+  color: #0BDF39;
 }
-
-.green {
-  color: rgb(0, 128, 0);
+.text_yellow{
+  color: #fdff12;
+}
+.text_purple{
+  color: #F23AFF;
+}
+.text_blue{
+  color: #00C9FF;
 }
 
 .agree-footer {

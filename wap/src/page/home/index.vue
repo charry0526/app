@@ -121,6 +121,7 @@ export default {
         this.active = 0
         this.getUserStock()
       } else if (sessionStorage.getItem('oneTabItemData') === 'Thị trường' && sessionStorage.getItem('childrenTabItemData')) {
+        this.stockPlate = sessionStorage.getItem('childrenTabItemData')
         this.getStock(1, sessionStorage.getItem('childrenTabItemData'))
         this.active = 1
       } else if (sessionStorage.getItem('oneTabItemData') === 'ESOP') {
@@ -271,7 +272,6 @@ export default {
     },
     //市场列表
     async getStock(pageNum, stockPlate) {
-      // let isNew = ['VN30', 'HNX30'].includes(stockPlate);
       let opt = {
         pageNum: pageNum || this.pageNum,
         pageSize: this.pageSize,
@@ -279,30 +279,6 @@ export default {
       }
 
       let data = await api.getStock(opt)
-      // let data = isNew ? await api.wifeedDutop({
-      //   san: stockPlate || this.stockPlate,
-      //   apikey
-      // }) : await api.getStock(opt);
-
-      // if (isNew) {
-      //   let replaceData = {
-      //     list: [],
-      //     total: data.data.length,
-      //     lastPage: 1
-      //   };
-      //   data.status = data.msg ? 1 : 0;
-      //   data.data.map(result => {
-      //     replaceData.list.push({
-      //       name: result.mack,
-      //       nowPrice: result.high_root,
-      //       changedRatio: result.changedratio ? result.changedratio : 0, //涨幅度百分比
-      //       floorPrice: result.changed, //涨幅度金额
-      //       volume: result.volume_root
-      //     })
-      //   })
-      //   data.data = replaceData
-      // }
-
       if (data.status === 0) {
         this.closeLoading()
         let marketListData = {
@@ -354,7 +330,6 @@ export default {
     //关注列表
     async getUserStock(pageNum) {
       this.showLoading()
-      console.log('pageNum', pageNum)
       let opt = {
         keyWords: this.keywords,
         pageNum: pageNum || this.pageNum,
@@ -426,7 +401,6 @@ export default {
       ) {
         this.active = 1
         //市场列表
-        // this.proList = marketListData;
         this.getStock(1, childrenTabItemData.name)
         this.stockPlate = childrenTabItemData.name
       } else if (

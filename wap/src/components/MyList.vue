@@ -448,31 +448,140 @@ export default {
   methods: {
     colorTextFn(item, list) {
       if (list.watchListData) {
-        if (((item.hcrate / (item.nowPrice - item.hcrate) * 100).toFixed(2)) >= 0) {
-          return ((item.hcrate / (item.nowPrice - item.hcrate) * 100).toFixed(2)) == 0 ? 'text_yellow' : 'text_green'
+        var zf = (item.hcrate / (item.nowPrice - item.hcrate) * 100).toFixed(2)
+        // 关注列表
+        if (zf >= 0) {
+          if(zf == 0){
+            // 不涨不跌为黄色
+            return 'text_yellow'
+          }else if(zf >= 7 && item.stock_plate === 'HOSE'){
+            // Hose类型的股票，大于等于7%就涨停
+            return 'text_purple'
+          }else if(zf >= 10 && item.stock_plate === 'HNX'){
+            // HNX类型的股票，大于等于10%就涨停
+            return 'text_purple'
+          }else if(zf >= 14 && item.stock_plate === 'UPCOM'){
+            // Upcom类型的股票，大于等于14%就涨停
+            return 'text_purple'
+          }else {
+            return 'text_green'
+          }
+          // return ((item.hcrate / (item.nowPrice - item.hcrate) * 100).toFixed(2)) == 0 ? 'text_yellow' : 'text_green'
         } else {
-          return 'text_red'
+          if(zf <= -7 && item.stock_plate === 'HOSE'){
+            // Hose类型的股票，小于等于-7%就跌停
+            return 'text_blue'
+          }else if(zf <= -10 && item.stock_plate === 'HNX'){
+            // HNX类型的股票，小于等于-10%就跌停
+            return 'text_blue'
+          }else if(zf <= -14 && item.stock_plate === 'UPCOM'){
+            // Upcom类型的股票，小于等于-14%就跌停
+            return 'text_blue'
+          }else {
+            return 'text_red'
+          }
+          // return 'text_red'
         }
       } else if (list.market) {
+        // 市场列表
         let changedRatio = item.changedRatio ? item.changedRatio : ((item.hcrate / (item.nowPrice - item.hcrate) * 100).toFixed(2))
         if (changedRatio >= 0) {
-          return changedRatio == 0 ? 'text_yellow' : 'text_green'
+          if(changedRatio == 0 ){
+            // 不涨不跌为黄色
+            return 'text_yellow'
+          }else if(changedRatio >= 7 && item.stock_plate === 'HOSE'){
+            // Hose类型的股票，大于等于7%就涨停
+            return 'text_purple'
+          }else if(changedRatio >= 7 && item.stock_plate === 'VN30'){
+            // VN30类型的股票，大于等于7%就涨停
+            return 'text_blue'
+          }else if(changedRatio >= 10 && item.stock_plate === 'HNX30'){
+            // HNX30类型的股票，大于等于10%就涨停
+            return 'text_blue'
+          }else if(changedRatio >= 10 && item.stock_plate === 'HNX'){
+            // HNX类型的股票，大于等于10%就涨停
+            return 'text_purple'
+          }else if(changedRatio >= 14 && item.stock_plate === 'UPCOM'){
+            // Upcom类型的股票，大于等于14%就涨停
+            return 'text_purple'
+          }else {
+            return 'text_green'
+          }
+          // return changedRatio == 0 ? 'text_yellow' : 'text_green'
         } else {
-          return 'text_red'
+          if(changedRatio <= -7 && item.stock_plate === 'HOSE'){
+            // Hose类型的股票，小于等于-7%就跌停
+            return 'text_blue'
+          }else if(changedRatio <= -7 && item.stock_plate === 'VN30'){
+            // VN30类型的股票，小于等于-7%就跌停
+            return 'text_blue'
+          }else if(changedRatio <= -10 && item.stock_plate === 'HNX30'){
+            // HNX30类型的股票，小于等于-10%就跌停
+            return 'text_blue'
+          }else if(changedRatio <= -10 && item.stock_plate === 'HNX'){
+            // HNX类型的股票，小于等于-10%就跌停
+            return 'text_blue'
+          }else if(changedRatio <= -14 && item.stock_plate === 'UPCOM'){
+            // Upcom类型的股票，小于等于-14%就跌停
+            return 'text_blue'
+          }else {
+            return 'text_red'
+          }
+          // return 'text_red'
         }
       } else if (list.welfare) {
+        // 红利股列表
         // if ((((item.price - item.scprice) / item.price * 100).toFixed(2)) >= 0) {
         //   return 'text_green'
         // } else {
         //   return 'text_red'
         // }
       } else if (list.zccyList) {
-        let changeRatio = ((((item.orderNum * item.now_price)-item.orderTotalPrice) / item.orderTotalPrice) * 100).toFixed(2);
-        console.log(changeRatio);
+        // 资产 持有列表
+        let changeRatio = (((item.orderNum * item.now_price - item.orderTotalPrice) / item.orderTotalPrice) * 100).toFixed(2);
         if (changeRatio >= 0) {
-          return changeRatio == 0 ? 'text_yellow' : 'text_green'
+          if(changeRatio == 0 ){
+            // 不涨不跌为黄色
+            return 'text_yellow'
+          }else if(changeRatio >= 7 && item.stockPlate === 'HOSE'){
+            // Hose类型的股票，大于等于7%就涨停
+            return 'text_purple'
+          }else if(changeRatio >= 7 && item.stockPlate === 'VN30'){
+            // VN30类型的股票，大于等于7%就涨停
+            return 'text_blue'
+          }else if(changeRatio >= 10 && item.stockPlate === 'HNX30'){
+            // HNX30类型的股票，大于等于10%就涨停
+            return 'text_blue'
+          }else if(changeRatio >= 10 && item.stockPlate === 'HNX'){
+            // HNX类型的股票，大于等于10%就涨停
+            return 'text_purple'
+          }else if(changeRatio >= 14 && item.stockPlate === 'UPCOM'){
+            // Upcom类型的股票，大于等于14%就涨停
+            return 'text_purple'
+          }else {
+            return 'text_green'
+          }
+          // return changeRatio == 0 ? 'text_yellow' : 'text_green'
         } else {
-          return 'text_red'
+          if(changeRatio <= -7 && item.stockPlate === 'HOSE'){
+            // Hose类型的股票，小于等于-7%就跌停
+            return 'text_blue'
+          }else if(changeRatio <= -7 && item.stockPlate === 'VN30'){
+            // VN30类型的股票，小于等于-7%就跌停
+            return 'text_blue'
+          }else if(changeRatio <= -10 && item.stockPlate === 'HNX30'){
+            // HNX30类型的股票，小于等于-10%就跌停
+            return 'text_blue'
+          }else if(changeRatio <= -10 && item.stockPlate === 'HNX'){
+            // HNX类型的股票，小于等于-10%就跌停
+            return 'text_blue'
+          }else if(changeRatio <= -14 && item.stockPlate === 'UPCOM'){
+            // Upcom类型的股票，小于等于-14%就跌停
+            return 'text_blue'
+          }else {
+            return 'text_red'
+          }
+          // return 'text_red'
         }
       }
     },

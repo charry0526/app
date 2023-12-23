@@ -421,6 +421,7 @@ export default {
   },
   mounted() {
     this.getUserInfo();
+    this.getCardDetail()
   },
   methods: {
     goPage(url) {
@@ -441,6 +442,15 @@ export default {
         Toast(data.msg)
       }
       this.$store.state.user = this.user
+    },
+    async getCardDetail () {
+      // 获取银行卡信息
+      let data = await api.getBankCard()
+      if (data.status === 0) {
+        this.$store.state.bankInfo = data.data
+      } else {
+        // Toast(data.msg)
+      }
     },
 
     async getProductSetting () {
