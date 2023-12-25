@@ -267,9 +267,11 @@
             <div class="bingtu">
               <van-circle v-model=" currentRate " size="111px" :rate=" rate " layer-color="#5bba6e" stroke-width=80 />
               <div class="bingtu_text">
-                Tài sản<p><span style="color: #5bba6e">{{ rate || 0 }}%</span> / <span style="color: #ff7b23">{{
-                  (100 - rate) || 0
-                    }}%</span></p>
+                Tài sản
+                <p>
+                  <span style="color: #5bba6e; font-size: 10px; ">{{ rate || 0 }}%</span>
+                  <span style="color: #ff7b23; font-size: 10px; ">{{rateUmt || 0 }}%</span>
+                </p>
               </div>
             </div>
           </div>
@@ -434,7 +436,8 @@ export default {
     return {
       fromListType: 'Thông tin nắm giữ',
       currentRate: 100,
-      rate: 0,
+      rate: 0.00,
+      rateUmt: 0.00,
       property_1: 1,
       property_2: 1,
       property_3: 1,
@@ -542,7 +545,9 @@ export default {
       }
       let res = api.getUserProperty(obj)
       res.then(result => {
-        this.rate = Math.ceil(result.data.shareholdingAmt / result.data.userAmt * 100)
+        // this.rate = Math.ceil(result.data.shareholdingAmt / result.data.userAmt * 100)
+        this.rate = (result.data.shareholdingAmt / result.data.userAmt * 100).toFixed(3)
+        this.rateUmt = (result.data.enableAmt / result.data.userAmt * 100).toFixed(3)
         this.propertyInfo = result.data
       })
     }
