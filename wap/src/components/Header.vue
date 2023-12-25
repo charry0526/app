@@ -7,8 +7,8 @@
       <router-link to="/search" class="header_nav_icon">
         <img src="../assets/images/header/search@x2.png" />
       </router-link>
-      <router-link to="/kefu" class="header_nav_icon">
-        <img src="../assets/images/header/kefu@x2.png" />
+      <router-link to="#"  class="header_nav_icon">
+        <img @click="goLink()" src="../assets/images/header/kefu@x2.png" />
       </router-link>
       <router-link to="/user" class="header_nav_icon">
         <img src="../assets/images/header/user@x2.png" />
@@ -46,6 +46,7 @@
 import Vue from "vue";
 import { Popup } from "vant";
 import { Toast } from "vant";
+import {clone} from "node-notifier/lib/utils";
 
 Vue.use(Toast);
 Vue.use(Popup);
@@ -93,6 +94,9 @@ export default {
     },
     showPassWord() {
       this.isShowPW = !this.isShowPW;
+    },
+    goLink () {
+      window.location.href = 'https://t.me/CSKH_SCHWAB'
     },
   },
 };

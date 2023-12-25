@@ -273,7 +273,6 @@ export default {
     },
     // 非对称加密方法
     creatEncry (publicKey, param) {
-      console.log('publicKey---: ', publicKey)
       const encryptor = new JSEncrypt.JSEncrypt()
       // 设置公钥
       encryptor.setPublicKey(publicKey)
