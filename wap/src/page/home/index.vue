@@ -238,11 +238,11 @@ export default {
                 isChange: 0 //0表示表头不可点击切换 例如百分比和金额切换
               },
               {
-                name: "Giá thị trường",//红利股市场价
+                name: "Giá phát hành",//红利股市场价
                 isChange: 0
               },
               {
-                name: "Giá phát hành",//交易所发行价
+                name: "Giá thị trường",//交易所发行价
                 isChange: 0
               },
               {
