@@ -361,12 +361,12 @@ export default {
 
     // 提出弹窗操作
     popUp(option) {
+      this.reset()
       this.itemInfo = option
       if (option.numberList.length != 0) {
         this.leverValue = option.numberList[0]
         console.log(this.leverValue)
       }
-      this.reset()
       this.dialogShow = !this.dialogShow
     },
     toCash(option) {

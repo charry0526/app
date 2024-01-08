@@ -555,12 +555,12 @@ export default {
     },
     // 提出弹窗操作
     popUp(option) {
+      this.reset()
       this.itemInfo = option
       option.numberList = option.lever.split('/')
       if (option.numberList.length !== 0) {
         this.leverValue = option.numberList[0]
       }
-      this.reset()
       this.dialogShow = !this.dialogShow
     },
     goDetail(item, fromListType) {
