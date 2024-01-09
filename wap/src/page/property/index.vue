@@ -126,7 +126,22 @@
 
   .bingtu {
     position: relative;
-
+    width: 110px;
+    height: 110px;
+    .color-circle {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+    .yuanxin {
+      width: 90px;
+      height: 90px;
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      background-color: #1a191f;
+      border-radius: 50%;
+    }
     .bingtu_text {
       position: absolute;
       left: 0;
@@ -140,7 +155,7 @@
       text-align: center;
       font-size: 16px;
       box-sizing: border-box;
-
+      z-index:2;
       p {
         margin: 8px 10px;
         overflow: hidden;
@@ -220,7 +235,7 @@
     <div class="page-main">
       <div class="property-menu">
         <div :class="showTemplate === 1 ? 'property-menu-active' : ''"
-          @click="showTemplate = 1; getHoldingsList(1); getHoldingsTotal">
+             @click="showTemplate = 1; getHoldingsList(1); getHoldingsTotal">
           Thông tin nắm giữ
         </div>
         <div :class=" showTemplate === 2 ? 'property-menu-active' : '' " @click="getPropertyInfo();">Báo cáo tài sản
@@ -248,7 +263,7 @@
                     <div>Giá trị đang nắm giữ</div>
                   </div>
                   <div class="item_number">{{
-                    $moneyDot(propertyInfo.shareholdingAmt)
+                      $moneyDot(propertyInfo.shareholdingAmt)
                     }}
                   </div>
                 </div>
@@ -258,14 +273,13 @@
                     <div>Số dư khả dụng</div>
                   </div>
                   <div class="item_number">{{
-                    $moneyDot(propertyInfo.enableAmt)
+                      $moneyDot(propertyInfo.enableAmt)
                     }}
                   </div>
                 </div>
               </div>
             </div>
             <div class="bingtu">
-              <van-circle v-model=" currentRate " size="111px" :rate=" rate " layer-color="#5bba6e" stroke-width=80 />
               <div class="bingtu_text">
                 Tài sản
                 <p>
@@ -273,7 +287,10 @@
                   <span style="color: #ff7b23; font-size: 10px; ">{{rateUmt || 0 }}%</span>
                 </p>
               </div>
+              <div class="color-circle" :style="pieStyle"></div>
+              <div class="yuanxin"></div>
             </div>
+
           </div>
         </div>
 
@@ -297,7 +314,7 @@
           <div class="property-list-template" v-if=" property_1 ">
             <div class="between-box">
               <div>Giá trị thị trường nắm giữ</div>
-<!--              持有债券总市值-->
+              <!--              持有债券总市值-->
               <div>{{ $moneyDot(propertyInfo.nowTotalPrice) }}</div>
             </div>
             <div class="between-box">
@@ -306,7 +323,7 @@
             </div>
             <div class="between-box">
               <div>Tổng lãi/lỗ</div>
-<!--              持有债券总损益值-->
+              <!--              持有债券总损益值-->
               <div>{{ $moneyDot(propertyInfo.shareholdingProperty) }}</div>
             </div>
           </div>
@@ -382,10 +399,10 @@
               </div>
               <div class="isContent_item">
                 <span>{{
-                  $moneyDot(holdingTotal.orderTotalPrice)
+                    $moneyDot(holdingTotal.orderTotalPrice)
                   }}</span>
                 <span>{{
-                  $moneyDot(holdingTotal.profitMoney)
+                    $moneyDot(holdingTotal.profitMoney)
                   }}</span>
               </div>
             </div>
@@ -396,16 +413,16 @@
               </div>
               <div class="isContent_item">
                 <span>{{
-                  $moneyDot(holdingTotal.nowPrice)
+                    $moneyDot(holdingTotal.nowPrice)
                   }}</span>
                 <span :class=" holdingTotal.profitMoney < 0 ? 'text_red' : 'text_green' ">{{
-                  holdingTotal.percentage
+                    holdingTotal.percentage
                   }}%</span>
               </div>
             </div>
           </div>
           <my-list :proList=" proList " :listType=" listType " @changeData=" changeData "
-            :fromListType=" fromListType " />
+                   :fromListType=" fromListType " />
         </div>
       </template>
     </div>
@@ -438,6 +455,7 @@ export default {
       currentRate: 100,
       rate: 0.00,
       rateUmt: 0.00,
+      pieStyle:{},
       property_1: 1,
       property_2: 1,
       property_3: 1,
@@ -546,8 +564,58 @@ export default {
       let res = api.getUserProperty(obj)
       res.then(result => {
         // this.rate = Math.ceil(result.data.shareholdingAmt / result.data.userAmt * 100)
+        //持有资产
         this.rate = (result.data.shareholdingAmt / result.data.userAmt * 100).toFixed(3)
+        //可用资产
         this.rateUmt = (result.data.enableAmt / result.data.userAmt * 100).toFixed(3)
+        //冻结资产
+        this.shareholdingProperty = (result.data.shareholdingProperty / result.data.userAmt * 100).toFixed(3)
+        //保证资产
+        this.margin = (result.data.margin / result.data.userAmt * 100).toFixed(3)
+
+        let pipePercentage = [
+          parseFloat(result.data.shareholdingAmt / result.data.userAmt * 100), // 持有资产
+          parseFloat(result.data.enableAmt / result.data.userAmt * 100),// 可用资产
+          parseFloat(result.data.shareholdingProperty / result.data.userAmt * 100),// 冻结资产
+          parseFloat(result.data.margin / result.data.userAmt * 100)// 保证资产
+        ]
+        let totalPercentage = pipePercentage.reduce((sum, num) => sum + num, 0)
+        //颜色对应上面四个值，顺序一样
+        let pipeColor = [
+          '#5BBA6EFF',
+          '#FF7B23FF',
+          '#F23AFF',
+          '#00C9FF'
+        ]
+        let styleArr = []
+        let countPercentage = 0;
+
+        for(let index = 0; index < pipePercentage.length; index++)
+        {
+          let percentage = pipePercentage[index]
+
+          if (percentage > 0)
+          {
+            if (totalPercentage !== 100 && percentage === Math.max(...pipePercentage))
+            {
+              percentage = percentage + 100 - totalPercentage
+            }
+
+            let tmpStyle = pipeColor[index] + ' ' + countPercentage + '% ' + (countPercentage + percentage) + '%'
+
+            styleArr.push(tmpStyle)
+
+            countPercentage += percentage
+          }
+        }
+
+        let styleStr = 'conic-gradient(' + styleArr.join(', ') + ')'
+
+        this.pieStyle = {
+          background: styleStr
+        }
+        console.log(this.pieStyle);
+
         this.propertyInfo = result.data
       })
     }
