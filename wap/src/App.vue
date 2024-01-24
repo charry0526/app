@@ -7,24 +7,25 @@
       <mt-header :title="title">
         <mt-button icon="back" slot="left" @click="$router.go(-1)"></mt-button>
         <template v-if="iconRight == 'search'">
-          <img
+<!--          <img
             slot="right"
             class="search-right"
             src="./assets/ico/fangdajing.png"
             alt=""
-          />
-        </template>
-        <template v-else>
-          <mt-button icon="more" slot="right"></mt-button>
+          />-->
         </template>
       </mt-header>
     </div>
-    <div class="body-box">
+    <div class="body-box" id="myDiv">
       <router-view></router-view>
     </div>
   </div>
 </template>
-
+<style>
+html,body{
+  background-color: #20272e;
+}
+</style>
 <script>
 export default {
   name: 'App',
@@ -127,7 +128,7 @@ export default {
     height: calc(100% - 1rem);
     box-sizing: border-box;
     overflow-y: auto;
-    
+
   }
   &.red-theme {
     background: #e9e9e9;
@@ -153,5 +154,12 @@ export default {
 }
 .mint-search-list {
   position: relative !important;
+}
+</style>
+<style>
+.van-toast{
+  overflow-wrap: break-word !important;
+  white-space:normal !important;
+  word-break: normal !important;
 }
 </style>

@@ -108,7 +108,7 @@ export default {
   }
 
   .transaction {
-    margin-top: 0.2rem;
+    //margin-top: 0.2rem;
     color: rgba(100, 100, 100, 0.78);
 
     .transaction-title {

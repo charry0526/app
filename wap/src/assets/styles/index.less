@@ -1,0 +1,116 @@
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  height: 100%;
+  background: #29282e;
+  font-family: PingFang SC, Helvetica Neue, Helvetica, Hiragino Sans GB,
+    Microsoft YaHei, Arial, sans-serif;
+  color: #fff;
+  position: relative;
+  .page-main {
+    width: 100%;
+    position: relative;
+    height: 100%;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 60px 0 50px 0;
+  }
+}
+.van-hairline--top-bottom::after,
+.van-hairline-unset--top-bottom::after {
+  border-width: 0 !important;
+}
+.van-tabbar--fixed {
+  // position: relative !important;
+}
+.text_red {
+  color: #FF0017;
+  //color: #d02551;
+}
+.text_green {
+  //color: rgb(91, 186, 110);
+  color: #0BDF39;
+}
+.text_yellow{
+  color: #fdff12;
+}
+.text_purple{
+  color: #F23AFF;
+}
+.text_blue{
+  color: #00C9FF;
+}
+
+.van-empty {
+  height: 100%;
+  .van-empty__image {
+    width: 20%;
+    height: auto;
+  }
+}
+.login_toast {
+  background-color: rgba(0, 0, 0, 0) !important;
+  .van-icon__image {
+    width: 80px !important;
+    height: 80px !important;
+  }
+}
+.van-overlay {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+.searchBox {
+  border-bottom: 1px solid #49474f;
+  .van-search {
+    padding: 15px 0 15px 15px;
+  }
+  .van-search__content {
+    padding-left: 0 !important;
+    background: #29282d;
+    .van-cell {
+      padding: 0;
+    }
+    .van-field__left-icon {
+      display: none;
+    }
+    .van-field__control {
+      height: 36px;
+      line-height: 36px;
+      background: #29282d;
+      padding: 10px;
+      border-radius: 4px;
+      // color: rgb(105, 105, 107);
+      color: #fff;
+      font-size: 12px;
+      &::placeholder {
+        color: rgb(105, 105, 107);
+      }
+    }
+  }
+  .van-search__action {
+    padding: 0 20px;
+    font-size: 14px;
+    color: rgb(251, 151, 2);
+  }
+  .van-search__action:active {
+    background-color: rgba(0, 0, 0, 0) !important;
+  }
+  .van-icon-clear {
+    margin-right: 0 !important;
+  }
+}
+.van-hairline--bottom::after {
+  border: 0 !important;
+}
+.van-nav-bar__content .van-nav-bar__left {
+  padding-left: 10px !important;
+}

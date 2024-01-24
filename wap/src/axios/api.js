@@ -4,6 +4,10 @@ import { post, get } from '@/axios/index'
 // var img_url = APIUrl.util.image // 这个就是图片上传的api url
 
 // 就可以使用 post 和 get 了
+export function activateInfo (options) {
+  return post('/apis/api/user/activateInfo.do', options)
+}
+
 // 获取产品配置信息
 export function getProductSetting (options) {
   return post('/apis/api/admin/getProductSetting.do', options)
@@ -258,6 +262,22 @@ export function outMoney (options) {
 export function canceloutMoney (options) {
   return post('/apis/user/withdraw/cancel.do', options)
 }
+// 信用金------------------
+export function moneyCredit (options) {
+  return post('/apis/user/moneyCredit/loan.do', options)
+}
+//信用金详情
+export function moneyCreditInfo (options) {
+  return post('/apis/user/moneyCredit/details.do', options)
+}
+// 用户信用金饼图
+export function pieChart (options) {
+  return post('/apis/user/pieChart/loan.do', options)
+}
+// 信用金充值
+export function topUp (options) {
+  return post('/apis/user/topupMoney/topUp.do', options)
+}
 
 // k线图
 export function getMinK (options) {
@@ -440,7 +460,7 @@ export function sellFunds (options) {
 export function Newlist (options) {
   return get('/apis/api/admin/getEsopList.do', options)
 }
-// 新股-提出列表 提出
+// 新股-申请列表
 export function ListsAdd (options) {
   return post('/apis/api/admin/addESOP_sq.do', options)
 }
@@ -484,4 +504,27 @@ export function getCusAddress (options) {
 // 修改用户信息
 export function setUserInfo (options) {
   return get('/apis/api/admin/setAvatar.do', options)
+}
+// 获取加密公钥
+export function getPKConfig (options) {
+  return post('/apis/api/user/getUPKConfig.do', options)
+}
+
+//我的资产
+export function getUserProperty (options) {
+  return post('/apis/user/getUserProperty.do', options)
+}
+
+//资产汇总
+export function getUserPropertyTotal (options) {
+  return post('/apis/user/position/percentage.do', options)
+}
+
+// 信贷记录
+export function creditRecord (options) {
+  return post('/apis/user/moneyCredit/list.do', options)
+}
+// 还款
+export function repaymentRecord (options) {
+  return post('/apis/user/topupMoney/list.do', options)
 }

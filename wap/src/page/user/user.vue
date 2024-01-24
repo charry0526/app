@@ -194,8 +194,8 @@
           <!-- <div>期货账户: <span>￥{{$store.state.hide?'****':Number($store.state.userInfo.userFuturesAmt).toFixed(2)}}</span></div> -->
         </div>
         <div class="acc-pre-right">
-          <div class="redbtn btn" @click="toRecharge">{{ $t("recharge") }}</div>
-          <div class="bluebtn btn" @click="toCash">{{ $t("withdraw") }}</div>
+          <div class="redbtn btn" style="display:flex; align-items:center;" @click="toRecharge">{{ $t("recharge") }}</div>
+          <div class="bluebtn btn" style="display:flex; align-items:center;" @click="toCash">{{ $t("withdraw") }}</div>
         </div>
       </div>
       <div v-for="item in account" :key="item.key">
@@ -408,11 +408,30 @@
                   }}
                 </p></div>
               </li>
-              <!-- <li>
-                <i class="iconfont icon-dongjiezijin"></i>
-                <div class="name">新股冻结保证金</div>
-                <p>{{shengoudj.djzj}}</p>
-              </li> -->
+
+              <li>
+                <img class="zijin1" src="../../assets/ico/icon2.png" />
+                <div>
+                  <div class="name">{{ $t("FrozenMargin") }}</div>
+                  <p class="number yellow">{{
+                    $store.state.hide
+                    ? "****"
+                    : $moneyDot($store.state.userInfo.djbzj,false) + " đ"
+                    }}</p>
+                </div>
+              </li>
+               <!--<li>
+                 <div>
+                   <img class="zijin1" src="../../assets/ico/icon3.png" />
+                 &lt;!&ndash;<i class="iconfont icon-dongjiezijin"></i>&ndash;&gt;
+                 <div class="name">{{ $t("FrozenMargin") }}</div><br/>
+                <p>{{
+                  $store.state.hide
+                  ? "****"
+                  : $moneyDot($store.state.userInfo.djbzj,false) + " đ"
+                  }}</p>
+                 </div>
+              </li>-->
             </ul>
           </div>
         </div>
@@ -485,6 +504,7 @@
 
             {{ $t("myClosingPosition") }}
           </div>
+
           <div
             v-if="this.$store.state.settingForm.indexDisplay"
             @click="goEsop()"
@@ -494,6 +514,17 @@
               <img class="row-icon" src="../../assets/ico/icon7.png" alt="" />
             </div>
             ESOP
+          </div>
+          <!-- 信用金 -->
+          <div
+            v-if="this.$store.state.settingForm.indexDisplay"
+            @click="goCredit()"
+            class="col-xs-4"
+          >
+            <div class="img-box">
+              <img class="row-icon" src="../../assets/ico/icon5.png" alt="" />
+            </div>
+            Vay tín dụng
           </div>
           <!-- <div v-if="this.$store.state.settingForm.indexDisplay" @click="goOrderList(2)" class="col-xs-3">
             <i class="iconfont icon-geguyingkui"></i>
@@ -727,7 +758,7 @@
           >{{ $t("popupTip6") }}
         </p>
       </mt-popup>
-      <div class="btnbox">
+      <div class="btnbox" style="margin-bottom:70px">
         <span class="text-center btnok loginout" @click="toRegister">
           Đăng xuất</span
         >
@@ -753,7 +784,7 @@ export default {
         img: ''
       },
       defaultUser: {
-        img: require('../../assets/img/default-head.png')
+        // img: require('../../assets/img/default-head.png')
       },
       changeHideStatus: false,
       userAmt: '',
@@ -869,6 +900,10 @@ export default {
     },
     goEsop () {
       this.$router.push('/esop')
+    },
+    //信用金
+    goCredit () {
+      this.$router.push('/credist')
     },
     //
     toAggre: function () {
@@ -1002,7 +1037,7 @@ body {
   // height: 0;
   // padding-top: 44%;
   height: 2.8rem;
-  background-image: url("../../assets/img/header.png");
+  //background-image: url("../../assets/img/header.png");
   background-size: 100% 100%;
 }
 .wrapper {
@@ -1754,6 +1789,9 @@ body {
   }
   li:nth-of-type(2) {
     padding-right: 0;
+  }
+  li:nth-of-type(5) {
+    padding-left: 0;
   }
 }
 

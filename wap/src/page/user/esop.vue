@@ -1,41 +1,29 @@
 <template>
   <div class="wrapper">
-    <mt-navbar class="top-navbar"
-               @click.native="tabchange"
-               v-model="selected"
-               fixed>
-      <mt-tab-item class="top-nav-item"
-                   id="1">ESOP</mt-tab-item>
-      <mt-tab-item class="top-nav-item"
-                   id="2">Danh mục</mt-tab-item>
+    <mt-navbar class="top-navbar" @click.native="tabchange" v-model="selected" fixed>
+      <mt-tab-item class="top-nav-item" id="1">ESOP</mt-tab-item>
+      <mt-tab-item class="top-nav-item" id="2">Danh mục</mt-tab-item>
       <!-- <mt-tab-item class="top-nav-item"
                    id="3">期货账户</mt-tab-item> -->
     </mt-navbar>
-    <mt-tab-container class="order-list"
-                      v-model="selected">
-      <mt-tab-container-item class="order-list-one"
-                             id="1">
+    <mt-tab-container class="order-list" v-model="selected">
+      <mt-tab-container-item class="order-list-one" id="1">
         <div class="table-box">
           <!-- <h3>报名名单</h3> -->
-          <table v-infinite-scroll="loadMore"
-                 :infinite-scroll-disabled="loading"
-                 infinite-scroll-distance="10"
-                 class="table">
+          <table v-infinite-scroll="loadMore" :infinite-scroll-disabled="loading" infinite-scroll-distance="10"
+            class="table">
             <th>Mã</th>
             <th>Giá thị trường</th>
             <th>Giá phát hành</th>
             <th>Đặt lệnh</th>
-            <tr v-for="(item,index) in stockList"
-                :key="index">
-              <td>{{item.names}}</td>
-              <td>{{$moneyDot(Number(item.nowPrice))||''}}</td>
-              <td>{{$moneyDot(Number(item.price))}}</td>
+            <tr v-for="(item, index) in stockList" :key="index">
+              <td>{{ item.names }}</td>
+              <td>{{ $moneyDot(Number(item.nowPrice)) || '' }}</td>
+              <td>{{ $moneyDot(Number(item.price)) }}</td>
               <td>
                 <div class="button-box">
-                  <mt-button class="btn-red pull-right"
-                             size="small"
-                             type="danger" style="background-color: #f5991d !important;"
-                             @click="popUp(item)">
+                  <mt-button class="btn-red pull-right" size="small" type="danger"
+                    style="background-color: #f5991d !important;" @click="popUp(item)">
                     Đề xuất
                   </mt-button>
                 </div>
@@ -44,42 +32,35 @@
           </table>
         </div>
       </mt-tab-container-item>
-      <mt-tab-container-item class="order-list-two"
-                             id="2">
-                             <!-- style="overflow-x: scroll;" -->
-        <div class="table-box" >
-          <table v-if="selected==2"
-                 v-infinite-scroll="loadMore"
-                 :infinite-scroll-disabled="loading"
-                 infinite-scroll-distance="10"
-                 class="table">
+      <mt-tab-container-item class="order-list-two" id="2">
+        <!-- style="overflow-x: scroll;" -->
+        <div class="table-box">
+          <table v-if="selected == 2" v-infinite-scroll="loadMore" :infinite-scroll-disabled="loading"
+            infinite-scroll-distance="10" class="table">
             <tr>
               <th>Mã</th>
               <th>Giá KL</th>
               <th>Giá PH</th>
               <th>SL</th>
-              <th>Đòn bẩy</th>
+              <th>Margin</th>
               <!-- <th>Giá TT</th> -->
               <th>Xét duyệt</th>
             </tr>
-            <tr v-for="(item,index) in tendorseListDate"
-                :key="index">
-              <td>{{item.xgname}}</td>
-              <td>{{$moneyDot(item.finalPrice)}}</td>
-              <td>{{$moneyDot(item.issuePrice)}}</td>
-              <td>{{item.nums}}</td>
-              <td>{{item.gg}}</td>
+            <tr v-for="(item, index) in tendorseListDate" :key="index">
+              <td>{{ item.xgname }}</td>
+              <td>{{ $moneyDot(item.finalPrice) }}</td>
+              <td>{{ $moneyDot(item.issuePrice) }}</td>
+              <td>{{ item.nums }}</td>
+              <td>{{ item.gg }}</td>
               <!-- <td>{{$moneyDot(item.sz)}}</td> -->
               <!-- <td :class="item.zts==2?'tdActive':''">
                 {{item.zts==1?'vượt qua':item.zts==2?'không vượt qua':item.zts==4?'Hoàn thành':'không được xem xét'}}
               </td> -->
               <td>
                 <div class="button-box">
-                <span  v-if="item.zts!=1">{{item.zts==2?'Chưa thông qua':item.zts==4?'Hoàn thành':'Đang XD'}}</span>
-                 <mt-button  v-if="item.zts==1" class="btn-red pull-right"
-                             size="small"
-                             type="danger" style="background-color: #f5991d !important;"
-                             @click="toCash(item)">
+                  <span v-if="item.zts != 1">{{ item.zts == 2 ? 'Chưa thông qua' : item.zts == 4 ? 'Hoàn thành' : 'Đang XD' }}</span>
+                  <mt-button v-if="item.zts == 1" class="btn-red pull-right" size="small" type="danger"
+                    style="background-color: #f5991d !important;" @click="toCash(item)">
                     Mua
                   </mt-button>
                 </div>
@@ -89,12 +70,9 @@
         </div>
       </mt-tab-container-item>
     </mt-tab-container>
-    <mt-popup v-model="dialogShow"
-              :closeOnClickModal="false"
-              class="mint-popup-box mint-popup-white">
+    <mt-popup v-model="dialogShow" :closeOnClickModal="false" class="mint-popup-box mint-popup-white">
       <div class="clearfix">
-        <a @click="dialogShow = false"
-           class="pull-right"><i class="iconfont icon-weitongguo"></i></a>
+        <a @click="dialogShow = false" class="pull-right"><i class="iconfont icon-weitongguo"></i></a>
       </div>
       <div class=" page-part transaction">
         <div class="back-info">
@@ -103,22 +81,21 @@
             Nhập số lượng cổ phiếu bạn muốn mua
           </p>
           <div class="box-tab">
-            <input v-model="selectNumber"
-                   class="btn-default"
-                   type="number">
+            <input v-model="selectNumber" class="btn-default" type="number">
             <p class="margin">Đòn bẩy</p>
             <div class="tab-con">
               <ul class="radio-group clearfix">
-                <li v-for="(item,index) in itemInfo.numberList"
-                    :key="item.key"
-                    @click="selectTypeFun(item,index)">
-                  <div :class="selecIndex == index?'on':''">
-                    {{item}}
+                <li v-for="(item, index) in itemInfo.numberList" :key="item.key" @click="selectTypeFun(item, index)">
+                  <div :class="selecIndex == index ? 'on' : ''">
+                    {{ item }}
                   </div>
                 </li>
               </ul>
             </div>
-            <p class="totle">Số tiền: {{$moneyDot(deposit)}}</p>
+            <!--            <p class="totle">Số tiền: {{$moneyDot(deposit)}}</p>-->
+            <p class="totle margin">Margin: {{ $moneyDot(leverageValue) }}</p>
+            <p class="totle margin">Tiền mua vào: {{ $moneyDot(deposit) }}</p>
+            <p class="totle margin">Tiền bảo chứng: {{ $moneyDot(fundsFrozen) }}</p>
             <!-- <div class="isagree-box">
                 <div
                     class="check"
@@ -127,10 +104,8 @@
                 ></div>
             </div> -->
             <div class="button-box">
-              <div @click="dialogShow=false"
-                   class="btn">Hủy bỏ </div>
-              <div @click="popconfirm()"
-                   class="btn">
+              <div @click="dialogShow = false" class="btn">Hủy bỏ </div>
+              <div @click="handclick()" class="btn">
                 Xác nhận
               </div>
 
@@ -148,11 +123,12 @@ import { Toast, MessageBox } from 'mint-ui'
 import { CodeList, endorseList, CodeDateFormat, CodeDateFormatFrist } from '@/utils/data.js'
 import * as api from '@/axios/api'
 import { formatTime } from '@/utils/imgupload'
+import { debounceJArgs } from '@/utils/utils'
 export default {
   components: {
   },
   props: {},
-  data () {
+  data() {
     return {
       formatTime,
       selectNumber: '',
@@ -173,7 +149,7 @@ export default {
       isagree: false
     }
   },
-  mounted () {
+  mounted() {
     if (this.$state.theme === 'red') {
       document.body.classList.remove('black-bg')
       document.body.classList.add('red-bg')
@@ -181,21 +157,44 @@ export default {
     this.getUserInfo()// 个人信息
     this.fillData()// 填充数据
   },
-  beforeDestroy () {
+  beforeDestroy() {
     if (this.$state.theme === 'red') {
       document.body.classList.remove('red-bg')
       document.body.classList.add('black-bg')
     }
   },
   computed: {
-    deposit () {
+    deposit() {
       const { price } = this.itemInfo
-      return this.selectNumber * price / this.leverValue
+      // 购买数量乘以单价再除以杠杆
+      // return this.selectNumber * price / this.leverValue
+      return this.selectNumber * price
+    },
+    // 杠杆值
+    leverageValue() {
+      // 购买数量乘以杠杆
+      return this.selectNumber * this.leverValue
+    },
+    // 冻结资金
+    fundsFrozen() {
+      // 获取账户可用余额：可用金-购买金 = 购买后的可用金
+      const p_price = this.deposit
+      // const entPrice = this.userInfo.enableAmt - p_price
+      // 获取保证金比例
+      const mr = this.itemInfo.marginRatio
+      // 计算冻结资金额度 可用余额乘以保证金
+      // const bzj = entPrice * mr
+      //购买金额 * 保证金比率
+      return p_price * mr
     }
   },
   methods: {
+    //防抖
+    handclick: debounceJArgs(function (e) {
+      this.popconfirm()
+    }, (3000)),
     // 获取市场价格
-    async getactualPrice (option) {
+    async getactualPrice(option) {
       let opts = {
         code: option.names
       }
@@ -203,7 +202,7 @@ export default {
       const data = res.data
       this.$set(option, 'nowPrice', data.nowPrice)
     },
-    fillData () {
+    fillData() {
       this.loadingAll = new Array(3).fill([]).map((item) => {
         return { loading: false }
       })
@@ -212,7 +211,7 @@ export default {
       })
     },
     // 上拉加载
-    async loadMore () {
+    async loadMore() {
       const pages = this.paegs[this.selected - 1]
       const loadingAll = this.loadingAll[this.selected - 1]
       if (this.selected == 1) {
@@ -241,7 +240,7 @@ export default {
       loadingAll.loading = false
     },
     // 获取用户信息
-    async getUserInfo () {
+    async getUserInfo() {
       let data = await api.getUserInfo()
       if (data.status === 0) {
         // 判断是否登录
@@ -251,7 +250,7 @@ export default {
     /**
      * 切换tab
      */
-    async tabchange (option) {
+    async tabchange(option) {
       if (this.selected != 2) {
         this.tendorseListDate = []
         this.paegs[1].pageNum = 0
@@ -262,8 +261,8 @@ export default {
     /**
      * 确认购买股票
      */
-    async popconfirm () {
-      console.log(this.userInfo)
+    async popconfirm() {
+      // console.log(this.userInfo)
       if (this.selectNumber < this.itemInfo.num) {
         return this.$message.warning('Tối thiểu cần' + this.itemInfo.num)
       }
@@ -277,7 +276,8 @@ export default {
         // zts: zt, // 状态
         // codes: code, // 新股代码
         nums: this.selectNumber, // 数量
-        bzj: this.deposit, // 保证金
+        bzj: this.fundsFrozen, // 保证金
+        marginRatio: this.itemInfo.marginRatio, // 保证金比例
         // price: price,
         gg: this.leverValue, // 杠杆
         sz: Number(this.selectNumber) * Number(price), // 市值
@@ -297,7 +297,7 @@ export default {
     /**
      * 赞同列表
      */
-    async getendorseList () {
+    async getendorseList() {
       try {
         const pages = this.paegs[1]
         const option = { pageNum: pages.pageNum, pageSize: pages.pageSize, phone: this.userInfo.phone }
@@ -323,7 +323,7 @@ export default {
     /**
      * 提出列表
      */
-    async getNewlist () {
+    async getNewlist() {
       try {
         const pages = this.paegs[0]
         const option = { pageNum: pages.pageNum, pageSize: pages.pageSize }
@@ -360,16 +360,16 @@ export default {
     },
 
     // 提出弹窗操作
-    popUp (option) {
+    popUp(option) {
+      this.reset()
       this.itemInfo = option
       if (option.numberList.length != 0) {
         this.leverValue = option.numberList[0]
         console.log(this.leverValue)
       }
-      this.reset()
       this.dialogShow = !this.dialogShow
     },
-    toCash (option) {
+    toCash(option) {
       console.log(option, 'option')
       // if (option.lever) {
       //   this.leverValue = option.lever.split('/')[0]
@@ -389,11 +389,11 @@ export default {
       })
     },
     // 重置表单
-    reset () {
+    reset() {
       this.selectNumber = ''
       this.selecIndex = 0
     },
-    selectTypeFun (value, index) {
+    selectTypeFun(value, index) {
       this.leverValue = value
       this.selecIndex = index
     }

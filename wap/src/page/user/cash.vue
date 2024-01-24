@@ -56,7 +56,8 @@
       </div>
 
       <div class="btnbox">
-        <span class="text-center btnok" @click="toSure">
+<!--        <span class="text-center btnok" @click="toSure">-->
+          <span class="text-center btnok" @click="handclick()">
           <!-- 确定 -->
           {{ $t("config") }}
         </span>
@@ -97,6 +98,7 @@
 <script>
 import * as api from '@/axios/api'
 import { Toast } from 'mint-ui'
+import { debounceJArgs } from '@/utils/utils'
 
 export default {
   components: {},
@@ -138,6 +140,10 @@ export default {
     this.getSettingInfo()
   },
   methods: {
+    //防抖
+    handclick:debounceJArgs(function(e){
+      this.toSure()
+    },(3000)),
     handleInput (eventOrValue) {
       let input = ''
       if (typeof eventOrValue === 'string' || typeof eventOrValue === 'number') {
@@ -194,7 +200,7 @@ export default {
         if (data.status === 0) {
           // 成功
           // Toast('申请成功，请等待审核!')
-          Toast('Ứng dụng đã thành công, vui lòng chờ xem xét!')
+          Toast('Lệnh rút tiền thành công!')
           this.$router.push('/cashlist')
         } else {
           // Toast(data.msg ? data.msg : '提现失败,请重新提现或者联系管理员')

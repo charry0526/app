@@ -184,27 +184,27 @@
       </div>
       <!-- <mt-button :disabled="buying" class="btn-red" size="small" type="danger" @click="toInquiry">下单</mt-button> -->
       <div class="right-btn">
-        <div class="btn-buy" @click="toInquiry">
+        <div class="btn-buy" @click="handclick">
           <img src="../../assets/ico/hangqing-btn.png" alt="" srcset="">
           {{$t("placorderwithliangrong")}}
         </div>
       </div>
     </div>
 
-    <foot></foot>
+    <Footer />
   </div>
 </template>
 
 <script>
-import foot from '../../components/foot/foot'
+//import Footer from '../../components/Footer.vue'
 import { Toast } from 'mint-ui'
-import { isNull } from '@/utils/utils'
+import { isNull,debounceJArgs } from '@/utils/utils'
 import * as api from '@/axios/api'
 
 export default {
-  components: {
-    foot
-  },
+  // components: {
+  //   Footer
+  // },
   props: {},
   data () {
     return {
@@ -316,6 +316,10 @@ export default {
     // this.detail = this.$route.query.info
   },
   methods: {
+    //防抖
+    handclick:debounceJArgs(function(e){
+      this.toInquiry()
+    },(3000)),
     changeAutoNumber () {
       // 自定义手数
       this.selectNumber = ''
@@ -511,6 +515,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+  @import "../../assets/styles/index.less";
   body {
     background: #fff;
   }
@@ -534,7 +539,7 @@ export default {
     z-index: 1;
     width: 100%;
     padding-right: 0;
-    bottom: 0.97rem;
+    bottom: 0rem;
     height: 1.32rem;
     line-height: 1.32rem;
     display: flex;
@@ -844,4 +849,7 @@ export default {
       flex-wrap: wrap;
 
     }
+  //.footer_tabbar{
+  //  position: absolute !important;
+  //}
 </style>

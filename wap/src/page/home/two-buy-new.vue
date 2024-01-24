@@ -190,7 +190,7 @@
       <!-- <mt-button :disabled="buying" class="btn-red" size="small" type="danger" @click="toInquiry">下单</mt-button> -->
       <div class="right-btn">
         <div class="btn-buy"
-             @click="toInquiry">
+             @click="handclick">
           <img src="../../assets/ico/hangqing-btn.png"
                alt=""
                srcset="">
@@ -199,20 +199,20 @@
       </div>
     </div>
 
-    <foot></foot>
+    <Footer />
   </div>
 </template>
 
 <script>
-import foot from '../../components/foot/foot'
+//import Footer from '../../components/Footer.vue'
 import { Toast } from 'mint-ui'
-import { isNull } from '@/utils/utils'
+import { isNull,debounceJArgs } from '@/utils/utils'
 import * as api from '@/axios/api'
 
 export default {
-  components: {
-    foot
-  },
+  // components: {
+  //   Footer
+  // },
   props: {},
   data () {
     return {
@@ -227,10 +227,10 @@ export default {
         { label: '20', value: '20' },
         { label: '30', value: '30' }
       ],
-      selectCycle: 1,
+      selectCycle: 1, // 杠杆
       numberList: [],
       siteLeverList: [],
-      selectNumber: '',
+      selectNumber: '', // 购买的数量
       autoNumber: '',
       type: [
         { label: '买涨', value: '0' },
@@ -276,12 +276,14 @@ export default {
         this.settingSpreadRate.spreadRate = 0
       }
       if (this.autoNumber) {
-        let payfee = (this.detail.nowPrice * 1 * this.autoNumber / this.selectCycle)
+        // let payfee = (this.detail.nowPrice * 1 * this.autoNumber / this.selectCycle)
+        let payfee = (this.detail.nowPrice * 1 * this.selectNumber)
         return (payfee + (payfee * this.settingInfo.buyFee) + (payfee * this.settingInfo.dutyFee) + (payfee * this.settingSpreadRate.spreadRate)).toFixed(2)
         // return (this.detail.nowPrice * this.autoNumber * 100 / this.selectCycle).toFixed(2)
       } else if (this.selectNumber) {
         // alert("bb"+this.detail.nowPrice+"cc==="+this.selectNumber+"ff==="+this.selectCycle+"==="+this.settingSpreadRate.spreadRate)
-        let payfee = (this.detail.nowPrice * 1 * this.selectNumber / this.selectCycle)
+        // let payfee = (this.detail.nowPrice * 1 * this.selectNumber / this.selectCycle)
+        let payfee = (this.detail.nowPrice * 1 * this.selectNumber)
         return (payfee + (payfee * this.settingInfo.buyFee) + (payfee * this.settingInfo.dutyFee) + (payfee * this.settingSpreadRate.spreadRate)).toFixed(2)
         // return (this.detail.nowPrice * this.selectNumber * 100 / this.selectCycle).toFixed(2)
       } else {
@@ -326,6 +328,10 @@ export default {
     // this.detail = this.$route.query.info
   },
   methods: {
+    //防抖
+    handclick:debounceJArgs(function(e){
+      this.toInquiry()
+    },(3000)),
     changeAutoNumber () {
       // 自定义手数
       this.selectNumber = ''
@@ -551,7 +557,7 @@ body {
   z-index: 1;
   width: 100%;
   padding-right: 0;
-  bottom: 0.97rem;
+  bottom: 0rem;
   height: 1.32rem;
   line-height: 1.32rem;
   display: flex;
@@ -853,4 +859,7 @@ body {
       flex-wrap: wrap;
 
     }
+//.footer_tabbar{
+//  position: absolute !important;
+//}
 </style>

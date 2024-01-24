@@ -1,33 +1,56 @@
-import Vue from 'vue'
-import App from './App'
-import router from './router'
-import Icon from 'vue-svg-icon/Icon.vue'
-import Mint from 'mint-ui'
+import Vue from "vue";
+import App from "./App";
+import router from "./router";
+import Icon from "vue-svg-icon/Icon.vue";
+import Mint from "mint-ui";
 // import Resource from 'vue-resource' // 已卸载用axios代替
-import store from './store/index'
-import axios from './axios/index'
-import ElementUI from 'element-ui'
-import locales from 'element-ui/lib/locale/lang/vi'
-import VueClipboard from 'vue-clipboard2' // 复制
-import state from './event'
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'mint-ui/lib/style.css'
-import 'element-ui/lib/theme-chalk/index.css'
+import store from "./store/index";
+import axios from "./axios/index";
+import ElementUI from "element-ui";
+import locales from "element-ui/lib/locale/lang/vi";
+import VueClipboard from "vue-clipboard2"; // 复制
+import state from "./event";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "mint-ui/lib/style.css";
+import "element-ui/lib/theme-chalk/index.css";
 // import md5 from 'js-md5'
-import * as filters from '@/utils/utils'
-import animated from 'animate.css' // npm install animate.css --save安装，在引入
-import VueI18n from 'vue-i18n'
-import zh from './i18n/zh'
-import en from './i18n/en'
-import '../static/css/public2.css'
+import * as filters from "@/utils/utils";
+import animated from "animate.css"; // npm install animate.css --save安装，在引入
+import VueI18n from "vue-i18n";
+import zh from "./i18n/zh";
+import en from "./i18n/en";
+import "../static/css/public2.css";
 // import VueTouch from 'vue-touch'
-import 'vant/lib/index.css'
-import * as api from '@/axios/api'
+import "vant/lib/index.css";
+import * as api from "@/axios/api";
 
-Vue.use(animated)
-Vue.use(ElementUI, { locales })
-Vue.use(VueClipboard)
-Vue.use(VueI18n)
+// import VConsole from "vconsole";
+// const vConsole = new VConsole();
+// 或者使用配置参数来初始化，详情见文档
+// const vConsole = new VConsole({ theme: "dark" });
+
+Vue.use(animated);
+Vue.use(ElementUI, { locales });
+Vue.use(VueClipboard);
+Vue.use(VueI18n);
+
+// // 获取当前窗口的可视区域高度
+// var viewportHeight = window.innerHeight;
+
+// // console.log("可视区域高度：" + viewportHeight);
+// //  获取窗口对象
+// const windowObj = window;
+// //  定义一个函数来处理可见区域高度变化
+// function handleVisibilityHeightChange(event) {
+//   console.log("Visible  height:", event.target.innerHeight);
+//   var element = document.getElementById("footer_tabbar");
+//   element.style.top = `${(event.target.innerHeight || viewportHeight) - 50}px`;
+// }
+// windowObj.addEventListener("resize", handleVisibilityHeightChange);
+// //  在页面加载完成后，立即调用handleVisibilityHeightChange
+// windowObj.addEventListener("load", () => {
+//   handleVisibilityHeightChange(event);
+// });
 
 // Vue.use(VueTouch, { name: 'v-touch' })
 // // Vue.prototype.$md5 = md5
@@ -35,132 +58,132 @@ Vue.use(VueI18n)
 //   threshold: 100 // 手指左右滑动距离
 // }
 const i18n = new VueI18n({
-  locale: localStorage.getItem('lang') || 'zh', // 没有就设置默认值zh
+  locale: localStorage.getItem("lang") || "zh", // 没有就设置默认值zh
   messages: {
     zh: zh,
     en: en
   }
-})
-Vue.use(Mint)
-Vue.component('icon', Icon)
-Vue.config.productionTip = false
+});
+Vue.use(Mint);
+Vue.component("icon", Icon);
+Vue.config.productionTip = false;
 Object.keys(filters).forEach(key => {
-  Vue.filter(key, filters[key])
-})
-Vue.prototype.$state = state
-Vue.prototype.$setgoindex = function () {
+  Vue.filter(key, filters[key]);
+});
+Vue.prototype.$state = state;
+Vue.prototype.$setgoindex = function() {
   if (window.history.length <= 1) {
-    if (location.href.indexOf('?') === -1) {
-      window.location.href = location.href + '?goindex=true'
+    if (location.href.indexOf("?") === -1) {
+      window.location.href = location.href + "?goindex=true";
     } else if (
-      location.href.indexOf('?') !== -1 &&
-      location.href.indexOf('goindex') === -1
+      location.href.indexOf("?") !== -1 &&
+      location.href.indexOf("goindex") === -1
     ) {
-      window.location.href = location.href + '&goindex=true'
+      window.location.href = location.href + "&goindex=true";
     }
   }
-}
-Vue.prototype.setCookie = function (name, value, day) {
+};
+Vue.prototype.setCookie = function(name, value, day) {
   if (day !== 0) {
     // 当设置的时间等于0时，不设置expires属性，cookie在浏览器关闭后删除
-    var curDate = new Date()
-    var curTamp = curDate.getTime()
-    var curWeeHours = new Date(curDate.toLocaleDateString()).getTime() - 1
-    var passedTamp = curTamp - curWeeHours
-    var leftTamp = 24 * 60 * 60 * 1000 - passedTamp
-    var leftTime = new Date()
-    leftTime.setTime(leftTamp + curTamp)
+    var curDate = new Date();
+    var curTamp = curDate.getTime();
+    var curWeeHours = new Date(curDate.toLocaleDateString()).getTime() - 1;
+    var passedTamp = curTamp - curWeeHours;
+    var leftTamp = 24 * 60 * 60 * 1000 - passedTamp;
+    var leftTime = new Date();
+    leftTime.setTime(leftTamp + curTamp);
     document.cookie =
-      name + '=' + escape(value) + ';expires=' + leftTime.toGMTString()
+      name + "=" + escape(value) + ";expires=" + leftTime.toGMTString();
   } else {
-    document.cookie = name + '=' + escape(value)
+    document.cookie = name + "=" + escape(value);
   }
-}
-Vue.prototype.getCookie = function (name) {
-  var arr
-  var reg = new RegExp('(^| )' + name + '=([^;]*)(;|$)')
-  arr = document.cookie.match(reg)
+};
+Vue.prototype.getCookie = function(name) {
+  var arr;
+  var reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+  arr = document.cookie.match(reg);
   if (arr) {
-    return unescape(arr[2])
+    return unescape(arr[2]);
   } else {
-    return null
+    return null;
   }
   // document.cookie = name + "=" + escape(value);
-}
-Vue.prototype.clearCookie = function () {
-  this.setCookie('USER_TOKEN', '', -1)
-}
-Vue.prototype.checkCookie = function () {
-  var user = this.getCookie('USER_TOKEN')
-  if (user !== '') {
-    alert('Welcome again ' + user)
+};
+Vue.prototype.clearCookie = function() {
+  this.setCookie("USER_TOKEN", "", -1);
+};
+Vue.prototype.checkCookie = function() {
+  var user = this.getCookie("USER_TOKEN");
+  if (user !== "") {
+    alert("Welcome again " + user);
   } else {
-    user = prompt('Please enter your name:', '')
-    if (user !== '' && user != null) {
-      this.setCookie('USER_TOKEN', user, 365)
+    user = prompt("Please enter your name:", "");
+    if (user !== "" && user != null) {
+      this.setCookie("USER_TOKEN", user, 365);
     }
   }
-}
+};
 
-Vue.prototype.$moneyDot = function (value, isdot = true) {
+Vue.prototype.$moneyDot = function(value, isdot = true) {
   if (value == 0) {
-    return value
+    return value;
   }
-  let suffix = ''
+  let suffix = "";
 
   // console.log(isNaN(Number(value)), value)
   if (
     value &&
-    value !== 'NULL' &&
-    value !== 'undefined' &&
+    value !== "NULL" &&
+    value !== "undefined" &&
     isNaN(Number(value))
   ) {
-    return value
+    return value;
   } else if (!value) {
-    return '-'
+    return "-";
   } else {
-    let pSuffix = ''
-    value = value.toString()
-    let intPart = Math.floor(Math.abs(Number(value))) // 获取整数部分
+    let pSuffix = "";
+    value = value.toString();
+    let intPart = Math.floor(Math.abs(Number(value))); // 获取整数部分
     let intPartFormat = intPart
       .toString()
-      .replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') // 将整数部分逢三一断
-    intPartFormat = pSuffix + intPartFormat
-    let floatPart = '' // 预定义小数部分
-    let value2Array = value.split('.')
+      .replace(/(\d)(?=(?:\d{3})+$)/g, "$1,"); // 将整数部分逢三一断
+    intPartFormat = pSuffix + intPartFormat;
+    let floatPart = ""; // 预定义小数部分
+    let value2Array = value.split(".");
 
     // =2表示数据有小数位
     if (value2Array.length === 2) {
-      floatPart = value2Array[1].toString() // 拿到小数部分
+      floatPart = value2Array[1].toString(); // 拿到小数部分
       if (isdot == false) {
-        return intPartFormat
+        return intPartFormat;
       }
       if (floatPart.length === 1) {
         // 补0,实际上用不着
-        let returnValue = intPartFormat + '.' + floatPart + '0' + suffix
+        let returnValue = intPartFormat + "." + floatPart + "0" + suffix;
         if (Number(value) >= 0) {
-          return returnValue
+          return returnValue;
         } else {
-          return '-' + returnValue
+          return "-" + returnValue;
         }
       } else {
         if (Number(value) >= 0) {
-          return intPartFormat + '.' + (floatPart + suffix).substring(0, 2)
+          return intPartFormat + "." + (floatPart + suffix).substring(0, 2);
         } else {
           return (
-            '-' + intPartFormat + '.' + (floatPart + suffix).substring(0, 2)
-          )
+            "-" + intPartFormat + "." + (floatPart + suffix).substring(0, 2)
+          );
         }
       }
     } else {
       if (Number(value) >= 0) {
-        return intPartFormat + floatPart + suffix
+        return intPartFormat + floatPart + suffix;
       } else {
-        return '-' + intPartFormat + floatPart + suffix
+        return "-" + intPartFormat + floatPart + suffix;
       }
     }
   }
-}
+};
 // router.beforeEach((to, from, next) => {
 // console.log(to.path)
 // store.state.select = to.path
@@ -189,30 +212,37 @@ Vue.prototype.$moneyDot = function (value, isdot = true) {
 // }
 // }
 // })
-router.beforeEach((to, from, next) => {
-  store.state.select = to.path
-  document.title = to.meta.title
-  api.getProductSetting().then(res => {
 
-  }).catch((err) => {
-    ElementUI.Message({
-      message: 'mạng bị ngắt kết nối',
-      type: 'error'
-    })
-  })
-  // if (navigator.onLine) {
-  //   // ElementUI.Message({
-  //   //   message: 'mạng trở lại bình thường',
-  //   //   type: 'success'
-  //   // })
-  // } else {
-  //   ElementUI.Message({
-  //     message: 'mạng bị ngắt kết nối',
-  //     type: 'error'
-  //   })
-  // }
-  next()
-})
+router.beforeEach((to, from, next) => {
+  api.activateInfo().then(res => {
+    if (res.data.isActivate == 1 && to.name != "maintenance") {
+      router.push({
+        path: "/maintenance",
+        query: {
+          imgUrl: res.data.imgUrl
+        }
+      });
+    } else if (res.data.isActivate == 0 && to.name == "maintenance") {
+      console.log(11);
+      router.push({
+        path: "/"
+      });
+    } else {
+      store.state.select = to.path;
+      document.title = to.meta.title;
+      api
+        .getProductSetting()
+        .then(resData => {})
+        .catch(err => {
+          ElementUI.Message({
+            message: "mạng bị ngắt kết nối",
+            type: "error"
+          });
+        });
+      next();
+    }
+  });
+});
 // // 设置title
 // router.beforeEach((to, from, next) => {
 //   if (to.meta.title) {//如果设置标题，拦截后设置标题
@@ -227,10 +257,10 @@ router.beforeEach((to, from, next) => {
 /* eslint-disable no-new */
 
 new Vue({
-  el: '#app',
+  el: "#app",
   store,
   router,
   axios,
   i18n,
   render: h => h(App)
-}).$mount('#app')
+}).$mount("#app");

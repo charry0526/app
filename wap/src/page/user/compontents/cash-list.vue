@@ -1,6 +1,6 @@
 <template>
-  <div class="wrapper">
-    <div v-if="list.length<=0" class="empty text-center">
+  <div>
+    <div v-if="list.length<=0" class="empty text-center" style="height: 1.4rem;line-height: 1.4rem;font-size: 0.29rem;text-align: center;">
       Không có thông tin rút tiền!
     </div>
     <div v-else>
@@ -19,7 +19,7 @@
               <span class="payNumber">{{$moneyDot(item.withAmt)}}VND</span>
               <span class="red pull-right">
                         <!-- {{item.withStatus == 1?'提现成功':item.withStatus == 2?'提现失败':item.withStatus == 3?'订单取消':'审核中'}} -->
-                       {{item.withStatus == 1?'thành công':item.withStatus == 2?'thất bại':item.withStatus == 3?'Hủy bỏ':'Đang xét duyệt'}}
+                       {{item.withStatus == 1?'thành công':item.withStatus == 2?'thất bại':item.withStatus == 3?'Hủy bỏ':'Đang xử lý'}}
 
                         <i v-if="item.withStatus == 1" class="iconfont icon-tongguo4 animated bounceIn"></i>
                         <i v-if="item.withStatus==0" class="iconfont icon-dengdai animated bounceInDown"></i>

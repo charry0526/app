@@ -57,7 +57,8 @@
                   <b class="space">{{$moneyDot(item.orderSpread)}}</b></span>
                 <span class="col-xs-4 text-right">
                   <!-- 留仓费 -->
-                  Phí qua đêm:{{$moneyDot(item.orderStayFee)}}
+<!--                  Phí qua đêm:{{$moneyDot(item.orderStayFee)}}-->
+                  Margin X:{{$moneyDot(item.orderLever)}}
                   <!-- <b class="space">{{item.orderStayFee}}</b>--></span>
 <!--                <span class="col-xs-4 text-right">-->
 <!--                  Lãi/lỗ:-->
@@ -68,8 +69,8 @@
               </p>
               <p class="clearfix">
                 <span class="col-xs-4">
-                  Chi phí khác
-                  :<b class="space">{{item.spreadRatePrice}}</b></span>
+                  Tiền đặt cọc
+                  :<b class="space">{{$moneyDot(item.newBzj)}}</b></span>
                         <span class="col-xs-4 text-center">
                           Lãi/lỗ
                           :
@@ -91,7 +92,7 @@
                 <b v-if="item.buyOrderTime">{{new Date(item.buyOrderTime) | timeFormat}}</b>
                 <b v-else></b>
               </div>
-              <div @click.stop="sell(item.positionSn)" class="foot-btn">
+              <div @click.stop="handclick(item.positionSn)" class="foot-btn">
                 <i class='font-icon'></i>
                 <!-- 我要平仓 -->
                 Bán ra
@@ -114,6 +115,7 @@
 <script>
 import { Toast, MessageBox } from 'mint-ui'
 import * as api from '@/axios/api'
+import { debounceJArgs } from '@/utils/utils'
 
 export default {
   components: {},
@@ -183,6 +185,13 @@ export default {
     this.getListDetail()
   },
   methods: {
+    //防抖
+    handclick:debounceJArgs(function(val){
+      console.log('e',val)
+      MessageBox.confirm('Bạn có chắc chắn muốn bán ra?', '', {confirmButtonText: 'Xác nhận', cancelButtonText: 'Hủy bỏ'}).then(async action => {
+        this.sell(val)
+      })
+    },(3000)),
     async getUserInfo () {
       // 获取用户信息
       let data = await api.getUserInfo()
@@ -268,7 +277,7 @@ export default {
       }
       return true
     },
-    sell (val) {
+    async sell (val) {
       // if(!this.canBuyStatus()){
       //     Toast('不在开盘时间内，暂不能交易！')
       //     return
@@ -280,7 +289,7 @@ export default {
       // })
 
       // return false
-      MessageBox.confirm('Bạn có chắc chắn muốn bán ra?', '', {confirmButtonText: 'Xác nhận', cancelButtonText: 'Hủy bỏ'}).then(async action => {
+      // MessageBox.confirm('Bạn có chắc chắn muốn bán ra?', '', {confirmButtonText: 'Xác nhận', cancelButtonText: 'Hủy bỏ'}).then(async action => {
         let opt = {
           positionSn: val
         }
@@ -293,7 +302,7 @@ export default {
         } else {
           Toast(data.msg)
         }
-      })
+      // })
     },
     toDetail (val) {
       // this.$router.push({

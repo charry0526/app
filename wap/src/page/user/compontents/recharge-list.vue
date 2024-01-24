@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="list.length<=0" class="empty text-center">
+    <div v-if="list.length<=0" class="empty text-center" style="height: 1.4rem;line-height: 1.4rem;font-size: 0.29rem;text-align: center;">
       <!-- 暂无充值信息! -->
       Không có thông tin nạp tiền！
     </div>
@@ -13,17 +13,16 @@
         <li class="list-body" v-for="(item) in list" :key="item.key">
           <div class="order-info-box">
             <div class="order-title">
-                    <span :class="['main',item.payChannel == 0?'ali':item.payChannel == 1?'cart':'wechat']">
+<!--                    <span :class="['main',item.payChannel == 0?'ali':item.payChannel == 1?'cart':'wechat']">-->
+
                         <!-- <i v-if="item.payChannel == 0 || item.payChannel == '支付宝'" style="color:#1296db;"
                            class="iconfont icon-zhifubao"></i>
                         <i v-if="item.payChannel == '微信' " style="color:#1296db;" class="iconfont icon-weixin"></i>
                         <i v-if="item.payChannel == 1 || item.payChannel == '对公转账'" style="color:#1296db;"
                            class="iconfont icon-yinlian"></i> -->
 
-                       {{item.payChannel == 0?'支付宝':item.payChannel == 1?'Chuyển khoản':item.payChannel}}
-
-                        <!-- {{item.payChannel == 0?'支付宝':item.payChannel == 1?'对公转账':item.payChannel}} -->
-                    </span>
+<!--                       {{item.payChannel == 0?'支付宝':item.payChannel == 1?'Chuyển khoản':item.payChannel}}-->
+<!--                    </span>-->
               <span class="payNumber"> Nạp tiền：<span :style="{color:$state.theme =='red'?'#BB1815':''}">{{$moneyDot(item.payAmt)}}VND</span></span>
 
               <!-- <span class="payNumber">充值：<span :style="{color:$state.theme =='red'?'#BB1815':''}">￥{{item.payAmt}}</span></span> -->

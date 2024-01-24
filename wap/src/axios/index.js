@@ -21,7 +21,7 @@ axios.interceptors.request.use(
     //     // config.headers.Authorization = `USER_TOKEN = ${store.state.token}`;
     //     config.headers["USER_TOKEN"] = store.state.token;
     // }
-    // console.log(config) 
+    // console.log(config)
     if (!config.params) {
       config.headers = {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
@@ -41,8 +41,7 @@ axios.interceptors.response.use(
     switch (response.data && response.data.success) {
       case false:
         // response.data.msg = '您还未登录,请先登录'
-        response.data.msg = 'Bạn chưa đăng nhập, vui lòng đăng nhập trước'
-        // console.log(response.data)
+        response.data.msg = "Bạn chưa đăng nhập, vui lòng đăng nhập trước"
         router.replace({
           path: 'openaccount'
         })

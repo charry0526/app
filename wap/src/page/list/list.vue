@@ -26,10 +26,10 @@
           <p :class="changeTextClass[index] == true?'price heartBeat':'price'">
             {{$moneyDot(Number(i.currentPoint).toFixed(2))}}
           </p>
-          <div class="status">
-              <span :class="i.floatPoint>0?'pifting green':'pifting red'">{{Number(i.floatPoint).toFixed(2)}}</span>
-              <span :class="i.floatRate>0?'Percentage green':'Percentage red'">{{i.floatRate}}%</span>
-          </div>
+<!--          <div class="status">-->
+<!--              <span :class="i.floatPoint>0?'pifting green':'pifting red'">{{Number(i.floatPoint).toFixed(2)}}</span>-->
+<!--              <span :class="i.floatRate>0?'Percentage green':'Percentage red'">{{i.floatRate}}%</span>-->
+<!--          </div>-->
       </div>
     </div>
 

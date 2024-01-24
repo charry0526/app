@@ -11,11 +11,12 @@
                  :key="i.key">
               <p :index='index' class="name">{{i.indexName}}</p>
               <p :class="changeTextClass[index] == true?'price heartBeat':'price'">
-                {{$moneyDot(Number(i.currentPoint).toFixed(2))}}</p>
-              <div class="status">
-                <span :class="i.floatPoint>0?'pifting green':'pifting red'">{{Number(i.floatPoint).toFixed(2)}}</span>
-                <span :class="i.floatRate>0?'Percentage green':'Percentage red'">{{i.floatRate}}%</span>
-              </div>
+                {{$moneyDot(Number(i.currentPoint).toFixed(2))}}
+              </p>
+<!--              <div class="status">-->
+<!--                <span :class="i.floatPoint>0?'pifting green':'pifting red'">{{Number(i.floatPoint).toFixed(2)}}</span>-->
+<!--                <span :class="i.floatRate>0?'Percentage green':'Percentage red'">{{i.floatRate}}%</span>-->
+<!--              </div>-->
             </div>
 
     </div>
