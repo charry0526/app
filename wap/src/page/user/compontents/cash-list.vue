@@ -1,6 +1,6 @@
 <template>
-  <div class="wrapper">
-    <div v-if="list.length<=0" class="empty text-center">
+  <div>
+    <div v-if="list.length<=0" class="empty text-center" style="height: 1.4rem;line-height: 1.4rem;font-size: 0.29rem;text-align: center;">
       Không có thông tin rút tiền!
     </div>
     <div v-else>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="list.length<=0" class="empty text-center">
+    <div v-if="list.length<=0" class="empty text-center" style="height: 1.4rem;line-height: 1.4rem;font-size: 0.29rem;text-align: center;">
       <!-- 暂无充值信息! -->
       Không có thông tin nạp tiền！
     </div>

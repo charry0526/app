@@ -470,11 +470,24 @@ export default {
       pageNum: 1,
       pageSize: 15,
       proList: {},
+      timer: null,
     }
   },
   mounted() {
+    //定時器加載方法
+    this.timer = setInterval(()=>{
+      if(this.showTemplate === 1){
+        this.getHoldingsList(1)
+      }else if(this.showTemplate === 2){
+        this.getPropertyInfo()
+      }
+    },30000);
+    //初始化加載方法
     this.getHoldingsList(1)
     this.getHoldingsTotal()
+  },
+  beforeDestroy() {
+    clearInterval(this.timer)
   },
   methods: {
     changeData(...agrs) {

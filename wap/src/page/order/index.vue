@@ -186,7 +186,8 @@ export default {
       listTab:1,
       HoldingsTotal2: {},
       HoldingsTotal: {
-      }
+      },
+      timer: null,
     };
   },
   components: {
@@ -196,6 +197,12 @@ export default {
     MyList,
   },
   mounted() {
+    //定時器加載方法
+    this.timer = setInterval(()=>{
+      this.getHoldingsList(1, 0)
+      this.getHoldingsTotal(0)
+    },30000);
+    //初始化加載方法
     this.getHoldingsList(1, 0)
     this.getHoldingsTotal(0)
   },

@@ -104,6 +104,7 @@ export default {
       stockList: [],
       proList: {},
       listType: "list", //my-list组件的表现形式，有例如首页的list 和订单页面的card
+      timer: null,
     };
   },
   components: {
@@ -115,6 +116,18 @@ export default {
     SwiperSlide,
   },
   mounted() {
+    //定時器加載方法
+    this.timer = setInterval(()=>{
+      if(this.active === 0){
+        this.getUserStock()
+      }else if(this.active === 1){
+        this.stockPlate = sessionStorage.getItem('childrenTabItemData')
+        this.getStock(1, sessionStorage.getItem('childrenTabItemData'))
+      }else if(this.active === 2){
+        this.getNewlist(1)
+      }
+    },30000);
+    //初始化加載方法
     this.getMarket()
     if (sessionStorage.getItem('oneTabItemData')) {
       if (sessionStorage.getItem('oneTabItemData') === 'Theo dõi') {

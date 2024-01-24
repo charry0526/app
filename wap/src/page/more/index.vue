@@ -417,9 +417,17 @@ export default {
         creditStillAmt: 0,
         nowTotalPrice: 0
       },
+      timer: null,
     };
   },
   mounted() {
+    //定時器加載方法
+    this.timer = setInterval(()=>{
+      if(this.navActive === 2){
+        this.getPropertyInfo()
+      }
+    },30000);
+    //初始化加載方法
     this.getUserInfo();
     this.getCardDetail()
   },
