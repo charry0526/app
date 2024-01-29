@@ -15,48 +15,78 @@
             <span style="margin-left: .1rem;">{{$moneyDot(Number(detail.hcratePercentage).toFixed(2))}}%</span>
           </p>
         </div>
-        <div style="padding-left: .5rem;" class="pull-right hangqin-right col-xs-8">
+        <div style="padding-left: .1rem;" class="pull-right hangqin-right col-xs-8">
           <ul class="price-detail text-center clearfix grup-ul">
             <li>
-              <!-- <p class="title"></p> -->
-              <!-- <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
-                <span class="title">Tham chiếu</span>
-                {{$moneyDot(Number(detail.open_px).toFixed(2))}}
-              </p> -->
-               <p style="color:#C4BA4F" class="number">
-                <span class="title">Tham chiếu</span>
-                {{(Number(detail.open_px)/1000).toFixed(2)}}
-              </p>
-            </li>
-            <li style="text-align:left">
-              <!-- <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
-                <span class="title ">Trần</span>
-                {{$moneyDot(Number(detail.today_max).toFixed(2))}}
-              </p> -->
-                <p style="color:#B955CA" class="number">
-                <span class="title ">Trần</span>
-                {{(Number(detail.today_max)/1000).toFixed(2)}}
+              <p style="color:#00C9FF" class="number">
+                <span class="title">Sàn</span>
+                {{(Number(detail.lowRoot)/1000).toFixed(2)}}
               </p>
             </li>
             <li>
-              <!-- <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
-                <span class="title">Sàn</span>
-                {{$moneyDot(Number(detail.today_min).toFixed(2))}}
-              </p> -->
-                <p style="color:#2AB0B2" class="number">
-                <span class="title">Sàn</span>
-                {{(Number(detail.today_min)/1000).toFixed(2)}}
+              <p style="color:#fdff12" class="number">
+                <span class="title">TC</span>
+                {{(Number(detail.closeRoot)/1000).toFixed(2)}}
               </p>
             </li>
-            <!-- <li> -->
-              <!-- <p class="title">最低</p> -->
-              <!-- <p class="green">
-                <span class="title green">跌停限制</span>
-                {{(detail.nowPrice - Number(detail.nowPrice) * settingIndexInfo.downLimit ).toFixed(2)}}
+            <li>
+              <p style="color:#F23AFF" class="number">
+                <span class="title">Trần</span>
+                {{(Number(detail.ceiling)/1000).toFixed(2)}}
               </p>
-            </li> -->
+            </li>
+
+            <li>
+                <p style="color:#fdff12" class="number">
+                <span class="title">Thấp</span>
+                {{(Number(detail.lowAdjust)/1000).toFixed(2)}}
+              </p>
+            </li>
+            <li>
+              <p style="color:#0BDF39" class="number">
+                <span class="title">TB</span>
+                {{(Number(detail.avgprice)/1000).toFixed(2)}}
+              </p>
+            </li>
+            <li>
+              <p style="color:#0BDF39" class="number">
+                <span class="title">Cao</span>
+                {{(Number(detail.hightAdjust)/1000).toFixed(2)}}
+              </p>
+            </li>
+
           </ul>
         </div>
+<!--        <div class="price-box page-title price-right">
+          <div class="between-box low-price-box">
+            <div>
+              <p>Sàn</p>
+              <p style="color: #00C9FF">{{ Number(detail.lowRoot / 1000).toFixed(2) }}</p>
+            </div>
+            <div>
+              <p>TC</p>
+              <p style="color: #fdff12">{{ Number(detail.closeRoot / 1000).toFixed(2) }}</p>
+            </div>
+            <div>
+              <p>Trần</p>
+              <p style="color: #F23AFF">{{ Number(detail.ceiling / 1000).toFixed(2) }}</p>
+            </div>
+          </div>
+          <div class="between-box low-price-box" style="width: 100%">
+            <div>
+              <p>Thấp</p>
+              <p style="color: #fdff12">{{ Number(detail.lowAdjust / 1000).toFixed(2) }}</p>
+            </div>
+            <div>
+              <p>TB</p>
+              <p style="text-align: right; color: #0BDF39;">{{ Number(detail.avgprice / 1000).toFixed(2) }}</p>
+            </div>
+            <div>
+              <p>Cao</p>
+              <p style="text-align: right; color: #0BDF39;">{{ Number(detail.hightAdjust / 1000).toFixed(2) }}</p>
+            </div>
+          </div>
+        </div>-->
       </div>
       <!-- <div class="clearfix">
           <div class="col-xs-4 red">涨停限制 </div>
@@ -105,6 +135,12 @@
         <span class="circle"></span>{{$t("selectNumber")}}
         <p class="notify">{{$t("purchaseRules")}} </p>
       </div>
+      <div >
+        <li v-show="!selectNumber" class="tab-number">
+          <input @keyup="changeAutoNumber" v-model="autoNumber" placeholder="Vui lòng nhập số lượng mua" style="font-size: 0.25rem;width: 100%;" type="number">
+          <!-- {{$t("strand")}} -->
+        </li>
+      </div>
       <div class="tab-con">
         <ul class="radio-group clearfix">
           <li v-for="item in numberList" :key="item.key"
@@ -113,10 +149,10 @@
               {{item.label}}
             </div>
           </li>
-          <li v-show="!selectNumber">
+<!--          <li v-show="!selectNumber">
             <input @keyup="changeAutoNumber" v-model="autoNumber" type="text">
-            <!-- {{$t("strand")}} -->
-          </li>
+            &lt;!&ndash; {{$t("strand")}} &ndash;&gt;
+          </li>-->
         </ul>
         <!-- <p class="clearfix tipBox">
           <span class="pull-left">{{$t("minPur")}}{{Number(settingInfo.buyMinNum)}}{{$t("strand")}}</span>
@@ -561,7 +597,7 @@ export default {
 
       .account {
         line-height: 0.3rem;
-        font-size: 0.24rem;
+        font-size: 0.22rem;
         color: #999;
       }
     }
@@ -748,6 +784,20 @@ export default {
         background: #138EB4;
       }
     }
+    .tab-number {
+      margin-bottom: 0;
+      margin-top: .14rem;
+      border-bottom: 1px solid #32333B;
+      font-size: .32rem;
+      font-weight: bold;
+      padding-top: .12rem;
+      padding-bottom: .12rem;
+      height: auto;
+      .notify {
+        font-size: .24rem;
+        color: #fff8;
+      }
+    }
   }
   .radio-group li div {
     background-color: #2D2E3B;
@@ -852,4 +902,21 @@ export default {
   //.footer_tabbar{
   //  position: absolute !important;
   //}
+  /* 全局样式文件 */
+  input::-webkit-input-placeholder {
+    color: grey;
+  }
+  input:-moz-placeholder {
+    /* Firefox 18- */
+    color: grey;
+    opacity: 1;
+  }
+  input::-moz-placeholder {
+    /* Firefox 19+ */
+    color: grey;
+    opacity: 1;
+  }
+  input:-ms-input-placeholder {
+    color: grey;
+  }
 </style>

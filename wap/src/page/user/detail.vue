@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" style="height: 15.2rem;">
     <!-- <div class="header">
       <mt-header title="资金明细">
         <router-link to="/user" slot="left">

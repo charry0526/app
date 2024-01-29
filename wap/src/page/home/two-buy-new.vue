@@ -15,47 +15,87 @@
             <span style="margin-left: .1rem;">{{Number(detail.hcratePercentage).toFixed(2)}}%</span>
           </p>
         </div>
-        <div class="pull-right hangqin-right col-xs-8">
+        <div style="padding-left: .1rem;" class="pull-right hangqin-right col-xs-8">
           <ul class="price-detail text-center clearfix grup-ul">
             <li>
-              <!-- <p class="title"></p> -->
-              <!-- <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
+              <p style="color:#00C9FF" class="number">
+                <span class="title">Sàn</span>
+                {{(Number(detail.lowRoot)/1000).toFixed(2)}}
+              </p>
+            </li>
+            <li>
+              <p style="color:#fdff12" class="number">
+                <span class="title">TC</span>
+                {{(Number(detail.closeRoot)/1000).toFixed(2)}}
+              </p>
+            </li>
+            <li>
+              <p style="color:#F23AFF" class="number">
+                <span class="title">Trần</span>
+                {{(Number(detail.ceiling)/1000).toFixed(2)}}
+              </p>
+            </li>
+
+            <li>
+              <p style="color:#fdff12" class="number">
+                <span class="title">Thấp</span>
+                {{(Number(detail.lowAdjust)/1000).toFixed(2)}}
+              </p>
+            </li>
+            <li>
+              <p style="color:#0BDF39" class="number">
+                <span class="title">TB</span>
+                {{(Number(detail.avgprice)/1000).toFixed(2)}}
+              </p>
+            </li>
+            <li>
+              <p style="color:#0BDF39" class="number">
+                <span class="title">Cao</span>
+                {{(Number(detail.hightAdjust)/1000).toFixed(2)}}
+              </p>
+            </li>
+
+          </ul>
+<!--          <ul class="price-detail text-center clearfix grup-ul">
+            <li>
+              &lt;!&ndash; <p class="title"></p> &ndash;&gt;
+              &lt;!&ndash; <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
                 <span class="title">Tham chiếu</span>
                 {{Number(detail.open_px).toFixed(2)}}
-              </p> -->
+              </p> &ndash;&gt;
                <p style="color:#C4BA4F" class="number">
                 <span class="title">Tham chiếu</span>
                 {{(Number(detail.open_px)/1000).toFixed(2)}}
               </p>
             </li>
             <li style="text-align:left">
-              <!-- <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
+              &lt;!&ndash; <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
                 <span class="title ">Trần</span>
                 {{Number(detail.today_max).toFixed(2)}}
-              </p> -->
+              </p> &ndash;&gt;
                <p style="color:#B955CA" class="number">
                 <span class="title ">Trần</span>
                 {{(Number(detail.today_max)/1000).toFixed(2)}}
               </p>
             </li>
             <li>
-              <!-- <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
+              &lt;!&ndash; <p :class="detail.hcrate == 0?'number yellow':detail.hcrate > 0?'number green':detail.hcrate<0?'number red':''">
                 <span class="title">Sàn</span>
                 {{Number(detail.today_min).toFixed(2)}}
-              </p> -->
+              </p> &ndash;&gt;
                 <p style="color:#2AB0B2" class="number">
                 <span class="title">Sàn</span>
                 {{(Number(detail.today_min)/1000).toFixed(2)}}
               </p>
             </li>
-            <!-- <li> -->
-            <!-- <p class="title">最低</p> -->
-            <!-- <p class="green">
+            &lt;!&ndash; <li> &ndash;&gt;
+            &lt;!&ndash; <p class="title">最低</p> &ndash;&gt;
+            &lt;!&ndash; <p class="green">
                 <span class="title green">跌停限制</span>
                 {{(detail.nowPrice - Number(detail.nowPrice) * settingIndexInfo.downLimit ).toFixed(2)}}
               </p>
-            </li> -->
-          </ul>
+            </li> &ndash;&gt;
+          </ul>-->
         </div>
       </div>
       <!-- <div class="clearfix">

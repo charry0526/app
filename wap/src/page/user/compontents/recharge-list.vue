@@ -1,9 +1,10 @@
 <template>
   <div>
-    <div v-if="list.length<=0" class="empty text-center" style="height: 1.4rem;line-height: 1.4rem;font-size: 0.29rem;text-align: center;">
-      <!-- 暂无充值信息! -->
-      Không có thông tin nạp tiền！
-    </div>
+<!--    <div v-if="list.length<=0" class="empty text-center" style="height: 1.4rem;line-height: 1.4rem;font-size: 0.29rem;text-align: center;">-->
+<!--      &lt;!&ndash; 暂无充值信息! &ndash;&gt;-->
+<!--      Không có thông tin nạp tiền！-->
+<!--    </div>-->
+    <van-empty description="Không có thông tin nạp tiền！" v-if="list.length<=0" style="height: 15.2rem;"/>
     <div v-else>
       <ul
         class="table-list"

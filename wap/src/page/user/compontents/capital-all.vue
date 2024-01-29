@@ -30,15 +30,17 @@
 
       </li>
     </ul>
-    <div v-show="loading"
-         class="load-all text-center">
-      <mt-spinner type="fading-circle"></mt-spinner>
-      {{$t("loading")}}...
-    </div>
-    <div v-show="!loading"
-         class="load-all text-center">
-      {{$t("allLoaded")}}
-    </div>
+    <!--  <div v-show="loading"
+          class="load-all text-center">
+       <mt-spinner type="fading-circle"></mt-spinner>
+       {{$t("loading")}}...
+     </div>
+       <div v-show="!loading"
+             class="load-all text-center">
+          {{$t("allLoaded")}}
+        </div>-->
+    <van-empty description="Tất cả được tải" v-if="list.length<=0" style="height: 10rem;"/>
+
   </div>
 </template>
 
