@@ -127,8 +127,7 @@ export default {
     width: 100%;
     height: calc(100% - 1rem);
     box-sizing: border-box;
-    overflow-y: auto;
-
+    //overflow-y: auto;
   }
   &.red-theme {
     background: #e9e9e9;
