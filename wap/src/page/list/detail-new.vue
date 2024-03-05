@@ -1,6 +1,6 @@
 <style src="../../../src/assets/styles/common.css"/>
 <template>
-  <div class="wrapper" style="padding: 0 15px;" id="wrapper">
+  <div class="wrapper" style="padding: 0 10px;" id="wrapper">
     <div style="position: absolute; width: 100%; padding: 8px 15px 0 15px; left: 0; top:calc(1rem - 2px); z-index: 10; background-color: #20272e;"
       :class="isScroll ? 'Div_active' : ''">
       <div class="page-title">

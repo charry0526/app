@@ -391,7 +391,8 @@ export function getFuturesDayK (options) {
 }
 
 export function getHistory (code) {
-  return get('/apis/chart3api/history?symbol=' + code + '&resolution=D&from=0&to=99999999999')
+  // return get('/apis/chart3api/history?symbol=' + code + '&resolution=D&from=0&to=99999999999')
+  return get('/apis/chart3api/history.do?symbol=' + code)
 }
 
 // 指数日线图

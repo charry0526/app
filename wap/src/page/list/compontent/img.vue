@@ -1,11 +1,11 @@
 <template>
   <div class="img">
     <mt-navbar v-model="selected">
-      <mt-tab-item id="1">1y</mt-tab-item>
-      <mt-tab-item id="2">6m</mt-tab-item>
-      <mt-tab-item id="3">3m</mt-tab-item>
+      <mt-tab-item id="1">1m</mt-tab-item>
+      <mt-tab-item id="2">3m</mt-tab-item>
+      <mt-tab-item id="3">6m</mt-tab-item>
       <!-- <mt-tab-item id="4">YTD</mt-tab-item> -->
-      <mt-tab-item id="4">1w</mt-tab-item>
+      <mt-tab-item id="4">1y</mt-tab-item>
     </mt-navbar>
 
     <!-- tab-container -->
